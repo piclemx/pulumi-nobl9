@@ -1,6 +1,6 @@
-# Foo Resource Provider
+# Nobl9 Resource Provider
 
-The Foo Resource Provider lets you manage [Foo](http://example.com) resources.
+The Nobl9 Resource Provider lets you manage [Nobl9](https://www.nobl9.com/) resources.
 
 ## Installing
 
@@ -11,13 +11,13 @@ This package is available for several languages/platforms:
 To use from JavaScript or TypeScript in Node.js, install using either `npm`:
 
 ```bash
-npm install @pulumi/foo
+npm install @piclemx/pulumi-nobl9/
 ```
 
 or `yarn`:
 
 ```bash
-yarn add @pulumi/foo
+yarn add @piclemx/pulumi-nobl9
 ```
 
 ### Python
@@ -25,7 +25,7 @@ yarn add @pulumi/foo
 To use from Python, install using `pip`:
 
 ```bash
-pip install pulumi_foo
+pip install pulumi_nobl9
 ```
 
 ### Go
@@ -33,7 +33,7 @@ pip install pulumi_foo
 To use from Go, use `go get` to grab the latest version of the library:
 
 ```bash
-go get github.com/pulumi/pulumi-foo/sdk/go/...
+go get github.com/piclemx/pulumi-nobl9/sdk/go/...
 ```
 
 ### .NET
@@ -41,7 +41,7 @@ go get github.com/pulumi/pulumi-foo/sdk/go/...
 To use from .NET, install using `dotnet add package`:
 
 ```bash
-dotnet add package Pulumi.Foo
+dotnet add package Pulumi.Nobl9
 ```
 
 ## Configuration
@@ -53,4 +53,4 @@ The following configuration points are available for the `foo` provider:
 
 ## Reference
 
-For detailed reference documentation, please visit [the Pulumi registry](https://www.pulumi.com/registry/packages/foo/api-docs/).
+For detailed reference documentation, please visit [the Pulumi registry](https://www.pulumi.com/registry/packages/nobl9/api-docs/).
