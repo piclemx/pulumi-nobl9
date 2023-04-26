@@ -23,7 +23,7 @@ import (
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
 	"github.com/piclemx/pulumi-nobl9/provider/pkg/version"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
-	"github.com/terraform-providers/terraform-provider-nobl9/nobl9"
+	"github.com/nobl9/terraform-provider-nobl9/nobl9"
 )
 
 // all of the token components used below.
