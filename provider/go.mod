@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-xyz/provider
+module github.com/piclemx/pulumi-nobl9/provider
 
 go 1.18
 
