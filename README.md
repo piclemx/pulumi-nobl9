@@ -370,7 +370,7 @@ builds:
   - linux
   ignore: []
   ldflags:
-  - -X github.com/pulumi/pulumi-nobl9/provider/pkg/version.Version={{.Tag}}
+  - -X github.com/piclemx/pulumi-nobl9/provider/pkg/version.Version={{.Tag}}
   main: ./cmd/pulumi-resource-nobl9/
   sort: asc
   use: git
