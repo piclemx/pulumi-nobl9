@@ -2,7 +2,7 @@ PROJECT_NAME := nobl9 Package
 
 SHELL            := /bin/bash
 PACK             := nobl9
-ORG              := pulumi
+ORG              := piclemx
 PROJECT          := github.com/${ORG}/pulumi-${PACK}
 NODE_MODULE_NAME := @pulumi/${PACK}
 TF_NAME          := ${PACK}
