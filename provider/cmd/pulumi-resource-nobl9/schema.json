@@ -1,0 +1,166 @@
+{
+    "name": "nobl9",
+    "description": "A Pulumi package for creating and managing nobl9 cloud resources.",
+    "keywords": [
+        "pulumi",
+        "nobl9",
+        "category/cloud"
+    ],
+    "homepage": "https://www.pulumi.com",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`nobl9` Terraform Provider](https://github.com/terraform-providers/terraform-provider-nobl9).",
+    "repository": "https://github.com/piclemx/pulumi-nobl9",
+    "publisher": "Pulumi",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "compatibility": "tfbridge20",
+            "namespaces": null,
+            "packageReferences": {
+                "Pulumi": "3.*"
+            }
+        },
+        "go": {
+            "generateExtraInputTypes": true,
+            "generateResourceContainerTypes": true,
+            "importBasePath": "github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
+        },
+        "nodejs": {
+            "compatibility": "tfbridge20",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/mime": "^2.0.0",
+                "@types/node": "^10.0.0"
+            },
+            "disableUnionOutputTypes": true,
+            "packageDescription": "A Pulumi package for creating and managing nobl9 cloud resources.",
+            "packageName": "",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-nobl9)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-nobl9` repo](https://github.com/piclemx/pulumi-nobl9/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-nobl9` repo](https://github.com/terraform-providers/terraform-provider-nobl9/issues).",
+            "typescriptVersion": ""
+        },
+        "python": {
+            "compatibility": "tfbridge20",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-nobl9)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-nobl9` repo](https://github.com/piclemx/pulumi-nobl9/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-nobl9` repo](https://github.com/terraform-providers/terraform-provider-nobl9/issues).",
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            }
+        }
+    },
+    "config": {
+        "variables": {
+            "clientId": {
+                "type": "string",
+                "description": "the [Client ID](https://docs.nobl9.com/sloctl-user-guide/#configuration) of your Nobl9 account required to connect to\nNobl9.\n"
+            },
+            "clientSecret": {
+                "type": "string",
+                "description": "the [Client Secret](https://docs.nobl9.com/sloctl-user-guide/#configuration) of your Nobl9 account required to connect\nto Nobl9.\n"
+            },
+            "ingestUrl": {
+                "type": "string",
+                "description": "Nobl9 API URL.\n"
+            },
+            "oktaAuthServer": {
+                "type": "string",
+                "description": "Authorization service configuration.\n"
+            },
+            "oktaOrgUrl": {
+                "type": "string",
+                "description": "Authorization service URL.\n"
+            },
+            "organization": {
+                "type": "string",
+                "description": "Nobl9 [Organization ID](https://docs.nobl9.com/API_Documentation/api-endpoints-for-slo-annotations/#common-headers) that\ncontains resources managed by the Nobl9 Terraform provider.\n"
+            },
+            "project": {
+                "type": "string",
+                "description": "Nobl9 project used when importing resources.\n"
+            }
+        },
+        "defaults": [
+            "clientId",
+            "clientSecret",
+            "organization",
+            "project"
+        ]
+    },
+    "provider": {
+        "description": "The provider type for the nobl9 package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "clientId": {
+                "type": "string",
+                "description": "the [Client ID](https://docs.nobl9.com/sloctl-user-guide/#configuration) of your Nobl9 account required to connect to\nNobl9.\n"
+            },
+            "clientSecret": {
+                "type": "string",
+                "description": "the [Client Secret](https://docs.nobl9.com/sloctl-user-guide/#configuration) of your Nobl9 account required to connect\nto Nobl9.\n"
+            },
+            "ingestUrl": {
+                "type": "string",
+                "description": "Nobl9 API URL.\n"
+            },
+            "oktaAuthServer": {
+                "type": "string",
+                "description": "Authorization service configuration.\n"
+            },
+            "oktaOrgUrl": {
+                "type": "string",
+                "description": "Authorization service URL.\n"
+            },
+            "organization": {
+                "type": "string",
+                "description": "Nobl9 [Organization ID](https://docs.nobl9.com/API_Documentation/api-endpoints-for-slo-annotations/#common-headers) that\ncontains resources managed by the Nobl9 Terraform provider.\n"
+            },
+            "project": {
+                "type": "string",
+                "description": "Nobl9 project used when importing resources.\n"
+            }
+        },
+        "required": [
+            "clientId",
+            "clientSecret",
+            "organization",
+            "project"
+        ],
+        "inputProperties": {
+            "clientId": {
+                "type": "string",
+                "description": "the [Client ID](https://docs.nobl9.com/sloctl-user-guide/#configuration) of your Nobl9 account required to connect to\nNobl9.\n"
+            },
+            "clientSecret": {
+                "type": "string",
+                "description": "the [Client Secret](https://docs.nobl9.com/sloctl-user-guide/#configuration) of your Nobl9 account required to connect\nto Nobl9.\n"
+            },
+            "ingestUrl": {
+                "type": "string",
+                "description": "Nobl9 API URL.\n"
+            },
+            "oktaAuthServer": {
+                "type": "string",
+                "description": "Authorization service configuration.\n"
+            },
+            "oktaOrgUrl": {
+                "type": "string",
+                "description": "Authorization service URL.\n"
+            },
+            "organization": {
+                "type": "string",
+                "description": "Nobl9 [Organization ID](https://docs.nobl9.com/API_Documentation/api-endpoints-for-slo-annotations/#common-headers) that\ncontains resources managed by the Nobl9 Terraform provider.\n"
+            },
+            "project": {
+                "type": "string",
+                "description": "Nobl9 project used when importing resources.\n"
+            }
+        },
+        "requiredInputs": [
+            "clientId",
+            "clientSecret",
+            "organization",
+            "project"
+        ]
+    }
+}
