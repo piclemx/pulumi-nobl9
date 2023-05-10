@@ -25,6 +25,8 @@ import (
 	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 // all of the token components used below.
@@ -165,8 +167,9 @@ func Provider() tfbridge.ProviderInfo {
 		"nobl9_slo",
 	} {
 		name := strings.Builder{}
+		caser := cases.Title(language.English)
 		for _, s := range strings.Split(res, "_")[1:] {
-			name.WriteString(strings.Title(s))
+			name.WriteString(caser.String(s))
 		}
 		prov.Resources[res] = &tfbridge.ResourceInfo{
 			Tok: tfbridge.MakeResource(mainPkg, mainMod, name.String()),
