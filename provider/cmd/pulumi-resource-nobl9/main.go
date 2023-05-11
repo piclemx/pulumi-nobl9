@@ -19,9 +19,9 @@ package main
 import (
 	_ "embed"
 
-	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	nobl9 "github.com/piclemx/pulumi-nobl9/provider"
 	"github.com/piclemx/pulumi-nobl9/provider/pkg/version"
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 )
 
 //go:embed schema-embed.json

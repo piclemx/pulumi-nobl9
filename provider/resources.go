@@ -17,13 +17,16 @@ package nobl9
 import (
 	"fmt"
 	"path/filepath"
+	"strings"
 
+	"github.com/nobl9/terraform-provider-nobl9/nobl9"
+	"github.com/piclemx/pulumi-nobl9/provider/pkg/version"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
-	"github.com/piclemx/pulumi-nobl9/provider/pkg/version"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
-	"github.com/nobl9/terraform-provider-nobl9/nobl9"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 // all of the token components used below.
@@ -59,7 +62,7 @@ func Provider() tfbridge.ProviderInfo {
 		// Change this to your personal name (or a company name) that you
 		// would like to be shown in the Pulumi Registry if this package is published
 		// there.
-		Publisher: "Pulumi",
+		Publisher: "Nobl9",
 		// LogoURL is optional but useful to help identify your package in the Pulumi Registry
 		// if this package is published there.
 		//
@@ -70,17 +73,17 @@ func Provider() tfbridge.ProviderInfo {
 		// for use in Pulumi programs
 		// e.g https://github.com/org/pulumi-provider-name/releases/
 		PluginDownloadURL: "",
-		Description:       "A Pulumi package for creating and managing nobl9 cloud resources.",
+		Description:       "A Pulumi package for creating and managing Nobl9 cloud resources.",
 		// category/cloud tag helps with categorizing the package in the Pulumi Registry.
 		// For all available categories, see `Keywords` in
 		// https://www.pulumi.com/docs/guides/pulumi-packages/schema/#package.
-		Keywords:   []string{"pulumi", "nobl9", "category/cloud"},
+		Keywords:   []string{"pulumi", "nobl9", "n9", "category/cloud"},
 		License:    "Apache-2.0",
 		Homepage:   "https://www.pulumi.com",
 		Repository: "https://github.com/piclemx/pulumi-nobl9",
 		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this
 		// should match the TF provider module's require directive, not any replace directives.
-		GitHubOrg: "",
+		GitHubOrg: "nobl9",
 		Config:    map[string]*tfbridge.SchemaInfo{
 			// Add any required configuration here, or remove the example below if
 			// no additional points are required.
@@ -92,25 +95,8 @@ func Provider() tfbridge.ProviderInfo {
 			// },
 		},
 		PreConfigureCallback: preConfigureCallback,
-		Resources:            map[string]*tfbridge.ResourceInfo{
-			// Map each resource in the Terraform provider to a Pulumi type. Two examples
-			// are below - the single line form is the common case. The multi-line form is
-			// needed only if you wish to override types or other default options.
-			//
-			// "aws_iam_role": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "IamRole")}
-			//
-			// "aws_acm_certificate": {
-			// 	Tok: tfbridge.MakeResource(mainPkg, mainMod, "Certificate"),
-			// 	Fields: map[string]*tfbridge.SchemaInfo{
-			// 		"tags": {Type: tfbridge.MakeType(mainPkg, "Tags")},
-			// 	},
-			// },
-		},
-		DataSources: map[string]*tfbridge.DataSourceInfo{
-			// Map each resource in the Terraform provider to a Pulumi function. An example
-			// is below.
-			// "aws_ami": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getAmi")},
-		},
+		Resources:            map[string]*tfbridge.ResourceInfo{},
+		DataSources:          map[string]*tfbridge.DataSourceInfo{},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			// List any npm dependencies and their versions
 			Dependencies: map[string]string{
@@ -145,6 +131,49 @@ func Provider() tfbridge.ProviderInfo {
 				"Pulumi": "3.*",
 			},
 		},
+	}
+
+	for _, res := range []string{
+		"nobl9_agent",
+		"nobl9_alert_method_discord",
+		"nobl9_alert_method_email",
+		"nobl9_alert_method_jira",
+		"nobl9_alert_method_msteams",
+		"nobl9_alert_method_opsgenie",
+		"nobl9_alert_method_pagerduty",
+		"nobl9_alert_method_servicenow",
+		"nobl9_alert_method_slack",
+		"nobl9_alert_method_webhook",
+		"nobl9_alert_policy",
+		"nobl9_direct_appdynamics",
+		"nobl9_direct_bigquery",
+		"nobl9_direct_cloudwatch",
+		"nobl9_direct_datadog",
+		"nobl9_direct_dynatrace",
+		"nobl9_direct_gcm",
+		"nobl9_direct_influxdb",
+		"nobl9_direct_instana",
+		"nobl9_direct_lightstep",
+		"nobl9_direct_newrelic",
+		"nobl9_direct_pingdom",
+		"nobl9_direct_redshift",
+		"nobl9_direct_splunk",
+		"nobl9_direct_splunk_observability",
+		"nobl9_direct_sumologic",
+		"nobl9_direct_thousandeyes",
+		"nobl9_project",
+		"nobl9_role_binding",
+		"nobl9_service",
+		"nobl9_slo",
+	} {
+		name := strings.Builder{}
+		caser := cases.Title(language.English)
+		for _, s := range strings.Split(res, "_")[1:] {
+			name.WriteString(caser.String(s))
+		}
+		prov.Resources[res] = &tfbridge.ResourceInfo{
+			Tok: tfbridge.MakeResource(mainPkg, mainMod, name.String()),
+		}
 	}
 
 	prov.SetAutonaming(255, "-")

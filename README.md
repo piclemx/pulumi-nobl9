@@ -225,7 +225,7 @@ The `make tfgen` target will take the file `schema.json` and serialize it to a b
 In this section, we will create a Pulumi program in TypeScript that utilizes the provider we created to ensure everything is working properly.
 
 1. Create an account with the provider's service and generate any necessary credentials, e.g. API keys.
-    - Email: bot@pulumi.com
+    - Email: <bot@pulumi.com>
     - Password: (Create a random password in 1Password with the  maximum length and complexity allowed by the provider.)
     - Ensure all secrets (passwords, generated API keys) are stored in Pulumi's 1Password vault.
 
@@ -370,7 +370,7 @@ builds:
   - linux
   ignore: []
   ldflags:
-  - -X github.com/pulumi/pulumi-nobl9/provider/pkg/version.Version={{.Tag}}
+  - -X github.com/piclemx/pulumi-nobl9/provider/pkg/version.Version={{.Tag}}
   main: ./cmd/pulumi-resource-nobl9/
   sort: asc
   use: git
