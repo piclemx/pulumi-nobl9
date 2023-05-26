@@ -50,5 +50,5 @@ export function getVersion(): string {
 
 /** @internal */
 export function resourceOptsDefaults(): any {
-    return { version: getVersion(), pluginDownloadURL: "https://github.com/piclemx/pulumi-noble9/releases/" };
+    return { version: getVersion(), pluginDownloadURL: "https://github.com/piclemx/pulumi-nobl9/releases/" };
 }

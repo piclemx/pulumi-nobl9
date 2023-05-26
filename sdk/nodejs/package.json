@@ -26,6 +26,6 @@
     "pulumi": {
         "resource": true,
         "name": "nobl9",
-        "server": "https://github.com/piclemx/pulumi-noble9/releases/"
+        "server": "https://github.com/piclemx/pulumi-nobl9/releases/"
     }
 }

@@ -15,7 +15,7 @@ class InstallPluginCommand(install):
     def run(self):
         install.run(self)
         try:
-            check_call(['pulumi', 'plugin', 'install', 'resource', 'nobl9', PLUGIN_VERSION, '--server', 'https://github.com/piclemx/pulumi-noble9/releases/'])
+            check_call(['pulumi', 'plugin', 'install', 'resource', 'nobl9', PLUGIN_VERSION, '--server', 'https://github.com/piclemx/pulumi-nobl9/releases/'])
         except OSError as error:
             if error.errno == errno.ENOENT:
                 print(f"""
