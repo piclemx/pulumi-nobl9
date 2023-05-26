@@ -51,6 +51,7 @@ func NewAlertMethodJira(ctx *pulumi.Context,
 	if args.Username == nil {
 		return nil, errors.New("invalid value for required argument 'Username'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource AlertMethodJira
 	err := ctx.RegisterResource("nobl9:index/alertMethodJira:AlertMethodJira", name, args, &resource, opts...)
 	if err != nil {
@@ -179,7 +180,7 @@ func (i *AlertMethodJira) ToAlertMethodJiraOutputWithContext(ctx context.Context
 // AlertMethodJiraArrayInput is an input type that accepts AlertMethodJiraArray and AlertMethodJiraArrayOutput values.
 // You can construct a concrete instance of `AlertMethodJiraArrayInput` via:
 //
-//	AlertMethodJiraArray{ AlertMethodJiraArgs{...} }
+//          AlertMethodJiraArray{ AlertMethodJiraArgs{...} }
 type AlertMethodJiraArrayInput interface {
 	pulumi.Input
 
@@ -204,7 +205,7 @@ func (i AlertMethodJiraArray) ToAlertMethodJiraArrayOutputWithContext(ctx contex
 // AlertMethodJiraMapInput is an input type that accepts AlertMethodJiraMap and AlertMethodJiraMapOutput values.
 // You can construct a concrete instance of `AlertMethodJiraMapInput` via:
 //
-//	AlertMethodJiraMap{ "key": AlertMethodJiraArgs{...} }
+//          AlertMethodJiraMap{ "key": AlertMethodJiraArgs{...} }
 type AlertMethodJiraMapInput interface {
 	pulumi.Input
 

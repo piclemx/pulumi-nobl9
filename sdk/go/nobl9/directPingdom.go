@@ -21,30 +21,27 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
+// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := nobl9.NewDirectPingdom(ctx, "test-pingdom", &nobl9.DirectPingdomArgs{
-//				ApiToken:    pulumi.String("secret"),
-//				Description: pulumi.String("desc"),
-//				Project:     pulumi.String("terraform"),
-//				SourceOfs: pulumi.StringArray{
-//					pulumi.String("Metrics"),
-//					pulumi.String("Services"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := nobl9.NewDirectPingdom(ctx, "test-pingdom", &nobl9.DirectPingdomArgs{
+// 			ApiToken:    pulumi.String("secret"),
+// 			Description: pulumi.String("desc"),
+// 			Project:     pulumi.String("terraform"),
+// 			SourceOfs: pulumi.StringArray{
+// 				pulumi.String("Metrics"),
+// 				pulumi.String("Services"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -83,6 +80,7 @@ func NewDirectPingdom(ctx *pulumi.Context,
 	if args.SourceOfs == nil {
 		return nil, errors.New("invalid value for required argument 'SourceOfs'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DirectPingdom
 	err := ctx.RegisterResource("nobl9:index/directPingdom:DirectPingdom", name, args, &resource, opts...)
 	if err != nil {
@@ -207,7 +205,7 @@ func (i *DirectPingdom) ToDirectPingdomOutputWithContext(ctx context.Context) Di
 // DirectPingdomArrayInput is an input type that accepts DirectPingdomArray and DirectPingdomArrayOutput values.
 // You can construct a concrete instance of `DirectPingdomArrayInput` via:
 //
-//	DirectPingdomArray{ DirectPingdomArgs{...} }
+//          DirectPingdomArray{ DirectPingdomArgs{...} }
 type DirectPingdomArrayInput interface {
 	pulumi.Input
 
@@ -232,7 +230,7 @@ func (i DirectPingdomArray) ToDirectPingdomArrayOutputWithContext(ctx context.Co
 // DirectPingdomMapInput is an input type that accepts DirectPingdomMap and DirectPingdomMapOutput values.
 // You can construct a concrete instance of `DirectPingdomMapInput` via:
 //
-//	DirectPingdomMap{ "key": DirectPingdomArgs{...} }
+//          DirectPingdomMap{ "key": DirectPingdomArgs{...} }
 type DirectPingdomMapInput interface {
 	pulumi.Input
 

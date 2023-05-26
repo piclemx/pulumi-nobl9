@@ -21,45 +21,43 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
+// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := nobl9.NewDirectNewrelic(ctx, "test-newrelic", &nobl9.DirectNewrelicArgs{
-//				AccountId:   pulumi.Int(1234),
-//				Description: pulumi.String("desc"),
-//				HistoricalDataRetrieval: &DirectNewrelicHistoricalDataRetrievalArgs{
-//					DefaultDurations: DirectNewrelicHistoricalDataRetrievalDefaultDurationArray{
-//						&DirectNewrelicHistoricalDataRetrievalDefaultDurationArgs{
-//							Unit:  pulumi.String("Day"),
-//							Value: pulumi.Int(0),
-//						},
-//					},
-//					MaxDurations: DirectNewrelicHistoricalDataRetrievalMaxDurationArray{
-//						&DirectNewrelicHistoricalDataRetrievalMaxDurationArgs{
-//							Unit:  pulumi.String("Day"),
-//							Value: pulumi.Int(30),
-//						},
-//					},
-//				},
-//				InsightsQueryKey: pulumi.String("secret"),
-//				Project:          pulumi.String("terraform"),
-//				SourceOfs: pulumi.StringArray{
-//					pulumi.String("Metrics"),
-//					pulumi.String("Services"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := nobl9.NewDirectNewrelic(ctx, "test-newrelic", &nobl9.DirectNewrelicArgs{
+// 			AccountId:   pulumi.Int(1234),
+// 			Description: pulumi.String("desc"),
+// 			HistoricalDataRetrieval: &DirectNewrelicHistoricalDataRetrievalArgs{
+// 				DefaultDurations: DirectNewrelicHistoricalDataRetrievalDefaultDurationArray{
+// 					&DirectNewrelicHistoricalDataRetrievalDefaultDurationArgs{
+// 						Unit:  pulumi.String("Day"),
+// 						Value: pulumi.Int(0),
+// 					},
+// 				},
+// 				MaxDurations: DirectNewrelicHistoricalDataRetrievalMaxDurationArray{
+// 					&DirectNewrelicHistoricalDataRetrievalMaxDurationArgs{
+// 						Unit:  pulumi.String("Day"),
+// 						Value: pulumi.Int(30),
+// 					},
+// 				},
+// 			},
+// 			InsightsQueryKey: pulumi.String("secret"),
+// 			Project:          pulumi.String("terraform"),
+// 			SourceOfs: pulumi.StringArray{
+// 				pulumi.String("Metrics"),
+// 				pulumi.String("Services"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -105,6 +103,7 @@ func NewDirectNewrelic(ctx *pulumi.Context,
 	if args.SourceOfs == nil {
 		return nil, errors.New("invalid value for required argument 'SourceOfs'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DirectNewrelic
 	err := ctx.RegisterResource("nobl9:index/directNewrelic:DirectNewrelic", name, args, &resource, opts...)
 	if err != nil {
@@ -245,7 +244,7 @@ func (i *DirectNewrelic) ToDirectNewrelicOutputWithContext(ctx context.Context) 
 // DirectNewrelicArrayInput is an input type that accepts DirectNewrelicArray and DirectNewrelicArrayOutput values.
 // You can construct a concrete instance of `DirectNewrelicArrayInput` via:
 //
-//	DirectNewrelicArray{ DirectNewrelicArgs{...} }
+//          DirectNewrelicArray{ DirectNewrelicArgs{...} }
 type DirectNewrelicArrayInput interface {
 	pulumi.Input
 
@@ -270,7 +269,7 @@ func (i DirectNewrelicArray) ToDirectNewrelicArrayOutputWithContext(ctx context.
 // DirectNewrelicMapInput is an input type that accepts DirectNewrelicMap and DirectNewrelicMapOutput values.
 // You can construct a concrete instance of `DirectNewrelicMapInput` via:
 //
-//	DirectNewrelicMap{ "key": DirectNewrelicArgs{...} }
+//          DirectNewrelicMap{ "key": DirectNewrelicArgs{...} }
 type DirectNewrelicMapInput interface {
 	pulumi.Input
 

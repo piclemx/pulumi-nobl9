@@ -21,45 +21,43 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
+// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := nobl9.NewDirectDynatrace(ctx, "test-dynatrace", &nobl9.DirectDynatraceArgs{
-//				Description:    pulumi.String("desc"),
-//				DynatraceToken: pulumi.String("secret"),
-//				HistoricalDataRetrieval: &DirectDynatraceHistoricalDataRetrievalArgs{
-//					DefaultDurations: DirectDynatraceHistoricalDataRetrievalDefaultDurationArray{
-//						&DirectDynatraceHistoricalDataRetrievalDefaultDurationArgs{
-//							Unit:  pulumi.String("Day"),
-//							Value: pulumi.Int(1),
-//						},
-//					},
-//					MaxDurations: DirectDynatraceHistoricalDataRetrievalMaxDurationArray{
-//						&DirectDynatraceHistoricalDataRetrievalMaxDurationArgs{
-//							Unit:  pulumi.String("Day"),
-//							Value: pulumi.Int(10),
-//						},
-//					},
-//				},
-//				Project: pulumi.String("terraform"),
-//				SourceOfs: pulumi.StringArray{
-//					pulumi.String("Metrics"),
-//					pulumi.String("Services"),
-//				},
-//				Url: pulumi.String("https://web.net"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := nobl9.NewDirectDynatrace(ctx, "test-dynatrace", &nobl9.DirectDynatraceArgs{
+// 			Description:    pulumi.String("desc"),
+// 			DynatraceToken: pulumi.String("secret"),
+// 			HistoricalDataRetrieval: &DirectDynatraceHistoricalDataRetrievalArgs{
+// 				DefaultDurations: DirectDynatraceHistoricalDataRetrievalDefaultDurationArray{
+// 					&DirectDynatraceHistoricalDataRetrievalDefaultDurationArgs{
+// 						Unit:  pulumi.String("Day"),
+// 						Value: pulumi.Int(1),
+// 					},
+// 				},
+// 				MaxDurations: DirectDynatraceHistoricalDataRetrievalMaxDurationArray{
+// 					&DirectDynatraceHistoricalDataRetrievalMaxDurationArgs{
+// 						Unit:  pulumi.String("Day"),
+// 						Value: pulumi.Int(10),
+// 					},
+// 				},
+// 			},
+// 			Project: pulumi.String("terraform"),
+// 			SourceOfs: pulumi.StringArray{
+// 				pulumi.String("Metrics"),
+// 				pulumi.String("Services"),
+// 			},
+// 			Url: pulumi.String("https://web.net"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -105,6 +103,7 @@ func NewDirectDynatrace(ctx *pulumi.Context,
 	if args.Url == nil {
 		return nil, errors.New("invalid value for required argument 'Url'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DirectDynatrace
 	err := ctx.RegisterResource("nobl9:index/directDynatrace:DirectDynatrace", name, args, &resource, opts...)
 	if err != nil {
@@ -245,7 +244,7 @@ func (i *DirectDynatrace) ToDirectDynatraceOutputWithContext(ctx context.Context
 // DirectDynatraceArrayInput is an input type that accepts DirectDynatraceArray and DirectDynatraceArrayOutput values.
 // You can construct a concrete instance of `DirectDynatraceArrayInput` via:
 //
-//	DirectDynatraceArray{ DirectDynatraceArgs{...} }
+//          DirectDynatraceArray{ DirectDynatraceArgs{...} }
 type DirectDynatraceArrayInput interface {
 	pulumi.Input
 
@@ -270,7 +269,7 @@ func (i DirectDynatraceArray) ToDirectDynatraceArrayOutputWithContext(ctx contex
 // DirectDynatraceMapInput is an input type that accepts DirectDynatraceMap and DirectDynatraceMapOutput values.
 // You can construct a concrete instance of `DirectDynatraceMapInput` via:
 //
-//	DirectDynatraceMap{ "key": DirectDynatraceArgs{...} }
+//          DirectDynatraceMap{ "key": DirectDynatraceArgs{...} }
 type DirectDynatraceMapInput interface {
 	pulumi.Input
 

@@ -21,30 +21,27 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
+// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := nobl9.NewDirectGcm(ctx, "test-gcm", &nobl9.DirectGcmArgs{
-//				Description:       pulumi.String("desc"),
-//				Project:           pulumi.String("terraform"),
-//				ServiceAccountKey: pulumi.String("secret"),
-//				SourceOfs: pulumi.StringArray{
-//					pulumi.String("Metrics"),
-//					pulumi.String("Services"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := nobl9.NewDirectGcm(ctx, "test-gcm", &nobl9.DirectGcmArgs{
+// 			Description:       pulumi.String("desc"),
+// 			Project:           pulumi.String("terraform"),
+// 			ServiceAccountKey: pulumi.String("secret"),
+// 			SourceOfs: pulumi.StringArray{
+// 				pulumi.String("Metrics"),
+// 				pulumi.String("Services"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -83,6 +80,7 @@ func NewDirectGcm(ctx *pulumi.Context,
 	if args.SourceOfs == nil {
 		return nil, errors.New("invalid value for required argument 'SourceOfs'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DirectGcm
 	err := ctx.RegisterResource("nobl9:index/directGcm:DirectGcm", name, args, &resource, opts...)
 	if err != nil {
@@ -207,7 +205,7 @@ func (i *DirectGcm) ToDirectGcmOutputWithContext(ctx context.Context) DirectGcmO
 // DirectGcmArrayInput is an input type that accepts DirectGcmArray and DirectGcmArrayOutput values.
 // You can construct a concrete instance of `DirectGcmArrayInput` via:
 //
-//	DirectGcmArray{ DirectGcmArgs{...} }
+//          DirectGcmArray{ DirectGcmArgs{...} }
 type DirectGcmArrayInput interface {
 	pulumi.Input
 
@@ -232,7 +230,7 @@ func (i DirectGcmArray) ToDirectGcmArrayOutputWithContext(ctx context.Context) D
 // DirectGcmMapInput is an input type that accepts DirectGcmMap and DirectGcmMapOutput values.
 // You can construct a concrete instance of `DirectGcmMapInput` via:
 //
-//	DirectGcmMap{ "key": DirectGcmArgs{...} }
+//          DirectGcmMap{ "key": DirectGcmArgs{...} }
 type DirectGcmMapInput interface {
 	pulumi.Input
 

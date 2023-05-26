@@ -21,45 +21,43 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
+// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := nobl9.NewDirectCloudwatch(ctx, "test-cloudwatch", &nobl9.DirectCloudwatchArgs{
-//				AccessKeyId: pulumi.String("secret"),
-//				Description: pulumi.String("desc"),
-//				HistoricalDataRetrieval: &DirectCloudwatchHistoricalDataRetrievalArgs{
-//					DefaultDurations: DirectCloudwatchHistoricalDataRetrievalDefaultDurationArray{
-//						&DirectCloudwatchHistoricalDataRetrievalDefaultDurationArgs{
-//							Unit:  pulumi.String("Day"),
-//							Value: pulumi.Int(0),
-//						},
-//					},
-//					MaxDurations: DirectCloudwatchHistoricalDataRetrievalMaxDurationArray{
-//						&DirectCloudwatchHistoricalDataRetrievalMaxDurationArgs{
-//							Unit:  pulumi.String("Day"),
-//							Value: pulumi.Int(15),
-//						},
-//					},
-//				},
-//				Project:         pulumi.String("terraform"),
-//				SecretAccessKey: pulumi.String("secret"),
-//				SourceOfs: pulumi.StringArray{
-//					pulumi.String("Metrics"),
-//					pulumi.String("Services"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := nobl9.NewDirectCloudwatch(ctx, "test-cloudwatch", &nobl9.DirectCloudwatchArgs{
+// 			AccessKeyId: pulumi.String("secret"),
+// 			Description: pulumi.String("desc"),
+// 			HistoricalDataRetrieval: &DirectCloudwatchHistoricalDataRetrievalArgs{
+// 				DefaultDurations: DirectCloudwatchHistoricalDataRetrievalDefaultDurationArray{
+// 					&DirectCloudwatchHistoricalDataRetrievalDefaultDurationArgs{
+// 						Unit:  pulumi.String("Day"),
+// 						Value: pulumi.Int(0),
+// 					},
+// 				},
+// 				MaxDurations: DirectCloudwatchHistoricalDataRetrievalMaxDurationArray{
+// 					&DirectCloudwatchHistoricalDataRetrievalMaxDurationArgs{
+// 						Unit:  pulumi.String("Day"),
+// 						Value: pulumi.Int(15),
+// 					},
+// 				},
+// 			},
+// 			Project:         pulumi.String("terraform"),
+// 			SecretAccessKey: pulumi.String("secret"),
+// 			SourceOfs: pulumi.StringArray{
+// 				pulumi.String("Metrics"),
+// 				pulumi.String("Services"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -102,6 +100,7 @@ func NewDirectCloudwatch(ctx *pulumi.Context,
 	if args.SourceOfs == nil {
 		return nil, errors.New("invalid value for required argument 'SourceOfs'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DirectCloudwatch
 	err := ctx.RegisterResource("nobl9:index/directCloudwatch:DirectCloudwatch", name, args, &resource, opts...)
 	if err != nil {
@@ -242,7 +241,7 @@ func (i *DirectCloudwatch) ToDirectCloudwatchOutputWithContext(ctx context.Conte
 // DirectCloudwatchArrayInput is an input type that accepts DirectCloudwatchArray and DirectCloudwatchArrayOutput values.
 // You can construct a concrete instance of `DirectCloudwatchArrayInput` via:
 //
-//	DirectCloudwatchArray{ DirectCloudwatchArgs{...} }
+//          DirectCloudwatchArray{ DirectCloudwatchArgs{...} }
 type DirectCloudwatchArrayInput interface {
 	pulumi.Input
 
@@ -267,7 +266,7 @@ func (i DirectCloudwatchArray) ToDirectCloudwatchArrayOutputWithContext(ctx cont
 // DirectCloudwatchMapInput is an input type that accepts DirectCloudwatchMap and DirectCloudwatchMapOutput values.
 // You can construct a concrete instance of `DirectCloudwatchMapInput` via:
 //
-//	DirectCloudwatchMap{ "key": DirectCloudwatchArgs{...} }
+//          DirectCloudwatchMap{ "key": DirectCloudwatchArgs{...} }
 type DirectCloudwatchMapInput interface {
 	pulumi.Input
 

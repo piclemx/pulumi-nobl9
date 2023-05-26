@@ -21,30 +21,27 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
+// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := nobl9.NewDirectBigquery(ctx, "test-bigquery", &nobl9.DirectBigqueryArgs{
-//				Description:       pulumi.String("desc"),
-//				Project:           pulumi.String("terraform"),
-//				ServiceAccountKey: pulumi.String("secret"),
-//				SourceOfs: pulumi.StringArray{
-//					pulumi.String("Metrics"),
-//					pulumi.String("Services"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := nobl9.NewDirectBigquery(ctx, "test-bigquery", &nobl9.DirectBigqueryArgs{
+// 			Description:       pulumi.String("desc"),
+// 			Project:           pulumi.String("terraform"),
+// 			ServiceAccountKey: pulumi.String("secret"),
+// 			SourceOfs: pulumi.StringArray{
+// 				pulumi.String("Metrics"),
+// 				pulumi.String("Services"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -83,6 +80,7 @@ func NewDirectBigquery(ctx *pulumi.Context,
 	if args.SourceOfs == nil {
 		return nil, errors.New("invalid value for required argument 'SourceOfs'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DirectBigquery
 	err := ctx.RegisterResource("nobl9:index/directBigquery:DirectBigquery", name, args, &resource, opts...)
 	if err != nil {
@@ -207,7 +205,7 @@ func (i *DirectBigquery) ToDirectBigqueryOutputWithContext(ctx context.Context) 
 // DirectBigqueryArrayInput is an input type that accepts DirectBigqueryArray and DirectBigqueryArrayOutput values.
 // You can construct a concrete instance of `DirectBigqueryArrayInput` via:
 //
-//	DirectBigqueryArray{ DirectBigqueryArgs{...} }
+//          DirectBigqueryArray{ DirectBigqueryArgs{...} }
 type DirectBigqueryArrayInput interface {
 	pulumi.Input
 
@@ -232,7 +230,7 @@ func (i DirectBigqueryArray) ToDirectBigqueryArrayOutputWithContext(ctx context.
 // DirectBigqueryMapInput is an input type that accepts DirectBigqueryMap and DirectBigqueryMapOutput values.
 // You can construct a concrete instance of `DirectBigqueryMapInput` via:
 //
-//	DirectBigqueryMap{ "key": DirectBigqueryArgs{...} }
+//          DirectBigqueryMap{ "key": DirectBigqueryArgs{...} }
 type DirectBigqueryMapInput interface {
 	pulumi.Input
 

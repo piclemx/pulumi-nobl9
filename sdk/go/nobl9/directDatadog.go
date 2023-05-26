@@ -21,46 +21,44 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
+// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := nobl9.NewDirectDatadog(ctx, "test-datadog", &nobl9.DirectDatadogArgs{
-//				ApiKey:         pulumi.String("secret"),
-//				ApplicationKey: pulumi.String("secret"),
-//				Description:    pulumi.String("desc"),
-//				HistoricalDataRetrieval: &DirectDatadogHistoricalDataRetrievalArgs{
-//					DefaultDurations: DirectDatadogHistoricalDataRetrievalDefaultDurationArray{
-//						&DirectDatadogHistoricalDataRetrievalDefaultDurationArgs{
-//							Unit:  pulumi.String("Day"),
-//							Value: pulumi.Int(0),
-//						},
-//					},
-//					MaxDurations: DirectDatadogHistoricalDataRetrievalMaxDurationArray{
-//						&DirectDatadogHistoricalDataRetrievalMaxDurationArgs{
-//							Unit:  pulumi.String("Day"),
-//							Value: pulumi.Int(30),
-//						},
-//					},
-//				},
-//				Project: pulumi.String("terraform"),
-//				Site:    pulumi.String("eu"),
-//				SourceOfs: pulumi.StringArray{
-//					pulumi.String("Metrics"),
-//					pulumi.String("Services"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := nobl9.NewDirectDatadog(ctx, "test-datadog", &nobl9.DirectDatadogArgs{
+// 			ApiKey:         pulumi.String("secret"),
+// 			ApplicationKey: pulumi.String("secret"),
+// 			Description:    pulumi.String("desc"),
+// 			HistoricalDataRetrieval: &DirectDatadogHistoricalDataRetrievalArgs{
+// 				DefaultDurations: DirectDatadogHistoricalDataRetrievalDefaultDurationArray{
+// 					&DirectDatadogHistoricalDataRetrievalDefaultDurationArgs{
+// 						Unit:  pulumi.String("Day"),
+// 						Value: pulumi.Int(0),
+// 					},
+// 				},
+// 				MaxDurations: DirectDatadogHistoricalDataRetrievalMaxDurationArray{
+// 					&DirectDatadogHistoricalDataRetrievalMaxDurationArgs{
+// 						Unit:  pulumi.String("Day"),
+// 						Value: pulumi.Int(30),
+// 					},
+// 				},
+// 			},
+// 			Project: pulumi.String("terraform"),
+// 			Site:    pulumi.String("eu"),
+// 			SourceOfs: pulumi.StringArray{
+// 				pulumi.String("Metrics"),
+// 				pulumi.String("Services"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -108,6 +106,7 @@ func NewDirectDatadog(ctx *pulumi.Context,
 	if args.SourceOfs == nil {
 		return nil, errors.New("invalid value for required argument 'SourceOfs'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DirectDatadog
 	err := ctx.RegisterResource("nobl9:index/directDatadog:DirectDatadog", name, args, &resource, opts...)
 	if err != nil {
@@ -256,7 +255,7 @@ func (i *DirectDatadog) ToDirectDatadogOutputWithContext(ctx context.Context) Di
 // DirectDatadogArrayInput is an input type that accepts DirectDatadogArray and DirectDatadogArrayOutput values.
 // You can construct a concrete instance of `DirectDatadogArrayInput` via:
 //
-//	DirectDatadogArray{ DirectDatadogArgs{...} }
+//          DirectDatadogArray{ DirectDatadogArgs{...} }
 type DirectDatadogArrayInput interface {
 	pulumi.Input
 
@@ -281,7 +280,7 @@ func (i DirectDatadogArray) ToDirectDatadogArrayOutputWithContext(ctx context.Co
 // DirectDatadogMapInput is an input type that accepts DirectDatadogMap and DirectDatadogMapOutput values.
 // You can construct a concrete instance of `DirectDatadogMapInput` via:
 //
-//	DirectDatadogMap{ "key": DirectDatadogArgs{...} }
+//          DirectDatadogMap{ "key": DirectDatadogArgs{...} }
 type DirectDatadogMapInput interface {
 	pulumi.Input
 

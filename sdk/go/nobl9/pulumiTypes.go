@@ -20,7 +20,7 @@ type AgentAmazonPrometheusConfig struct {
 // AgentAmazonPrometheusConfigInput is an input type that accepts AgentAmazonPrometheusConfigArgs and AgentAmazonPrometheusConfigOutput values.
 // You can construct a concrete instance of `AgentAmazonPrometheusConfigInput` via:
 //
-//	AgentAmazonPrometheusConfigArgs{...}
+//          AgentAmazonPrometheusConfigArgs{...}
 type AgentAmazonPrometheusConfigInput interface {
 	pulumi.Input
 
@@ -58,11 +58,11 @@ func (i AgentAmazonPrometheusConfigArgs) ToAgentAmazonPrometheusConfigPtrOutputW
 // AgentAmazonPrometheusConfigPtrInput is an input type that accepts AgentAmazonPrometheusConfigArgs, AgentAmazonPrometheusConfigPtr and AgentAmazonPrometheusConfigPtrOutput values.
 // You can construct a concrete instance of `AgentAmazonPrometheusConfigPtrInput` via:
 //
-//	        AgentAmazonPrometheusConfigArgs{...}
+//          AgentAmazonPrometheusConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentAmazonPrometheusConfigPtrInput interface {
 	pulumi.Input
 
@@ -174,7 +174,7 @@ type AgentAppdynamicsConfig struct {
 // AgentAppdynamicsConfigInput is an input type that accepts AgentAppdynamicsConfigArgs and AgentAppdynamicsConfigOutput values.
 // You can construct a concrete instance of `AgentAppdynamicsConfigInput` via:
 //
-//	AgentAppdynamicsConfigArgs{...}
+//          AgentAppdynamicsConfigArgs{...}
 type AgentAppdynamicsConfigInput interface {
 	pulumi.Input
 
@@ -210,11 +210,11 @@ func (i AgentAppdynamicsConfigArgs) ToAgentAppdynamicsConfigPtrOutputWithContext
 // AgentAppdynamicsConfigPtrInput is an input type that accepts AgentAppdynamicsConfigArgs, AgentAppdynamicsConfigPtr and AgentAppdynamicsConfigPtrOutput values.
 // You can construct a concrete instance of `AgentAppdynamicsConfigPtrInput` via:
 //
-//	        AgentAppdynamicsConfigArgs{...}
+//          AgentAppdynamicsConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentAppdynamicsConfigPtrInput interface {
 	pulumi.Input
 
@@ -309,7 +309,7 @@ type AgentBigqueryConfig struct {
 // AgentBigqueryConfigInput is an input type that accepts AgentBigqueryConfigArgs and AgentBigqueryConfigOutput values.
 // You can construct a concrete instance of `AgentBigqueryConfigInput` via:
 //
-//	AgentBigqueryConfigArgs{...}
+//          AgentBigqueryConfigArgs{...}
 type AgentBigqueryConfigInput interface {
 	pulumi.Input
 
@@ -343,11 +343,11 @@ func (i AgentBigqueryConfigArgs) ToAgentBigqueryConfigPtrOutputWithContext(ctx c
 // AgentBigqueryConfigPtrInput is an input type that accepts AgentBigqueryConfigArgs, AgentBigqueryConfigPtr and AgentBigqueryConfigPtrOutput values.
 // You can construct a concrete instance of `AgentBigqueryConfigPtrInput` via:
 //
-//	        AgentBigqueryConfigArgs{...}
+//          AgentBigqueryConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentBigqueryConfigPtrInput interface {
 	pulumi.Input
 
@@ -427,7 +427,7 @@ type AgentCloudwatchConfig struct {
 // AgentCloudwatchConfigInput is an input type that accepts AgentCloudwatchConfigArgs and AgentCloudwatchConfigOutput values.
 // You can construct a concrete instance of `AgentCloudwatchConfigInput` via:
 //
-//	AgentCloudwatchConfigArgs{...}
+//          AgentCloudwatchConfigArgs{...}
 type AgentCloudwatchConfigInput interface {
 	pulumi.Input
 
@@ -461,11 +461,11 @@ func (i AgentCloudwatchConfigArgs) ToAgentCloudwatchConfigPtrOutputWithContext(c
 // AgentCloudwatchConfigPtrInput is an input type that accepts AgentCloudwatchConfigArgs, AgentCloudwatchConfigPtr and AgentCloudwatchConfigPtrOutput values.
 // You can construct a concrete instance of `AgentCloudwatchConfigPtrInput` via:
 //
-//	        AgentCloudwatchConfigArgs{...}
+//          AgentCloudwatchConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentCloudwatchConfigPtrInput interface {
 	pulumi.Input
 
@@ -547,7 +547,7 @@ type AgentDatadogConfig struct {
 // AgentDatadogConfigInput is an input type that accepts AgentDatadogConfigArgs and AgentDatadogConfigOutput values.
 // You can construct a concrete instance of `AgentDatadogConfigInput` via:
 //
-//	AgentDatadogConfigArgs{...}
+//          AgentDatadogConfigArgs{...}
 type AgentDatadogConfigInput interface {
 	pulumi.Input
 
@@ -583,11 +583,11 @@ func (i AgentDatadogConfigArgs) ToAgentDatadogConfigPtrOutputWithContext(ctx con
 // AgentDatadogConfigPtrInput is an input type that accepts AgentDatadogConfigArgs, AgentDatadogConfigPtr and AgentDatadogConfigPtrOutput values.
 // You can construct a concrete instance of `AgentDatadogConfigPtrInput` via:
 //
-//	        AgentDatadogConfigArgs{...}
+//          AgentDatadogConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentDatadogConfigPtrInput interface {
 	pulumi.Input
 
@@ -684,7 +684,7 @@ type AgentDynatraceConfig struct {
 // AgentDynatraceConfigInput is an input type that accepts AgentDynatraceConfigArgs and AgentDynatraceConfigOutput values.
 // You can construct a concrete instance of `AgentDynatraceConfigInput` via:
 //
-//	AgentDynatraceConfigArgs{...}
+//          AgentDynatraceConfigArgs{...}
 type AgentDynatraceConfigInput interface {
 	pulumi.Input
 
@@ -720,11 +720,11 @@ func (i AgentDynatraceConfigArgs) ToAgentDynatraceConfigPtrOutputWithContext(ctx
 // AgentDynatraceConfigPtrInput is an input type that accepts AgentDynatraceConfigArgs, AgentDynatraceConfigPtr and AgentDynatraceConfigPtrOutput values.
 // You can construct a concrete instance of `AgentDynatraceConfigPtrInput` via:
 //
-//	        AgentDynatraceConfigArgs{...}
+//          AgentDynatraceConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentDynatraceConfigPtrInput interface {
 	pulumi.Input
 
@@ -821,7 +821,7 @@ type AgentElasticsearchConfig struct {
 // AgentElasticsearchConfigInput is an input type that accepts AgentElasticsearchConfigArgs and AgentElasticsearchConfigOutput values.
 // You can construct a concrete instance of `AgentElasticsearchConfigInput` via:
 //
-//	AgentElasticsearchConfigArgs{...}
+//          AgentElasticsearchConfigArgs{...}
 type AgentElasticsearchConfigInput interface {
 	pulumi.Input
 
@@ -857,11 +857,11 @@ func (i AgentElasticsearchConfigArgs) ToAgentElasticsearchConfigPtrOutputWithCon
 // AgentElasticsearchConfigPtrInput is an input type that accepts AgentElasticsearchConfigArgs, AgentElasticsearchConfigPtr and AgentElasticsearchConfigPtrOutput values.
 // You can construct a concrete instance of `AgentElasticsearchConfigPtrInput` via:
 //
-//	        AgentElasticsearchConfigArgs{...}
+//          AgentElasticsearchConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentElasticsearchConfigPtrInput interface {
 	pulumi.Input
 
@@ -956,7 +956,7 @@ type AgentGcmConfig struct {
 // AgentGcmConfigInput is an input type that accepts AgentGcmConfigArgs and AgentGcmConfigOutput values.
 // You can construct a concrete instance of `AgentGcmConfigInput` via:
 //
-//	AgentGcmConfigArgs{...}
+//          AgentGcmConfigArgs{...}
 type AgentGcmConfigInput interface {
 	pulumi.Input
 
@@ -990,11 +990,11 @@ func (i AgentGcmConfigArgs) ToAgentGcmConfigPtrOutputWithContext(ctx context.Con
 // AgentGcmConfigPtrInput is an input type that accepts AgentGcmConfigArgs, AgentGcmConfigPtr and AgentGcmConfigPtrOutput values.
 // You can construct a concrete instance of `AgentGcmConfigPtrInput` via:
 //
-//	        AgentGcmConfigArgs{...}
+//          AgentGcmConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentGcmConfigPtrInput interface {
 	pulumi.Input
 
@@ -1076,7 +1076,7 @@ type AgentGrafanaLokiConfig struct {
 // AgentGrafanaLokiConfigInput is an input type that accepts AgentGrafanaLokiConfigArgs and AgentGrafanaLokiConfigOutput values.
 // You can construct a concrete instance of `AgentGrafanaLokiConfigInput` via:
 //
-//	AgentGrafanaLokiConfigArgs{...}
+//          AgentGrafanaLokiConfigArgs{...}
 type AgentGrafanaLokiConfigInput interface {
 	pulumi.Input
 
@@ -1112,11 +1112,11 @@ func (i AgentGrafanaLokiConfigArgs) ToAgentGrafanaLokiConfigPtrOutputWithContext
 // AgentGrafanaLokiConfigPtrInput is an input type that accepts AgentGrafanaLokiConfigArgs, AgentGrafanaLokiConfigPtr and AgentGrafanaLokiConfigPtrOutput values.
 // You can construct a concrete instance of `AgentGrafanaLokiConfigPtrInput` via:
 //
-//	        AgentGrafanaLokiConfigArgs{...}
+//          AgentGrafanaLokiConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentGrafanaLokiConfigPtrInput interface {
 	pulumi.Input
 
@@ -1213,7 +1213,7 @@ type AgentGraphiteConfig struct {
 // AgentGraphiteConfigInput is an input type that accepts AgentGraphiteConfigArgs and AgentGraphiteConfigOutput values.
 // You can construct a concrete instance of `AgentGraphiteConfigInput` via:
 //
-//	AgentGraphiteConfigArgs{...}
+//          AgentGraphiteConfigArgs{...}
 type AgentGraphiteConfigInput interface {
 	pulumi.Input
 
@@ -1249,11 +1249,11 @@ func (i AgentGraphiteConfigArgs) ToAgentGraphiteConfigPtrOutputWithContext(ctx c
 // AgentGraphiteConfigPtrInput is an input type that accepts AgentGraphiteConfigArgs, AgentGraphiteConfigPtr and AgentGraphiteConfigPtrOutput values.
 // You can construct a concrete instance of `AgentGraphiteConfigPtrInput` via:
 //
-//	        AgentGraphiteConfigArgs{...}
+//          AgentGraphiteConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentGraphiteConfigPtrInput interface {
 	pulumi.Input
 
@@ -1350,7 +1350,7 @@ type AgentInfluxdbConfig struct {
 // AgentInfluxdbConfigInput is an input type that accepts AgentInfluxdbConfigArgs and AgentInfluxdbConfigOutput values.
 // You can construct a concrete instance of `AgentInfluxdbConfigInput` via:
 //
-//	AgentInfluxdbConfigArgs{...}
+//          AgentInfluxdbConfigArgs{...}
 type AgentInfluxdbConfigInput interface {
 	pulumi.Input
 
@@ -1386,11 +1386,11 @@ func (i AgentInfluxdbConfigArgs) ToAgentInfluxdbConfigPtrOutputWithContext(ctx c
 // AgentInfluxdbConfigPtrInput is an input type that accepts AgentInfluxdbConfigArgs, AgentInfluxdbConfigPtr and AgentInfluxdbConfigPtrOutput values.
 // You can construct a concrete instance of `AgentInfluxdbConfigPtrInput` via:
 //
-//	        AgentInfluxdbConfigArgs{...}
+//          AgentInfluxdbConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentInfluxdbConfigPtrInput interface {
 	pulumi.Input
 
@@ -1487,7 +1487,7 @@ type AgentInstanaConfig struct {
 // AgentInstanaConfigInput is an input type that accepts AgentInstanaConfigArgs and AgentInstanaConfigOutput values.
 // You can construct a concrete instance of `AgentInstanaConfigInput` via:
 //
-//	AgentInstanaConfigArgs{...}
+//          AgentInstanaConfigArgs{...}
 type AgentInstanaConfigInput interface {
 	pulumi.Input
 
@@ -1523,11 +1523,11 @@ func (i AgentInstanaConfigArgs) ToAgentInstanaConfigPtrOutputWithContext(ctx con
 // AgentInstanaConfigPtrInput is an input type that accepts AgentInstanaConfigArgs, AgentInstanaConfigPtr and AgentInstanaConfigPtrOutput values.
 // You can construct a concrete instance of `AgentInstanaConfigPtrInput` via:
 //
-//	        AgentInstanaConfigArgs{...}
+//          AgentInstanaConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentInstanaConfigPtrInput interface {
 	pulumi.Input
 
@@ -1626,7 +1626,7 @@ type AgentLightstepConfig struct {
 // AgentLightstepConfigInput is an input type that accepts AgentLightstepConfigArgs and AgentLightstepConfigOutput values.
 // You can construct a concrete instance of `AgentLightstepConfigInput` via:
 //
-//	AgentLightstepConfigArgs{...}
+//          AgentLightstepConfigArgs{...}
 type AgentLightstepConfigInput interface {
 	pulumi.Input
 
@@ -1664,11 +1664,11 @@ func (i AgentLightstepConfigArgs) ToAgentLightstepConfigPtrOutputWithContext(ctx
 // AgentLightstepConfigPtrInput is an input type that accepts AgentLightstepConfigArgs, AgentLightstepConfigPtr and AgentLightstepConfigPtrOutput values.
 // You can construct a concrete instance of `AgentLightstepConfigPtrInput` via:
 //
-//	        AgentLightstepConfigArgs{...}
+//          AgentLightstepConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentLightstepConfigPtrInput interface {
 	pulumi.Input
 
@@ -1780,7 +1780,7 @@ type AgentNewrelicConfig struct {
 // AgentNewrelicConfigInput is an input type that accepts AgentNewrelicConfigArgs and AgentNewrelicConfigOutput values.
 // You can construct a concrete instance of `AgentNewrelicConfigInput` via:
 //
-//	AgentNewrelicConfigArgs{...}
+//          AgentNewrelicConfigArgs{...}
 type AgentNewrelicConfigInput interface {
 	pulumi.Input
 
@@ -1816,11 +1816,11 @@ func (i AgentNewrelicConfigArgs) ToAgentNewrelicConfigPtrOutputWithContext(ctx c
 // AgentNewrelicConfigPtrInput is an input type that accepts AgentNewrelicConfigArgs, AgentNewrelicConfigPtr and AgentNewrelicConfigPtrOutput values.
 // You can construct a concrete instance of `AgentNewrelicConfigPtrInput` via:
 //
-//	        AgentNewrelicConfigArgs{...}
+//          AgentNewrelicConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentNewrelicConfigPtrInput interface {
 	pulumi.Input
 
@@ -1917,7 +1917,7 @@ type AgentOpentsdbConfig struct {
 // AgentOpentsdbConfigInput is an input type that accepts AgentOpentsdbConfigArgs and AgentOpentsdbConfigOutput values.
 // You can construct a concrete instance of `AgentOpentsdbConfigInput` via:
 //
-//	AgentOpentsdbConfigArgs{...}
+//          AgentOpentsdbConfigArgs{...}
 type AgentOpentsdbConfigInput interface {
 	pulumi.Input
 
@@ -1953,11 +1953,11 @@ func (i AgentOpentsdbConfigArgs) ToAgentOpentsdbConfigPtrOutputWithContext(ctx c
 // AgentOpentsdbConfigPtrInput is an input type that accepts AgentOpentsdbConfigArgs, AgentOpentsdbConfigPtr and AgentOpentsdbConfigPtrOutput values.
 // You can construct a concrete instance of `AgentOpentsdbConfigPtrInput` via:
 //
-//	        AgentOpentsdbConfigArgs{...}
+//          AgentOpentsdbConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentOpentsdbConfigPtrInput interface {
 	pulumi.Input
 
@@ -2052,7 +2052,7 @@ type AgentPingdomConfig struct {
 // AgentPingdomConfigInput is an input type that accepts AgentPingdomConfigArgs and AgentPingdomConfigOutput values.
 // You can construct a concrete instance of `AgentPingdomConfigInput` via:
 //
-//	AgentPingdomConfigArgs{...}
+//          AgentPingdomConfigArgs{...}
 type AgentPingdomConfigInput interface {
 	pulumi.Input
 
@@ -2086,11 +2086,11 @@ func (i AgentPingdomConfigArgs) ToAgentPingdomConfigPtrOutputWithContext(ctx con
 // AgentPingdomConfigPtrInput is an input type that accepts AgentPingdomConfigArgs, AgentPingdomConfigPtr and AgentPingdomConfigPtrOutput values.
 // You can construct a concrete instance of `AgentPingdomConfigPtrInput` via:
 //
-//	        AgentPingdomConfigArgs{...}
+//          AgentPingdomConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentPingdomConfigPtrInput interface {
 	pulumi.Input
 
@@ -2172,7 +2172,7 @@ type AgentPrometheusConfig struct {
 // AgentPrometheusConfigInput is an input type that accepts AgentPrometheusConfigArgs and AgentPrometheusConfigOutput values.
 // You can construct a concrete instance of `AgentPrometheusConfigInput` via:
 //
-//	AgentPrometheusConfigArgs{...}
+//          AgentPrometheusConfigArgs{...}
 type AgentPrometheusConfigInput interface {
 	pulumi.Input
 
@@ -2208,11 +2208,11 @@ func (i AgentPrometheusConfigArgs) ToAgentPrometheusConfigPtrOutputWithContext(c
 // AgentPrometheusConfigPtrInput is an input type that accepts AgentPrometheusConfigArgs, AgentPrometheusConfigPtr and AgentPrometheusConfigPtrOutput values.
 // You can construct a concrete instance of `AgentPrometheusConfigPtrInput` via:
 //
-//	        AgentPrometheusConfigArgs{...}
+//          AgentPrometheusConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentPrometheusConfigPtrInput interface {
 	pulumi.Input
 
@@ -2311,7 +2311,7 @@ type AgentQueryDelay struct {
 // AgentQueryDelayInput is an input type that accepts AgentQueryDelayArgs and AgentQueryDelayOutput values.
 // You can construct a concrete instance of `AgentQueryDelayInput` via:
 //
-//	AgentQueryDelayArgs{...}
+//          AgentQueryDelayArgs{...}
 type AgentQueryDelayInput interface {
 	pulumi.Input
 
@@ -2349,11 +2349,11 @@ func (i AgentQueryDelayArgs) ToAgentQueryDelayPtrOutputWithContext(ctx context.C
 // AgentQueryDelayPtrInput is an input type that accepts AgentQueryDelayArgs, AgentQueryDelayPtr and AgentQueryDelayPtrOutput values.
 // You can construct a concrete instance of `AgentQueryDelayPtrInput` via:
 //
-//	        AgentQueryDelayArgs{...}
+//          AgentQueryDelayArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -2463,7 +2463,7 @@ type AgentRedshiftConfig struct {
 // AgentRedshiftConfigInput is an input type that accepts AgentRedshiftConfigArgs and AgentRedshiftConfigOutput values.
 // You can construct a concrete instance of `AgentRedshiftConfigInput` via:
 //
-//	AgentRedshiftConfigArgs{...}
+//          AgentRedshiftConfigArgs{...}
 type AgentRedshiftConfigInput interface {
 	pulumi.Input
 
@@ -2497,11 +2497,11 @@ func (i AgentRedshiftConfigArgs) ToAgentRedshiftConfigPtrOutputWithContext(ctx c
 // AgentRedshiftConfigPtrInput is an input type that accepts AgentRedshiftConfigArgs, AgentRedshiftConfigPtr and AgentRedshiftConfigPtrOutput values.
 // You can construct a concrete instance of `AgentRedshiftConfigPtrInput` via:
 //
-//	        AgentRedshiftConfigArgs{...}
+//          AgentRedshiftConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentRedshiftConfigPtrInput interface {
 	pulumi.Input
 
@@ -2583,7 +2583,7 @@ type AgentSplunkConfig struct {
 // AgentSplunkConfigInput is an input type that accepts AgentSplunkConfigArgs and AgentSplunkConfigOutput values.
 // You can construct a concrete instance of `AgentSplunkConfigInput` via:
 //
-//	AgentSplunkConfigArgs{...}
+//          AgentSplunkConfigArgs{...}
 type AgentSplunkConfigInput interface {
 	pulumi.Input
 
@@ -2619,11 +2619,11 @@ func (i AgentSplunkConfigArgs) ToAgentSplunkConfigPtrOutputWithContext(ctx conte
 // AgentSplunkConfigPtrInput is an input type that accepts AgentSplunkConfigArgs, AgentSplunkConfigPtr and AgentSplunkConfigPtrOutput values.
 // You can construct a concrete instance of `AgentSplunkConfigPtrInput` via:
 //
-//	        AgentSplunkConfigArgs{...}
+//          AgentSplunkConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentSplunkConfigPtrInput interface {
 	pulumi.Input
 
@@ -2720,7 +2720,7 @@ type AgentSplunkObservabilityConfig struct {
 // AgentSplunkObservabilityConfigInput is an input type that accepts AgentSplunkObservabilityConfigArgs and AgentSplunkObservabilityConfigOutput values.
 // You can construct a concrete instance of `AgentSplunkObservabilityConfigInput` via:
 //
-//	AgentSplunkObservabilityConfigArgs{...}
+//          AgentSplunkObservabilityConfigArgs{...}
 type AgentSplunkObservabilityConfigInput interface {
 	pulumi.Input
 
@@ -2756,11 +2756,11 @@ func (i AgentSplunkObservabilityConfigArgs) ToAgentSplunkObservabilityConfigPtrO
 // AgentSplunkObservabilityConfigPtrInput is an input type that accepts AgentSplunkObservabilityConfigArgs, AgentSplunkObservabilityConfigPtr and AgentSplunkObservabilityConfigPtrOutput values.
 // You can construct a concrete instance of `AgentSplunkObservabilityConfigPtrInput` via:
 //
-//	        AgentSplunkObservabilityConfigArgs{...}
+//          AgentSplunkObservabilityConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentSplunkObservabilityConfigPtrInput interface {
 	pulumi.Input
 
@@ -2857,7 +2857,7 @@ type AgentSumologicConfig struct {
 // AgentSumologicConfigInput is an input type that accepts AgentSumologicConfigArgs and AgentSumologicConfigOutput values.
 // You can construct a concrete instance of `AgentSumologicConfigInput` via:
 //
-//	AgentSumologicConfigArgs{...}
+//          AgentSumologicConfigArgs{...}
 type AgentSumologicConfigInput interface {
 	pulumi.Input
 
@@ -2893,11 +2893,11 @@ func (i AgentSumologicConfigArgs) ToAgentSumologicConfigPtrOutputWithContext(ctx
 // AgentSumologicConfigPtrInput is an input type that accepts AgentSumologicConfigArgs, AgentSumologicConfigPtr and AgentSumologicConfigPtrOutput values.
 // You can construct a concrete instance of `AgentSumologicConfigPtrInput` via:
 //
-//	        AgentSumologicConfigArgs{...}
+//          AgentSumologicConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentSumologicConfigPtrInput interface {
 	pulumi.Input
 
@@ -2992,7 +2992,7 @@ type AgentThousandeyesConfig struct {
 // AgentThousandeyesConfigInput is an input type that accepts AgentThousandeyesConfigArgs and AgentThousandeyesConfigOutput values.
 // You can construct a concrete instance of `AgentThousandeyesConfigInput` via:
 //
-//	AgentThousandeyesConfigArgs{...}
+//          AgentThousandeyesConfigArgs{...}
 type AgentThousandeyesConfigInput interface {
 	pulumi.Input
 
@@ -3026,11 +3026,11 @@ func (i AgentThousandeyesConfigArgs) ToAgentThousandeyesConfigPtrOutputWithConte
 // AgentThousandeyesConfigPtrInput is an input type that accepts AgentThousandeyesConfigArgs, AgentThousandeyesConfigPtr and AgentThousandeyesConfigPtrOutput values.
 // You can construct a concrete instance of `AgentThousandeyesConfigPtrInput` via:
 //
-//	        AgentThousandeyesConfigArgs{...}
+//          AgentThousandeyesConfigArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type AgentThousandeyesConfigPtrInput interface {
 	pulumi.Input
 
@@ -3114,7 +3114,7 @@ type AlertPolicyAlertMethod struct {
 // AlertPolicyAlertMethodInput is an input type that accepts AlertPolicyAlertMethodArgs and AlertPolicyAlertMethodOutput values.
 // You can construct a concrete instance of `AlertPolicyAlertMethodInput` via:
 //
-//	AlertPolicyAlertMethodArgs{...}
+//          AlertPolicyAlertMethodArgs{...}
 type AlertPolicyAlertMethodInput interface {
 	pulumi.Input
 
@@ -3144,7 +3144,7 @@ func (i AlertPolicyAlertMethodArgs) ToAlertPolicyAlertMethodOutputWithContext(ct
 // AlertPolicyAlertMethodArrayInput is an input type that accepts AlertPolicyAlertMethodArray and AlertPolicyAlertMethodArrayOutput values.
 // You can construct a concrete instance of `AlertPolicyAlertMethodArrayInput` via:
 //
-//	AlertPolicyAlertMethodArray{ AlertPolicyAlertMethodArgs{...} }
+//          AlertPolicyAlertMethodArray{ AlertPolicyAlertMethodArgs{...} }
 type AlertPolicyAlertMethodArrayInput interface {
 	pulumi.Input
 
@@ -3224,7 +3224,7 @@ type AlertPolicyCondition struct {
 // AlertPolicyConditionInput is an input type that accepts AlertPolicyConditionArgs and AlertPolicyConditionOutput values.
 // You can construct a concrete instance of `AlertPolicyConditionInput` via:
 //
-//	AlertPolicyConditionArgs{...}
+//          AlertPolicyConditionArgs{...}
 type AlertPolicyConditionInput interface {
 	pulumi.Input
 
@@ -3258,7 +3258,7 @@ func (i AlertPolicyConditionArgs) ToAlertPolicyConditionOutputWithContext(ctx co
 // AlertPolicyConditionArrayInput is an input type that accepts AlertPolicyConditionArray and AlertPolicyConditionArrayOutput values.
 // You can construct a concrete instance of `AlertPolicyConditionArrayInput` via:
 //
-//	AlertPolicyConditionArray{ AlertPolicyConditionArgs{...} }
+//          AlertPolicyConditionArray{ AlertPolicyConditionArgs{...} }
 type AlertPolicyConditionArrayInput interface {
 	pulumi.Input
 
@@ -3344,7 +3344,7 @@ type DirectAppdynamicsQueryDelay struct {
 // DirectAppdynamicsQueryDelayInput is an input type that accepts DirectAppdynamicsQueryDelayArgs and DirectAppdynamicsQueryDelayOutput values.
 // You can construct a concrete instance of `DirectAppdynamicsQueryDelayInput` via:
 //
-//	DirectAppdynamicsQueryDelayArgs{...}
+//          DirectAppdynamicsQueryDelayArgs{...}
 type DirectAppdynamicsQueryDelayInput interface {
 	pulumi.Input
 
@@ -3382,11 +3382,11 @@ func (i DirectAppdynamicsQueryDelayArgs) ToDirectAppdynamicsQueryDelayPtrOutputW
 // DirectAppdynamicsQueryDelayPtrInput is an input type that accepts DirectAppdynamicsQueryDelayArgs, DirectAppdynamicsQueryDelayPtr and DirectAppdynamicsQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectAppdynamicsQueryDelayPtrInput` via:
 //
-//	        DirectAppdynamicsQueryDelayArgs{...}
+//          DirectAppdynamicsQueryDelayArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type DirectAppdynamicsQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -3500,7 +3500,7 @@ type DirectBigqueryQueryDelay struct {
 // DirectBigqueryQueryDelayInput is an input type that accepts DirectBigqueryQueryDelayArgs and DirectBigqueryQueryDelayOutput values.
 // You can construct a concrete instance of `DirectBigqueryQueryDelayInput` via:
 //
-//	DirectBigqueryQueryDelayArgs{...}
+//          DirectBigqueryQueryDelayArgs{...}
 type DirectBigqueryQueryDelayInput interface {
 	pulumi.Input
 
@@ -3538,11 +3538,11 @@ func (i DirectBigqueryQueryDelayArgs) ToDirectBigqueryQueryDelayPtrOutputWithCon
 // DirectBigqueryQueryDelayPtrInput is an input type that accepts DirectBigqueryQueryDelayArgs, DirectBigqueryQueryDelayPtr and DirectBigqueryQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectBigqueryQueryDelayPtrInput` via:
 //
-//	        DirectBigqueryQueryDelayArgs{...}
+//          DirectBigqueryQueryDelayArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type DirectBigqueryQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -3656,7 +3656,7 @@ type DirectCloudwatchHistoricalDataRetrieval struct {
 // DirectCloudwatchHistoricalDataRetrievalInput is an input type that accepts DirectCloudwatchHistoricalDataRetrievalArgs and DirectCloudwatchHistoricalDataRetrievalOutput values.
 // You can construct a concrete instance of `DirectCloudwatchHistoricalDataRetrievalInput` via:
 //
-//	DirectCloudwatchHistoricalDataRetrievalArgs{...}
+//          DirectCloudwatchHistoricalDataRetrievalArgs{...}
 type DirectCloudwatchHistoricalDataRetrievalInput interface {
 	pulumi.Input
 
@@ -3694,11 +3694,11 @@ func (i DirectCloudwatchHistoricalDataRetrievalArgs) ToDirectCloudwatchHistorica
 // DirectCloudwatchHistoricalDataRetrievalPtrInput is an input type that accepts DirectCloudwatchHistoricalDataRetrievalArgs, DirectCloudwatchHistoricalDataRetrievalPtr and DirectCloudwatchHistoricalDataRetrievalPtrOutput values.
 // You can construct a concrete instance of `DirectCloudwatchHistoricalDataRetrievalPtrInput` via:
 //
-//	        DirectCloudwatchHistoricalDataRetrievalArgs{...}
+//          DirectCloudwatchHistoricalDataRetrievalArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type DirectCloudwatchHistoricalDataRetrievalPtrInput interface {
 	pulumi.Input
 
@@ -3814,7 +3814,7 @@ type DirectCloudwatchHistoricalDataRetrievalDefaultDuration struct {
 // DirectCloudwatchHistoricalDataRetrievalDefaultDurationInput is an input type that accepts DirectCloudwatchHistoricalDataRetrievalDefaultDurationArgs and DirectCloudwatchHistoricalDataRetrievalDefaultDurationOutput values.
 // You can construct a concrete instance of `DirectCloudwatchHistoricalDataRetrievalDefaultDurationInput` via:
 //
-//	DirectCloudwatchHistoricalDataRetrievalDefaultDurationArgs{...}
+//          DirectCloudwatchHistoricalDataRetrievalDefaultDurationArgs{...}
 type DirectCloudwatchHistoricalDataRetrievalDefaultDurationInput interface {
 	pulumi.Input
 
@@ -3842,7 +3842,7 @@ func (i DirectCloudwatchHistoricalDataRetrievalDefaultDurationArgs) ToDirectClou
 // DirectCloudwatchHistoricalDataRetrievalDefaultDurationArrayInput is an input type that accepts DirectCloudwatchHistoricalDataRetrievalDefaultDurationArray and DirectCloudwatchHistoricalDataRetrievalDefaultDurationArrayOutput values.
 // You can construct a concrete instance of `DirectCloudwatchHistoricalDataRetrievalDefaultDurationArrayInput` via:
 //
-//	DirectCloudwatchHistoricalDataRetrievalDefaultDurationArray{ DirectCloudwatchHistoricalDataRetrievalDefaultDurationArgs{...} }
+//          DirectCloudwatchHistoricalDataRetrievalDefaultDurationArray{ DirectCloudwatchHistoricalDataRetrievalDefaultDurationArgs{...} }
 type DirectCloudwatchHistoricalDataRetrievalDefaultDurationArrayInput interface {
 	pulumi.Input
 
@@ -3914,7 +3914,7 @@ type DirectCloudwatchHistoricalDataRetrievalMaxDuration struct {
 // DirectCloudwatchHistoricalDataRetrievalMaxDurationInput is an input type that accepts DirectCloudwatchHistoricalDataRetrievalMaxDurationArgs and DirectCloudwatchHistoricalDataRetrievalMaxDurationOutput values.
 // You can construct a concrete instance of `DirectCloudwatchHistoricalDataRetrievalMaxDurationInput` via:
 //
-//	DirectCloudwatchHistoricalDataRetrievalMaxDurationArgs{...}
+//          DirectCloudwatchHistoricalDataRetrievalMaxDurationArgs{...}
 type DirectCloudwatchHistoricalDataRetrievalMaxDurationInput interface {
 	pulumi.Input
 
@@ -3942,7 +3942,7 @@ func (i DirectCloudwatchHistoricalDataRetrievalMaxDurationArgs) ToDirectCloudwat
 // DirectCloudwatchHistoricalDataRetrievalMaxDurationArrayInput is an input type that accepts DirectCloudwatchHistoricalDataRetrievalMaxDurationArray and DirectCloudwatchHistoricalDataRetrievalMaxDurationArrayOutput values.
 // You can construct a concrete instance of `DirectCloudwatchHistoricalDataRetrievalMaxDurationArrayInput` via:
 //
-//	DirectCloudwatchHistoricalDataRetrievalMaxDurationArray{ DirectCloudwatchHistoricalDataRetrievalMaxDurationArgs{...} }
+//          DirectCloudwatchHistoricalDataRetrievalMaxDurationArray{ DirectCloudwatchHistoricalDataRetrievalMaxDurationArgs{...} }
 type DirectCloudwatchHistoricalDataRetrievalMaxDurationArrayInput interface {
 	pulumi.Input
 
@@ -4016,7 +4016,7 @@ type DirectCloudwatchQueryDelay struct {
 // DirectCloudwatchQueryDelayInput is an input type that accepts DirectCloudwatchQueryDelayArgs and DirectCloudwatchQueryDelayOutput values.
 // You can construct a concrete instance of `DirectCloudwatchQueryDelayInput` via:
 //
-//	DirectCloudwatchQueryDelayArgs{...}
+//          DirectCloudwatchQueryDelayArgs{...}
 type DirectCloudwatchQueryDelayInput interface {
 	pulumi.Input
 
@@ -4054,11 +4054,11 @@ func (i DirectCloudwatchQueryDelayArgs) ToDirectCloudwatchQueryDelayPtrOutputWit
 // DirectCloudwatchQueryDelayPtrInput is an input type that accepts DirectCloudwatchQueryDelayArgs, DirectCloudwatchQueryDelayPtr and DirectCloudwatchQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectCloudwatchQueryDelayPtrInput` via:
 //
-//	        DirectCloudwatchQueryDelayArgs{...}
+//          DirectCloudwatchQueryDelayArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type DirectCloudwatchQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -4172,7 +4172,7 @@ type DirectDatadogHistoricalDataRetrieval struct {
 // DirectDatadogHistoricalDataRetrievalInput is an input type that accepts DirectDatadogHistoricalDataRetrievalArgs and DirectDatadogHistoricalDataRetrievalOutput values.
 // You can construct a concrete instance of `DirectDatadogHistoricalDataRetrievalInput` via:
 //
-//	DirectDatadogHistoricalDataRetrievalArgs{...}
+//          DirectDatadogHistoricalDataRetrievalArgs{...}
 type DirectDatadogHistoricalDataRetrievalInput interface {
 	pulumi.Input
 
@@ -4210,11 +4210,11 @@ func (i DirectDatadogHistoricalDataRetrievalArgs) ToDirectDatadogHistoricalDataR
 // DirectDatadogHistoricalDataRetrievalPtrInput is an input type that accepts DirectDatadogHistoricalDataRetrievalArgs, DirectDatadogHistoricalDataRetrievalPtr and DirectDatadogHistoricalDataRetrievalPtrOutput values.
 // You can construct a concrete instance of `DirectDatadogHistoricalDataRetrievalPtrInput` via:
 //
-//	        DirectDatadogHistoricalDataRetrievalArgs{...}
+//          DirectDatadogHistoricalDataRetrievalArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type DirectDatadogHistoricalDataRetrievalPtrInput interface {
 	pulumi.Input
 
@@ -4330,7 +4330,7 @@ type DirectDatadogHistoricalDataRetrievalDefaultDuration struct {
 // DirectDatadogHistoricalDataRetrievalDefaultDurationInput is an input type that accepts DirectDatadogHistoricalDataRetrievalDefaultDurationArgs and DirectDatadogHistoricalDataRetrievalDefaultDurationOutput values.
 // You can construct a concrete instance of `DirectDatadogHistoricalDataRetrievalDefaultDurationInput` via:
 //
-//	DirectDatadogHistoricalDataRetrievalDefaultDurationArgs{...}
+//          DirectDatadogHistoricalDataRetrievalDefaultDurationArgs{...}
 type DirectDatadogHistoricalDataRetrievalDefaultDurationInput interface {
 	pulumi.Input
 
@@ -4358,7 +4358,7 @@ func (i DirectDatadogHistoricalDataRetrievalDefaultDurationArgs) ToDirectDatadog
 // DirectDatadogHistoricalDataRetrievalDefaultDurationArrayInput is an input type that accepts DirectDatadogHistoricalDataRetrievalDefaultDurationArray and DirectDatadogHistoricalDataRetrievalDefaultDurationArrayOutput values.
 // You can construct a concrete instance of `DirectDatadogHistoricalDataRetrievalDefaultDurationArrayInput` via:
 //
-//	DirectDatadogHistoricalDataRetrievalDefaultDurationArray{ DirectDatadogHistoricalDataRetrievalDefaultDurationArgs{...} }
+//          DirectDatadogHistoricalDataRetrievalDefaultDurationArray{ DirectDatadogHistoricalDataRetrievalDefaultDurationArgs{...} }
 type DirectDatadogHistoricalDataRetrievalDefaultDurationArrayInput interface {
 	pulumi.Input
 
@@ -4430,7 +4430,7 @@ type DirectDatadogHistoricalDataRetrievalMaxDuration struct {
 // DirectDatadogHistoricalDataRetrievalMaxDurationInput is an input type that accepts DirectDatadogHistoricalDataRetrievalMaxDurationArgs and DirectDatadogHistoricalDataRetrievalMaxDurationOutput values.
 // You can construct a concrete instance of `DirectDatadogHistoricalDataRetrievalMaxDurationInput` via:
 //
-//	DirectDatadogHistoricalDataRetrievalMaxDurationArgs{...}
+//          DirectDatadogHistoricalDataRetrievalMaxDurationArgs{...}
 type DirectDatadogHistoricalDataRetrievalMaxDurationInput interface {
 	pulumi.Input
 
@@ -4458,7 +4458,7 @@ func (i DirectDatadogHistoricalDataRetrievalMaxDurationArgs) ToDirectDatadogHist
 // DirectDatadogHistoricalDataRetrievalMaxDurationArrayInput is an input type that accepts DirectDatadogHistoricalDataRetrievalMaxDurationArray and DirectDatadogHistoricalDataRetrievalMaxDurationArrayOutput values.
 // You can construct a concrete instance of `DirectDatadogHistoricalDataRetrievalMaxDurationArrayInput` via:
 //
-//	DirectDatadogHistoricalDataRetrievalMaxDurationArray{ DirectDatadogHistoricalDataRetrievalMaxDurationArgs{...} }
+//          DirectDatadogHistoricalDataRetrievalMaxDurationArray{ DirectDatadogHistoricalDataRetrievalMaxDurationArgs{...} }
 type DirectDatadogHistoricalDataRetrievalMaxDurationArrayInput interface {
 	pulumi.Input
 
@@ -4532,7 +4532,7 @@ type DirectDatadogQueryDelay struct {
 // DirectDatadogQueryDelayInput is an input type that accepts DirectDatadogQueryDelayArgs and DirectDatadogQueryDelayOutput values.
 // You can construct a concrete instance of `DirectDatadogQueryDelayInput` via:
 //
-//	DirectDatadogQueryDelayArgs{...}
+//          DirectDatadogQueryDelayArgs{...}
 type DirectDatadogQueryDelayInput interface {
 	pulumi.Input
 
@@ -4570,11 +4570,11 @@ func (i DirectDatadogQueryDelayArgs) ToDirectDatadogQueryDelayPtrOutputWithConte
 // DirectDatadogQueryDelayPtrInput is an input type that accepts DirectDatadogQueryDelayArgs, DirectDatadogQueryDelayPtr and DirectDatadogQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectDatadogQueryDelayPtrInput` via:
 //
-//	        DirectDatadogQueryDelayArgs{...}
+//          DirectDatadogQueryDelayArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type DirectDatadogQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -4688,7 +4688,7 @@ type DirectDynatraceHistoricalDataRetrieval struct {
 // DirectDynatraceHistoricalDataRetrievalInput is an input type that accepts DirectDynatraceHistoricalDataRetrievalArgs and DirectDynatraceHistoricalDataRetrievalOutput values.
 // You can construct a concrete instance of `DirectDynatraceHistoricalDataRetrievalInput` via:
 //
-//	DirectDynatraceHistoricalDataRetrievalArgs{...}
+//          DirectDynatraceHistoricalDataRetrievalArgs{...}
 type DirectDynatraceHistoricalDataRetrievalInput interface {
 	pulumi.Input
 
@@ -4726,11 +4726,11 @@ func (i DirectDynatraceHistoricalDataRetrievalArgs) ToDirectDynatraceHistoricalD
 // DirectDynatraceHistoricalDataRetrievalPtrInput is an input type that accepts DirectDynatraceHistoricalDataRetrievalArgs, DirectDynatraceHistoricalDataRetrievalPtr and DirectDynatraceHistoricalDataRetrievalPtrOutput values.
 // You can construct a concrete instance of `DirectDynatraceHistoricalDataRetrievalPtrInput` via:
 //
-//	        DirectDynatraceHistoricalDataRetrievalArgs{...}
+//          DirectDynatraceHistoricalDataRetrievalArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type DirectDynatraceHistoricalDataRetrievalPtrInput interface {
 	pulumi.Input
 
@@ -4846,7 +4846,7 @@ type DirectDynatraceHistoricalDataRetrievalDefaultDuration struct {
 // DirectDynatraceHistoricalDataRetrievalDefaultDurationInput is an input type that accepts DirectDynatraceHistoricalDataRetrievalDefaultDurationArgs and DirectDynatraceHistoricalDataRetrievalDefaultDurationOutput values.
 // You can construct a concrete instance of `DirectDynatraceHistoricalDataRetrievalDefaultDurationInput` via:
 //
-//	DirectDynatraceHistoricalDataRetrievalDefaultDurationArgs{...}
+//          DirectDynatraceHistoricalDataRetrievalDefaultDurationArgs{...}
 type DirectDynatraceHistoricalDataRetrievalDefaultDurationInput interface {
 	pulumi.Input
 
@@ -4874,7 +4874,7 @@ func (i DirectDynatraceHistoricalDataRetrievalDefaultDurationArgs) ToDirectDynat
 // DirectDynatraceHistoricalDataRetrievalDefaultDurationArrayInput is an input type that accepts DirectDynatraceHistoricalDataRetrievalDefaultDurationArray and DirectDynatraceHistoricalDataRetrievalDefaultDurationArrayOutput values.
 // You can construct a concrete instance of `DirectDynatraceHistoricalDataRetrievalDefaultDurationArrayInput` via:
 //
-//	DirectDynatraceHistoricalDataRetrievalDefaultDurationArray{ DirectDynatraceHistoricalDataRetrievalDefaultDurationArgs{...} }
+//          DirectDynatraceHistoricalDataRetrievalDefaultDurationArray{ DirectDynatraceHistoricalDataRetrievalDefaultDurationArgs{...} }
 type DirectDynatraceHistoricalDataRetrievalDefaultDurationArrayInput interface {
 	pulumi.Input
 
@@ -4946,7 +4946,7 @@ type DirectDynatraceHistoricalDataRetrievalMaxDuration struct {
 // DirectDynatraceHistoricalDataRetrievalMaxDurationInput is an input type that accepts DirectDynatraceHistoricalDataRetrievalMaxDurationArgs and DirectDynatraceHistoricalDataRetrievalMaxDurationOutput values.
 // You can construct a concrete instance of `DirectDynatraceHistoricalDataRetrievalMaxDurationInput` via:
 //
-//	DirectDynatraceHistoricalDataRetrievalMaxDurationArgs{...}
+//          DirectDynatraceHistoricalDataRetrievalMaxDurationArgs{...}
 type DirectDynatraceHistoricalDataRetrievalMaxDurationInput interface {
 	pulumi.Input
 
@@ -4974,7 +4974,7 @@ func (i DirectDynatraceHistoricalDataRetrievalMaxDurationArgs) ToDirectDynatrace
 // DirectDynatraceHistoricalDataRetrievalMaxDurationArrayInput is an input type that accepts DirectDynatraceHistoricalDataRetrievalMaxDurationArray and DirectDynatraceHistoricalDataRetrievalMaxDurationArrayOutput values.
 // You can construct a concrete instance of `DirectDynatraceHistoricalDataRetrievalMaxDurationArrayInput` via:
 //
-//	DirectDynatraceHistoricalDataRetrievalMaxDurationArray{ DirectDynatraceHistoricalDataRetrievalMaxDurationArgs{...} }
+//          DirectDynatraceHistoricalDataRetrievalMaxDurationArray{ DirectDynatraceHistoricalDataRetrievalMaxDurationArgs{...} }
 type DirectDynatraceHistoricalDataRetrievalMaxDurationArrayInput interface {
 	pulumi.Input
 
@@ -5048,7 +5048,7 @@ type DirectDynatraceQueryDelay struct {
 // DirectDynatraceQueryDelayInput is an input type that accepts DirectDynatraceQueryDelayArgs and DirectDynatraceQueryDelayOutput values.
 // You can construct a concrete instance of `DirectDynatraceQueryDelayInput` via:
 //
-//	DirectDynatraceQueryDelayArgs{...}
+//          DirectDynatraceQueryDelayArgs{...}
 type DirectDynatraceQueryDelayInput interface {
 	pulumi.Input
 
@@ -5086,11 +5086,11 @@ func (i DirectDynatraceQueryDelayArgs) ToDirectDynatraceQueryDelayPtrOutputWithC
 // DirectDynatraceQueryDelayPtrInput is an input type that accepts DirectDynatraceQueryDelayArgs, DirectDynatraceQueryDelayPtr and DirectDynatraceQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectDynatraceQueryDelayPtrInput` via:
 //
-//	        DirectDynatraceQueryDelayArgs{...}
+//          DirectDynatraceQueryDelayArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type DirectDynatraceQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -5204,7 +5204,7 @@ type DirectGcmQueryDelay struct {
 // DirectGcmQueryDelayInput is an input type that accepts DirectGcmQueryDelayArgs and DirectGcmQueryDelayOutput values.
 // You can construct a concrete instance of `DirectGcmQueryDelayInput` via:
 //
-//	DirectGcmQueryDelayArgs{...}
+//          DirectGcmQueryDelayArgs{...}
 type DirectGcmQueryDelayInput interface {
 	pulumi.Input
 
@@ -5242,11 +5242,11 @@ func (i DirectGcmQueryDelayArgs) ToDirectGcmQueryDelayPtrOutputWithContext(ctx c
 // DirectGcmQueryDelayPtrInput is an input type that accepts DirectGcmQueryDelayArgs, DirectGcmQueryDelayPtr and DirectGcmQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectGcmQueryDelayPtrInput` via:
 //
-//	        DirectGcmQueryDelayArgs{...}
+//          DirectGcmQueryDelayArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type DirectGcmQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -5360,7 +5360,7 @@ type DirectInfluxdbQueryDelay struct {
 // DirectInfluxdbQueryDelayInput is an input type that accepts DirectInfluxdbQueryDelayArgs and DirectInfluxdbQueryDelayOutput values.
 // You can construct a concrete instance of `DirectInfluxdbQueryDelayInput` via:
 //
-//	DirectInfluxdbQueryDelayArgs{...}
+//          DirectInfluxdbQueryDelayArgs{...}
 type DirectInfluxdbQueryDelayInput interface {
 	pulumi.Input
 
@@ -5398,11 +5398,11 @@ func (i DirectInfluxdbQueryDelayArgs) ToDirectInfluxdbQueryDelayPtrOutputWithCon
 // DirectInfluxdbQueryDelayPtrInput is an input type that accepts DirectInfluxdbQueryDelayArgs, DirectInfluxdbQueryDelayPtr and DirectInfluxdbQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectInfluxdbQueryDelayPtrInput` via:
 //
-//	        DirectInfluxdbQueryDelayArgs{...}
+//          DirectInfluxdbQueryDelayArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type DirectInfluxdbQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -5516,7 +5516,7 @@ type DirectInstanaQueryDelay struct {
 // DirectInstanaQueryDelayInput is an input type that accepts DirectInstanaQueryDelayArgs and DirectInstanaQueryDelayOutput values.
 // You can construct a concrete instance of `DirectInstanaQueryDelayInput` via:
 //
-//	DirectInstanaQueryDelayArgs{...}
+//          DirectInstanaQueryDelayArgs{...}
 type DirectInstanaQueryDelayInput interface {
 	pulumi.Input
 
@@ -5554,11 +5554,11 @@ func (i DirectInstanaQueryDelayArgs) ToDirectInstanaQueryDelayPtrOutputWithConte
 // DirectInstanaQueryDelayPtrInput is an input type that accepts DirectInstanaQueryDelayArgs, DirectInstanaQueryDelayPtr and DirectInstanaQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectInstanaQueryDelayPtrInput` via:
 //
-//	        DirectInstanaQueryDelayArgs{...}
+//          DirectInstanaQueryDelayArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type DirectInstanaQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -5672,7 +5672,7 @@ type DirectLightstepHistoricalDataRetrieval struct {
 // DirectLightstepHistoricalDataRetrievalInput is an input type that accepts DirectLightstepHistoricalDataRetrievalArgs and DirectLightstepHistoricalDataRetrievalOutput values.
 // You can construct a concrete instance of `DirectLightstepHistoricalDataRetrievalInput` via:
 //
-//	DirectLightstepHistoricalDataRetrievalArgs{...}
+//          DirectLightstepHistoricalDataRetrievalArgs{...}
 type DirectLightstepHistoricalDataRetrievalInput interface {
 	pulumi.Input
 
@@ -5710,11 +5710,11 @@ func (i DirectLightstepHistoricalDataRetrievalArgs) ToDirectLightstepHistoricalD
 // DirectLightstepHistoricalDataRetrievalPtrInput is an input type that accepts DirectLightstepHistoricalDataRetrievalArgs, DirectLightstepHistoricalDataRetrievalPtr and DirectLightstepHistoricalDataRetrievalPtrOutput values.
 // You can construct a concrete instance of `DirectLightstepHistoricalDataRetrievalPtrInput` via:
 //
-//	        DirectLightstepHistoricalDataRetrievalArgs{...}
+//          DirectLightstepHistoricalDataRetrievalArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type DirectLightstepHistoricalDataRetrievalPtrInput interface {
 	pulumi.Input
 
@@ -5830,7 +5830,7 @@ type DirectLightstepHistoricalDataRetrievalDefaultDuration struct {
 // DirectLightstepHistoricalDataRetrievalDefaultDurationInput is an input type that accepts DirectLightstepHistoricalDataRetrievalDefaultDurationArgs and DirectLightstepHistoricalDataRetrievalDefaultDurationOutput values.
 // You can construct a concrete instance of `DirectLightstepHistoricalDataRetrievalDefaultDurationInput` via:
 //
-//	DirectLightstepHistoricalDataRetrievalDefaultDurationArgs{...}
+//          DirectLightstepHistoricalDataRetrievalDefaultDurationArgs{...}
 type DirectLightstepHistoricalDataRetrievalDefaultDurationInput interface {
 	pulumi.Input
 
@@ -5858,7 +5858,7 @@ func (i DirectLightstepHistoricalDataRetrievalDefaultDurationArgs) ToDirectLight
 // DirectLightstepHistoricalDataRetrievalDefaultDurationArrayInput is an input type that accepts DirectLightstepHistoricalDataRetrievalDefaultDurationArray and DirectLightstepHistoricalDataRetrievalDefaultDurationArrayOutput values.
 // You can construct a concrete instance of `DirectLightstepHistoricalDataRetrievalDefaultDurationArrayInput` via:
 //
-//	DirectLightstepHistoricalDataRetrievalDefaultDurationArray{ DirectLightstepHistoricalDataRetrievalDefaultDurationArgs{...} }
+//          DirectLightstepHistoricalDataRetrievalDefaultDurationArray{ DirectLightstepHistoricalDataRetrievalDefaultDurationArgs{...} }
 type DirectLightstepHistoricalDataRetrievalDefaultDurationArrayInput interface {
 	pulumi.Input
 
@@ -5930,7 +5930,7 @@ type DirectLightstepHistoricalDataRetrievalMaxDuration struct {
 // DirectLightstepHistoricalDataRetrievalMaxDurationInput is an input type that accepts DirectLightstepHistoricalDataRetrievalMaxDurationArgs and DirectLightstepHistoricalDataRetrievalMaxDurationOutput values.
 // You can construct a concrete instance of `DirectLightstepHistoricalDataRetrievalMaxDurationInput` via:
 //
-//	DirectLightstepHistoricalDataRetrievalMaxDurationArgs{...}
+//          DirectLightstepHistoricalDataRetrievalMaxDurationArgs{...}
 type DirectLightstepHistoricalDataRetrievalMaxDurationInput interface {
 	pulumi.Input
 
@@ -5958,7 +5958,7 @@ func (i DirectLightstepHistoricalDataRetrievalMaxDurationArgs) ToDirectLightstep
 // DirectLightstepHistoricalDataRetrievalMaxDurationArrayInput is an input type that accepts DirectLightstepHistoricalDataRetrievalMaxDurationArray and DirectLightstepHistoricalDataRetrievalMaxDurationArrayOutput values.
 // You can construct a concrete instance of `DirectLightstepHistoricalDataRetrievalMaxDurationArrayInput` via:
 //
-//	DirectLightstepHistoricalDataRetrievalMaxDurationArray{ DirectLightstepHistoricalDataRetrievalMaxDurationArgs{...} }
+//          DirectLightstepHistoricalDataRetrievalMaxDurationArray{ DirectLightstepHistoricalDataRetrievalMaxDurationArgs{...} }
 type DirectLightstepHistoricalDataRetrievalMaxDurationArrayInput interface {
 	pulumi.Input
 
@@ -6032,7 +6032,7 @@ type DirectLightstepQueryDelay struct {
 // DirectLightstepQueryDelayInput is an input type that accepts DirectLightstepQueryDelayArgs and DirectLightstepQueryDelayOutput values.
 // You can construct a concrete instance of `DirectLightstepQueryDelayInput` via:
 //
-//	DirectLightstepQueryDelayArgs{...}
+//          DirectLightstepQueryDelayArgs{...}
 type DirectLightstepQueryDelayInput interface {
 	pulumi.Input
 
@@ -6070,11 +6070,11 @@ func (i DirectLightstepQueryDelayArgs) ToDirectLightstepQueryDelayPtrOutputWithC
 // DirectLightstepQueryDelayPtrInput is an input type that accepts DirectLightstepQueryDelayArgs, DirectLightstepQueryDelayPtr and DirectLightstepQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectLightstepQueryDelayPtrInput` via:
 //
-//	        DirectLightstepQueryDelayArgs{...}
+//          DirectLightstepQueryDelayArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type DirectLightstepQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -6188,7 +6188,7 @@ type DirectNewrelicHistoricalDataRetrieval struct {
 // DirectNewrelicHistoricalDataRetrievalInput is an input type that accepts DirectNewrelicHistoricalDataRetrievalArgs and DirectNewrelicHistoricalDataRetrievalOutput values.
 // You can construct a concrete instance of `DirectNewrelicHistoricalDataRetrievalInput` via:
 //
-//	DirectNewrelicHistoricalDataRetrievalArgs{...}
+//          DirectNewrelicHistoricalDataRetrievalArgs{...}
 type DirectNewrelicHistoricalDataRetrievalInput interface {
 	pulumi.Input
 
@@ -6226,11 +6226,11 @@ func (i DirectNewrelicHistoricalDataRetrievalArgs) ToDirectNewrelicHistoricalDat
 // DirectNewrelicHistoricalDataRetrievalPtrInput is an input type that accepts DirectNewrelicHistoricalDataRetrievalArgs, DirectNewrelicHistoricalDataRetrievalPtr and DirectNewrelicHistoricalDataRetrievalPtrOutput values.
 // You can construct a concrete instance of `DirectNewrelicHistoricalDataRetrievalPtrInput` via:
 //
-//	        DirectNewrelicHistoricalDataRetrievalArgs{...}
+//          DirectNewrelicHistoricalDataRetrievalArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type DirectNewrelicHistoricalDataRetrievalPtrInput interface {
 	pulumi.Input
 
@@ -6346,7 +6346,7 @@ type DirectNewrelicHistoricalDataRetrievalDefaultDuration struct {
 // DirectNewrelicHistoricalDataRetrievalDefaultDurationInput is an input type that accepts DirectNewrelicHistoricalDataRetrievalDefaultDurationArgs and DirectNewrelicHistoricalDataRetrievalDefaultDurationOutput values.
 // You can construct a concrete instance of `DirectNewrelicHistoricalDataRetrievalDefaultDurationInput` via:
 //
-//	DirectNewrelicHistoricalDataRetrievalDefaultDurationArgs{...}
+//          DirectNewrelicHistoricalDataRetrievalDefaultDurationArgs{...}
 type DirectNewrelicHistoricalDataRetrievalDefaultDurationInput interface {
 	pulumi.Input
 
@@ -6374,7 +6374,7 @@ func (i DirectNewrelicHistoricalDataRetrievalDefaultDurationArgs) ToDirectNewrel
 // DirectNewrelicHistoricalDataRetrievalDefaultDurationArrayInput is an input type that accepts DirectNewrelicHistoricalDataRetrievalDefaultDurationArray and DirectNewrelicHistoricalDataRetrievalDefaultDurationArrayOutput values.
 // You can construct a concrete instance of `DirectNewrelicHistoricalDataRetrievalDefaultDurationArrayInput` via:
 //
-//	DirectNewrelicHistoricalDataRetrievalDefaultDurationArray{ DirectNewrelicHistoricalDataRetrievalDefaultDurationArgs{...} }
+//          DirectNewrelicHistoricalDataRetrievalDefaultDurationArray{ DirectNewrelicHistoricalDataRetrievalDefaultDurationArgs{...} }
 type DirectNewrelicHistoricalDataRetrievalDefaultDurationArrayInput interface {
 	pulumi.Input
 
@@ -6446,7 +6446,7 @@ type DirectNewrelicHistoricalDataRetrievalMaxDuration struct {
 // DirectNewrelicHistoricalDataRetrievalMaxDurationInput is an input type that accepts DirectNewrelicHistoricalDataRetrievalMaxDurationArgs and DirectNewrelicHistoricalDataRetrievalMaxDurationOutput values.
 // You can construct a concrete instance of `DirectNewrelicHistoricalDataRetrievalMaxDurationInput` via:
 //
-//	DirectNewrelicHistoricalDataRetrievalMaxDurationArgs{...}
+//          DirectNewrelicHistoricalDataRetrievalMaxDurationArgs{...}
 type DirectNewrelicHistoricalDataRetrievalMaxDurationInput interface {
 	pulumi.Input
 
@@ -6474,7 +6474,7 @@ func (i DirectNewrelicHistoricalDataRetrievalMaxDurationArgs) ToDirectNewrelicHi
 // DirectNewrelicHistoricalDataRetrievalMaxDurationArrayInput is an input type that accepts DirectNewrelicHistoricalDataRetrievalMaxDurationArray and DirectNewrelicHistoricalDataRetrievalMaxDurationArrayOutput values.
 // You can construct a concrete instance of `DirectNewrelicHistoricalDataRetrievalMaxDurationArrayInput` via:
 //
-//	DirectNewrelicHistoricalDataRetrievalMaxDurationArray{ DirectNewrelicHistoricalDataRetrievalMaxDurationArgs{...} }
+//          DirectNewrelicHistoricalDataRetrievalMaxDurationArray{ DirectNewrelicHistoricalDataRetrievalMaxDurationArgs{...} }
 type DirectNewrelicHistoricalDataRetrievalMaxDurationArrayInput interface {
 	pulumi.Input
 
@@ -6548,7 +6548,7 @@ type DirectNewrelicQueryDelay struct {
 // DirectNewrelicQueryDelayInput is an input type that accepts DirectNewrelicQueryDelayArgs and DirectNewrelicQueryDelayOutput values.
 // You can construct a concrete instance of `DirectNewrelicQueryDelayInput` via:
 //
-//	DirectNewrelicQueryDelayArgs{...}
+//          DirectNewrelicQueryDelayArgs{...}
 type DirectNewrelicQueryDelayInput interface {
 	pulumi.Input
 
@@ -6586,11 +6586,11 @@ func (i DirectNewrelicQueryDelayArgs) ToDirectNewrelicQueryDelayPtrOutputWithCon
 // DirectNewrelicQueryDelayPtrInput is an input type that accepts DirectNewrelicQueryDelayArgs, DirectNewrelicQueryDelayPtr and DirectNewrelicQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectNewrelicQueryDelayPtrInput` via:
 //
-//	        DirectNewrelicQueryDelayArgs{...}
+//          DirectNewrelicQueryDelayArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type DirectNewrelicQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -6704,7 +6704,7 @@ type DirectPingdomQueryDelay struct {
 // DirectPingdomQueryDelayInput is an input type that accepts DirectPingdomQueryDelayArgs and DirectPingdomQueryDelayOutput values.
 // You can construct a concrete instance of `DirectPingdomQueryDelayInput` via:
 //
-//	DirectPingdomQueryDelayArgs{...}
+//          DirectPingdomQueryDelayArgs{...}
 type DirectPingdomQueryDelayInput interface {
 	pulumi.Input
 
@@ -6742,11 +6742,11 @@ func (i DirectPingdomQueryDelayArgs) ToDirectPingdomQueryDelayPtrOutputWithConte
 // DirectPingdomQueryDelayPtrInput is an input type that accepts DirectPingdomQueryDelayArgs, DirectPingdomQueryDelayPtr and DirectPingdomQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectPingdomQueryDelayPtrInput` via:
 //
-//	        DirectPingdomQueryDelayArgs{...}
+//          DirectPingdomQueryDelayArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type DirectPingdomQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -6860,7 +6860,7 @@ type DirectRedshiftQueryDelay struct {
 // DirectRedshiftQueryDelayInput is an input type that accepts DirectRedshiftQueryDelayArgs and DirectRedshiftQueryDelayOutput values.
 // You can construct a concrete instance of `DirectRedshiftQueryDelayInput` via:
 //
-//	DirectRedshiftQueryDelayArgs{...}
+//          DirectRedshiftQueryDelayArgs{...}
 type DirectRedshiftQueryDelayInput interface {
 	pulumi.Input
 
@@ -6898,11 +6898,11 @@ func (i DirectRedshiftQueryDelayArgs) ToDirectRedshiftQueryDelayPtrOutputWithCon
 // DirectRedshiftQueryDelayPtrInput is an input type that accepts DirectRedshiftQueryDelayArgs, DirectRedshiftQueryDelayPtr and DirectRedshiftQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectRedshiftQueryDelayPtrInput` via:
 //
-//	        DirectRedshiftQueryDelayArgs{...}
+//          DirectRedshiftQueryDelayArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type DirectRedshiftQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -7016,7 +7016,7 @@ type DirectSplunkHistoricalDataRetrieval struct {
 // DirectSplunkHistoricalDataRetrievalInput is an input type that accepts DirectSplunkHistoricalDataRetrievalArgs and DirectSplunkHistoricalDataRetrievalOutput values.
 // You can construct a concrete instance of `DirectSplunkHistoricalDataRetrievalInput` via:
 //
-//	DirectSplunkHistoricalDataRetrievalArgs{...}
+//          DirectSplunkHistoricalDataRetrievalArgs{...}
 type DirectSplunkHistoricalDataRetrievalInput interface {
 	pulumi.Input
 
@@ -7054,11 +7054,11 @@ func (i DirectSplunkHistoricalDataRetrievalArgs) ToDirectSplunkHistoricalDataRet
 // DirectSplunkHistoricalDataRetrievalPtrInput is an input type that accepts DirectSplunkHistoricalDataRetrievalArgs, DirectSplunkHistoricalDataRetrievalPtr and DirectSplunkHistoricalDataRetrievalPtrOutput values.
 // You can construct a concrete instance of `DirectSplunkHistoricalDataRetrievalPtrInput` via:
 //
-//	        DirectSplunkHistoricalDataRetrievalArgs{...}
+//          DirectSplunkHistoricalDataRetrievalArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type DirectSplunkHistoricalDataRetrievalPtrInput interface {
 	pulumi.Input
 
@@ -7174,7 +7174,7 @@ type DirectSplunkHistoricalDataRetrievalDefaultDuration struct {
 // DirectSplunkHistoricalDataRetrievalDefaultDurationInput is an input type that accepts DirectSplunkHistoricalDataRetrievalDefaultDurationArgs and DirectSplunkHistoricalDataRetrievalDefaultDurationOutput values.
 // You can construct a concrete instance of `DirectSplunkHistoricalDataRetrievalDefaultDurationInput` via:
 //
-//	DirectSplunkHistoricalDataRetrievalDefaultDurationArgs{...}
+//          DirectSplunkHistoricalDataRetrievalDefaultDurationArgs{...}
 type DirectSplunkHistoricalDataRetrievalDefaultDurationInput interface {
 	pulumi.Input
 
@@ -7202,7 +7202,7 @@ func (i DirectSplunkHistoricalDataRetrievalDefaultDurationArgs) ToDirectSplunkHi
 // DirectSplunkHistoricalDataRetrievalDefaultDurationArrayInput is an input type that accepts DirectSplunkHistoricalDataRetrievalDefaultDurationArray and DirectSplunkHistoricalDataRetrievalDefaultDurationArrayOutput values.
 // You can construct a concrete instance of `DirectSplunkHistoricalDataRetrievalDefaultDurationArrayInput` via:
 //
-//	DirectSplunkHistoricalDataRetrievalDefaultDurationArray{ DirectSplunkHistoricalDataRetrievalDefaultDurationArgs{...} }
+//          DirectSplunkHistoricalDataRetrievalDefaultDurationArray{ DirectSplunkHistoricalDataRetrievalDefaultDurationArgs{...} }
 type DirectSplunkHistoricalDataRetrievalDefaultDurationArrayInput interface {
 	pulumi.Input
 
@@ -7274,7 +7274,7 @@ type DirectSplunkHistoricalDataRetrievalMaxDuration struct {
 // DirectSplunkHistoricalDataRetrievalMaxDurationInput is an input type that accepts DirectSplunkHistoricalDataRetrievalMaxDurationArgs and DirectSplunkHistoricalDataRetrievalMaxDurationOutput values.
 // You can construct a concrete instance of `DirectSplunkHistoricalDataRetrievalMaxDurationInput` via:
 //
-//	DirectSplunkHistoricalDataRetrievalMaxDurationArgs{...}
+//          DirectSplunkHistoricalDataRetrievalMaxDurationArgs{...}
 type DirectSplunkHistoricalDataRetrievalMaxDurationInput interface {
 	pulumi.Input
 
@@ -7302,7 +7302,7 @@ func (i DirectSplunkHistoricalDataRetrievalMaxDurationArgs) ToDirectSplunkHistor
 // DirectSplunkHistoricalDataRetrievalMaxDurationArrayInput is an input type that accepts DirectSplunkHistoricalDataRetrievalMaxDurationArray and DirectSplunkHistoricalDataRetrievalMaxDurationArrayOutput values.
 // You can construct a concrete instance of `DirectSplunkHistoricalDataRetrievalMaxDurationArrayInput` via:
 //
-//	DirectSplunkHistoricalDataRetrievalMaxDurationArray{ DirectSplunkHistoricalDataRetrievalMaxDurationArgs{...} }
+//          DirectSplunkHistoricalDataRetrievalMaxDurationArray{ DirectSplunkHistoricalDataRetrievalMaxDurationArgs{...} }
 type DirectSplunkHistoricalDataRetrievalMaxDurationArrayInput interface {
 	pulumi.Input
 
@@ -7376,7 +7376,7 @@ type DirectSplunkObservabilityQueryDelay struct {
 // DirectSplunkObservabilityQueryDelayInput is an input type that accepts DirectSplunkObservabilityQueryDelayArgs and DirectSplunkObservabilityQueryDelayOutput values.
 // You can construct a concrete instance of `DirectSplunkObservabilityQueryDelayInput` via:
 //
-//	DirectSplunkObservabilityQueryDelayArgs{...}
+//          DirectSplunkObservabilityQueryDelayArgs{...}
 type DirectSplunkObservabilityQueryDelayInput interface {
 	pulumi.Input
 
@@ -7414,11 +7414,11 @@ func (i DirectSplunkObservabilityQueryDelayArgs) ToDirectSplunkObservabilityQuer
 // DirectSplunkObservabilityQueryDelayPtrInput is an input type that accepts DirectSplunkObservabilityQueryDelayArgs, DirectSplunkObservabilityQueryDelayPtr and DirectSplunkObservabilityQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectSplunkObservabilityQueryDelayPtrInput` via:
 //
-//	        DirectSplunkObservabilityQueryDelayArgs{...}
+//          DirectSplunkObservabilityQueryDelayArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type DirectSplunkObservabilityQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -7532,7 +7532,7 @@ type DirectSplunkQueryDelay struct {
 // DirectSplunkQueryDelayInput is an input type that accepts DirectSplunkQueryDelayArgs and DirectSplunkQueryDelayOutput values.
 // You can construct a concrete instance of `DirectSplunkQueryDelayInput` via:
 //
-//	DirectSplunkQueryDelayArgs{...}
+//          DirectSplunkQueryDelayArgs{...}
 type DirectSplunkQueryDelayInput interface {
 	pulumi.Input
 
@@ -7570,11 +7570,11 @@ func (i DirectSplunkQueryDelayArgs) ToDirectSplunkQueryDelayPtrOutputWithContext
 // DirectSplunkQueryDelayPtrInput is an input type that accepts DirectSplunkQueryDelayArgs, DirectSplunkQueryDelayPtr and DirectSplunkQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectSplunkQueryDelayPtrInput` via:
 //
-//	        DirectSplunkQueryDelayArgs{...}
+//          DirectSplunkQueryDelayArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type DirectSplunkQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -7688,7 +7688,7 @@ type DirectSumologicQueryDelay struct {
 // DirectSumologicQueryDelayInput is an input type that accepts DirectSumologicQueryDelayArgs and DirectSumologicQueryDelayOutput values.
 // You can construct a concrete instance of `DirectSumologicQueryDelayInput` via:
 //
-//	DirectSumologicQueryDelayArgs{...}
+//          DirectSumologicQueryDelayArgs{...}
 type DirectSumologicQueryDelayInput interface {
 	pulumi.Input
 
@@ -7726,11 +7726,11 @@ func (i DirectSumologicQueryDelayArgs) ToDirectSumologicQueryDelayPtrOutputWithC
 // DirectSumologicQueryDelayPtrInput is an input type that accepts DirectSumologicQueryDelayArgs, DirectSumologicQueryDelayPtr and DirectSumologicQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectSumologicQueryDelayPtrInput` via:
 //
-//	        DirectSumologicQueryDelayArgs{...}
+//          DirectSumologicQueryDelayArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type DirectSumologicQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -7844,7 +7844,7 @@ type DirectThousandeyesQueryDelay struct {
 // DirectThousandeyesQueryDelayInput is an input type that accepts DirectThousandeyesQueryDelayArgs and DirectThousandeyesQueryDelayOutput values.
 // You can construct a concrete instance of `DirectThousandeyesQueryDelayInput` via:
 //
-//	DirectThousandeyesQueryDelayArgs{...}
+//          DirectThousandeyesQueryDelayArgs{...}
 type DirectThousandeyesQueryDelayInput interface {
 	pulumi.Input
 
@@ -7882,11 +7882,11 @@ func (i DirectThousandeyesQueryDelayArgs) ToDirectThousandeyesQueryDelayPtrOutpu
 // DirectThousandeyesQueryDelayPtrInput is an input type that accepts DirectThousandeyesQueryDelayArgs, DirectThousandeyesQueryDelayPtr and DirectThousandeyesQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectThousandeyesQueryDelayPtrInput` via:
 //
-//	        DirectThousandeyesQueryDelayArgs{...}
+//          DirectThousandeyesQueryDelayArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type DirectThousandeyesQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -8000,7 +8000,7 @@ type ProjectLabel struct {
 // ProjectLabelInput is an input type that accepts ProjectLabelArgs and ProjectLabelOutput values.
 // You can construct a concrete instance of `ProjectLabelInput` via:
 //
-//	ProjectLabelArgs{...}
+//          ProjectLabelArgs{...}
 type ProjectLabelInput interface {
 	pulumi.Input
 
@@ -8030,7 +8030,7 @@ func (i ProjectLabelArgs) ToProjectLabelOutputWithContext(ctx context.Context) P
 // ProjectLabelArrayInput is an input type that accepts ProjectLabelArray and ProjectLabelArrayOutput values.
 // You can construct a concrete instance of `ProjectLabelArrayInput` via:
 //
-//	ProjectLabelArray{ ProjectLabelArgs{...} }
+//          ProjectLabelArray{ ProjectLabelArgs{...} }
 type ProjectLabelArrayInput interface {
 	pulumi.Input
 
@@ -8106,7 +8106,7 @@ type ServiceLabel struct {
 // ServiceLabelInput is an input type that accepts ServiceLabelArgs and ServiceLabelOutput values.
 // You can construct a concrete instance of `ServiceLabelInput` via:
 //
-//	ServiceLabelArgs{...}
+//          ServiceLabelArgs{...}
 type ServiceLabelInput interface {
 	pulumi.Input
 
@@ -8136,7 +8136,7 @@ func (i ServiceLabelArgs) ToServiceLabelOutputWithContext(ctx context.Context) S
 // ServiceLabelArrayInput is an input type that accepts ServiceLabelArray and ServiceLabelArrayOutput values.
 // You can construct a concrete instance of `ServiceLabelArrayInput` via:
 //
-//	ServiceLabelArray{ ServiceLabelArgs{...} }
+//          ServiceLabelArray{ ServiceLabelArgs{...} }
 type ServiceLabelArrayInput interface {
 	pulumi.Input
 
@@ -8212,7 +8212,7 @@ type SloAttachment struct {
 // SloAttachmentInput is an input type that accepts SloAttachmentArgs and SloAttachmentOutput values.
 // You can construct a concrete instance of `SloAttachmentInput` via:
 //
-//	SloAttachmentArgs{...}
+//          SloAttachmentArgs{...}
 type SloAttachmentInput interface {
 	pulumi.Input
 
@@ -8242,7 +8242,7 @@ func (i SloAttachmentArgs) ToSloAttachmentOutputWithContext(ctx context.Context)
 // SloAttachmentArrayInput is an input type that accepts SloAttachmentArray and SloAttachmentArrayOutput values.
 // You can construct a concrete instance of `SloAttachmentArrayInput` via:
 //
-//	SloAttachmentArray{ SloAttachmentArgs{...} }
+//          SloAttachmentArray{ SloAttachmentArgs{...} }
 type SloAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -8318,7 +8318,7 @@ type SloComposite struct {
 // SloCompositeInput is an input type that accepts SloCompositeArgs and SloCompositeOutput values.
 // You can construct a concrete instance of `SloCompositeInput` via:
 //
-//	SloCompositeArgs{...}
+//          SloCompositeArgs{...}
 type SloCompositeInput interface {
 	pulumi.Input
 
@@ -8356,11 +8356,11 @@ func (i SloCompositeArgs) ToSloCompositePtrOutputWithContext(ctx context.Context
 // SloCompositePtrInput is an input type that accepts SloCompositeArgs, SloCompositePtr and SloCompositePtrOutput values.
 // You can construct a concrete instance of `SloCompositePtrInput` via:
 //
-//	        SloCompositeArgs{...}
+//          SloCompositeArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type SloCompositePtrInput interface {
 	pulumi.Input
 
@@ -8472,7 +8472,7 @@ type SloCompositeBurnRateCondition struct {
 // SloCompositeBurnRateConditionInput is an input type that accepts SloCompositeBurnRateConditionArgs and SloCompositeBurnRateConditionOutput values.
 // You can construct a concrete instance of `SloCompositeBurnRateConditionInput` via:
 //
-//	SloCompositeBurnRateConditionArgs{...}
+//          SloCompositeBurnRateConditionArgs{...}
 type SloCompositeBurnRateConditionInput interface {
 	pulumi.Input
 
@@ -8500,7 +8500,7 @@ func (i SloCompositeBurnRateConditionArgs) ToSloCompositeBurnRateConditionOutput
 // SloCompositeBurnRateConditionArrayInput is an input type that accepts SloCompositeBurnRateConditionArray and SloCompositeBurnRateConditionArrayOutput values.
 // You can construct a concrete instance of `SloCompositeBurnRateConditionArrayInput` via:
 //
-//	SloCompositeBurnRateConditionArray{ SloCompositeBurnRateConditionArgs{...} }
+//          SloCompositeBurnRateConditionArray{ SloCompositeBurnRateConditionArgs{...} }
 type SloCompositeBurnRateConditionArrayInput interface {
 	pulumi.Input
 
@@ -8576,7 +8576,7 @@ type SloIndicator struct {
 // SloIndicatorInput is an input type that accepts SloIndicatorArgs and SloIndicatorOutput values.
 // You can construct a concrete instance of `SloIndicatorInput` via:
 //
-//	SloIndicatorArgs{...}
+//          SloIndicatorArgs{...}
 type SloIndicatorInput interface {
 	pulumi.Input
 
@@ -8616,11 +8616,11 @@ func (i SloIndicatorArgs) ToSloIndicatorPtrOutputWithContext(ctx context.Context
 // SloIndicatorPtrInput is an input type that accepts SloIndicatorArgs, SloIndicatorPtr and SloIndicatorPtrOutput values.
 // You can construct a concrete instance of `SloIndicatorPtrInput` via:
 //
-//	        SloIndicatorArgs{...}
+//          SloIndicatorArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type SloIndicatorPtrInput interface {
 	pulumi.Input
 
@@ -8749,7 +8749,7 @@ type SloLabel struct {
 // SloLabelInput is an input type that accepts SloLabelArgs and SloLabelOutput values.
 // You can construct a concrete instance of `SloLabelInput` via:
 //
-//	SloLabelArgs{...}
+//          SloLabelArgs{...}
 type SloLabelInput interface {
 	pulumi.Input
 
@@ -8779,7 +8779,7 @@ func (i SloLabelArgs) ToSloLabelOutputWithContext(ctx context.Context) SloLabelO
 // SloLabelArrayInput is an input type that accepts SloLabelArray and SloLabelArrayOutput values.
 // You can construct a concrete instance of `SloLabelArrayInput` via:
 //
-//	SloLabelArray{ SloLabelArgs{...} }
+//          SloLabelArray{ SloLabelArgs{...} }
 type SloLabelArrayInput interface {
 	pulumi.Input
 
@@ -8867,7 +8867,7 @@ type SloObjective struct {
 // SloObjectiveInput is an input type that accepts SloObjectiveArgs and SloObjectiveOutput values.
 // You can construct a concrete instance of `SloObjectiveInput` via:
 //
-//	SloObjectiveArgs{...}
+//          SloObjectiveArgs{...}
 type SloObjectiveInput interface {
 	pulumi.Input
 
@@ -8909,7 +8909,7 @@ func (i SloObjectiveArgs) ToSloObjectiveOutputWithContext(ctx context.Context) S
 // SloObjectiveArrayInput is an input type that accepts SloObjectiveArray and SloObjectiveArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveArrayInput` via:
 //
-//	SloObjectiveArray{ SloObjectiveArgs{...} }
+//          SloObjectiveArray{ SloObjectiveArgs{...} }
 type SloObjectiveArrayInput interface {
 	pulumi.Input
 
@@ -9014,7 +9014,7 @@ type SloObjectiveCountMetric struct {
 // SloObjectiveCountMetricInput is an input type that accepts SloObjectiveCountMetricArgs and SloObjectiveCountMetricOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricInput` via:
 //
-//	SloObjectiveCountMetricArgs{...}
+//          SloObjectiveCountMetricArgs{...}
 type SloObjectiveCountMetricInput interface {
 	pulumi.Input
 
@@ -9043,7 +9043,7 @@ func (i SloObjectiveCountMetricArgs) ToSloObjectiveCountMetricOutputWithContext(
 // SloObjectiveCountMetricArrayInput is an input type that accepts SloObjectiveCountMetricArray and SloObjectiveCountMetricArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricArrayInput` via:
 //
-//	SloObjectiveCountMetricArray{ SloObjectiveCountMetricArgs{...} }
+//          SloObjectiveCountMetricArray{ SloObjectiveCountMetricArgs{...} }
 type SloObjectiveCountMetricArrayInput interface {
 	pulumi.Input
 
@@ -9139,7 +9139,7 @@ type SloObjectiveCountMetricGood struct {
 // SloObjectiveCountMetricGoodInput is an input type that accepts SloObjectiveCountMetricGoodArgs and SloObjectiveCountMetricGoodOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodInput` via:
 //
-//	SloObjectiveCountMetricGoodArgs{...}
+//          SloObjectiveCountMetricGoodArgs{...}
 type SloObjectiveCountMetricGoodInput interface {
 	pulumi.Input
 
@@ -9187,7 +9187,7 @@ func (i SloObjectiveCountMetricGoodArgs) ToSloObjectiveCountMetricGoodOutputWith
 // SloObjectiveCountMetricGoodArrayInput is an input type that accepts SloObjectiveCountMetricGoodArray and SloObjectiveCountMetricGoodArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodArray{ SloObjectiveCountMetricGoodArgs{...} }
+//          SloObjectiveCountMetricGoodArray{ SloObjectiveCountMetricGoodArgs{...} }
 type SloObjectiveCountMetricGoodArrayInput interface {
 	pulumi.Input
 
@@ -9344,7 +9344,7 @@ type SloObjectiveCountMetricGoodAmazonPrometheus struct {
 // SloObjectiveCountMetricGoodAmazonPrometheusInput is an input type that accepts SloObjectiveCountMetricGoodAmazonPrometheusArgs and SloObjectiveCountMetricGoodAmazonPrometheusOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodAmazonPrometheusInput` via:
 //
-//	SloObjectiveCountMetricGoodAmazonPrometheusArgs{...}
+//          SloObjectiveCountMetricGoodAmazonPrometheusArgs{...}
 type SloObjectiveCountMetricGoodAmazonPrometheusInput interface {
 	pulumi.Input
 
@@ -9371,7 +9371,7 @@ func (i SloObjectiveCountMetricGoodAmazonPrometheusArgs) ToSloObjectiveCountMetr
 // SloObjectiveCountMetricGoodAmazonPrometheusArrayInput is an input type that accepts SloObjectiveCountMetricGoodAmazonPrometheusArray and SloObjectiveCountMetricGoodAmazonPrometheusArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodAmazonPrometheusArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodAmazonPrometheusArray{ SloObjectiveCountMetricGoodAmazonPrometheusArgs{...} }
+//          SloObjectiveCountMetricGoodAmazonPrometheusArray{ SloObjectiveCountMetricGoodAmazonPrometheusArgs{...} }
 type SloObjectiveCountMetricGoodAmazonPrometheusArrayInput interface {
 	pulumi.Input
 
@@ -9439,7 +9439,7 @@ type SloObjectiveCountMetricGoodAppdynamic struct {
 // SloObjectiveCountMetricGoodAppdynamicInput is an input type that accepts SloObjectiveCountMetricGoodAppdynamicArgs and SloObjectiveCountMetricGoodAppdynamicOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodAppdynamicInput` via:
 //
-//	SloObjectiveCountMetricGoodAppdynamicArgs{...}
+//          SloObjectiveCountMetricGoodAppdynamicArgs{...}
 type SloObjectiveCountMetricGoodAppdynamicInput interface {
 	pulumi.Input
 
@@ -9467,7 +9467,7 @@ func (i SloObjectiveCountMetricGoodAppdynamicArgs) ToSloObjectiveCountMetricGood
 // SloObjectiveCountMetricGoodAppdynamicArrayInput is an input type that accepts SloObjectiveCountMetricGoodAppdynamicArray and SloObjectiveCountMetricGoodAppdynamicArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodAppdynamicArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodAppdynamicArray{ SloObjectiveCountMetricGoodAppdynamicArgs{...} }
+//          SloObjectiveCountMetricGoodAppdynamicArray{ SloObjectiveCountMetricGoodAppdynamicArgs{...} }
 type SloObjectiveCountMetricGoodAppdynamicArrayInput interface {
 	pulumi.Input
 
@@ -9540,7 +9540,7 @@ type SloObjectiveCountMetricGoodBigquery struct {
 // SloObjectiveCountMetricGoodBigqueryInput is an input type that accepts SloObjectiveCountMetricGoodBigqueryArgs and SloObjectiveCountMetricGoodBigqueryOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodBigqueryInput` via:
 //
-//	SloObjectiveCountMetricGoodBigqueryArgs{...}
+//          SloObjectiveCountMetricGoodBigqueryArgs{...}
 type SloObjectiveCountMetricGoodBigqueryInput interface {
 	pulumi.Input
 
@@ -9569,7 +9569,7 @@ func (i SloObjectiveCountMetricGoodBigqueryArgs) ToSloObjectiveCountMetricGoodBi
 // SloObjectiveCountMetricGoodBigqueryArrayInput is an input type that accepts SloObjectiveCountMetricGoodBigqueryArray and SloObjectiveCountMetricGoodBigqueryArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodBigqueryArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodBigqueryArray{ SloObjectiveCountMetricGoodBigqueryArgs{...} }
+//          SloObjectiveCountMetricGoodBigqueryArray{ SloObjectiveCountMetricGoodBigqueryArgs{...} }
 type SloObjectiveCountMetricGoodBigqueryArrayInput interface {
 	pulumi.Input
 
@@ -9650,7 +9650,7 @@ type SloObjectiveCountMetricGoodCloudwatch struct {
 // SloObjectiveCountMetricGoodCloudwatchInput is an input type that accepts SloObjectiveCountMetricGoodCloudwatchArgs and SloObjectiveCountMetricGoodCloudwatchOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodCloudwatchInput` via:
 //
-//	SloObjectiveCountMetricGoodCloudwatchArgs{...}
+//          SloObjectiveCountMetricGoodCloudwatchArgs{...}
 type SloObjectiveCountMetricGoodCloudwatchInput interface {
 	pulumi.Input
 
@@ -9683,7 +9683,7 @@ func (i SloObjectiveCountMetricGoodCloudwatchArgs) ToSloObjectiveCountMetricGood
 // SloObjectiveCountMetricGoodCloudwatchArrayInput is an input type that accepts SloObjectiveCountMetricGoodCloudwatchArray and SloObjectiveCountMetricGoodCloudwatchArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodCloudwatchArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodCloudwatchArray{ SloObjectiveCountMetricGoodCloudwatchArgs{...} }
+//          SloObjectiveCountMetricGoodCloudwatchArray{ SloObjectiveCountMetricGoodCloudwatchArgs{...} }
 type SloObjectiveCountMetricGoodCloudwatchArrayInput interface {
 	pulumi.Input
 
@@ -9778,7 +9778,7 @@ type SloObjectiveCountMetricGoodCloudwatchDimension struct {
 // SloObjectiveCountMetricGoodCloudwatchDimensionInput is an input type that accepts SloObjectiveCountMetricGoodCloudwatchDimensionArgs and SloObjectiveCountMetricGoodCloudwatchDimensionOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodCloudwatchDimensionInput` via:
 //
-//	SloObjectiveCountMetricGoodCloudwatchDimensionArgs{...}
+//          SloObjectiveCountMetricGoodCloudwatchDimensionArgs{...}
 type SloObjectiveCountMetricGoodCloudwatchDimensionInput interface {
 	pulumi.Input
 
@@ -9807,7 +9807,7 @@ func (i SloObjectiveCountMetricGoodCloudwatchDimensionArgs) ToSloObjectiveCountM
 // SloObjectiveCountMetricGoodCloudwatchDimensionArrayInput is an input type that accepts SloObjectiveCountMetricGoodCloudwatchDimensionArray and SloObjectiveCountMetricGoodCloudwatchDimensionArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodCloudwatchDimensionArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodCloudwatchDimensionArray{ SloObjectiveCountMetricGoodCloudwatchDimensionArgs{...} }
+//          SloObjectiveCountMetricGoodCloudwatchDimensionArray{ SloObjectiveCountMetricGoodCloudwatchDimensionArgs{...} }
 type SloObjectiveCountMetricGoodCloudwatchDimensionArrayInput interface {
 	pulumi.Input
 
@@ -9879,7 +9879,7 @@ type SloObjectiveCountMetricGoodDatadog struct {
 // SloObjectiveCountMetricGoodDatadogInput is an input type that accepts SloObjectiveCountMetricGoodDatadogArgs and SloObjectiveCountMetricGoodDatadogOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodDatadogInput` via:
 //
-//	SloObjectiveCountMetricGoodDatadogArgs{...}
+//          SloObjectiveCountMetricGoodDatadogArgs{...}
 type SloObjectiveCountMetricGoodDatadogInput interface {
 	pulumi.Input
 
@@ -9906,7 +9906,7 @@ func (i SloObjectiveCountMetricGoodDatadogArgs) ToSloObjectiveCountMetricGoodDat
 // SloObjectiveCountMetricGoodDatadogArrayInput is an input type that accepts SloObjectiveCountMetricGoodDatadogArray and SloObjectiveCountMetricGoodDatadogArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodDatadogArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodDatadogArray{ SloObjectiveCountMetricGoodDatadogArgs{...} }
+//          SloObjectiveCountMetricGoodDatadogArray{ SloObjectiveCountMetricGoodDatadogArgs{...} }
 type SloObjectiveCountMetricGoodDatadogArrayInput interface {
 	pulumi.Input
 
@@ -9973,7 +9973,7 @@ type SloObjectiveCountMetricGoodDynatrace struct {
 // SloObjectiveCountMetricGoodDynatraceInput is an input type that accepts SloObjectiveCountMetricGoodDynatraceArgs and SloObjectiveCountMetricGoodDynatraceOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodDynatraceInput` via:
 //
-//	SloObjectiveCountMetricGoodDynatraceArgs{...}
+//          SloObjectiveCountMetricGoodDynatraceArgs{...}
 type SloObjectiveCountMetricGoodDynatraceInput interface {
 	pulumi.Input
 
@@ -10000,7 +10000,7 @@ func (i SloObjectiveCountMetricGoodDynatraceArgs) ToSloObjectiveCountMetricGoodD
 // SloObjectiveCountMetricGoodDynatraceArrayInput is an input type that accepts SloObjectiveCountMetricGoodDynatraceArray and SloObjectiveCountMetricGoodDynatraceArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodDynatraceArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodDynatraceArray{ SloObjectiveCountMetricGoodDynatraceArgs{...} }
+//          SloObjectiveCountMetricGoodDynatraceArray{ SloObjectiveCountMetricGoodDynatraceArgs{...} }
 type SloObjectiveCountMetricGoodDynatraceArrayInput interface {
 	pulumi.Input
 
@@ -10068,7 +10068,7 @@ type SloObjectiveCountMetricGoodElasticsearch struct {
 // SloObjectiveCountMetricGoodElasticsearchInput is an input type that accepts SloObjectiveCountMetricGoodElasticsearchArgs and SloObjectiveCountMetricGoodElasticsearchOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodElasticsearchInput` via:
 //
-//	SloObjectiveCountMetricGoodElasticsearchArgs{...}
+//          SloObjectiveCountMetricGoodElasticsearchArgs{...}
 type SloObjectiveCountMetricGoodElasticsearchInput interface {
 	pulumi.Input
 
@@ -10096,7 +10096,7 @@ func (i SloObjectiveCountMetricGoodElasticsearchArgs) ToSloObjectiveCountMetricG
 // SloObjectiveCountMetricGoodElasticsearchArrayInput is an input type that accepts SloObjectiveCountMetricGoodElasticsearchArray and SloObjectiveCountMetricGoodElasticsearchArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodElasticsearchArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodElasticsearchArray{ SloObjectiveCountMetricGoodElasticsearchArgs{...} }
+//          SloObjectiveCountMetricGoodElasticsearchArray{ SloObjectiveCountMetricGoodElasticsearchArgs{...} }
 type SloObjectiveCountMetricGoodElasticsearchArrayInput interface {
 	pulumi.Input
 
@@ -10168,7 +10168,7 @@ type SloObjectiveCountMetricGoodGcm struct {
 // SloObjectiveCountMetricGoodGcmInput is an input type that accepts SloObjectiveCountMetricGoodGcmArgs and SloObjectiveCountMetricGoodGcmOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodGcmInput` via:
 //
-//	SloObjectiveCountMetricGoodGcmArgs{...}
+//          SloObjectiveCountMetricGoodGcmArgs{...}
 type SloObjectiveCountMetricGoodGcmInput interface {
 	pulumi.Input
 
@@ -10196,7 +10196,7 @@ func (i SloObjectiveCountMetricGoodGcmArgs) ToSloObjectiveCountMetricGoodGcmOutp
 // SloObjectiveCountMetricGoodGcmArrayInput is an input type that accepts SloObjectiveCountMetricGoodGcmArray and SloObjectiveCountMetricGoodGcmArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodGcmArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodGcmArray{ SloObjectiveCountMetricGoodGcmArgs{...} }
+//          SloObjectiveCountMetricGoodGcmArray{ SloObjectiveCountMetricGoodGcmArgs{...} }
 type SloObjectiveCountMetricGoodGcmArrayInput interface {
 	pulumi.Input
 
@@ -10267,7 +10267,7 @@ type SloObjectiveCountMetricGoodGrafanaLoki struct {
 // SloObjectiveCountMetricGoodGrafanaLokiInput is an input type that accepts SloObjectiveCountMetricGoodGrafanaLokiArgs and SloObjectiveCountMetricGoodGrafanaLokiOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodGrafanaLokiInput` via:
 //
-//	SloObjectiveCountMetricGoodGrafanaLokiArgs{...}
+//          SloObjectiveCountMetricGoodGrafanaLokiArgs{...}
 type SloObjectiveCountMetricGoodGrafanaLokiInput interface {
 	pulumi.Input
 
@@ -10294,7 +10294,7 @@ func (i SloObjectiveCountMetricGoodGrafanaLokiArgs) ToSloObjectiveCountMetricGoo
 // SloObjectiveCountMetricGoodGrafanaLokiArrayInput is an input type that accepts SloObjectiveCountMetricGoodGrafanaLokiArray and SloObjectiveCountMetricGoodGrafanaLokiArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodGrafanaLokiArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodGrafanaLokiArray{ SloObjectiveCountMetricGoodGrafanaLokiArgs{...} }
+//          SloObjectiveCountMetricGoodGrafanaLokiArray{ SloObjectiveCountMetricGoodGrafanaLokiArgs{...} }
 type SloObjectiveCountMetricGoodGrafanaLokiArrayInput interface {
 	pulumi.Input
 
@@ -10361,7 +10361,7 @@ type SloObjectiveCountMetricGoodGraphite struct {
 // SloObjectiveCountMetricGoodGraphiteInput is an input type that accepts SloObjectiveCountMetricGoodGraphiteArgs and SloObjectiveCountMetricGoodGraphiteOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodGraphiteInput` via:
 //
-//	SloObjectiveCountMetricGoodGraphiteArgs{...}
+//          SloObjectiveCountMetricGoodGraphiteArgs{...}
 type SloObjectiveCountMetricGoodGraphiteInput interface {
 	pulumi.Input
 
@@ -10388,7 +10388,7 @@ func (i SloObjectiveCountMetricGoodGraphiteArgs) ToSloObjectiveCountMetricGoodGr
 // SloObjectiveCountMetricGoodGraphiteArrayInput is an input type that accepts SloObjectiveCountMetricGoodGraphiteArray and SloObjectiveCountMetricGoodGraphiteArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodGraphiteArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodGraphiteArray{ SloObjectiveCountMetricGoodGraphiteArgs{...} }
+//          SloObjectiveCountMetricGoodGraphiteArray{ SloObjectiveCountMetricGoodGraphiteArgs{...} }
 type SloObjectiveCountMetricGoodGraphiteArrayInput interface {
 	pulumi.Input
 
@@ -10455,7 +10455,7 @@ type SloObjectiveCountMetricGoodInfluxdb struct {
 // SloObjectiveCountMetricGoodInfluxdbInput is an input type that accepts SloObjectiveCountMetricGoodInfluxdbArgs and SloObjectiveCountMetricGoodInfluxdbOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodInfluxdbInput` via:
 //
-//	SloObjectiveCountMetricGoodInfluxdbArgs{...}
+//          SloObjectiveCountMetricGoodInfluxdbArgs{...}
 type SloObjectiveCountMetricGoodInfluxdbInput interface {
 	pulumi.Input
 
@@ -10482,7 +10482,7 @@ func (i SloObjectiveCountMetricGoodInfluxdbArgs) ToSloObjectiveCountMetricGoodIn
 // SloObjectiveCountMetricGoodInfluxdbArrayInput is an input type that accepts SloObjectiveCountMetricGoodInfluxdbArray and SloObjectiveCountMetricGoodInfluxdbArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodInfluxdbArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodInfluxdbArray{ SloObjectiveCountMetricGoodInfluxdbArgs{...} }
+//          SloObjectiveCountMetricGoodInfluxdbArray{ SloObjectiveCountMetricGoodInfluxdbArgs{...} }
 type SloObjectiveCountMetricGoodInfluxdbArrayInput interface {
 	pulumi.Input
 
@@ -10551,7 +10551,7 @@ type SloObjectiveCountMetricGoodInstana struct {
 // SloObjectiveCountMetricGoodInstanaInput is an input type that accepts SloObjectiveCountMetricGoodInstanaArgs and SloObjectiveCountMetricGoodInstanaOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodInstanaInput` via:
 //
-//	SloObjectiveCountMetricGoodInstanaArgs{...}
+//          SloObjectiveCountMetricGoodInstanaArgs{...}
 type SloObjectiveCountMetricGoodInstanaInput interface {
 	pulumi.Input
 
@@ -10580,7 +10580,7 @@ func (i SloObjectiveCountMetricGoodInstanaArgs) ToSloObjectiveCountMetricGoodIns
 // SloObjectiveCountMetricGoodInstanaArrayInput is an input type that accepts SloObjectiveCountMetricGoodInstanaArray and SloObjectiveCountMetricGoodInstanaArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodInstanaArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodInstanaArray{ SloObjectiveCountMetricGoodInstanaArgs{...} }
+//          SloObjectiveCountMetricGoodInstanaArray{ SloObjectiveCountMetricGoodInstanaArgs{...} }
 type SloObjectiveCountMetricGoodInstanaArrayInput interface {
 	pulumi.Input
 
@@ -10664,7 +10664,7 @@ type SloObjectiveCountMetricGoodInstanaApplication struct {
 // SloObjectiveCountMetricGoodInstanaApplicationInput is an input type that accepts SloObjectiveCountMetricGoodInstanaApplicationArgs and SloObjectiveCountMetricGoodInstanaApplicationOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodInstanaApplicationInput` via:
 //
-//	SloObjectiveCountMetricGoodInstanaApplicationArgs{...}
+//          SloObjectiveCountMetricGoodInstanaApplicationArgs{...}
 type SloObjectiveCountMetricGoodInstanaApplicationInput interface {
 	pulumi.Input
 
@@ -10696,7 +10696,7 @@ func (i SloObjectiveCountMetricGoodInstanaApplicationArgs) ToSloObjectiveCountMe
 // SloObjectiveCountMetricGoodInstanaApplicationArrayInput is an input type that accepts SloObjectiveCountMetricGoodInstanaApplicationArray and SloObjectiveCountMetricGoodInstanaApplicationArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodInstanaApplicationArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodInstanaApplicationArray{ SloObjectiveCountMetricGoodInstanaApplicationArgs{...} }
+//          SloObjectiveCountMetricGoodInstanaApplicationArray{ SloObjectiveCountMetricGoodInstanaApplicationArgs{...} }
 type SloObjectiveCountMetricGoodInstanaApplicationArrayInput interface {
 	pulumi.Input
 
@@ -10787,7 +10787,7 @@ type SloObjectiveCountMetricGoodInstanaApplicationGroupBy struct {
 // SloObjectiveCountMetricGoodInstanaApplicationGroupByInput is an input type that accepts SloObjectiveCountMetricGoodInstanaApplicationGroupByArgs and SloObjectiveCountMetricGoodInstanaApplicationGroupByOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodInstanaApplicationGroupByInput` via:
 //
-//	SloObjectiveCountMetricGoodInstanaApplicationGroupByArgs{...}
+//          SloObjectiveCountMetricGoodInstanaApplicationGroupByArgs{...}
 type SloObjectiveCountMetricGoodInstanaApplicationGroupByInput interface {
 	pulumi.Input
 
@@ -10816,7 +10816,7 @@ func (i SloObjectiveCountMetricGoodInstanaApplicationGroupByArgs) ToSloObjective
 // SloObjectiveCountMetricGoodInstanaApplicationGroupByArrayInput is an input type that accepts SloObjectiveCountMetricGoodInstanaApplicationGroupByArray and SloObjectiveCountMetricGoodInstanaApplicationGroupByArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodInstanaApplicationGroupByArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodInstanaApplicationGroupByArray{ SloObjectiveCountMetricGoodInstanaApplicationGroupByArgs{...} }
+//          SloObjectiveCountMetricGoodInstanaApplicationGroupByArray{ SloObjectiveCountMetricGoodInstanaApplicationGroupByArgs{...} }
 type SloObjectiveCountMetricGoodInstanaApplicationGroupByArrayInput interface {
 	pulumi.Input
 
@@ -10895,7 +10895,7 @@ type SloObjectiveCountMetricGoodInstanaInfrastructure struct {
 // SloObjectiveCountMetricGoodInstanaInfrastructureInput is an input type that accepts SloObjectiveCountMetricGoodInstanaInfrastructureArgs and SloObjectiveCountMetricGoodInstanaInfrastructureOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodInstanaInfrastructureInput` via:
 //
-//	SloObjectiveCountMetricGoodInstanaInfrastructureArgs{...}
+//          SloObjectiveCountMetricGoodInstanaInfrastructureArgs{...}
 type SloObjectiveCountMetricGoodInstanaInfrastructureInput interface {
 	pulumi.Input
 
@@ -10926,7 +10926,7 @@ func (i SloObjectiveCountMetricGoodInstanaInfrastructureArgs) ToSloObjectiveCoun
 // SloObjectiveCountMetricGoodInstanaInfrastructureArrayInput is an input type that accepts SloObjectiveCountMetricGoodInstanaInfrastructureArray and SloObjectiveCountMetricGoodInstanaInfrastructureArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodInstanaInfrastructureArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodInstanaInfrastructureArray{ SloObjectiveCountMetricGoodInstanaInfrastructureArgs{...} }
+//          SloObjectiveCountMetricGoodInstanaInfrastructureArray{ SloObjectiveCountMetricGoodInstanaInfrastructureArgs{...} }
 type SloObjectiveCountMetricGoodInstanaInfrastructureArrayInput interface {
 	pulumi.Input
 
@@ -11012,7 +11012,7 @@ type SloObjectiveCountMetricGoodLightstep struct {
 // SloObjectiveCountMetricGoodLightstepInput is an input type that accepts SloObjectiveCountMetricGoodLightstepArgs and SloObjectiveCountMetricGoodLightstepOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodLightstepInput` via:
 //
-//	SloObjectiveCountMetricGoodLightstepArgs{...}
+//          SloObjectiveCountMetricGoodLightstepArgs{...}
 type SloObjectiveCountMetricGoodLightstepInput interface {
 	pulumi.Input
 
@@ -11042,7 +11042,7 @@ func (i SloObjectiveCountMetricGoodLightstepArgs) ToSloObjectiveCountMetricGoodL
 // SloObjectiveCountMetricGoodLightstepArrayInput is an input type that accepts SloObjectiveCountMetricGoodLightstepArray and SloObjectiveCountMetricGoodLightstepArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodLightstepArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodLightstepArray{ SloObjectiveCountMetricGoodLightstepArgs{...} }
+//          SloObjectiveCountMetricGoodLightstepArray{ SloObjectiveCountMetricGoodLightstepArgs{...} }
 type SloObjectiveCountMetricGoodLightstepArrayInput interface {
 	pulumi.Input
 
@@ -11121,7 +11121,7 @@ type SloObjectiveCountMetricGoodNewrelic struct {
 // SloObjectiveCountMetricGoodNewrelicInput is an input type that accepts SloObjectiveCountMetricGoodNewrelicArgs and SloObjectiveCountMetricGoodNewrelicOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodNewrelicInput` via:
 //
-//	SloObjectiveCountMetricGoodNewrelicArgs{...}
+//          SloObjectiveCountMetricGoodNewrelicArgs{...}
 type SloObjectiveCountMetricGoodNewrelicInput interface {
 	pulumi.Input
 
@@ -11148,7 +11148,7 @@ func (i SloObjectiveCountMetricGoodNewrelicArgs) ToSloObjectiveCountMetricGoodNe
 // SloObjectiveCountMetricGoodNewrelicArrayInput is an input type that accepts SloObjectiveCountMetricGoodNewrelicArray and SloObjectiveCountMetricGoodNewrelicArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodNewrelicArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodNewrelicArray{ SloObjectiveCountMetricGoodNewrelicArgs{...} }
+//          SloObjectiveCountMetricGoodNewrelicArray{ SloObjectiveCountMetricGoodNewrelicArgs{...} }
 type SloObjectiveCountMetricGoodNewrelicArrayInput interface {
 	pulumi.Input
 
@@ -11215,7 +11215,7 @@ type SloObjectiveCountMetricGoodOpentsdb struct {
 // SloObjectiveCountMetricGoodOpentsdbInput is an input type that accepts SloObjectiveCountMetricGoodOpentsdbArgs and SloObjectiveCountMetricGoodOpentsdbOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodOpentsdbInput` via:
 //
-//	SloObjectiveCountMetricGoodOpentsdbArgs{...}
+//          SloObjectiveCountMetricGoodOpentsdbArgs{...}
 type SloObjectiveCountMetricGoodOpentsdbInput interface {
 	pulumi.Input
 
@@ -11242,7 +11242,7 @@ func (i SloObjectiveCountMetricGoodOpentsdbArgs) ToSloObjectiveCountMetricGoodOp
 // SloObjectiveCountMetricGoodOpentsdbArrayInput is an input type that accepts SloObjectiveCountMetricGoodOpentsdbArray and SloObjectiveCountMetricGoodOpentsdbArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodOpentsdbArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodOpentsdbArray{ SloObjectiveCountMetricGoodOpentsdbArgs{...} }
+//          SloObjectiveCountMetricGoodOpentsdbArray{ SloObjectiveCountMetricGoodOpentsdbArgs{...} }
 type SloObjectiveCountMetricGoodOpentsdbArrayInput interface {
 	pulumi.Input
 
@@ -11311,7 +11311,7 @@ type SloObjectiveCountMetricGoodPingdom struct {
 // SloObjectiveCountMetricGoodPingdomInput is an input type that accepts SloObjectiveCountMetricGoodPingdomArgs and SloObjectiveCountMetricGoodPingdomOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodPingdomInput` via:
 //
-//	SloObjectiveCountMetricGoodPingdomArgs{...}
+//          SloObjectiveCountMetricGoodPingdomArgs{...}
 type SloObjectiveCountMetricGoodPingdomInput interface {
 	pulumi.Input
 
@@ -11340,7 +11340,7 @@ func (i SloObjectiveCountMetricGoodPingdomArgs) ToSloObjectiveCountMetricGoodPin
 // SloObjectiveCountMetricGoodPingdomArrayInput is an input type that accepts SloObjectiveCountMetricGoodPingdomArray and SloObjectiveCountMetricGoodPingdomArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodPingdomArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodPingdomArray{ SloObjectiveCountMetricGoodPingdomArgs{...} }
+//          SloObjectiveCountMetricGoodPingdomArray{ SloObjectiveCountMetricGoodPingdomArgs{...} }
 type SloObjectiveCountMetricGoodPingdomArrayInput interface {
 	pulumi.Input
 
@@ -11415,7 +11415,7 @@ type SloObjectiveCountMetricGoodPrometheus struct {
 // SloObjectiveCountMetricGoodPrometheusInput is an input type that accepts SloObjectiveCountMetricGoodPrometheusArgs and SloObjectiveCountMetricGoodPrometheusOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodPrometheusInput` via:
 //
-//	SloObjectiveCountMetricGoodPrometheusArgs{...}
+//          SloObjectiveCountMetricGoodPrometheusArgs{...}
 type SloObjectiveCountMetricGoodPrometheusInput interface {
 	pulumi.Input
 
@@ -11442,7 +11442,7 @@ func (i SloObjectiveCountMetricGoodPrometheusArgs) ToSloObjectiveCountMetricGood
 // SloObjectiveCountMetricGoodPrometheusArrayInput is an input type that accepts SloObjectiveCountMetricGoodPrometheusArray and SloObjectiveCountMetricGoodPrometheusArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodPrometheusArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodPrometheusArray{ SloObjectiveCountMetricGoodPrometheusArgs{...} }
+//          SloObjectiveCountMetricGoodPrometheusArray{ SloObjectiveCountMetricGoodPrometheusArgs{...} }
 type SloObjectiveCountMetricGoodPrometheusArrayInput interface {
 	pulumi.Input
 
@@ -11512,7 +11512,7 @@ type SloObjectiveCountMetricGoodRedshift struct {
 // SloObjectiveCountMetricGoodRedshiftInput is an input type that accepts SloObjectiveCountMetricGoodRedshiftArgs and SloObjectiveCountMetricGoodRedshiftOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodRedshiftInput` via:
 //
-//	SloObjectiveCountMetricGoodRedshiftArgs{...}
+//          SloObjectiveCountMetricGoodRedshiftArgs{...}
 type SloObjectiveCountMetricGoodRedshiftInput interface {
 	pulumi.Input
 
@@ -11542,7 +11542,7 @@ func (i SloObjectiveCountMetricGoodRedshiftArgs) ToSloObjectiveCountMetricGoodRe
 // SloObjectiveCountMetricGoodRedshiftArrayInput is an input type that accepts SloObjectiveCountMetricGoodRedshiftArray and SloObjectiveCountMetricGoodRedshiftArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodRedshiftArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodRedshiftArray{ SloObjectiveCountMetricGoodRedshiftArgs{...} }
+//          SloObjectiveCountMetricGoodRedshiftArray{ SloObjectiveCountMetricGoodRedshiftArgs{...} }
 type SloObjectiveCountMetricGoodRedshiftArrayInput interface {
 	pulumi.Input
 
@@ -11621,7 +11621,7 @@ type SloObjectiveCountMetricGoodSplunk struct {
 // SloObjectiveCountMetricGoodSplunkInput is an input type that accepts SloObjectiveCountMetricGoodSplunkArgs and SloObjectiveCountMetricGoodSplunkOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodSplunkInput` via:
 //
-//	SloObjectiveCountMetricGoodSplunkArgs{...}
+//          SloObjectiveCountMetricGoodSplunkArgs{...}
 type SloObjectiveCountMetricGoodSplunkInput interface {
 	pulumi.Input
 
@@ -11648,7 +11648,7 @@ func (i SloObjectiveCountMetricGoodSplunkArgs) ToSloObjectiveCountMetricGoodSplu
 // SloObjectiveCountMetricGoodSplunkArrayInput is an input type that accepts SloObjectiveCountMetricGoodSplunkArray and SloObjectiveCountMetricGoodSplunkArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodSplunkArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodSplunkArray{ SloObjectiveCountMetricGoodSplunkArgs{...} }
+//          SloObjectiveCountMetricGoodSplunkArray{ SloObjectiveCountMetricGoodSplunkArgs{...} }
 type SloObjectiveCountMetricGoodSplunkArrayInput interface {
 	pulumi.Input
 
@@ -11715,7 +11715,7 @@ type SloObjectiveCountMetricGoodSplunkObservability struct {
 // SloObjectiveCountMetricGoodSplunkObservabilityInput is an input type that accepts SloObjectiveCountMetricGoodSplunkObservabilityArgs and SloObjectiveCountMetricGoodSplunkObservabilityOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodSplunkObservabilityInput` via:
 //
-//	SloObjectiveCountMetricGoodSplunkObservabilityArgs{...}
+//          SloObjectiveCountMetricGoodSplunkObservabilityArgs{...}
 type SloObjectiveCountMetricGoodSplunkObservabilityInput interface {
 	pulumi.Input
 
@@ -11742,7 +11742,7 @@ func (i SloObjectiveCountMetricGoodSplunkObservabilityArgs) ToSloObjectiveCountM
 // SloObjectiveCountMetricGoodSplunkObservabilityArrayInput is an input type that accepts SloObjectiveCountMetricGoodSplunkObservabilityArray and SloObjectiveCountMetricGoodSplunkObservabilityArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodSplunkObservabilityArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodSplunkObservabilityArray{ SloObjectiveCountMetricGoodSplunkObservabilityArgs{...} }
+//          SloObjectiveCountMetricGoodSplunkObservabilityArray{ SloObjectiveCountMetricGoodSplunkObservabilityArgs{...} }
 type SloObjectiveCountMetricGoodSplunkObservabilityArrayInput interface {
 	pulumi.Input
 
@@ -11812,7 +11812,7 @@ type SloObjectiveCountMetricGoodSumologic struct {
 // SloObjectiveCountMetricGoodSumologicInput is an input type that accepts SloObjectiveCountMetricGoodSumologicArgs and SloObjectiveCountMetricGoodSumologicOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodSumologicInput` via:
 //
-//	SloObjectiveCountMetricGoodSumologicArgs{...}
+//          SloObjectiveCountMetricGoodSumologicArgs{...}
 type SloObjectiveCountMetricGoodSumologicInput interface {
 	pulumi.Input
 
@@ -11842,7 +11842,7 @@ func (i SloObjectiveCountMetricGoodSumologicArgs) ToSloObjectiveCountMetricGoodS
 // SloObjectiveCountMetricGoodSumologicArrayInput is an input type that accepts SloObjectiveCountMetricGoodSumologicArray and SloObjectiveCountMetricGoodSumologicArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodSumologicArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodSumologicArray{ SloObjectiveCountMetricGoodSumologicArgs{...} }
+//          SloObjectiveCountMetricGoodSumologicArray{ SloObjectiveCountMetricGoodSumologicArgs{...} }
 type SloObjectiveCountMetricGoodSumologicArrayInput interface {
 	pulumi.Input
 
@@ -11921,7 +11921,7 @@ type SloObjectiveCountMetricGoodThousandeye struct {
 // SloObjectiveCountMetricGoodThousandeyeInput is an input type that accepts SloObjectiveCountMetricGoodThousandeyeArgs and SloObjectiveCountMetricGoodThousandeyeOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodThousandeyeInput` via:
 //
-//	SloObjectiveCountMetricGoodThousandeyeArgs{...}
+//          SloObjectiveCountMetricGoodThousandeyeArgs{...}
 type SloObjectiveCountMetricGoodThousandeyeInput interface {
 	pulumi.Input
 
@@ -11948,7 +11948,7 @@ func (i SloObjectiveCountMetricGoodThousandeyeArgs) ToSloObjectiveCountMetricGoo
 // SloObjectiveCountMetricGoodThousandeyeArrayInput is an input type that accepts SloObjectiveCountMetricGoodThousandeyeArray and SloObjectiveCountMetricGoodThousandeyeArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodThousandeyeArrayInput` via:
 //
-//	SloObjectiveCountMetricGoodThousandeyeArray{ SloObjectiveCountMetricGoodThousandeyeArgs{...} }
+//          SloObjectiveCountMetricGoodThousandeyeArray{ SloObjectiveCountMetricGoodThousandeyeArgs{...} }
 type SloObjectiveCountMetricGoodThousandeyeArrayInput interface {
 	pulumi.Input
 
@@ -12036,7 +12036,7 @@ type SloObjectiveCountMetricTotal struct {
 // SloObjectiveCountMetricTotalInput is an input type that accepts SloObjectiveCountMetricTotalArgs and SloObjectiveCountMetricTotalOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalInput` via:
 //
-//	SloObjectiveCountMetricTotalArgs{...}
+//          SloObjectiveCountMetricTotalArgs{...}
 type SloObjectiveCountMetricTotalInput interface {
 	pulumi.Input
 
@@ -12084,7 +12084,7 @@ func (i SloObjectiveCountMetricTotalArgs) ToSloObjectiveCountMetricTotalOutputWi
 // SloObjectiveCountMetricTotalArrayInput is an input type that accepts SloObjectiveCountMetricTotalArray and SloObjectiveCountMetricTotalArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalArray{ SloObjectiveCountMetricTotalArgs{...} }
+//          SloObjectiveCountMetricTotalArray{ SloObjectiveCountMetricTotalArgs{...} }
 type SloObjectiveCountMetricTotalArrayInput interface {
 	pulumi.Input
 
@@ -12241,7 +12241,7 @@ type SloObjectiveCountMetricTotalAmazonPrometheus struct {
 // SloObjectiveCountMetricTotalAmazonPrometheusInput is an input type that accepts SloObjectiveCountMetricTotalAmazonPrometheusArgs and SloObjectiveCountMetricTotalAmazonPrometheusOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalAmazonPrometheusInput` via:
 //
-//	SloObjectiveCountMetricTotalAmazonPrometheusArgs{...}
+//          SloObjectiveCountMetricTotalAmazonPrometheusArgs{...}
 type SloObjectiveCountMetricTotalAmazonPrometheusInput interface {
 	pulumi.Input
 
@@ -12268,7 +12268,7 @@ func (i SloObjectiveCountMetricTotalAmazonPrometheusArgs) ToSloObjectiveCountMet
 // SloObjectiveCountMetricTotalAmazonPrometheusArrayInput is an input type that accepts SloObjectiveCountMetricTotalAmazonPrometheusArray and SloObjectiveCountMetricTotalAmazonPrometheusArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalAmazonPrometheusArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalAmazonPrometheusArray{ SloObjectiveCountMetricTotalAmazonPrometheusArgs{...} }
+//          SloObjectiveCountMetricTotalAmazonPrometheusArray{ SloObjectiveCountMetricTotalAmazonPrometheusArgs{...} }
 type SloObjectiveCountMetricTotalAmazonPrometheusArrayInput interface {
 	pulumi.Input
 
@@ -12336,7 +12336,7 @@ type SloObjectiveCountMetricTotalAppdynamic struct {
 // SloObjectiveCountMetricTotalAppdynamicInput is an input type that accepts SloObjectiveCountMetricTotalAppdynamicArgs and SloObjectiveCountMetricTotalAppdynamicOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalAppdynamicInput` via:
 //
-//	SloObjectiveCountMetricTotalAppdynamicArgs{...}
+//          SloObjectiveCountMetricTotalAppdynamicArgs{...}
 type SloObjectiveCountMetricTotalAppdynamicInput interface {
 	pulumi.Input
 
@@ -12364,7 +12364,7 @@ func (i SloObjectiveCountMetricTotalAppdynamicArgs) ToSloObjectiveCountMetricTot
 // SloObjectiveCountMetricTotalAppdynamicArrayInput is an input type that accepts SloObjectiveCountMetricTotalAppdynamicArray and SloObjectiveCountMetricTotalAppdynamicArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalAppdynamicArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalAppdynamicArray{ SloObjectiveCountMetricTotalAppdynamicArgs{...} }
+//          SloObjectiveCountMetricTotalAppdynamicArray{ SloObjectiveCountMetricTotalAppdynamicArgs{...} }
 type SloObjectiveCountMetricTotalAppdynamicArrayInput interface {
 	pulumi.Input
 
@@ -12437,7 +12437,7 @@ type SloObjectiveCountMetricTotalBigquery struct {
 // SloObjectiveCountMetricTotalBigqueryInput is an input type that accepts SloObjectiveCountMetricTotalBigqueryArgs and SloObjectiveCountMetricTotalBigqueryOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalBigqueryInput` via:
 //
-//	SloObjectiveCountMetricTotalBigqueryArgs{...}
+//          SloObjectiveCountMetricTotalBigqueryArgs{...}
 type SloObjectiveCountMetricTotalBigqueryInput interface {
 	pulumi.Input
 
@@ -12466,7 +12466,7 @@ func (i SloObjectiveCountMetricTotalBigqueryArgs) ToSloObjectiveCountMetricTotal
 // SloObjectiveCountMetricTotalBigqueryArrayInput is an input type that accepts SloObjectiveCountMetricTotalBigqueryArray and SloObjectiveCountMetricTotalBigqueryArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalBigqueryArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalBigqueryArray{ SloObjectiveCountMetricTotalBigqueryArgs{...} }
+//          SloObjectiveCountMetricTotalBigqueryArray{ SloObjectiveCountMetricTotalBigqueryArgs{...} }
 type SloObjectiveCountMetricTotalBigqueryArrayInput interface {
 	pulumi.Input
 
@@ -12547,7 +12547,7 @@ type SloObjectiveCountMetricTotalCloudwatch struct {
 // SloObjectiveCountMetricTotalCloudwatchInput is an input type that accepts SloObjectiveCountMetricTotalCloudwatchArgs and SloObjectiveCountMetricTotalCloudwatchOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalCloudwatchInput` via:
 //
-//	SloObjectiveCountMetricTotalCloudwatchArgs{...}
+//          SloObjectiveCountMetricTotalCloudwatchArgs{...}
 type SloObjectiveCountMetricTotalCloudwatchInput interface {
 	pulumi.Input
 
@@ -12580,7 +12580,7 @@ func (i SloObjectiveCountMetricTotalCloudwatchArgs) ToSloObjectiveCountMetricTot
 // SloObjectiveCountMetricTotalCloudwatchArrayInput is an input type that accepts SloObjectiveCountMetricTotalCloudwatchArray and SloObjectiveCountMetricTotalCloudwatchArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalCloudwatchArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalCloudwatchArray{ SloObjectiveCountMetricTotalCloudwatchArgs{...} }
+//          SloObjectiveCountMetricTotalCloudwatchArray{ SloObjectiveCountMetricTotalCloudwatchArgs{...} }
 type SloObjectiveCountMetricTotalCloudwatchArrayInput interface {
 	pulumi.Input
 
@@ -12675,7 +12675,7 @@ type SloObjectiveCountMetricTotalCloudwatchDimension struct {
 // SloObjectiveCountMetricTotalCloudwatchDimensionInput is an input type that accepts SloObjectiveCountMetricTotalCloudwatchDimensionArgs and SloObjectiveCountMetricTotalCloudwatchDimensionOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalCloudwatchDimensionInput` via:
 //
-//	SloObjectiveCountMetricTotalCloudwatchDimensionArgs{...}
+//          SloObjectiveCountMetricTotalCloudwatchDimensionArgs{...}
 type SloObjectiveCountMetricTotalCloudwatchDimensionInput interface {
 	pulumi.Input
 
@@ -12704,7 +12704,7 @@ func (i SloObjectiveCountMetricTotalCloudwatchDimensionArgs) ToSloObjectiveCount
 // SloObjectiveCountMetricTotalCloudwatchDimensionArrayInput is an input type that accepts SloObjectiveCountMetricTotalCloudwatchDimensionArray and SloObjectiveCountMetricTotalCloudwatchDimensionArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalCloudwatchDimensionArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalCloudwatchDimensionArray{ SloObjectiveCountMetricTotalCloudwatchDimensionArgs{...} }
+//          SloObjectiveCountMetricTotalCloudwatchDimensionArray{ SloObjectiveCountMetricTotalCloudwatchDimensionArgs{...} }
 type SloObjectiveCountMetricTotalCloudwatchDimensionArrayInput interface {
 	pulumi.Input
 
@@ -12776,7 +12776,7 @@ type SloObjectiveCountMetricTotalDatadog struct {
 // SloObjectiveCountMetricTotalDatadogInput is an input type that accepts SloObjectiveCountMetricTotalDatadogArgs and SloObjectiveCountMetricTotalDatadogOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalDatadogInput` via:
 //
-//	SloObjectiveCountMetricTotalDatadogArgs{...}
+//          SloObjectiveCountMetricTotalDatadogArgs{...}
 type SloObjectiveCountMetricTotalDatadogInput interface {
 	pulumi.Input
 
@@ -12803,7 +12803,7 @@ func (i SloObjectiveCountMetricTotalDatadogArgs) ToSloObjectiveCountMetricTotalD
 // SloObjectiveCountMetricTotalDatadogArrayInput is an input type that accepts SloObjectiveCountMetricTotalDatadogArray and SloObjectiveCountMetricTotalDatadogArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalDatadogArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalDatadogArray{ SloObjectiveCountMetricTotalDatadogArgs{...} }
+//          SloObjectiveCountMetricTotalDatadogArray{ SloObjectiveCountMetricTotalDatadogArgs{...} }
 type SloObjectiveCountMetricTotalDatadogArrayInput interface {
 	pulumi.Input
 
@@ -12870,7 +12870,7 @@ type SloObjectiveCountMetricTotalDynatrace struct {
 // SloObjectiveCountMetricTotalDynatraceInput is an input type that accepts SloObjectiveCountMetricTotalDynatraceArgs and SloObjectiveCountMetricTotalDynatraceOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalDynatraceInput` via:
 //
-//	SloObjectiveCountMetricTotalDynatraceArgs{...}
+//          SloObjectiveCountMetricTotalDynatraceArgs{...}
 type SloObjectiveCountMetricTotalDynatraceInput interface {
 	pulumi.Input
 
@@ -12897,7 +12897,7 @@ func (i SloObjectiveCountMetricTotalDynatraceArgs) ToSloObjectiveCountMetricTota
 // SloObjectiveCountMetricTotalDynatraceArrayInput is an input type that accepts SloObjectiveCountMetricTotalDynatraceArray and SloObjectiveCountMetricTotalDynatraceArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalDynatraceArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalDynatraceArray{ SloObjectiveCountMetricTotalDynatraceArgs{...} }
+//          SloObjectiveCountMetricTotalDynatraceArray{ SloObjectiveCountMetricTotalDynatraceArgs{...} }
 type SloObjectiveCountMetricTotalDynatraceArrayInput interface {
 	pulumi.Input
 
@@ -12965,7 +12965,7 @@ type SloObjectiveCountMetricTotalElasticsearch struct {
 // SloObjectiveCountMetricTotalElasticsearchInput is an input type that accepts SloObjectiveCountMetricTotalElasticsearchArgs and SloObjectiveCountMetricTotalElasticsearchOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalElasticsearchInput` via:
 //
-//	SloObjectiveCountMetricTotalElasticsearchArgs{...}
+//          SloObjectiveCountMetricTotalElasticsearchArgs{...}
 type SloObjectiveCountMetricTotalElasticsearchInput interface {
 	pulumi.Input
 
@@ -12993,7 +12993,7 @@ func (i SloObjectiveCountMetricTotalElasticsearchArgs) ToSloObjectiveCountMetric
 // SloObjectiveCountMetricTotalElasticsearchArrayInput is an input type that accepts SloObjectiveCountMetricTotalElasticsearchArray and SloObjectiveCountMetricTotalElasticsearchArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalElasticsearchArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalElasticsearchArray{ SloObjectiveCountMetricTotalElasticsearchArgs{...} }
+//          SloObjectiveCountMetricTotalElasticsearchArray{ SloObjectiveCountMetricTotalElasticsearchArgs{...} }
 type SloObjectiveCountMetricTotalElasticsearchArrayInput interface {
 	pulumi.Input
 
@@ -13065,7 +13065,7 @@ type SloObjectiveCountMetricTotalGcm struct {
 // SloObjectiveCountMetricTotalGcmInput is an input type that accepts SloObjectiveCountMetricTotalGcmArgs and SloObjectiveCountMetricTotalGcmOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalGcmInput` via:
 //
-//	SloObjectiveCountMetricTotalGcmArgs{...}
+//          SloObjectiveCountMetricTotalGcmArgs{...}
 type SloObjectiveCountMetricTotalGcmInput interface {
 	pulumi.Input
 
@@ -13093,7 +13093,7 @@ func (i SloObjectiveCountMetricTotalGcmArgs) ToSloObjectiveCountMetricTotalGcmOu
 // SloObjectiveCountMetricTotalGcmArrayInput is an input type that accepts SloObjectiveCountMetricTotalGcmArray and SloObjectiveCountMetricTotalGcmArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalGcmArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalGcmArray{ SloObjectiveCountMetricTotalGcmArgs{...} }
+//          SloObjectiveCountMetricTotalGcmArray{ SloObjectiveCountMetricTotalGcmArgs{...} }
 type SloObjectiveCountMetricTotalGcmArrayInput interface {
 	pulumi.Input
 
@@ -13164,7 +13164,7 @@ type SloObjectiveCountMetricTotalGrafanaLoki struct {
 // SloObjectiveCountMetricTotalGrafanaLokiInput is an input type that accepts SloObjectiveCountMetricTotalGrafanaLokiArgs and SloObjectiveCountMetricTotalGrafanaLokiOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalGrafanaLokiInput` via:
 //
-//	SloObjectiveCountMetricTotalGrafanaLokiArgs{...}
+//          SloObjectiveCountMetricTotalGrafanaLokiArgs{...}
 type SloObjectiveCountMetricTotalGrafanaLokiInput interface {
 	pulumi.Input
 
@@ -13191,7 +13191,7 @@ func (i SloObjectiveCountMetricTotalGrafanaLokiArgs) ToSloObjectiveCountMetricTo
 // SloObjectiveCountMetricTotalGrafanaLokiArrayInput is an input type that accepts SloObjectiveCountMetricTotalGrafanaLokiArray and SloObjectiveCountMetricTotalGrafanaLokiArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalGrafanaLokiArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalGrafanaLokiArray{ SloObjectiveCountMetricTotalGrafanaLokiArgs{...} }
+//          SloObjectiveCountMetricTotalGrafanaLokiArray{ SloObjectiveCountMetricTotalGrafanaLokiArgs{...} }
 type SloObjectiveCountMetricTotalGrafanaLokiArrayInput interface {
 	pulumi.Input
 
@@ -13258,7 +13258,7 @@ type SloObjectiveCountMetricTotalGraphite struct {
 // SloObjectiveCountMetricTotalGraphiteInput is an input type that accepts SloObjectiveCountMetricTotalGraphiteArgs and SloObjectiveCountMetricTotalGraphiteOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalGraphiteInput` via:
 //
-//	SloObjectiveCountMetricTotalGraphiteArgs{...}
+//          SloObjectiveCountMetricTotalGraphiteArgs{...}
 type SloObjectiveCountMetricTotalGraphiteInput interface {
 	pulumi.Input
 
@@ -13285,7 +13285,7 @@ func (i SloObjectiveCountMetricTotalGraphiteArgs) ToSloObjectiveCountMetricTotal
 // SloObjectiveCountMetricTotalGraphiteArrayInput is an input type that accepts SloObjectiveCountMetricTotalGraphiteArray and SloObjectiveCountMetricTotalGraphiteArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalGraphiteArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalGraphiteArray{ SloObjectiveCountMetricTotalGraphiteArgs{...} }
+//          SloObjectiveCountMetricTotalGraphiteArray{ SloObjectiveCountMetricTotalGraphiteArgs{...} }
 type SloObjectiveCountMetricTotalGraphiteArrayInput interface {
 	pulumi.Input
 
@@ -13352,7 +13352,7 @@ type SloObjectiveCountMetricTotalInfluxdb struct {
 // SloObjectiveCountMetricTotalInfluxdbInput is an input type that accepts SloObjectiveCountMetricTotalInfluxdbArgs and SloObjectiveCountMetricTotalInfluxdbOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalInfluxdbInput` via:
 //
-//	SloObjectiveCountMetricTotalInfluxdbArgs{...}
+//          SloObjectiveCountMetricTotalInfluxdbArgs{...}
 type SloObjectiveCountMetricTotalInfluxdbInput interface {
 	pulumi.Input
 
@@ -13379,7 +13379,7 @@ func (i SloObjectiveCountMetricTotalInfluxdbArgs) ToSloObjectiveCountMetricTotal
 // SloObjectiveCountMetricTotalInfluxdbArrayInput is an input type that accepts SloObjectiveCountMetricTotalInfluxdbArray and SloObjectiveCountMetricTotalInfluxdbArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalInfluxdbArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalInfluxdbArray{ SloObjectiveCountMetricTotalInfluxdbArgs{...} }
+//          SloObjectiveCountMetricTotalInfluxdbArray{ SloObjectiveCountMetricTotalInfluxdbArgs{...} }
 type SloObjectiveCountMetricTotalInfluxdbArrayInput interface {
 	pulumi.Input
 
@@ -13448,7 +13448,7 @@ type SloObjectiveCountMetricTotalInstana struct {
 // SloObjectiveCountMetricTotalInstanaInput is an input type that accepts SloObjectiveCountMetricTotalInstanaArgs and SloObjectiveCountMetricTotalInstanaOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalInstanaInput` via:
 //
-//	SloObjectiveCountMetricTotalInstanaArgs{...}
+//          SloObjectiveCountMetricTotalInstanaArgs{...}
 type SloObjectiveCountMetricTotalInstanaInput interface {
 	pulumi.Input
 
@@ -13477,7 +13477,7 @@ func (i SloObjectiveCountMetricTotalInstanaArgs) ToSloObjectiveCountMetricTotalI
 // SloObjectiveCountMetricTotalInstanaArrayInput is an input type that accepts SloObjectiveCountMetricTotalInstanaArray and SloObjectiveCountMetricTotalInstanaArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalInstanaArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalInstanaArray{ SloObjectiveCountMetricTotalInstanaArgs{...} }
+//          SloObjectiveCountMetricTotalInstanaArray{ SloObjectiveCountMetricTotalInstanaArgs{...} }
 type SloObjectiveCountMetricTotalInstanaArrayInput interface {
 	pulumi.Input
 
@@ -13561,7 +13561,7 @@ type SloObjectiveCountMetricTotalInstanaApplication struct {
 // SloObjectiveCountMetricTotalInstanaApplicationInput is an input type that accepts SloObjectiveCountMetricTotalInstanaApplicationArgs and SloObjectiveCountMetricTotalInstanaApplicationOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalInstanaApplicationInput` via:
 //
-//	SloObjectiveCountMetricTotalInstanaApplicationArgs{...}
+//          SloObjectiveCountMetricTotalInstanaApplicationArgs{...}
 type SloObjectiveCountMetricTotalInstanaApplicationInput interface {
 	pulumi.Input
 
@@ -13593,7 +13593,7 @@ func (i SloObjectiveCountMetricTotalInstanaApplicationArgs) ToSloObjectiveCountM
 // SloObjectiveCountMetricTotalInstanaApplicationArrayInput is an input type that accepts SloObjectiveCountMetricTotalInstanaApplicationArray and SloObjectiveCountMetricTotalInstanaApplicationArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalInstanaApplicationArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalInstanaApplicationArray{ SloObjectiveCountMetricTotalInstanaApplicationArgs{...} }
+//          SloObjectiveCountMetricTotalInstanaApplicationArray{ SloObjectiveCountMetricTotalInstanaApplicationArgs{...} }
 type SloObjectiveCountMetricTotalInstanaApplicationArrayInput interface {
 	pulumi.Input
 
@@ -13684,7 +13684,7 @@ type SloObjectiveCountMetricTotalInstanaApplicationGroupBy struct {
 // SloObjectiveCountMetricTotalInstanaApplicationGroupByInput is an input type that accepts SloObjectiveCountMetricTotalInstanaApplicationGroupByArgs and SloObjectiveCountMetricTotalInstanaApplicationGroupByOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalInstanaApplicationGroupByInput` via:
 //
-//	SloObjectiveCountMetricTotalInstanaApplicationGroupByArgs{...}
+//          SloObjectiveCountMetricTotalInstanaApplicationGroupByArgs{...}
 type SloObjectiveCountMetricTotalInstanaApplicationGroupByInput interface {
 	pulumi.Input
 
@@ -13713,7 +13713,7 @@ func (i SloObjectiveCountMetricTotalInstanaApplicationGroupByArgs) ToSloObjectiv
 // SloObjectiveCountMetricTotalInstanaApplicationGroupByArrayInput is an input type that accepts SloObjectiveCountMetricTotalInstanaApplicationGroupByArray and SloObjectiveCountMetricTotalInstanaApplicationGroupByArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalInstanaApplicationGroupByArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalInstanaApplicationGroupByArray{ SloObjectiveCountMetricTotalInstanaApplicationGroupByArgs{...} }
+//          SloObjectiveCountMetricTotalInstanaApplicationGroupByArray{ SloObjectiveCountMetricTotalInstanaApplicationGroupByArgs{...} }
 type SloObjectiveCountMetricTotalInstanaApplicationGroupByArrayInput interface {
 	pulumi.Input
 
@@ -13792,7 +13792,7 @@ type SloObjectiveCountMetricTotalInstanaInfrastructure struct {
 // SloObjectiveCountMetricTotalInstanaInfrastructureInput is an input type that accepts SloObjectiveCountMetricTotalInstanaInfrastructureArgs and SloObjectiveCountMetricTotalInstanaInfrastructureOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalInstanaInfrastructureInput` via:
 //
-//	SloObjectiveCountMetricTotalInstanaInfrastructureArgs{...}
+//          SloObjectiveCountMetricTotalInstanaInfrastructureArgs{...}
 type SloObjectiveCountMetricTotalInstanaInfrastructureInput interface {
 	pulumi.Input
 
@@ -13823,7 +13823,7 @@ func (i SloObjectiveCountMetricTotalInstanaInfrastructureArgs) ToSloObjectiveCou
 // SloObjectiveCountMetricTotalInstanaInfrastructureArrayInput is an input type that accepts SloObjectiveCountMetricTotalInstanaInfrastructureArray and SloObjectiveCountMetricTotalInstanaInfrastructureArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalInstanaInfrastructureArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalInstanaInfrastructureArray{ SloObjectiveCountMetricTotalInstanaInfrastructureArgs{...} }
+//          SloObjectiveCountMetricTotalInstanaInfrastructureArray{ SloObjectiveCountMetricTotalInstanaInfrastructureArgs{...} }
 type SloObjectiveCountMetricTotalInstanaInfrastructureArrayInput interface {
 	pulumi.Input
 
@@ -13909,7 +13909,7 @@ type SloObjectiveCountMetricTotalLightstep struct {
 // SloObjectiveCountMetricTotalLightstepInput is an input type that accepts SloObjectiveCountMetricTotalLightstepArgs and SloObjectiveCountMetricTotalLightstepOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalLightstepInput` via:
 //
-//	SloObjectiveCountMetricTotalLightstepArgs{...}
+//          SloObjectiveCountMetricTotalLightstepArgs{...}
 type SloObjectiveCountMetricTotalLightstepInput interface {
 	pulumi.Input
 
@@ -13939,7 +13939,7 @@ func (i SloObjectiveCountMetricTotalLightstepArgs) ToSloObjectiveCountMetricTota
 // SloObjectiveCountMetricTotalLightstepArrayInput is an input type that accepts SloObjectiveCountMetricTotalLightstepArray and SloObjectiveCountMetricTotalLightstepArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalLightstepArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalLightstepArray{ SloObjectiveCountMetricTotalLightstepArgs{...} }
+//          SloObjectiveCountMetricTotalLightstepArray{ SloObjectiveCountMetricTotalLightstepArgs{...} }
 type SloObjectiveCountMetricTotalLightstepArrayInput interface {
 	pulumi.Input
 
@@ -14018,7 +14018,7 @@ type SloObjectiveCountMetricTotalNewrelic struct {
 // SloObjectiveCountMetricTotalNewrelicInput is an input type that accepts SloObjectiveCountMetricTotalNewrelicArgs and SloObjectiveCountMetricTotalNewrelicOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalNewrelicInput` via:
 //
-//	SloObjectiveCountMetricTotalNewrelicArgs{...}
+//          SloObjectiveCountMetricTotalNewrelicArgs{...}
 type SloObjectiveCountMetricTotalNewrelicInput interface {
 	pulumi.Input
 
@@ -14045,7 +14045,7 @@ func (i SloObjectiveCountMetricTotalNewrelicArgs) ToSloObjectiveCountMetricTotal
 // SloObjectiveCountMetricTotalNewrelicArrayInput is an input type that accepts SloObjectiveCountMetricTotalNewrelicArray and SloObjectiveCountMetricTotalNewrelicArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalNewrelicArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalNewrelicArray{ SloObjectiveCountMetricTotalNewrelicArgs{...} }
+//          SloObjectiveCountMetricTotalNewrelicArray{ SloObjectiveCountMetricTotalNewrelicArgs{...} }
 type SloObjectiveCountMetricTotalNewrelicArrayInput interface {
 	pulumi.Input
 
@@ -14112,7 +14112,7 @@ type SloObjectiveCountMetricTotalOpentsdb struct {
 // SloObjectiveCountMetricTotalOpentsdbInput is an input type that accepts SloObjectiveCountMetricTotalOpentsdbArgs and SloObjectiveCountMetricTotalOpentsdbOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalOpentsdbInput` via:
 //
-//	SloObjectiveCountMetricTotalOpentsdbArgs{...}
+//          SloObjectiveCountMetricTotalOpentsdbArgs{...}
 type SloObjectiveCountMetricTotalOpentsdbInput interface {
 	pulumi.Input
 
@@ -14139,7 +14139,7 @@ func (i SloObjectiveCountMetricTotalOpentsdbArgs) ToSloObjectiveCountMetricTotal
 // SloObjectiveCountMetricTotalOpentsdbArrayInput is an input type that accepts SloObjectiveCountMetricTotalOpentsdbArray and SloObjectiveCountMetricTotalOpentsdbArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalOpentsdbArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalOpentsdbArray{ SloObjectiveCountMetricTotalOpentsdbArgs{...} }
+//          SloObjectiveCountMetricTotalOpentsdbArray{ SloObjectiveCountMetricTotalOpentsdbArgs{...} }
 type SloObjectiveCountMetricTotalOpentsdbArrayInput interface {
 	pulumi.Input
 
@@ -14208,7 +14208,7 @@ type SloObjectiveCountMetricTotalPingdom struct {
 // SloObjectiveCountMetricTotalPingdomInput is an input type that accepts SloObjectiveCountMetricTotalPingdomArgs and SloObjectiveCountMetricTotalPingdomOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalPingdomInput` via:
 //
-//	SloObjectiveCountMetricTotalPingdomArgs{...}
+//          SloObjectiveCountMetricTotalPingdomArgs{...}
 type SloObjectiveCountMetricTotalPingdomInput interface {
 	pulumi.Input
 
@@ -14237,7 +14237,7 @@ func (i SloObjectiveCountMetricTotalPingdomArgs) ToSloObjectiveCountMetricTotalP
 // SloObjectiveCountMetricTotalPingdomArrayInput is an input type that accepts SloObjectiveCountMetricTotalPingdomArray and SloObjectiveCountMetricTotalPingdomArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalPingdomArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalPingdomArray{ SloObjectiveCountMetricTotalPingdomArgs{...} }
+//          SloObjectiveCountMetricTotalPingdomArray{ SloObjectiveCountMetricTotalPingdomArgs{...} }
 type SloObjectiveCountMetricTotalPingdomArrayInput interface {
 	pulumi.Input
 
@@ -14312,7 +14312,7 @@ type SloObjectiveCountMetricTotalPrometheus struct {
 // SloObjectiveCountMetricTotalPrometheusInput is an input type that accepts SloObjectiveCountMetricTotalPrometheusArgs and SloObjectiveCountMetricTotalPrometheusOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalPrometheusInput` via:
 //
-//	SloObjectiveCountMetricTotalPrometheusArgs{...}
+//          SloObjectiveCountMetricTotalPrometheusArgs{...}
 type SloObjectiveCountMetricTotalPrometheusInput interface {
 	pulumi.Input
 
@@ -14339,7 +14339,7 @@ func (i SloObjectiveCountMetricTotalPrometheusArgs) ToSloObjectiveCountMetricTot
 // SloObjectiveCountMetricTotalPrometheusArrayInput is an input type that accepts SloObjectiveCountMetricTotalPrometheusArray and SloObjectiveCountMetricTotalPrometheusArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalPrometheusArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalPrometheusArray{ SloObjectiveCountMetricTotalPrometheusArgs{...} }
+//          SloObjectiveCountMetricTotalPrometheusArray{ SloObjectiveCountMetricTotalPrometheusArgs{...} }
 type SloObjectiveCountMetricTotalPrometheusArrayInput interface {
 	pulumi.Input
 
@@ -14409,7 +14409,7 @@ type SloObjectiveCountMetricTotalRedshift struct {
 // SloObjectiveCountMetricTotalRedshiftInput is an input type that accepts SloObjectiveCountMetricTotalRedshiftArgs and SloObjectiveCountMetricTotalRedshiftOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalRedshiftInput` via:
 //
-//	SloObjectiveCountMetricTotalRedshiftArgs{...}
+//          SloObjectiveCountMetricTotalRedshiftArgs{...}
 type SloObjectiveCountMetricTotalRedshiftInput interface {
 	pulumi.Input
 
@@ -14439,7 +14439,7 @@ func (i SloObjectiveCountMetricTotalRedshiftArgs) ToSloObjectiveCountMetricTotal
 // SloObjectiveCountMetricTotalRedshiftArrayInput is an input type that accepts SloObjectiveCountMetricTotalRedshiftArray and SloObjectiveCountMetricTotalRedshiftArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalRedshiftArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalRedshiftArray{ SloObjectiveCountMetricTotalRedshiftArgs{...} }
+//          SloObjectiveCountMetricTotalRedshiftArray{ SloObjectiveCountMetricTotalRedshiftArgs{...} }
 type SloObjectiveCountMetricTotalRedshiftArrayInput interface {
 	pulumi.Input
 
@@ -14518,7 +14518,7 @@ type SloObjectiveCountMetricTotalSplunk struct {
 // SloObjectiveCountMetricTotalSplunkInput is an input type that accepts SloObjectiveCountMetricTotalSplunkArgs and SloObjectiveCountMetricTotalSplunkOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalSplunkInput` via:
 //
-//	SloObjectiveCountMetricTotalSplunkArgs{...}
+//          SloObjectiveCountMetricTotalSplunkArgs{...}
 type SloObjectiveCountMetricTotalSplunkInput interface {
 	pulumi.Input
 
@@ -14545,7 +14545,7 @@ func (i SloObjectiveCountMetricTotalSplunkArgs) ToSloObjectiveCountMetricTotalSp
 // SloObjectiveCountMetricTotalSplunkArrayInput is an input type that accepts SloObjectiveCountMetricTotalSplunkArray and SloObjectiveCountMetricTotalSplunkArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalSplunkArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalSplunkArray{ SloObjectiveCountMetricTotalSplunkArgs{...} }
+//          SloObjectiveCountMetricTotalSplunkArray{ SloObjectiveCountMetricTotalSplunkArgs{...} }
 type SloObjectiveCountMetricTotalSplunkArrayInput interface {
 	pulumi.Input
 
@@ -14612,7 +14612,7 @@ type SloObjectiveCountMetricTotalSplunkObservability struct {
 // SloObjectiveCountMetricTotalSplunkObservabilityInput is an input type that accepts SloObjectiveCountMetricTotalSplunkObservabilityArgs and SloObjectiveCountMetricTotalSplunkObservabilityOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalSplunkObservabilityInput` via:
 //
-//	SloObjectiveCountMetricTotalSplunkObservabilityArgs{...}
+//          SloObjectiveCountMetricTotalSplunkObservabilityArgs{...}
 type SloObjectiveCountMetricTotalSplunkObservabilityInput interface {
 	pulumi.Input
 
@@ -14639,7 +14639,7 @@ func (i SloObjectiveCountMetricTotalSplunkObservabilityArgs) ToSloObjectiveCount
 // SloObjectiveCountMetricTotalSplunkObservabilityArrayInput is an input type that accepts SloObjectiveCountMetricTotalSplunkObservabilityArray and SloObjectiveCountMetricTotalSplunkObservabilityArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalSplunkObservabilityArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalSplunkObservabilityArray{ SloObjectiveCountMetricTotalSplunkObservabilityArgs{...} }
+//          SloObjectiveCountMetricTotalSplunkObservabilityArray{ SloObjectiveCountMetricTotalSplunkObservabilityArgs{...} }
 type SloObjectiveCountMetricTotalSplunkObservabilityArrayInput interface {
 	pulumi.Input
 
@@ -14709,7 +14709,7 @@ type SloObjectiveCountMetricTotalSumologic struct {
 // SloObjectiveCountMetricTotalSumologicInput is an input type that accepts SloObjectiveCountMetricTotalSumologicArgs and SloObjectiveCountMetricTotalSumologicOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalSumologicInput` via:
 //
-//	SloObjectiveCountMetricTotalSumologicArgs{...}
+//          SloObjectiveCountMetricTotalSumologicArgs{...}
 type SloObjectiveCountMetricTotalSumologicInput interface {
 	pulumi.Input
 
@@ -14739,7 +14739,7 @@ func (i SloObjectiveCountMetricTotalSumologicArgs) ToSloObjectiveCountMetricTota
 // SloObjectiveCountMetricTotalSumologicArrayInput is an input type that accepts SloObjectiveCountMetricTotalSumologicArray and SloObjectiveCountMetricTotalSumologicArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalSumologicArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalSumologicArray{ SloObjectiveCountMetricTotalSumologicArgs{...} }
+//          SloObjectiveCountMetricTotalSumologicArray{ SloObjectiveCountMetricTotalSumologicArgs{...} }
 type SloObjectiveCountMetricTotalSumologicArrayInput interface {
 	pulumi.Input
 
@@ -14818,7 +14818,7 @@ type SloObjectiveCountMetricTotalThousandeye struct {
 // SloObjectiveCountMetricTotalThousandeyeInput is an input type that accepts SloObjectiveCountMetricTotalThousandeyeArgs and SloObjectiveCountMetricTotalThousandeyeOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalThousandeyeInput` via:
 //
-//	SloObjectiveCountMetricTotalThousandeyeArgs{...}
+//          SloObjectiveCountMetricTotalThousandeyeArgs{...}
 type SloObjectiveCountMetricTotalThousandeyeInput interface {
 	pulumi.Input
 
@@ -14845,7 +14845,7 @@ func (i SloObjectiveCountMetricTotalThousandeyeArgs) ToSloObjectiveCountMetricTo
 // SloObjectiveCountMetricTotalThousandeyeArrayInput is an input type that accepts SloObjectiveCountMetricTotalThousandeyeArray and SloObjectiveCountMetricTotalThousandeyeArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalThousandeyeArrayInput` via:
 //
-//	SloObjectiveCountMetricTotalThousandeyeArray{ SloObjectiveCountMetricTotalThousandeyeArgs{...} }
+//          SloObjectiveCountMetricTotalThousandeyeArray{ SloObjectiveCountMetricTotalThousandeyeArgs{...} }
 type SloObjectiveCountMetricTotalThousandeyeArrayInput interface {
 	pulumi.Input
 
@@ -14912,7 +14912,7 @@ type SloObjectiveRawMetric struct {
 // SloObjectiveRawMetricInput is an input type that accepts SloObjectiveRawMetricArgs and SloObjectiveRawMetricOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricInput` via:
 //
-//	SloObjectiveRawMetricArgs{...}
+//          SloObjectiveRawMetricArgs{...}
 type SloObjectiveRawMetricInput interface {
 	pulumi.Input
 
@@ -14939,7 +14939,7 @@ func (i SloObjectiveRawMetricArgs) ToSloObjectiveRawMetricOutputWithContext(ctx 
 // SloObjectiveRawMetricArrayInput is an input type that accepts SloObjectiveRawMetricArray and SloObjectiveRawMetricArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricArrayInput` via:
 //
-//	SloObjectiveRawMetricArray{ SloObjectiveRawMetricArgs{...} }
+//          SloObjectiveRawMetricArray{ SloObjectiveRawMetricArgs{...} }
 type SloObjectiveRawMetricArrayInput interface {
 	pulumi.Input
 
@@ -15027,7 +15027,7 @@ type SloObjectiveRawMetricQuery struct {
 // SloObjectiveRawMetricQueryInput is an input type that accepts SloObjectiveRawMetricQueryArgs and SloObjectiveRawMetricQueryOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryInput` via:
 //
-//	SloObjectiveRawMetricQueryArgs{...}
+//          SloObjectiveRawMetricQueryArgs{...}
 type SloObjectiveRawMetricQueryInput interface {
 	pulumi.Input
 
@@ -15075,7 +15075,7 @@ func (i SloObjectiveRawMetricQueryArgs) ToSloObjectiveRawMetricQueryOutputWithCo
 // SloObjectiveRawMetricQueryArrayInput is an input type that accepts SloObjectiveRawMetricQueryArray and SloObjectiveRawMetricQueryArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryArray{ SloObjectiveRawMetricQueryArgs{...} }
+//          SloObjectiveRawMetricQueryArray{ SloObjectiveRawMetricQueryArgs{...} }
 type SloObjectiveRawMetricQueryArrayInput interface {
 	pulumi.Input
 
@@ -15230,7 +15230,7 @@ type SloObjectiveRawMetricQueryAmazonPrometheus struct {
 // SloObjectiveRawMetricQueryAmazonPrometheusInput is an input type that accepts SloObjectiveRawMetricQueryAmazonPrometheusArgs and SloObjectiveRawMetricQueryAmazonPrometheusOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryAmazonPrometheusInput` via:
 //
-//	SloObjectiveRawMetricQueryAmazonPrometheusArgs{...}
+//          SloObjectiveRawMetricQueryAmazonPrometheusArgs{...}
 type SloObjectiveRawMetricQueryAmazonPrometheusInput interface {
 	pulumi.Input
 
@@ -15257,7 +15257,7 @@ func (i SloObjectiveRawMetricQueryAmazonPrometheusArgs) ToSloObjectiveRawMetricQ
 // SloObjectiveRawMetricQueryAmazonPrometheusArrayInput is an input type that accepts SloObjectiveRawMetricQueryAmazonPrometheusArray and SloObjectiveRawMetricQueryAmazonPrometheusArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryAmazonPrometheusArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryAmazonPrometheusArray{ SloObjectiveRawMetricQueryAmazonPrometheusArgs{...} }
+//          SloObjectiveRawMetricQueryAmazonPrometheusArray{ SloObjectiveRawMetricQueryAmazonPrometheusArgs{...} }
 type SloObjectiveRawMetricQueryAmazonPrometheusArrayInput interface {
 	pulumi.Input
 
@@ -15325,7 +15325,7 @@ type SloObjectiveRawMetricQueryAppdynamic struct {
 // SloObjectiveRawMetricQueryAppdynamicInput is an input type that accepts SloObjectiveRawMetricQueryAppdynamicArgs and SloObjectiveRawMetricQueryAppdynamicOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryAppdynamicInput` via:
 //
-//	SloObjectiveRawMetricQueryAppdynamicArgs{...}
+//          SloObjectiveRawMetricQueryAppdynamicArgs{...}
 type SloObjectiveRawMetricQueryAppdynamicInput interface {
 	pulumi.Input
 
@@ -15353,7 +15353,7 @@ func (i SloObjectiveRawMetricQueryAppdynamicArgs) ToSloObjectiveRawMetricQueryAp
 // SloObjectiveRawMetricQueryAppdynamicArrayInput is an input type that accepts SloObjectiveRawMetricQueryAppdynamicArray and SloObjectiveRawMetricQueryAppdynamicArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryAppdynamicArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryAppdynamicArray{ SloObjectiveRawMetricQueryAppdynamicArgs{...} }
+//          SloObjectiveRawMetricQueryAppdynamicArray{ SloObjectiveRawMetricQueryAppdynamicArgs{...} }
 type SloObjectiveRawMetricQueryAppdynamicArrayInput interface {
 	pulumi.Input
 
@@ -15426,7 +15426,7 @@ type SloObjectiveRawMetricQueryBigquery struct {
 // SloObjectiveRawMetricQueryBigqueryInput is an input type that accepts SloObjectiveRawMetricQueryBigqueryArgs and SloObjectiveRawMetricQueryBigqueryOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryBigqueryInput` via:
 //
-//	SloObjectiveRawMetricQueryBigqueryArgs{...}
+//          SloObjectiveRawMetricQueryBigqueryArgs{...}
 type SloObjectiveRawMetricQueryBigqueryInput interface {
 	pulumi.Input
 
@@ -15455,7 +15455,7 @@ func (i SloObjectiveRawMetricQueryBigqueryArgs) ToSloObjectiveRawMetricQueryBigq
 // SloObjectiveRawMetricQueryBigqueryArrayInput is an input type that accepts SloObjectiveRawMetricQueryBigqueryArray and SloObjectiveRawMetricQueryBigqueryArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryBigqueryArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryBigqueryArray{ SloObjectiveRawMetricQueryBigqueryArgs{...} }
+//          SloObjectiveRawMetricQueryBigqueryArray{ SloObjectiveRawMetricQueryBigqueryArgs{...} }
 type SloObjectiveRawMetricQueryBigqueryArrayInput interface {
 	pulumi.Input
 
@@ -15536,7 +15536,7 @@ type SloObjectiveRawMetricQueryCloudwatch struct {
 // SloObjectiveRawMetricQueryCloudwatchInput is an input type that accepts SloObjectiveRawMetricQueryCloudwatchArgs and SloObjectiveRawMetricQueryCloudwatchOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryCloudwatchInput` via:
 //
-//	SloObjectiveRawMetricQueryCloudwatchArgs{...}
+//          SloObjectiveRawMetricQueryCloudwatchArgs{...}
 type SloObjectiveRawMetricQueryCloudwatchInput interface {
 	pulumi.Input
 
@@ -15569,7 +15569,7 @@ func (i SloObjectiveRawMetricQueryCloudwatchArgs) ToSloObjectiveRawMetricQueryCl
 // SloObjectiveRawMetricQueryCloudwatchArrayInput is an input type that accepts SloObjectiveRawMetricQueryCloudwatchArray and SloObjectiveRawMetricQueryCloudwatchArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryCloudwatchArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryCloudwatchArray{ SloObjectiveRawMetricQueryCloudwatchArgs{...} }
+//          SloObjectiveRawMetricQueryCloudwatchArray{ SloObjectiveRawMetricQueryCloudwatchArgs{...} }
 type SloObjectiveRawMetricQueryCloudwatchArrayInput interface {
 	pulumi.Input
 
@@ -15664,7 +15664,7 @@ type SloObjectiveRawMetricQueryCloudwatchDimension struct {
 // SloObjectiveRawMetricQueryCloudwatchDimensionInput is an input type that accepts SloObjectiveRawMetricQueryCloudwatchDimensionArgs and SloObjectiveRawMetricQueryCloudwatchDimensionOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryCloudwatchDimensionInput` via:
 //
-//	SloObjectiveRawMetricQueryCloudwatchDimensionArgs{...}
+//          SloObjectiveRawMetricQueryCloudwatchDimensionArgs{...}
 type SloObjectiveRawMetricQueryCloudwatchDimensionInput interface {
 	pulumi.Input
 
@@ -15693,7 +15693,7 @@ func (i SloObjectiveRawMetricQueryCloudwatchDimensionArgs) ToSloObjectiveRawMetr
 // SloObjectiveRawMetricQueryCloudwatchDimensionArrayInput is an input type that accepts SloObjectiveRawMetricQueryCloudwatchDimensionArray and SloObjectiveRawMetricQueryCloudwatchDimensionArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryCloudwatchDimensionArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryCloudwatchDimensionArray{ SloObjectiveRawMetricQueryCloudwatchDimensionArgs{...} }
+//          SloObjectiveRawMetricQueryCloudwatchDimensionArray{ SloObjectiveRawMetricQueryCloudwatchDimensionArgs{...} }
 type SloObjectiveRawMetricQueryCloudwatchDimensionArrayInput interface {
 	pulumi.Input
 
@@ -15765,7 +15765,7 @@ type SloObjectiveRawMetricQueryDatadog struct {
 // SloObjectiveRawMetricQueryDatadogInput is an input type that accepts SloObjectiveRawMetricQueryDatadogArgs and SloObjectiveRawMetricQueryDatadogOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryDatadogInput` via:
 //
-//	SloObjectiveRawMetricQueryDatadogArgs{...}
+//          SloObjectiveRawMetricQueryDatadogArgs{...}
 type SloObjectiveRawMetricQueryDatadogInput interface {
 	pulumi.Input
 
@@ -15792,7 +15792,7 @@ func (i SloObjectiveRawMetricQueryDatadogArgs) ToSloObjectiveRawMetricQueryDatad
 // SloObjectiveRawMetricQueryDatadogArrayInput is an input type that accepts SloObjectiveRawMetricQueryDatadogArray and SloObjectiveRawMetricQueryDatadogArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryDatadogArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryDatadogArray{ SloObjectiveRawMetricQueryDatadogArgs{...} }
+//          SloObjectiveRawMetricQueryDatadogArray{ SloObjectiveRawMetricQueryDatadogArgs{...} }
 type SloObjectiveRawMetricQueryDatadogArrayInput interface {
 	pulumi.Input
 
@@ -15859,7 +15859,7 @@ type SloObjectiveRawMetricQueryDynatrace struct {
 // SloObjectiveRawMetricQueryDynatraceInput is an input type that accepts SloObjectiveRawMetricQueryDynatraceArgs and SloObjectiveRawMetricQueryDynatraceOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryDynatraceInput` via:
 //
-//	SloObjectiveRawMetricQueryDynatraceArgs{...}
+//          SloObjectiveRawMetricQueryDynatraceArgs{...}
 type SloObjectiveRawMetricQueryDynatraceInput interface {
 	pulumi.Input
 
@@ -15886,7 +15886,7 @@ func (i SloObjectiveRawMetricQueryDynatraceArgs) ToSloObjectiveRawMetricQueryDyn
 // SloObjectiveRawMetricQueryDynatraceArrayInput is an input type that accepts SloObjectiveRawMetricQueryDynatraceArray and SloObjectiveRawMetricQueryDynatraceArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryDynatraceArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryDynatraceArray{ SloObjectiveRawMetricQueryDynatraceArgs{...} }
+//          SloObjectiveRawMetricQueryDynatraceArray{ SloObjectiveRawMetricQueryDynatraceArgs{...} }
 type SloObjectiveRawMetricQueryDynatraceArrayInput interface {
 	pulumi.Input
 
@@ -15954,7 +15954,7 @@ type SloObjectiveRawMetricQueryElasticsearch struct {
 // SloObjectiveRawMetricQueryElasticsearchInput is an input type that accepts SloObjectiveRawMetricQueryElasticsearchArgs and SloObjectiveRawMetricQueryElasticsearchOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryElasticsearchInput` via:
 //
-//	SloObjectiveRawMetricQueryElasticsearchArgs{...}
+//          SloObjectiveRawMetricQueryElasticsearchArgs{...}
 type SloObjectiveRawMetricQueryElasticsearchInput interface {
 	pulumi.Input
 
@@ -15982,7 +15982,7 @@ func (i SloObjectiveRawMetricQueryElasticsearchArgs) ToSloObjectiveRawMetricQuer
 // SloObjectiveRawMetricQueryElasticsearchArrayInput is an input type that accepts SloObjectiveRawMetricQueryElasticsearchArray and SloObjectiveRawMetricQueryElasticsearchArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryElasticsearchArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryElasticsearchArray{ SloObjectiveRawMetricQueryElasticsearchArgs{...} }
+//          SloObjectiveRawMetricQueryElasticsearchArray{ SloObjectiveRawMetricQueryElasticsearchArgs{...} }
 type SloObjectiveRawMetricQueryElasticsearchArrayInput interface {
 	pulumi.Input
 
@@ -16054,7 +16054,7 @@ type SloObjectiveRawMetricQueryGcm struct {
 // SloObjectiveRawMetricQueryGcmInput is an input type that accepts SloObjectiveRawMetricQueryGcmArgs and SloObjectiveRawMetricQueryGcmOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryGcmInput` via:
 //
-//	SloObjectiveRawMetricQueryGcmArgs{...}
+//          SloObjectiveRawMetricQueryGcmArgs{...}
 type SloObjectiveRawMetricQueryGcmInput interface {
 	pulumi.Input
 
@@ -16082,7 +16082,7 @@ func (i SloObjectiveRawMetricQueryGcmArgs) ToSloObjectiveRawMetricQueryGcmOutput
 // SloObjectiveRawMetricQueryGcmArrayInput is an input type that accepts SloObjectiveRawMetricQueryGcmArray and SloObjectiveRawMetricQueryGcmArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryGcmArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryGcmArray{ SloObjectiveRawMetricQueryGcmArgs{...} }
+//          SloObjectiveRawMetricQueryGcmArray{ SloObjectiveRawMetricQueryGcmArgs{...} }
 type SloObjectiveRawMetricQueryGcmArrayInput interface {
 	pulumi.Input
 
@@ -16153,7 +16153,7 @@ type SloObjectiveRawMetricQueryGrafanaLoki struct {
 // SloObjectiveRawMetricQueryGrafanaLokiInput is an input type that accepts SloObjectiveRawMetricQueryGrafanaLokiArgs and SloObjectiveRawMetricQueryGrafanaLokiOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryGrafanaLokiInput` via:
 //
-//	SloObjectiveRawMetricQueryGrafanaLokiArgs{...}
+//          SloObjectiveRawMetricQueryGrafanaLokiArgs{...}
 type SloObjectiveRawMetricQueryGrafanaLokiInput interface {
 	pulumi.Input
 
@@ -16180,7 +16180,7 @@ func (i SloObjectiveRawMetricQueryGrafanaLokiArgs) ToSloObjectiveRawMetricQueryG
 // SloObjectiveRawMetricQueryGrafanaLokiArrayInput is an input type that accepts SloObjectiveRawMetricQueryGrafanaLokiArray and SloObjectiveRawMetricQueryGrafanaLokiArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryGrafanaLokiArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryGrafanaLokiArray{ SloObjectiveRawMetricQueryGrafanaLokiArgs{...} }
+//          SloObjectiveRawMetricQueryGrafanaLokiArray{ SloObjectiveRawMetricQueryGrafanaLokiArgs{...} }
 type SloObjectiveRawMetricQueryGrafanaLokiArrayInput interface {
 	pulumi.Input
 
@@ -16247,7 +16247,7 @@ type SloObjectiveRawMetricQueryGraphite struct {
 // SloObjectiveRawMetricQueryGraphiteInput is an input type that accepts SloObjectiveRawMetricQueryGraphiteArgs and SloObjectiveRawMetricQueryGraphiteOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryGraphiteInput` via:
 //
-//	SloObjectiveRawMetricQueryGraphiteArgs{...}
+//          SloObjectiveRawMetricQueryGraphiteArgs{...}
 type SloObjectiveRawMetricQueryGraphiteInput interface {
 	pulumi.Input
 
@@ -16274,7 +16274,7 @@ func (i SloObjectiveRawMetricQueryGraphiteArgs) ToSloObjectiveRawMetricQueryGrap
 // SloObjectiveRawMetricQueryGraphiteArrayInput is an input type that accepts SloObjectiveRawMetricQueryGraphiteArray and SloObjectiveRawMetricQueryGraphiteArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryGraphiteArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryGraphiteArray{ SloObjectiveRawMetricQueryGraphiteArgs{...} }
+//          SloObjectiveRawMetricQueryGraphiteArray{ SloObjectiveRawMetricQueryGraphiteArgs{...} }
 type SloObjectiveRawMetricQueryGraphiteArrayInput interface {
 	pulumi.Input
 
@@ -16341,7 +16341,7 @@ type SloObjectiveRawMetricQueryInfluxdb struct {
 // SloObjectiveRawMetricQueryInfluxdbInput is an input type that accepts SloObjectiveRawMetricQueryInfluxdbArgs and SloObjectiveRawMetricQueryInfluxdbOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryInfluxdbInput` via:
 //
-//	SloObjectiveRawMetricQueryInfluxdbArgs{...}
+//          SloObjectiveRawMetricQueryInfluxdbArgs{...}
 type SloObjectiveRawMetricQueryInfluxdbInput interface {
 	pulumi.Input
 
@@ -16368,7 +16368,7 @@ func (i SloObjectiveRawMetricQueryInfluxdbArgs) ToSloObjectiveRawMetricQueryInfl
 // SloObjectiveRawMetricQueryInfluxdbArrayInput is an input type that accepts SloObjectiveRawMetricQueryInfluxdbArray and SloObjectiveRawMetricQueryInfluxdbArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryInfluxdbArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryInfluxdbArray{ SloObjectiveRawMetricQueryInfluxdbArgs{...} }
+//          SloObjectiveRawMetricQueryInfluxdbArray{ SloObjectiveRawMetricQueryInfluxdbArgs{...} }
 type SloObjectiveRawMetricQueryInfluxdbArrayInput interface {
 	pulumi.Input
 
@@ -16437,7 +16437,7 @@ type SloObjectiveRawMetricQueryInstana struct {
 // SloObjectiveRawMetricQueryInstanaInput is an input type that accepts SloObjectiveRawMetricQueryInstanaArgs and SloObjectiveRawMetricQueryInstanaOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryInstanaInput` via:
 //
-//	SloObjectiveRawMetricQueryInstanaArgs{...}
+//          SloObjectiveRawMetricQueryInstanaArgs{...}
 type SloObjectiveRawMetricQueryInstanaInput interface {
 	pulumi.Input
 
@@ -16466,7 +16466,7 @@ func (i SloObjectiveRawMetricQueryInstanaArgs) ToSloObjectiveRawMetricQueryInsta
 // SloObjectiveRawMetricQueryInstanaArrayInput is an input type that accepts SloObjectiveRawMetricQueryInstanaArray and SloObjectiveRawMetricQueryInstanaArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryInstanaArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryInstanaArray{ SloObjectiveRawMetricQueryInstanaArgs{...} }
+//          SloObjectiveRawMetricQueryInstanaArray{ SloObjectiveRawMetricQueryInstanaArgs{...} }
 type SloObjectiveRawMetricQueryInstanaArrayInput interface {
 	pulumi.Input
 
@@ -16550,7 +16550,7 @@ type SloObjectiveRawMetricQueryInstanaApplication struct {
 // SloObjectiveRawMetricQueryInstanaApplicationInput is an input type that accepts SloObjectiveRawMetricQueryInstanaApplicationArgs and SloObjectiveRawMetricQueryInstanaApplicationOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryInstanaApplicationInput` via:
 //
-//	SloObjectiveRawMetricQueryInstanaApplicationArgs{...}
+//          SloObjectiveRawMetricQueryInstanaApplicationArgs{...}
 type SloObjectiveRawMetricQueryInstanaApplicationInput interface {
 	pulumi.Input
 
@@ -16582,7 +16582,7 @@ func (i SloObjectiveRawMetricQueryInstanaApplicationArgs) ToSloObjectiveRawMetri
 // SloObjectiveRawMetricQueryInstanaApplicationArrayInput is an input type that accepts SloObjectiveRawMetricQueryInstanaApplicationArray and SloObjectiveRawMetricQueryInstanaApplicationArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryInstanaApplicationArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryInstanaApplicationArray{ SloObjectiveRawMetricQueryInstanaApplicationArgs{...} }
+//          SloObjectiveRawMetricQueryInstanaApplicationArray{ SloObjectiveRawMetricQueryInstanaApplicationArgs{...} }
 type SloObjectiveRawMetricQueryInstanaApplicationArrayInput interface {
 	pulumi.Input
 
@@ -16673,7 +16673,7 @@ type SloObjectiveRawMetricQueryInstanaApplicationGroupBy struct {
 // SloObjectiveRawMetricQueryInstanaApplicationGroupByInput is an input type that accepts SloObjectiveRawMetricQueryInstanaApplicationGroupByArgs and SloObjectiveRawMetricQueryInstanaApplicationGroupByOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryInstanaApplicationGroupByInput` via:
 //
-//	SloObjectiveRawMetricQueryInstanaApplicationGroupByArgs{...}
+//          SloObjectiveRawMetricQueryInstanaApplicationGroupByArgs{...}
 type SloObjectiveRawMetricQueryInstanaApplicationGroupByInput interface {
 	pulumi.Input
 
@@ -16702,7 +16702,7 @@ func (i SloObjectiveRawMetricQueryInstanaApplicationGroupByArgs) ToSloObjectiveR
 // SloObjectiveRawMetricQueryInstanaApplicationGroupByArrayInput is an input type that accepts SloObjectiveRawMetricQueryInstanaApplicationGroupByArray and SloObjectiveRawMetricQueryInstanaApplicationGroupByArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryInstanaApplicationGroupByArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryInstanaApplicationGroupByArray{ SloObjectiveRawMetricQueryInstanaApplicationGroupByArgs{...} }
+//          SloObjectiveRawMetricQueryInstanaApplicationGroupByArray{ SloObjectiveRawMetricQueryInstanaApplicationGroupByArgs{...} }
 type SloObjectiveRawMetricQueryInstanaApplicationGroupByArrayInput interface {
 	pulumi.Input
 
@@ -16781,7 +16781,7 @@ type SloObjectiveRawMetricQueryInstanaInfrastructure struct {
 // SloObjectiveRawMetricQueryInstanaInfrastructureInput is an input type that accepts SloObjectiveRawMetricQueryInstanaInfrastructureArgs and SloObjectiveRawMetricQueryInstanaInfrastructureOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryInstanaInfrastructureInput` via:
 //
-//	SloObjectiveRawMetricQueryInstanaInfrastructureArgs{...}
+//          SloObjectiveRawMetricQueryInstanaInfrastructureArgs{...}
 type SloObjectiveRawMetricQueryInstanaInfrastructureInput interface {
 	pulumi.Input
 
@@ -16812,7 +16812,7 @@ func (i SloObjectiveRawMetricQueryInstanaInfrastructureArgs) ToSloObjectiveRawMe
 // SloObjectiveRawMetricQueryInstanaInfrastructureArrayInput is an input type that accepts SloObjectiveRawMetricQueryInstanaInfrastructureArray and SloObjectiveRawMetricQueryInstanaInfrastructureArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryInstanaInfrastructureArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryInstanaInfrastructureArray{ SloObjectiveRawMetricQueryInstanaInfrastructureArgs{...} }
+//          SloObjectiveRawMetricQueryInstanaInfrastructureArray{ SloObjectiveRawMetricQueryInstanaInfrastructureArgs{...} }
 type SloObjectiveRawMetricQueryInstanaInfrastructureArrayInput interface {
 	pulumi.Input
 
@@ -16898,7 +16898,7 @@ type SloObjectiveRawMetricQueryLightstep struct {
 // SloObjectiveRawMetricQueryLightstepInput is an input type that accepts SloObjectiveRawMetricQueryLightstepArgs and SloObjectiveRawMetricQueryLightstepOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryLightstepInput` via:
 //
-//	SloObjectiveRawMetricQueryLightstepArgs{...}
+//          SloObjectiveRawMetricQueryLightstepArgs{...}
 type SloObjectiveRawMetricQueryLightstepInput interface {
 	pulumi.Input
 
@@ -16928,7 +16928,7 @@ func (i SloObjectiveRawMetricQueryLightstepArgs) ToSloObjectiveRawMetricQueryLig
 // SloObjectiveRawMetricQueryLightstepArrayInput is an input type that accepts SloObjectiveRawMetricQueryLightstepArray and SloObjectiveRawMetricQueryLightstepArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryLightstepArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryLightstepArray{ SloObjectiveRawMetricQueryLightstepArgs{...} }
+//          SloObjectiveRawMetricQueryLightstepArray{ SloObjectiveRawMetricQueryLightstepArgs{...} }
 type SloObjectiveRawMetricQueryLightstepArrayInput interface {
 	pulumi.Input
 
@@ -17007,7 +17007,7 @@ type SloObjectiveRawMetricQueryNewrelic struct {
 // SloObjectiveRawMetricQueryNewrelicInput is an input type that accepts SloObjectiveRawMetricQueryNewrelicArgs and SloObjectiveRawMetricQueryNewrelicOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryNewrelicInput` via:
 //
-//	SloObjectiveRawMetricQueryNewrelicArgs{...}
+//          SloObjectiveRawMetricQueryNewrelicArgs{...}
 type SloObjectiveRawMetricQueryNewrelicInput interface {
 	pulumi.Input
 
@@ -17034,7 +17034,7 @@ func (i SloObjectiveRawMetricQueryNewrelicArgs) ToSloObjectiveRawMetricQueryNewr
 // SloObjectiveRawMetricQueryNewrelicArrayInput is an input type that accepts SloObjectiveRawMetricQueryNewrelicArray and SloObjectiveRawMetricQueryNewrelicArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryNewrelicArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryNewrelicArray{ SloObjectiveRawMetricQueryNewrelicArgs{...} }
+//          SloObjectiveRawMetricQueryNewrelicArray{ SloObjectiveRawMetricQueryNewrelicArgs{...} }
 type SloObjectiveRawMetricQueryNewrelicArrayInput interface {
 	pulumi.Input
 
@@ -17101,7 +17101,7 @@ type SloObjectiveRawMetricQueryOpentsdb struct {
 // SloObjectiveRawMetricQueryOpentsdbInput is an input type that accepts SloObjectiveRawMetricQueryOpentsdbArgs and SloObjectiveRawMetricQueryOpentsdbOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryOpentsdbInput` via:
 //
-//	SloObjectiveRawMetricQueryOpentsdbArgs{...}
+//          SloObjectiveRawMetricQueryOpentsdbArgs{...}
 type SloObjectiveRawMetricQueryOpentsdbInput interface {
 	pulumi.Input
 
@@ -17128,7 +17128,7 @@ func (i SloObjectiveRawMetricQueryOpentsdbArgs) ToSloObjectiveRawMetricQueryOpen
 // SloObjectiveRawMetricQueryOpentsdbArrayInput is an input type that accepts SloObjectiveRawMetricQueryOpentsdbArray and SloObjectiveRawMetricQueryOpentsdbArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryOpentsdbArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryOpentsdbArray{ SloObjectiveRawMetricQueryOpentsdbArgs{...} }
+//          SloObjectiveRawMetricQueryOpentsdbArray{ SloObjectiveRawMetricQueryOpentsdbArgs{...} }
 type SloObjectiveRawMetricQueryOpentsdbArrayInput interface {
 	pulumi.Input
 
@@ -17197,7 +17197,7 @@ type SloObjectiveRawMetricQueryPingdom struct {
 // SloObjectiveRawMetricQueryPingdomInput is an input type that accepts SloObjectiveRawMetricQueryPingdomArgs and SloObjectiveRawMetricQueryPingdomOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryPingdomInput` via:
 //
-//	SloObjectiveRawMetricQueryPingdomArgs{...}
+//          SloObjectiveRawMetricQueryPingdomArgs{...}
 type SloObjectiveRawMetricQueryPingdomInput interface {
 	pulumi.Input
 
@@ -17226,7 +17226,7 @@ func (i SloObjectiveRawMetricQueryPingdomArgs) ToSloObjectiveRawMetricQueryPingd
 // SloObjectiveRawMetricQueryPingdomArrayInput is an input type that accepts SloObjectiveRawMetricQueryPingdomArray and SloObjectiveRawMetricQueryPingdomArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryPingdomArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryPingdomArray{ SloObjectiveRawMetricQueryPingdomArgs{...} }
+//          SloObjectiveRawMetricQueryPingdomArray{ SloObjectiveRawMetricQueryPingdomArgs{...} }
 type SloObjectiveRawMetricQueryPingdomArrayInput interface {
 	pulumi.Input
 
@@ -17301,7 +17301,7 @@ type SloObjectiveRawMetricQueryPrometheus struct {
 // SloObjectiveRawMetricQueryPrometheusInput is an input type that accepts SloObjectiveRawMetricQueryPrometheusArgs and SloObjectiveRawMetricQueryPrometheusOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryPrometheusInput` via:
 //
-//	SloObjectiveRawMetricQueryPrometheusArgs{...}
+//          SloObjectiveRawMetricQueryPrometheusArgs{...}
 type SloObjectiveRawMetricQueryPrometheusInput interface {
 	pulumi.Input
 
@@ -17328,7 +17328,7 @@ func (i SloObjectiveRawMetricQueryPrometheusArgs) ToSloObjectiveRawMetricQueryPr
 // SloObjectiveRawMetricQueryPrometheusArrayInput is an input type that accepts SloObjectiveRawMetricQueryPrometheusArray and SloObjectiveRawMetricQueryPrometheusArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryPrometheusArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryPrometheusArray{ SloObjectiveRawMetricQueryPrometheusArgs{...} }
+//          SloObjectiveRawMetricQueryPrometheusArray{ SloObjectiveRawMetricQueryPrometheusArgs{...} }
 type SloObjectiveRawMetricQueryPrometheusArrayInput interface {
 	pulumi.Input
 
@@ -17398,7 +17398,7 @@ type SloObjectiveRawMetricQueryRedshift struct {
 // SloObjectiveRawMetricQueryRedshiftInput is an input type that accepts SloObjectiveRawMetricQueryRedshiftArgs and SloObjectiveRawMetricQueryRedshiftOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryRedshiftInput` via:
 //
-//	SloObjectiveRawMetricQueryRedshiftArgs{...}
+//          SloObjectiveRawMetricQueryRedshiftArgs{...}
 type SloObjectiveRawMetricQueryRedshiftInput interface {
 	pulumi.Input
 
@@ -17428,7 +17428,7 @@ func (i SloObjectiveRawMetricQueryRedshiftArgs) ToSloObjectiveRawMetricQueryReds
 // SloObjectiveRawMetricQueryRedshiftArrayInput is an input type that accepts SloObjectiveRawMetricQueryRedshiftArray and SloObjectiveRawMetricQueryRedshiftArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryRedshiftArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryRedshiftArray{ SloObjectiveRawMetricQueryRedshiftArgs{...} }
+//          SloObjectiveRawMetricQueryRedshiftArray{ SloObjectiveRawMetricQueryRedshiftArgs{...} }
 type SloObjectiveRawMetricQueryRedshiftArrayInput interface {
 	pulumi.Input
 
@@ -17507,7 +17507,7 @@ type SloObjectiveRawMetricQuerySplunk struct {
 // SloObjectiveRawMetricQuerySplunkInput is an input type that accepts SloObjectiveRawMetricQuerySplunkArgs and SloObjectiveRawMetricQuerySplunkOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQuerySplunkInput` via:
 //
-//	SloObjectiveRawMetricQuerySplunkArgs{...}
+//          SloObjectiveRawMetricQuerySplunkArgs{...}
 type SloObjectiveRawMetricQuerySplunkInput interface {
 	pulumi.Input
 
@@ -17534,7 +17534,7 @@ func (i SloObjectiveRawMetricQuerySplunkArgs) ToSloObjectiveRawMetricQuerySplunk
 // SloObjectiveRawMetricQuerySplunkArrayInput is an input type that accepts SloObjectiveRawMetricQuerySplunkArray and SloObjectiveRawMetricQuerySplunkArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQuerySplunkArrayInput` via:
 //
-//	SloObjectiveRawMetricQuerySplunkArray{ SloObjectiveRawMetricQuerySplunkArgs{...} }
+//          SloObjectiveRawMetricQuerySplunkArray{ SloObjectiveRawMetricQuerySplunkArgs{...} }
 type SloObjectiveRawMetricQuerySplunkArrayInput interface {
 	pulumi.Input
 
@@ -17601,7 +17601,7 @@ type SloObjectiveRawMetricQuerySplunkObservability struct {
 // SloObjectiveRawMetricQuerySplunkObservabilityInput is an input type that accepts SloObjectiveRawMetricQuerySplunkObservabilityArgs and SloObjectiveRawMetricQuerySplunkObservabilityOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQuerySplunkObservabilityInput` via:
 //
-//	SloObjectiveRawMetricQuerySplunkObservabilityArgs{...}
+//          SloObjectiveRawMetricQuerySplunkObservabilityArgs{...}
 type SloObjectiveRawMetricQuerySplunkObservabilityInput interface {
 	pulumi.Input
 
@@ -17628,7 +17628,7 @@ func (i SloObjectiveRawMetricQuerySplunkObservabilityArgs) ToSloObjectiveRawMetr
 // SloObjectiveRawMetricQuerySplunkObservabilityArrayInput is an input type that accepts SloObjectiveRawMetricQuerySplunkObservabilityArray and SloObjectiveRawMetricQuerySplunkObservabilityArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQuerySplunkObservabilityArrayInput` via:
 //
-//	SloObjectiveRawMetricQuerySplunkObservabilityArray{ SloObjectiveRawMetricQuerySplunkObservabilityArgs{...} }
+//          SloObjectiveRawMetricQuerySplunkObservabilityArray{ SloObjectiveRawMetricQuerySplunkObservabilityArgs{...} }
 type SloObjectiveRawMetricQuerySplunkObservabilityArrayInput interface {
 	pulumi.Input
 
@@ -17698,7 +17698,7 @@ type SloObjectiveRawMetricQuerySumologic struct {
 // SloObjectiveRawMetricQuerySumologicInput is an input type that accepts SloObjectiveRawMetricQuerySumologicArgs and SloObjectiveRawMetricQuerySumologicOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQuerySumologicInput` via:
 //
-//	SloObjectiveRawMetricQuerySumologicArgs{...}
+//          SloObjectiveRawMetricQuerySumologicArgs{...}
 type SloObjectiveRawMetricQuerySumologicInput interface {
 	pulumi.Input
 
@@ -17728,7 +17728,7 @@ func (i SloObjectiveRawMetricQuerySumologicArgs) ToSloObjectiveRawMetricQuerySum
 // SloObjectiveRawMetricQuerySumologicArrayInput is an input type that accepts SloObjectiveRawMetricQuerySumologicArray and SloObjectiveRawMetricQuerySumologicArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQuerySumologicArrayInput` via:
 //
-//	SloObjectiveRawMetricQuerySumologicArray{ SloObjectiveRawMetricQuerySumologicArgs{...} }
+//          SloObjectiveRawMetricQuerySumologicArray{ SloObjectiveRawMetricQuerySumologicArgs{...} }
 type SloObjectiveRawMetricQuerySumologicArrayInput interface {
 	pulumi.Input
 
@@ -17807,7 +17807,7 @@ type SloObjectiveRawMetricQueryThousandeye struct {
 // SloObjectiveRawMetricQueryThousandeyeInput is an input type that accepts SloObjectiveRawMetricQueryThousandeyeArgs and SloObjectiveRawMetricQueryThousandeyeOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryThousandeyeInput` via:
 //
-//	SloObjectiveRawMetricQueryThousandeyeArgs{...}
+//          SloObjectiveRawMetricQueryThousandeyeArgs{...}
 type SloObjectiveRawMetricQueryThousandeyeInput interface {
 	pulumi.Input
 
@@ -17834,7 +17834,7 @@ func (i SloObjectiveRawMetricQueryThousandeyeArgs) ToSloObjectiveRawMetricQueryT
 // SloObjectiveRawMetricQueryThousandeyeArrayInput is an input type that accepts SloObjectiveRawMetricQueryThousandeyeArray and SloObjectiveRawMetricQueryThousandeyeArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryThousandeyeArrayInput` via:
 //
-//	SloObjectiveRawMetricQueryThousandeyeArray{ SloObjectiveRawMetricQueryThousandeyeArgs{...} }
+//          SloObjectiveRawMetricQueryThousandeyeArray{ SloObjectiveRawMetricQueryThousandeyeArgs{...} }
 type SloObjectiveRawMetricQueryThousandeyeArrayInput interface {
 	pulumi.Input
 
@@ -17910,7 +17910,7 @@ type SloTimeWindow struct {
 // SloTimeWindowInput is an input type that accepts SloTimeWindowArgs and SloTimeWindowOutput values.
 // You can construct a concrete instance of `SloTimeWindowInput` via:
 //
-//	SloTimeWindowArgs{...}
+//          SloTimeWindowArgs{...}
 type SloTimeWindowInput interface {
 	pulumi.Input
 
@@ -17954,11 +17954,11 @@ func (i SloTimeWindowArgs) ToSloTimeWindowPtrOutputWithContext(ctx context.Conte
 // SloTimeWindowPtrInput is an input type that accepts SloTimeWindowArgs, SloTimeWindowPtr and SloTimeWindowPtrOutput values.
 // You can construct a concrete instance of `SloTimeWindowPtrInput` via:
 //
-//	        SloTimeWindowArgs{...}
+//          SloTimeWindowArgs{...}
 //
-//	or:
+//  or:
 //
-//	        nil
+//          nil
 type SloTimeWindowPtrInput interface {
 	pulumi.Input
 
@@ -18115,7 +18115,7 @@ type SloTimeWindowCalendar struct {
 // SloTimeWindowCalendarInput is an input type that accepts SloTimeWindowCalendarArgs and SloTimeWindowCalendarOutput values.
 // You can construct a concrete instance of `SloTimeWindowCalendarInput` via:
 //
-//	SloTimeWindowCalendarArgs{...}
+//          SloTimeWindowCalendarArgs{...}
 type SloTimeWindowCalendarInput interface {
 	pulumi.Input
 
@@ -18143,7 +18143,7 @@ func (i SloTimeWindowCalendarArgs) ToSloTimeWindowCalendarOutputWithContext(ctx 
 // SloTimeWindowCalendarArrayInput is an input type that accepts SloTimeWindowCalendarArray and SloTimeWindowCalendarArrayOutput values.
 // You can construct a concrete instance of `SloTimeWindowCalendarArrayInput` via:
 //
-//	SloTimeWindowCalendarArray{ SloTimeWindowCalendarArgs{...} }
+//          SloTimeWindowCalendarArray{ SloTimeWindowCalendarArgs{...} }
 type SloTimeWindowCalendarArrayInput interface {
 	pulumi.Input
 

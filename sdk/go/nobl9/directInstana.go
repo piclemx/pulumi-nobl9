@@ -21,31 +21,28 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
+// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := nobl9.NewDirectInstana(ctx, "test-instana", &nobl9.DirectInstanaArgs{
-//				ApiToken:    pulumi.String("secret"),
-//				Description: pulumi.String("desc"),
-//				Project:     pulumi.String("terraform"),
-//				SourceOfs: pulumi.StringArray{
-//					pulumi.String("Metrics"),
-//					pulumi.String("Services"),
-//				},
-//				Url: pulumi.String("https://web.net"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := nobl9.NewDirectInstana(ctx, "test-instana", &nobl9.DirectInstanaArgs{
+// 			ApiToken:    pulumi.String("secret"),
+// 			Description: pulumi.String("desc"),
+// 			Project:     pulumi.String("terraform"),
+// 			SourceOfs: pulumi.StringArray{
+// 				pulumi.String("Metrics"),
+// 				pulumi.String("Services"),
+// 			},
+// 			Url: pulumi.String("https://web.net"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -89,6 +86,7 @@ func NewDirectInstana(ctx *pulumi.Context,
 	if args.Url == nil {
 		return nil, errors.New("invalid value for required argument 'Url'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DirectInstana
 	err := ctx.RegisterResource("nobl9:index/directInstana:DirectInstana", name, args, &resource, opts...)
 	if err != nil {
@@ -221,7 +219,7 @@ func (i *DirectInstana) ToDirectInstanaOutputWithContext(ctx context.Context) Di
 // DirectInstanaArrayInput is an input type that accepts DirectInstanaArray and DirectInstanaArrayOutput values.
 // You can construct a concrete instance of `DirectInstanaArrayInput` via:
 //
-//	DirectInstanaArray{ DirectInstanaArgs{...} }
+//          DirectInstanaArray{ DirectInstanaArgs{...} }
 type DirectInstanaArrayInput interface {
 	pulumi.Input
 
@@ -246,7 +244,7 @@ func (i DirectInstanaArray) ToDirectInstanaArrayOutputWithContext(ctx context.Co
 // DirectInstanaMapInput is an input type that accepts DirectInstanaMap and DirectInstanaMapOutput values.
 // You can construct a concrete instance of `DirectInstanaMapInput` via:
 //
-//	DirectInstanaMap{ "key": DirectInstanaArgs{...} }
+//          DirectInstanaMap{ "key": DirectInstanaArgs{...} }
 type DirectInstanaMapInput interface {
 	pulumi.Input
 

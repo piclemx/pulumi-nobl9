@@ -21,31 +21,28 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
+// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := nobl9.NewDirectSumologic(ctx, "test-sumologic", &nobl9.DirectSumologicArgs{
-//				AccessId:    pulumi.String("secret"),
-//				AccessKey:   pulumi.String("secret"),
-//				Description: pulumi.String("desc"),
-//				Project:     pulumi.String("terraform"),
-//				SourceOfs: pulumi.StringArray{
-//					pulumi.String("Metrics"),
-//				},
-//				Url: pulumi.String("http://web.net"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := nobl9.NewDirectSumologic(ctx, "test-sumologic", &nobl9.DirectSumologicArgs{
+// 			AccessId:    pulumi.String("secret"),
+// 			AccessKey:   pulumi.String("secret"),
+// 			Description: pulumi.String("desc"),
+// 			Project:     pulumi.String("terraform"),
+// 			SourceOfs: pulumi.StringArray{
+// 				pulumi.String("Metrics"),
+// 			},
+// 			Url: pulumi.String("http://web.net"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -91,6 +88,7 @@ func NewDirectSumologic(ctx *pulumi.Context,
 	if args.Url == nil {
 		return nil, errors.New("invalid value for required argument 'Url'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DirectSumologic
 	err := ctx.RegisterResource("nobl9:index/directSumologic:DirectSumologic", name, args, &resource, opts...)
 	if err != nil {
@@ -231,7 +229,7 @@ func (i *DirectSumologic) ToDirectSumologicOutputWithContext(ctx context.Context
 // DirectSumologicArrayInput is an input type that accepts DirectSumologicArray and DirectSumologicArrayOutput values.
 // You can construct a concrete instance of `DirectSumologicArrayInput` via:
 //
-//	DirectSumologicArray{ DirectSumologicArgs{...} }
+//          DirectSumologicArray{ DirectSumologicArgs{...} }
 type DirectSumologicArrayInput interface {
 	pulumi.Input
 
@@ -256,7 +254,7 @@ func (i DirectSumologicArray) ToDirectSumologicArrayOutputWithContext(ctx contex
 // DirectSumologicMapInput is an input type that accepts DirectSumologicMap and DirectSumologicMapOutput values.
 // You can construct a concrete instance of `DirectSumologicMapInput` via:
 //
-//	DirectSumologicMap{ "key": DirectSumologicArgs{...} }
+//          DirectSumologicMap{ "key": DirectSumologicArgs{...} }
 type DirectSumologicMapInput interface {
 	pulumi.Input
 

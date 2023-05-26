@@ -53,6 +53,7 @@ func NewAlertMethodEmail(ctx *pulumi.Context,
 	if args.Tos == nil {
 		return nil, errors.New("invalid value for required argument 'Tos'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource AlertMethodEmail
 	err := ctx.RegisterResource("nobl9:index/alertMethodEmail:AlertMethodEmail", name, args, &resource, opts...)
 	if err != nil {
@@ -189,7 +190,7 @@ func (i *AlertMethodEmail) ToAlertMethodEmailOutputWithContext(ctx context.Conte
 // AlertMethodEmailArrayInput is an input type that accepts AlertMethodEmailArray and AlertMethodEmailArrayOutput values.
 // You can construct a concrete instance of `AlertMethodEmailArrayInput` via:
 //
-//	AlertMethodEmailArray{ AlertMethodEmailArgs{...} }
+//          AlertMethodEmailArray{ AlertMethodEmailArgs{...} }
 type AlertMethodEmailArrayInput interface {
 	pulumi.Input
 
@@ -214,7 +215,7 @@ func (i AlertMethodEmailArray) ToAlertMethodEmailArrayOutputWithContext(ctx cont
 // AlertMethodEmailMapInput is an input type that accepts AlertMethodEmailMap and AlertMethodEmailMapOutput values.
 // You can construct a concrete instance of `AlertMethodEmailMapInput` via:
 //
-//	AlertMethodEmailMap{ "key": AlertMethodEmailArgs{...} }
+//          AlertMethodEmailMap{ "key": AlertMethodEmailArgs{...} }
 type AlertMethodEmailMapInput interface {
 	pulumi.Input
 

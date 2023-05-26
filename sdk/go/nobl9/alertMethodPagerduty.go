@@ -36,6 +36,7 @@ func NewAlertMethodPagerduty(ctx *pulumi.Context,
 	if args.Project == nil {
 		return nil, errors.New("invalid value for required argument 'Project'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource AlertMethodPagerduty
 	err := ctx.RegisterResource("nobl9:index/alertMethodPagerduty:AlertMethodPagerduty", name, args, &resource, opts...)
 	if err != nil {
@@ -140,7 +141,7 @@ func (i *AlertMethodPagerduty) ToAlertMethodPagerdutyOutputWithContext(ctx conte
 // AlertMethodPagerdutyArrayInput is an input type that accepts AlertMethodPagerdutyArray and AlertMethodPagerdutyArrayOutput values.
 // You can construct a concrete instance of `AlertMethodPagerdutyArrayInput` via:
 //
-//	AlertMethodPagerdutyArray{ AlertMethodPagerdutyArgs{...} }
+//          AlertMethodPagerdutyArray{ AlertMethodPagerdutyArgs{...} }
 type AlertMethodPagerdutyArrayInput interface {
 	pulumi.Input
 
@@ -165,7 +166,7 @@ func (i AlertMethodPagerdutyArray) ToAlertMethodPagerdutyArrayOutputWithContext(
 // AlertMethodPagerdutyMapInput is an input type that accepts AlertMethodPagerdutyMap and AlertMethodPagerdutyMapOutput values.
 // You can construct a concrete instance of `AlertMethodPagerdutyMapInput` via:
 //
-//	AlertMethodPagerdutyMap{ "key": AlertMethodPagerdutyArgs{...} }
+//          AlertMethodPagerdutyMap{ "key": AlertMethodPagerdutyArgs{...} }
 type AlertMethodPagerdutyMapInput interface {
 	pulumi.Input
 

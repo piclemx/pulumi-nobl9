@@ -21,46 +21,44 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
+// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := nobl9.NewDirectLightstep(ctx, "test-lightstep", &nobl9.DirectLightstepArgs{
-//				AppToken:    pulumi.String("secret"),
-//				Description: pulumi.String("desc"),
-//				HistoricalDataRetrieval: &DirectLightstepHistoricalDataRetrievalArgs{
-//					DefaultDurations: DirectLightstepHistoricalDataRetrievalDefaultDurationArray{
-//						&DirectLightstepHistoricalDataRetrievalDefaultDurationArgs{
-//							Unit:  pulumi.String("Day"),
-//							Value: pulumi.Int(0),
-//						},
-//					},
-//					MaxDurations: DirectLightstepHistoricalDataRetrievalMaxDurationArray{
-//						&DirectLightstepHistoricalDataRetrievalMaxDurationArgs{
-//							Unit:  pulumi.String("Day"),
-//							Value: pulumi.Int(30),
-//						},
-//					},
-//				},
-//				LightstepOrganization: pulumi.String("acme"),
-//				LightstepProject:      pulumi.String("project1"),
-//				Project:               pulumi.String("terraform"),
-//				SourceOfs: pulumi.StringArray{
-//					pulumi.String("Metrics"),
-//					pulumi.String("Services"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := nobl9.NewDirectLightstep(ctx, "test-lightstep", &nobl9.DirectLightstepArgs{
+// 			AppToken:    pulumi.String("secret"),
+// 			Description: pulumi.String("desc"),
+// 			HistoricalDataRetrieval: &DirectLightstepHistoricalDataRetrievalArgs{
+// 				DefaultDurations: DirectLightstepHistoricalDataRetrievalDefaultDurationArray{
+// 					&DirectLightstepHistoricalDataRetrievalDefaultDurationArgs{
+// 						Unit:  pulumi.String("Day"),
+// 						Value: pulumi.Int(0),
+// 					},
+// 				},
+// 				MaxDurations: DirectLightstepHistoricalDataRetrievalMaxDurationArray{
+// 					&DirectLightstepHistoricalDataRetrievalMaxDurationArgs{
+// 						Unit:  pulumi.String("Day"),
+// 						Value: pulumi.Int(30),
+// 					},
+// 				},
+// 			},
+// 			LightstepOrganization: pulumi.String("acme"),
+// 			LightstepProject:      pulumi.String("project1"),
+// 			Project:               pulumi.String("terraform"),
+// 			SourceOfs: pulumi.StringArray{
+// 				pulumi.String("Metrics"),
+// 				pulumi.String("Services"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -111,6 +109,7 @@ func NewDirectLightstep(ctx *pulumi.Context,
 	if args.SourceOfs == nil {
 		return nil, errors.New("invalid value for required argument 'SourceOfs'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DirectLightstep
 	err := ctx.RegisterResource("nobl9:index/directLightstep:DirectLightstep", name, args, &resource, opts...)
 	if err != nil {
@@ -259,7 +258,7 @@ func (i *DirectLightstep) ToDirectLightstepOutputWithContext(ctx context.Context
 // DirectLightstepArrayInput is an input type that accepts DirectLightstepArray and DirectLightstepArrayOutput values.
 // You can construct a concrete instance of `DirectLightstepArrayInput` via:
 //
-//	DirectLightstepArray{ DirectLightstepArgs{...} }
+//          DirectLightstepArray{ DirectLightstepArgs{...} }
 type DirectLightstepArrayInput interface {
 	pulumi.Input
 
@@ -284,7 +283,7 @@ func (i DirectLightstepArray) ToDirectLightstepArrayOutputWithContext(ctx contex
 // DirectLightstepMapInput is an input type that accepts DirectLightstepMap and DirectLightstepMapOutput values.
 // You can construct a concrete instance of `DirectLightstepMapInput` via:
 //
-//	DirectLightstepMap{ "key": DirectLightstepArgs{...} }
+//          DirectLightstepMap{ "key": DirectLightstepArgs{...} }
 type DirectLightstepMapInput interface {
 	pulumi.Input
 

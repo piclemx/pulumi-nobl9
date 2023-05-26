@@ -46,6 +46,7 @@ func NewAlertMethodServicenow(ctx *pulumi.Context,
 	if args.Username == nil {
 		return nil, errors.New("invalid value for required argument 'Username'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource AlertMethodServicenow
 	err := ctx.RegisterResource("nobl9:index/alertMethodServicenow:AlertMethodServicenow", name, args, &resource, opts...)
 	if err != nil {
@@ -166,7 +167,7 @@ func (i *AlertMethodServicenow) ToAlertMethodServicenowOutputWithContext(ctx con
 // AlertMethodServicenowArrayInput is an input type that accepts AlertMethodServicenowArray and AlertMethodServicenowArrayOutput values.
 // You can construct a concrete instance of `AlertMethodServicenowArrayInput` via:
 //
-//	AlertMethodServicenowArray{ AlertMethodServicenowArgs{...} }
+//          AlertMethodServicenowArray{ AlertMethodServicenowArgs{...} }
 type AlertMethodServicenowArrayInput interface {
 	pulumi.Input
 
@@ -191,7 +192,7 @@ func (i AlertMethodServicenowArray) ToAlertMethodServicenowArrayOutputWithContex
 // AlertMethodServicenowMapInput is an input type that accepts AlertMethodServicenowMap and AlertMethodServicenowMapOutput values.
 // You can construct a concrete instance of `AlertMethodServicenowMapInput` via:
 //
-//	AlertMethodServicenowMap{ "key": AlertMethodServicenowArgs{...} }
+//          AlertMethodServicenowMap{ "key": AlertMethodServicenowArgs{...} }
 type AlertMethodServicenowMapInput interface {
 	pulumi.Input
 

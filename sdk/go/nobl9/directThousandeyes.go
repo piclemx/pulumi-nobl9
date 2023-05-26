@@ -21,30 +21,27 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
+// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := nobl9.NewDirectThousandeyes(ctx, "test-thousandeyes", &nobl9.DirectThousandeyesArgs{
-//				Description:      pulumi.String("desc"),
-//				OauthBearerToken: pulumi.String("secret"),
-//				Project:          pulumi.String("terraform"),
-//				SourceOfs: pulumi.StringArray{
-//					pulumi.String("Metrics"),
-//					pulumi.String("Services"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := nobl9.NewDirectThousandeyes(ctx, "test-thousandeyes", &nobl9.DirectThousandeyesArgs{
+// 			Description:      pulumi.String("desc"),
+// 			OauthBearerToken: pulumi.String("secret"),
+// 			Project:          pulumi.String("terraform"),
+// 			SourceOfs: pulumi.StringArray{
+// 				pulumi.String("Metrics"),
+// 				pulumi.String("Services"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -83,6 +80,7 @@ func NewDirectThousandeyes(ctx *pulumi.Context,
 	if args.SourceOfs == nil {
 		return nil, errors.New("invalid value for required argument 'SourceOfs'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DirectThousandeyes
 	err := ctx.RegisterResource("nobl9:index/directThousandeyes:DirectThousandeyes", name, args, &resource, opts...)
 	if err != nil {
@@ -207,7 +205,7 @@ func (i *DirectThousandeyes) ToDirectThousandeyesOutputWithContext(ctx context.C
 // DirectThousandeyesArrayInput is an input type that accepts DirectThousandeyesArray and DirectThousandeyesArrayOutput values.
 // You can construct a concrete instance of `DirectThousandeyesArrayInput` via:
 //
-//	DirectThousandeyesArray{ DirectThousandeyesArgs{...} }
+//          DirectThousandeyesArray{ DirectThousandeyesArgs{...} }
 type DirectThousandeyesArrayInput interface {
 	pulumi.Input
 
@@ -232,7 +230,7 @@ func (i DirectThousandeyesArray) ToDirectThousandeyesArrayOutputWithContext(ctx 
 // DirectThousandeyesMapInput is an input type that accepts DirectThousandeyesMap and DirectThousandeyesMapOutput values.
 // You can construct a concrete instance of `DirectThousandeyesMapInput` via:
 //
-//	DirectThousandeyesMap{ "key": DirectThousandeyesArgs{...} }
+//          DirectThousandeyesMap{ "key": DirectThousandeyesArgs{...} }
 type DirectThousandeyesMapInput interface {
 	pulumi.Input
 

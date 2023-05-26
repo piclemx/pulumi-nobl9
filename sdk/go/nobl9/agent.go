@@ -23,39 +23,37 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
+// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			thisProject, err := nobl9.NewProject(ctx, "thisProject", &nobl9.ProjectArgs{
-//				DisplayName: pulumi.String("Test N9 Terraform"),
-//				Description: pulumi.String("An example N9 Terraform project"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = nobl9.NewAgent(ctx, "thisAgent", &nobl9.AgentArgs{
-//				Project: thisProject.Name,
-//				SourceOfs: pulumi.StringArray{
-//					pulumi.String("Metrics"),
-//					pulumi.String("Services"),
-//				},
-//				AgentType: pulumi.String("prometheus"),
-//				PrometheusConfig: &AgentPrometheusConfigArgs{
-//					Url: pulumi.String("http://web.net"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		thisProject, err := nobl9.NewProject(ctx, "thisProject", &nobl9.ProjectArgs{
+// 			DisplayName: pulumi.String("Test N9 Terraform"),
+// 			Description: pulumi.String("An example N9 Terraform project"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = nobl9.NewAgent(ctx, "thisAgent", &nobl9.AgentArgs{
+// 			Project: thisProject.Name,
+// 			SourceOfs: pulumi.StringArray{
+// 				pulumi.String("Metrics"),
+// 				pulumi.String("Services"),
+// 			},
+// 			AgentType: pulumi.String("prometheus"),
+// 			PrometheusConfig: &AgentPrometheusConfigArgs{
+// 				Url: pulumi.String("http://web.net"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -145,6 +143,7 @@ func NewAgent(ctx *pulumi.Context,
 	if args.SourceOfs == nil {
 		return nil, errors.New("invalid value for required argument 'SourceOfs'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Agent
 	err := ctx.RegisterResource("nobl9:index/agent:Agent", name, args, &resource, opts...)
 	if err != nil {
@@ -453,7 +452,7 @@ func (i *Agent) ToAgentOutputWithContext(ctx context.Context) AgentOutput {
 // AgentArrayInput is an input type that accepts AgentArray and AgentArrayOutput values.
 // You can construct a concrete instance of `AgentArrayInput` via:
 //
-//	AgentArray{ AgentArgs{...} }
+//          AgentArray{ AgentArgs{...} }
 type AgentArrayInput interface {
 	pulumi.Input
 
@@ -478,7 +477,7 @@ func (i AgentArray) ToAgentArrayOutputWithContext(ctx context.Context) AgentArra
 // AgentMapInput is an input type that accepts AgentMap and AgentMapOutput values.
 // You can construct a concrete instance of `AgentMapInput` via:
 //
-//	AgentMap{ "key": AgentArgs{...} }
+//          AgentMap{ "key": AgentArgs{...} }
 type AgentMapInput interface {
 	pulumi.Input
 

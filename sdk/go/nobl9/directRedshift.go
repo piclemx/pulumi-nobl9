@@ -21,32 +21,29 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
+// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := nobl9.NewDirectRedshift(ctx, "test-redshift", &nobl9.DirectRedshiftArgs{
-//				AccessKeyId:     pulumi.String("secret"),
-//				Description:     pulumi.String("desc"),
-//				Project:         pulumi.String("terraform"),
-//				SecretAccessKey: pulumi.String("secret"),
-//				SecretArn:       pulumi.String("aws:arn"),
-//				SourceOfs: pulumi.StringArray{
-//					pulumi.String("Metrics"),
-//					pulumi.String("Services"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := nobl9.NewDirectRedshift(ctx, "test-redshift", &nobl9.DirectRedshiftArgs{
+// 			AccessKeyId:     pulumi.String("secret"),
+// 			Description:     pulumi.String("desc"),
+// 			Project:         pulumi.String("terraform"),
+// 			SecretAccessKey: pulumi.String("secret"),
+// 			SecretArn:       pulumi.String("aws:arn"),
+// 			SourceOfs: pulumi.StringArray{
+// 				pulumi.String("Metrics"),
+// 				pulumi.String("Services"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -89,6 +86,7 @@ func NewDirectRedshift(ctx *pulumi.Context,
 	if args.SourceOfs == nil {
 		return nil, errors.New("invalid value for required argument 'SourceOfs'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DirectRedshift
 	err := ctx.RegisterResource("nobl9:index/directRedshift:DirectRedshift", name, args, &resource, opts...)
 	if err != nil {
@@ -229,7 +227,7 @@ func (i *DirectRedshift) ToDirectRedshiftOutputWithContext(ctx context.Context) 
 // DirectRedshiftArrayInput is an input type that accepts DirectRedshiftArray and DirectRedshiftArrayOutput values.
 // You can construct a concrete instance of `DirectRedshiftArrayInput` via:
 //
-//	DirectRedshiftArray{ DirectRedshiftArgs{...} }
+//          DirectRedshiftArray{ DirectRedshiftArgs{...} }
 type DirectRedshiftArrayInput interface {
 	pulumi.Input
 
@@ -254,7 +252,7 @@ func (i DirectRedshiftArray) ToDirectRedshiftArrayOutputWithContext(ctx context.
 // DirectRedshiftMapInput is an input type that accepts DirectRedshiftMap and DirectRedshiftMapOutput values.
 // You can construct a concrete instance of `DirectRedshiftMapInput` via:
 //
-//	DirectRedshiftMap{ "key": DirectRedshiftArgs{...} }
+//          DirectRedshiftMap{ "key": DirectRedshiftArgs{...} }
 type DirectRedshiftMapInput interface {
 	pulumi.Input
 

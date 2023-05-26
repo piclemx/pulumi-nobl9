@@ -19,26 +19,23 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
+// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := nobl9.NewRoleBinding(ctx, "this", &nobl9.RoleBindingArgs{
-//				ProjectRef: pulumi.String("1234567890asdfghjkl"),
-//				RoleRef:    pulumi.String("project-owner"),
-//				User:       pulumi.String("1234567890asdfghjkl"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := nobl9.NewRoleBinding(ctx, "this", &nobl9.RoleBindingArgs{
+// 			ProjectRef: pulumi.String("1234567890asdfghjkl"),
+// 			RoleRef:    pulumi.String("project-owner"),
+// 			User:       pulumi.String("1234567890asdfghjkl"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 // ## Useful Links
 //
@@ -73,6 +70,7 @@ func NewRoleBinding(ctx *pulumi.Context,
 	if args.User == nil {
 		return nil, errors.New("invalid value for required argument 'User'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource RoleBinding
 	err := ctx.RegisterResource("nobl9:index/roleBinding:RoleBinding", name, args, &resource, opts...)
 	if err != nil {
@@ -177,7 +175,7 @@ func (i *RoleBinding) ToRoleBindingOutputWithContext(ctx context.Context) RoleBi
 // RoleBindingArrayInput is an input type that accepts RoleBindingArray and RoleBindingArrayOutput values.
 // You can construct a concrete instance of `RoleBindingArrayInput` via:
 //
-//	RoleBindingArray{ RoleBindingArgs{...} }
+//          RoleBindingArray{ RoleBindingArgs{...} }
 type RoleBindingArrayInput interface {
 	pulumi.Input
 
@@ -202,7 +200,7 @@ func (i RoleBindingArray) ToRoleBindingArrayOutputWithContext(ctx context.Contex
 // RoleBindingMapInput is an input type that accepts RoleBindingMap and RoleBindingMapOutput values.
 // You can construct a concrete instance of `RoleBindingMapInput` via:
 //
-//	RoleBindingMap{ "key": RoleBindingArgs{...} }
+//          RoleBindingMap{ "key": RoleBindingArgs{...} }
 type RoleBindingMapInput interface {
 	pulumi.Input
 

@@ -23,52 +23,50 @@ import (
 // package main
 //
 // import (
+// 	"fmt"
 //
-//	"fmt"
-//
-//	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
+// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			thisProject, err := nobl9.NewProject(ctx, "thisProject", &nobl9.ProjectArgs{
-//				DisplayName: pulumi.String("My Project"),
-//				Description: pulumi.String("An example N9 Terraform project"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = nobl9.NewService(ctx, "thisService", &nobl9.ServiceArgs{
-//				Project: thisProject.Name,
-//				DisplayName: thisProject.DisplayName.ApplyT(func(displayName string) (string, error) {
-//					return fmt.Sprintf("%v Front Page", displayName), nil
-//				}).(pulumi.StringOutput),
-//				Description: pulumi.String("Front page service"),
-//				Labels: ServiceLabelArray{
-//					&ServiceLabelArgs{
-//						Key: pulumi.String("env"),
-//						Values: pulumi.StringArray{
-//							pulumi.String("dev"),
-//							pulumi.String("prod"),
-//						},
-//					},
-//					&ServiceLabelArgs{
-//						Key: pulumi.String("team"),
-//						Values: pulumi.StringArray{
-//							pulumi.String("red"),
-//						},
-//					},
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		thisProject, err := nobl9.NewProject(ctx, "thisProject", &nobl9.ProjectArgs{
+// 			DisplayName: pulumi.String("My Project"),
+// 			Description: pulumi.String("An example N9 Terraform project"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = nobl9.NewService(ctx, "thisService", &nobl9.ServiceArgs{
+// 			Project: thisProject.Name,
+// 			DisplayName: thisProject.DisplayName.ApplyT(func(displayName string) (string, error) {
+// 				return fmt.Sprintf("%v Front Page", displayName), nil
+// 			}).(pulumi.StringOutput),
+// 			Description: pulumi.String("Front page service"),
+// 			Labels: ServiceLabelArray{
+// 				&ServiceLabelArgs{
+// 					Key: pulumi.String("env"),
+// 					Values: pulumi.StringArray{
+// 						pulumi.String("dev"),
+// 						pulumi.String("prod"),
+// 					},
+// 				},
+// 				&ServiceLabelArgs{
+// 					Key: pulumi.String("team"),
+// 					Values: pulumi.StringArray{
+// 						pulumi.String("red"),
+// 					},
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 // ## Useful Links
 //
@@ -102,6 +100,7 @@ func NewService(ctx *pulumi.Context,
 	if args.Project == nil {
 		return nil, errors.New("invalid value for required argument 'Project'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Service
 	err := ctx.RegisterResource("nobl9:index/service:Service", name, args, &resource, opts...)
 	if err != nil {
@@ -210,7 +209,7 @@ func (i *Service) ToServiceOutputWithContext(ctx context.Context) ServiceOutput 
 // ServiceArrayInput is an input type that accepts ServiceArray and ServiceArrayOutput values.
 // You can construct a concrete instance of `ServiceArrayInput` via:
 //
-//	ServiceArray{ ServiceArgs{...} }
+//          ServiceArray{ ServiceArgs{...} }
 type ServiceArrayInput interface {
 	pulumi.Input
 
@@ -235,7 +234,7 @@ func (i ServiceArray) ToServiceArrayOutputWithContext(ctx context.Context) Servi
 // ServiceMapInput is an input type that accepts ServiceMap and ServiceMapOutput values.
 // You can construct a concrete instance of `ServiceMapInput` via:
 //
-//	ServiceMap{ "key": ServiceArgs{...} }
+//          ServiceMap{ "key": ServiceArgs{...} }
 type ServiceMapInput interface {
 	pulumi.Input
 

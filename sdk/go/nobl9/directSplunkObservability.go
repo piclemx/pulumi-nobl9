@@ -21,31 +21,28 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
+// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := nobl9.NewDirectSplunkObservability(ctx, "test-splunkobservability", &nobl9.DirectSplunkObservabilityArgs{
-//				AccessToken: pulumi.String("secret"),
-//				Description: pulumi.String("desc"),
-//				Project:     pulumi.String("terraform"),
-//				Realm:       pulumi.String("eu"),
-//				SourceOfs: pulumi.StringArray{
-//					pulumi.String("Metrics"),
-//					pulumi.String("Services"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := nobl9.NewDirectSplunkObservability(ctx, "test-splunkobservability", &nobl9.DirectSplunkObservabilityArgs{
+// 			AccessToken: pulumi.String("secret"),
+// 			Description: pulumi.String("desc"),
+// 			Project:     pulumi.String("terraform"),
+// 			Realm:       pulumi.String("eu"),
+// 			SourceOfs: pulumi.StringArray{
+// 				pulumi.String("Metrics"),
+// 				pulumi.String("Services"),
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -89,6 +86,7 @@ func NewDirectSplunkObservability(ctx *pulumi.Context,
 	if args.SourceOfs == nil {
 		return nil, errors.New("invalid value for required argument 'SourceOfs'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DirectSplunkObservability
 	err := ctx.RegisterResource("nobl9:index/directSplunkObservability:DirectSplunkObservability", name, args, &resource, opts...)
 	if err != nil {
@@ -221,7 +219,7 @@ func (i *DirectSplunkObservability) ToDirectSplunkObservabilityOutputWithContext
 // DirectSplunkObservabilityArrayInput is an input type that accepts DirectSplunkObservabilityArray and DirectSplunkObservabilityArrayOutput values.
 // You can construct a concrete instance of `DirectSplunkObservabilityArrayInput` via:
 //
-//	DirectSplunkObservabilityArray{ DirectSplunkObservabilityArgs{...} }
+//          DirectSplunkObservabilityArray{ DirectSplunkObservabilityArgs{...} }
 type DirectSplunkObservabilityArrayInput interface {
 	pulumi.Input
 
@@ -246,7 +244,7 @@ func (i DirectSplunkObservabilityArray) ToDirectSplunkObservabilityArrayOutputWi
 // DirectSplunkObservabilityMapInput is an input type that accepts DirectSplunkObservabilityMap and DirectSplunkObservabilityMapOutput values.
 // You can construct a concrete instance of `DirectSplunkObservabilityMapInput` via:
 //
-//	DirectSplunkObservabilityMap{ "key": DirectSplunkObservabilityArgs{...} }
+//          DirectSplunkObservabilityMap{ "key": DirectSplunkObservabilityArgs{...} }
 type DirectSplunkObservabilityMapInput interface {
 	pulumi.Input
 

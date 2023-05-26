@@ -25,60 +25,58 @@ import (
 // package main
 //
 // import (
+// 	"fmt"
 //
-//	"fmt"
-//
-//	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
+// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			thisProject, err := nobl9.NewProject(ctx, "thisProject", &nobl9.ProjectArgs{
-//				DisplayName: pulumi.String("My Project"),
-//				Description: pulumi.String("An example N9 Terraform project"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = nobl9.NewService(ctx, "thisService", &nobl9.ServiceArgs{
-//				Project: thisProject.Name,
-//				DisplayName: thisProject.DisplayName.ApplyT(func(displayName string) (string, error) {
-//					return fmt.Sprintf("%v Front Page", displayName), nil
-//				}).(pulumi.StringOutput),
-//				Description: pulumi.String("Front page service"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = nobl9.NewAlertPolicy(ctx, "thisAlertPolicy", &nobl9.AlertPolicyArgs{
-//				Project: thisProject.Name,
-//				DisplayName: thisProject.DisplayName.ApplyT(func(displayName string) (string, error) {
-//					return fmt.Sprintf("%v Front Page Latency", displayName), nil
-//				}).(pulumi.StringOutput),
-//				Severity:    pulumi.String("High"),
-//				Description: pulumi.String("Alert when page latency is > 2000 and error budget would be exhausted"),
-//				Conditions: AlertPolicyConditionArray{
-//					&AlertPolicyConditionArgs{
-//						Measurement: pulumi.String("timeToBurnBudget"),
-//						ValueString: pulumi.String("72h"),
-//						LastsFor:    pulumi.String("30m"),
-//					},
-//				},
-//				AlertMethods: AlertPolicyAlertMethodArray{
-//					&AlertPolicyAlertMethodArgs{
-//						Name: pulumi.String("my-alert-method"),
-//					},
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		thisProject, err := nobl9.NewProject(ctx, "thisProject", &nobl9.ProjectArgs{
+// 			DisplayName: pulumi.String("My Project"),
+// 			Description: pulumi.String("An example N9 Terraform project"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = nobl9.NewService(ctx, "thisService", &nobl9.ServiceArgs{
+// 			Project: thisProject.Name,
+// 			DisplayName: thisProject.DisplayName.ApplyT(func(displayName string) (string, error) {
+// 				return fmt.Sprintf("%v Front Page", displayName), nil
+// 			}).(pulumi.StringOutput),
+// 			Description: pulumi.String("Front page service"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		_, err = nobl9.NewAlertPolicy(ctx, "thisAlertPolicy", &nobl9.AlertPolicyArgs{
+// 			Project: thisProject.Name,
+// 			DisplayName: thisProject.DisplayName.ApplyT(func(displayName string) (string, error) {
+// 				return fmt.Sprintf("%v Front Page Latency", displayName), nil
+// 			}).(pulumi.StringOutput),
+// 			Severity:    pulumi.String("High"),
+// 			Description: pulumi.String("Alert when page latency is > 2000 and error budget would be exhausted"),
+// 			Conditions: AlertPolicyConditionArray{
+// 				&AlertPolicyConditionArgs{
+// 					Measurement: pulumi.String("timeToBurnBudget"),
+// 					ValueString: pulumi.String("72h"),
+// 					LastsFor:    pulumi.String("30m"),
+// 				},
+// 			},
+// 			AlertMethods: AlertPolicyAlertMethodArray{
+// 				&AlertPolicyAlertMethodArgs{
+// 					Name: pulumi.String("my-alert-method"),
+// 				},
+// 			},
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 // ## Useful Links
 //
@@ -117,6 +115,7 @@ func NewAlertPolicy(ctx *pulumi.Context,
 	if args.Severity == nil {
 		return nil, errors.New("invalid value for required argument 'Severity'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource AlertPolicy
 	err := ctx.RegisterResource("nobl9:index/alertPolicy:AlertPolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -233,7 +232,7 @@ func (i *AlertPolicy) ToAlertPolicyOutputWithContext(ctx context.Context) AlertP
 // AlertPolicyArrayInput is an input type that accepts AlertPolicyArray and AlertPolicyArrayOutput values.
 // You can construct a concrete instance of `AlertPolicyArrayInput` via:
 //
-//	AlertPolicyArray{ AlertPolicyArgs{...} }
+//          AlertPolicyArray{ AlertPolicyArgs{...} }
 type AlertPolicyArrayInput interface {
 	pulumi.Input
 
@@ -258,7 +257,7 @@ func (i AlertPolicyArray) ToAlertPolicyArrayOutputWithContext(ctx context.Contex
 // AlertPolicyMapInput is an input type that accepts AlertPolicyMap and AlertPolicyMapOutput values.
 // You can construct a concrete instance of `AlertPolicyMapInput` via:
 //
-//	AlertPolicyMap{ "key": AlertPolicyArgs{...} }
+//          AlertPolicyMap{ "key": AlertPolicyArgs{...} }
 type AlertPolicyMapInput interface {
 	pulumi.Input
 

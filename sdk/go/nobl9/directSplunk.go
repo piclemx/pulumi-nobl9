@@ -21,45 +21,43 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
+// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := nobl9.NewDirectSplunk(ctx, "test-splunk", &nobl9.DirectSplunkArgs{
-//				AccessToken: pulumi.String("secret"),
-//				Description: pulumi.String("desc"),
-//				HistoricalDataRetrieval: &DirectSplunkHistoricalDataRetrievalArgs{
-//					DefaultDurations: DirectSplunkHistoricalDataRetrievalDefaultDurationArray{
-//						&DirectSplunkHistoricalDataRetrievalDefaultDurationArgs{
-//							Unit:  pulumi.String("Day"),
-//							Value: pulumi.Int(0),
-//						},
-//					},
-//					MaxDurations: DirectSplunkHistoricalDataRetrievalMaxDurationArray{
-//						&DirectSplunkHistoricalDataRetrievalMaxDurationArgs{
-//							Unit:  pulumi.String("Day"),
-//							Value: pulumi.Int(30),
-//						},
-//					},
-//				},
-//				Project: pulumi.String("terraform"),
-//				SourceOfs: pulumi.StringArray{
-//					pulumi.String("Metrics"),
-//					pulumi.String("Services"),
-//				},
-//				Url: pulumi.String("https://web.net"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := nobl9.NewDirectSplunk(ctx, "test-splunk", &nobl9.DirectSplunkArgs{
+// 			AccessToken: pulumi.String("secret"),
+// 			Description: pulumi.String("desc"),
+// 			HistoricalDataRetrieval: &DirectSplunkHistoricalDataRetrievalArgs{
+// 				DefaultDurations: DirectSplunkHistoricalDataRetrievalDefaultDurationArray{
+// 					&DirectSplunkHistoricalDataRetrievalDefaultDurationArgs{
+// 						Unit:  pulumi.String("Day"),
+// 						Value: pulumi.Int(0),
+// 					},
+// 				},
+// 				MaxDurations: DirectSplunkHistoricalDataRetrievalMaxDurationArray{
+// 					&DirectSplunkHistoricalDataRetrievalMaxDurationArgs{
+// 						Unit:  pulumi.String("Day"),
+// 						Value: pulumi.Int(30),
+// 					},
+// 				},
+// 			},
+// 			Project: pulumi.String("terraform"),
+// 			SourceOfs: pulumi.StringArray{
+// 				pulumi.String("Metrics"),
+// 				pulumi.String("Services"),
+// 			},
+// 			Url: pulumi.String("https://web.net"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -105,6 +103,7 @@ func NewDirectSplunk(ctx *pulumi.Context,
 	if args.Url == nil {
 		return nil, errors.New("invalid value for required argument 'Url'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DirectSplunk
 	err := ctx.RegisterResource("nobl9:index/directSplunk:DirectSplunk", name, args, &resource, opts...)
 	if err != nil {
@@ -245,7 +244,7 @@ func (i *DirectSplunk) ToDirectSplunkOutputWithContext(ctx context.Context) Dire
 // DirectSplunkArrayInput is an input type that accepts DirectSplunkArray and DirectSplunkArrayOutput values.
 // You can construct a concrete instance of `DirectSplunkArrayInput` via:
 //
-//	DirectSplunkArray{ DirectSplunkArgs{...} }
+//          DirectSplunkArray{ DirectSplunkArgs{...} }
 type DirectSplunkArrayInput interface {
 	pulumi.Input
 
@@ -270,7 +269,7 @@ func (i DirectSplunkArray) ToDirectSplunkArrayOutputWithContext(ctx context.Cont
 // DirectSplunkMapInput is an input type that accepts DirectSplunkMap and DirectSplunkMapOutput values.
 // You can construct a concrete instance of `DirectSplunkMapInput` via:
 //
-//	DirectSplunkMap{ "key": DirectSplunkArgs{...} }
+//          DirectSplunkMap{ "key": DirectSplunkArgs{...} }
 type DirectSplunkMapInput interface {
 	pulumi.Input
 

@@ -21,32 +21,29 @@ import (
 // package main
 //
 // import (
-//
-//	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
+// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 // )
 //
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := nobl9.NewDirectInfluxdb(ctx, "test-influxdb", &nobl9.DirectInfluxdbArgs{
-//				ApiToken:       pulumi.String("secret"),
-//				Description:    pulumi.String("desc"),
-//				OrganizationId: pulumi.String("secret"),
-//				Project:        pulumi.String("terraform"),
-//				SourceOfs: pulumi.StringArray{
-//					pulumi.String("Metrics"),
-//					pulumi.String("Services"),
-//				},
-//				Url: pulumi.String("https://web.net"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// func main() {
+// 	pulumi.Run(func(ctx *pulumi.Context) error {
+// 		_, err := nobl9.NewDirectInfluxdb(ctx, "test-influxdb", &nobl9.DirectInfluxdbArgs{
+// 			ApiToken:       pulumi.String("secret"),
+// 			Description:    pulumi.String("desc"),
+// 			OrganizationId: pulumi.String("secret"),
+// 			Project:        pulumi.String("terraform"),
+// 			SourceOfs: pulumi.StringArray{
+// 				pulumi.String("Metrics"),
+// 				pulumi.String("Services"),
+// 			},
+// 			Url: pulumi.String("https://web.net"),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 		return nil
+// 	})
+// }
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -92,6 +89,7 @@ func NewDirectInfluxdb(ctx *pulumi.Context,
 	if args.Url == nil {
 		return nil, errors.New("invalid value for required argument 'Url'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource DirectInfluxdb
 	err := ctx.RegisterResource("nobl9:index/directInfluxdb:DirectInfluxdb", name, args, &resource, opts...)
 	if err != nil {
@@ -232,7 +230,7 @@ func (i *DirectInfluxdb) ToDirectInfluxdbOutputWithContext(ctx context.Context) 
 // DirectInfluxdbArrayInput is an input type that accepts DirectInfluxdbArray and DirectInfluxdbArrayOutput values.
 // You can construct a concrete instance of `DirectInfluxdbArrayInput` via:
 //
-//	DirectInfluxdbArray{ DirectInfluxdbArgs{...} }
+//          DirectInfluxdbArray{ DirectInfluxdbArgs{...} }
 type DirectInfluxdbArrayInput interface {
 	pulumi.Input
 
@@ -257,7 +255,7 @@ func (i DirectInfluxdbArray) ToDirectInfluxdbArrayOutputWithContext(ctx context.
 // DirectInfluxdbMapInput is an input type that accepts DirectInfluxdbMap and DirectInfluxdbMapOutput values.
 // You can construct a concrete instance of `DirectInfluxdbMapInput` via:
 //
-//	DirectInfluxdbMap{ "key": DirectInfluxdbArgs{...} }
+//          DirectInfluxdbMap{ "key": DirectInfluxdbArgs{...} }
 type DirectInfluxdbMapInput interface {
 	pulumi.Input
 

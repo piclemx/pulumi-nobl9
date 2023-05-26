@@ -72,6 +72,7 @@ func NewSlo(ctx *pulumi.Context,
 	if args.TimeWindow == nil {
 		return nil, errors.New("invalid value for required argument 'TimeWindow'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Slo
 	err := ctx.RegisterResource("nobl9:index/slo:Slo", name, args, &resource, opts...)
 	if err != nil {
@@ -232,7 +233,7 @@ func (i *Slo) ToSloOutputWithContext(ctx context.Context) SloOutput {
 // SloArrayInput is an input type that accepts SloArray and SloArrayOutput values.
 // You can construct a concrete instance of `SloArrayInput` via:
 //
-//	SloArray{ SloArgs{...} }
+//          SloArray{ SloArgs{...} }
 type SloArrayInput interface {
 	pulumi.Input
 
@@ -257,7 +258,7 @@ func (i SloArray) ToSloArrayOutputWithContext(ctx context.Context) SloArrayOutpu
 // SloMapInput is an input type that accepts SloMap and SloMapOutput values.
 // You can construct a concrete instance of `SloMapInput` via:
 //
-//	SloMap{ "key": SloArgs{...} }
+//          SloMap{ "key": SloArgs{...} }
 type SloMapInput interface {
 	pulumi.Input
 

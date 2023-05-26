@@ -41,6 +41,7 @@ func NewAlertMethodOpsgenie(ctx *pulumi.Context,
 	if args.Url == nil {
 		return nil, errors.New("invalid value for required argument 'Url'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource AlertMethodOpsgenie
 	err := ctx.RegisterResource("nobl9:index/alertMethodOpsgenie:AlertMethodOpsgenie", name, args, &resource, opts...)
 	if err != nil {
@@ -153,7 +154,7 @@ func (i *AlertMethodOpsgenie) ToAlertMethodOpsgenieOutputWithContext(ctx context
 // AlertMethodOpsgenieArrayInput is an input type that accepts AlertMethodOpsgenieArray and AlertMethodOpsgenieArrayOutput values.
 // You can construct a concrete instance of `AlertMethodOpsgenieArrayInput` via:
 //
-//	AlertMethodOpsgenieArray{ AlertMethodOpsgenieArgs{...} }
+//          AlertMethodOpsgenieArray{ AlertMethodOpsgenieArgs{...} }
 type AlertMethodOpsgenieArrayInput interface {
 	pulumi.Input
 
@@ -178,7 +179,7 @@ func (i AlertMethodOpsgenieArray) ToAlertMethodOpsgenieArrayOutputWithContext(ct
 // AlertMethodOpsgenieMapInput is an input type that accepts AlertMethodOpsgenieMap and AlertMethodOpsgenieMapOutput values.
 // You can construct a concrete instance of `AlertMethodOpsgenieMapInput` via:
 //
-//	AlertMethodOpsgenieMap{ "key": AlertMethodOpsgenieArgs{...} }
+//          AlertMethodOpsgenieMap{ "key": AlertMethodOpsgenieArgs{...} }
 type AlertMethodOpsgenieMapInput interface {
 	pulumi.Input
 
