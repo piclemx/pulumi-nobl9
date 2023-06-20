@@ -1,5 +1,3 @@
-module github.com/pulumi/pulumi-xyz/sdk
+module github.com/piclemx/pulumi-nobl9/sdk
 
 go 1.17
-
-require github.com/pulumi/pulumi/sdk/v3 v3.38.0
