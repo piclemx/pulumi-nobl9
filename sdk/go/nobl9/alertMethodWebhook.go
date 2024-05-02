@@ -7,7 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -40,7 +41,14 @@ func NewAlertMethodWebhook(ctx *pulumi.Context,
 	if args.Project == nil {
 		return nil, errors.New("invalid value for required argument 'Project'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.Url != nil {
+		args.Url = pulumi.ToSecret(args.Url).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"url",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AlertMethodWebhook
 	err := ctx.RegisterResource("nobl9:index/alertMethodWebhook:AlertMethodWebhook", name, args, &resource, opts...)
 	if err != nil {
@@ -161,7 +169,7 @@ func (i *AlertMethodWebhook) ToAlertMethodWebhookOutputWithContext(ctx context.C
 // AlertMethodWebhookArrayInput is an input type that accepts AlertMethodWebhookArray and AlertMethodWebhookArrayOutput values.
 // You can construct a concrete instance of `AlertMethodWebhookArrayInput` via:
 //
-//          AlertMethodWebhookArray{ AlertMethodWebhookArgs{...} }
+//	AlertMethodWebhookArray{ AlertMethodWebhookArgs{...} }
 type AlertMethodWebhookArrayInput interface {
 	pulumi.Input
 
@@ -186,7 +194,7 @@ func (i AlertMethodWebhookArray) ToAlertMethodWebhookArrayOutputWithContext(ctx 
 // AlertMethodWebhookMapInput is an input type that accepts AlertMethodWebhookMap and AlertMethodWebhookMapOutput values.
 // You can construct a concrete instance of `AlertMethodWebhookMapInput` via:
 //
-//          AlertMethodWebhookMap{ "key": AlertMethodWebhookArgs{...} }
+//	AlertMethodWebhookMap{ "key": AlertMethodWebhookArgs{...} }
 type AlertMethodWebhookMapInput interface {
 	pulumi.Input
 

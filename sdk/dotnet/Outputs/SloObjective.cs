@@ -6,15 +6,16 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class SloObjective
     {
         /// <summary>
-        /// Compares two time series, indicating the ratio of the count of good values to total values.
+        /// Compares two time series, calculating the ratio of either good or bad values to the total number of values. Fill either the 'good' or 'bad' series, but not both.
         /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetric> CountMetrics;
         /// <summary>

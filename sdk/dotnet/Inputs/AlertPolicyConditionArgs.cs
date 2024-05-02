@@ -6,12 +6,19 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Inputs
+namespace Piclemx.Nobl9.Inputs
 {
 
     public sealed class AlertPolicyConditionArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Duration over which the burn rate is evaluated.
+        /// </summary>
+        [Input("alertingWindow")]
+        public Input<string>? AlertingWindow { get; set; }
+
         /// <summary>
         /// Indicates how long a given condition needs to be valid to mark the condition as true.
         /// </summary>
@@ -19,7 +26,7 @@ namespace Pulumi.Nobl9.Inputs
         public Input<string>? LastsFor { get; set; }
 
         /// <summary>
-        /// One of `timeToBurnBudget` | `burnRate` | `burnedBudget`.
+        /// One of `timeToBurnBudget` | `timeToBurnEntireBudget` | `burnRate` | `burnedBudget`.
         /// </summary>
         [Input("measurement", required: true)]
         public Input<string> Measurement { get; set; } = null!;
@@ -31,7 +38,7 @@ namespace Pulumi.Nobl9.Inputs
         public Input<double>? Value { get; set; }
 
         /// <summary>
-        /// Used with `timeToBurnBudget`, indicates when the budget would be exhausted. The expected value is a string in time duration string format.
+        /// Used with `timeToBurnBudget` or `timeToBurnEntireBudget`, indicates when the budget would be exhausted. The expected value is a string in time duration string format.
         /// </summary>
         [Input("valueString")]
         public Input<string>? ValueString { get; set; }

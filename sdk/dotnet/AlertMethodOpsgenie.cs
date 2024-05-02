@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9
+namespace Piclemx.Nobl9
 {
     [Nobl9ResourceType("nobl9:index/alertMethodOpsgenie:AlertMethodOpsgenie")]
     public partial class AlertMethodOpsgenie : global::Pulumi.CustomResource
@@ -71,7 +72,11 @@ namespace Pulumi.Nobl9
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/piclemx/pulumi-nobl9/releases/",
+                PluginDownloadURL = "github://api.github.com/piclemx/pulumi-nobl9",
+                AdditionalSecretOutputs =
+                {
+                    "auth",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -95,11 +100,21 @@ namespace Pulumi.Nobl9
 
     public sealed class AlertMethodOpsgenieArgs : global::Pulumi.ResourceArgs
     {
+        [Input("auth")]
+        private Input<string>? _auth;
+
         /// <summary>
         /// Opsgenie authentication credentials. See [Nobl9 documentation](https://docs.nobl9.com/Alerting/Alert_methods/opsgenie#authentication) for supported formats.
         /// </summary>
-        [Input("auth")]
-        public Input<string>? Auth { get; set; }
+        public Input<string>? Auth
+        {
+            get => _auth;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _auth = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
@@ -139,11 +154,21 @@ namespace Pulumi.Nobl9
 
     public sealed class AlertMethodOpsgenieState : global::Pulumi.ResourceArgs
     {
+        [Input("auth")]
+        private Input<string>? _auth;
+
         /// <summary>
         /// Opsgenie authentication credentials. See [Nobl9 documentation](https://docs.nobl9.com/Alerting/Alert_methods/opsgenie#authentication) for supported formats.
         /// </summary>
-        [Input("auth")]
-        public Input<string>? Auth { get; set; }
+        public Input<string>? Auth
+        {
+            get => _auth;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _auth = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.

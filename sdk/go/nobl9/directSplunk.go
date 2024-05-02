@@ -7,11 +7,12 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Splunk provides software for searching, monitoring, and analyzing machine-generated data via a Web-style interface. Nobl9 connects with Splunk to collect SLI measurements and compare them to SLO targets.
+// Splunk provides software for searching, monitoring, and analyzing machine-generated data via a Web-style interface. Nobl9 connects to Splunk for SLI measurement collection and comparison with SLO targets.
 //
 // For more information, refer to [Splunk Direct | Nobl9 Documentation](https://docs.nobl9.com/Sources/splunk#splunk-direct).
 //
@@ -21,43 +22,42 @@ import (
 // package main
 //
 // import (
-// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := nobl9.NewDirectSplunk(ctx, "test-splunk", &nobl9.DirectSplunkArgs{
-// 			AccessToken: pulumi.String("secret"),
-// 			Description: pulumi.String("desc"),
-// 			HistoricalDataRetrieval: &DirectSplunkHistoricalDataRetrievalArgs{
-// 				DefaultDurations: DirectSplunkHistoricalDataRetrievalDefaultDurationArray{
-// 					&DirectSplunkHistoricalDataRetrievalDefaultDurationArgs{
-// 						Unit:  pulumi.String("Day"),
-// 						Value: pulumi.Int(0),
-// 					},
-// 				},
-// 				MaxDurations: DirectSplunkHistoricalDataRetrievalMaxDurationArray{
-// 					&DirectSplunkHistoricalDataRetrievalMaxDurationArgs{
-// 						Unit:  pulumi.String("Day"),
-// 						Value: pulumi.Int(30),
-// 					},
-// 				},
-// 			},
-// 			Project: pulumi.String("terraform"),
-// 			SourceOfs: pulumi.StringArray{
-// 				pulumi.String("Metrics"),
-// 				pulumi.String("Services"),
-// 			},
-// 			Url: pulumi.String("https://web.net"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := nobl9.NewDirectSplunk(ctx, "test-splunk", &nobl9.DirectSplunkArgs{
+//				AccessToken: pulumi.String("secret"),
+//				Description: pulumi.String("desc"),
+//				HistoricalDataRetrieval: &nobl9.DirectSplunkHistoricalDataRetrievalArgs{
+//					DefaultDurations: nobl9.DirectSplunkHistoricalDataRetrievalDefaultDurationArray{
+//						&nobl9.DirectSplunkHistoricalDataRetrievalDefaultDurationArgs{
+//							Unit:  pulumi.String("Day"),
+//							Value: pulumi.Int(0),
+//						},
+//					},
+//					MaxDurations: nobl9.DirectSplunkHistoricalDataRetrievalMaxDurationArray{
+//						&nobl9.DirectSplunkHistoricalDataRetrievalMaxDurationArgs{
+//							Unit:  pulumi.String("Day"),
+//							Value: pulumi.Int(30),
+//						},
+//					},
+//				},
+//				LogCollectionEnabled: pulumi.Bool(true),
+//				Project:              pulumi.String("terraform"),
+//				Url:                  pulumi.String("https://web.net"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -72,14 +72,20 @@ type DirectSplunk struct {
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrOutput `pulumi:"displayName"`
 	// [Replay configuration documentation](https://docs.nobl9.com/replay)
-	HistoricalDataRetrieval DirectSplunkHistoricalDataRetrievalPtrOutput `pulumi:"historicalDataRetrieval"`
+	HistoricalDataRetrieval DirectSplunkHistoricalDataRetrievalOutput `pulumi:"historicalDataRetrieval"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrOutput `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringOutput `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-	QueryDelay DirectSplunkQueryDelayPtrOutput `pulumi:"queryDelay"`
-	// Source of Metrics and/or Services.
+	QueryDelay DirectSplunkQueryDelayOutput `pulumi:"queryDelay"`
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringOutput `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayOutput `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status pulumi.StringOutput `pulumi:"status"`
@@ -97,13 +103,17 @@ func NewDirectSplunk(ctx *pulumi.Context,
 	if args.Project == nil {
 		return nil, errors.New("invalid value for required argument 'Project'")
 	}
-	if args.SourceOfs == nil {
-		return nil, errors.New("invalid value for required argument 'SourceOfs'")
-	}
 	if args.Url == nil {
 		return nil, errors.New("invalid value for required argument 'Url'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.AccessToken != nil {
+		args.AccessToken = pulumi.ToSecret(args.AccessToken).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"accessToken",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DirectSplunk
 	err := ctx.RegisterResource("nobl9:index/directSplunk:DirectSplunk", name, args, &resource, opts...)
 	if err != nil {
@@ -134,13 +144,19 @@ type directSplunkState struct {
 	DisplayName *string `pulumi:"displayName"`
 	// [Replay configuration documentation](https://docs.nobl9.com/replay)
 	HistoricalDataRetrieval *DirectSplunkHistoricalDataRetrieval `pulumi:"historicalDataRetrieval"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project *string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectSplunkQueryDelay `pulumi:"queryDelay"`
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status *string `pulumi:"status"`
@@ -157,13 +173,19 @@ type DirectSplunkState struct {
 	DisplayName pulumi.StringPtrInput
 	// [Replay configuration documentation](https://docs.nobl9.com/replay)
 	HistoricalDataRetrieval DirectSplunkHistoricalDataRetrievalPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringPtrInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectSplunkQueryDelayPtrInput
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 	// The status of the created direct.
 	Status pulumi.StringPtrInput
@@ -184,13 +206,19 @@ type directSplunkArgs struct {
 	DisplayName *string `pulumi:"displayName"`
 	// [Replay configuration documentation](https://docs.nobl9.com/replay)
 	HistoricalDataRetrieval *DirectSplunkHistoricalDataRetrieval `pulumi:"historicalDataRetrieval"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectSplunkQueryDelay `pulumi:"queryDelay"`
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 	// Base API URL to the Splunk Search app.
 	Url string `pulumi:"url"`
@@ -206,13 +234,19 @@ type DirectSplunkArgs struct {
 	DisplayName pulumi.StringPtrInput
 	// [Replay configuration documentation](https://docs.nobl9.com/replay)
 	HistoricalDataRetrieval DirectSplunkHistoricalDataRetrievalPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectSplunkQueryDelayPtrInput
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 	// Base API URL to the Splunk Search app.
 	Url pulumi.StringInput
@@ -244,7 +278,7 @@ func (i *DirectSplunk) ToDirectSplunkOutputWithContext(ctx context.Context) Dire
 // DirectSplunkArrayInput is an input type that accepts DirectSplunkArray and DirectSplunkArrayOutput values.
 // You can construct a concrete instance of `DirectSplunkArrayInput` via:
 //
-//          DirectSplunkArray{ DirectSplunkArgs{...} }
+//	DirectSplunkArray{ DirectSplunkArgs{...} }
 type DirectSplunkArrayInput interface {
 	pulumi.Input
 
@@ -269,7 +303,7 @@ func (i DirectSplunkArray) ToDirectSplunkArrayOutputWithContext(ctx context.Cont
 // DirectSplunkMapInput is an input type that accepts DirectSplunkMap and DirectSplunkMapOutput values.
 // You can construct a concrete instance of `DirectSplunkMapInput` via:
 //
-//          DirectSplunkMap{ "key": DirectSplunkArgs{...} }
+//	DirectSplunkMap{ "key": DirectSplunkArgs{...} }
 type DirectSplunkMapInput interface {
 	pulumi.Input
 
@@ -321,8 +355,13 @@ func (o DirectSplunkOutput) DisplayName() pulumi.StringPtrOutput {
 }
 
 // [Replay configuration documentation](https://docs.nobl9.com/replay)
-func (o DirectSplunkOutput) HistoricalDataRetrieval() DirectSplunkHistoricalDataRetrievalPtrOutput {
-	return o.ApplyT(func(v *DirectSplunk) DirectSplunkHistoricalDataRetrievalPtrOutput { return v.HistoricalDataRetrieval }).(DirectSplunkHistoricalDataRetrievalPtrOutput)
+func (o DirectSplunkOutput) HistoricalDataRetrieval() DirectSplunkHistoricalDataRetrievalOutput {
+	return o.ApplyT(func(v *DirectSplunk) DirectSplunkHistoricalDataRetrievalOutput { return v.HistoricalDataRetrieval }).(DirectSplunkHistoricalDataRetrievalOutput)
+}
+
+// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+func (o DirectSplunkOutput) LogCollectionEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DirectSplunk) pulumi.BoolPtrOutput { return v.LogCollectionEnabled }).(pulumi.BoolPtrOutput)
 }
 
 // Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
@@ -336,11 +375,18 @@ func (o DirectSplunkOutput) Project() pulumi.StringOutput {
 }
 
 // [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-func (o DirectSplunkOutput) QueryDelay() DirectSplunkQueryDelayPtrOutput {
-	return o.ApplyT(func(v *DirectSplunk) DirectSplunkQueryDelayPtrOutput { return v.QueryDelay }).(DirectSplunkQueryDelayPtrOutput)
+func (o DirectSplunkOutput) QueryDelay() DirectSplunkQueryDelayOutput {
+	return o.ApplyT(func(v *DirectSplunk) DirectSplunkQueryDelayOutput { return v.QueryDelay }).(DirectSplunkQueryDelayOutput)
 }
 
-// Source of Metrics and/or Services.
+// Release channel of the created datasource [stable/beta]
+func (o DirectSplunkOutput) ReleaseChannel() pulumi.StringOutput {
+	return o.ApplyT(func(v *DirectSplunk) pulumi.StringOutput { return v.ReleaseChannel }).(pulumi.StringOutput)
+}
+
+// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+//
+// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 func (o DirectSplunkOutput) SourceOfs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *DirectSplunk) pulumi.StringArrayOutput { return v.SourceOfs }).(pulumi.StringArrayOutput)
 }

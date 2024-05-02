@@ -6,34 +6,109 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class SloObjectiveCountMetricTotal
     {
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalAmazonPrometheus> AmazonPrometheuses;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalAppdynamic> Appdynamics;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+        /// </summary>
+        public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalAzureMonitor> AzureMonitors;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalBigquery> Bigqueries;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalCloudwatch> Cloudwatches;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalDatadog> Datadogs;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalDynatrace> Dynatraces;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalElasticsearch> Elasticsearches;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalGcm> Gcms;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalGrafanaLoki> GrafanaLokis;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalGraphite> Graphites;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+        /// </summary>
+        public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalHoneycomb> Honeycombs;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalInfluxdb> Influxdbs;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalInstana> Instanas;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalLightstep> Lightsteps;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalNewrelic> Newrelics;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalOpentsdb> Opentsdbs;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalPingdom> Pingdoms;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalPrometheus> Prometheuses;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalRedshift> Redshifts;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalSplunkObservability> SplunkObservabilities;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalSplunk> Splunks;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalSumologic> Sumologics;
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalThousandeye> Thousandeyes;
 
         [OutputConstructor]
@@ -41,6 +116,8 @@ namespace Pulumi.Nobl9.Outputs
             ImmutableArray<Outputs.SloObjectiveCountMetricTotalAmazonPrometheus> amazonPrometheuses,
 
             ImmutableArray<Outputs.SloObjectiveCountMetricTotalAppdynamic> appdynamics,
+
+            ImmutableArray<Outputs.SloObjectiveCountMetricTotalAzureMonitor> azureMonitors,
 
             ImmutableArray<Outputs.SloObjectiveCountMetricTotalBigquery> bigqueries,
 
@@ -57,6 +134,8 @@ namespace Pulumi.Nobl9.Outputs
             ImmutableArray<Outputs.SloObjectiveCountMetricTotalGrafanaLoki> grafanaLokis,
 
             ImmutableArray<Outputs.SloObjectiveCountMetricTotalGraphite> graphites,
+
+            ImmutableArray<Outputs.SloObjectiveCountMetricTotalHoneycomb> honeycombs,
 
             ImmutableArray<Outputs.SloObjectiveCountMetricTotalInfluxdb> influxdbs,
 
@@ -84,6 +163,7 @@ namespace Pulumi.Nobl9.Outputs
         {
             AmazonPrometheuses = amazonPrometheuses;
             Appdynamics = appdynamics;
+            AzureMonitors = azureMonitors;
             Bigqueries = bigqueries;
             Cloudwatches = cloudwatches;
             Datadogs = datadogs;
@@ -92,6 +172,7 @@ namespace Pulumi.Nobl9.Outputs
             Gcms = gcms;
             GrafanaLokis = grafanaLokis;
             Graphites = graphites;
+            Honeycombs = honeycombs;
             Influxdbs = influxdbs;
             Instanas = instanas;
             Lightsteps = lightsteps;

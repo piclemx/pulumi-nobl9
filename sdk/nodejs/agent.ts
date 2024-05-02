@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
@@ -16,7 +17,7 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as nobl9 from "@pulumi/nobl9";
+ * import * as nobl9 from "@piclemx/pulumi-nobl9";
  *
  * const thisProject = new nobl9.Project("thisProject", {
  *     displayName: "Test N9 Terraform",
@@ -24,11 +25,8 @@ import * as utilities from "./utilities";
  * });
  * const thisAgent = new nobl9.Agent("thisAgent", {
  *     project: thisProject.name,
- *     sourceOfs: [
- *         "Metrics",
- *         "Services",
- *     ],
  *     agentType: "prometheus",
+ *     releaseChannel: "stable",
  *     prometheusConfig: {
  *         url: "http://web.net",
  *     },
@@ -79,6 +77,10 @@ export class Agent extends pulumi.CustomResource {
      */
     public readonly appdynamicsConfig!: pulumi.Output<outputs.AgentAppdynamicsConfig | undefined>;
     /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#azure-monitor-agent)
+     */
+    public readonly azureMonitorConfig!: pulumi.Output<outputs.AgentAzureMonitorConfig | undefined>;
+    /**
      * [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#bigquery-agent)
      */
     public readonly bigqueryConfig!: pulumi.Output<outputs.AgentBigqueryConfig | undefined>;
@@ -127,6 +129,14 @@ export class Agent extends pulumi.CustomResource {
      */
     public readonly graphiteConfig!: pulumi.Output<outputs.AgentGraphiteConfig | undefined>;
     /**
+     * [Replay configuration documentation](https://docs.nobl9.com/replay)
+     */
+    public readonly historicalDataRetrieval!: pulumi.Output<outputs.AgentHistoricalDataRetrieval>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#hc-agent)
+     */
+    public readonly honeycombConfig!: pulumi.Output<outputs.AgentHoneycombConfig | undefined>;
+    /**
      * [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#influxdb-agent)
      */
     public readonly influxdbConfig!: pulumi.Output<outputs.AgentInfluxdbConfig | undefined>;
@@ -155,7 +165,7 @@ export class Agent extends pulumi.CustomResource {
      */
     public readonly pingdomConfig!: pulumi.Output<outputs.AgentPingdomConfig | undefined>;
     /**
-     * Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+     * Name of the Lightstep project.
      */
     public readonly project!: pulumi.Output<string>;
     /**
@@ -165,15 +175,21 @@ export class Agent extends pulumi.CustomResource {
     /**
      * [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
      */
-    public readonly queryDelay!: pulumi.Output<outputs.AgentQueryDelay | undefined>;
+    public readonly queryDelay!: pulumi.Output<outputs.AgentQueryDelay>;
     /**
      * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/?_highlight=redshift#amazon-redshift-agent)
      */
     public readonly redshiftConfig!: pulumi.Output<outputs.AgentRedshiftConfig | undefined>;
     /**
-     * Source of Metrics and/or Services.
+     * Release channel of the created datasource [stable/beta]
      */
-    public readonly sourceOfs!: pulumi.Output<string[]>;
+    public readonly releaseChannel!: pulumi.Output<string>;
+    /**
+     * This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+     *
+     * @deprecated 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
+     */
+    public readonly sourceOfs!: pulumi.Output<string[] | undefined>;
     /**
      * [Configuration documentation](https://docs.nobl9.com/Sources/splunk#splunk-agent)
      */
@@ -211,6 +227,7 @@ export class Agent extends pulumi.CustomResource {
             resourceInputs["agentType"] = state ? state.agentType : undefined;
             resourceInputs["amazonPrometheusConfig"] = state ? state.amazonPrometheusConfig : undefined;
             resourceInputs["appdynamicsConfig"] = state ? state.appdynamicsConfig : undefined;
+            resourceInputs["azureMonitorConfig"] = state ? state.azureMonitorConfig : undefined;
             resourceInputs["bigqueryConfig"] = state ? state.bigqueryConfig : undefined;
             resourceInputs["clientId"] = state ? state.clientId : undefined;
             resourceInputs["clientSecret"] = state ? state.clientSecret : undefined;
@@ -223,6 +240,8 @@ export class Agent extends pulumi.CustomResource {
             resourceInputs["gcmConfig"] = state ? state.gcmConfig : undefined;
             resourceInputs["grafanaLokiConfig"] = state ? state.grafanaLokiConfig : undefined;
             resourceInputs["graphiteConfig"] = state ? state.graphiteConfig : undefined;
+            resourceInputs["historicalDataRetrieval"] = state ? state.historicalDataRetrieval : undefined;
+            resourceInputs["honeycombConfig"] = state ? state.honeycombConfig : undefined;
             resourceInputs["influxdbConfig"] = state ? state.influxdbConfig : undefined;
             resourceInputs["instanaConfig"] = state ? state.instanaConfig : undefined;
             resourceInputs["lightstepConfig"] = state ? state.lightstepConfig : undefined;
@@ -234,6 +253,7 @@ export class Agent extends pulumi.CustomResource {
             resourceInputs["prometheusConfig"] = state ? state.prometheusConfig : undefined;
             resourceInputs["queryDelay"] = state ? state.queryDelay : undefined;
             resourceInputs["redshiftConfig"] = state ? state.redshiftConfig : undefined;
+            resourceInputs["releaseChannel"] = state ? state.releaseChannel : undefined;
             resourceInputs["sourceOfs"] = state ? state.sourceOfs : undefined;
             resourceInputs["splunkConfig"] = state ? state.splunkConfig : undefined;
             resourceInputs["splunkObservabilityConfig"] = state ? state.splunkObservabilityConfig : undefined;
@@ -248,12 +268,10 @@ export class Agent extends pulumi.CustomResource {
             if ((!args || args.project === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'project'");
             }
-            if ((!args || args.sourceOfs === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'sourceOfs'");
-            }
             resourceInputs["agentType"] = args ? args.agentType : undefined;
             resourceInputs["amazonPrometheusConfig"] = args ? args.amazonPrometheusConfig : undefined;
             resourceInputs["appdynamicsConfig"] = args ? args.appdynamicsConfig : undefined;
+            resourceInputs["azureMonitorConfig"] = args ? args.azureMonitorConfig : undefined;
             resourceInputs["bigqueryConfig"] = args ? args.bigqueryConfig : undefined;
             resourceInputs["cloudwatchConfig"] = args ? args.cloudwatchConfig : undefined;
             resourceInputs["datadogConfig"] = args ? args.datadogConfig : undefined;
@@ -264,6 +282,8 @@ export class Agent extends pulumi.CustomResource {
             resourceInputs["gcmConfig"] = args ? args.gcmConfig : undefined;
             resourceInputs["grafanaLokiConfig"] = args ? args.grafanaLokiConfig : undefined;
             resourceInputs["graphiteConfig"] = args ? args.graphiteConfig : undefined;
+            resourceInputs["historicalDataRetrieval"] = args ? args.historicalDataRetrieval : undefined;
+            resourceInputs["honeycombConfig"] = args ? args.honeycombConfig : undefined;
             resourceInputs["influxdbConfig"] = args ? args.influxdbConfig : undefined;
             resourceInputs["instanaConfig"] = args ? args.instanaConfig : undefined;
             resourceInputs["lightstepConfig"] = args ? args.lightstepConfig : undefined;
@@ -275,6 +295,7 @@ export class Agent extends pulumi.CustomResource {
             resourceInputs["prometheusConfig"] = args ? args.prometheusConfig : undefined;
             resourceInputs["queryDelay"] = args ? args.queryDelay : undefined;
             resourceInputs["redshiftConfig"] = args ? args.redshiftConfig : undefined;
+            resourceInputs["releaseChannel"] = args ? args.releaseChannel : undefined;
             resourceInputs["sourceOfs"] = args ? args.sourceOfs : undefined;
             resourceInputs["splunkConfig"] = args ? args.splunkConfig : undefined;
             resourceInputs["splunkObservabilityConfig"] = args ? args.splunkObservabilityConfig : undefined;
@@ -305,6 +326,10 @@ export interface AgentState {
      * [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#appdynamics-agent)
      */
     appdynamicsConfig?: pulumi.Input<inputs.AgentAppdynamicsConfig>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#azure-monitor-agent)
+     */
+    azureMonitorConfig?: pulumi.Input<inputs.AgentAzureMonitorConfig>;
     /**
      * [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#bigquery-agent)
      */
@@ -354,6 +379,14 @@ export interface AgentState {
      */
     graphiteConfig?: pulumi.Input<inputs.AgentGraphiteConfig>;
     /**
+     * [Replay configuration documentation](https://docs.nobl9.com/replay)
+     */
+    historicalDataRetrieval?: pulumi.Input<inputs.AgentHistoricalDataRetrieval>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#hc-agent)
+     */
+    honeycombConfig?: pulumi.Input<inputs.AgentHoneycombConfig>;
+    /**
      * [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#influxdb-agent)
      */
     influxdbConfig?: pulumi.Input<inputs.AgentInfluxdbConfig>;
@@ -382,7 +415,7 @@ export interface AgentState {
      */
     pingdomConfig?: pulumi.Input<inputs.AgentPingdomConfig>;
     /**
-     * Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+     * Name of the Lightstep project.
      */
     project?: pulumi.Input<string>;
     /**
@@ -398,7 +431,13 @@ export interface AgentState {
      */
     redshiftConfig?: pulumi.Input<inputs.AgentRedshiftConfig>;
     /**
-     * Source of Metrics and/or Services.
+     * Release channel of the created datasource [stable/beta]
+     */
+    releaseChannel?: pulumi.Input<string>;
+    /**
+     * This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+     *
+     * @deprecated 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
      */
     sourceOfs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -440,6 +479,10 @@ export interface AgentArgs {
      */
     appdynamicsConfig?: pulumi.Input<inputs.AgentAppdynamicsConfig>;
     /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#azure-monitor-agent)
+     */
+    azureMonitorConfig?: pulumi.Input<inputs.AgentAzureMonitorConfig>;
+    /**
      * [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#bigquery-agent)
      */
     bigqueryConfig?: pulumi.Input<inputs.AgentBigqueryConfig>;
@@ -480,6 +523,14 @@ export interface AgentArgs {
      */
     graphiteConfig?: pulumi.Input<inputs.AgentGraphiteConfig>;
     /**
+     * [Replay configuration documentation](https://docs.nobl9.com/replay)
+     */
+    historicalDataRetrieval?: pulumi.Input<inputs.AgentHistoricalDataRetrieval>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#hc-agent)
+     */
+    honeycombConfig?: pulumi.Input<inputs.AgentHoneycombConfig>;
+    /**
      * [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#influxdb-agent)
      */
     influxdbConfig?: pulumi.Input<inputs.AgentInfluxdbConfig>;
@@ -508,7 +559,7 @@ export interface AgentArgs {
      */
     pingdomConfig?: pulumi.Input<inputs.AgentPingdomConfig>;
     /**
-     * Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+     * Name of the Lightstep project.
      */
     project: pulumi.Input<string>;
     /**
@@ -524,9 +575,15 @@ export interface AgentArgs {
      */
     redshiftConfig?: pulumi.Input<inputs.AgentRedshiftConfig>;
     /**
-     * Source of Metrics and/or Services.
+     * Release channel of the created datasource [stable/beta]
      */
-    sourceOfs: pulumi.Input<pulumi.Input<string>[]>;
+    releaseChannel?: pulumi.Input<string>;
+    /**
+     * This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+     *
+     * @deprecated 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
+     */
+    sourceOfs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * [Configuration documentation](https://docs.nobl9.com/Sources/splunk#splunk-agent)
      */

@@ -7,11 +7,12 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// ThousandEyes monitors the performance of both local and wide-area networks. ThousandEyes combines Internet and WAN visibility, browser synthetics, end-user monitoring, and Internet Insights to deliver a holistic view of your hybrid digital ecosystem – across cloud, SaaS, and the Internet. It's a SaaS-based tool that helps troubleshoot application delivery and maps Internet performance. Nobl9 connects with ThousandEyes to collect SLI measurements and compare them to SLO targets.
+// ThousandEyes monitors the performance of both local and wide-area networks. ThousandEyes combines Internet and WAN visibility, browser synthetics, end-user monitoring, and Internet Insights to deliver a holistic view of your hybrid digital ecosystem – across cloud, SaaS, and the Internet. It's a SaaS-based tool that helps troubleshoot application delivery and maps Internet performance. Nobl9 connects to ThousandEyes for SLI measurement collection and comparison with SLO targets.
 //
 // For more information, refer to [ThousandEyes Direct | Nobl9 Documentation](https://docs.nobl9.com/Sources/thousandeyes#thousandeyes-direct).
 //
@@ -21,27 +22,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := nobl9.NewDirectThousandeyes(ctx, "test-thousandeyes", &nobl9.DirectThousandeyesArgs{
-// 			Description:      pulumi.String("desc"),
-// 			OauthBearerToken: pulumi.String("secret"),
-// 			Project:          pulumi.String("terraform"),
-// 			SourceOfs: pulumi.StringArray{
-// 				pulumi.String("Metrics"),
-// 				pulumi.String("Services"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := nobl9.NewDirectThousandeyes(ctx, "test-thousandeyes", &nobl9.DirectThousandeyesArgs{
+//				Description:          pulumi.String("desc"),
+//				LogCollectionEnabled: pulumi.Bool(true),
+//				OauthBearerToken:     pulumi.String("secret"),
+//				Project:              pulumi.String("terraform"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -53,6 +54,8 @@ type DirectThousandeyes struct {
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrOutput `pulumi:"displayName"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrOutput `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringOutput `pulumi:"name"`
 	// [required] | ThousandEyes OAuth Bearer Token.
@@ -60,8 +63,12 @@ type DirectThousandeyes struct {
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringOutput `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-	QueryDelay DirectThousandeyesQueryDelayPtrOutput `pulumi:"queryDelay"`
-	// Source of Metrics and/or Services.
+	QueryDelay DirectThousandeyesQueryDelayOutput `pulumi:"queryDelay"`
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringOutput `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayOutput `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status pulumi.StringOutput `pulumi:"status"`
@@ -77,10 +84,14 @@ func NewDirectThousandeyes(ctx *pulumi.Context,
 	if args.Project == nil {
 		return nil, errors.New("invalid value for required argument 'Project'")
 	}
-	if args.SourceOfs == nil {
-		return nil, errors.New("invalid value for required argument 'SourceOfs'")
+	if args.OauthBearerToken != nil {
+		args.OauthBearerToken = pulumi.ToSecret(args.OauthBearerToken).(pulumi.StringPtrInput)
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"oauthBearerToken",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DirectThousandeyes
 	err := ctx.RegisterResource("nobl9:index/directThousandeyes:DirectThousandeyes", name, args, &resource, opts...)
 	if err != nil {
@@ -107,6 +118,8 @@ type directThousandeyesState struct {
 	Description *string `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName *string `pulumi:"displayName"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// [required] | ThousandEyes OAuth Bearer Token.
@@ -115,7 +128,11 @@ type directThousandeyesState struct {
 	Project *string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectThousandeyesQueryDelay `pulumi:"queryDelay"`
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status *string `pulumi:"status"`
@@ -126,6 +143,8 @@ type DirectThousandeyesState struct {
 	Description pulumi.StringPtrInput
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// [required] | ThousandEyes OAuth Bearer Token.
@@ -134,7 +153,11 @@ type DirectThousandeyesState struct {
 	Project pulumi.StringPtrInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectThousandeyesQueryDelayPtrInput
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 	// The status of the created direct.
 	Status pulumi.StringPtrInput
@@ -149,6 +172,8 @@ type directThousandeyesArgs struct {
 	Description *string `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName *string `pulumi:"displayName"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// [required] | ThousandEyes OAuth Bearer Token.
@@ -157,7 +182,11 @@ type directThousandeyesArgs struct {
 	Project string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectThousandeyesQueryDelay `pulumi:"queryDelay"`
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 }
 
@@ -167,6 +196,8 @@ type DirectThousandeyesArgs struct {
 	Description pulumi.StringPtrInput
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// [required] | ThousandEyes OAuth Bearer Token.
@@ -175,7 +206,11 @@ type DirectThousandeyesArgs struct {
 	Project pulumi.StringInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectThousandeyesQueryDelayPtrInput
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 }
 
@@ -205,7 +240,7 @@ func (i *DirectThousandeyes) ToDirectThousandeyesOutputWithContext(ctx context.C
 // DirectThousandeyesArrayInput is an input type that accepts DirectThousandeyesArray and DirectThousandeyesArrayOutput values.
 // You can construct a concrete instance of `DirectThousandeyesArrayInput` via:
 //
-//          DirectThousandeyesArray{ DirectThousandeyesArgs{...} }
+//	DirectThousandeyesArray{ DirectThousandeyesArgs{...} }
 type DirectThousandeyesArrayInput interface {
 	pulumi.Input
 
@@ -230,7 +265,7 @@ func (i DirectThousandeyesArray) ToDirectThousandeyesArrayOutputWithContext(ctx 
 // DirectThousandeyesMapInput is an input type that accepts DirectThousandeyesMap and DirectThousandeyesMapOutput values.
 // You can construct a concrete instance of `DirectThousandeyesMapInput` via:
 //
-//          DirectThousandeyesMap{ "key": DirectThousandeyesArgs{...} }
+//	DirectThousandeyesMap{ "key": DirectThousandeyesArgs{...} }
 type DirectThousandeyesMapInput interface {
 	pulumi.Input
 
@@ -276,6 +311,11 @@ func (o DirectThousandeyesOutput) DisplayName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DirectThousandeyes) pulumi.StringPtrOutput { return v.DisplayName }).(pulumi.StringPtrOutput)
 }
 
+// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+func (o DirectThousandeyesOutput) LogCollectionEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DirectThousandeyes) pulumi.BoolPtrOutput { return v.LogCollectionEnabled }).(pulumi.BoolPtrOutput)
+}
+
 // Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 func (o DirectThousandeyesOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *DirectThousandeyes) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
@@ -292,11 +332,18 @@ func (o DirectThousandeyesOutput) Project() pulumi.StringOutput {
 }
 
 // [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-func (o DirectThousandeyesOutput) QueryDelay() DirectThousandeyesQueryDelayPtrOutput {
-	return o.ApplyT(func(v *DirectThousandeyes) DirectThousandeyesQueryDelayPtrOutput { return v.QueryDelay }).(DirectThousandeyesQueryDelayPtrOutput)
+func (o DirectThousandeyesOutput) QueryDelay() DirectThousandeyesQueryDelayOutput {
+	return o.ApplyT(func(v *DirectThousandeyes) DirectThousandeyesQueryDelayOutput { return v.QueryDelay }).(DirectThousandeyesQueryDelayOutput)
 }
 
-// Source of Metrics and/or Services.
+// Release channel of the created datasource [stable/beta]
+func (o DirectThousandeyesOutput) ReleaseChannel() pulumi.StringOutput {
+	return o.ApplyT(func(v *DirectThousandeyes) pulumi.StringOutput { return v.ReleaseChannel }).(pulumi.StringOutput)
+}
+
+// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+//
+// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 func (o DirectThousandeyesOutput) SourceOfs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *DirectThousandeyes) pulumi.StringArrayOutput { return v.SourceOfs }).(pulumi.StringArrayOutput)
 }

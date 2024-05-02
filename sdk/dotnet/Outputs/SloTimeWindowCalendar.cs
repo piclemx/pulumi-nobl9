@@ -6,14 +6,21 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class SloTimeWindowCalendar
     {
+        /// <summary>
+        /// Date of the start
+        /// </summary>
         public readonly string StartTime;
+        /// <summary>
+        /// Timezone name in IANA Time Zone Database
+        /// </summary>
         public readonly string TimeZone;
 
         [OutputConstructor]

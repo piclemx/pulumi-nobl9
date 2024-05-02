@@ -100,7 +100,7 @@ export class AlertMethodJira extends pulumi.CustomResource {
             if ((!args || args.username === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'username'");
             }
-            resourceInputs["apitoken"] = args ? args.apitoken : undefined;
+            resourceInputs["apitoken"] = args?.apitoken ? pulumi.secret(args.apitoken) : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["displayName"] = args ? args.displayName : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
@@ -110,6 +110,8 @@ export class AlertMethodJira extends pulumi.CustomResource {
             resourceInputs["username"] = args ? args.username : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["apitoken"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(AlertMethodJira.__pulumiType, name, resourceInputs, opts);
     }
 }

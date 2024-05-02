@@ -22,7 +22,7 @@ export class Provider extends pulumi.ProviderResource {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === Provider.__pulumiType;
+        return obj['__pulumiType'] === "pulumi:providers:" + Provider.__pulumiType;
     }
 
     /**
@@ -51,11 +51,11 @@ export class Provider extends pulumi.ProviderResource {
      * Nobl9 [Organization ID](https://docs.nobl9.com/API_Documentation/api-endpoints-for-slo-annotations/#common-headers) that
      * contains resources managed by the Nobl9 Terraform provider.
      */
-    public readonly organization!: pulumi.Output<string>;
+    public readonly organization!: pulumi.Output<string | undefined>;
     /**
      * Nobl9 project used when importing resources.
      */
-    public readonly project!: pulumi.Output<string>;
+    public readonly project!: pulumi.Output<string | undefined>;
 
     /**
      * Create a Provider resource with the given unique name, arguments, and options.
@@ -74,14 +74,8 @@ export class Provider extends pulumi.ProviderResource {
             if ((!args || args.clientSecret === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'clientSecret'");
             }
-            if ((!args || args.organization === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'organization'");
-            }
-            if ((!args || args.project === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'project'");
-            }
             resourceInputs["clientId"] = args ? args.clientId : undefined;
-            resourceInputs["clientSecret"] = args ? args.clientSecret : undefined;
+            resourceInputs["clientSecret"] = args?.clientSecret ? pulumi.secret(args.clientSecret) : undefined;
             resourceInputs["ingestUrl"] = args ? args.ingestUrl : undefined;
             resourceInputs["oktaAuthServer"] = args ? args.oktaAuthServer : undefined;
             resourceInputs["oktaOrgUrl"] = args ? args.oktaOrgUrl : undefined;
@@ -89,6 +83,8 @@ export class Provider extends pulumi.ProviderResource {
             resourceInputs["project"] = args ? args.project : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["clientSecret"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Provider.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -123,9 +119,9 @@ export interface ProviderArgs {
      * Nobl9 [Organization ID](https://docs.nobl9.com/API_Documentation/api-endpoints-for-slo-annotations/#common-headers) that
      * contains resources managed by the Nobl9 Terraform provider.
      */
-    organization: pulumi.Input<string>;
+    organization?: pulumi.Input<string>;
     /**
      * Nobl9 project used when importing resources.
      */
-    project: pulumi.Input<string>;
+    project?: pulumi.Input<string>;
 }

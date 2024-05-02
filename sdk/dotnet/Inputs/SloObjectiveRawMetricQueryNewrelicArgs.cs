@@ -6,12 +6,16 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Inputs
+namespace Piclemx.Nobl9.Inputs
 {
 
     public sealed class SloObjectiveRawMetricQueryNewrelicArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Query for the metrics
+        /// </summary>
         [Input("nrql", required: true)]
         public Input<string> Nrql { get; set; } = null!;
 

@@ -7,8 +7,11 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type AgentAmazonPrometheusConfig struct {
 	// AWS region e.g., eu-central-1
@@ -20,7 +23,7 @@ type AgentAmazonPrometheusConfig struct {
 // AgentAmazonPrometheusConfigInput is an input type that accepts AgentAmazonPrometheusConfigArgs and AgentAmazonPrometheusConfigOutput values.
 // You can construct a concrete instance of `AgentAmazonPrometheusConfigInput` via:
 //
-//          AgentAmazonPrometheusConfigArgs{...}
+//	AgentAmazonPrometheusConfigArgs{...}
 type AgentAmazonPrometheusConfigInput interface {
 	pulumi.Input
 
@@ -58,11 +61,11 @@ func (i AgentAmazonPrometheusConfigArgs) ToAgentAmazonPrometheusConfigPtrOutputW
 // AgentAmazonPrometheusConfigPtrInput is an input type that accepts AgentAmazonPrometheusConfigArgs, AgentAmazonPrometheusConfigPtr and AgentAmazonPrometheusConfigPtrOutput values.
 // You can construct a concrete instance of `AgentAmazonPrometheusConfigPtrInput` via:
 //
-//          AgentAmazonPrometheusConfigArgs{...}
+//	        AgentAmazonPrometheusConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentAmazonPrometheusConfigPtrInput interface {
 	pulumi.Input
 
@@ -174,7 +177,7 @@ type AgentAppdynamicsConfig struct {
 // AgentAppdynamicsConfigInput is an input type that accepts AgentAppdynamicsConfigArgs and AgentAppdynamicsConfigOutput values.
 // You can construct a concrete instance of `AgentAppdynamicsConfigInput` via:
 //
-//          AgentAppdynamicsConfigArgs{...}
+//	AgentAppdynamicsConfigArgs{...}
 type AgentAppdynamicsConfigInput interface {
 	pulumi.Input
 
@@ -210,11 +213,11 @@ func (i AgentAppdynamicsConfigArgs) ToAgentAppdynamicsConfigPtrOutputWithContext
 // AgentAppdynamicsConfigPtrInput is an input type that accepts AgentAppdynamicsConfigArgs, AgentAppdynamicsConfigPtr and AgentAppdynamicsConfigPtrOutput values.
 // You can construct a concrete instance of `AgentAppdynamicsConfigPtrInput` via:
 //
-//          AgentAppdynamicsConfigArgs{...}
+//	        AgentAppdynamicsConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentAppdynamicsConfigPtrInput interface {
 	pulumi.Input
 
@@ -303,13 +306,150 @@ func (o AgentAppdynamicsConfigPtrOutput) Url() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type AgentAzureMonitorConfig struct {
+	// Azure Tenant Id.
+	TenantId string `pulumi:"tenantId"`
+}
+
+// AgentAzureMonitorConfigInput is an input type that accepts AgentAzureMonitorConfigArgs and AgentAzureMonitorConfigOutput values.
+// You can construct a concrete instance of `AgentAzureMonitorConfigInput` via:
+//
+//	AgentAzureMonitorConfigArgs{...}
+type AgentAzureMonitorConfigInput interface {
+	pulumi.Input
+
+	ToAgentAzureMonitorConfigOutput() AgentAzureMonitorConfigOutput
+	ToAgentAzureMonitorConfigOutputWithContext(context.Context) AgentAzureMonitorConfigOutput
+}
+
+type AgentAzureMonitorConfigArgs struct {
+	// Azure Tenant Id.
+	TenantId pulumi.StringInput `pulumi:"tenantId"`
+}
+
+func (AgentAzureMonitorConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AgentAzureMonitorConfig)(nil)).Elem()
+}
+
+func (i AgentAzureMonitorConfigArgs) ToAgentAzureMonitorConfigOutput() AgentAzureMonitorConfigOutput {
+	return i.ToAgentAzureMonitorConfigOutputWithContext(context.Background())
+}
+
+func (i AgentAzureMonitorConfigArgs) ToAgentAzureMonitorConfigOutputWithContext(ctx context.Context) AgentAzureMonitorConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AgentAzureMonitorConfigOutput)
+}
+
+func (i AgentAzureMonitorConfigArgs) ToAgentAzureMonitorConfigPtrOutput() AgentAzureMonitorConfigPtrOutput {
+	return i.ToAgentAzureMonitorConfigPtrOutputWithContext(context.Background())
+}
+
+func (i AgentAzureMonitorConfigArgs) ToAgentAzureMonitorConfigPtrOutputWithContext(ctx context.Context) AgentAzureMonitorConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AgentAzureMonitorConfigOutput).ToAgentAzureMonitorConfigPtrOutputWithContext(ctx)
+}
+
+// AgentAzureMonitorConfigPtrInput is an input type that accepts AgentAzureMonitorConfigArgs, AgentAzureMonitorConfigPtr and AgentAzureMonitorConfigPtrOutput values.
+// You can construct a concrete instance of `AgentAzureMonitorConfigPtrInput` via:
+//
+//	        AgentAzureMonitorConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type AgentAzureMonitorConfigPtrInput interface {
+	pulumi.Input
+
+	ToAgentAzureMonitorConfigPtrOutput() AgentAzureMonitorConfigPtrOutput
+	ToAgentAzureMonitorConfigPtrOutputWithContext(context.Context) AgentAzureMonitorConfigPtrOutput
+}
+
+type agentAzureMonitorConfigPtrType AgentAzureMonitorConfigArgs
+
+func AgentAzureMonitorConfigPtr(v *AgentAzureMonitorConfigArgs) AgentAzureMonitorConfigPtrInput {
+	return (*agentAzureMonitorConfigPtrType)(v)
+}
+
+func (*agentAzureMonitorConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**AgentAzureMonitorConfig)(nil)).Elem()
+}
+
+func (i *agentAzureMonitorConfigPtrType) ToAgentAzureMonitorConfigPtrOutput() AgentAzureMonitorConfigPtrOutput {
+	return i.ToAgentAzureMonitorConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *agentAzureMonitorConfigPtrType) ToAgentAzureMonitorConfigPtrOutputWithContext(ctx context.Context) AgentAzureMonitorConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AgentAzureMonitorConfigPtrOutput)
+}
+
+type AgentAzureMonitorConfigOutput struct{ *pulumi.OutputState }
+
+func (AgentAzureMonitorConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AgentAzureMonitorConfig)(nil)).Elem()
+}
+
+func (o AgentAzureMonitorConfigOutput) ToAgentAzureMonitorConfigOutput() AgentAzureMonitorConfigOutput {
+	return o
+}
+
+func (o AgentAzureMonitorConfigOutput) ToAgentAzureMonitorConfigOutputWithContext(ctx context.Context) AgentAzureMonitorConfigOutput {
+	return o
+}
+
+func (o AgentAzureMonitorConfigOutput) ToAgentAzureMonitorConfigPtrOutput() AgentAzureMonitorConfigPtrOutput {
+	return o.ToAgentAzureMonitorConfigPtrOutputWithContext(context.Background())
+}
+
+func (o AgentAzureMonitorConfigOutput) ToAgentAzureMonitorConfigPtrOutputWithContext(ctx context.Context) AgentAzureMonitorConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v AgentAzureMonitorConfig) *AgentAzureMonitorConfig {
+		return &v
+	}).(AgentAzureMonitorConfigPtrOutput)
+}
+
+// Azure Tenant Id.
+func (o AgentAzureMonitorConfigOutput) TenantId() pulumi.StringOutput {
+	return o.ApplyT(func(v AgentAzureMonitorConfig) string { return v.TenantId }).(pulumi.StringOutput)
+}
+
+type AgentAzureMonitorConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (AgentAzureMonitorConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**AgentAzureMonitorConfig)(nil)).Elem()
+}
+
+func (o AgentAzureMonitorConfigPtrOutput) ToAgentAzureMonitorConfigPtrOutput() AgentAzureMonitorConfigPtrOutput {
+	return o
+}
+
+func (o AgentAzureMonitorConfigPtrOutput) ToAgentAzureMonitorConfigPtrOutputWithContext(ctx context.Context) AgentAzureMonitorConfigPtrOutput {
+	return o
+}
+
+func (o AgentAzureMonitorConfigPtrOutput) Elem() AgentAzureMonitorConfigOutput {
+	return o.ApplyT(func(v *AgentAzureMonitorConfig) AgentAzureMonitorConfig {
+		if v != nil {
+			return *v
+		}
+		var ret AgentAzureMonitorConfig
+		return ret
+	}).(AgentAzureMonitorConfigOutput)
+}
+
+// Azure Tenant Id.
+func (o AgentAzureMonitorConfigPtrOutput) TenantId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AgentAzureMonitorConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TenantId
+	}).(pulumi.StringPtrOutput)
+}
+
 type AgentBigqueryConfig struct {
 }
 
 // AgentBigqueryConfigInput is an input type that accepts AgentBigqueryConfigArgs and AgentBigqueryConfigOutput values.
 // You can construct a concrete instance of `AgentBigqueryConfigInput` via:
 //
-//          AgentBigqueryConfigArgs{...}
+//	AgentBigqueryConfigArgs{...}
 type AgentBigqueryConfigInput interface {
 	pulumi.Input
 
@@ -343,11 +483,11 @@ func (i AgentBigqueryConfigArgs) ToAgentBigqueryConfigPtrOutputWithContext(ctx c
 // AgentBigqueryConfigPtrInput is an input type that accepts AgentBigqueryConfigArgs, AgentBigqueryConfigPtr and AgentBigqueryConfigPtrOutput values.
 // You can construct a concrete instance of `AgentBigqueryConfigPtrInput` via:
 //
-//          AgentBigqueryConfigArgs{...}
+//	        AgentBigqueryConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentBigqueryConfigPtrInput interface {
 	pulumi.Input
 
@@ -427,7 +567,7 @@ type AgentCloudwatchConfig struct {
 // AgentCloudwatchConfigInput is an input type that accepts AgentCloudwatchConfigArgs and AgentCloudwatchConfigOutput values.
 // You can construct a concrete instance of `AgentCloudwatchConfigInput` via:
 //
-//          AgentCloudwatchConfigArgs{...}
+//	AgentCloudwatchConfigArgs{...}
 type AgentCloudwatchConfigInput interface {
 	pulumi.Input
 
@@ -461,11 +601,11 @@ func (i AgentCloudwatchConfigArgs) ToAgentCloudwatchConfigPtrOutputWithContext(c
 // AgentCloudwatchConfigPtrInput is an input type that accepts AgentCloudwatchConfigArgs, AgentCloudwatchConfigPtr and AgentCloudwatchConfigPtrOutput values.
 // You can construct a concrete instance of `AgentCloudwatchConfigPtrInput` via:
 //
-//          AgentCloudwatchConfigArgs{...}
+//	        AgentCloudwatchConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentCloudwatchConfigPtrInput interface {
 	pulumi.Input
 
@@ -547,7 +687,7 @@ type AgentDatadogConfig struct {
 // AgentDatadogConfigInput is an input type that accepts AgentDatadogConfigArgs and AgentDatadogConfigOutput values.
 // You can construct a concrete instance of `AgentDatadogConfigInput` via:
 //
-//          AgentDatadogConfigArgs{...}
+//	AgentDatadogConfigArgs{...}
 type AgentDatadogConfigInput interface {
 	pulumi.Input
 
@@ -583,11 +723,11 @@ func (i AgentDatadogConfigArgs) ToAgentDatadogConfigPtrOutputWithContext(ctx con
 // AgentDatadogConfigPtrInput is an input type that accepts AgentDatadogConfigArgs, AgentDatadogConfigPtr and AgentDatadogConfigPtrOutput values.
 // You can construct a concrete instance of `AgentDatadogConfigPtrInput` via:
 //
-//          AgentDatadogConfigArgs{...}
+//	        AgentDatadogConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentDatadogConfigPtrInput interface {
 	pulumi.Input
 
@@ -684,7 +824,7 @@ type AgentDynatraceConfig struct {
 // AgentDynatraceConfigInput is an input type that accepts AgentDynatraceConfigArgs and AgentDynatraceConfigOutput values.
 // You can construct a concrete instance of `AgentDynatraceConfigInput` via:
 //
-//          AgentDynatraceConfigArgs{...}
+//	AgentDynatraceConfigArgs{...}
 type AgentDynatraceConfigInput interface {
 	pulumi.Input
 
@@ -720,11 +860,11 @@ func (i AgentDynatraceConfigArgs) ToAgentDynatraceConfigPtrOutputWithContext(ctx
 // AgentDynatraceConfigPtrInput is an input type that accepts AgentDynatraceConfigArgs, AgentDynatraceConfigPtr and AgentDynatraceConfigPtrOutput values.
 // You can construct a concrete instance of `AgentDynatraceConfigPtrInput` via:
 //
-//          AgentDynatraceConfigArgs{...}
+//	        AgentDynatraceConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentDynatraceConfigPtrInput interface {
 	pulumi.Input
 
@@ -821,7 +961,7 @@ type AgentElasticsearchConfig struct {
 // AgentElasticsearchConfigInput is an input type that accepts AgentElasticsearchConfigArgs and AgentElasticsearchConfigOutput values.
 // You can construct a concrete instance of `AgentElasticsearchConfigInput` via:
 //
-//          AgentElasticsearchConfigArgs{...}
+//	AgentElasticsearchConfigArgs{...}
 type AgentElasticsearchConfigInput interface {
 	pulumi.Input
 
@@ -857,11 +997,11 @@ func (i AgentElasticsearchConfigArgs) ToAgentElasticsearchConfigPtrOutputWithCon
 // AgentElasticsearchConfigPtrInput is an input type that accepts AgentElasticsearchConfigArgs, AgentElasticsearchConfigPtr and AgentElasticsearchConfigPtrOutput values.
 // You can construct a concrete instance of `AgentElasticsearchConfigPtrInput` via:
 //
-//          AgentElasticsearchConfigArgs{...}
+//	        AgentElasticsearchConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentElasticsearchConfigPtrInput interface {
 	pulumi.Input
 
@@ -956,7 +1096,7 @@ type AgentGcmConfig struct {
 // AgentGcmConfigInput is an input type that accepts AgentGcmConfigArgs and AgentGcmConfigOutput values.
 // You can construct a concrete instance of `AgentGcmConfigInput` via:
 //
-//          AgentGcmConfigArgs{...}
+//	AgentGcmConfigArgs{...}
 type AgentGcmConfigInput interface {
 	pulumi.Input
 
@@ -990,11 +1130,11 @@ func (i AgentGcmConfigArgs) ToAgentGcmConfigPtrOutputWithContext(ctx context.Con
 // AgentGcmConfigPtrInput is an input type that accepts AgentGcmConfigArgs, AgentGcmConfigPtr and AgentGcmConfigPtrOutput values.
 // You can construct a concrete instance of `AgentGcmConfigPtrInput` via:
 //
-//          AgentGcmConfigArgs{...}
+//	        AgentGcmConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentGcmConfigPtrInput interface {
 	pulumi.Input
 
@@ -1076,7 +1216,7 @@ type AgentGrafanaLokiConfig struct {
 // AgentGrafanaLokiConfigInput is an input type that accepts AgentGrafanaLokiConfigArgs and AgentGrafanaLokiConfigOutput values.
 // You can construct a concrete instance of `AgentGrafanaLokiConfigInput` via:
 //
-//          AgentGrafanaLokiConfigArgs{...}
+//	AgentGrafanaLokiConfigArgs{...}
 type AgentGrafanaLokiConfigInput interface {
 	pulumi.Input
 
@@ -1112,11 +1252,11 @@ func (i AgentGrafanaLokiConfigArgs) ToAgentGrafanaLokiConfigPtrOutputWithContext
 // AgentGrafanaLokiConfigPtrInput is an input type that accepts AgentGrafanaLokiConfigArgs, AgentGrafanaLokiConfigPtr and AgentGrafanaLokiConfigPtrOutput values.
 // You can construct a concrete instance of `AgentGrafanaLokiConfigPtrInput` via:
 //
-//          AgentGrafanaLokiConfigArgs{...}
+//	        AgentGrafanaLokiConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentGrafanaLokiConfigPtrInput interface {
 	pulumi.Input
 
@@ -1213,7 +1353,7 @@ type AgentGraphiteConfig struct {
 // AgentGraphiteConfigInput is an input type that accepts AgentGraphiteConfigArgs and AgentGraphiteConfigOutput values.
 // You can construct a concrete instance of `AgentGraphiteConfigInput` via:
 //
-//          AgentGraphiteConfigArgs{...}
+//	AgentGraphiteConfigArgs{...}
 type AgentGraphiteConfigInput interface {
 	pulumi.Input
 
@@ -1249,11 +1389,11 @@ func (i AgentGraphiteConfigArgs) ToAgentGraphiteConfigPtrOutputWithContext(ctx c
 // AgentGraphiteConfigPtrInput is an input type that accepts AgentGraphiteConfigArgs, AgentGraphiteConfigPtr and AgentGraphiteConfigPtrOutput values.
 // You can construct a concrete instance of `AgentGraphiteConfigPtrInput` via:
 //
-//          AgentGraphiteConfigArgs{...}
+//	        AgentGraphiteConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentGraphiteConfigPtrInput interface {
 	pulumi.Input
 
@@ -1342,6 +1482,494 @@ func (o AgentGraphiteConfigPtrOutput) Url() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type AgentHistoricalDataRetrieval struct {
+	// Used by default for any SLOs connected to this data source.
+	DefaultDurations []AgentHistoricalDataRetrievalDefaultDuration `pulumi:"defaultDurations"`
+	// Defines the maximum period for which data can be retrieved.
+	MaxDurations []AgentHistoricalDataRetrievalMaxDuration `pulumi:"maxDurations"`
+}
+
+// AgentHistoricalDataRetrievalInput is an input type that accepts AgentHistoricalDataRetrievalArgs and AgentHistoricalDataRetrievalOutput values.
+// You can construct a concrete instance of `AgentHistoricalDataRetrievalInput` via:
+//
+//	AgentHistoricalDataRetrievalArgs{...}
+type AgentHistoricalDataRetrievalInput interface {
+	pulumi.Input
+
+	ToAgentHistoricalDataRetrievalOutput() AgentHistoricalDataRetrievalOutput
+	ToAgentHistoricalDataRetrievalOutputWithContext(context.Context) AgentHistoricalDataRetrievalOutput
+}
+
+type AgentHistoricalDataRetrievalArgs struct {
+	// Used by default for any SLOs connected to this data source.
+	DefaultDurations AgentHistoricalDataRetrievalDefaultDurationArrayInput `pulumi:"defaultDurations"`
+	// Defines the maximum period for which data can be retrieved.
+	MaxDurations AgentHistoricalDataRetrievalMaxDurationArrayInput `pulumi:"maxDurations"`
+}
+
+func (AgentHistoricalDataRetrievalArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AgentHistoricalDataRetrieval)(nil)).Elem()
+}
+
+func (i AgentHistoricalDataRetrievalArgs) ToAgentHistoricalDataRetrievalOutput() AgentHistoricalDataRetrievalOutput {
+	return i.ToAgentHistoricalDataRetrievalOutputWithContext(context.Background())
+}
+
+func (i AgentHistoricalDataRetrievalArgs) ToAgentHistoricalDataRetrievalOutputWithContext(ctx context.Context) AgentHistoricalDataRetrievalOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AgentHistoricalDataRetrievalOutput)
+}
+
+func (i AgentHistoricalDataRetrievalArgs) ToAgentHistoricalDataRetrievalPtrOutput() AgentHistoricalDataRetrievalPtrOutput {
+	return i.ToAgentHistoricalDataRetrievalPtrOutputWithContext(context.Background())
+}
+
+func (i AgentHistoricalDataRetrievalArgs) ToAgentHistoricalDataRetrievalPtrOutputWithContext(ctx context.Context) AgentHistoricalDataRetrievalPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AgentHistoricalDataRetrievalOutput).ToAgentHistoricalDataRetrievalPtrOutputWithContext(ctx)
+}
+
+// AgentHistoricalDataRetrievalPtrInput is an input type that accepts AgentHistoricalDataRetrievalArgs, AgentHistoricalDataRetrievalPtr and AgentHistoricalDataRetrievalPtrOutput values.
+// You can construct a concrete instance of `AgentHistoricalDataRetrievalPtrInput` via:
+//
+//	        AgentHistoricalDataRetrievalArgs{...}
+//
+//	or:
+//
+//	        nil
+type AgentHistoricalDataRetrievalPtrInput interface {
+	pulumi.Input
+
+	ToAgentHistoricalDataRetrievalPtrOutput() AgentHistoricalDataRetrievalPtrOutput
+	ToAgentHistoricalDataRetrievalPtrOutputWithContext(context.Context) AgentHistoricalDataRetrievalPtrOutput
+}
+
+type agentHistoricalDataRetrievalPtrType AgentHistoricalDataRetrievalArgs
+
+func AgentHistoricalDataRetrievalPtr(v *AgentHistoricalDataRetrievalArgs) AgentHistoricalDataRetrievalPtrInput {
+	return (*agentHistoricalDataRetrievalPtrType)(v)
+}
+
+func (*agentHistoricalDataRetrievalPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**AgentHistoricalDataRetrieval)(nil)).Elem()
+}
+
+func (i *agentHistoricalDataRetrievalPtrType) ToAgentHistoricalDataRetrievalPtrOutput() AgentHistoricalDataRetrievalPtrOutput {
+	return i.ToAgentHistoricalDataRetrievalPtrOutputWithContext(context.Background())
+}
+
+func (i *agentHistoricalDataRetrievalPtrType) ToAgentHistoricalDataRetrievalPtrOutputWithContext(ctx context.Context) AgentHistoricalDataRetrievalPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AgentHistoricalDataRetrievalPtrOutput)
+}
+
+type AgentHistoricalDataRetrievalOutput struct{ *pulumi.OutputState }
+
+func (AgentHistoricalDataRetrievalOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AgentHistoricalDataRetrieval)(nil)).Elem()
+}
+
+func (o AgentHistoricalDataRetrievalOutput) ToAgentHistoricalDataRetrievalOutput() AgentHistoricalDataRetrievalOutput {
+	return o
+}
+
+func (o AgentHistoricalDataRetrievalOutput) ToAgentHistoricalDataRetrievalOutputWithContext(ctx context.Context) AgentHistoricalDataRetrievalOutput {
+	return o
+}
+
+func (o AgentHistoricalDataRetrievalOutput) ToAgentHistoricalDataRetrievalPtrOutput() AgentHistoricalDataRetrievalPtrOutput {
+	return o.ToAgentHistoricalDataRetrievalPtrOutputWithContext(context.Background())
+}
+
+func (o AgentHistoricalDataRetrievalOutput) ToAgentHistoricalDataRetrievalPtrOutputWithContext(ctx context.Context) AgentHistoricalDataRetrievalPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v AgentHistoricalDataRetrieval) *AgentHistoricalDataRetrieval {
+		return &v
+	}).(AgentHistoricalDataRetrievalPtrOutput)
+}
+
+// Used by default for any SLOs connected to this data source.
+func (o AgentHistoricalDataRetrievalOutput) DefaultDurations() AgentHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return o.ApplyT(func(v AgentHistoricalDataRetrieval) []AgentHistoricalDataRetrievalDefaultDuration {
+		return v.DefaultDurations
+	}).(AgentHistoricalDataRetrievalDefaultDurationArrayOutput)
+}
+
+// Defines the maximum period for which data can be retrieved.
+func (o AgentHistoricalDataRetrievalOutput) MaxDurations() AgentHistoricalDataRetrievalMaxDurationArrayOutput {
+	return o.ApplyT(func(v AgentHistoricalDataRetrieval) []AgentHistoricalDataRetrievalMaxDuration { return v.MaxDurations }).(AgentHistoricalDataRetrievalMaxDurationArrayOutput)
+}
+
+type AgentHistoricalDataRetrievalPtrOutput struct{ *pulumi.OutputState }
+
+func (AgentHistoricalDataRetrievalPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**AgentHistoricalDataRetrieval)(nil)).Elem()
+}
+
+func (o AgentHistoricalDataRetrievalPtrOutput) ToAgentHistoricalDataRetrievalPtrOutput() AgentHistoricalDataRetrievalPtrOutput {
+	return o
+}
+
+func (o AgentHistoricalDataRetrievalPtrOutput) ToAgentHistoricalDataRetrievalPtrOutputWithContext(ctx context.Context) AgentHistoricalDataRetrievalPtrOutput {
+	return o
+}
+
+func (o AgentHistoricalDataRetrievalPtrOutput) Elem() AgentHistoricalDataRetrievalOutput {
+	return o.ApplyT(func(v *AgentHistoricalDataRetrieval) AgentHistoricalDataRetrieval {
+		if v != nil {
+			return *v
+		}
+		var ret AgentHistoricalDataRetrieval
+		return ret
+	}).(AgentHistoricalDataRetrievalOutput)
+}
+
+// Used by default for any SLOs connected to this data source.
+func (o AgentHistoricalDataRetrievalPtrOutput) DefaultDurations() AgentHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return o.ApplyT(func(v *AgentHistoricalDataRetrieval) []AgentHistoricalDataRetrievalDefaultDuration {
+		if v == nil {
+			return nil
+		}
+		return v.DefaultDurations
+	}).(AgentHistoricalDataRetrievalDefaultDurationArrayOutput)
+}
+
+// Defines the maximum period for which data can be retrieved.
+func (o AgentHistoricalDataRetrievalPtrOutput) MaxDurations() AgentHistoricalDataRetrievalMaxDurationArrayOutput {
+	return o.ApplyT(func(v *AgentHistoricalDataRetrieval) []AgentHistoricalDataRetrievalMaxDuration {
+		if v == nil {
+			return nil
+		}
+		return v.MaxDurations
+	}).(AgentHistoricalDataRetrievalMaxDurationArrayOutput)
+}
+
+type AgentHistoricalDataRetrievalDefaultDuration struct {
+	// Must be one of Minute, Hour, or Day.
+	Unit string `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value int `pulumi:"value"`
+}
+
+// AgentHistoricalDataRetrievalDefaultDurationInput is an input type that accepts AgentHistoricalDataRetrievalDefaultDurationArgs and AgentHistoricalDataRetrievalDefaultDurationOutput values.
+// You can construct a concrete instance of `AgentHistoricalDataRetrievalDefaultDurationInput` via:
+//
+//	AgentHistoricalDataRetrievalDefaultDurationArgs{...}
+type AgentHistoricalDataRetrievalDefaultDurationInput interface {
+	pulumi.Input
+
+	ToAgentHistoricalDataRetrievalDefaultDurationOutput() AgentHistoricalDataRetrievalDefaultDurationOutput
+	ToAgentHistoricalDataRetrievalDefaultDurationOutputWithContext(context.Context) AgentHistoricalDataRetrievalDefaultDurationOutput
+}
+
+type AgentHistoricalDataRetrievalDefaultDurationArgs struct {
+	// Must be one of Minute, Hour, or Day.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value pulumi.IntInput `pulumi:"value"`
+}
+
+func (AgentHistoricalDataRetrievalDefaultDurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AgentHistoricalDataRetrievalDefaultDuration)(nil)).Elem()
+}
+
+func (i AgentHistoricalDataRetrievalDefaultDurationArgs) ToAgentHistoricalDataRetrievalDefaultDurationOutput() AgentHistoricalDataRetrievalDefaultDurationOutput {
+	return i.ToAgentHistoricalDataRetrievalDefaultDurationOutputWithContext(context.Background())
+}
+
+func (i AgentHistoricalDataRetrievalDefaultDurationArgs) ToAgentHistoricalDataRetrievalDefaultDurationOutputWithContext(ctx context.Context) AgentHistoricalDataRetrievalDefaultDurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AgentHistoricalDataRetrievalDefaultDurationOutput)
+}
+
+// AgentHistoricalDataRetrievalDefaultDurationArrayInput is an input type that accepts AgentHistoricalDataRetrievalDefaultDurationArray and AgentHistoricalDataRetrievalDefaultDurationArrayOutput values.
+// You can construct a concrete instance of `AgentHistoricalDataRetrievalDefaultDurationArrayInput` via:
+//
+//	AgentHistoricalDataRetrievalDefaultDurationArray{ AgentHistoricalDataRetrievalDefaultDurationArgs{...} }
+type AgentHistoricalDataRetrievalDefaultDurationArrayInput interface {
+	pulumi.Input
+
+	ToAgentHistoricalDataRetrievalDefaultDurationArrayOutput() AgentHistoricalDataRetrievalDefaultDurationArrayOutput
+	ToAgentHistoricalDataRetrievalDefaultDurationArrayOutputWithContext(context.Context) AgentHistoricalDataRetrievalDefaultDurationArrayOutput
+}
+
+type AgentHistoricalDataRetrievalDefaultDurationArray []AgentHistoricalDataRetrievalDefaultDurationInput
+
+func (AgentHistoricalDataRetrievalDefaultDurationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AgentHistoricalDataRetrievalDefaultDuration)(nil)).Elem()
+}
+
+func (i AgentHistoricalDataRetrievalDefaultDurationArray) ToAgentHistoricalDataRetrievalDefaultDurationArrayOutput() AgentHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return i.ToAgentHistoricalDataRetrievalDefaultDurationArrayOutputWithContext(context.Background())
+}
+
+func (i AgentHistoricalDataRetrievalDefaultDurationArray) ToAgentHistoricalDataRetrievalDefaultDurationArrayOutputWithContext(ctx context.Context) AgentHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AgentHistoricalDataRetrievalDefaultDurationArrayOutput)
+}
+
+type AgentHistoricalDataRetrievalDefaultDurationOutput struct{ *pulumi.OutputState }
+
+func (AgentHistoricalDataRetrievalDefaultDurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AgentHistoricalDataRetrievalDefaultDuration)(nil)).Elem()
+}
+
+func (o AgentHistoricalDataRetrievalDefaultDurationOutput) ToAgentHistoricalDataRetrievalDefaultDurationOutput() AgentHistoricalDataRetrievalDefaultDurationOutput {
+	return o
+}
+
+func (o AgentHistoricalDataRetrievalDefaultDurationOutput) ToAgentHistoricalDataRetrievalDefaultDurationOutputWithContext(ctx context.Context) AgentHistoricalDataRetrievalDefaultDurationOutput {
+	return o
+}
+
+// Must be one of Minute, Hour, or Day.
+func (o AgentHistoricalDataRetrievalDefaultDurationOutput) Unit() pulumi.StringOutput {
+	return o.ApplyT(func(v AgentHistoricalDataRetrievalDefaultDuration) string { return v.Unit }).(pulumi.StringOutput)
+}
+
+// Must be an integer greater than or equal to 0.
+func (o AgentHistoricalDataRetrievalDefaultDurationOutput) Value() pulumi.IntOutput {
+	return o.ApplyT(func(v AgentHistoricalDataRetrievalDefaultDuration) int { return v.Value }).(pulumi.IntOutput)
+}
+
+type AgentHistoricalDataRetrievalDefaultDurationArrayOutput struct{ *pulumi.OutputState }
+
+func (AgentHistoricalDataRetrievalDefaultDurationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AgentHistoricalDataRetrievalDefaultDuration)(nil)).Elem()
+}
+
+func (o AgentHistoricalDataRetrievalDefaultDurationArrayOutput) ToAgentHistoricalDataRetrievalDefaultDurationArrayOutput() AgentHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return o
+}
+
+func (o AgentHistoricalDataRetrievalDefaultDurationArrayOutput) ToAgentHistoricalDataRetrievalDefaultDurationArrayOutputWithContext(ctx context.Context) AgentHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return o
+}
+
+func (o AgentHistoricalDataRetrievalDefaultDurationArrayOutput) Index(i pulumi.IntInput) AgentHistoricalDataRetrievalDefaultDurationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AgentHistoricalDataRetrievalDefaultDuration {
+		return vs[0].([]AgentHistoricalDataRetrievalDefaultDuration)[vs[1].(int)]
+	}).(AgentHistoricalDataRetrievalDefaultDurationOutput)
+}
+
+type AgentHistoricalDataRetrievalMaxDuration struct {
+	// Must be one of Minute, Hour, or Day.
+	Unit string `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value int `pulumi:"value"`
+}
+
+// AgentHistoricalDataRetrievalMaxDurationInput is an input type that accepts AgentHistoricalDataRetrievalMaxDurationArgs and AgentHistoricalDataRetrievalMaxDurationOutput values.
+// You can construct a concrete instance of `AgentHistoricalDataRetrievalMaxDurationInput` via:
+//
+//	AgentHistoricalDataRetrievalMaxDurationArgs{...}
+type AgentHistoricalDataRetrievalMaxDurationInput interface {
+	pulumi.Input
+
+	ToAgentHistoricalDataRetrievalMaxDurationOutput() AgentHistoricalDataRetrievalMaxDurationOutput
+	ToAgentHistoricalDataRetrievalMaxDurationOutputWithContext(context.Context) AgentHistoricalDataRetrievalMaxDurationOutput
+}
+
+type AgentHistoricalDataRetrievalMaxDurationArgs struct {
+	// Must be one of Minute, Hour, or Day.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value pulumi.IntInput `pulumi:"value"`
+}
+
+func (AgentHistoricalDataRetrievalMaxDurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AgentHistoricalDataRetrievalMaxDuration)(nil)).Elem()
+}
+
+func (i AgentHistoricalDataRetrievalMaxDurationArgs) ToAgentHistoricalDataRetrievalMaxDurationOutput() AgentHistoricalDataRetrievalMaxDurationOutput {
+	return i.ToAgentHistoricalDataRetrievalMaxDurationOutputWithContext(context.Background())
+}
+
+func (i AgentHistoricalDataRetrievalMaxDurationArgs) ToAgentHistoricalDataRetrievalMaxDurationOutputWithContext(ctx context.Context) AgentHistoricalDataRetrievalMaxDurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AgentHistoricalDataRetrievalMaxDurationOutput)
+}
+
+// AgentHistoricalDataRetrievalMaxDurationArrayInput is an input type that accepts AgentHistoricalDataRetrievalMaxDurationArray and AgentHistoricalDataRetrievalMaxDurationArrayOutput values.
+// You can construct a concrete instance of `AgentHistoricalDataRetrievalMaxDurationArrayInput` via:
+//
+//	AgentHistoricalDataRetrievalMaxDurationArray{ AgentHistoricalDataRetrievalMaxDurationArgs{...} }
+type AgentHistoricalDataRetrievalMaxDurationArrayInput interface {
+	pulumi.Input
+
+	ToAgentHistoricalDataRetrievalMaxDurationArrayOutput() AgentHistoricalDataRetrievalMaxDurationArrayOutput
+	ToAgentHistoricalDataRetrievalMaxDurationArrayOutputWithContext(context.Context) AgentHistoricalDataRetrievalMaxDurationArrayOutput
+}
+
+type AgentHistoricalDataRetrievalMaxDurationArray []AgentHistoricalDataRetrievalMaxDurationInput
+
+func (AgentHistoricalDataRetrievalMaxDurationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AgentHistoricalDataRetrievalMaxDuration)(nil)).Elem()
+}
+
+func (i AgentHistoricalDataRetrievalMaxDurationArray) ToAgentHistoricalDataRetrievalMaxDurationArrayOutput() AgentHistoricalDataRetrievalMaxDurationArrayOutput {
+	return i.ToAgentHistoricalDataRetrievalMaxDurationArrayOutputWithContext(context.Background())
+}
+
+func (i AgentHistoricalDataRetrievalMaxDurationArray) ToAgentHistoricalDataRetrievalMaxDurationArrayOutputWithContext(ctx context.Context) AgentHistoricalDataRetrievalMaxDurationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AgentHistoricalDataRetrievalMaxDurationArrayOutput)
+}
+
+type AgentHistoricalDataRetrievalMaxDurationOutput struct{ *pulumi.OutputState }
+
+func (AgentHistoricalDataRetrievalMaxDurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AgentHistoricalDataRetrievalMaxDuration)(nil)).Elem()
+}
+
+func (o AgentHistoricalDataRetrievalMaxDurationOutput) ToAgentHistoricalDataRetrievalMaxDurationOutput() AgentHistoricalDataRetrievalMaxDurationOutput {
+	return o
+}
+
+func (o AgentHistoricalDataRetrievalMaxDurationOutput) ToAgentHistoricalDataRetrievalMaxDurationOutputWithContext(ctx context.Context) AgentHistoricalDataRetrievalMaxDurationOutput {
+	return o
+}
+
+// Must be one of Minute, Hour, or Day.
+func (o AgentHistoricalDataRetrievalMaxDurationOutput) Unit() pulumi.StringOutput {
+	return o.ApplyT(func(v AgentHistoricalDataRetrievalMaxDuration) string { return v.Unit }).(pulumi.StringOutput)
+}
+
+// Must be an integer greater than or equal to 0.
+func (o AgentHistoricalDataRetrievalMaxDurationOutput) Value() pulumi.IntOutput {
+	return o.ApplyT(func(v AgentHistoricalDataRetrievalMaxDuration) int { return v.Value }).(pulumi.IntOutput)
+}
+
+type AgentHistoricalDataRetrievalMaxDurationArrayOutput struct{ *pulumi.OutputState }
+
+func (AgentHistoricalDataRetrievalMaxDurationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AgentHistoricalDataRetrievalMaxDuration)(nil)).Elem()
+}
+
+func (o AgentHistoricalDataRetrievalMaxDurationArrayOutput) ToAgentHistoricalDataRetrievalMaxDurationArrayOutput() AgentHistoricalDataRetrievalMaxDurationArrayOutput {
+	return o
+}
+
+func (o AgentHistoricalDataRetrievalMaxDurationArrayOutput) ToAgentHistoricalDataRetrievalMaxDurationArrayOutputWithContext(ctx context.Context) AgentHistoricalDataRetrievalMaxDurationArrayOutput {
+	return o
+}
+
+func (o AgentHistoricalDataRetrievalMaxDurationArrayOutput) Index(i pulumi.IntInput) AgentHistoricalDataRetrievalMaxDurationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AgentHistoricalDataRetrievalMaxDuration {
+		return vs[0].([]AgentHistoricalDataRetrievalMaxDuration)[vs[1].(int)]
+	}).(AgentHistoricalDataRetrievalMaxDurationOutput)
+}
+
+type AgentHoneycombConfig struct {
+}
+
+// AgentHoneycombConfigInput is an input type that accepts AgentHoneycombConfigArgs and AgentHoneycombConfigOutput values.
+// You can construct a concrete instance of `AgentHoneycombConfigInput` via:
+//
+//	AgentHoneycombConfigArgs{...}
+type AgentHoneycombConfigInput interface {
+	pulumi.Input
+
+	ToAgentHoneycombConfigOutput() AgentHoneycombConfigOutput
+	ToAgentHoneycombConfigOutputWithContext(context.Context) AgentHoneycombConfigOutput
+}
+
+type AgentHoneycombConfigArgs struct {
+}
+
+func (AgentHoneycombConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AgentHoneycombConfig)(nil)).Elem()
+}
+
+func (i AgentHoneycombConfigArgs) ToAgentHoneycombConfigOutput() AgentHoneycombConfigOutput {
+	return i.ToAgentHoneycombConfigOutputWithContext(context.Background())
+}
+
+func (i AgentHoneycombConfigArgs) ToAgentHoneycombConfigOutputWithContext(ctx context.Context) AgentHoneycombConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AgentHoneycombConfigOutput)
+}
+
+func (i AgentHoneycombConfigArgs) ToAgentHoneycombConfigPtrOutput() AgentHoneycombConfigPtrOutput {
+	return i.ToAgentHoneycombConfigPtrOutputWithContext(context.Background())
+}
+
+func (i AgentHoneycombConfigArgs) ToAgentHoneycombConfigPtrOutputWithContext(ctx context.Context) AgentHoneycombConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AgentHoneycombConfigOutput).ToAgentHoneycombConfigPtrOutputWithContext(ctx)
+}
+
+// AgentHoneycombConfigPtrInput is an input type that accepts AgentHoneycombConfigArgs, AgentHoneycombConfigPtr and AgentHoneycombConfigPtrOutput values.
+// You can construct a concrete instance of `AgentHoneycombConfigPtrInput` via:
+//
+//	        AgentHoneycombConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type AgentHoneycombConfigPtrInput interface {
+	pulumi.Input
+
+	ToAgentHoneycombConfigPtrOutput() AgentHoneycombConfigPtrOutput
+	ToAgentHoneycombConfigPtrOutputWithContext(context.Context) AgentHoneycombConfigPtrOutput
+}
+
+type agentHoneycombConfigPtrType AgentHoneycombConfigArgs
+
+func AgentHoneycombConfigPtr(v *AgentHoneycombConfigArgs) AgentHoneycombConfigPtrInput {
+	return (*agentHoneycombConfigPtrType)(v)
+}
+
+func (*agentHoneycombConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**AgentHoneycombConfig)(nil)).Elem()
+}
+
+func (i *agentHoneycombConfigPtrType) ToAgentHoneycombConfigPtrOutput() AgentHoneycombConfigPtrOutput {
+	return i.ToAgentHoneycombConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *agentHoneycombConfigPtrType) ToAgentHoneycombConfigPtrOutputWithContext(ctx context.Context) AgentHoneycombConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AgentHoneycombConfigPtrOutput)
+}
+
+type AgentHoneycombConfigOutput struct{ *pulumi.OutputState }
+
+func (AgentHoneycombConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AgentHoneycombConfig)(nil)).Elem()
+}
+
+func (o AgentHoneycombConfigOutput) ToAgentHoneycombConfigOutput() AgentHoneycombConfigOutput {
+	return o
+}
+
+func (o AgentHoneycombConfigOutput) ToAgentHoneycombConfigOutputWithContext(ctx context.Context) AgentHoneycombConfigOutput {
+	return o
+}
+
+func (o AgentHoneycombConfigOutput) ToAgentHoneycombConfigPtrOutput() AgentHoneycombConfigPtrOutput {
+	return o.ToAgentHoneycombConfigPtrOutputWithContext(context.Background())
+}
+
+func (o AgentHoneycombConfigOutput) ToAgentHoneycombConfigPtrOutputWithContext(ctx context.Context) AgentHoneycombConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v AgentHoneycombConfig) *AgentHoneycombConfig {
+		return &v
+	}).(AgentHoneycombConfigPtrOutput)
+}
+
+type AgentHoneycombConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (AgentHoneycombConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**AgentHoneycombConfig)(nil)).Elem()
+}
+
+func (o AgentHoneycombConfigPtrOutput) ToAgentHoneycombConfigPtrOutput() AgentHoneycombConfigPtrOutput {
+	return o
+}
+
+func (o AgentHoneycombConfigPtrOutput) ToAgentHoneycombConfigPtrOutputWithContext(ctx context.Context) AgentHoneycombConfigPtrOutput {
+	return o
+}
+
+func (o AgentHoneycombConfigPtrOutput) Elem() AgentHoneycombConfigOutput {
+	return o.ApplyT(func(v *AgentHoneycombConfig) AgentHoneycombConfig {
+		if v != nil {
+			return *v
+		}
+		var ret AgentHoneycombConfig
+		return ret
+	}).(AgentHoneycombConfigOutput)
+}
+
 type AgentInfluxdbConfig struct {
 	// API URL endpoint to the InfluxDB's instance.
 	Url string `pulumi:"url"`
@@ -1350,7 +1978,7 @@ type AgentInfluxdbConfig struct {
 // AgentInfluxdbConfigInput is an input type that accepts AgentInfluxdbConfigArgs and AgentInfluxdbConfigOutput values.
 // You can construct a concrete instance of `AgentInfluxdbConfigInput` via:
 //
-//          AgentInfluxdbConfigArgs{...}
+//	AgentInfluxdbConfigArgs{...}
 type AgentInfluxdbConfigInput interface {
 	pulumi.Input
 
@@ -1386,11 +2014,11 @@ func (i AgentInfluxdbConfigArgs) ToAgentInfluxdbConfigPtrOutputWithContext(ctx c
 // AgentInfluxdbConfigPtrInput is an input type that accepts AgentInfluxdbConfigArgs, AgentInfluxdbConfigPtr and AgentInfluxdbConfigPtrOutput values.
 // You can construct a concrete instance of `AgentInfluxdbConfigPtrInput` via:
 //
-//          AgentInfluxdbConfigArgs{...}
+//	        AgentInfluxdbConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentInfluxdbConfigPtrInput interface {
 	pulumi.Input
 
@@ -1487,7 +2115,7 @@ type AgentInstanaConfig struct {
 // AgentInstanaConfigInput is an input type that accepts AgentInstanaConfigArgs and AgentInstanaConfigOutput values.
 // You can construct a concrete instance of `AgentInstanaConfigInput` via:
 //
-//          AgentInstanaConfigArgs{...}
+//	AgentInstanaConfigArgs{...}
 type AgentInstanaConfigInput interface {
 	pulumi.Input
 
@@ -1523,11 +2151,11 @@ func (i AgentInstanaConfigArgs) ToAgentInstanaConfigPtrOutputWithContext(ctx con
 // AgentInstanaConfigPtrInput is an input type that accepts AgentInstanaConfigArgs, AgentInstanaConfigPtr and AgentInstanaConfigPtrOutput values.
 // You can construct a concrete instance of `AgentInstanaConfigPtrInput` via:
 //
-//          AgentInstanaConfigArgs{...}
+//	        AgentInstanaConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentInstanaConfigPtrInput interface {
 	pulumi.Input
 
@@ -1621,12 +2249,14 @@ type AgentLightstepConfig struct {
 	Organization string `pulumi:"organization"`
 	// Name of the Lightstep project.
 	Project string `pulumi:"project"`
+	// Lightstep API URL. Nobl9 will use https://api.lightstep.com if empty.
+	Url *string `pulumi:"url"`
 }
 
 // AgentLightstepConfigInput is an input type that accepts AgentLightstepConfigArgs and AgentLightstepConfigOutput values.
 // You can construct a concrete instance of `AgentLightstepConfigInput` via:
 //
-//          AgentLightstepConfigArgs{...}
+//	AgentLightstepConfigArgs{...}
 type AgentLightstepConfigInput interface {
 	pulumi.Input
 
@@ -1639,6 +2269,8 @@ type AgentLightstepConfigArgs struct {
 	Organization pulumi.StringInput `pulumi:"organization"`
 	// Name of the Lightstep project.
 	Project pulumi.StringInput `pulumi:"project"`
+	// Lightstep API URL. Nobl9 will use https://api.lightstep.com if empty.
+	Url pulumi.StringPtrInput `pulumi:"url"`
 }
 
 func (AgentLightstepConfigArgs) ElementType() reflect.Type {
@@ -1664,11 +2296,11 @@ func (i AgentLightstepConfigArgs) ToAgentLightstepConfigPtrOutputWithContext(ctx
 // AgentLightstepConfigPtrInput is an input type that accepts AgentLightstepConfigArgs, AgentLightstepConfigPtr and AgentLightstepConfigPtrOutput values.
 // You can construct a concrete instance of `AgentLightstepConfigPtrInput` via:
 //
-//          AgentLightstepConfigArgs{...}
+//	        AgentLightstepConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentLightstepConfigPtrInput interface {
 	pulumi.Input
 
@@ -1728,6 +2360,11 @@ func (o AgentLightstepConfigOutput) Project() pulumi.StringOutput {
 	return o.ApplyT(func(v AgentLightstepConfig) string { return v.Project }).(pulumi.StringOutput)
 }
 
+// Lightstep API URL. Nobl9 will use https://api.lightstep.com if empty.
+func (o AgentLightstepConfigOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AgentLightstepConfig) *string { return v.Url }).(pulumi.StringPtrOutput)
+}
+
 type AgentLightstepConfigPtrOutput struct{ *pulumi.OutputState }
 
 func (AgentLightstepConfigPtrOutput) ElementType() reflect.Type {
@@ -1772,6 +2409,16 @@ func (o AgentLightstepConfigPtrOutput) Project() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Lightstep API URL. Nobl9 will use https://api.lightstep.com if empty.
+func (o AgentLightstepConfigPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AgentLightstepConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
 type AgentNewrelicConfig struct {
 	// ID number assigned to the New Relic user account.
 	AccountId string `pulumi:"accountId"`
@@ -1780,7 +2427,7 @@ type AgentNewrelicConfig struct {
 // AgentNewrelicConfigInput is an input type that accepts AgentNewrelicConfigArgs and AgentNewrelicConfigOutput values.
 // You can construct a concrete instance of `AgentNewrelicConfigInput` via:
 //
-//          AgentNewrelicConfigArgs{...}
+//	AgentNewrelicConfigArgs{...}
 type AgentNewrelicConfigInput interface {
 	pulumi.Input
 
@@ -1816,11 +2463,11 @@ func (i AgentNewrelicConfigArgs) ToAgentNewrelicConfigPtrOutputWithContext(ctx c
 // AgentNewrelicConfigPtrInput is an input type that accepts AgentNewrelicConfigArgs, AgentNewrelicConfigPtr and AgentNewrelicConfigPtrOutput values.
 // You can construct a concrete instance of `AgentNewrelicConfigPtrInput` via:
 //
-//          AgentNewrelicConfigArgs{...}
+//	        AgentNewrelicConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentNewrelicConfigPtrInput interface {
 	pulumi.Input
 
@@ -1917,7 +2564,7 @@ type AgentOpentsdbConfig struct {
 // AgentOpentsdbConfigInput is an input type that accepts AgentOpentsdbConfigArgs and AgentOpentsdbConfigOutput values.
 // You can construct a concrete instance of `AgentOpentsdbConfigInput` via:
 //
-//          AgentOpentsdbConfigArgs{...}
+//	AgentOpentsdbConfigArgs{...}
 type AgentOpentsdbConfigInput interface {
 	pulumi.Input
 
@@ -1953,11 +2600,11 @@ func (i AgentOpentsdbConfigArgs) ToAgentOpentsdbConfigPtrOutputWithContext(ctx c
 // AgentOpentsdbConfigPtrInput is an input type that accepts AgentOpentsdbConfigArgs, AgentOpentsdbConfigPtr and AgentOpentsdbConfigPtrOutput values.
 // You can construct a concrete instance of `AgentOpentsdbConfigPtrInput` via:
 //
-//          AgentOpentsdbConfigArgs{...}
+//	        AgentOpentsdbConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentOpentsdbConfigPtrInput interface {
 	pulumi.Input
 
@@ -2052,7 +2699,7 @@ type AgentPingdomConfig struct {
 // AgentPingdomConfigInput is an input type that accepts AgentPingdomConfigArgs and AgentPingdomConfigOutput values.
 // You can construct a concrete instance of `AgentPingdomConfigInput` via:
 //
-//          AgentPingdomConfigArgs{...}
+//	AgentPingdomConfigArgs{...}
 type AgentPingdomConfigInput interface {
 	pulumi.Input
 
@@ -2086,11 +2733,11 @@ func (i AgentPingdomConfigArgs) ToAgentPingdomConfigPtrOutputWithContext(ctx con
 // AgentPingdomConfigPtrInput is an input type that accepts AgentPingdomConfigArgs, AgentPingdomConfigPtr and AgentPingdomConfigPtrOutput values.
 // You can construct a concrete instance of `AgentPingdomConfigPtrInput` via:
 //
-//          AgentPingdomConfigArgs{...}
+//	        AgentPingdomConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentPingdomConfigPtrInput interface {
 	pulumi.Input
 
@@ -2172,7 +2819,7 @@ type AgentPrometheusConfig struct {
 // AgentPrometheusConfigInput is an input type that accepts AgentPrometheusConfigArgs and AgentPrometheusConfigOutput values.
 // You can construct a concrete instance of `AgentPrometheusConfigInput` via:
 //
-//          AgentPrometheusConfigArgs{...}
+//	AgentPrometheusConfigArgs{...}
 type AgentPrometheusConfigInput interface {
 	pulumi.Input
 
@@ -2208,11 +2855,11 @@ func (i AgentPrometheusConfigArgs) ToAgentPrometheusConfigPtrOutputWithContext(c
 // AgentPrometheusConfigPtrInput is an input type that accepts AgentPrometheusConfigArgs, AgentPrometheusConfigPtr and AgentPrometheusConfigPtrOutput values.
 // You can construct a concrete instance of `AgentPrometheusConfigPtrInput` via:
 //
-//          AgentPrometheusConfigArgs{...}
+//	        AgentPrometheusConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentPrometheusConfigPtrInput interface {
 	pulumi.Input
 
@@ -2311,7 +2958,7 @@ type AgentQueryDelay struct {
 // AgentQueryDelayInput is an input type that accepts AgentQueryDelayArgs and AgentQueryDelayOutput values.
 // You can construct a concrete instance of `AgentQueryDelayInput` via:
 //
-//          AgentQueryDelayArgs{...}
+//	AgentQueryDelayArgs{...}
 type AgentQueryDelayInput interface {
 	pulumi.Input
 
@@ -2349,11 +2996,11 @@ func (i AgentQueryDelayArgs) ToAgentQueryDelayPtrOutputWithContext(ctx context.C
 // AgentQueryDelayPtrInput is an input type that accepts AgentQueryDelayArgs, AgentQueryDelayPtr and AgentQueryDelayPtrOutput values.
 // You can construct a concrete instance of `AgentQueryDelayPtrInput` via:
 //
-//          AgentQueryDelayArgs{...}
+//	        AgentQueryDelayArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -2463,7 +3110,7 @@ type AgentRedshiftConfig struct {
 // AgentRedshiftConfigInput is an input type that accepts AgentRedshiftConfigArgs and AgentRedshiftConfigOutput values.
 // You can construct a concrete instance of `AgentRedshiftConfigInput` via:
 //
-//          AgentRedshiftConfigArgs{...}
+//	AgentRedshiftConfigArgs{...}
 type AgentRedshiftConfigInput interface {
 	pulumi.Input
 
@@ -2497,11 +3144,11 @@ func (i AgentRedshiftConfigArgs) ToAgentRedshiftConfigPtrOutputWithContext(ctx c
 // AgentRedshiftConfigPtrInput is an input type that accepts AgentRedshiftConfigArgs, AgentRedshiftConfigPtr and AgentRedshiftConfigPtrOutput values.
 // You can construct a concrete instance of `AgentRedshiftConfigPtrInput` via:
 //
-//          AgentRedshiftConfigArgs{...}
+//	        AgentRedshiftConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentRedshiftConfigPtrInput interface {
 	pulumi.Input
 
@@ -2583,7 +3230,7 @@ type AgentSplunkConfig struct {
 // AgentSplunkConfigInput is an input type that accepts AgentSplunkConfigArgs and AgentSplunkConfigOutput values.
 // You can construct a concrete instance of `AgentSplunkConfigInput` via:
 //
-//          AgentSplunkConfigArgs{...}
+//	AgentSplunkConfigArgs{...}
 type AgentSplunkConfigInput interface {
 	pulumi.Input
 
@@ -2619,11 +3266,11 @@ func (i AgentSplunkConfigArgs) ToAgentSplunkConfigPtrOutputWithContext(ctx conte
 // AgentSplunkConfigPtrInput is an input type that accepts AgentSplunkConfigArgs, AgentSplunkConfigPtr and AgentSplunkConfigPtrOutput values.
 // You can construct a concrete instance of `AgentSplunkConfigPtrInput` via:
 //
-//          AgentSplunkConfigArgs{...}
+//	        AgentSplunkConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentSplunkConfigPtrInput interface {
 	pulumi.Input
 
@@ -2720,7 +3367,7 @@ type AgentSplunkObservabilityConfig struct {
 // AgentSplunkObservabilityConfigInput is an input type that accepts AgentSplunkObservabilityConfigArgs and AgentSplunkObservabilityConfigOutput values.
 // You can construct a concrete instance of `AgentSplunkObservabilityConfigInput` via:
 //
-//          AgentSplunkObservabilityConfigArgs{...}
+//	AgentSplunkObservabilityConfigArgs{...}
 type AgentSplunkObservabilityConfigInput interface {
 	pulumi.Input
 
@@ -2756,11 +3403,11 @@ func (i AgentSplunkObservabilityConfigArgs) ToAgentSplunkObservabilityConfigPtrO
 // AgentSplunkObservabilityConfigPtrInput is an input type that accepts AgentSplunkObservabilityConfigArgs, AgentSplunkObservabilityConfigPtr and AgentSplunkObservabilityConfigPtrOutput values.
 // You can construct a concrete instance of `AgentSplunkObservabilityConfigPtrInput` via:
 //
-//          AgentSplunkObservabilityConfigArgs{...}
+//	        AgentSplunkObservabilityConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentSplunkObservabilityConfigPtrInput interface {
 	pulumi.Input
 
@@ -2857,7 +3504,7 @@ type AgentSumologicConfig struct {
 // AgentSumologicConfigInput is an input type that accepts AgentSumologicConfigArgs and AgentSumologicConfigOutput values.
 // You can construct a concrete instance of `AgentSumologicConfigInput` via:
 //
-//          AgentSumologicConfigArgs{...}
+//	AgentSumologicConfigArgs{...}
 type AgentSumologicConfigInput interface {
 	pulumi.Input
 
@@ -2893,11 +3540,11 @@ func (i AgentSumologicConfigArgs) ToAgentSumologicConfigPtrOutputWithContext(ctx
 // AgentSumologicConfigPtrInput is an input type that accepts AgentSumologicConfigArgs, AgentSumologicConfigPtr and AgentSumologicConfigPtrOutput values.
 // You can construct a concrete instance of `AgentSumologicConfigPtrInput` via:
 //
-//          AgentSumologicConfigArgs{...}
+//	        AgentSumologicConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentSumologicConfigPtrInput interface {
 	pulumi.Input
 
@@ -2992,7 +3639,7 @@ type AgentThousandeyesConfig struct {
 // AgentThousandeyesConfigInput is an input type that accepts AgentThousandeyesConfigArgs and AgentThousandeyesConfigOutput values.
 // You can construct a concrete instance of `AgentThousandeyesConfigInput` via:
 //
-//          AgentThousandeyesConfigArgs{...}
+//	AgentThousandeyesConfigArgs{...}
 type AgentThousandeyesConfigInput interface {
 	pulumi.Input
 
@@ -3026,11 +3673,11 @@ func (i AgentThousandeyesConfigArgs) ToAgentThousandeyesConfigPtrOutputWithConte
 // AgentThousandeyesConfigPtrInput is an input type that accepts AgentThousandeyesConfigArgs, AgentThousandeyesConfigPtr and AgentThousandeyesConfigPtrOutput values.
 // You can construct a concrete instance of `AgentThousandeyesConfigPtrInput` via:
 //
-//          AgentThousandeyesConfigArgs{...}
+//	        AgentThousandeyesConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type AgentThousandeyesConfigPtrInput interface {
 	pulumi.Input
 
@@ -3104,6 +3751,143 @@ func (o AgentThousandeyesConfigPtrOutput) Elem() AgentThousandeyesConfigOutput {
 	}).(AgentThousandeyesConfigOutput)
 }
 
+type AlertMethodPagerdutySendResolution struct {
+	// A message that will be attached to your 'all clear' notification.
+	Message *string `pulumi:"message"`
+}
+
+// AlertMethodPagerdutySendResolutionInput is an input type that accepts AlertMethodPagerdutySendResolutionArgs and AlertMethodPagerdutySendResolutionOutput values.
+// You can construct a concrete instance of `AlertMethodPagerdutySendResolutionInput` via:
+//
+//	AlertMethodPagerdutySendResolutionArgs{...}
+type AlertMethodPagerdutySendResolutionInput interface {
+	pulumi.Input
+
+	ToAlertMethodPagerdutySendResolutionOutput() AlertMethodPagerdutySendResolutionOutput
+	ToAlertMethodPagerdutySendResolutionOutputWithContext(context.Context) AlertMethodPagerdutySendResolutionOutput
+}
+
+type AlertMethodPagerdutySendResolutionArgs struct {
+	// A message that will be attached to your 'all clear' notification.
+	Message pulumi.StringPtrInput `pulumi:"message"`
+}
+
+func (AlertMethodPagerdutySendResolutionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlertMethodPagerdutySendResolution)(nil)).Elem()
+}
+
+func (i AlertMethodPagerdutySendResolutionArgs) ToAlertMethodPagerdutySendResolutionOutput() AlertMethodPagerdutySendResolutionOutput {
+	return i.ToAlertMethodPagerdutySendResolutionOutputWithContext(context.Background())
+}
+
+func (i AlertMethodPagerdutySendResolutionArgs) ToAlertMethodPagerdutySendResolutionOutputWithContext(ctx context.Context) AlertMethodPagerdutySendResolutionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlertMethodPagerdutySendResolutionOutput)
+}
+
+func (i AlertMethodPagerdutySendResolutionArgs) ToAlertMethodPagerdutySendResolutionPtrOutput() AlertMethodPagerdutySendResolutionPtrOutput {
+	return i.ToAlertMethodPagerdutySendResolutionPtrOutputWithContext(context.Background())
+}
+
+func (i AlertMethodPagerdutySendResolutionArgs) ToAlertMethodPagerdutySendResolutionPtrOutputWithContext(ctx context.Context) AlertMethodPagerdutySendResolutionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlertMethodPagerdutySendResolutionOutput).ToAlertMethodPagerdutySendResolutionPtrOutputWithContext(ctx)
+}
+
+// AlertMethodPagerdutySendResolutionPtrInput is an input type that accepts AlertMethodPagerdutySendResolutionArgs, AlertMethodPagerdutySendResolutionPtr and AlertMethodPagerdutySendResolutionPtrOutput values.
+// You can construct a concrete instance of `AlertMethodPagerdutySendResolutionPtrInput` via:
+//
+//	        AlertMethodPagerdutySendResolutionArgs{...}
+//
+//	or:
+//
+//	        nil
+type AlertMethodPagerdutySendResolutionPtrInput interface {
+	pulumi.Input
+
+	ToAlertMethodPagerdutySendResolutionPtrOutput() AlertMethodPagerdutySendResolutionPtrOutput
+	ToAlertMethodPagerdutySendResolutionPtrOutputWithContext(context.Context) AlertMethodPagerdutySendResolutionPtrOutput
+}
+
+type alertMethodPagerdutySendResolutionPtrType AlertMethodPagerdutySendResolutionArgs
+
+func AlertMethodPagerdutySendResolutionPtr(v *AlertMethodPagerdutySendResolutionArgs) AlertMethodPagerdutySendResolutionPtrInput {
+	return (*alertMethodPagerdutySendResolutionPtrType)(v)
+}
+
+func (*alertMethodPagerdutySendResolutionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**AlertMethodPagerdutySendResolution)(nil)).Elem()
+}
+
+func (i *alertMethodPagerdutySendResolutionPtrType) ToAlertMethodPagerdutySendResolutionPtrOutput() AlertMethodPagerdutySendResolutionPtrOutput {
+	return i.ToAlertMethodPagerdutySendResolutionPtrOutputWithContext(context.Background())
+}
+
+func (i *alertMethodPagerdutySendResolutionPtrType) ToAlertMethodPagerdutySendResolutionPtrOutputWithContext(ctx context.Context) AlertMethodPagerdutySendResolutionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlertMethodPagerdutySendResolutionPtrOutput)
+}
+
+type AlertMethodPagerdutySendResolutionOutput struct{ *pulumi.OutputState }
+
+func (AlertMethodPagerdutySendResolutionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlertMethodPagerdutySendResolution)(nil)).Elem()
+}
+
+func (o AlertMethodPagerdutySendResolutionOutput) ToAlertMethodPagerdutySendResolutionOutput() AlertMethodPagerdutySendResolutionOutput {
+	return o
+}
+
+func (o AlertMethodPagerdutySendResolutionOutput) ToAlertMethodPagerdutySendResolutionOutputWithContext(ctx context.Context) AlertMethodPagerdutySendResolutionOutput {
+	return o
+}
+
+func (o AlertMethodPagerdutySendResolutionOutput) ToAlertMethodPagerdutySendResolutionPtrOutput() AlertMethodPagerdutySendResolutionPtrOutput {
+	return o.ToAlertMethodPagerdutySendResolutionPtrOutputWithContext(context.Background())
+}
+
+func (o AlertMethodPagerdutySendResolutionOutput) ToAlertMethodPagerdutySendResolutionPtrOutputWithContext(ctx context.Context) AlertMethodPagerdutySendResolutionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v AlertMethodPagerdutySendResolution) *AlertMethodPagerdutySendResolution {
+		return &v
+	}).(AlertMethodPagerdutySendResolutionPtrOutput)
+}
+
+// A message that will be attached to your 'all clear' notification.
+func (o AlertMethodPagerdutySendResolutionOutput) Message() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlertMethodPagerdutySendResolution) *string { return v.Message }).(pulumi.StringPtrOutput)
+}
+
+type AlertMethodPagerdutySendResolutionPtrOutput struct{ *pulumi.OutputState }
+
+func (AlertMethodPagerdutySendResolutionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**AlertMethodPagerdutySendResolution)(nil)).Elem()
+}
+
+func (o AlertMethodPagerdutySendResolutionPtrOutput) ToAlertMethodPagerdutySendResolutionPtrOutput() AlertMethodPagerdutySendResolutionPtrOutput {
+	return o
+}
+
+func (o AlertMethodPagerdutySendResolutionPtrOutput) ToAlertMethodPagerdutySendResolutionPtrOutputWithContext(ctx context.Context) AlertMethodPagerdutySendResolutionPtrOutput {
+	return o
+}
+
+func (o AlertMethodPagerdutySendResolutionPtrOutput) Elem() AlertMethodPagerdutySendResolutionOutput {
+	return o.ApplyT(func(v *AlertMethodPagerdutySendResolution) AlertMethodPagerdutySendResolution {
+		if v != nil {
+			return *v
+		}
+		var ret AlertMethodPagerdutySendResolution
+		return ret
+	}).(AlertMethodPagerdutySendResolutionOutput)
+}
+
+// A message that will be attached to your 'all clear' notification.
+func (o AlertMethodPagerdutySendResolutionPtrOutput) Message() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AlertMethodPagerdutySendResolution) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Message
+	}).(pulumi.StringPtrOutput)
+}
+
 type AlertPolicyAlertMethod struct {
 	// The name of the previously defined alert method.
 	Name string `pulumi:"name"`
@@ -3114,7 +3898,7 @@ type AlertPolicyAlertMethod struct {
 // AlertPolicyAlertMethodInput is an input type that accepts AlertPolicyAlertMethodArgs and AlertPolicyAlertMethodOutput values.
 // You can construct a concrete instance of `AlertPolicyAlertMethodInput` via:
 //
-//          AlertPolicyAlertMethodArgs{...}
+//	AlertPolicyAlertMethodArgs{...}
 type AlertPolicyAlertMethodInput interface {
 	pulumi.Input
 
@@ -3144,7 +3928,7 @@ func (i AlertPolicyAlertMethodArgs) ToAlertPolicyAlertMethodOutputWithContext(ct
 // AlertPolicyAlertMethodArrayInput is an input type that accepts AlertPolicyAlertMethodArray and AlertPolicyAlertMethodArrayOutput values.
 // You can construct a concrete instance of `AlertPolicyAlertMethodArrayInput` via:
 //
-//          AlertPolicyAlertMethodArray{ AlertPolicyAlertMethodArgs{...} }
+//	AlertPolicyAlertMethodArray{ AlertPolicyAlertMethodArgs{...} }
 type AlertPolicyAlertMethodArrayInput interface {
 	pulumi.Input
 
@@ -3211,20 +3995,22 @@ func (o AlertPolicyAlertMethodArrayOutput) Index(i pulumi.IntInput) AlertPolicyA
 }
 
 type AlertPolicyCondition struct {
+	// Duration over which the burn rate is evaluated.
+	AlertingWindow *string `pulumi:"alertingWindow"`
 	// Indicates how long a given condition needs to be valid to mark the condition as true.
 	LastsFor *string `pulumi:"lastsFor"`
-	// One of `timeToBurnBudget` | `burnRate` | `burnedBudget`.
+	// One of `timeToBurnBudget` | `timeToBurnEntireBudget` | `burnRate` | `burnedBudget`.
 	Measurement string `pulumi:"measurement"`
 	// For `averageBurnRate`, it indicates how fast the error budget is burning. For `burnedBudget`, it tells how much error budget is already burned.
 	Value *float64 `pulumi:"value"`
-	// Used with `timeToBurnBudget`, indicates when the budget would be exhausted. The expected value is a string in time duration string format.
+	// Used with `timeToBurnBudget` or `timeToBurnEntireBudget`, indicates when the budget would be exhausted. The expected value is a string in time duration string format.
 	ValueString *string `pulumi:"valueString"`
 }
 
 // AlertPolicyConditionInput is an input type that accepts AlertPolicyConditionArgs and AlertPolicyConditionOutput values.
 // You can construct a concrete instance of `AlertPolicyConditionInput` via:
 //
-//          AlertPolicyConditionArgs{...}
+//	AlertPolicyConditionArgs{...}
 type AlertPolicyConditionInput interface {
 	pulumi.Input
 
@@ -3233,13 +4019,15 @@ type AlertPolicyConditionInput interface {
 }
 
 type AlertPolicyConditionArgs struct {
+	// Duration over which the burn rate is evaluated.
+	AlertingWindow pulumi.StringPtrInput `pulumi:"alertingWindow"`
 	// Indicates how long a given condition needs to be valid to mark the condition as true.
 	LastsFor pulumi.StringPtrInput `pulumi:"lastsFor"`
-	// One of `timeToBurnBudget` | `burnRate` | `burnedBudget`.
+	// One of `timeToBurnBudget` | `timeToBurnEntireBudget` | `burnRate` | `burnedBudget`.
 	Measurement pulumi.StringInput `pulumi:"measurement"`
 	// For `averageBurnRate`, it indicates how fast the error budget is burning. For `burnedBudget`, it tells how much error budget is already burned.
 	Value pulumi.Float64PtrInput `pulumi:"value"`
-	// Used with `timeToBurnBudget`, indicates when the budget would be exhausted. The expected value is a string in time duration string format.
+	// Used with `timeToBurnBudget` or `timeToBurnEntireBudget`, indicates when the budget would be exhausted. The expected value is a string in time duration string format.
 	ValueString pulumi.StringPtrInput `pulumi:"valueString"`
 }
 
@@ -3258,7 +4046,7 @@ func (i AlertPolicyConditionArgs) ToAlertPolicyConditionOutputWithContext(ctx co
 // AlertPolicyConditionArrayInput is an input type that accepts AlertPolicyConditionArray and AlertPolicyConditionArrayOutput values.
 // You can construct a concrete instance of `AlertPolicyConditionArrayInput` via:
 //
-//          AlertPolicyConditionArray{ AlertPolicyConditionArgs{...} }
+//	AlertPolicyConditionArray{ AlertPolicyConditionArgs{...} }
 type AlertPolicyConditionArrayInput interface {
 	pulumi.Input
 
@@ -3294,12 +4082,17 @@ func (o AlertPolicyConditionOutput) ToAlertPolicyConditionOutputWithContext(ctx 
 	return o
 }
 
+// Duration over which the burn rate is evaluated.
+func (o AlertPolicyConditionOutput) AlertingWindow() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlertPolicyCondition) *string { return v.AlertingWindow }).(pulumi.StringPtrOutput)
+}
+
 // Indicates how long a given condition needs to be valid to mark the condition as true.
 func (o AlertPolicyConditionOutput) LastsFor() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AlertPolicyCondition) *string { return v.LastsFor }).(pulumi.StringPtrOutput)
 }
 
-// One of `timeToBurnBudget` | `burnRate` | `burnedBudget`.
+// One of `timeToBurnBudget` | `timeToBurnEntireBudget` | `burnRate` | `burnedBudget`.
 func (o AlertPolicyConditionOutput) Measurement() pulumi.StringOutput {
 	return o.ApplyT(func(v AlertPolicyCondition) string { return v.Measurement }).(pulumi.StringOutput)
 }
@@ -3309,7 +4102,7 @@ func (o AlertPolicyConditionOutput) Value() pulumi.Float64PtrOutput {
 	return o.ApplyT(func(v AlertPolicyCondition) *float64 { return v.Value }).(pulumi.Float64PtrOutput)
 }
 
-// Used with `timeToBurnBudget`, indicates when the budget would be exhausted. The expected value is a string in time duration string format.
+// Used with `timeToBurnBudget` or `timeToBurnEntireBudget`, indicates when the budget would be exhausted. The expected value is a string in time duration string format.
 func (o AlertPolicyConditionOutput) ValueString() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AlertPolicyCondition) *string { return v.ValueString }).(pulumi.StringPtrOutput)
 }
@@ -3334,6 +4127,378 @@ func (o AlertPolicyConditionArrayOutput) Index(i pulumi.IntInput) AlertPolicyCon
 	}).(AlertPolicyConditionOutput)
 }
 
+type DirectAppdynamicsHistoricalDataRetrieval struct {
+	// Used by default for any SLOs connected to this data source.
+	DefaultDurations []DirectAppdynamicsHistoricalDataRetrievalDefaultDuration `pulumi:"defaultDurations"`
+	// Defines the maximum period for which data can be retrieved.
+	MaxDurations []DirectAppdynamicsHistoricalDataRetrievalMaxDuration `pulumi:"maxDurations"`
+}
+
+// DirectAppdynamicsHistoricalDataRetrievalInput is an input type that accepts DirectAppdynamicsHistoricalDataRetrievalArgs and DirectAppdynamicsHistoricalDataRetrievalOutput values.
+// You can construct a concrete instance of `DirectAppdynamicsHistoricalDataRetrievalInput` via:
+//
+//	DirectAppdynamicsHistoricalDataRetrievalArgs{...}
+type DirectAppdynamicsHistoricalDataRetrievalInput interface {
+	pulumi.Input
+
+	ToDirectAppdynamicsHistoricalDataRetrievalOutput() DirectAppdynamicsHistoricalDataRetrievalOutput
+	ToDirectAppdynamicsHistoricalDataRetrievalOutputWithContext(context.Context) DirectAppdynamicsHistoricalDataRetrievalOutput
+}
+
+type DirectAppdynamicsHistoricalDataRetrievalArgs struct {
+	// Used by default for any SLOs connected to this data source.
+	DefaultDurations DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayInput `pulumi:"defaultDurations"`
+	// Defines the maximum period for which data can be retrieved.
+	MaxDurations DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayInput `pulumi:"maxDurations"`
+}
+
+func (DirectAppdynamicsHistoricalDataRetrievalArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DirectAppdynamicsHistoricalDataRetrieval)(nil)).Elem()
+}
+
+func (i DirectAppdynamicsHistoricalDataRetrievalArgs) ToDirectAppdynamicsHistoricalDataRetrievalOutput() DirectAppdynamicsHistoricalDataRetrievalOutput {
+	return i.ToDirectAppdynamicsHistoricalDataRetrievalOutputWithContext(context.Background())
+}
+
+func (i DirectAppdynamicsHistoricalDataRetrievalArgs) ToDirectAppdynamicsHistoricalDataRetrievalOutputWithContext(ctx context.Context) DirectAppdynamicsHistoricalDataRetrievalOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectAppdynamicsHistoricalDataRetrievalOutput)
+}
+
+func (i DirectAppdynamicsHistoricalDataRetrievalArgs) ToDirectAppdynamicsHistoricalDataRetrievalPtrOutput() DirectAppdynamicsHistoricalDataRetrievalPtrOutput {
+	return i.ToDirectAppdynamicsHistoricalDataRetrievalPtrOutputWithContext(context.Background())
+}
+
+func (i DirectAppdynamicsHistoricalDataRetrievalArgs) ToDirectAppdynamicsHistoricalDataRetrievalPtrOutputWithContext(ctx context.Context) DirectAppdynamicsHistoricalDataRetrievalPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectAppdynamicsHistoricalDataRetrievalOutput).ToDirectAppdynamicsHistoricalDataRetrievalPtrOutputWithContext(ctx)
+}
+
+// DirectAppdynamicsHistoricalDataRetrievalPtrInput is an input type that accepts DirectAppdynamicsHistoricalDataRetrievalArgs, DirectAppdynamicsHistoricalDataRetrievalPtr and DirectAppdynamicsHistoricalDataRetrievalPtrOutput values.
+// You can construct a concrete instance of `DirectAppdynamicsHistoricalDataRetrievalPtrInput` via:
+//
+//	        DirectAppdynamicsHistoricalDataRetrievalArgs{...}
+//
+//	or:
+//
+//	        nil
+type DirectAppdynamicsHistoricalDataRetrievalPtrInput interface {
+	pulumi.Input
+
+	ToDirectAppdynamicsHistoricalDataRetrievalPtrOutput() DirectAppdynamicsHistoricalDataRetrievalPtrOutput
+	ToDirectAppdynamicsHistoricalDataRetrievalPtrOutputWithContext(context.Context) DirectAppdynamicsHistoricalDataRetrievalPtrOutput
+}
+
+type directAppdynamicsHistoricalDataRetrievalPtrType DirectAppdynamicsHistoricalDataRetrievalArgs
+
+func DirectAppdynamicsHistoricalDataRetrievalPtr(v *DirectAppdynamicsHistoricalDataRetrievalArgs) DirectAppdynamicsHistoricalDataRetrievalPtrInput {
+	return (*directAppdynamicsHistoricalDataRetrievalPtrType)(v)
+}
+
+func (*directAppdynamicsHistoricalDataRetrievalPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DirectAppdynamicsHistoricalDataRetrieval)(nil)).Elem()
+}
+
+func (i *directAppdynamicsHistoricalDataRetrievalPtrType) ToDirectAppdynamicsHistoricalDataRetrievalPtrOutput() DirectAppdynamicsHistoricalDataRetrievalPtrOutput {
+	return i.ToDirectAppdynamicsHistoricalDataRetrievalPtrOutputWithContext(context.Background())
+}
+
+func (i *directAppdynamicsHistoricalDataRetrievalPtrType) ToDirectAppdynamicsHistoricalDataRetrievalPtrOutputWithContext(ctx context.Context) DirectAppdynamicsHistoricalDataRetrievalPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectAppdynamicsHistoricalDataRetrievalPtrOutput)
+}
+
+type DirectAppdynamicsHistoricalDataRetrievalOutput struct{ *pulumi.OutputState }
+
+func (DirectAppdynamicsHistoricalDataRetrievalOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DirectAppdynamicsHistoricalDataRetrieval)(nil)).Elem()
+}
+
+func (o DirectAppdynamicsHistoricalDataRetrievalOutput) ToDirectAppdynamicsHistoricalDataRetrievalOutput() DirectAppdynamicsHistoricalDataRetrievalOutput {
+	return o
+}
+
+func (o DirectAppdynamicsHistoricalDataRetrievalOutput) ToDirectAppdynamicsHistoricalDataRetrievalOutputWithContext(ctx context.Context) DirectAppdynamicsHistoricalDataRetrievalOutput {
+	return o
+}
+
+func (o DirectAppdynamicsHistoricalDataRetrievalOutput) ToDirectAppdynamicsHistoricalDataRetrievalPtrOutput() DirectAppdynamicsHistoricalDataRetrievalPtrOutput {
+	return o.ToDirectAppdynamicsHistoricalDataRetrievalPtrOutputWithContext(context.Background())
+}
+
+func (o DirectAppdynamicsHistoricalDataRetrievalOutput) ToDirectAppdynamicsHistoricalDataRetrievalPtrOutputWithContext(ctx context.Context) DirectAppdynamicsHistoricalDataRetrievalPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DirectAppdynamicsHistoricalDataRetrieval) *DirectAppdynamicsHistoricalDataRetrieval {
+		return &v
+	}).(DirectAppdynamicsHistoricalDataRetrievalPtrOutput)
+}
+
+// Used by default for any SLOs connected to this data source.
+func (o DirectAppdynamicsHistoricalDataRetrievalOutput) DefaultDurations() DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return o.ApplyT(func(v DirectAppdynamicsHistoricalDataRetrieval) []DirectAppdynamicsHistoricalDataRetrievalDefaultDuration {
+		return v.DefaultDurations
+	}).(DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutput)
+}
+
+// Defines the maximum period for which data can be retrieved.
+func (o DirectAppdynamicsHistoricalDataRetrievalOutput) MaxDurations() DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutput {
+	return o.ApplyT(func(v DirectAppdynamicsHistoricalDataRetrieval) []DirectAppdynamicsHistoricalDataRetrievalMaxDuration {
+		return v.MaxDurations
+	}).(DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutput)
+}
+
+type DirectAppdynamicsHistoricalDataRetrievalPtrOutput struct{ *pulumi.OutputState }
+
+func (DirectAppdynamicsHistoricalDataRetrievalPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DirectAppdynamicsHistoricalDataRetrieval)(nil)).Elem()
+}
+
+func (o DirectAppdynamicsHistoricalDataRetrievalPtrOutput) ToDirectAppdynamicsHistoricalDataRetrievalPtrOutput() DirectAppdynamicsHistoricalDataRetrievalPtrOutput {
+	return o
+}
+
+func (o DirectAppdynamicsHistoricalDataRetrievalPtrOutput) ToDirectAppdynamicsHistoricalDataRetrievalPtrOutputWithContext(ctx context.Context) DirectAppdynamicsHistoricalDataRetrievalPtrOutput {
+	return o
+}
+
+func (o DirectAppdynamicsHistoricalDataRetrievalPtrOutput) Elem() DirectAppdynamicsHistoricalDataRetrievalOutput {
+	return o.ApplyT(func(v *DirectAppdynamicsHistoricalDataRetrieval) DirectAppdynamicsHistoricalDataRetrieval {
+		if v != nil {
+			return *v
+		}
+		var ret DirectAppdynamicsHistoricalDataRetrieval
+		return ret
+	}).(DirectAppdynamicsHistoricalDataRetrievalOutput)
+}
+
+// Used by default for any SLOs connected to this data source.
+func (o DirectAppdynamicsHistoricalDataRetrievalPtrOutput) DefaultDurations() DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return o.ApplyT(func(v *DirectAppdynamicsHistoricalDataRetrieval) []DirectAppdynamicsHistoricalDataRetrievalDefaultDuration {
+		if v == nil {
+			return nil
+		}
+		return v.DefaultDurations
+	}).(DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutput)
+}
+
+// Defines the maximum period for which data can be retrieved.
+func (o DirectAppdynamicsHistoricalDataRetrievalPtrOutput) MaxDurations() DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutput {
+	return o.ApplyT(func(v *DirectAppdynamicsHistoricalDataRetrieval) []DirectAppdynamicsHistoricalDataRetrievalMaxDuration {
+		if v == nil {
+			return nil
+		}
+		return v.MaxDurations
+	}).(DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutput)
+}
+
+type DirectAppdynamicsHistoricalDataRetrievalDefaultDuration struct {
+	// Must be one of Minute, Hour, or Day.
+	Unit string `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value int `pulumi:"value"`
+}
+
+// DirectAppdynamicsHistoricalDataRetrievalDefaultDurationInput is an input type that accepts DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArgs and DirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutput values.
+// You can construct a concrete instance of `DirectAppdynamicsHistoricalDataRetrievalDefaultDurationInput` via:
+//
+//	DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArgs{...}
+type DirectAppdynamicsHistoricalDataRetrievalDefaultDurationInput interface {
+	pulumi.Input
+
+	ToDirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutput() DirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutput
+	ToDirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutputWithContext(context.Context) DirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutput
+}
+
+type DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArgs struct {
+	// Must be one of Minute, Hour, or Day.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value pulumi.IntInput `pulumi:"value"`
+}
+
+func (DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DirectAppdynamicsHistoricalDataRetrievalDefaultDuration)(nil)).Elem()
+}
+
+func (i DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArgs) ToDirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutput() DirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutput {
+	return i.ToDirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutputWithContext(context.Background())
+}
+
+func (i DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArgs) ToDirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutputWithContext(ctx context.Context) DirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutput)
+}
+
+// DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayInput is an input type that accepts DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArray and DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutput values.
+// You can construct a concrete instance of `DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayInput` via:
+//
+//	DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArray{ DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArgs{...} }
+type DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayInput interface {
+	pulumi.Input
+
+	ToDirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutput() DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutput
+	ToDirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutputWithContext(context.Context) DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutput
+}
+
+type DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArray []DirectAppdynamicsHistoricalDataRetrievalDefaultDurationInput
+
+func (DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DirectAppdynamicsHistoricalDataRetrievalDefaultDuration)(nil)).Elem()
+}
+
+func (i DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArray) ToDirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutput() DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return i.ToDirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutputWithContext(context.Background())
+}
+
+func (i DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArray) ToDirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutputWithContext(ctx context.Context) DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutput)
+}
+
+type DirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutput struct{ *pulumi.OutputState }
+
+func (DirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DirectAppdynamicsHistoricalDataRetrievalDefaultDuration)(nil)).Elem()
+}
+
+func (o DirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutput) ToDirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutput() DirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutput {
+	return o
+}
+
+func (o DirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutput) ToDirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutputWithContext(ctx context.Context) DirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutput {
+	return o
+}
+
+// Must be one of Minute, Hour, or Day.
+func (o DirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutput) Unit() pulumi.StringOutput {
+	return o.ApplyT(func(v DirectAppdynamicsHistoricalDataRetrievalDefaultDuration) string { return v.Unit }).(pulumi.StringOutput)
+}
+
+// Must be an integer greater than or equal to 0.
+func (o DirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutput) Value() pulumi.IntOutput {
+	return o.ApplyT(func(v DirectAppdynamicsHistoricalDataRetrievalDefaultDuration) int { return v.Value }).(pulumi.IntOutput)
+}
+
+type DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutput struct{ *pulumi.OutputState }
+
+func (DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DirectAppdynamicsHistoricalDataRetrievalDefaultDuration)(nil)).Elem()
+}
+
+func (o DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutput) ToDirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutput() DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return o
+}
+
+func (o DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutput) ToDirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutputWithContext(ctx context.Context) DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return o
+}
+
+func (o DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutput) Index(i pulumi.IntInput) DirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DirectAppdynamicsHistoricalDataRetrievalDefaultDuration {
+		return vs[0].([]DirectAppdynamicsHistoricalDataRetrievalDefaultDuration)[vs[1].(int)]
+	}).(DirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutput)
+}
+
+type DirectAppdynamicsHistoricalDataRetrievalMaxDuration struct {
+	// Must be one of Minute, Hour, or Day.
+	Unit string `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value int `pulumi:"value"`
+}
+
+// DirectAppdynamicsHistoricalDataRetrievalMaxDurationInput is an input type that accepts DirectAppdynamicsHistoricalDataRetrievalMaxDurationArgs and DirectAppdynamicsHistoricalDataRetrievalMaxDurationOutput values.
+// You can construct a concrete instance of `DirectAppdynamicsHistoricalDataRetrievalMaxDurationInput` via:
+//
+//	DirectAppdynamicsHistoricalDataRetrievalMaxDurationArgs{...}
+type DirectAppdynamicsHistoricalDataRetrievalMaxDurationInput interface {
+	pulumi.Input
+
+	ToDirectAppdynamicsHistoricalDataRetrievalMaxDurationOutput() DirectAppdynamicsHistoricalDataRetrievalMaxDurationOutput
+	ToDirectAppdynamicsHistoricalDataRetrievalMaxDurationOutputWithContext(context.Context) DirectAppdynamicsHistoricalDataRetrievalMaxDurationOutput
+}
+
+type DirectAppdynamicsHistoricalDataRetrievalMaxDurationArgs struct {
+	// Must be one of Minute, Hour, or Day.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value pulumi.IntInput `pulumi:"value"`
+}
+
+func (DirectAppdynamicsHistoricalDataRetrievalMaxDurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DirectAppdynamicsHistoricalDataRetrievalMaxDuration)(nil)).Elem()
+}
+
+func (i DirectAppdynamicsHistoricalDataRetrievalMaxDurationArgs) ToDirectAppdynamicsHistoricalDataRetrievalMaxDurationOutput() DirectAppdynamicsHistoricalDataRetrievalMaxDurationOutput {
+	return i.ToDirectAppdynamicsHistoricalDataRetrievalMaxDurationOutputWithContext(context.Background())
+}
+
+func (i DirectAppdynamicsHistoricalDataRetrievalMaxDurationArgs) ToDirectAppdynamicsHistoricalDataRetrievalMaxDurationOutputWithContext(ctx context.Context) DirectAppdynamicsHistoricalDataRetrievalMaxDurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectAppdynamicsHistoricalDataRetrievalMaxDurationOutput)
+}
+
+// DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayInput is an input type that accepts DirectAppdynamicsHistoricalDataRetrievalMaxDurationArray and DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutput values.
+// You can construct a concrete instance of `DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayInput` via:
+//
+//	DirectAppdynamicsHistoricalDataRetrievalMaxDurationArray{ DirectAppdynamicsHistoricalDataRetrievalMaxDurationArgs{...} }
+type DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayInput interface {
+	pulumi.Input
+
+	ToDirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutput() DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutput
+	ToDirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutputWithContext(context.Context) DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutput
+}
+
+type DirectAppdynamicsHistoricalDataRetrievalMaxDurationArray []DirectAppdynamicsHistoricalDataRetrievalMaxDurationInput
+
+func (DirectAppdynamicsHistoricalDataRetrievalMaxDurationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DirectAppdynamicsHistoricalDataRetrievalMaxDuration)(nil)).Elem()
+}
+
+func (i DirectAppdynamicsHistoricalDataRetrievalMaxDurationArray) ToDirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutput() DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutput {
+	return i.ToDirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutputWithContext(context.Background())
+}
+
+func (i DirectAppdynamicsHistoricalDataRetrievalMaxDurationArray) ToDirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutputWithContext(ctx context.Context) DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutput)
+}
+
+type DirectAppdynamicsHistoricalDataRetrievalMaxDurationOutput struct{ *pulumi.OutputState }
+
+func (DirectAppdynamicsHistoricalDataRetrievalMaxDurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DirectAppdynamicsHistoricalDataRetrievalMaxDuration)(nil)).Elem()
+}
+
+func (o DirectAppdynamicsHistoricalDataRetrievalMaxDurationOutput) ToDirectAppdynamicsHistoricalDataRetrievalMaxDurationOutput() DirectAppdynamicsHistoricalDataRetrievalMaxDurationOutput {
+	return o
+}
+
+func (o DirectAppdynamicsHistoricalDataRetrievalMaxDurationOutput) ToDirectAppdynamicsHistoricalDataRetrievalMaxDurationOutputWithContext(ctx context.Context) DirectAppdynamicsHistoricalDataRetrievalMaxDurationOutput {
+	return o
+}
+
+// Must be one of Minute, Hour, or Day.
+func (o DirectAppdynamicsHistoricalDataRetrievalMaxDurationOutput) Unit() pulumi.StringOutput {
+	return o.ApplyT(func(v DirectAppdynamicsHistoricalDataRetrievalMaxDuration) string { return v.Unit }).(pulumi.StringOutput)
+}
+
+// Must be an integer greater than or equal to 0.
+func (o DirectAppdynamicsHistoricalDataRetrievalMaxDurationOutput) Value() pulumi.IntOutput {
+	return o.ApplyT(func(v DirectAppdynamicsHistoricalDataRetrievalMaxDuration) int { return v.Value }).(pulumi.IntOutput)
+}
+
+type DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutput struct{ *pulumi.OutputState }
+
+func (DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DirectAppdynamicsHistoricalDataRetrievalMaxDuration)(nil)).Elem()
+}
+
+func (o DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutput) ToDirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutput() DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutput {
+	return o
+}
+
+func (o DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutput) ToDirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutputWithContext(ctx context.Context) DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutput {
+	return o
+}
+
+func (o DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutput) Index(i pulumi.IntInput) DirectAppdynamicsHistoricalDataRetrievalMaxDurationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DirectAppdynamicsHistoricalDataRetrievalMaxDuration {
+		return vs[0].([]DirectAppdynamicsHistoricalDataRetrievalMaxDuration)[vs[1].(int)]
+	}).(DirectAppdynamicsHistoricalDataRetrievalMaxDurationOutput)
+}
+
 type DirectAppdynamicsQueryDelay struct {
 	// Must be one of Minute or Second.
 	Unit string `pulumi:"unit"`
@@ -3344,7 +4509,7 @@ type DirectAppdynamicsQueryDelay struct {
 // DirectAppdynamicsQueryDelayInput is an input type that accepts DirectAppdynamicsQueryDelayArgs and DirectAppdynamicsQueryDelayOutput values.
 // You can construct a concrete instance of `DirectAppdynamicsQueryDelayInput` via:
 //
-//          DirectAppdynamicsQueryDelayArgs{...}
+//	DirectAppdynamicsQueryDelayArgs{...}
 type DirectAppdynamicsQueryDelayInput interface {
 	pulumi.Input
 
@@ -3382,11 +4547,11 @@ func (i DirectAppdynamicsQueryDelayArgs) ToDirectAppdynamicsQueryDelayPtrOutputW
 // DirectAppdynamicsQueryDelayPtrInput is an input type that accepts DirectAppdynamicsQueryDelayArgs, DirectAppdynamicsQueryDelayPtr and DirectAppdynamicsQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectAppdynamicsQueryDelayPtrInput` via:
 //
-//          DirectAppdynamicsQueryDelayArgs{...}
+//	        DirectAppdynamicsQueryDelayArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DirectAppdynamicsQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -3490,6 +4655,534 @@ func (o DirectAppdynamicsQueryDelayPtrOutput) Value() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+type DirectAzureMonitorHistoricalDataRetrieval struct {
+	// Used by default for any SLOs connected to this data source.
+	DefaultDurations []DirectAzureMonitorHistoricalDataRetrievalDefaultDuration `pulumi:"defaultDurations"`
+	// Defines the maximum period for which data can be retrieved.
+	MaxDurations []DirectAzureMonitorHistoricalDataRetrievalMaxDuration `pulumi:"maxDurations"`
+}
+
+// DirectAzureMonitorHistoricalDataRetrievalInput is an input type that accepts DirectAzureMonitorHistoricalDataRetrievalArgs and DirectAzureMonitorHistoricalDataRetrievalOutput values.
+// You can construct a concrete instance of `DirectAzureMonitorHistoricalDataRetrievalInput` via:
+//
+//	DirectAzureMonitorHistoricalDataRetrievalArgs{...}
+type DirectAzureMonitorHistoricalDataRetrievalInput interface {
+	pulumi.Input
+
+	ToDirectAzureMonitorHistoricalDataRetrievalOutput() DirectAzureMonitorHistoricalDataRetrievalOutput
+	ToDirectAzureMonitorHistoricalDataRetrievalOutputWithContext(context.Context) DirectAzureMonitorHistoricalDataRetrievalOutput
+}
+
+type DirectAzureMonitorHistoricalDataRetrievalArgs struct {
+	// Used by default for any SLOs connected to this data source.
+	DefaultDurations DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayInput `pulumi:"defaultDurations"`
+	// Defines the maximum period for which data can be retrieved.
+	MaxDurations DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayInput `pulumi:"maxDurations"`
+}
+
+func (DirectAzureMonitorHistoricalDataRetrievalArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DirectAzureMonitorHistoricalDataRetrieval)(nil)).Elem()
+}
+
+func (i DirectAzureMonitorHistoricalDataRetrievalArgs) ToDirectAzureMonitorHistoricalDataRetrievalOutput() DirectAzureMonitorHistoricalDataRetrievalOutput {
+	return i.ToDirectAzureMonitorHistoricalDataRetrievalOutputWithContext(context.Background())
+}
+
+func (i DirectAzureMonitorHistoricalDataRetrievalArgs) ToDirectAzureMonitorHistoricalDataRetrievalOutputWithContext(ctx context.Context) DirectAzureMonitorHistoricalDataRetrievalOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectAzureMonitorHistoricalDataRetrievalOutput)
+}
+
+func (i DirectAzureMonitorHistoricalDataRetrievalArgs) ToDirectAzureMonitorHistoricalDataRetrievalPtrOutput() DirectAzureMonitorHistoricalDataRetrievalPtrOutput {
+	return i.ToDirectAzureMonitorHistoricalDataRetrievalPtrOutputWithContext(context.Background())
+}
+
+func (i DirectAzureMonitorHistoricalDataRetrievalArgs) ToDirectAzureMonitorHistoricalDataRetrievalPtrOutputWithContext(ctx context.Context) DirectAzureMonitorHistoricalDataRetrievalPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectAzureMonitorHistoricalDataRetrievalOutput).ToDirectAzureMonitorHistoricalDataRetrievalPtrOutputWithContext(ctx)
+}
+
+// DirectAzureMonitorHistoricalDataRetrievalPtrInput is an input type that accepts DirectAzureMonitorHistoricalDataRetrievalArgs, DirectAzureMonitorHistoricalDataRetrievalPtr and DirectAzureMonitorHistoricalDataRetrievalPtrOutput values.
+// You can construct a concrete instance of `DirectAzureMonitorHistoricalDataRetrievalPtrInput` via:
+//
+//	        DirectAzureMonitorHistoricalDataRetrievalArgs{...}
+//
+//	or:
+//
+//	        nil
+type DirectAzureMonitorHistoricalDataRetrievalPtrInput interface {
+	pulumi.Input
+
+	ToDirectAzureMonitorHistoricalDataRetrievalPtrOutput() DirectAzureMonitorHistoricalDataRetrievalPtrOutput
+	ToDirectAzureMonitorHistoricalDataRetrievalPtrOutputWithContext(context.Context) DirectAzureMonitorHistoricalDataRetrievalPtrOutput
+}
+
+type directAzureMonitorHistoricalDataRetrievalPtrType DirectAzureMonitorHistoricalDataRetrievalArgs
+
+func DirectAzureMonitorHistoricalDataRetrievalPtr(v *DirectAzureMonitorHistoricalDataRetrievalArgs) DirectAzureMonitorHistoricalDataRetrievalPtrInput {
+	return (*directAzureMonitorHistoricalDataRetrievalPtrType)(v)
+}
+
+func (*directAzureMonitorHistoricalDataRetrievalPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DirectAzureMonitorHistoricalDataRetrieval)(nil)).Elem()
+}
+
+func (i *directAzureMonitorHistoricalDataRetrievalPtrType) ToDirectAzureMonitorHistoricalDataRetrievalPtrOutput() DirectAzureMonitorHistoricalDataRetrievalPtrOutput {
+	return i.ToDirectAzureMonitorHistoricalDataRetrievalPtrOutputWithContext(context.Background())
+}
+
+func (i *directAzureMonitorHistoricalDataRetrievalPtrType) ToDirectAzureMonitorHistoricalDataRetrievalPtrOutputWithContext(ctx context.Context) DirectAzureMonitorHistoricalDataRetrievalPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectAzureMonitorHistoricalDataRetrievalPtrOutput)
+}
+
+type DirectAzureMonitorHistoricalDataRetrievalOutput struct{ *pulumi.OutputState }
+
+func (DirectAzureMonitorHistoricalDataRetrievalOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DirectAzureMonitorHistoricalDataRetrieval)(nil)).Elem()
+}
+
+func (o DirectAzureMonitorHistoricalDataRetrievalOutput) ToDirectAzureMonitorHistoricalDataRetrievalOutput() DirectAzureMonitorHistoricalDataRetrievalOutput {
+	return o
+}
+
+func (o DirectAzureMonitorHistoricalDataRetrievalOutput) ToDirectAzureMonitorHistoricalDataRetrievalOutputWithContext(ctx context.Context) DirectAzureMonitorHistoricalDataRetrievalOutput {
+	return o
+}
+
+func (o DirectAzureMonitorHistoricalDataRetrievalOutput) ToDirectAzureMonitorHistoricalDataRetrievalPtrOutput() DirectAzureMonitorHistoricalDataRetrievalPtrOutput {
+	return o.ToDirectAzureMonitorHistoricalDataRetrievalPtrOutputWithContext(context.Background())
+}
+
+func (o DirectAzureMonitorHistoricalDataRetrievalOutput) ToDirectAzureMonitorHistoricalDataRetrievalPtrOutputWithContext(ctx context.Context) DirectAzureMonitorHistoricalDataRetrievalPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DirectAzureMonitorHistoricalDataRetrieval) *DirectAzureMonitorHistoricalDataRetrieval {
+		return &v
+	}).(DirectAzureMonitorHistoricalDataRetrievalPtrOutput)
+}
+
+// Used by default for any SLOs connected to this data source.
+func (o DirectAzureMonitorHistoricalDataRetrievalOutput) DefaultDurations() DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return o.ApplyT(func(v DirectAzureMonitorHistoricalDataRetrieval) []DirectAzureMonitorHistoricalDataRetrievalDefaultDuration {
+		return v.DefaultDurations
+	}).(DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutput)
+}
+
+// Defines the maximum period for which data can be retrieved.
+func (o DirectAzureMonitorHistoricalDataRetrievalOutput) MaxDurations() DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutput {
+	return o.ApplyT(func(v DirectAzureMonitorHistoricalDataRetrieval) []DirectAzureMonitorHistoricalDataRetrievalMaxDuration {
+		return v.MaxDurations
+	}).(DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutput)
+}
+
+type DirectAzureMonitorHistoricalDataRetrievalPtrOutput struct{ *pulumi.OutputState }
+
+func (DirectAzureMonitorHistoricalDataRetrievalPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DirectAzureMonitorHistoricalDataRetrieval)(nil)).Elem()
+}
+
+func (o DirectAzureMonitorHistoricalDataRetrievalPtrOutput) ToDirectAzureMonitorHistoricalDataRetrievalPtrOutput() DirectAzureMonitorHistoricalDataRetrievalPtrOutput {
+	return o
+}
+
+func (o DirectAzureMonitorHistoricalDataRetrievalPtrOutput) ToDirectAzureMonitorHistoricalDataRetrievalPtrOutputWithContext(ctx context.Context) DirectAzureMonitorHistoricalDataRetrievalPtrOutput {
+	return o
+}
+
+func (o DirectAzureMonitorHistoricalDataRetrievalPtrOutput) Elem() DirectAzureMonitorHistoricalDataRetrievalOutput {
+	return o.ApplyT(func(v *DirectAzureMonitorHistoricalDataRetrieval) DirectAzureMonitorHistoricalDataRetrieval {
+		if v != nil {
+			return *v
+		}
+		var ret DirectAzureMonitorHistoricalDataRetrieval
+		return ret
+	}).(DirectAzureMonitorHistoricalDataRetrievalOutput)
+}
+
+// Used by default for any SLOs connected to this data source.
+func (o DirectAzureMonitorHistoricalDataRetrievalPtrOutput) DefaultDurations() DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return o.ApplyT(func(v *DirectAzureMonitorHistoricalDataRetrieval) []DirectAzureMonitorHistoricalDataRetrievalDefaultDuration {
+		if v == nil {
+			return nil
+		}
+		return v.DefaultDurations
+	}).(DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutput)
+}
+
+// Defines the maximum period for which data can be retrieved.
+func (o DirectAzureMonitorHistoricalDataRetrievalPtrOutput) MaxDurations() DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutput {
+	return o.ApplyT(func(v *DirectAzureMonitorHistoricalDataRetrieval) []DirectAzureMonitorHistoricalDataRetrievalMaxDuration {
+		if v == nil {
+			return nil
+		}
+		return v.MaxDurations
+	}).(DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutput)
+}
+
+type DirectAzureMonitorHistoricalDataRetrievalDefaultDuration struct {
+	// Must be one of Minute, Hour, or Day.
+	Unit string `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value int `pulumi:"value"`
+}
+
+// DirectAzureMonitorHistoricalDataRetrievalDefaultDurationInput is an input type that accepts DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArgs and DirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutput values.
+// You can construct a concrete instance of `DirectAzureMonitorHistoricalDataRetrievalDefaultDurationInput` via:
+//
+//	DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArgs{...}
+type DirectAzureMonitorHistoricalDataRetrievalDefaultDurationInput interface {
+	pulumi.Input
+
+	ToDirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutput() DirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutput
+	ToDirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutputWithContext(context.Context) DirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutput
+}
+
+type DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArgs struct {
+	// Must be one of Minute, Hour, or Day.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value pulumi.IntInput `pulumi:"value"`
+}
+
+func (DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DirectAzureMonitorHistoricalDataRetrievalDefaultDuration)(nil)).Elem()
+}
+
+func (i DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArgs) ToDirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutput() DirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutput {
+	return i.ToDirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutputWithContext(context.Background())
+}
+
+func (i DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArgs) ToDirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutputWithContext(ctx context.Context) DirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutput)
+}
+
+// DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayInput is an input type that accepts DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArray and DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutput values.
+// You can construct a concrete instance of `DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayInput` via:
+//
+//	DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArray{ DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArgs{...} }
+type DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayInput interface {
+	pulumi.Input
+
+	ToDirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutput() DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutput
+	ToDirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutputWithContext(context.Context) DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutput
+}
+
+type DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArray []DirectAzureMonitorHistoricalDataRetrievalDefaultDurationInput
+
+func (DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DirectAzureMonitorHistoricalDataRetrievalDefaultDuration)(nil)).Elem()
+}
+
+func (i DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArray) ToDirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutput() DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return i.ToDirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutputWithContext(context.Background())
+}
+
+func (i DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArray) ToDirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutputWithContext(ctx context.Context) DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutput)
+}
+
+type DirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutput struct{ *pulumi.OutputState }
+
+func (DirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DirectAzureMonitorHistoricalDataRetrievalDefaultDuration)(nil)).Elem()
+}
+
+func (o DirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutput) ToDirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutput() DirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutput {
+	return o
+}
+
+func (o DirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutput) ToDirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutputWithContext(ctx context.Context) DirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutput {
+	return o
+}
+
+// Must be one of Minute, Hour, or Day.
+func (o DirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutput) Unit() pulumi.StringOutput {
+	return o.ApplyT(func(v DirectAzureMonitorHistoricalDataRetrievalDefaultDuration) string { return v.Unit }).(pulumi.StringOutput)
+}
+
+// Must be an integer greater than or equal to 0.
+func (o DirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutput) Value() pulumi.IntOutput {
+	return o.ApplyT(func(v DirectAzureMonitorHistoricalDataRetrievalDefaultDuration) int { return v.Value }).(pulumi.IntOutput)
+}
+
+type DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutput struct{ *pulumi.OutputState }
+
+func (DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DirectAzureMonitorHistoricalDataRetrievalDefaultDuration)(nil)).Elem()
+}
+
+func (o DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutput) ToDirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutput() DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return o
+}
+
+func (o DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutput) ToDirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutputWithContext(ctx context.Context) DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return o
+}
+
+func (o DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutput) Index(i pulumi.IntInput) DirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DirectAzureMonitorHistoricalDataRetrievalDefaultDuration {
+		return vs[0].([]DirectAzureMonitorHistoricalDataRetrievalDefaultDuration)[vs[1].(int)]
+	}).(DirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutput)
+}
+
+type DirectAzureMonitorHistoricalDataRetrievalMaxDuration struct {
+	// Must be one of Minute, Hour, or Day.
+	Unit string `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value int `pulumi:"value"`
+}
+
+// DirectAzureMonitorHistoricalDataRetrievalMaxDurationInput is an input type that accepts DirectAzureMonitorHistoricalDataRetrievalMaxDurationArgs and DirectAzureMonitorHistoricalDataRetrievalMaxDurationOutput values.
+// You can construct a concrete instance of `DirectAzureMonitorHistoricalDataRetrievalMaxDurationInput` via:
+//
+//	DirectAzureMonitorHistoricalDataRetrievalMaxDurationArgs{...}
+type DirectAzureMonitorHistoricalDataRetrievalMaxDurationInput interface {
+	pulumi.Input
+
+	ToDirectAzureMonitorHistoricalDataRetrievalMaxDurationOutput() DirectAzureMonitorHistoricalDataRetrievalMaxDurationOutput
+	ToDirectAzureMonitorHistoricalDataRetrievalMaxDurationOutputWithContext(context.Context) DirectAzureMonitorHistoricalDataRetrievalMaxDurationOutput
+}
+
+type DirectAzureMonitorHistoricalDataRetrievalMaxDurationArgs struct {
+	// Must be one of Minute, Hour, or Day.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value pulumi.IntInput `pulumi:"value"`
+}
+
+func (DirectAzureMonitorHistoricalDataRetrievalMaxDurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DirectAzureMonitorHistoricalDataRetrievalMaxDuration)(nil)).Elem()
+}
+
+func (i DirectAzureMonitorHistoricalDataRetrievalMaxDurationArgs) ToDirectAzureMonitorHistoricalDataRetrievalMaxDurationOutput() DirectAzureMonitorHistoricalDataRetrievalMaxDurationOutput {
+	return i.ToDirectAzureMonitorHistoricalDataRetrievalMaxDurationOutputWithContext(context.Background())
+}
+
+func (i DirectAzureMonitorHistoricalDataRetrievalMaxDurationArgs) ToDirectAzureMonitorHistoricalDataRetrievalMaxDurationOutputWithContext(ctx context.Context) DirectAzureMonitorHistoricalDataRetrievalMaxDurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectAzureMonitorHistoricalDataRetrievalMaxDurationOutput)
+}
+
+// DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayInput is an input type that accepts DirectAzureMonitorHistoricalDataRetrievalMaxDurationArray and DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutput values.
+// You can construct a concrete instance of `DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayInput` via:
+//
+//	DirectAzureMonitorHistoricalDataRetrievalMaxDurationArray{ DirectAzureMonitorHistoricalDataRetrievalMaxDurationArgs{...} }
+type DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayInput interface {
+	pulumi.Input
+
+	ToDirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutput() DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutput
+	ToDirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutputWithContext(context.Context) DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutput
+}
+
+type DirectAzureMonitorHistoricalDataRetrievalMaxDurationArray []DirectAzureMonitorHistoricalDataRetrievalMaxDurationInput
+
+func (DirectAzureMonitorHistoricalDataRetrievalMaxDurationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DirectAzureMonitorHistoricalDataRetrievalMaxDuration)(nil)).Elem()
+}
+
+func (i DirectAzureMonitorHistoricalDataRetrievalMaxDurationArray) ToDirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutput() DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutput {
+	return i.ToDirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutputWithContext(context.Background())
+}
+
+func (i DirectAzureMonitorHistoricalDataRetrievalMaxDurationArray) ToDirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutputWithContext(ctx context.Context) DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutput)
+}
+
+type DirectAzureMonitorHistoricalDataRetrievalMaxDurationOutput struct{ *pulumi.OutputState }
+
+func (DirectAzureMonitorHistoricalDataRetrievalMaxDurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DirectAzureMonitorHistoricalDataRetrievalMaxDuration)(nil)).Elem()
+}
+
+func (o DirectAzureMonitorHistoricalDataRetrievalMaxDurationOutput) ToDirectAzureMonitorHistoricalDataRetrievalMaxDurationOutput() DirectAzureMonitorHistoricalDataRetrievalMaxDurationOutput {
+	return o
+}
+
+func (o DirectAzureMonitorHistoricalDataRetrievalMaxDurationOutput) ToDirectAzureMonitorHistoricalDataRetrievalMaxDurationOutputWithContext(ctx context.Context) DirectAzureMonitorHistoricalDataRetrievalMaxDurationOutput {
+	return o
+}
+
+// Must be one of Minute, Hour, or Day.
+func (o DirectAzureMonitorHistoricalDataRetrievalMaxDurationOutput) Unit() pulumi.StringOutput {
+	return o.ApplyT(func(v DirectAzureMonitorHistoricalDataRetrievalMaxDuration) string { return v.Unit }).(pulumi.StringOutput)
+}
+
+// Must be an integer greater than or equal to 0.
+func (o DirectAzureMonitorHistoricalDataRetrievalMaxDurationOutput) Value() pulumi.IntOutput {
+	return o.ApplyT(func(v DirectAzureMonitorHistoricalDataRetrievalMaxDuration) int { return v.Value }).(pulumi.IntOutput)
+}
+
+type DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutput struct{ *pulumi.OutputState }
+
+func (DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DirectAzureMonitorHistoricalDataRetrievalMaxDuration)(nil)).Elem()
+}
+
+func (o DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutput) ToDirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutput() DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutput {
+	return o
+}
+
+func (o DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutput) ToDirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutputWithContext(ctx context.Context) DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutput {
+	return o
+}
+
+func (o DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutput) Index(i pulumi.IntInput) DirectAzureMonitorHistoricalDataRetrievalMaxDurationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DirectAzureMonitorHistoricalDataRetrievalMaxDuration {
+		return vs[0].([]DirectAzureMonitorHistoricalDataRetrievalMaxDuration)[vs[1].(int)]
+	}).(DirectAzureMonitorHistoricalDataRetrievalMaxDurationOutput)
+}
+
+type DirectAzureMonitorQueryDelay struct {
+	// Must be one of Minute or Second.
+	Unit string `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value int `pulumi:"value"`
+}
+
+// DirectAzureMonitorQueryDelayInput is an input type that accepts DirectAzureMonitorQueryDelayArgs and DirectAzureMonitorQueryDelayOutput values.
+// You can construct a concrete instance of `DirectAzureMonitorQueryDelayInput` via:
+//
+//	DirectAzureMonitorQueryDelayArgs{...}
+type DirectAzureMonitorQueryDelayInput interface {
+	pulumi.Input
+
+	ToDirectAzureMonitorQueryDelayOutput() DirectAzureMonitorQueryDelayOutput
+	ToDirectAzureMonitorQueryDelayOutputWithContext(context.Context) DirectAzureMonitorQueryDelayOutput
+}
+
+type DirectAzureMonitorQueryDelayArgs struct {
+	// Must be one of Minute or Second.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value pulumi.IntInput `pulumi:"value"`
+}
+
+func (DirectAzureMonitorQueryDelayArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DirectAzureMonitorQueryDelay)(nil)).Elem()
+}
+
+func (i DirectAzureMonitorQueryDelayArgs) ToDirectAzureMonitorQueryDelayOutput() DirectAzureMonitorQueryDelayOutput {
+	return i.ToDirectAzureMonitorQueryDelayOutputWithContext(context.Background())
+}
+
+func (i DirectAzureMonitorQueryDelayArgs) ToDirectAzureMonitorQueryDelayOutputWithContext(ctx context.Context) DirectAzureMonitorQueryDelayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectAzureMonitorQueryDelayOutput)
+}
+
+func (i DirectAzureMonitorQueryDelayArgs) ToDirectAzureMonitorQueryDelayPtrOutput() DirectAzureMonitorQueryDelayPtrOutput {
+	return i.ToDirectAzureMonitorQueryDelayPtrOutputWithContext(context.Background())
+}
+
+func (i DirectAzureMonitorQueryDelayArgs) ToDirectAzureMonitorQueryDelayPtrOutputWithContext(ctx context.Context) DirectAzureMonitorQueryDelayPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectAzureMonitorQueryDelayOutput).ToDirectAzureMonitorQueryDelayPtrOutputWithContext(ctx)
+}
+
+// DirectAzureMonitorQueryDelayPtrInput is an input type that accepts DirectAzureMonitorQueryDelayArgs, DirectAzureMonitorQueryDelayPtr and DirectAzureMonitorQueryDelayPtrOutput values.
+// You can construct a concrete instance of `DirectAzureMonitorQueryDelayPtrInput` via:
+//
+//	        DirectAzureMonitorQueryDelayArgs{...}
+//
+//	or:
+//
+//	        nil
+type DirectAzureMonitorQueryDelayPtrInput interface {
+	pulumi.Input
+
+	ToDirectAzureMonitorQueryDelayPtrOutput() DirectAzureMonitorQueryDelayPtrOutput
+	ToDirectAzureMonitorQueryDelayPtrOutputWithContext(context.Context) DirectAzureMonitorQueryDelayPtrOutput
+}
+
+type directAzureMonitorQueryDelayPtrType DirectAzureMonitorQueryDelayArgs
+
+func DirectAzureMonitorQueryDelayPtr(v *DirectAzureMonitorQueryDelayArgs) DirectAzureMonitorQueryDelayPtrInput {
+	return (*directAzureMonitorQueryDelayPtrType)(v)
+}
+
+func (*directAzureMonitorQueryDelayPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DirectAzureMonitorQueryDelay)(nil)).Elem()
+}
+
+func (i *directAzureMonitorQueryDelayPtrType) ToDirectAzureMonitorQueryDelayPtrOutput() DirectAzureMonitorQueryDelayPtrOutput {
+	return i.ToDirectAzureMonitorQueryDelayPtrOutputWithContext(context.Background())
+}
+
+func (i *directAzureMonitorQueryDelayPtrType) ToDirectAzureMonitorQueryDelayPtrOutputWithContext(ctx context.Context) DirectAzureMonitorQueryDelayPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectAzureMonitorQueryDelayPtrOutput)
+}
+
+type DirectAzureMonitorQueryDelayOutput struct{ *pulumi.OutputState }
+
+func (DirectAzureMonitorQueryDelayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DirectAzureMonitorQueryDelay)(nil)).Elem()
+}
+
+func (o DirectAzureMonitorQueryDelayOutput) ToDirectAzureMonitorQueryDelayOutput() DirectAzureMonitorQueryDelayOutput {
+	return o
+}
+
+func (o DirectAzureMonitorQueryDelayOutput) ToDirectAzureMonitorQueryDelayOutputWithContext(ctx context.Context) DirectAzureMonitorQueryDelayOutput {
+	return o
+}
+
+func (o DirectAzureMonitorQueryDelayOutput) ToDirectAzureMonitorQueryDelayPtrOutput() DirectAzureMonitorQueryDelayPtrOutput {
+	return o.ToDirectAzureMonitorQueryDelayPtrOutputWithContext(context.Background())
+}
+
+func (o DirectAzureMonitorQueryDelayOutput) ToDirectAzureMonitorQueryDelayPtrOutputWithContext(ctx context.Context) DirectAzureMonitorQueryDelayPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DirectAzureMonitorQueryDelay) *DirectAzureMonitorQueryDelay {
+		return &v
+	}).(DirectAzureMonitorQueryDelayPtrOutput)
+}
+
+// Must be one of Minute or Second.
+func (o DirectAzureMonitorQueryDelayOutput) Unit() pulumi.StringOutput {
+	return o.ApplyT(func(v DirectAzureMonitorQueryDelay) string { return v.Unit }).(pulumi.StringOutput)
+}
+
+// Must be an integer greater than or equal to 0.
+func (o DirectAzureMonitorQueryDelayOutput) Value() pulumi.IntOutput {
+	return o.ApplyT(func(v DirectAzureMonitorQueryDelay) int { return v.Value }).(pulumi.IntOutput)
+}
+
+type DirectAzureMonitorQueryDelayPtrOutput struct{ *pulumi.OutputState }
+
+func (DirectAzureMonitorQueryDelayPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DirectAzureMonitorQueryDelay)(nil)).Elem()
+}
+
+func (o DirectAzureMonitorQueryDelayPtrOutput) ToDirectAzureMonitorQueryDelayPtrOutput() DirectAzureMonitorQueryDelayPtrOutput {
+	return o
+}
+
+func (o DirectAzureMonitorQueryDelayPtrOutput) ToDirectAzureMonitorQueryDelayPtrOutputWithContext(ctx context.Context) DirectAzureMonitorQueryDelayPtrOutput {
+	return o
+}
+
+func (o DirectAzureMonitorQueryDelayPtrOutput) Elem() DirectAzureMonitorQueryDelayOutput {
+	return o.ApplyT(func(v *DirectAzureMonitorQueryDelay) DirectAzureMonitorQueryDelay {
+		if v != nil {
+			return *v
+		}
+		var ret DirectAzureMonitorQueryDelay
+		return ret
+	}).(DirectAzureMonitorQueryDelayOutput)
+}
+
+// Must be one of Minute or Second.
+func (o DirectAzureMonitorQueryDelayPtrOutput) Unit() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DirectAzureMonitorQueryDelay) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Unit
+	}).(pulumi.StringPtrOutput)
+}
+
+// Must be an integer greater than or equal to 0.
+func (o DirectAzureMonitorQueryDelayPtrOutput) Value() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DirectAzureMonitorQueryDelay) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Value
+	}).(pulumi.IntPtrOutput)
+}
+
 type DirectBigqueryQueryDelay struct {
 	// Must be one of Minute or Second.
 	Unit string `pulumi:"unit"`
@@ -3500,7 +5193,7 @@ type DirectBigqueryQueryDelay struct {
 // DirectBigqueryQueryDelayInput is an input type that accepts DirectBigqueryQueryDelayArgs and DirectBigqueryQueryDelayOutput values.
 // You can construct a concrete instance of `DirectBigqueryQueryDelayInput` via:
 //
-//          DirectBigqueryQueryDelayArgs{...}
+//	DirectBigqueryQueryDelayArgs{...}
 type DirectBigqueryQueryDelayInput interface {
 	pulumi.Input
 
@@ -3538,11 +5231,11 @@ func (i DirectBigqueryQueryDelayArgs) ToDirectBigqueryQueryDelayPtrOutputWithCon
 // DirectBigqueryQueryDelayPtrInput is an input type that accepts DirectBigqueryQueryDelayArgs, DirectBigqueryQueryDelayPtr and DirectBigqueryQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectBigqueryQueryDelayPtrInput` via:
 //
-//          DirectBigqueryQueryDelayArgs{...}
+//	        DirectBigqueryQueryDelayArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DirectBigqueryQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -3656,7 +5349,7 @@ type DirectCloudwatchHistoricalDataRetrieval struct {
 // DirectCloudwatchHistoricalDataRetrievalInput is an input type that accepts DirectCloudwatchHistoricalDataRetrievalArgs and DirectCloudwatchHistoricalDataRetrievalOutput values.
 // You can construct a concrete instance of `DirectCloudwatchHistoricalDataRetrievalInput` via:
 //
-//          DirectCloudwatchHistoricalDataRetrievalArgs{...}
+//	DirectCloudwatchHistoricalDataRetrievalArgs{...}
 type DirectCloudwatchHistoricalDataRetrievalInput interface {
 	pulumi.Input
 
@@ -3694,11 +5387,11 @@ func (i DirectCloudwatchHistoricalDataRetrievalArgs) ToDirectCloudwatchHistorica
 // DirectCloudwatchHistoricalDataRetrievalPtrInput is an input type that accepts DirectCloudwatchHistoricalDataRetrievalArgs, DirectCloudwatchHistoricalDataRetrievalPtr and DirectCloudwatchHistoricalDataRetrievalPtrOutput values.
 // You can construct a concrete instance of `DirectCloudwatchHistoricalDataRetrievalPtrInput` via:
 //
-//          DirectCloudwatchHistoricalDataRetrievalArgs{...}
+//	        DirectCloudwatchHistoricalDataRetrievalArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DirectCloudwatchHistoricalDataRetrievalPtrInput interface {
 	pulumi.Input
 
@@ -3807,14 +5500,16 @@ func (o DirectCloudwatchHistoricalDataRetrievalPtrOutput) MaxDurations() DirectC
 }
 
 type DirectCloudwatchHistoricalDataRetrievalDefaultDuration struct {
-	Unit  string `pulumi:"unit"`
-	Value int    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit string `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value int `pulumi:"value"`
 }
 
 // DirectCloudwatchHistoricalDataRetrievalDefaultDurationInput is an input type that accepts DirectCloudwatchHistoricalDataRetrievalDefaultDurationArgs and DirectCloudwatchHistoricalDataRetrievalDefaultDurationOutput values.
 // You can construct a concrete instance of `DirectCloudwatchHistoricalDataRetrievalDefaultDurationInput` via:
 //
-//          DirectCloudwatchHistoricalDataRetrievalDefaultDurationArgs{...}
+//	DirectCloudwatchHistoricalDataRetrievalDefaultDurationArgs{...}
 type DirectCloudwatchHistoricalDataRetrievalDefaultDurationInput interface {
 	pulumi.Input
 
@@ -3823,8 +5518,10 @@ type DirectCloudwatchHistoricalDataRetrievalDefaultDurationInput interface {
 }
 
 type DirectCloudwatchHistoricalDataRetrievalDefaultDurationArgs struct {
-	Unit  pulumi.StringInput `pulumi:"unit"`
-	Value pulumi.IntInput    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value pulumi.IntInput `pulumi:"value"`
 }
 
 func (DirectCloudwatchHistoricalDataRetrievalDefaultDurationArgs) ElementType() reflect.Type {
@@ -3842,7 +5539,7 @@ func (i DirectCloudwatchHistoricalDataRetrievalDefaultDurationArgs) ToDirectClou
 // DirectCloudwatchHistoricalDataRetrievalDefaultDurationArrayInput is an input type that accepts DirectCloudwatchHistoricalDataRetrievalDefaultDurationArray and DirectCloudwatchHistoricalDataRetrievalDefaultDurationArrayOutput values.
 // You can construct a concrete instance of `DirectCloudwatchHistoricalDataRetrievalDefaultDurationArrayInput` via:
 //
-//          DirectCloudwatchHistoricalDataRetrievalDefaultDurationArray{ DirectCloudwatchHistoricalDataRetrievalDefaultDurationArgs{...} }
+//	DirectCloudwatchHistoricalDataRetrievalDefaultDurationArray{ DirectCloudwatchHistoricalDataRetrievalDefaultDurationArgs{...} }
 type DirectCloudwatchHistoricalDataRetrievalDefaultDurationArrayInput interface {
 	pulumi.Input
 
@@ -3878,10 +5575,12 @@ func (o DirectCloudwatchHistoricalDataRetrievalDefaultDurationOutput) ToDirectCl
 	return o
 }
 
+// Must be one of Minute, Hour, or Day.
 func (o DirectCloudwatchHistoricalDataRetrievalDefaultDurationOutput) Unit() pulumi.StringOutput {
 	return o.ApplyT(func(v DirectCloudwatchHistoricalDataRetrievalDefaultDuration) string { return v.Unit }).(pulumi.StringOutput)
 }
 
+// Must be an integer greater than or equal to 0.
 func (o DirectCloudwatchHistoricalDataRetrievalDefaultDurationOutput) Value() pulumi.IntOutput {
 	return o.ApplyT(func(v DirectCloudwatchHistoricalDataRetrievalDefaultDuration) int { return v.Value }).(pulumi.IntOutput)
 }
@@ -3907,14 +5606,16 @@ func (o DirectCloudwatchHistoricalDataRetrievalDefaultDurationArrayOutput) Index
 }
 
 type DirectCloudwatchHistoricalDataRetrievalMaxDuration struct {
-	Unit  string `pulumi:"unit"`
-	Value int    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit string `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value int `pulumi:"value"`
 }
 
 // DirectCloudwatchHistoricalDataRetrievalMaxDurationInput is an input type that accepts DirectCloudwatchHistoricalDataRetrievalMaxDurationArgs and DirectCloudwatchHistoricalDataRetrievalMaxDurationOutput values.
 // You can construct a concrete instance of `DirectCloudwatchHistoricalDataRetrievalMaxDurationInput` via:
 //
-//          DirectCloudwatchHistoricalDataRetrievalMaxDurationArgs{...}
+//	DirectCloudwatchHistoricalDataRetrievalMaxDurationArgs{...}
 type DirectCloudwatchHistoricalDataRetrievalMaxDurationInput interface {
 	pulumi.Input
 
@@ -3923,8 +5624,10 @@ type DirectCloudwatchHistoricalDataRetrievalMaxDurationInput interface {
 }
 
 type DirectCloudwatchHistoricalDataRetrievalMaxDurationArgs struct {
-	Unit  pulumi.StringInput `pulumi:"unit"`
-	Value pulumi.IntInput    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value pulumi.IntInput `pulumi:"value"`
 }
 
 func (DirectCloudwatchHistoricalDataRetrievalMaxDurationArgs) ElementType() reflect.Type {
@@ -3942,7 +5645,7 @@ func (i DirectCloudwatchHistoricalDataRetrievalMaxDurationArgs) ToDirectCloudwat
 // DirectCloudwatchHistoricalDataRetrievalMaxDurationArrayInput is an input type that accepts DirectCloudwatchHistoricalDataRetrievalMaxDurationArray and DirectCloudwatchHistoricalDataRetrievalMaxDurationArrayOutput values.
 // You can construct a concrete instance of `DirectCloudwatchHistoricalDataRetrievalMaxDurationArrayInput` via:
 //
-//          DirectCloudwatchHistoricalDataRetrievalMaxDurationArray{ DirectCloudwatchHistoricalDataRetrievalMaxDurationArgs{...} }
+//	DirectCloudwatchHistoricalDataRetrievalMaxDurationArray{ DirectCloudwatchHistoricalDataRetrievalMaxDurationArgs{...} }
 type DirectCloudwatchHistoricalDataRetrievalMaxDurationArrayInput interface {
 	pulumi.Input
 
@@ -3978,10 +5681,12 @@ func (o DirectCloudwatchHistoricalDataRetrievalMaxDurationOutput) ToDirectCloudw
 	return o
 }
 
+// Must be one of Minute, Hour, or Day.
 func (o DirectCloudwatchHistoricalDataRetrievalMaxDurationOutput) Unit() pulumi.StringOutput {
 	return o.ApplyT(func(v DirectCloudwatchHistoricalDataRetrievalMaxDuration) string { return v.Unit }).(pulumi.StringOutput)
 }
 
+// Must be an integer greater than or equal to 0.
 func (o DirectCloudwatchHistoricalDataRetrievalMaxDurationOutput) Value() pulumi.IntOutput {
 	return o.ApplyT(func(v DirectCloudwatchHistoricalDataRetrievalMaxDuration) int { return v.Value }).(pulumi.IntOutput)
 }
@@ -4016,7 +5721,7 @@ type DirectCloudwatchQueryDelay struct {
 // DirectCloudwatchQueryDelayInput is an input type that accepts DirectCloudwatchQueryDelayArgs and DirectCloudwatchQueryDelayOutput values.
 // You can construct a concrete instance of `DirectCloudwatchQueryDelayInput` via:
 //
-//          DirectCloudwatchQueryDelayArgs{...}
+//	DirectCloudwatchQueryDelayArgs{...}
 type DirectCloudwatchQueryDelayInput interface {
 	pulumi.Input
 
@@ -4054,11 +5759,11 @@ func (i DirectCloudwatchQueryDelayArgs) ToDirectCloudwatchQueryDelayPtrOutputWit
 // DirectCloudwatchQueryDelayPtrInput is an input type that accepts DirectCloudwatchQueryDelayArgs, DirectCloudwatchQueryDelayPtr and DirectCloudwatchQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectCloudwatchQueryDelayPtrInput` via:
 //
-//          DirectCloudwatchQueryDelayArgs{...}
+//	        DirectCloudwatchQueryDelayArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DirectCloudwatchQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -4172,7 +5877,7 @@ type DirectDatadogHistoricalDataRetrieval struct {
 // DirectDatadogHistoricalDataRetrievalInput is an input type that accepts DirectDatadogHistoricalDataRetrievalArgs and DirectDatadogHistoricalDataRetrievalOutput values.
 // You can construct a concrete instance of `DirectDatadogHistoricalDataRetrievalInput` via:
 //
-//          DirectDatadogHistoricalDataRetrievalArgs{...}
+//	DirectDatadogHistoricalDataRetrievalArgs{...}
 type DirectDatadogHistoricalDataRetrievalInput interface {
 	pulumi.Input
 
@@ -4210,11 +5915,11 @@ func (i DirectDatadogHistoricalDataRetrievalArgs) ToDirectDatadogHistoricalDataR
 // DirectDatadogHistoricalDataRetrievalPtrInput is an input type that accepts DirectDatadogHistoricalDataRetrievalArgs, DirectDatadogHistoricalDataRetrievalPtr and DirectDatadogHistoricalDataRetrievalPtrOutput values.
 // You can construct a concrete instance of `DirectDatadogHistoricalDataRetrievalPtrInput` via:
 //
-//          DirectDatadogHistoricalDataRetrievalArgs{...}
+//	        DirectDatadogHistoricalDataRetrievalArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DirectDatadogHistoricalDataRetrievalPtrInput interface {
 	pulumi.Input
 
@@ -4323,14 +6028,16 @@ func (o DirectDatadogHistoricalDataRetrievalPtrOutput) MaxDurations() DirectData
 }
 
 type DirectDatadogHistoricalDataRetrievalDefaultDuration struct {
-	Unit  string `pulumi:"unit"`
-	Value int    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit string `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value int `pulumi:"value"`
 }
 
 // DirectDatadogHistoricalDataRetrievalDefaultDurationInput is an input type that accepts DirectDatadogHistoricalDataRetrievalDefaultDurationArgs and DirectDatadogHistoricalDataRetrievalDefaultDurationOutput values.
 // You can construct a concrete instance of `DirectDatadogHistoricalDataRetrievalDefaultDurationInput` via:
 //
-//          DirectDatadogHistoricalDataRetrievalDefaultDurationArgs{...}
+//	DirectDatadogHistoricalDataRetrievalDefaultDurationArgs{...}
 type DirectDatadogHistoricalDataRetrievalDefaultDurationInput interface {
 	pulumi.Input
 
@@ -4339,8 +6046,10 @@ type DirectDatadogHistoricalDataRetrievalDefaultDurationInput interface {
 }
 
 type DirectDatadogHistoricalDataRetrievalDefaultDurationArgs struct {
-	Unit  pulumi.StringInput `pulumi:"unit"`
-	Value pulumi.IntInput    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value pulumi.IntInput `pulumi:"value"`
 }
 
 func (DirectDatadogHistoricalDataRetrievalDefaultDurationArgs) ElementType() reflect.Type {
@@ -4358,7 +6067,7 @@ func (i DirectDatadogHistoricalDataRetrievalDefaultDurationArgs) ToDirectDatadog
 // DirectDatadogHistoricalDataRetrievalDefaultDurationArrayInput is an input type that accepts DirectDatadogHistoricalDataRetrievalDefaultDurationArray and DirectDatadogHistoricalDataRetrievalDefaultDurationArrayOutput values.
 // You can construct a concrete instance of `DirectDatadogHistoricalDataRetrievalDefaultDurationArrayInput` via:
 //
-//          DirectDatadogHistoricalDataRetrievalDefaultDurationArray{ DirectDatadogHistoricalDataRetrievalDefaultDurationArgs{...} }
+//	DirectDatadogHistoricalDataRetrievalDefaultDurationArray{ DirectDatadogHistoricalDataRetrievalDefaultDurationArgs{...} }
 type DirectDatadogHistoricalDataRetrievalDefaultDurationArrayInput interface {
 	pulumi.Input
 
@@ -4394,10 +6103,12 @@ func (o DirectDatadogHistoricalDataRetrievalDefaultDurationOutput) ToDirectDatad
 	return o
 }
 
+// Must be one of Minute, Hour, or Day.
 func (o DirectDatadogHistoricalDataRetrievalDefaultDurationOutput) Unit() pulumi.StringOutput {
 	return o.ApplyT(func(v DirectDatadogHistoricalDataRetrievalDefaultDuration) string { return v.Unit }).(pulumi.StringOutput)
 }
 
+// Must be an integer greater than or equal to 0.
 func (o DirectDatadogHistoricalDataRetrievalDefaultDurationOutput) Value() pulumi.IntOutput {
 	return o.ApplyT(func(v DirectDatadogHistoricalDataRetrievalDefaultDuration) int { return v.Value }).(pulumi.IntOutput)
 }
@@ -4423,14 +6134,16 @@ func (o DirectDatadogHistoricalDataRetrievalDefaultDurationArrayOutput) Index(i 
 }
 
 type DirectDatadogHistoricalDataRetrievalMaxDuration struct {
-	Unit  string `pulumi:"unit"`
-	Value int    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit string `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value int `pulumi:"value"`
 }
 
 // DirectDatadogHistoricalDataRetrievalMaxDurationInput is an input type that accepts DirectDatadogHistoricalDataRetrievalMaxDurationArgs and DirectDatadogHistoricalDataRetrievalMaxDurationOutput values.
 // You can construct a concrete instance of `DirectDatadogHistoricalDataRetrievalMaxDurationInput` via:
 //
-//          DirectDatadogHistoricalDataRetrievalMaxDurationArgs{...}
+//	DirectDatadogHistoricalDataRetrievalMaxDurationArgs{...}
 type DirectDatadogHistoricalDataRetrievalMaxDurationInput interface {
 	pulumi.Input
 
@@ -4439,8 +6152,10 @@ type DirectDatadogHistoricalDataRetrievalMaxDurationInput interface {
 }
 
 type DirectDatadogHistoricalDataRetrievalMaxDurationArgs struct {
-	Unit  pulumi.StringInput `pulumi:"unit"`
-	Value pulumi.IntInput    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value pulumi.IntInput `pulumi:"value"`
 }
 
 func (DirectDatadogHistoricalDataRetrievalMaxDurationArgs) ElementType() reflect.Type {
@@ -4458,7 +6173,7 @@ func (i DirectDatadogHistoricalDataRetrievalMaxDurationArgs) ToDirectDatadogHist
 // DirectDatadogHistoricalDataRetrievalMaxDurationArrayInput is an input type that accepts DirectDatadogHistoricalDataRetrievalMaxDurationArray and DirectDatadogHistoricalDataRetrievalMaxDurationArrayOutput values.
 // You can construct a concrete instance of `DirectDatadogHistoricalDataRetrievalMaxDurationArrayInput` via:
 //
-//          DirectDatadogHistoricalDataRetrievalMaxDurationArray{ DirectDatadogHistoricalDataRetrievalMaxDurationArgs{...} }
+//	DirectDatadogHistoricalDataRetrievalMaxDurationArray{ DirectDatadogHistoricalDataRetrievalMaxDurationArgs{...} }
 type DirectDatadogHistoricalDataRetrievalMaxDurationArrayInput interface {
 	pulumi.Input
 
@@ -4494,10 +6209,12 @@ func (o DirectDatadogHistoricalDataRetrievalMaxDurationOutput) ToDirectDatadogHi
 	return o
 }
 
+// Must be one of Minute, Hour, or Day.
 func (o DirectDatadogHistoricalDataRetrievalMaxDurationOutput) Unit() pulumi.StringOutput {
 	return o.ApplyT(func(v DirectDatadogHistoricalDataRetrievalMaxDuration) string { return v.Unit }).(pulumi.StringOutput)
 }
 
+// Must be an integer greater than or equal to 0.
 func (o DirectDatadogHistoricalDataRetrievalMaxDurationOutput) Value() pulumi.IntOutput {
 	return o.ApplyT(func(v DirectDatadogHistoricalDataRetrievalMaxDuration) int { return v.Value }).(pulumi.IntOutput)
 }
@@ -4532,7 +6249,7 @@ type DirectDatadogQueryDelay struct {
 // DirectDatadogQueryDelayInput is an input type that accepts DirectDatadogQueryDelayArgs and DirectDatadogQueryDelayOutput values.
 // You can construct a concrete instance of `DirectDatadogQueryDelayInput` via:
 //
-//          DirectDatadogQueryDelayArgs{...}
+//	DirectDatadogQueryDelayArgs{...}
 type DirectDatadogQueryDelayInput interface {
 	pulumi.Input
 
@@ -4570,11 +6287,11 @@ func (i DirectDatadogQueryDelayArgs) ToDirectDatadogQueryDelayPtrOutputWithConte
 // DirectDatadogQueryDelayPtrInput is an input type that accepts DirectDatadogQueryDelayArgs, DirectDatadogQueryDelayPtr and DirectDatadogQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectDatadogQueryDelayPtrInput` via:
 //
-//          DirectDatadogQueryDelayArgs{...}
+//	        DirectDatadogQueryDelayArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DirectDatadogQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -4688,7 +6405,7 @@ type DirectDynatraceHistoricalDataRetrieval struct {
 // DirectDynatraceHistoricalDataRetrievalInput is an input type that accepts DirectDynatraceHistoricalDataRetrievalArgs and DirectDynatraceHistoricalDataRetrievalOutput values.
 // You can construct a concrete instance of `DirectDynatraceHistoricalDataRetrievalInput` via:
 //
-//          DirectDynatraceHistoricalDataRetrievalArgs{...}
+//	DirectDynatraceHistoricalDataRetrievalArgs{...}
 type DirectDynatraceHistoricalDataRetrievalInput interface {
 	pulumi.Input
 
@@ -4726,11 +6443,11 @@ func (i DirectDynatraceHistoricalDataRetrievalArgs) ToDirectDynatraceHistoricalD
 // DirectDynatraceHistoricalDataRetrievalPtrInput is an input type that accepts DirectDynatraceHistoricalDataRetrievalArgs, DirectDynatraceHistoricalDataRetrievalPtr and DirectDynatraceHistoricalDataRetrievalPtrOutput values.
 // You can construct a concrete instance of `DirectDynatraceHistoricalDataRetrievalPtrInput` via:
 //
-//          DirectDynatraceHistoricalDataRetrievalArgs{...}
+//	        DirectDynatraceHistoricalDataRetrievalArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DirectDynatraceHistoricalDataRetrievalPtrInput interface {
 	pulumi.Input
 
@@ -4839,14 +6556,16 @@ func (o DirectDynatraceHistoricalDataRetrievalPtrOutput) MaxDurations() DirectDy
 }
 
 type DirectDynatraceHistoricalDataRetrievalDefaultDuration struct {
-	Unit  string `pulumi:"unit"`
-	Value int    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit string `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value int `pulumi:"value"`
 }
 
 // DirectDynatraceHistoricalDataRetrievalDefaultDurationInput is an input type that accepts DirectDynatraceHistoricalDataRetrievalDefaultDurationArgs and DirectDynatraceHistoricalDataRetrievalDefaultDurationOutput values.
 // You can construct a concrete instance of `DirectDynatraceHistoricalDataRetrievalDefaultDurationInput` via:
 //
-//          DirectDynatraceHistoricalDataRetrievalDefaultDurationArgs{...}
+//	DirectDynatraceHistoricalDataRetrievalDefaultDurationArgs{...}
 type DirectDynatraceHistoricalDataRetrievalDefaultDurationInput interface {
 	pulumi.Input
 
@@ -4855,8 +6574,10 @@ type DirectDynatraceHistoricalDataRetrievalDefaultDurationInput interface {
 }
 
 type DirectDynatraceHistoricalDataRetrievalDefaultDurationArgs struct {
-	Unit  pulumi.StringInput `pulumi:"unit"`
-	Value pulumi.IntInput    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value pulumi.IntInput `pulumi:"value"`
 }
 
 func (DirectDynatraceHistoricalDataRetrievalDefaultDurationArgs) ElementType() reflect.Type {
@@ -4874,7 +6595,7 @@ func (i DirectDynatraceHistoricalDataRetrievalDefaultDurationArgs) ToDirectDynat
 // DirectDynatraceHistoricalDataRetrievalDefaultDurationArrayInput is an input type that accepts DirectDynatraceHistoricalDataRetrievalDefaultDurationArray and DirectDynatraceHistoricalDataRetrievalDefaultDurationArrayOutput values.
 // You can construct a concrete instance of `DirectDynatraceHistoricalDataRetrievalDefaultDurationArrayInput` via:
 //
-//          DirectDynatraceHistoricalDataRetrievalDefaultDurationArray{ DirectDynatraceHistoricalDataRetrievalDefaultDurationArgs{...} }
+//	DirectDynatraceHistoricalDataRetrievalDefaultDurationArray{ DirectDynatraceHistoricalDataRetrievalDefaultDurationArgs{...} }
 type DirectDynatraceHistoricalDataRetrievalDefaultDurationArrayInput interface {
 	pulumi.Input
 
@@ -4910,10 +6631,12 @@ func (o DirectDynatraceHistoricalDataRetrievalDefaultDurationOutput) ToDirectDyn
 	return o
 }
 
+// Must be one of Minute, Hour, or Day.
 func (o DirectDynatraceHistoricalDataRetrievalDefaultDurationOutput) Unit() pulumi.StringOutput {
 	return o.ApplyT(func(v DirectDynatraceHistoricalDataRetrievalDefaultDuration) string { return v.Unit }).(pulumi.StringOutput)
 }
 
+// Must be an integer greater than or equal to 0.
 func (o DirectDynatraceHistoricalDataRetrievalDefaultDurationOutput) Value() pulumi.IntOutput {
 	return o.ApplyT(func(v DirectDynatraceHistoricalDataRetrievalDefaultDuration) int { return v.Value }).(pulumi.IntOutput)
 }
@@ -4939,14 +6662,16 @@ func (o DirectDynatraceHistoricalDataRetrievalDefaultDurationArrayOutput) Index(
 }
 
 type DirectDynatraceHistoricalDataRetrievalMaxDuration struct {
-	Unit  string `pulumi:"unit"`
-	Value int    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit string `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value int `pulumi:"value"`
 }
 
 // DirectDynatraceHistoricalDataRetrievalMaxDurationInput is an input type that accepts DirectDynatraceHistoricalDataRetrievalMaxDurationArgs and DirectDynatraceHistoricalDataRetrievalMaxDurationOutput values.
 // You can construct a concrete instance of `DirectDynatraceHistoricalDataRetrievalMaxDurationInput` via:
 //
-//          DirectDynatraceHistoricalDataRetrievalMaxDurationArgs{...}
+//	DirectDynatraceHistoricalDataRetrievalMaxDurationArgs{...}
 type DirectDynatraceHistoricalDataRetrievalMaxDurationInput interface {
 	pulumi.Input
 
@@ -4955,8 +6680,10 @@ type DirectDynatraceHistoricalDataRetrievalMaxDurationInput interface {
 }
 
 type DirectDynatraceHistoricalDataRetrievalMaxDurationArgs struct {
-	Unit  pulumi.StringInput `pulumi:"unit"`
-	Value pulumi.IntInput    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value pulumi.IntInput `pulumi:"value"`
 }
 
 func (DirectDynatraceHistoricalDataRetrievalMaxDurationArgs) ElementType() reflect.Type {
@@ -4974,7 +6701,7 @@ func (i DirectDynatraceHistoricalDataRetrievalMaxDurationArgs) ToDirectDynatrace
 // DirectDynatraceHistoricalDataRetrievalMaxDurationArrayInput is an input type that accepts DirectDynatraceHistoricalDataRetrievalMaxDurationArray and DirectDynatraceHistoricalDataRetrievalMaxDurationArrayOutput values.
 // You can construct a concrete instance of `DirectDynatraceHistoricalDataRetrievalMaxDurationArrayInput` via:
 //
-//          DirectDynatraceHistoricalDataRetrievalMaxDurationArray{ DirectDynatraceHistoricalDataRetrievalMaxDurationArgs{...} }
+//	DirectDynatraceHistoricalDataRetrievalMaxDurationArray{ DirectDynatraceHistoricalDataRetrievalMaxDurationArgs{...} }
 type DirectDynatraceHistoricalDataRetrievalMaxDurationArrayInput interface {
 	pulumi.Input
 
@@ -5010,10 +6737,12 @@ func (o DirectDynatraceHistoricalDataRetrievalMaxDurationOutput) ToDirectDynatra
 	return o
 }
 
+// Must be one of Minute, Hour, or Day.
 func (o DirectDynatraceHistoricalDataRetrievalMaxDurationOutput) Unit() pulumi.StringOutput {
 	return o.ApplyT(func(v DirectDynatraceHistoricalDataRetrievalMaxDuration) string { return v.Unit }).(pulumi.StringOutput)
 }
 
+// Must be an integer greater than or equal to 0.
 func (o DirectDynatraceHistoricalDataRetrievalMaxDurationOutput) Value() pulumi.IntOutput {
 	return o.ApplyT(func(v DirectDynatraceHistoricalDataRetrievalMaxDuration) int { return v.Value }).(pulumi.IntOutput)
 }
@@ -5048,7 +6777,7 @@ type DirectDynatraceQueryDelay struct {
 // DirectDynatraceQueryDelayInput is an input type that accepts DirectDynatraceQueryDelayArgs and DirectDynatraceQueryDelayOutput values.
 // You can construct a concrete instance of `DirectDynatraceQueryDelayInput` via:
 //
-//          DirectDynatraceQueryDelayArgs{...}
+//	DirectDynatraceQueryDelayArgs{...}
 type DirectDynatraceQueryDelayInput interface {
 	pulumi.Input
 
@@ -5086,11 +6815,11 @@ func (i DirectDynatraceQueryDelayArgs) ToDirectDynatraceQueryDelayPtrOutputWithC
 // DirectDynatraceQueryDelayPtrInput is an input type that accepts DirectDynatraceQueryDelayArgs, DirectDynatraceQueryDelayPtr and DirectDynatraceQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectDynatraceQueryDelayPtrInput` via:
 //
-//          DirectDynatraceQueryDelayArgs{...}
+//	        DirectDynatraceQueryDelayArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DirectDynatraceQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -5204,7 +6933,7 @@ type DirectGcmQueryDelay struct {
 // DirectGcmQueryDelayInput is an input type that accepts DirectGcmQueryDelayArgs and DirectGcmQueryDelayOutput values.
 // You can construct a concrete instance of `DirectGcmQueryDelayInput` via:
 //
-//          DirectGcmQueryDelayArgs{...}
+//	DirectGcmQueryDelayArgs{...}
 type DirectGcmQueryDelayInput interface {
 	pulumi.Input
 
@@ -5242,11 +6971,11 @@ func (i DirectGcmQueryDelayArgs) ToDirectGcmQueryDelayPtrOutputWithContext(ctx c
 // DirectGcmQueryDelayPtrInput is an input type that accepts DirectGcmQueryDelayArgs, DirectGcmQueryDelayPtr and DirectGcmQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectGcmQueryDelayPtrInput` via:
 //
-//          DirectGcmQueryDelayArgs{...}
+//	        DirectGcmQueryDelayArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DirectGcmQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -5350,6 +7079,534 @@ func (o DirectGcmQueryDelayPtrOutput) Value() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+type DirectHoneycombHistoricalDataRetrieval struct {
+	// Used by default for any SLOs connected to this data source.
+	DefaultDurations []DirectHoneycombHistoricalDataRetrievalDefaultDuration `pulumi:"defaultDurations"`
+	// Defines the maximum period for which data can be retrieved.
+	MaxDurations []DirectHoneycombHistoricalDataRetrievalMaxDuration `pulumi:"maxDurations"`
+}
+
+// DirectHoneycombHistoricalDataRetrievalInput is an input type that accepts DirectHoneycombHistoricalDataRetrievalArgs and DirectHoneycombHistoricalDataRetrievalOutput values.
+// You can construct a concrete instance of `DirectHoneycombHistoricalDataRetrievalInput` via:
+//
+//	DirectHoneycombHistoricalDataRetrievalArgs{...}
+type DirectHoneycombHistoricalDataRetrievalInput interface {
+	pulumi.Input
+
+	ToDirectHoneycombHistoricalDataRetrievalOutput() DirectHoneycombHistoricalDataRetrievalOutput
+	ToDirectHoneycombHistoricalDataRetrievalOutputWithContext(context.Context) DirectHoneycombHistoricalDataRetrievalOutput
+}
+
+type DirectHoneycombHistoricalDataRetrievalArgs struct {
+	// Used by default for any SLOs connected to this data source.
+	DefaultDurations DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayInput `pulumi:"defaultDurations"`
+	// Defines the maximum period for which data can be retrieved.
+	MaxDurations DirectHoneycombHistoricalDataRetrievalMaxDurationArrayInput `pulumi:"maxDurations"`
+}
+
+func (DirectHoneycombHistoricalDataRetrievalArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DirectHoneycombHistoricalDataRetrieval)(nil)).Elem()
+}
+
+func (i DirectHoneycombHistoricalDataRetrievalArgs) ToDirectHoneycombHistoricalDataRetrievalOutput() DirectHoneycombHistoricalDataRetrievalOutput {
+	return i.ToDirectHoneycombHistoricalDataRetrievalOutputWithContext(context.Background())
+}
+
+func (i DirectHoneycombHistoricalDataRetrievalArgs) ToDirectHoneycombHistoricalDataRetrievalOutputWithContext(ctx context.Context) DirectHoneycombHistoricalDataRetrievalOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectHoneycombHistoricalDataRetrievalOutput)
+}
+
+func (i DirectHoneycombHistoricalDataRetrievalArgs) ToDirectHoneycombHistoricalDataRetrievalPtrOutput() DirectHoneycombHistoricalDataRetrievalPtrOutput {
+	return i.ToDirectHoneycombHistoricalDataRetrievalPtrOutputWithContext(context.Background())
+}
+
+func (i DirectHoneycombHistoricalDataRetrievalArgs) ToDirectHoneycombHistoricalDataRetrievalPtrOutputWithContext(ctx context.Context) DirectHoneycombHistoricalDataRetrievalPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectHoneycombHistoricalDataRetrievalOutput).ToDirectHoneycombHistoricalDataRetrievalPtrOutputWithContext(ctx)
+}
+
+// DirectHoneycombHistoricalDataRetrievalPtrInput is an input type that accepts DirectHoneycombHistoricalDataRetrievalArgs, DirectHoneycombHistoricalDataRetrievalPtr and DirectHoneycombHistoricalDataRetrievalPtrOutput values.
+// You can construct a concrete instance of `DirectHoneycombHistoricalDataRetrievalPtrInput` via:
+//
+//	        DirectHoneycombHistoricalDataRetrievalArgs{...}
+//
+//	or:
+//
+//	        nil
+type DirectHoneycombHistoricalDataRetrievalPtrInput interface {
+	pulumi.Input
+
+	ToDirectHoneycombHistoricalDataRetrievalPtrOutput() DirectHoneycombHistoricalDataRetrievalPtrOutput
+	ToDirectHoneycombHistoricalDataRetrievalPtrOutputWithContext(context.Context) DirectHoneycombHistoricalDataRetrievalPtrOutput
+}
+
+type directHoneycombHistoricalDataRetrievalPtrType DirectHoneycombHistoricalDataRetrievalArgs
+
+func DirectHoneycombHistoricalDataRetrievalPtr(v *DirectHoneycombHistoricalDataRetrievalArgs) DirectHoneycombHistoricalDataRetrievalPtrInput {
+	return (*directHoneycombHistoricalDataRetrievalPtrType)(v)
+}
+
+func (*directHoneycombHistoricalDataRetrievalPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DirectHoneycombHistoricalDataRetrieval)(nil)).Elem()
+}
+
+func (i *directHoneycombHistoricalDataRetrievalPtrType) ToDirectHoneycombHistoricalDataRetrievalPtrOutput() DirectHoneycombHistoricalDataRetrievalPtrOutput {
+	return i.ToDirectHoneycombHistoricalDataRetrievalPtrOutputWithContext(context.Background())
+}
+
+func (i *directHoneycombHistoricalDataRetrievalPtrType) ToDirectHoneycombHistoricalDataRetrievalPtrOutputWithContext(ctx context.Context) DirectHoneycombHistoricalDataRetrievalPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectHoneycombHistoricalDataRetrievalPtrOutput)
+}
+
+type DirectHoneycombHistoricalDataRetrievalOutput struct{ *pulumi.OutputState }
+
+func (DirectHoneycombHistoricalDataRetrievalOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DirectHoneycombHistoricalDataRetrieval)(nil)).Elem()
+}
+
+func (o DirectHoneycombHistoricalDataRetrievalOutput) ToDirectHoneycombHistoricalDataRetrievalOutput() DirectHoneycombHistoricalDataRetrievalOutput {
+	return o
+}
+
+func (o DirectHoneycombHistoricalDataRetrievalOutput) ToDirectHoneycombHistoricalDataRetrievalOutputWithContext(ctx context.Context) DirectHoneycombHistoricalDataRetrievalOutput {
+	return o
+}
+
+func (o DirectHoneycombHistoricalDataRetrievalOutput) ToDirectHoneycombHistoricalDataRetrievalPtrOutput() DirectHoneycombHistoricalDataRetrievalPtrOutput {
+	return o.ToDirectHoneycombHistoricalDataRetrievalPtrOutputWithContext(context.Background())
+}
+
+func (o DirectHoneycombHistoricalDataRetrievalOutput) ToDirectHoneycombHistoricalDataRetrievalPtrOutputWithContext(ctx context.Context) DirectHoneycombHistoricalDataRetrievalPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DirectHoneycombHistoricalDataRetrieval) *DirectHoneycombHistoricalDataRetrieval {
+		return &v
+	}).(DirectHoneycombHistoricalDataRetrievalPtrOutput)
+}
+
+// Used by default for any SLOs connected to this data source.
+func (o DirectHoneycombHistoricalDataRetrievalOutput) DefaultDurations() DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return o.ApplyT(func(v DirectHoneycombHistoricalDataRetrieval) []DirectHoneycombHistoricalDataRetrievalDefaultDuration {
+		return v.DefaultDurations
+	}).(DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutput)
+}
+
+// Defines the maximum period for which data can be retrieved.
+func (o DirectHoneycombHistoricalDataRetrievalOutput) MaxDurations() DirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutput {
+	return o.ApplyT(func(v DirectHoneycombHistoricalDataRetrieval) []DirectHoneycombHistoricalDataRetrievalMaxDuration {
+		return v.MaxDurations
+	}).(DirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutput)
+}
+
+type DirectHoneycombHistoricalDataRetrievalPtrOutput struct{ *pulumi.OutputState }
+
+func (DirectHoneycombHistoricalDataRetrievalPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DirectHoneycombHistoricalDataRetrieval)(nil)).Elem()
+}
+
+func (o DirectHoneycombHistoricalDataRetrievalPtrOutput) ToDirectHoneycombHistoricalDataRetrievalPtrOutput() DirectHoneycombHistoricalDataRetrievalPtrOutput {
+	return o
+}
+
+func (o DirectHoneycombHistoricalDataRetrievalPtrOutput) ToDirectHoneycombHistoricalDataRetrievalPtrOutputWithContext(ctx context.Context) DirectHoneycombHistoricalDataRetrievalPtrOutput {
+	return o
+}
+
+func (o DirectHoneycombHistoricalDataRetrievalPtrOutput) Elem() DirectHoneycombHistoricalDataRetrievalOutput {
+	return o.ApplyT(func(v *DirectHoneycombHistoricalDataRetrieval) DirectHoneycombHistoricalDataRetrieval {
+		if v != nil {
+			return *v
+		}
+		var ret DirectHoneycombHistoricalDataRetrieval
+		return ret
+	}).(DirectHoneycombHistoricalDataRetrievalOutput)
+}
+
+// Used by default for any SLOs connected to this data source.
+func (o DirectHoneycombHistoricalDataRetrievalPtrOutput) DefaultDurations() DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return o.ApplyT(func(v *DirectHoneycombHistoricalDataRetrieval) []DirectHoneycombHistoricalDataRetrievalDefaultDuration {
+		if v == nil {
+			return nil
+		}
+		return v.DefaultDurations
+	}).(DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutput)
+}
+
+// Defines the maximum period for which data can be retrieved.
+func (o DirectHoneycombHistoricalDataRetrievalPtrOutput) MaxDurations() DirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutput {
+	return o.ApplyT(func(v *DirectHoneycombHistoricalDataRetrieval) []DirectHoneycombHistoricalDataRetrievalMaxDuration {
+		if v == nil {
+			return nil
+		}
+		return v.MaxDurations
+	}).(DirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutput)
+}
+
+type DirectHoneycombHistoricalDataRetrievalDefaultDuration struct {
+	// Must be one of Minute, Hour, or Day.
+	Unit string `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value int `pulumi:"value"`
+}
+
+// DirectHoneycombHistoricalDataRetrievalDefaultDurationInput is an input type that accepts DirectHoneycombHistoricalDataRetrievalDefaultDurationArgs and DirectHoneycombHistoricalDataRetrievalDefaultDurationOutput values.
+// You can construct a concrete instance of `DirectHoneycombHistoricalDataRetrievalDefaultDurationInput` via:
+//
+//	DirectHoneycombHistoricalDataRetrievalDefaultDurationArgs{...}
+type DirectHoneycombHistoricalDataRetrievalDefaultDurationInput interface {
+	pulumi.Input
+
+	ToDirectHoneycombHistoricalDataRetrievalDefaultDurationOutput() DirectHoneycombHistoricalDataRetrievalDefaultDurationOutput
+	ToDirectHoneycombHistoricalDataRetrievalDefaultDurationOutputWithContext(context.Context) DirectHoneycombHistoricalDataRetrievalDefaultDurationOutput
+}
+
+type DirectHoneycombHistoricalDataRetrievalDefaultDurationArgs struct {
+	// Must be one of Minute, Hour, or Day.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value pulumi.IntInput `pulumi:"value"`
+}
+
+func (DirectHoneycombHistoricalDataRetrievalDefaultDurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DirectHoneycombHistoricalDataRetrievalDefaultDuration)(nil)).Elem()
+}
+
+func (i DirectHoneycombHistoricalDataRetrievalDefaultDurationArgs) ToDirectHoneycombHistoricalDataRetrievalDefaultDurationOutput() DirectHoneycombHistoricalDataRetrievalDefaultDurationOutput {
+	return i.ToDirectHoneycombHistoricalDataRetrievalDefaultDurationOutputWithContext(context.Background())
+}
+
+func (i DirectHoneycombHistoricalDataRetrievalDefaultDurationArgs) ToDirectHoneycombHistoricalDataRetrievalDefaultDurationOutputWithContext(ctx context.Context) DirectHoneycombHistoricalDataRetrievalDefaultDurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectHoneycombHistoricalDataRetrievalDefaultDurationOutput)
+}
+
+// DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayInput is an input type that accepts DirectHoneycombHistoricalDataRetrievalDefaultDurationArray and DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutput values.
+// You can construct a concrete instance of `DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayInput` via:
+//
+//	DirectHoneycombHistoricalDataRetrievalDefaultDurationArray{ DirectHoneycombHistoricalDataRetrievalDefaultDurationArgs{...} }
+type DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayInput interface {
+	pulumi.Input
+
+	ToDirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutput() DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutput
+	ToDirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutputWithContext(context.Context) DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutput
+}
+
+type DirectHoneycombHistoricalDataRetrievalDefaultDurationArray []DirectHoneycombHistoricalDataRetrievalDefaultDurationInput
+
+func (DirectHoneycombHistoricalDataRetrievalDefaultDurationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DirectHoneycombHistoricalDataRetrievalDefaultDuration)(nil)).Elem()
+}
+
+func (i DirectHoneycombHistoricalDataRetrievalDefaultDurationArray) ToDirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutput() DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return i.ToDirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutputWithContext(context.Background())
+}
+
+func (i DirectHoneycombHistoricalDataRetrievalDefaultDurationArray) ToDirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutputWithContext(ctx context.Context) DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutput)
+}
+
+type DirectHoneycombHistoricalDataRetrievalDefaultDurationOutput struct{ *pulumi.OutputState }
+
+func (DirectHoneycombHistoricalDataRetrievalDefaultDurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DirectHoneycombHistoricalDataRetrievalDefaultDuration)(nil)).Elem()
+}
+
+func (o DirectHoneycombHistoricalDataRetrievalDefaultDurationOutput) ToDirectHoneycombHistoricalDataRetrievalDefaultDurationOutput() DirectHoneycombHistoricalDataRetrievalDefaultDurationOutput {
+	return o
+}
+
+func (o DirectHoneycombHistoricalDataRetrievalDefaultDurationOutput) ToDirectHoneycombHistoricalDataRetrievalDefaultDurationOutputWithContext(ctx context.Context) DirectHoneycombHistoricalDataRetrievalDefaultDurationOutput {
+	return o
+}
+
+// Must be one of Minute, Hour, or Day.
+func (o DirectHoneycombHistoricalDataRetrievalDefaultDurationOutput) Unit() pulumi.StringOutput {
+	return o.ApplyT(func(v DirectHoneycombHistoricalDataRetrievalDefaultDuration) string { return v.Unit }).(pulumi.StringOutput)
+}
+
+// Must be an integer greater than or equal to 0.
+func (o DirectHoneycombHistoricalDataRetrievalDefaultDurationOutput) Value() pulumi.IntOutput {
+	return o.ApplyT(func(v DirectHoneycombHistoricalDataRetrievalDefaultDuration) int { return v.Value }).(pulumi.IntOutput)
+}
+
+type DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutput struct{ *pulumi.OutputState }
+
+func (DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DirectHoneycombHistoricalDataRetrievalDefaultDuration)(nil)).Elem()
+}
+
+func (o DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutput) ToDirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutput() DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return o
+}
+
+func (o DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutput) ToDirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutputWithContext(ctx context.Context) DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutput {
+	return o
+}
+
+func (o DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutput) Index(i pulumi.IntInput) DirectHoneycombHistoricalDataRetrievalDefaultDurationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DirectHoneycombHistoricalDataRetrievalDefaultDuration {
+		return vs[0].([]DirectHoneycombHistoricalDataRetrievalDefaultDuration)[vs[1].(int)]
+	}).(DirectHoneycombHistoricalDataRetrievalDefaultDurationOutput)
+}
+
+type DirectHoneycombHistoricalDataRetrievalMaxDuration struct {
+	// Must be one of Minute, Hour, or Day.
+	Unit string `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value int `pulumi:"value"`
+}
+
+// DirectHoneycombHistoricalDataRetrievalMaxDurationInput is an input type that accepts DirectHoneycombHistoricalDataRetrievalMaxDurationArgs and DirectHoneycombHistoricalDataRetrievalMaxDurationOutput values.
+// You can construct a concrete instance of `DirectHoneycombHistoricalDataRetrievalMaxDurationInput` via:
+//
+//	DirectHoneycombHistoricalDataRetrievalMaxDurationArgs{...}
+type DirectHoneycombHistoricalDataRetrievalMaxDurationInput interface {
+	pulumi.Input
+
+	ToDirectHoneycombHistoricalDataRetrievalMaxDurationOutput() DirectHoneycombHistoricalDataRetrievalMaxDurationOutput
+	ToDirectHoneycombHistoricalDataRetrievalMaxDurationOutputWithContext(context.Context) DirectHoneycombHistoricalDataRetrievalMaxDurationOutput
+}
+
+type DirectHoneycombHistoricalDataRetrievalMaxDurationArgs struct {
+	// Must be one of Minute, Hour, or Day.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value pulumi.IntInput `pulumi:"value"`
+}
+
+func (DirectHoneycombHistoricalDataRetrievalMaxDurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DirectHoneycombHistoricalDataRetrievalMaxDuration)(nil)).Elem()
+}
+
+func (i DirectHoneycombHistoricalDataRetrievalMaxDurationArgs) ToDirectHoneycombHistoricalDataRetrievalMaxDurationOutput() DirectHoneycombHistoricalDataRetrievalMaxDurationOutput {
+	return i.ToDirectHoneycombHistoricalDataRetrievalMaxDurationOutputWithContext(context.Background())
+}
+
+func (i DirectHoneycombHistoricalDataRetrievalMaxDurationArgs) ToDirectHoneycombHistoricalDataRetrievalMaxDurationOutputWithContext(ctx context.Context) DirectHoneycombHistoricalDataRetrievalMaxDurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectHoneycombHistoricalDataRetrievalMaxDurationOutput)
+}
+
+// DirectHoneycombHistoricalDataRetrievalMaxDurationArrayInput is an input type that accepts DirectHoneycombHistoricalDataRetrievalMaxDurationArray and DirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutput values.
+// You can construct a concrete instance of `DirectHoneycombHistoricalDataRetrievalMaxDurationArrayInput` via:
+//
+//	DirectHoneycombHistoricalDataRetrievalMaxDurationArray{ DirectHoneycombHistoricalDataRetrievalMaxDurationArgs{...} }
+type DirectHoneycombHistoricalDataRetrievalMaxDurationArrayInput interface {
+	pulumi.Input
+
+	ToDirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutput() DirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutput
+	ToDirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutputWithContext(context.Context) DirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutput
+}
+
+type DirectHoneycombHistoricalDataRetrievalMaxDurationArray []DirectHoneycombHistoricalDataRetrievalMaxDurationInput
+
+func (DirectHoneycombHistoricalDataRetrievalMaxDurationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DirectHoneycombHistoricalDataRetrievalMaxDuration)(nil)).Elem()
+}
+
+func (i DirectHoneycombHistoricalDataRetrievalMaxDurationArray) ToDirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutput() DirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutput {
+	return i.ToDirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutputWithContext(context.Background())
+}
+
+func (i DirectHoneycombHistoricalDataRetrievalMaxDurationArray) ToDirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutputWithContext(ctx context.Context) DirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutput)
+}
+
+type DirectHoneycombHistoricalDataRetrievalMaxDurationOutput struct{ *pulumi.OutputState }
+
+func (DirectHoneycombHistoricalDataRetrievalMaxDurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DirectHoneycombHistoricalDataRetrievalMaxDuration)(nil)).Elem()
+}
+
+func (o DirectHoneycombHistoricalDataRetrievalMaxDurationOutput) ToDirectHoneycombHistoricalDataRetrievalMaxDurationOutput() DirectHoneycombHistoricalDataRetrievalMaxDurationOutput {
+	return o
+}
+
+func (o DirectHoneycombHistoricalDataRetrievalMaxDurationOutput) ToDirectHoneycombHistoricalDataRetrievalMaxDurationOutputWithContext(ctx context.Context) DirectHoneycombHistoricalDataRetrievalMaxDurationOutput {
+	return o
+}
+
+// Must be one of Minute, Hour, or Day.
+func (o DirectHoneycombHistoricalDataRetrievalMaxDurationOutput) Unit() pulumi.StringOutput {
+	return o.ApplyT(func(v DirectHoneycombHistoricalDataRetrievalMaxDuration) string { return v.Unit }).(pulumi.StringOutput)
+}
+
+// Must be an integer greater than or equal to 0.
+func (o DirectHoneycombHistoricalDataRetrievalMaxDurationOutput) Value() pulumi.IntOutput {
+	return o.ApplyT(func(v DirectHoneycombHistoricalDataRetrievalMaxDuration) int { return v.Value }).(pulumi.IntOutput)
+}
+
+type DirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutput struct{ *pulumi.OutputState }
+
+func (DirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DirectHoneycombHistoricalDataRetrievalMaxDuration)(nil)).Elem()
+}
+
+func (o DirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutput) ToDirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutput() DirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutput {
+	return o
+}
+
+func (o DirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutput) ToDirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutputWithContext(ctx context.Context) DirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutput {
+	return o
+}
+
+func (o DirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutput) Index(i pulumi.IntInput) DirectHoneycombHistoricalDataRetrievalMaxDurationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DirectHoneycombHistoricalDataRetrievalMaxDuration {
+		return vs[0].([]DirectHoneycombHistoricalDataRetrievalMaxDuration)[vs[1].(int)]
+	}).(DirectHoneycombHistoricalDataRetrievalMaxDurationOutput)
+}
+
+type DirectHoneycombQueryDelay struct {
+	// Must be one of Minute or Second.
+	Unit string `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value int `pulumi:"value"`
+}
+
+// DirectHoneycombQueryDelayInput is an input type that accepts DirectHoneycombQueryDelayArgs and DirectHoneycombQueryDelayOutput values.
+// You can construct a concrete instance of `DirectHoneycombQueryDelayInput` via:
+//
+//	DirectHoneycombQueryDelayArgs{...}
+type DirectHoneycombQueryDelayInput interface {
+	pulumi.Input
+
+	ToDirectHoneycombQueryDelayOutput() DirectHoneycombQueryDelayOutput
+	ToDirectHoneycombQueryDelayOutputWithContext(context.Context) DirectHoneycombQueryDelayOutput
+}
+
+type DirectHoneycombQueryDelayArgs struct {
+	// Must be one of Minute or Second.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value pulumi.IntInput `pulumi:"value"`
+}
+
+func (DirectHoneycombQueryDelayArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DirectHoneycombQueryDelay)(nil)).Elem()
+}
+
+func (i DirectHoneycombQueryDelayArgs) ToDirectHoneycombQueryDelayOutput() DirectHoneycombQueryDelayOutput {
+	return i.ToDirectHoneycombQueryDelayOutputWithContext(context.Background())
+}
+
+func (i DirectHoneycombQueryDelayArgs) ToDirectHoneycombQueryDelayOutputWithContext(ctx context.Context) DirectHoneycombQueryDelayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectHoneycombQueryDelayOutput)
+}
+
+func (i DirectHoneycombQueryDelayArgs) ToDirectHoneycombQueryDelayPtrOutput() DirectHoneycombQueryDelayPtrOutput {
+	return i.ToDirectHoneycombQueryDelayPtrOutputWithContext(context.Background())
+}
+
+func (i DirectHoneycombQueryDelayArgs) ToDirectHoneycombQueryDelayPtrOutputWithContext(ctx context.Context) DirectHoneycombQueryDelayPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectHoneycombQueryDelayOutput).ToDirectHoneycombQueryDelayPtrOutputWithContext(ctx)
+}
+
+// DirectHoneycombQueryDelayPtrInput is an input type that accepts DirectHoneycombQueryDelayArgs, DirectHoneycombQueryDelayPtr and DirectHoneycombQueryDelayPtrOutput values.
+// You can construct a concrete instance of `DirectHoneycombQueryDelayPtrInput` via:
+//
+//	        DirectHoneycombQueryDelayArgs{...}
+//
+//	or:
+//
+//	        nil
+type DirectHoneycombQueryDelayPtrInput interface {
+	pulumi.Input
+
+	ToDirectHoneycombQueryDelayPtrOutput() DirectHoneycombQueryDelayPtrOutput
+	ToDirectHoneycombQueryDelayPtrOutputWithContext(context.Context) DirectHoneycombQueryDelayPtrOutput
+}
+
+type directHoneycombQueryDelayPtrType DirectHoneycombQueryDelayArgs
+
+func DirectHoneycombQueryDelayPtr(v *DirectHoneycombQueryDelayArgs) DirectHoneycombQueryDelayPtrInput {
+	return (*directHoneycombQueryDelayPtrType)(v)
+}
+
+func (*directHoneycombQueryDelayPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DirectHoneycombQueryDelay)(nil)).Elem()
+}
+
+func (i *directHoneycombQueryDelayPtrType) ToDirectHoneycombQueryDelayPtrOutput() DirectHoneycombQueryDelayPtrOutput {
+	return i.ToDirectHoneycombQueryDelayPtrOutputWithContext(context.Background())
+}
+
+func (i *directHoneycombQueryDelayPtrType) ToDirectHoneycombQueryDelayPtrOutputWithContext(ctx context.Context) DirectHoneycombQueryDelayPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DirectHoneycombQueryDelayPtrOutput)
+}
+
+type DirectHoneycombQueryDelayOutput struct{ *pulumi.OutputState }
+
+func (DirectHoneycombQueryDelayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DirectHoneycombQueryDelay)(nil)).Elem()
+}
+
+func (o DirectHoneycombQueryDelayOutput) ToDirectHoneycombQueryDelayOutput() DirectHoneycombQueryDelayOutput {
+	return o
+}
+
+func (o DirectHoneycombQueryDelayOutput) ToDirectHoneycombQueryDelayOutputWithContext(ctx context.Context) DirectHoneycombQueryDelayOutput {
+	return o
+}
+
+func (o DirectHoneycombQueryDelayOutput) ToDirectHoneycombQueryDelayPtrOutput() DirectHoneycombQueryDelayPtrOutput {
+	return o.ToDirectHoneycombQueryDelayPtrOutputWithContext(context.Background())
+}
+
+func (o DirectHoneycombQueryDelayOutput) ToDirectHoneycombQueryDelayPtrOutputWithContext(ctx context.Context) DirectHoneycombQueryDelayPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DirectHoneycombQueryDelay) *DirectHoneycombQueryDelay {
+		return &v
+	}).(DirectHoneycombQueryDelayPtrOutput)
+}
+
+// Must be one of Minute or Second.
+func (o DirectHoneycombQueryDelayOutput) Unit() pulumi.StringOutput {
+	return o.ApplyT(func(v DirectHoneycombQueryDelay) string { return v.Unit }).(pulumi.StringOutput)
+}
+
+// Must be an integer greater than or equal to 0.
+func (o DirectHoneycombQueryDelayOutput) Value() pulumi.IntOutput {
+	return o.ApplyT(func(v DirectHoneycombQueryDelay) int { return v.Value }).(pulumi.IntOutput)
+}
+
+type DirectHoneycombQueryDelayPtrOutput struct{ *pulumi.OutputState }
+
+func (DirectHoneycombQueryDelayPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DirectHoneycombQueryDelay)(nil)).Elem()
+}
+
+func (o DirectHoneycombQueryDelayPtrOutput) ToDirectHoneycombQueryDelayPtrOutput() DirectHoneycombQueryDelayPtrOutput {
+	return o
+}
+
+func (o DirectHoneycombQueryDelayPtrOutput) ToDirectHoneycombQueryDelayPtrOutputWithContext(ctx context.Context) DirectHoneycombQueryDelayPtrOutput {
+	return o
+}
+
+func (o DirectHoneycombQueryDelayPtrOutput) Elem() DirectHoneycombQueryDelayOutput {
+	return o.ApplyT(func(v *DirectHoneycombQueryDelay) DirectHoneycombQueryDelay {
+		if v != nil {
+			return *v
+		}
+		var ret DirectHoneycombQueryDelay
+		return ret
+	}).(DirectHoneycombQueryDelayOutput)
+}
+
+// Must be one of Minute or Second.
+func (o DirectHoneycombQueryDelayPtrOutput) Unit() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DirectHoneycombQueryDelay) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Unit
+	}).(pulumi.StringPtrOutput)
+}
+
+// Must be an integer greater than or equal to 0.
+func (o DirectHoneycombQueryDelayPtrOutput) Value() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DirectHoneycombQueryDelay) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Value
+	}).(pulumi.IntPtrOutput)
+}
+
 type DirectInfluxdbQueryDelay struct {
 	// Must be one of Minute or Second.
 	Unit string `pulumi:"unit"`
@@ -5360,7 +7617,7 @@ type DirectInfluxdbQueryDelay struct {
 // DirectInfluxdbQueryDelayInput is an input type that accepts DirectInfluxdbQueryDelayArgs and DirectInfluxdbQueryDelayOutput values.
 // You can construct a concrete instance of `DirectInfluxdbQueryDelayInput` via:
 //
-//          DirectInfluxdbQueryDelayArgs{...}
+//	DirectInfluxdbQueryDelayArgs{...}
 type DirectInfluxdbQueryDelayInput interface {
 	pulumi.Input
 
@@ -5398,11 +7655,11 @@ func (i DirectInfluxdbQueryDelayArgs) ToDirectInfluxdbQueryDelayPtrOutputWithCon
 // DirectInfluxdbQueryDelayPtrInput is an input type that accepts DirectInfluxdbQueryDelayArgs, DirectInfluxdbQueryDelayPtr and DirectInfluxdbQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectInfluxdbQueryDelayPtrInput` via:
 //
-//          DirectInfluxdbQueryDelayArgs{...}
+//	        DirectInfluxdbQueryDelayArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DirectInfluxdbQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -5516,7 +7773,7 @@ type DirectInstanaQueryDelay struct {
 // DirectInstanaQueryDelayInput is an input type that accepts DirectInstanaQueryDelayArgs and DirectInstanaQueryDelayOutput values.
 // You can construct a concrete instance of `DirectInstanaQueryDelayInput` via:
 //
-//          DirectInstanaQueryDelayArgs{...}
+//	DirectInstanaQueryDelayArgs{...}
 type DirectInstanaQueryDelayInput interface {
 	pulumi.Input
 
@@ -5554,11 +7811,11 @@ func (i DirectInstanaQueryDelayArgs) ToDirectInstanaQueryDelayPtrOutputWithConte
 // DirectInstanaQueryDelayPtrInput is an input type that accepts DirectInstanaQueryDelayArgs, DirectInstanaQueryDelayPtr and DirectInstanaQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectInstanaQueryDelayPtrInput` via:
 //
-//          DirectInstanaQueryDelayArgs{...}
+//	        DirectInstanaQueryDelayArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DirectInstanaQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -5672,7 +7929,7 @@ type DirectLightstepHistoricalDataRetrieval struct {
 // DirectLightstepHistoricalDataRetrievalInput is an input type that accepts DirectLightstepHistoricalDataRetrievalArgs and DirectLightstepHistoricalDataRetrievalOutput values.
 // You can construct a concrete instance of `DirectLightstepHistoricalDataRetrievalInput` via:
 //
-//          DirectLightstepHistoricalDataRetrievalArgs{...}
+//	DirectLightstepHistoricalDataRetrievalArgs{...}
 type DirectLightstepHistoricalDataRetrievalInput interface {
 	pulumi.Input
 
@@ -5710,11 +7967,11 @@ func (i DirectLightstepHistoricalDataRetrievalArgs) ToDirectLightstepHistoricalD
 // DirectLightstepHistoricalDataRetrievalPtrInput is an input type that accepts DirectLightstepHistoricalDataRetrievalArgs, DirectLightstepHistoricalDataRetrievalPtr and DirectLightstepHistoricalDataRetrievalPtrOutput values.
 // You can construct a concrete instance of `DirectLightstepHistoricalDataRetrievalPtrInput` via:
 //
-//          DirectLightstepHistoricalDataRetrievalArgs{...}
+//	        DirectLightstepHistoricalDataRetrievalArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DirectLightstepHistoricalDataRetrievalPtrInput interface {
 	pulumi.Input
 
@@ -5823,14 +8080,16 @@ func (o DirectLightstepHistoricalDataRetrievalPtrOutput) MaxDurations() DirectLi
 }
 
 type DirectLightstepHistoricalDataRetrievalDefaultDuration struct {
-	Unit  string `pulumi:"unit"`
-	Value int    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit string `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value int `pulumi:"value"`
 }
 
 // DirectLightstepHistoricalDataRetrievalDefaultDurationInput is an input type that accepts DirectLightstepHistoricalDataRetrievalDefaultDurationArgs and DirectLightstepHistoricalDataRetrievalDefaultDurationOutput values.
 // You can construct a concrete instance of `DirectLightstepHistoricalDataRetrievalDefaultDurationInput` via:
 //
-//          DirectLightstepHistoricalDataRetrievalDefaultDurationArgs{...}
+//	DirectLightstepHistoricalDataRetrievalDefaultDurationArgs{...}
 type DirectLightstepHistoricalDataRetrievalDefaultDurationInput interface {
 	pulumi.Input
 
@@ -5839,8 +8098,10 @@ type DirectLightstepHistoricalDataRetrievalDefaultDurationInput interface {
 }
 
 type DirectLightstepHistoricalDataRetrievalDefaultDurationArgs struct {
-	Unit  pulumi.StringInput `pulumi:"unit"`
-	Value pulumi.IntInput    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value pulumi.IntInput `pulumi:"value"`
 }
 
 func (DirectLightstepHistoricalDataRetrievalDefaultDurationArgs) ElementType() reflect.Type {
@@ -5858,7 +8119,7 @@ func (i DirectLightstepHistoricalDataRetrievalDefaultDurationArgs) ToDirectLight
 // DirectLightstepHistoricalDataRetrievalDefaultDurationArrayInput is an input type that accepts DirectLightstepHistoricalDataRetrievalDefaultDurationArray and DirectLightstepHistoricalDataRetrievalDefaultDurationArrayOutput values.
 // You can construct a concrete instance of `DirectLightstepHistoricalDataRetrievalDefaultDurationArrayInput` via:
 //
-//          DirectLightstepHistoricalDataRetrievalDefaultDurationArray{ DirectLightstepHistoricalDataRetrievalDefaultDurationArgs{...} }
+//	DirectLightstepHistoricalDataRetrievalDefaultDurationArray{ DirectLightstepHistoricalDataRetrievalDefaultDurationArgs{...} }
 type DirectLightstepHistoricalDataRetrievalDefaultDurationArrayInput interface {
 	pulumi.Input
 
@@ -5894,10 +8155,12 @@ func (o DirectLightstepHistoricalDataRetrievalDefaultDurationOutput) ToDirectLig
 	return o
 }
 
+// Must be one of Minute, Hour, or Day.
 func (o DirectLightstepHistoricalDataRetrievalDefaultDurationOutput) Unit() pulumi.StringOutput {
 	return o.ApplyT(func(v DirectLightstepHistoricalDataRetrievalDefaultDuration) string { return v.Unit }).(pulumi.StringOutput)
 }
 
+// Must be an integer greater than or equal to 0.
 func (o DirectLightstepHistoricalDataRetrievalDefaultDurationOutput) Value() pulumi.IntOutput {
 	return o.ApplyT(func(v DirectLightstepHistoricalDataRetrievalDefaultDuration) int { return v.Value }).(pulumi.IntOutput)
 }
@@ -5923,14 +8186,16 @@ func (o DirectLightstepHistoricalDataRetrievalDefaultDurationArrayOutput) Index(
 }
 
 type DirectLightstepHistoricalDataRetrievalMaxDuration struct {
-	Unit  string `pulumi:"unit"`
-	Value int    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit string `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value int `pulumi:"value"`
 }
 
 // DirectLightstepHistoricalDataRetrievalMaxDurationInput is an input type that accepts DirectLightstepHistoricalDataRetrievalMaxDurationArgs and DirectLightstepHistoricalDataRetrievalMaxDurationOutput values.
 // You can construct a concrete instance of `DirectLightstepHistoricalDataRetrievalMaxDurationInput` via:
 //
-//          DirectLightstepHistoricalDataRetrievalMaxDurationArgs{...}
+//	DirectLightstepHistoricalDataRetrievalMaxDurationArgs{...}
 type DirectLightstepHistoricalDataRetrievalMaxDurationInput interface {
 	pulumi.Input
 
@@ -5939,8 +8204,10 @@ type DirectLightstepHistoricalDataRetrievalMaxDurationInput interface {
 }
 
 type DirectLightstepHistoricalDataRetrievalMaxDurationArgs struct {
-	Unit  pulumi.StringInput `pulumi:"unit"`
-	Value pulumi.IntInput    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value pulumi.IntInput `pulumi:"value"`
 }
 
 func (DirectLightstepHistoricalDataRetrievalMaxDurationArgs) ElementType() reflect.Type {
@@ -5958,7 +8225,7 @@ func (i DirectLightstepHistoricalDataRetrievalMaxDurationArgs) ToDirectLightstep
 // DirectLightstepHistoricalDataRetrievalMaxDurationArrayInput is an input type that accepts DirectLightstepHistoricalDataRetrievalMaxDurationArray and DirectLightstepHistoricalDataRetrievalMaxDurationArrayOutput values.
 // You can construct a concrete instance of `DirectLightstepHistoricalDataRetrievalMaxDurationArrayInput` via:
 //
-//          DirectLightstepHistoricalDataRetrievalMaxDurationArray{ DirectLightstepHistoricalDataRetrievalMaxDurationArgs{...} }
+//	DirectLightstepHistoricalDataRetrievalMaxDurationArray{ DirectLightstepHistoricalDataRetrievalMaxDurationArgs{...} }
 type DirectLightstepHistoricalDataRetrievalMaxDurationArrayInput interface {
 	pulumi.Input
 
@@ -5994,10 +8261,12 @@ func (o DirectLightstepHistoricalDataRetrievalMaxDurationOutput) ToDirectLightst
 	return o
 }
 
+// Must be one of Minute, Hour, or Day.
 func (o DirectLightstepHistoricalDataRetrievalMaxDurationOutput) Unit() pulumi.StringOutput {
 	return o.ApplyT(func(v DirectLightstepHistoricalDataRetrievalMaxDuration) string { return v.Unit }).(pulumi.StringOutput)
 }
 
+// Must be an integer greater than or equal to 0.
 func (o DirectLightstepHistoricalDataRetrievalMaxDurationOutput) Value() pulumi.IntOutput {
 	return o.ApplyT(func(v DirectLightstepHistoricalDataRetrievalMaxDuration) int { return v.Value }).(pulumi.IntOutput)
 }
@@ -6032,7 +8301,7 @@ type DirectLightstepQueryDelay struct {
 // DirectLightstepQueryDelayInput is an input type that accepts DirectLightstepQueryDelayArgs and DirectLightstepQueryDelayOutput values.
 // You can construct a concrete instance of `DirectLightstepQueryDelayInput` via:
 //
-//          DirectLightstepQueryDelayArgs{...}
+//	DirectLightstepQueryDelayArgs{...}
 type DirectLightstepQueryDelayInput interface {
 	pulumi.Input
 
@@ -6070,11 +8339,11 @@ func (i DirectLightstepQueryDelayArgs) ToDirectLightstepQueryDelayPtrOutputWithC
 // DirectLightstepQueryDelayPtrInput is an input type that accepts DirectLightstepQueryDelayArgs, DirectLightstepQueryDelayPtr and DirectLightstepQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectLightstepQueryDelayPtrInput` via:
 //
-//          DirectLightstepQueryDelayArgs{...}
+//	        DirectLightstepQueryDelayArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DirectLightstepQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -6188,7 +8457,7 @@ type DirectNewrelicHistoricalDataRetrieval struct {
 // DirectNewrelicHistoricalDataRetrievalInput is an input type that accepts DirectNewrelicHistoricalDataRetrievalArgs and DirectNewrelicHistoricalDataRetrievalOutput values.
 // You can construct a concrete instance of `DirectNewrelicHistoricalDataRetrievalInput` via:
 //
-//          DirectNewrelicHistoricalDataRetrievalArgs{...}
+//	DirectNewrelicHistoricalDataRetrievalArgs{...}
 type DirectNewrelicHistoricalDataRetrievalInput interface {
 	pulumi.Input
 
@@ -6226,11 +8495,11 @@ func (i DirectNewrelicHistoricalDataRetrievalArgs) ToDirectNewrelicHistoricalDat
 // DirectNewrelicHistoricalDataRetrievalPtrInput is an input type that accepts DirectNewrelicHistoricalDataRetrievalArgs, DirectNewrelicHistoricalDataRetrievalPtr and DirectNewrelicHistoricalDataRetrievalPtrOutput values.
 // You can construct a concrete instance of `DirectNewrelicHistoricalDataRetrievalPtrInput` via:
 //
-//          DirectNewrelicHistoricalDataRetrievalArgs{...}
+//	        DirectNewrelicHistoricalDataRetrievalArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DirectNewrelicHistoricalDataRetrievalPtrInput interface {
 	pulumi.Input
 
@@ -6339,14 +8608,16 @@ func (o DirectNewrelicHistoricalDataRetrievalPtrOutput) MaxDurations() DirectNew
 }
 
 type DirectNewrelicHistoricalDataRetrievalDefaultDuration struct {
-	Unit  string `pulumi:"unit"`
-	Value int    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit string `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value int `pulumi:"value"`
 }
 
 // DirectNewrelicHistoricalDataRetrievalDefaultDurationInput is an input type that accepts DirectNewrelicHistoricalDataRetrievalDefaultDurationArgs and DirectNewrelicHistoricalDataRetrievalDefaultDurationOutput values.
 // You can construct a concrete instance of `DirectNewrelicHistoricalDataRetrievalDefaultDurationInput` via:
 //
-//          DirectNewrelicHistoricalDataRetrievalDefaultDurationArgs{...}
+//	DirectNewrelicHistoricalDataRetrievalDefaultDurationArgs{...}
 type DirectNewrelicHistoricalDataRetrievalDefaultDurationInput interface {
 	pulumi.Input
 
@@ -6355,8 +8626,10 @@ type DirectNewrelicHistoricalDataRetrievalDefaultDurationInput interface {
 }
 
 type DirectNewrelicHistoricalDataRetrievalDefaultDurationArgs struct {
-	Unit  pulumi.StringInput `pulumi:"unit"`
-	Value pulumi.IntInput    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value pulumi.IntInput `pulumi:"value"`
 }
 
 func (DirectNewrelicHistoricalDataRetrievalDefaultDurationArgs) ElementType() reflect.Type {
@@ -6374,7 +8647,7 @@ func (i DirectNewrelicHistoricalDataRetrievalDefaultDurationArgs) ToDirectNewrel
 // DirectNewrelicHistoricalDataRetrievalDefaultDurationArrayInput is an input type that accepts DirectNewrelicHistoricalDataRetrievalDefaultDurationArray and DirectNewrelicHistoricalDataRetrievalDefaultDurationArrayOutput values.
 // You can construct a concrete instance of `DirectNewrelicHistoricalDataRetrievalDefaultDurationArrayInput` via:
 //
-//          DirectNewrelicHistoricalDataRetrievalDefaultDurationArray{ DirectNewrelicHistoricalDataRetrievalDefaultDurationArgs{...} }
+//	DirectNewrelicHistoricalDataRetrievalDefaultDurationArray{ DirectNewrelicHistoricalDataRetrievalDefaultDurationArgs{...} }
 type DirectNewrelicHistoricalDataRetrievalDefaultDurationArrayInput interface {
 	pulumi.Input
 
@@ -6410,10 +8683,12 @@ func (o DirectNewrelicHistoricalDataRetrievalDefaultDurationOutput) ToDirectNewr
 	return o
 }
 
+// Must be one of Minute, Hour, or Day.
 func (o DirectNewrelicHistoricalDataRetrievalDefaultDurationOutput) Unit() pulumi.StringOutput {
 	return o.ApplyT(func(v DirectNewrelicHistoricalDataRetrievalDefaultDuration) string { return v.Unit }).(pulumi.StringOutput)
 }
 
+// Must be an integer greater than or equal to 0.
 func (o DirectNewrelicHistoricalDataRetrievalDefaultDurationOutput) Value() pulumi.IntOutput {
 	return o.ApplyT(func(v DirectNewrelicHistoricalDataRetrievalDefaultDuration) int { return v.Value }).(pulumi.IntOutput)
 }
@@ -6439,14 +8714,16 @@ func (o DirectNewrelicHistoricalDataRetrievalDefaultDurationArrayOutput) Index(i
 }
 
 type DirectNewrelicHistoricalDataRetrievalMaxDuration struct {
-	Unit  string `pulumi:"unit"`
-	Value int    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit string `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value int `pulumi:"value"`
 }
 
 // DirectNewrelicHistoricalDataRetrievalMaxDurationInput is an input type that accepts DirectNewrelicHistoricalDataRetrievalMaxDurationArgs and DirectNewrelicHistoricalDataRetrievalMaxDurationOutput values.
 // You can construct a concrete instance of `DirectNewrelicHistoricalDataRetrievalMaxDurationInput` via:
 //
-//          DirectNewrelicHistoricalDataRetrievalMaxDurationArgs{...}
+//	DirectNewrelicHistoricalDataRetrievalMaxDurationArgs{...}
 type DirectNewrelicHistoricalDataRetrievalMaxDurationInput interface {
 	pulumi.Input
 
@@ -6455,8 +8732,10 @@ type DirectNewrelicHistoricalDataRetrievalMaxDurationInput interface {
 }
 
 type DirectNewrelicHistoricalDataRetrievalMaxDurationArgs struct {
-	Unit  pulumi.StringInput `pulumi:"unit"`
-	Value pulumi.IntInput    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value pulumi.IntInput `pulumi:"value"`
 }
 
 func (DirectNewrelicHistoricalDataRetrievalMaxDurationArgs) ElementType() reflect.Type {
@@ -6474,7 +8753,7 @@ func (i DirectNewrelicHistoricalDataRetrievalMaxDurationArgs) ToDirectNewrelicHi
 // DirectNewrelicHistoricalDataRetrievalMaxDurationArrayInput is an input type that accepts DirectNewrelicHistoricalDataRetrievalMaxDurationArray and DirectNewrelicHistoricalDataRetrievalMaxDurationArrayOutput values.
 // You can construct a concrete instance of `DirectNewrelicHistoricalDataRetrievalMaxDurationArrayInput` via:
 //
-//          DirectNewrelicHistoricalDataRetrievalMaxDurationArray{ DirectNewrelicHistoricalDataRetrievalMaxDurationArgs{...} }
+//	DirectNewrelicHistoricalDataRetrievalMaxDurationArray{ DirectNewrelicHistoricalDataRetrievalMaxDurationArgs{...} }
 type DirectNewrelicHistoricalDataRetrievalMaxDurationArrayInput interface {
 	pulumi.Input
 
@@ -6510,10 +8789,12 @@ func (o DirectNewrelicHistoricalDataRetrievalMaxDurationOutput) ToDirectNewrelic
 	return o
 }
 
+// Must be one of Minute, Hour, or Day.
 func (o DirectNewrelicHistoricalDataRetrievalMaxDurationOutput) Unit() pulumi.StringOutput {
 	return o.ApplyT(func(v DirectNewrelicHistoricalDataRetrievalMaxDuration) string { return v.Unit }).(pulumi.StringOutput)
 }
 
+// Must be an integer greater than or equal to 0.
 func (o DirectNewrelicHistoricalDataRetrievalMaxDurationOutput) Value() pulumi.IntOutput {
 	return o.ApplyT(func(v DirectNewrelicHistoricalDataRetrievalMaxDuration) int { return v.Value }).(pulumi.IntOutput)
 }
@@ -6548,7 +8829,7 @@ type DirectNewrelicQueryDelay struct {
 // DirectNewrelicQueryDelayInput is an input type that accepts DirectNewrelicQueryDelayArgs and DirectNewrelicQueryDelayOutput values.
 // You can construct a concrete instance of `DirectNewrelicQueryDelayInput` via:
 //
-//          DirectNewrelicQueryDelayArgs{...}
+//	DirectNewrelicQueryDelayArgs{...}
 type DirectNewrelicQueryDelayInput interface {
 	pulumi.Input
 
@@ -6586,11 +8867,11 @@ func (i DirectNewrelicQueryDelayArgs) ToDirectNewrelicQueryDelayPtrOutputWithCon
 // DirectNewrelicQueryDelayPtrInput is an input type that accepts DirectNewrelicQueryDelayArgs, DirectNewrelicQueryDelayPtr and DirectNewrelicQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectNewrelicQueryDelayPtrInput` via:
 //
-//          DirectNewrelicQueryDelayArgs{...}
+//	        DirectNewrelicQueryDelayArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DirectNewrelicQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -6704,7 +8985,7 @@ type DirectPingdomQueryDelay struct {
 // DirectPingdomQueryDelayInput is an input type that accepts DirectPingdomQueryDelayArgs and DirectPingdomQueryDelayOutput values.
 // You can construct a concrete instance of `DirectPingdomQueryDelayInput` via:
 //
-//          DirectPingdomQueryDelayArgs{...}
+//	DirectPingdomQueryDelayArgs{...}
 type DirectPingdomQueryDelayInput interface {
 	pulumi.Input
 
@@ -6742,11 +9023,11 @@ func (i DirectPingdomQueryDelayArgs) ToDirectPingdomQueryDelayPtrOutputWithConte
 // DirectPingdomQueryDelayPtrInput is an input type that accepts DirectPingdomQueryDelayArgs, DirectPingdomQueryDelayPtr and DirectPingdomQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectPingdomQueryDelayPtrInput` via:
 //
-//          DirectPingdomQueryDelayArgs{...}
+//	        DirectPingdomQueryDelayArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DirectPingdomQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -6860,7 +9141,7 @@ type DirectRedshiftQueryDelay struct {
 // DirectRedshiftQueryDelayInput is an input type that accepts DirectRedshiftQueryDelayArgs and DirectRedshiftQueryDelayOutput values.
 // You can construct a concrete instance of `DirectRedshiftQueryDelayInput` via:
 //
-//          DirectRedshiftQueryDelayArgs{...}
+//	DirectRedshiftQueryDelayArgs{...}
 type DirectRedshiftQueryDelayInput interface {
 	pulumi.Input
 
@@ -6898,11 +9179,11 @@ func (i DirectRedshiftQueryDelayArgs) ToDirectRedshiftQueryDelayPtrOutputWithCon
 // DirectRedshiftQueryDelayPtrInput is an input type that accepts DirectRedshiftQueryDelayArgs, DirectRedshiftQueryDelayPtr and DirectRedshiftQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectRedshiftQueryDelayPtrInput` via:
 //
-//          DirectRedshiftQueryDelayArgs{...}
+//	        DirectRedshiftQueryDelayArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DirectRedshiftQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -7016,7 +9297,7 @@ type DirectSplunkHistoricalDataRetrieval struct {
 // DirectSplunkHistoricalDataRetrievalInput is an input type that accepts DirectSplunkHistoricalDataRetrievalArgs and DirectSplunkHistoricalDataRetrievalOutput values.
 // You can construct a concrete instance of `DirectSplunkHistoricalDataRetrievalInput` via:
 //
-//          DirectSplunkHistoricalDataRetrievalArgs{...}
+//	DirectSplunkHistoricalDataRetrievalArgs{...}
 type DirectSplunkHistoricalDataRetrievalInput interface {
 	pulumi.Input
 
@@ -7054,11 +9335,11 @@ func (i DirectSplunkHistoricalDataRetrievalArgs) ToDirectSplunkHistoricalDataRet
 // DirectSplunkHistoricalDataRetrievalPtrInput is an input type that accepts DirectSplunkHistoricalDataRetrievalArgs, DirectSplunkHistoricalDataRetrievalPtr and DirectSplunkHistoricalDataRetrievalPtrOutput values.
 // You can construct a concrete instance of `DirectSplunkHistoricalDataRetrievalPtrInput` via:
 //
-//          DirectSplunkHistoricalDataRetrievalArgs{...}
+//	        DirectSplunkHistoricalDataRetrievalArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DirectSplunkHistoricalDataRetrievalPtrInput interface {
 	pulumi.Input
 
@@ -7167,14 +9448,16 @@ func (o DirectSplunkHistoricalDataRetrievalPtrOutput) MaxDurations() DirectSplun
 }
 
 type DirectSplunkHistoricalDataRetrievalDefaultDuration struct {
-	Unit  string `pulumi:"unit"`
-	Value int    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit string `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value int `pulumi:"value"`
 }
 
 // DirectSplunkHistoricalDataRetrievalDefaultDurationInput is an input type that accepts DirectSplunkHistoricalDataRetrievalDefaultDurationArgs and DirectSplunkHistoricalDataRetrievalDefaultDurationOutput values.
 // You can construct a concrete instance of `DirectSplunkHistoricalDataRetrievalDefaultDurationInput` via:
 //
-//          DirectSplunkHistoricalDataRetrievalDefaultDurationArgs{...}
+//	DirectSplunkHistoricalDataRetrievalDefaultDurationArgs{...}
 type DirectSplunkHistoricalDataRetrievalDefaultDurationInput interface {
 	pulumi.Input
 
@@ -7183,8 +9466,10 @@ type DirectSplunkHistoricalDataRetrievalDefaultDurationInput interface {
 }
 
 type DirectSplunkHistoricalDataRetrievalDefaultDurationArgs struct {
-	Unit  pulumi.StringInput `pulumi:"unit"`
-	Value pulumi.IntInput    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value pulumi.IntInput `pulumi:"value"`
 }
 
 func (DirectSplunkHistoricalDataRetrievalDefaultDurationArgs) ElementType() reflect.Type {
@@ -7202,7 +9487,7 @@ func (i DirectSplunkHistoricalDataRetrievalDefaultDurationArgs) ToDirectSplunkHi
 // DirectSplunkHistoricalDataRetrievalDefaultDurationArrayInput is an input type that accepts DirectSplunkHistoricalDataRetrievalDefaultDurationArray and DirectSplunkHistoricalDataRetrievalDefaultDurationArrayOutput values.
 // You can construct a concrete instance of `DirectSplunkHistoricalDataRetrievalDefaultDurationArrayInput` via:
 //
-//          DirectSplunkHistoricalDataRetrievalDefaultDurationArray{ DirectSplunkHistoricalDataRetrievalDefaultDurationArgs{...} }
+//	DirectSplunkHistoricalDataRetrievalDefaultDurationArray{ DirectSplunkHistoricalDataRetrievalDefaultDurationArgs{...} }
 type DirectSplunkHistoricalDataRetrievalDefaultDurationArrayInput interface {
 	pulumi.Input
 
@@ -7238,10 +9523,12 @@ func (o DirectSplunkHistoricalDataRetrievalDefaultDurationOutput) ToDirectSplunk
 	return o
 }
 
+// Must be one of Minute, Hour, or Day.
 func (o DirectSplunkHistoricalDataRetrievalDefaultDurationOutput) Unit() pulumi.StringOutput {
 	return o.ApplyT(func(v DirectSplunkHistoricalDataRetrievalDefaultDuration) string { return v.Unit }).(pulumi.StringOutput)
 }
 
+// Must be an integer greater than or equal to 0.
 func (o DirectSplunkHistoricalDataRetrievalDefaultDurationOutput) Value() pulumi.IntOutput {
 	return o.ApplyT(func(v DirectSplunkHistoricalDataRetrievalDefaultDuration) int { return v.Value }).(pulumi.IntOutput)
 }
@@ -7267,14 +9554,16 @@ func (o DirectSplunkHistoricalDataRetrievalDefaultDurationArrayOutput) Index(i p
 }
 
 type DirectSplunkHistoricalDataRetrievalMaxDuration struct {
-	Unit  string `pulumi:"unit"`
-	Value int    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit string `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value int `pulumi:"value"`
 }
 
 // DirectSplunkHistoricalDataRetrievalMaxDurationInput is an input type that accepts DirectSplunkHistoricalDataRetrievalMaxDurationArgs and DirectSplunkHistoricalDataRetrievalMaxDurationOutput values.
 // You can construct a concrete instance of `DirectSplunkHistoricalDataRetrievalMaxDurationInput` via:
 //
-//          DirectSplunkHistoricalDataRetrievalMaxDurationArgs{...}
+//	DirectSplunkHistoricalDataRetrievalMaxDurationArgs{...}
 type DirectSplunkHistoricalDataRetrievalMaxDurationInput interface {
 	pulumi.Input
 
@@ -7283,8 +9572,10 @@ type DirectSplunkHistoricalDataRetrievalMaxDurationInput interface {
 }
 
 type DirectSplunkHistoricalDataRetrievalMaxDurationArgs struct {
-	Unit  pulumi.StringInput `pulumi:"unit"`
-	Value pulumi.IntInput    `pulumi:"value"`
+	// Must be one of Minute, Hour, or Day.
+	Unit pulumi.StringInput `pulumi:"unit"`
+	// Must be an integer greater than or equal to 0.
+	Value pulumi.IntInput `pulumi:"value"`
 }
 
 func (DirectSplunkHistoricalDataRetrievalMaxDurationArgs) ElementType() reflect.Type {
@@ -7302,7 +9593,7 @@ func (i DirectSplunkHistoricalDataRetrievalMaxDurationArgs) ToDirectSplunkHistor
 // DirectSplunkHistoricalDataRetrievalMaxDurationArrayInput is an input type that accepts DirectSplunkHistoricalDataRetrievalMaxDurationArray and DirectSplunkHistoricalDataRetrievalMaxDurationArrayOutput values.
 // You can construct a concrete instance of `DirectSplunkHistoricalDataRetrievalMaxDurationArrayInput` via:
 //
-//          DirectSplunkHistoricalDataRetrievalMaxDurationArray{ DirectSplunkHistoricalDataRetrievalMaxDurationArgs{...} }
+//	DirectSplunkHistoricalDataRetrievalMaxDurationArray{ DirectSplunkHistoricalDataRetrievalMaxDurationArgs{...} }
 type DirectSplunkHistoricalDataRetrievalMaxDurationArrayInput interface {
 	pulumi.Input
 
@@ -7338,10 +9629,12 @@ func (o DirectSplunkHistoricalDataRetrievalMaxDurationOutput) ToDirectSplunkHist
 	return o
 }
 
+// Must be one of Minute, Hour, or Day.
 func (o DirectSplunkHistoricalDataRetrievalMaxDurationOutput) Unit() pulumi.StringOutput {
 	return o.ApplyT(func(v DirectSplunkHistoricalDataRetrievalMaxDuration) string { return v.Unit }).(pulumi.StringOutput)
 }
 
+// Must be an integer greater than or equal to 0.
 func (o DirectSplunkHistoricalDataRetrievalMaxDurationOutput) Value() pulumi.IntOutput {
 	return o.ApplyT(func(v DirectSplunkHistoricalDataRetrievalMaxDuration) int { return v.Value }).(pulumi.IntOutput)
 }
@@ -7376,7 +9669,7 @@ type DirectSplunkObservabilityQueryDelay struct {
 // DirectSplunkObservabilityQueryDelayInput is an input type that accepts DirectSplunkObservabilityQueryDelayArgs and DirectSplunkObservabilityQueryDelayOutput values.
 // You can construct a concrete instance of `DirectSplunkObservabilityQueryDelayInput` via:
 //
-//          DirectSplunkObservabilityQueryDelayArgs{...}
+//	DirectSplunkObservabilityQueryDelayArgs{...}
 type DirectSplunkObservabilityQueryDelayInput interface {
 	pulumi.Input
 
@@ -7414,11 +9707,11 @@ func (i DirectSplunkObservabilityQueryDelayArgs) ToDirectSplunkObservabilityQuer
 // DirectSplunkObservabilityQueryDelayPtrInput is an input type that accepts DirectSplunkObservabilityQueryDelayArgs, DirectSplunkObservabilityQueryDelayPtr and DirectSplunkObservabilityQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectSplunkObservabilityQueryDelayPtrInput` via:
 //
-//          DirectSplunkObservabilityQueryDelayArgs{...}
+//	        DirectSplunkObservabilityQueryDelayArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DirectSplunkObservabilityQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -7532,7 +9825,7 @@ type DirectSplunkQueryDelay struct {
 // DirectSplunkQueryDelayInput is an input type that accepts DirectSplunkQueryDelayArgs and DirectSplunkQueryDelayOutput values.
 // You can construct a concrete instance of `DirectSplunkQueryDelayInput` via:
 //
-//          DirectSplunkQueryDelayArgs{...}
+//	DirectSplunkQueryDelayArgs{...}
 type DirectSplunkQueryDelayInput interface {
 	pulumi.Input
 
@@ -7570,11 +9863,11 @@ func (i DirectSplunkQueryDelayArgs) ToDirectSplunkQueryDelayPtrOutputWithContext
 // DirectSplunkQueryDelayPtrInput is an input type that accepts DirectSplunkQueryDelayArgs, DirectSplunkQueryDelayPtr and DirectSplunkQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectSplunkQueryDelayPtrInput` via:
 //
-//          DirectSplunkQueryDelayArgs{...}
+//	        DirectSplunkQueryDelayArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DirectSplunkQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -7688,7 +9981,7 @@ type DirectSumologicQueryDelay struct {
 // DirectSumologicQueryDelayInput is an input type that accepts DirectSumologicQueryDelayArgs and DirectSumologicQueryDelayOutput values.
 // You can construct a concrete instance of `DirectSumologicQueryDelayInput` via:
 //
-//          DirectSumologicQueryDelayArgs{...}
+//	DirectSumologicQueryDelayArgs{...}
 type DirectSumologicQueryDelayInput interface {
 	pulumi.Input
 
@@ -7726,11 +10019,11 @@ func (i DirectSumologicQueryDelayArgs) ToDirectSumologicQueryDelayPtrOutputWithC
 // DirectSumologicQueryDelayPtrInput is an input type that accepts DirectSumologicQueryDelayArgs, DirectSumologicQueryDelayPtr and DirectSumologicQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectSumologicQueryDelayPtrInput` via:
 //
-//          DirectSumologicQueryDelayArgs{...}
+//	        DirectSumologicQueryDelayArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DirectSumologicQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -7844,7 +10137,7 @@ type DirectThousandeyesQueryDelay struct {
 // DirectThousandeyesQueryDelayInput is an input type that accepts DirectThousandeyesQueryDelayArgs and DirectThousandeyesQueryDelayOutput values.
 // You can construct a concrete instance of `DirectThousandeyesQueryDelayInput` via:
 //
-//          DirectThousandeyesQueryDelayArgs{...}
+//	DirectThousandeyesQueryDelayArgs{...}
 type DirectThousandeyesQueryDelayInput interface {
 	pulumi.Input
 
@@ -7882,11 +10175,11 @@ func (i DirectThousandeyesQueryDelayArgs) ToDirectThousandeyesQueryDelayPtrOutpu
 // DirectThousandeyesQueryDelayPtrInput is an input type that accepts DirectThousandeyesQueryDelayArgs, DirectThousandeyesQueryDelayPtr and DirectThousandeyesQueryDelayPtrOutput values.
 // You can construct a concrete instance of `DirectThousandeyesQueryDelayPtrInput` via:
 //
-//          DirectThousandeyesQueryDelayArgs{...}
+//	        DirectThousandeyesQueryDelayArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DirectThousandeyesQueryDelayPtrInput interface {
 	pulumi.Input
 
@@ -8000,7 +10293,7 @@ type ProjectLabel struct {
 // ProjectLabelInput is an input type that accepts ProjectLabelArgs and ProjectLabelOutput values.
 // You can construct a concrete instance of `ProjectLabelInput` via:
 //
-//          ProjectLabelArgs{...}
+//	ProjectLabelArgs{...}
 type ProjectLabelInput interface {
 	pulumi.Input
 
@@ -8030,7 +10323,7 @@ func (i ProjectLabelArgs) ToProjectLabelOutputWithContext(ctx context.Context) P
 // ProjectLabelArrayInput is an input type that accepts ProjectLabelArray and ProjectLabelArrayOutput values.
 // You can construct a concrete instance of `ProjectLabelArrayInput` via:
 //
-//          ProjectLabelArray{ ProjectLabelArgs{...} }
+//	ProjectLabelArray{ ProjectLabelArgs{...} }
 type ProjectLabelArrayInput interface {
 	pulumi.Input
 
@@ -8106,7 +10399,7 @@ type ServiceLabel struct {
 // ServiceLabelInput is an input type that accepts ServiceLabelArgs and ServiceLabelOutput values.
 // You can construct a concrete instance of `ServiceLabelInput` via:
 //
-//          ServiceLabelArgs{...}
+//	ServiceLabelArgs{...}
 type ServiceLabelInput interface {
 	pulumi.Input
 
@@ -8136,7 +10429,7 @@ func (i ServiceLabelArgs) ToServiceLabelOutputWithContext(ctx context.Context) S
 // ServiceLabelArrayInput is an input type that accepts ServiceLabelArray and ServiceLabelArrayOutput values.
 // You can construct a concrete instance of `ServiceLabelArrayInput` via:
 //
-//          ServiceLabelArray{ ServiceLabelArgs{...} }
+//	ServiceLabelArray{ ServiceLabelArgs{...} }
 type ServiceLabelArrayInput interface {
 	pulumi.Input
 
@@ -8202,6 +10495,386 @@ func (o ServiceLabelArrayOutput) Index(i pulumi.IntInput) ServiceLabelOutput {
 	}).(ServiceLabelOutput)
 }
 
+type SloAnomalyConfig struct {
+	// Alert Policies attached to SLO
+	NoData SloAnomalyConfigNoData `pulumi:"noData"`
+}
+
+// SloAnomalyConfigInput is an input type that accepts SloAnomalyConfigArgs and SloAnomalyConfigOutput values.
+// You can construct a concrete instance of `SloAnomalyConfigInput` via:
+//
+//	SloAnomalyConfigArgs{...}
+type SloAnomalyConfigInput interface {
+	pulumi.Input
+
+	ToSloAnomalyConfigOutput() SloAnomalyConfigOutput
+	ToSloAnomalyConfigOutputWithContext(context.Context) SloAnomalyConfigOutput
+}
+
+type SloAnomalyConfigArgs struct {
+	// Alert Policies attached to SLO
+	NoData SloAnomalyConfigNoDataInput `pulumi:"noData"`
+}
+
+func (SloAnomalyConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloAnomalyConfig)(nil)).Elem()
+}
+
+func (i SloAnomalyConfigArgs) ToSloAnomalyConfigOutput() SloAnomalyConfigOutput {
+	return i.ToSloAnomalyConfigOutputWithContext(context.Background())
+}
+
+func (i SloAnomalyConfigArgs) ToSloAnomalyConfigOutputWithContext(ctx context.Context) SloAnomalyConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloAnomalyConfigOutput)
+}
+
+func (i SloAnomalyConfigArgs) ToSloAnomalyConfigPtrOutput() SloAnomalyConfigPtrOutput {
+	return i.ToSloAnomalyConfigPtrOutputWithContext(context.Background())
+}
+
+func (i SloAnomalyConfigArgs) ToSloAnomalyConfigPtrOutputWithContext(ctx context.Context) SloAnomalyConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloAnomalyConfigOutput).ToSloAnomalyConfigPtrOutputWithContext(ctx)
+}
+
+// SloAnomalyConfigPtrInput is an input type that accepts SloAnomalyConfigArgs, SloAnomalyConfigPtr and SloAnomalyConfigPtrOutput values.
+// You can construct a concrete instance of `SloAnomalyConfigPtrInput` via:
+//
+//	        SloAnomalyConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type SloAnomalyConfigPtrInput interface {
+	pulumi.Input
+
+	ToSloAnomalyConfigPtrOutput() SloAnomalyConfigPtrOutput
+	ToSloAnomalyConfigPtrOutputWithContext(context.Context) SloAnomalyConfigPtrOutput
+}
+
+type sloAnomalyConfigPtrType SloAnomalyConfigArgs
+
+func SloAnomalyConfigPtr(v *SloAnomalyConfigArgs) SloAnomalyConfigPtrInput {
+	return (*sloAnomalyConfigPtrType)(v)
+}
+
+func (*sloAnomalyConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SloAnomalyConfig)(nil)).Elem()
+}
+
+func (i *sloAnomalyConfigPtrType) ToSloAnomalyConfigPtrOutput() SloAnomalyConfigPtrOutput {
+	return i.ToSloAnomalyConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *sloAnomalyConfigPtrType) ToSloAnomalyConfigPtrOutputWithContext(ctx context.Context) SloAnomalyConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloAnomalyConfigPtrOutput)
+}
+
+type SloAnomalyConfigOutput struct{ *pulumi.OutputState }
+
+func (SloAnomalyConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloAnomalyConfig)(nil)).Elem()
+}
+
+func (o SloAnomalyConfigOutput) ToSloAnomalyConfigOutput() SloAnomalyConfigOutput {
+	return o
+}
+
+func (o SloAnomalyConfigOutput) ToSloAnomalyConfigOutputWithContext(ctx context.Context) SloAnomalyConfigOutput {
+	return o
+}
+
+func (o SloAnomalyConfigOutput) ToSloAnomalyConfigPtrOutput() SloAnomalyConfigPtrOutput {
+	return o.ToSloAnomalyConfigPtrOutputWithContext(context.Background())
+}
+
+func (o SloAnomalyConfigOutput) ToSloAnomalyConfigPtrOutputWithContext(ctx context.Context) SloAnomalyConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SloAnomalyConfig) *SloAnomalyConfig {
+		return &v
+	}).(SloAnomalyConfigPtrOutput)
+}
+
+// Alert Policies attached to SLO
+func (o SloAnomalyConfigOutput) NoData() SloAnomalyConfigNoDataOutput {
+	return o.ApplyT(func(v SloAnomalyConfig) SloAnomalyConfigNoData { return v.NoData }).(SloAnomalyConfigNoDataOutput)
+}
+
+type SloAnomalyConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (SloAnomalyConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SloAnomalyConfig)(nil)).Elem()
+}
+
+func (o SloAnomalyConfigPtrOutput) ToSloAnomalyConfigPtrOutput() SloAnomalyConfigPtrOutput {
+	return o
+}
+
+func (o SloAnomalyConfigPtrOutput) ToSloAnomalyConfigPtrOutputWithContext(ctx context.Context) SloAnomalyConfigPtrOutput {
+	return o
+}
+
+func (o SloAnomalyConfigPtrOutput) Elem() SloAnomalyConfigOutput {
+	return o.ApplyT(func(v *SloAnomalyConfig) SloAnomalyConfig {
+		if v != nil {
+			return *v
+		}
+		var ret SloAnomalyConfig
+		return ret
+	}).(SloAnomalyConfigOutput)
+}
+
+// Alert Policies attached to SLO
+func (o SloAnomalyConfigPtrOutput) NoData() SloAnomalyConfigNoDataPtrOutput {
+	return o.ApplyT(func(v *SloAnomalyConfig) *SloAnomalyConfigNoData {
+		if v == nil {
+			return nil
+		}
+		return &v.NoData
+	}).(SloAnomalyConfigNoDataPtrOutput)
+}
+
+type SloAnomalyConfigNoData struct {
+	// Alert methods attached to Anomaly Config
+	AlertMethods []SloAnomalyConfigNoDataAlertMethod `pulumi:"alertMethods"`
+}
+
+// SloAnomalyConfigNoDataInput is an input type that accepts SloAnomalyConfigNoDataArgs and SloAnomalyConfigNoDataOutput values.
+// You can construct a concrete instance of `SloAnomalyConfigNoDataInput` via:
+//
+//	SloAnomalyConfigNoDataArgs{...}
+type SloAnomalyConfigNoDataInput interface {
+	pulumi.Input
+
+	ToSloAnomalyConfigNoDataOutput() SloAnomalyConfigNoDataOutput
+	ToSloAnomalyConfigNoDataOutputWithContext(context.Context) SloAnomalyConfigNoDataOutput
+}
+
+type SloAnomalyConfigNoDataArgs struct {
+	// Alert methods attached to Anomaly Config
+	AlertMethods SloAnomalyConfigNoDataAlertMethodArrayInput `pulumi:"alertMethods"`
+}
+
+func (SloAnomalyConfigNoDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloAnomalyConfigNoData)(nil)).Elem()
+}
+
+func (i SloAnomalyConfigNoDataArgs) ToSloAnomalyConfigNoDataOutput() SloAnomalyConfigNoDataOutput {
+	return i.ToSloAnomalyConfigNoDataOutputWithContext(context.Background())
+}
+
+func (i SloAnomalyConfigNoDataArgs) ToSloAnomalyConfigNoDataOutputWithContext(ctx context.Context) SloAnomalyConfigNoDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloAnomalyConfigNoDataOutput)
+}
+
+func (i SloAnomalyConfigNoDataArgs) ToSloAnomalyConfigNoDataPtrOutput() SloAnomalyConfigNoDataPtrOutput {
+	return i.ToSloAnomalyConfigNoDataPtrOutputWithContext(context.Background())
+}
+
+func (i SloAnomalyConfigNoDataArgs) ToSloAnomalyConfigNoDataPtrOutputWithContext(ctx context.Context) SloAnomalyConfigNoDataPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloAnomalyConfigNoDataOutput).ToSloAnomalyConfigNoDataPtrOutputWithContext(ctx)
+}
+
+// SloAnomalyConfigNoDataPtrInput is an input type that accepts SloAnomalyConfigNoDataArgs, SloAnomalyConfigNoDataPtr and SloAnomalyConfigNoDataPtrOutput values.
+// You can construct a concrete instance of `SloAnomalyConfigNoDataPtrInput` via:
+//
+//	        SloAnomalyConfigNoDataArgs{...}
+//
+//	or:
+//
+//	        nil
+type SloAnomalyConfigNoDataPtrInput interface {
+	pulumi.Input
+
+	ToSloAnomalyConfigNoDataPtrOutput() SloAnomalyConfigNoDataPtrOutput
+	ToSloAnomalyConfigNoDataPtrOutputWithContext(context.Context) SloAnomalyConfigNoDataPtrOutput
+}
+
+type sloAnomalyConfigNoDataPtrType SloAnomalyConfigNoDataArgs
+
+func SloAnomalyConfigNoDataPtr(v *SloAnomalyConfigNoDataArgs) SloAnomalyConfigNoDataPtrInput {
+	return (*sloAnomalyConfigNoDataPtrType)(v)
+}
+
+func (*sloAnomalyConfigNoDataPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SloAnomalyConfigNoData)(nil)).Elem()
+}
+
+func (i *sloAnomalyConfigNoDataPtrType) ToSloAnomalyConfigNoDataPtrOutput() SloAnomalyConfigNoDataPtrOutput {
+	return i.ToSloAnomalyConfigNoDataPtrOutputWithContext(context.Background())
+}
+
+func (i *sloAnomalyConfigNoDataPtrType) ToSloAnomalyConfigNoDataPtrOutputWithContext(ctx context.Context) SloAnomalyConfigNoDataPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloAnomalyConfigNoDataPtrOutput)
+}
+
+type SloAnomalyConfigNoDataOutput struct{ *pulumi.OutputState }
+
+func (SloAnomalyConfigNoDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloAnomalyConfigNoData)(nil)).Elem()
+}
+
+func (o SloAnomalyConfigNoDataOutput) ToSloAnomalyConfigNoDataOutput() SloAnomalyConfigNoDataOutput {
+	return o
+}
+
+func (o SloAnomalyConfigNoDataOutput) ToSloAnomalyConfigNoDataOutputWithContext(ctx context.Context) SloAnomalyConfigNoDataOutput {
+	return o
+}
+
+func (o SloAnomalyConfigNoDataOutput) ToSloAnomalyConfigNoDataPtrOutput() SloAnomalyConfigNoDataPtrOutput {
+	return o.ToSloAnomalyConfigNoDataPtrOutputWithContext(context.Background())
+}
+
+func (o SloAnomalyConfigNoDataOutput) ToSloAnomalyConfigNoDataPtrOutputWithContext(ctx context.Context) SloAnomalyConfigNoDataPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SloAnomalyConfigNoData) *SloAnomalyConfigNoData {
+		return &v
+	}).(SloAnomalyConfigNoDataPtrOutput)
+}
+
+// Alert methods attached to Anomaly Config
+func (o SloAnomalyConfigNoDataOutput) AlertMethods() SloAnomalyConfigNoDataAlertMethodArrayOutput {
+	return o.ApplyT(func(v SloAnomalyConfigNoData) []SloAnomalyConfigNoDataAlertMethod { return v.AlertMethods }).(SloAnomalyConfigNoDataAlertMethodArrayOutput)
+}
+
+type SloAnomalyConfigNoDataPtrOutput struct{ *pulumi.OutputState }
+
+func (SloAnomalyConfigNoDataPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SloAnomalyConfigNoData)(nil)).Elem()
+}
+
+func (o SloAnomalyConfigNoDataPtrOutput) ToSloAnomalyConfigNoDataPtrOutput() SloAnomalyConfigNoDataPtrOutput {
+	return o
+}
+
+func (o SloAnomalyConfigNoDataPtrOutput) ToSloAnomalyConfigNoDataPtrOutputWithContext(ctx context.Context) SloAnomalyConfigNoDataPtrOutput {
+	return o
+}
+
+func (o SloAnomalyConfigNoDataPtrOutput) Elem() SloAnomalyConfigNoDataOutput {
+	return o.ApplyT(func(v *SloAnomalyConfigNoData) SloAnomalyConfigNoData {
+		if v != nil {
+			return *v
+		}
+		var ret SloAnomalyConfigNoData
+		return ret
+	}).(SloAnomalyConfigNoDataOutput)
+}
+
+// Alert methods attached to Anomaly Config
+func (o SloAnomalyConfigNoDataPtrOutput) AlertMethods() SloAnomalyConfigNoDataAlertMethodArrayOutput {
+	return o.ApplyT(func(v *SloAnomalyConfigNoData) []SloAnomalyConfigNoDataAlertMethod {
+		if v == nil {
+			return nil
+		}
+		return v.AlertMethods
+	}).(SloAnomalyConfigNoDataAlertMethodArrayOutput)
+}
+
+type SloAnomalyConfigNoDataAlertMethod struct {
+	// The name of the previously defined alert method.
+	Name string `pulumi:"name"`
+	// Project name the Alert Method is in,  must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
+	Project string `pulumi:"project"`
+}
+
+// SloAnomalyConfigNoDataAlertMethodInput is an input type that accepts SloAnomalyConfigNoDataAlertMethodArgs and SloAnomalyConfigNoDataAlertMethodOutput values.
+// You can construct a concrete instance of `SloAnomalyConfigNoDataAlertMethodInput` via:
+//
+//	SloAnomalyConfigNoDataAlertMethodArgs{...}
+type SloAnomalyConfigNoDataAlertMethodInput interface {
+	pulumi.Input
+
+	ToSloAnomalyConfigNoDataAlertMethodOutput() SloAnomalyConfigNoDataAlertMethodOutput
+	ToSloAnomalyConfigNoDataAlertMethodOutputWithContext(context.Context) SloAnomalyConfigNoDataAlertMethodOutput
+}
+
+type SloAnomalyConfigNoDataAlertMethodArgs struct {
+	// The name of the previously defined alert method.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Project name the Alert Method is in,  must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
+	Project pulumi.StringInput `pulumi:"project"`
+}
+
+func (SloAnomalyConfigNoDataAlertMethodArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloAnomalyConfigNoDataAlertMethod)(nil)).Elem()
+}
+
+func (i SloAnomalyConfigNoDataAlertMethodArgs) ToSloAnomalyConfigNoDataAlertMethodOutput() SloAnomalyConfigNoDataAlertMethodOutput {
+	return i.ToSloAnomalyConfigNoDataAlertMethodOutputWithContext(context.Background())
+}
+
+func (i SloAnomalyConfigNoDataAlertMethodArgs) ToSloAnomalyConfigNoDataAlertMethodOutputWithContext(ctx context.Context) SloAnomalyConfigNoDataAlertMethodOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloAnomalyConfigNoDataAlertMethodOutput)
+}
+
+// SloAnomalyConfigNoDataAlertMethodArrayInput is an input type that accepts SloAnomalyConfigNoDataAlertMethodArray and SloAnomalyConfigNoDataAlertMethodArrayOutput values.
+// You can construct a concrete instance of `SloAnomalyConfigNoDataAlertMethodArrayInput` via:
+//
+//	SloAnomalyConfigNoDataAlertMethodArray{ SloAnomalyConfigNoDataAlertMethodArgs{...} }
+type SloAnomalyConfigNoDataAlertMethodArrayInput interface {
+	pulumi.Input
+
+	ToSloAnomalyConfigNoDataAlertMethodArrayOutput() SloAnomalyConfigNoDataAlertMethodArrayOutput
+	ToSloAnomalyConfigNoDataAlertMethodArrayOutputWithContext(context.Context) SloAnomalyConfigNoDataAlertMethodArrayOutput
+}
+
+type SloAnomalyConfigNoDataAlertMethodArray []SloAnomalyConfigNoDataAlertMethodInput
+
+func (SloAnomalyConfigNoDataAlertMethodArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloAnomalyConfigNoDataAlertMethod)(nil)).Elem()
+}
+
+func (i SloAnomalyConfigNoDataAlertMethodArray) ToSloAnomalyConfigNoDataAlertMethodArrayOutput() SloAnomalyConfigNoDataAlertMethodArrayOutput {
+	return i.ToSloAnomalyConfigNoDataAlertMethodArrayOutputWithContext(context.Background())
+}
+
+func (i SloAnomalyConfigNoDataAlertMethodArray) ToSloAnomalyConfigNoDataAlertMethodArrayOutputWithContext(ctx context.Context) SloAnomalyConfigNoDataAlertMethodArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloAnomalyConfigNoDataAlertMethodArrayOutput)
+}
+
+type SloAnomalyConfigNoDataAlertMethodOutput struct{ *pulumi.OutputState }
+
+func (SloAnomalyConfigNoDataAlertMethodOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloAnomalyConfigNoDataAlertMethod)(nil)).Elem()
+}
+
+func (o SloAnomalyConfigNoDataAlertMethodOutput) ToSloAnomalyConfigNoDataAlertMethodOutput() SloAnomalyConfigNoDataAlertMethodOutput {
+	return o
+}
+
+func (o SloAnomalyConfigNoDataAlertMethodOutput) ToSloAnomalyConfigNoDataAlertMethodOutputWithContext(ctx context.Context) SloAnomalyConfigNoDataAlertMethodOutput {
+	return o
+}
+
+// The name of the previously defined alert method.
+func (o SloAnomalyConfigNoDataAlertMethodOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v SloAnomalyConfigNoDataAlertMethod) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Project name the Alert Method is in,  must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
+func (o SloAnomalyConfigNoDataAlertMethodOutput) Project() pulumi.StringOutput {
+	return o.ApplyT(func(v SloAnomalyConfigNoDataAlertMethod) string { return v.Project }).(pulumi.StringOutput)
+}
+
+type SloAnomalyConfigNoDataAlertMethodArrayOutput struct{ *pulumi.OutputState }
+
+func (SloAnomalyConfigNoDataAlertMethodArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloAnomalyConfigNoDataAlertMethod)(nil)).Elem()
+}
+
+func (o SloAnomalyConfigNoDataAlertMethodArrayOutput) ToSloAnomalyConfigNoDataAlertMethodArrayOutput() SloAnomalyConfigNoDataAlertMethodArrayOutput {
+	return o
+}
+
+func (o SloAnomalyConfigNoDataAlertMethodArrayOutput) ToSloAnomalyConfigNoDataAlertMethodArrayOutputWithContext(ctx context.Context) SloAnomalyConfigNoDataAlertMethodArrayOutput {
+	return o
+}
+
+func (o SloAnomalyConfigNoDataAlertMethodArrayOutput) Index(i pulumi.IntInput) SloAnomalyConfigNoDataAlertMethodOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloAnomalyConfigNoDataAlertMethod {
+		return vs[0].([]SloAnomalyConfigNoDataAlertMethod)[vs[1].(int)]
+	}).(SloAnomalyConfigNoDataAlertMethodOutput)
+}
+
 type SloAttachment struct {
 	// Name displayed for the attachment. Max. length: 63 characters.
 	DisplayName *string `pulumi:"displayName"`
@@ -8212,7 +10885,7 @@ type SloAttachment struct {
 // SloAttachmentInput is an input type that accepts SloAttachmentArgs and SloAttachmentOutput values.
 // You can construct a concrete instance of `SloAttachmentInput` via:
 //
-//          SloAttachmentArgs{...}
+//	SloAttachmentArgs{...}
 type SloAttachmentInput interface {
 	pulumi.Input
 
@@ -8242,7 +10915,7 @@ func (i SloAttachmentArgs) ToSloAttachmentOutputWithContext(ctx context.Context)
 // SloAttachmentArrayInput is an input type that accepts SloAttachmentArray and SloAttachmentArrayOutput values.
 // You can construct a concrete instance of `SloAttachmentArrayInput` via:
 //
-//          SloAttachmentArray{ SloAttachmentArgs{...} }
+//	SloAttachmentArray{ SloAttachmentArgs{...} }
 type SloAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -8318,7 +10991,7 @@ type SloComposite struct {
 // SloCompositeInput is an input type that accepts SloCompositeArgs and SloCompositeOutput values.
 // You can construct a concrete instance of `SloCompositeInput` via:
 //
-//          SloCompositeArgs{...}
+//	SloCompositeArgs{...}
 type SloCompositeInput interface {
 	pulumi.Input
 
@@ -8356,11 +11029,11 @@ func (i SloCompositeArgs) ToSloCompositePtrOutputWithContext(ctx context.Context
 // SloCompositePtrInput is an input type that accepts SloCompositeArgs, SloCompositePtr and SloCompositePtrOutput values.
 // You can construct a concrete instance of `SloCompositePtrInput` via:
 //
-//          SloCompositeArgs{...}
+//	        SloCompositeArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type SloCompositePtrInput interface {
 	pulumi.Input
 
@@ -8465,14 +11138,16 @@ func (o SloCompositePtrOutput) Target() pulumi.Float64PtrOutput {
 }
 
 type SloCompositeBurnRateCondition struct {
-	Op    string  `pulumi:"op"`
+	// Type of logical operation
+	Op string `pulumi:"op"`
+	// Burn rate value.
 	Value float64 `pulumi:"value"`
 }
 
 // SloCompositeBurnRateConditionInput is an input type that accepts SloCompositeBurnRateConditionArgs and SloCompositeBurnRateConditionOutput values.
 // You can construct a concrete instance of `SloCompositeBurnRateConditionInput` via:
 //
-//          SloCompositeBurnRateConditionArgs{...}
+//	SloCompositeBurnRateConditionArgs{...}
 type SloCompositeBurnRateConditionInput interface {
 	pulumi.Input
 
@@ -8481,7 +11156,9 @@ type SloCompositeBurnRateConditionInput interface {
 }
 
 type SloCompositeBurnRateConditionArgs struct {
-	Op    pulumi.StringInput  `pulumi:"op"`
+	// Type of logical operation
+	Op pulumi.StringInput `pulumi:"op"`
+	// Burn rate value.
 	Value pulumi.Float64Input `pulumi:"value"`
 }
 
@@ -8500,7 +11177,7 @@ func (i SloCompositeBurnRateConditionArgs) ToSloCompositeBurnRateConditionOutput
 // SloCompositeBurnRateConditionArrayInput is an input type that accepts SloCompositeBurnRateConditionArray and SloCompositeBurnRateConditionArrayOutput values.
 // You can construct a concrete instance of `SloCompositeBurnRateConditionArrayInput` via:
 //
-//          SloCompositeBurnRateConditionArray{ SloCompositeBurnRateConditionArgs{...} }
+//	SloCompositeBurnRateConditionArray{ SloCompositeBurnRateConditionArgs{...} }
 type SloCompositeBurnRateConditionArrayInput interface {
 	pulumi.Input
 
@@ -8536,10 +11213,12 @@ func (o SloCompositeBurnRateConditionOutput) ToSloCompositeBurnRateConditionOutp
 	return o
 }
 
+// Type of logical operation
 func (o SloCompositeBurnRateConditionOutput) Op() pulumi.StringOutput {
 	return o.ApplyT(func(v SloCompositeBurnRateCondition) string { return v.Op }).(pulumi.StringOutput)
 }
 
+// Burn rate value.
 func (o SloCompositeBurnRateConditionOutput) Value() pulumi.Float64Output {
 	return o.ApplyT(func(v SloCompositeBurnRateCondition) float64 { return v.Value }).(pulumi.Float64Output)
 }
@@ -8576,7 +11255,7 @@ type SloIndicator struct {
 // SloIndicatorInput is an input type that accepts SloIndicatorArgs and SloIndicatorOutput values.
 // You can construct a concrete instance of `SloIndicatorInput` via:
 //
-//          SloIndicatorArgs{...}
+//	SloIndicatorArgs{...}
 type SloIndicatorInput interface {
 	pulumi.Input
 
@@ -8616,11 +11295,11 @@ func (i SloIndicatorArgs) ToSloIndicatorPtrOutputWithContext(ctx context.Context
 // SloIndicatorPtrInput is an input type that accepts SloIndicatorArgs, SloIndicatorPtr and SloIndicatorPtrOutput values.
 // You can construct a concrete instance of `SloIndicatorPtrInput` via:
 //
-//          SloIndicatorArgs{...}
+//	        SloIndicatorArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type SloIndicatorPtrInput interface {
 	pulumi.Input
 
@@ -8749,7 +11428,7 @@ type SloLabel struct {
 // SloLabelInput is an input type that accepts SloLabelArgs and SloLabelOutput values.
 // You can construct a concrete instance of `SloLabelInput` via:
 //
-//          SloLabelArgs{...}
+//	SloLabelArgs{...}
 type SloLabelInput interface {
 	pulumi.Input
 
@@ -8779,7 +11458,7 @@ func (i SloLabelArgs) ToSloLabelOutputWithContext(ctx context.Context) SloLabelO
 // SloLabelArrayInput is an input type that accepts SloLabelArray and SloLabelArrayOutput values.
 // You can construct a concrete instance of `SloLabelArrayInput` via:
 //
-//          SloLabelArray{ SloLabelArgs{...} }
+//	SloLabelArray{ SloLabelArgs{...} }
 type SloLabelArrayInput interface {
 	pulumi.Input
 
@@ -8846,7 +11525,7 @@ func (o SloLabelArrayOutput) Index(i pulumi.IntInput) SloLabelOutput {
 }
 
 type SloObjective struct {
-	// Compares two time series, indicating the ratio of the count of good values to total values.
+	// Compares two time series, calculating the ratio of either good or bad values to the total number of values. Fill either the 'good' or 'bad' series, but not both.
 	CountMetrics []SloObjectiveCountMetric `pulumi:"countMetrics"`
 	// Name to be displayed
 	DisplayName string `pulumi:"displayName"`
@@ -8867,7 +11546,7 @@ type SloObjective struct {
 // SloObjectiveInput is an input type that accepts SloObjectiveArgs and SloObjectiveOutput values.
 // You can construct a concrete instance of `SloObjectiveInput` via:
 //
-//          SloObjectiveArgs{...}
+//	SloObjectiveArgs{...}
 type SloObjectiveInput interface {
 	pulumi.Input
 
@@ -8876,7 +11555,7 @@ type SloObjectiveInput interface {
 }
 
 type SloObjectiveArgs struct {
-	// Compares two time series, indicating the ratio of the count of good values to total values.
+	// Compares two time series, calculating the ratio of either good or bad values to the total number of values. Fill either the 'good' or 'bad' series, but not both.
 	CountMetrics SloObjectiveCountMetricArrayInput `pulumi:"countMetrics"`
 	// Name to be displayed
 	DisplayName pulumi.StringInput `pulumi:"displayName"`
@@ -8909,7 +11588,7 @@ func (i SloObjectiveArgs) ToSloObjectiveOutputWithContext(ctx context.Context) S
 // SloObjectiveArrayInput is an input type that accepts SloObjectiveArray and SloObjectiveArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveArrayInput` via:
 //
-//          SloObjectiveArray{ SloObjectiveArgs{...} }
+//	SloObjectiveArray{ SloObjectiveArgs{...} }
 type SloObjectiveArrayInput interface {
 	pulumi.Input
 
@@ -8945,7 +11624,7 @@ func (o SloObjectiveOutput) ToSloObjectiveOutputWithContext(ctx context.Context)
 	return o
 }
 
-// Compares two time series, indicating the ratio of the count of good values to total values.
+// Compares two time series, calculating the ratio of either good or bad values to the total number of values. Fill either the 'good' or 'bad' series, but not both.
 func (o SloObjectiveOutput) CountMetrics() SloObjectiveCountMetricArrayOutput {
 	return o.ApplyT(func(v SloObjective) []SloObjectiveCountMetric { return v.CountMetrics }).(SloObjectiveCountMetricArrayOutput)
 }
@@ -9006,15 +11685,20 @@ func (o SloObjectiveArrayOutput) Index(i pulumi.IntInput) SloObjectiveOutput {
 }
 
 type SloObjectiveCountMetric struct {
-	Goods       []SloObjectiveCountMetricGood  `pulumi:"goods"`
-	Incremental bool                           `pulumi:"incremental"`
-	Totals      []SloObjectiveCountMetricTotal `pulumi:"totals"`
+	// Configuration for bad time series metrics.
+	Bads []SloObjectiveCountMetricBad `pulumi:"bads"`
+	// Configuration for good time series metrics.
+	Goods []SloObjectiveCountMetricGood `pulumi:"goods"`
+	// Should the metrics be incrementing or not
+	Incremental bool `pulumi:"incremental"`
+	// Configuration for metric source
+	Totals []SloObjectiveCountMetricTotal `pulumi:"totals"`
 }
 
 // SloObjectiveCountMetricInput is an input type that accepts SloObjectiveCountMetricArgs and SloObjectiveCountMetricOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricInput` via:
 //
-//          SloObjectiveCountMetricArgs{...}
+//	SloObjectiveCountMetricArgs{...}
 type SloObjectiveCountMetricInput interface {
 	pulumi.Input
 
@@ -9023,9 +11707,14 @@ type SloObjectiveCountMetricInput interface {
 }
 
 type SloObjectiveCountMetricArgs struct {
-	Goods       SloObjectiveCountMetricGoodArrayInput  `pulumi:"goods"`
-	Incremental pulumi.BoolInput                       `pulumi:"incremental"`
-	Totals      SloObjectiveCountMetricTotalArrayInput `pulumi:"totals"`
+	// Configuration for bad time series metrics.
+	Bads SloObjectiveCountMetricBadArrayInput `pulumi:"bads"`
+	// Configuration for good time series metrics.
+	Goods SloObjectiveCountMetricGoodArrayInput `pulumi:"goods"`
+	// Should the metrics be incrementing or not
+	Incremental pulumi.BoolInput `pulumi:"incremental"`
+	// Configuration for metric source
+	Totals SloObjectiveCountMetricTotalArrayInput `pulumi:"totals"`
 }
 
 func (SloObjectiveCountMetricArgs) ElementType() reflect.Type {
@@ -9043,7 +11732,7 @@ func (i SloObjectiveCountMetricArgs) ToSloObjectiveCountMetricOutputWithContext(
 // SloObjectiveCountMetricArrayInput is an input type that accepts SloObjectiveCountMetricArray and SloObjectiveCountMetricArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricArrayInput` via:
 //
-//          SloObjectiveCountMetricArray{ SloObjectiveCountMetricArgs{...} }
+//	SloObjectiveCountMetricArray{ SloObjectiveCountMetricArgs{...} }
 type SloObjectiveCountMetricArrayInput interface {
 	pulumi.Input
 
@@ -9079,14 +11768,22 @@ func (o SloObjectiveCountMetricOutput) ToSloObjectiveCountMetricOutputWithContex
 	return o
 }
 
+// Configuration for bad time series metrics.
+func (o SloObjectiveCountMetricOutput) Bads() SloObjectiveCountMetricBadArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetric) []SloObjectiveCountMetricBad { return v.Bads }).(SloObjectiveCountMetricBadArrayOutput)
+}
+
+// Configuration for good time series metrics.
 func (o SloObjectiveCountMetricOutput) Goods() SloObjectiveCountMetricGoodArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetric) []SloObjectiveCountMetricGood { return v.Goods }).(SloObjectiveCountMetricGoodArrayOutput)
 }
 
+// Should the metrics be incrementing or not
 func (o SloObjectiveCountMetricOutput) Incremental() pulumi.BoolOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetric) bool { return v.Incremental }).(pulumi.BoolOutput)
 }
 
+// Configuration for metric source
 func (o SloObjectiveCountMetricOutput) Totals() SloObjectiveCountMetricTotalArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetric) []SloObjectiveCountMetricTotal { return v.Totals }).(SloObjectiveCountMetricTotalArrayOutput)
 }
@@ -9111,35 +11808,3720 @@ func (o SloObjectiveCountMetricArrayOutput) Index(i pulumi.IntInput) SloObjectiv
 	}).(SloObjectiveCountMetricOutput)
 }
 
+type SloObjectiveCountMetricBad struct {
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
+	AmazonPrometheuses []SloObjectiveCountMetricBadAmazonPrometheus `pulumi:"amazonPrometheuses"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
+	Appdynamics []SloObjectiveCountMetricBadAppdynamic `pulumi:"appdynamics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+	AzureMonitors []SloObjectiveCountMetricBadAzureMonitor `pulumi:"azureMonitors"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
+	Bigqueries []SloObjectiveCountMetricBadBigquery `pulumi:"bigqueries"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
+	Cloudwatches []SloObjectiveCountMetricBadCloudwatch `pulumi:"cloudwatches"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
+	Datadogs []SloObjectiveCountMetricBadDatadog `pulumi:"datadogs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
+	Dynatraces []SloObjectiveCountMetricBadDynatrace `pulumi:"dynatraces"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
+	Elasticsearches []SloObjectiveCountMetricBadElasticsearch `pulumi:"elasticsearches"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
+	Gcms []SloObjectiveCountMetricBadGcm `pulumi:"gcms"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
+	GrafanaLokis []SloObjectiveCountMetricBadGrafanaLoki `pulumi:"grafanaLokis"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
+	Graphites []SloObjectiveCountMetricBadGraphite `pulumi:"graphites"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+	Honeycombs []SloObjectiveCountMetricBadHoneycomb `pulumi:"honeycombs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
+	Influxdbs []SloObjectiveCountMetricBadInfluxdb `pulumi:"influxdbs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
+	Instanas []SloObjectiveCountMetricBadInstana `pulumi:"instanas"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
+	Lightsteps []SloObjectiveCountMetricBadLightstep `pulumi:"lightsteps"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
+	Newrelics []SloObjectiveCountMetricBadNewrelic `pulumi:"newrelics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
+	Opentsdbs []SloObjectiveCountMetricBadOpentsdb `pulumi:"opentsdbs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
+	Pingdoms []SloObjectiveCountMetricBadPingdom `pulumi:"pingdoms"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
+	Prometheuses []SloObjectiveCountMetricBadPrometheus `pulumi:"prometheuses"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
+	Redshifts []SloObjectiveCountMetricBadRedshift `pulumi:"redshifts"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
+	SplunkObservabilities []SloObjectiveCountMetricBadSplunkObservability `pulumi:"splunkObservabilities"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
+	Splunks []SloObjectiveCountMetricBadSplunk `pulumi:"splunks"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
+	Sumologics []SloObjectiveCountMetricBadSumologic `pulumi:"sumologics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
+	Thousandeyes []SloObjectiveCountMetricBadThousandeye `pulumi:"thousandeyes"`
+}
+
+// SloObjectiveCountMetricBadInput is an input type that accepts SloObjectiveCountMetricBadArgs and SloObjectiveCountMetricBadOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadInput` via:
+//
+//	SloObjectiveCountMetricBadArgs{...}
+type SloObjectiveCountMetricBadInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadOutput() SloObjectiveCountMetricBadOutput
+	ToSloObjectiveCountMetricBadOutputWithContext(context.Context) SloObjectiveCountMetricBadOutput
+}
+
+type SloObjectiveCountMetricBadArgs struct {
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
+	AmazonPrometheuses SloObjectiveCountMetricBadAmazonPrometheusArrayInput `pulumi:"amazonPrometheuses"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
+	Appdynamics SloObjectiveCountMetricBadAppdynamicArrayInput `pulumi:"appdynamics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+	AzureMonitors SloObjectiveCountMetricBadAzureMonitorArrayInput `pulumi:"azureMonitors"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
+	Bigqueries SloObjectiveCountMetricBadBigqueryArrayInput `pulumi:"bigqueries"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
+	Cloudwatches SloObjectiveCountMetricBadCloudwatchArrayInput `pulumi:"cloudwatches"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
+	Datadogs SloObjectiveCountMetricBadDatadogArrayInput `pulumi:"datadogs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
+	Dynatraces SloObjectiveCountMetricBadDynatraceArrayInput `pulumi:"dynatraces"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
+	Elasticsearches SloObjectiveCountMetricBadElasticsearchArrayInput `pulumi:"elasticsearches"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
+	Gcms SloObjectiveCountMetricBadGcmArrayInput `pulumi:"gcms"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
+	GrafanaLokis SloObjectiveCountMetricBadGrafanaLokiArrayInput `pulumi:"grafanaLokis"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
+	Graphites SloObjectiveCountMetricBadGraphiteArrayInput `pulumi:"graphites"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+	Honeycombs SloObjectiveCountMetricBadHoneycombArrayInput `pulumi:"honeycombs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
+	Influxdbs SloObjectiveCountMetricBadInfluxdbArrayInput `pulumi:"influxdbs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
+	Instanas SloObjectiveCountMetricBadInstanaArrayInput `pulumi:"instanas"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
+	Lightsteps SloObjectiveCountMetricBadLightstepArrayInput `pulumi:"lightsteps"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
+	Newrelics SloObjectiveCountMetricBadNewrelicArrayInput `pulumi:"newrelics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
+	Opentsdbs SloObjectiveCountMetricBadOpentsdbArrayInput `pulumi:"opentsdbs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
+	Pingdoms SloObjectiveCountMetricBadPingdomArrayInput `pulumi:"pingdoms"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
+	Prometheuses SloObjectiveCountMetricBadPrometheusArrayInput `pulumi:"prometheuses"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
+	Redshifts SloObjectiveCountMetricBadRedshiftArrayInput `pulumi:"redshifts"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
+	SplunkObservabilities SloObjectiveCountMetricBadSplunkObservabilityArrayInput `pulumi:"splunkObservabilities"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
+	Splunks SloObjectiveCountMetricBadSplunkArrayInput `pulumi:"splunks"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
+	Sumologics SloObjectiveCountMetricBadSumologicArrayInput `pulumi:"sumologics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
+	Thousandeyes SloObjectiveCountMetricBadThousandeyeArrayInput `pulumi:"thousandeyes"`
+}
+
+func (SloObjectiveCountMetricBadArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBad)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadArgs) ToSloObjectiveCountMetricBadOutput() SloObjectiveCountMetricBadOutput {
+	return i.ToSloObjectiveCountMetricBadOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadArgs) ToSloObjectiveCountMetricBadOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadOutput)
+}
+
+// SloObjectiveCountMetricBadArrayInput is an input type that accepts SloObjectiveCountMetricBadArray and SloObjectiveCountMetricBadArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadArrayInput` via:
+//
+//	SloObjectiveCountMetricBadArray{ SloObjectiveCountMetricBadArgs{...} }
+type SloObjectiveCountMetricBadArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadArrayOutput() SloObjectiveCountMetricBadArrayOutput
+	ToSloObjectiveCountMetricBadArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadArrayOutput
+}
+
+type SloObjectiveCountMetricBadArray []SloObjectiveCountMetricBadInput
+
+func (SloObjectiveCountMetricBadArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBad)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadArray) ToSloObjectiveCountMetricBadArrayOutput() SloObjectiveCountMetricBadArrayOutput {
+	return i.ToSloObjectiveCountMetricBadArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadArray) ToSloObjectiveCountMetricBadArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadArrayOutput)
+}
+
+type SloObjectiveCountMetricBadOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBad)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadOutput) ToSloObjectiveCountMetricBadOutput() SloObjectiveCountMetricBadOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadOutput) ToSloObjectiveCountMetricBadOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadOutput {
+	return o
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
+func (o SloObjectiveCountMetricBadOutput) AmazonPrometheuses() SloObjectiveCountMetricBadAmazonPrometheusArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadAmazonPrometheus {
+		return v.AmazonPrometheuses
+	}).(SloObjectiveCountMetricBadAmazonPrometheusArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
+func (o SloObjectiveCountMetricBadOutput) Appdynamics() SloObjectiveCountMetricBadAppdynamicArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadAppdynamic { return v.Appdynamics }).(SloObjectiveCountMetricBadAppdynamicArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+func (o SloObjectiveCountMetricBadOutput) AzureMonitors() SloObjectiveCountMetricBadAzureMonitorArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadAzureMonitor { return v.AzureMonitors }).(SloObjectiveCountMetricBadAzureMonitorArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
+func (o SloObjectiveCountMetricBadOutput) Bigqueries() SloObjectiveCountMetricBadBigqueryArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadBigquery { return v.Bigqueries }).(SloObjectiveCountMetricBadBigqueryArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
+func (o SloObjectiveCountMetricBadOutput) Cloudwatches() SloObjectiveCountMetricBadCloudwatchArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadCloudwatch { return v.Cloudwatches }).(SloObjectiveCountMetricBadCloudwatchArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
+func (o SloObjectiveCountMetricBadOutput) Datadogs() SloObjectiveCountMetricBadDatadogArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadDatadog { return v.Datadogs }).(SloObjectiveCountMetricBadDatadogArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
+func (o SloObjectiveCountMetricBadOutput) Dynatraces() SloObjectiveCountMetricBadDynatraceArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadDynatrace { return v.Dynatraces }).(SloObjectiveCountMetricBadDynatraceArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
+func (o SloObjectiveCountMetricBadOutput) Elasticsearches() SloObjectiveCountMetricBadElasticsearchArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadElasticsearch { return v.Elasticsearches }).(SloObjectiveCountMetricBadElasticsearchArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
+func (o SloObjectiveCountMetricBadOutput) Gcms() SloObjectiveCountMetricBadGcmArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadGcm { return v.Gcms }).(SloObjectiveCountMetricBadGcmArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
+func (o SloObjectiveCountMetricBadOutput) GrafanaLokis() SloObjectiveCountMetricBadGrafanaLokiArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadGrafanaLoki { return v.GrafanaLokis }).(SloObjectiveCountMetricBadGrafanaLokiArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
+func (o SloObjectiveCountMetricBadOutput) Graphites() SloObjectiveCountMetricBadGraphiteArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadGraphite { return v.Graphites }).(SloObjectiveCountMetricBadGraphiteArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+func (o SloObjectiveCountMetricBadOutput) Honeycombs() SloObjectiveCountMetricBadHoneycombArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadHoneycomb { return v.Honeycombs }).(SloObjectiveCountMetricBadHoneycombArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
+func (o SloObjectiveCountMetricBadOutput) Influxdbs() SloObjectiveCountMetricBadInfluxdbArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadInfluxdb { return v.Influxdbs }).(SloObjectiveCountMetricBadInfluxdbArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
+func (o SloObjectiveCountMetricBadOutput) Instanas() SloObjectiveCountMetricBadInstanaArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadInstana { return v.Instanas }).(SloObjectiveCountMetricBadInstanaArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
+func (o SloObjectiveCountMetricBadOutput) Lightsteps() SloObjectiveCountMetricBadLightstepArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadLightstep { return v.Lightsteps }).(SloObjectiveCountMetricBadLightstepArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
+func (o SloObjectiveCountMetricBadOutput) Newrelics() SloObjectiveCountMetricBadNewrelicArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadNewrelic { return v.Newrelics }).(SloObjectiveCountMetricBadNewrelicArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
+func (o SloObjectiveCountMetricBadOutput) Opentsdbs() SloObjectiveCountMetricBadOpentsdbArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadOpentsdb { return v.Opentsdbs }).(SloObjectiveCountMetricBadOpentsdbArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
+func (o SloObjectiveCountMetricBadOutput) Pingdoms() SloObjectiveCountMetricBadPingdomArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadPingdom { return v.Pingdoms }).(SloObjectiveCountMetricBadPingdomArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
+func (o SloObjectiveCountMetricBadOutput) Prometheuses() SloObjectiveCountMetricBadPrometheusArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadPrometheus { return v.Prometheuses }).(SloObjectiveCountMetricBadPrometheusArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
+func (o SloObjectiveCountMetricBadOutput) Redshifts() SloObjectiveCountMetricBadRedshiftArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadRedshift { return v.Redshifts }).(SloObjectiveCountMetricBadRedshiftArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
+func (o SloObjectiveCountMetricBadOutput) SplunkObservabilities() SloObjectiveCountMetricBadSplunkObservabilityArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadSplunkObservability {
+		return v.SplunkObservabilities
+	}).(SloObjectiveCountMetricBadSplunkObservabilityArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
+func (o SloObjectiveCountMetricBadOutput) Splunks() SloObjectiveCountMetricBadSplunkArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadSplunk { return v.Splunks }).(SloObjectiveCountMetricBadSplunkArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
+func (o SloObjectiveCountMetricBadOutput) Sumologics() SloObjectiveCountMetricBadSumologicArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadSumologic { return v.Sumologics }).(SloObjectiveCountMetricBadSumologicArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
+func (o SloObjectiveCountMetricBadOutput) Thousandeyes() SloObjectiveCountMetricBadThousandeyeArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBad) []SloObjectiveCountMetricBadThousandeye { return v.Thousandeyes }).(SloObjectiveCountMetricBadThousandeyeArrayOutput)
+}
+
+type SloObjectiveCountMetricBadArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBad)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadArrayOutput) ToSloObjectiveCountMetricBadArrayOutput() SloObjectiveCountMetricBadArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadArrayOutput) ToSloObjectiveCountMetricBadArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBad {
+		return vs[0].([]SloObjectiveCountMetricBad)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadOutput)
+}
+
+type SloObjectiveCountMetricBadAmazonPrometheus struct {
+	// Query for the metrics
+	Promql string `pulumi:"promql"`
+}
+
+// SloObjectiveCountMetricBadAmazonPrometheusInput is an input type that accepts SloObjectiveCountMetricBadAmazonPrometheusArgs and SloObjectiveCountMetricBadAmazonPrometheusOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadAmazonPrometheusInput` via:
+//
+//	SloObjectiveCountMetricBadAmazonPrometheusArgs{...}
+type SloObjectiveCountMetricBadAmazonPrometheusInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadAmazonPrometheusOutput() SloObjectiveCountMetricBadAmazonPrometheusOutput
+	ToSloObjectiveCountMetricBadAmazonPrometheusOutputWithContext(context.Context) SloObjectiveCountMetricBadAmazonPrometheusOutput
+}
+
+type SloObjectiveCountMetricBadAmazonPrometheusArgs struct {
+	// Query for the metrics
+	Promql pulumi.StringInput `pulumi:"promql"`
+}
+
+func (SloObjectiveCountMetricBadAmazonPrometheusArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadAmazonPrometheus)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadAmazonPrometheusArgs) ToSloObjectiveCountMetricBadAmazonPrometheusOutput() SloObjectiveCountMetricBadAmazonPrometheusOutput {
+	return i.ToSloObjectiveCountMetricBadAmazonPrometheusOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadAmazonPrometheusArgs) ToSloObjectiveCountMetricBadAmazonPrometheusOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadAmazonPrometheusOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadAmazonPrometheusOutput)
+}
+
+// SloObjectiveCountMetricBadAmazonPrometheusArrayInput is an input type that accepts SloObjectiveCountMetricBadAmazonPrometheusArray and SloObjectiveCountMetricBadAmazonPrometheusArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadAmazonPrometheusArrayInput` via:
+//
+//	SloObjectiveCountMetricBadAmazonPrometheusArray{ SloObjectiveCountMetricBadAmazonPrometheusArgs{...} }
+type SloObjectiveCountMetricBadAmazonPrometheusArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadAmazonPrometheusArrayOutput() SloObjectiveCountMetricBadAmazonPrometheusArrayOutput
+	ToSloObjectiveCountMetricBadAmazonPrometheusArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadAmazonPrometheusArrayOutput
+}
+
+type SloObjectiveCountMetricBadAmazonPrometheusArray []SloObjectiveCountMetricBadAmazonPrometheusInput
+
+func (SloObjectiveCountMetricBadAmazonPrometheusArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadAmazonPrometheus)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadAmazonPrometheusArray) ToSloObjectiveCountMetricBadAmazonPrometheusArrayOutput() SloObjectiveCountMetricBadAmazonPrometheusArrayOutput {
+	return i.ToSloObjectiveCountMetricBadAmazonPrometheusArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadAmazonPrometheusArray) ToSloObjectiveCountMetricBadAmazonPrometheusArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadAmazonPrometheusArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadAmazonPrometheusArrayOutput)
+}
+
+type SloObjectiveCountMetricBadAmazonPrometheusOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadAmazonPrometheusOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadAmazonPrometheus)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadAmazonPrometheusOutput) ToSloObjectiveCountMetricBadAmazonPrometheusOutput() SloObjectiveCountMetricBadAmazonPrometheusOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadAmazonPrometheusOutput) ToSloObjectiveCountMetricBadAmazonPrometheusOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadAmazonPrometheusOutput {
+	return o
+}
+
+// Query for the metrics
+func (o SloObjectiveCountMetricBadAmazonPrometheusOutput) Promql() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadAmazonPrometheus) string { return v.Promql }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadAmazonPrometheusArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadAmazonPrometheusArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadAmazonPrometheus)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadAmazonPrometheusArrayOutput) ToSloObjectiveCountMetricBadAmazonPrometheusArrayOutput() SloObjectiveCountMetricBadAmazonPrometheusArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadAmazonPrometheusArrayOutput) ToSloObjectiveCountMetricBadAmazonPrometheusArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadAmazonPrometheusArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadAmazonPrometheusArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadAmazonPrometheusOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadAmazonPrometheus {
+		return vs[0].([]SloObjectiveCountMetricBadAmazonPrometheus)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadAmazonPrometheusOutput)
+}
+
+type SloObjectiveCountMetricBadAppdynamic struct {
+	// Name of the added application
+	ApplicationName string `pulumi:"applicationName"`
+	// Path to the metrics
+	MetricPath string `pulumi:"metricPath"`
+}
+
+// SloObjectiveCountMetricBadAppdynamicInput is an input type that accepts SloObjectiveCountMetricBadAppdynamicArgs and SloObjectiveCountMetricBadAppdynamicOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadAppdynamicInput` via:
+//
+//	SloObjectiveCountMetricBadAppdynamicArgs{...}
+type SloObjectiveCountMetricBadAppdynamicInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadAppdynamicOutput() SloObjectiveCountMetricBadAppdynamicOutput
+	ToSloObjectiveCountMetricBadAppdynamicOutputWithContext(context.Context) SloObjectiveCountMetricBadAppdynamicOutput
+}
+
+type SloObjectiveCountMetricBadAppdynamicArgs struct {
+	// Name of the added application
+	ApplicationName pulumi.StringInput `pulumi:"applicationName"`
+	// Path to the metrics
+	MetricPath pulumi.StringInput `pulumi:"metricPath"`
+}
+
+func (SloObjectiveCountMetricBadAppdynamicArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadAppdynamic)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadAppdynamicArgs) ToSloObjectiveCountMetricBadAppdynamicOutput() SloObjectiveCountMetricBadAppdynamicOutput {
+	return i.ToSloObjectiveCountMetricBadAppdynamicOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadAppdynamicArgs) ToSloObjectiveCountMetricBadAppdynamicOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadAppdynamicOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadAppdynamicOutput)
+}
+
+// SloObjectiveCountMetricBadAppdynamicArrayInput is an input type that accepts SloObjectiveCountMetricBadAppdynamicArray and SloObjectiveCountMetricBadAppdynamicArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadAppdynamicArrayInput` via:
+//
+//	SloObjectiveCountMetricBadAppdynamicArray{ SloObjectiveCountMetricBadAppdynamicArgs{...} }
+type SloObjectiveCountMetricBadAppdynamicArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadAppdynamicArrayOutput() SloObjectiveCountMetricBadAppdynamicArrayOutput
+	ToSloObjectiveCountMetricBadAppdynamicArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadAppdynamicArrayOutput
+}
+
+type SloObjectiveCountMetricBadAppdynamicArray []SloObjectiveCountMetricBadAppdynamicInput
+
+func (SloObjectiveCountMetricBadAppdynamicArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadAppdynamic)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadAppdynamicArray) ToSloObjectiveCountMetricBadAppdynamicArrayOutput() SloObjectiveCountMetricBadAppdynamicArrayOutput {
+	return i.ToSloObjectiveCountMetricBadAppdynamicArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadAppdynamicArray) ToSloObjectiveCountMetricBadAppdynamicArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadAppdynamicArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadAppdynamicArrayOutput)
+}
+
+type SloObjectiveCountMetricBadAppdynamicOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadAppdynamicOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadAppdynamic)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadAppdynamicOutput) ToSloObjectiveCountMetricBadAppdynamicOutput() SloObjectiveCountMetricBadAppdynamicOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadAppdynamicOutput) ToSloObjectiveCountMetricBadAppdynamicOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadAppdynamicOutput {
+	return o
+}
+
+// Name of the added application
+func (o SloObjectiveCountMetricBadAppdynamicOutput) ApplicationName() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadAppdynamic) string { return v.ApplicationName }).(pulumi.StringOutput)
+}
+
+// Path to the metrics
+func (o SloObjectiveCountMetricBadAppdynamicOutput) MetricPath() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadAppdynamic) string { return v.MetricPath }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadAppdynamicArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadAppdynamicArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadAppdynamic)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadAppdynamicArrayOutput) ToSloObjectiveCountMetricBadAppdynamicArrayOutput() SloObjectiveCountMetricBadAppdynamicArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadAppdynamicArrayOutput) ToSloObjectiveCountMetricBadAppdynamicArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadAppdynamicArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadAppdynamicArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadAppdynamicOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadAppdynamic {
+		return vs[0].([]SloObjectiveCountMetricBadAppdynamic)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadAppdynamicOutput)
+}
+
+type SloObjectiveCountMetricBadAzureMonitor struct {
+	// Aggregation type [Required for metrics]
+	Aggregation *string `pulumi:"aggregation"`
+	// Specifies source: 'metrics' or 'logs'
+	DataType string `pulumi:"dataType"`
+	// Dimensions of the metric [Optional for metrics]
+	Dimensions []SloObjectiveCountMetricBadAzureMonitorDimension `pulumi:"dimensions"`
+	// Logs query in Kusto Query Language [Required for logs]
+	KqlQuery *string `pulumi:"kqlQuery"`
+	// Name of the metric [Required for metrics]
+	MetricName *string `pulumi:"metricName"`
+	// Namespace of the metric [Optional for metrics]
+	MetricNamespace *string `pulumi:"metricNamespace"`
+	// Identifier of the Azure Cloud resource [Required for metrics]
+	ResourceId *string `pulumi:"resourceId"`
+	// Log analytics workspace [Required for logs]
+	Workspaces []SloObjectiveCountMetricBadAzureMonitorWorkspace `pulumi:"workspaces"`
+}
+
+// SloObjectiveCountMetricBadAzureMonitorInput is an input type that accepts SloObjectiveCountMetricBadAzureMonitorArgs and SloObjectiveCountMetricBadAzureMonitorOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadAzureMonitorInput` via:
+//
+//	SloObjectiveCountMetricBadAzureMonitorArgs{...}
+type SloObjectiveCountMetricBadAzureMonitorInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadAzureMonitorOutput() SloObjectiveCountMetricBadAzureMonitorOutput
+	ToSloObjectiveCountMetricBadAzureMonitorOutputWithContext(context.Context) SloObjectiveCountMetricBadAzureMonitorOutput
+}
+
+type SloObjectiveCountMetricBadAzureMonitorArgs struct {
+	// Aggregation type [Required for metrics]
+	Aggregation pulumi.StringPtrInput `pulumi:"aggregation"`
+	// Specifies source: 'metrics' or 'logs'
+	DataType pulumi.StringInput `pulumi:"dataType"`
+	// Dimensions of the metric [Optional for metrics]
+	Dimensions SloObjectiveCountMetricBadAzureMonitorDimensionArrayInput `pulumi:"dimensions"`
+	// Logs query in Kusto Query Language [Required for logs]
+	KqlQuery pulumi.StringPtrInput `pulumi:"kqlQuery"`
+	// Name of the metric [Required for metrics]
+	MetricName pulumi.StringPtrInput `pulumi:"metricName"`
+	// Namespace of the metric [Optional for metrics]
+	MetricNamespace pulumi.StringPtrInput `pulumi:"metricNamespace"`
+	// Identifier of the Azure Cloud resource [Required for metrics]
+	ResourceId pulumi.StringPtrInput `pulumi:"resourceId"`
+	// Log analytics workspace [Required for logs]
+	Workspaces SloObjectiveCountMetricBadAzureMonitorWorkspaceArrayInput `pulumi:"workspaces"`
+}
+
+func (SloObjectiveCountMetricBadAzureMonitorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadAzureMonitor)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadAzureMonitorArgs) ToSloObjectiveCountMetricBadAzureMonitorOutput() SloObjectiveCountMetricBadAzureMonitorOutput {
+	return i.ToSloObjectiveCountMetricBadAzureMonitorOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadAzureMonitorArgs) ToSloObjectiveCountMetricBadAzureMonitorOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadAzureMonitorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadAzureMonitorOutput)
+}
+
+// SloObjectiveCountMetricBadAzureMonitorArrayInput is an input type that accepts SloObjectiveCountMetricBadAzureMonitorArray and SloObjectiveCountMetricBadAzureMonitorArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadAzureMonitorArrayInput` via:
+//
+//	SloObjectiveCountMetricBadAzureMonitorArray{ SloObjectiveCountMetricBadAzureMonitorArgs{...} }
+type SloObjectiveCountMetricBadAzureMonitorArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadAzureMonitorArrayOutput() SloObjectiveCountMetricBadAzureMonitorArrayOutput
+	ToSloObjectiveCountMetricBadAzureMonitorArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadAzureMonitorArrayOutput
+}
+
+type SloObjectiveCountMetricBadAzureMonitorArray []SloObjectiveCountMetricBadAzureMonitorInput
+
+func (SloObjectiveCountMetricBadAzureMonitorArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadAzureMonitor)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadAzureMonitorArray) ToSloObjectiveCountMetricBadAzureMonitorArrayOutput() SloObjectiveCountMetricBadAzureMonitorArrayOutput {
+	return i.ToSloObjectiveCountMetricBadAzureMonitorArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadAzureMonitorArray) ToSloObjectiveCountMetricBadAzureMonitorArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadAzureMonitorArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadAzureMonitorArrayOutput)
+}
+
+type SloObjectiveCountMetricBadAzureMonitorOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadAzureMonitorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadAzureMonitor)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadAzureMonitorOutput) ToSloObjectiveCountMetricBadAzureMonitorOutput() SloObjectiveCountMetricBadAzureMonitorOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadAzureMonitorOutput) ToSloObjectiveCountMetricBadAzureMonitorOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadAzureMonitorOutput {
+	return o
+}
+
+// Aggregation type [Required for metrics]
+func (o SloObjectiveCountMetricBadAzureMonitorOutput) Aggregation() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadAzureMonitor) *string { return v.Aggregation }).(pulumi.StringPtrOutput)
+}
+
+// Specifies source: 'metrics' or 'logs'
+func (o SloObjectiveCountMetricBadAzureMonitorOutput) DataType() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadAzureMonitor) string { return v.DataType }).(pulumi.StringOutput)
+}
+
+// Dimensions of the metric [Optional for metrics]
+func (o SloObjectiveCountMetricBadAzureMonitorOutput) Dimensions() SloObjectiveCountMetricBadAzureMonitorDimensionArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadAzureMonitor) []SloObjectiveCountMetricBadAzureMonitorDimension {
+		return v.Dimensions
+	}).(SloObjectiveCountMetricBadAzureMonitorDimensionArrayOutput)
+}
+
+// Logs query in Kusto Query Language [Required for logs]
+func (o SloObjectiveCountMetricBadAzureMonitorOutput) KqlQuery() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadAzureMonitor) *string { return v.KqlQuery }).(pulumi.StringPtrOutput)
+}
+
+// Name of the metric [Required for metrics]
+func (o SloObjectiveCountMetricBadAzureMonitorOutput) MetricName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadAzureMonitor) *string { return v.MetricName }).(pulumi.StringPtrOutput)
+}
+
+// Namespace of the metric [Optional for metrics]
+func (o SloObjectiveCountMetricBadAzureMonitorOutput) MetricNamespace() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadAzureMonitor) *string { return v.MetricNamespace }).(pulumi.StringPtrOutput)
+}
+
+// Identifier of the Azure Cloud resource [Required for metrics]
+func (o SloObjectiveCountMetricBadAzureMonitorOutput) ResourceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadAzureMonitor) *string { return v.ResourceId }).(pulumi.StringPtrOutput)
+}
+
+// Log analytics workspace [Required for logs]
+func (o SloObjectiveCountMetricBadAzureMonitorOutput) Workspaces() SloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadAzureMonitor) []SloObjectiveCountMetricBadAzureMonitorWorkspace {
+		return v.Workspaces
+	}).(SloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutput)
+}
+
+type SloObjectiveCountMetricBadAzureMonitorArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadAzureMonitorArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadAzureMonitor)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadAzureMonitorArrayOutput) ToSloObjectiveCountMetricBadAzureMonitorArrayOutput() SloObjectiveCountMetricBadAzureMonitorArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadAzureMonitorArrayOutput) ToSloObjectiveCountMetricBadAzureMonitorArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadAzureMonitorArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadAzureMonitorArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadAzureMonitorOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadAzureMonitor {
+		return vs[0].([]SloObjectiveCountMetricBadAzureMonitor)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadAzureMonitorOutput)
+}
+
+type SloObjectiveCountMetricBadAzureMonitorDimension struct {
+	// The name of the previously defined alert method.
+	Name string `pulumi:"name"`
+	// Burn rate value.
+	Value string `pulumi:"value"`
+}
+
+// SloObjectiveCountMetricBadAzureMonitorDimensionInput is an input type that accepts SloObjectiveCountMetricBadAzureMonitorDimensionArgs and SloObjectiveCountMetricBadAzureMonitorDimensionOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadAzureMonitorDimensionInput` via:
+//
+//	SloObjectiveCountMetricBadAzureMonitorDimensionArgs{...}
+type SloObjectiveCountMetricBadAzureMonitorDimensionInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadAzureMonitorDimensionOutput() SloObjectiveCountMetricBadAzureMonitorDimensionOutput
+	ToSloObjectiveCountMetricBadAzureMonitorDimensionOutputWithContext(context.Context) SloObjectiveCountMetricBadAzureMonitorDimensionOutput
+}
+
+type SloObjectiveCountMetricBadAzureMonitorDimensionArgs struct {
+	// The name of the previously defined alert method.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Burn rate value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (SloObjectiveCountMetricBadAzureMonitorDimensionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadAzureMonitorDimension)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadAzureMonitorDimensionArgs) ToSloObjectiveCountMetricBadAzureMonitorDimensionOutput() SloObjectiveCountMetricBadAzureMonitorDimensionOutput {
+	return i.ToSloObjectiveCountMetricBadAzureMonitorDimensionOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadAzureMonitorDimensionArgs) ToSloObjectiveCountMetricBadAzureMonitorDimensionOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadAzureMonitorDimensionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadAzureMonitorDimensionOutput)
+}
+
+// SloObjectiveCountMetricBadAzureMonitorDimensionArrayInput is an input type that accepts SloObjectiveCountMetricBadAzureMonitorDimensionArray and SloObjectiveCountMetricBadAzureMonitorDimensionArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadAzureMonitorDimensionArrayInput` via:
+//
+//	SloObjectiveCountMetricBadAzureMonitorDimensionArray{ SloObjectiveCountMetricBadAzureMonitorDimensionArgs{...} }
+type SloObjectiveCountMetricBadAzureMonitorDimensionArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadAzureMonitorDimensionArrayOutput() SloObjectiveCountMetricBadAzureMonitorDimensionArrayOutput
+	ToSloObjectiveCountMetricBadAzureMonitorDimensionArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadAzureMonitorDimensionArrayOutput
+}
+
+type SloObjectiveCountMetricBadAzureMonitorDimensionArray []SloObjectiveCountMetricBadAzureMonitorDimensionInput
+
+func (SloObjectiveCountMetricBadAzureMonitorDimensionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadAzureMonitorDimension)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadAzureMonitorDimensionArray) ToSloObjectiveCountMetricBadAzureMonitorDimensionArrayOutput() SloObjectiveCountMetricBadAzureMonitorDimensionArrayOutput {
+	return i.ToSloObjectiveCountMetricBadAzureMonitorDimensionArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadAzureMonitorDimensionArray) ToSloObjectiveCountMetricBadAzureMonitorDimensionArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadAzureMonitorDimensionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadAzureMonitorDimensionArrayOutput)
+}
+
+type SloObjectiveCountMetricBadAzureMonitorDimensionOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadAzureMonitorDimensionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadAzureMonitorDimension)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadAzureMonitorDimensionOutput) ToSloObjectiveCountMetricBadAzureMonitorDimensionOutput() SloObjectiveCountMetricBadAzureMonitorDimensionOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadAzureMonitorDimensionOutput) ToSloObjectiveCountMetricBadAzureMonitorDimensionOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadAzureMonitorDimensionOutput {
+	return o
+}
+
+// The name of the previously defined alert method.
+func (o SloObjectiveCountMetricBadAzureMonitorDimensionOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadAzureMonitorDimension) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Burn rate value.
+func (o SloObjectiveCountMetricBadAzureMonitorDimensionOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadAzureMonitorDimension) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadAzureMonitorDimensionArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadAzureMonitorDimensionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadAzureMonitorDimension)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadAzureMonitorDimensionArrayOutput) ToSloObjectiveCountMetricBadAzureMonitorDimensionArrayOutput() SloObjectiveCountMetricBadAzureMonitorDimensionArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadAzureMonitorDimensionArrayOutput) ToSloObjectiveCountMetricBadAzureMonitorDimensionArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadAzureMonitorDimensionArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadAzureMonitorDimensionArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadAzureMonitorDimensionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadAzureMonitorDimension {
+		return vs[0].([]SloObjectiveCountMetricBadAzureMonitorDimension)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadAzureMonitorDimensionOutput)
+}
+
+type SloObjectiveCountMetricBadAzureMonitorWorkspace struct {
+	// Resource group of the workspace
+	ResourceGroup string `pulumi:"resourceGroup"`
+	// Subscription ID of the workspace
+	SubscriptionId string `pulumi:"subscriptionId"`
+	// ID of the workspace
+	WorkspaceId string `pulumi:"workspaceId"`
+}
+
+// SloObjectiveCountMetricBadAzureMonitorWorkspaceInput is an input type that accepts SloObjectiveCountMetricBadAzureMonitorWorkspaceArgs and SloObjectiveCountMetricBadAzureMonitorWorkspaceOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadAzureMonitorWorkspaceInput` via:
+//
+//	SloObjectiveCountMetricBadAzureMonitorWorkspaceArgs{...}
+type SloObjectiveCountMetricBadAzureMonitorWorkspaceInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadAzureMonitorWorkspaceOutput() SloObjectiveCountMetricBadAzureMonitorWorkspaceOutput
+	ToSloObjectiveCountMetricBadAzureMonitorWorkspaceOutputWithContext(context.Context) SloObjectiveCountMetricBadAzureMonitorWorkspaceOutput
+}
+
+type SloObjectiveCountMetricBadAzureMonitorWorkspaceArgs struct {
+	// Resource group of the workspace
+	ResourceGroup pulumi.StringInput `pulumi:"resourceGroup"`
+	// Subscription ID of the workspace
+	SubscriptionId pulumi.StringInput `pulumi:"subscriptionId"`
+	// ID of the workspace
+	WorkspaceId pulumi.StringInput `pulumi:"workspaceId"`
+}
+
+func (SloObjectiveCountMetricBadAzureMonitorWorkspaceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadAzureMonitorWorkspace)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadAzureMonitorWorkspaceArgs) ToSloObjectiveCountMetricBadAzureMonitorWorkspaceOutput() SloObjectiveCountMetricBadAzureMonitorWorkspaceOutput {
+	return i.ToSloObjectiveCountMetricBadAzureMonitorWorkspaceOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadAzureMonitorWorkspaceArgs) ToSloObjectiveCountMetricBadAzureMonitorWorkspaceOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadAzureMonitorWorkspaceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadAzureMonitorWorkspaceOutput)
+}
+
+// SloObjectiveCountMetricBadAzureMonitorWorkspaceArrayInput is an input type that accepts SloObjectiveCountMetricBadAzureMonitorWorkspaceArray and SloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadAzureMonitorWorkspaceArrayInput` via:
+//
+//	SloObjectiveCountMetricBadAzureMonitorWorkspaceArray{ SloObjectiveCountMetricBadAzureMonitorWorkspaceArgs{...} }
+type SloObjectiveCountMetricBadAzureMonitorWorkspaceArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutput() SloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutput
+	ToSloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutput
+}
+
+type SloObjectiveCountMetricBadAzureMonitorWorkspaceArray []SloObjectiveCountMetricBadAzureMonitorWorkspaceInput
+
+func (SloObjectiveCountMetricBadAzureMonitorWorkspaceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadAzureMonitorWorkspace)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadAzureMonitorWorkspaceArray) ToSloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutput() SloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutput {
+	return i.ToSloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadAzureMonitorWorkspaceArray) ToSloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutput)
+}
+
+type SloObjectiveCountMetricBadAzureMonitorWorkspaceOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadAzureMonitorWorkspaceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadAzureMonitorWorkspace)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadAzureMonitorWorkspaceOutput) ToSloObjectiveCountMetricBadAzureMonitorWorkspaceOutput() SloObjectiveCountMetricBadAzureMonitorWorkspaceOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadAzureMonitorWorkspaceOutput) ToSloObjectiveCountMetricBadAzureMonitorWorkspaceOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadAzureMonitorWorkspaceOutput {
+	return o
+}
+
+// Resource group of the workspace
+func (o SloObjectiveCountMetricBadAzureMonitorWorkspaceOutput) ResourceGroup() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadAzureMonitorWorkspace) string { return v.ResourceGroup }).(pulumi.StringOutput)
+}
+
+// Subscription ID of the workspace
+func (o SloObjectiveCountMetricBadAzureMonitorWorkspaceOutput) SubscriptionId() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadAzureMonitorWorkspace) string { return v.SubscriptionId }).(pulumi.StringOutput)
+}
+
+// ID of the workspace
+func (o SloObjectiveCountMetricBadAzureMonitorWorkspaceOutput) WorkspaceId() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadAzureMonitorWorkspace) string { return v.WorkspaceId }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadAzureMonitorWorkspace)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutput) ToSloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutput() SloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutput) ToSloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadAzureMonitorWorkspaceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadAzureMonitorWorkspace {
+		return vs[0].([]SloObjectiveCountMetricBadAzureMonitorWorkspace)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadAzureMonitorWorkspaceOutput)
+}
+
+type SloObjectiveCountMetricBadBigquery struct {
+	// Location of you BigQuery
+	Location string `pulumi:"location"`
+	// Project ID
+	ProjectId string `pulumi:"projectId"`
+	// Query for the metrics
+	Query string `pulumi:"query"`
+}
+
+// SloObjectiveCountMetricBadBigqueryInput is an input type that accepts SloObjectiveCountMetricBadBigqueryArgs and SloObjectiveCountMetricBadBigqueryOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadBigqueryInput` via:
+//
+//	SloObjectiveCountMetricBadBigqueryArgs{...}
+type SloObjectiveCountMetricBadBigqueryInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadBigqueryOutput() SloObjectiveCountMetricBadBigqueryOutput
+	ToSloObjectiveCountMetricBadBigqueryOutputWithContext(context.Context) SloObjectiveCountMetricBadBigqueryOutput
+}
+
+type SloObjectiveCountMetricBadBigqueryArgs struct {
+	// Location of you BigQuery
+	Location pulumi.StringInput `pulumi:"location"`
+	// Project ID
+	ProjectId pulumi.StringInput `pulumi:"projectId"`
+	// Query for the metrics
+	Query pulumi.StringInput `pulumi:"query"`
+}
+
+func (SloObjectiveCountMetricBadBigqueryArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadBigquery)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadBigqueryArgs) ToSloObjectiveCountMetricBadBigqueryOutput() SloObjectiveCountMetricBadBigqueryOutput {
+	return i.ToSloObjectiveCountMetricBadBigqueryOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadBigqueryArgs) ToSloObjectiveCountMetricBadBigqueryOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadBigqueryOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadBigqueryOutput)
+}
+
+// SloObjectiveCountMetricBadBigqueryArrayInput is an input type that accepts SloObjectiveCountMetricBadBigqueryArray and SloObjectiveCountMetricBadBigqueryArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadBigqueryArrayInput` via:
+//
+//	SloObjectiveCountMetricBadBigqueryArray{ SloObjectiveCountMetricBadBigqueryArgs{...} }
+type SloObjectiveCountMetricBadBigqueryArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadBigqueryArrayOutput() SloObjectiveCountMetricBadBigqueryArrayOutput
+	ToSloObjectiveCountMetricBadBigqueryArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadBigqueryArrayOutput
+}
+
+type SloObjectiveCountMetricBadBigqueryArray []SloObjectiveCountMetricBadBigqueryInput
+
+func (SloObjectiveCountMetricBadBigqueryArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadBigquery)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadBigqueryArray) ToSloObjectiveCountMetricBadBigqueryArrayOutput() SloObjectiveCountMetricBadBigqueryArrayOutput {
+	return i.ToSloObjectiveCountMetricBadBigqueryArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadBigqueryArray) ToSloObjectiveCountMetricBadBigqueryArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadBigqueryArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadBigqueryArrayOutput)
+}
+
+type SloObjectiveCountMetricBadBigqueryOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadBigqueryOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadBigquery)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadBigqueryOutput) ToSloObjectiveCountMetricBadBigqueryOutput() SloObjectiveCountMetricBadBigqueryOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadBigqueryOutput) ToSloObjectiveCountMetricBadBigqueryOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadBigqueryOutput {
+	return o
+}
+
+// Location of you BigQuery
+func (o SloObjectiveCountMetricBadBigqueryOutput) Location() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadBigquery) string { return v.Location }).(pulumi.StringOutput)
+}
+
+// Project ID
+func (o SloObjectiveCountMetricBadBigqueryOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadBigquery) string { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// Query for the metrics
+func (o SloObjectiveCountMetricBadBigqueryOutput) Query() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadBigquery) string { return v.Query }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadBigqueryArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadBigqueryArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadBigquery)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadBigqueryArrayOutput) ToSloObjectiveCountMetricBadBigqueryArrayOutput() SloObjectiveCountMetricBadBigqueryArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadBigqueryArrayOutput) ToSloObjectiveCountMetricBadBigqueryArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadBigqueryArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadBigqueryArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadBigqueryOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadBigquery {
+		return vs[0].([]SloObjectiveCountMetricBadBigquery)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadBigqueryOutput)
+}
+
+type SloObjectiveCountMetricBadCloudwatch struct {
+	// AccountID used with cross-account observability feature
+	AccountId *string `pulumi:"accountId"`
+	// Dimensions of the metric [Optional for metrics]
+	Dimensions []SloObjectiveCountMetricBadCloudwatchDimension `pulumi:"dimensions"`
+	// JSON query
+	Json *string `pulumi:"json"`
+	// Name of the metric [Required for metrics]
+	MetricName *string `pulumi:"metricName"`
+	// Namespace of the metric
+	Namespace *string `pulumi:"namespace"`
+	// Region of the CloudWatch instance
+	Region string `pulumi:"region"`
+	// SQL query
+	Sql *string `pulumi:"sql"`
+	// Metric data aggregations
+	Stat *string `pulumi:"stat"`
+}
+
+// SloObjectiveCountMetricBadCloudwatchInput is an input type that accepts SloObjectiveCountMetricBadCloudwatchArgs and SloObjectiveCountMetricBadCloudwatchOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadCloudwatchInput` via:
+//
+//	SloObjectiveCountMetricBadCloudwatchArgs{...}
+type SloObjectiveCountMetricBadCloudwatchInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadCloudwatchOutput() SloObjectiveCountMetricBadCloudwatchOutput
+	ToSloObjectiveCountMetricBadCloudwatchOutputWithContext(context.Context) SloObjectiveCountMetricBadCloudwatchOutput
+}
+
+type SloObjectiveCountMetricBadCloudwatchArgs struct {
+	// AccountID used with cross-account observability feature
+	AccountId pulumi.StringPtrInput `pulumi:"accountId"`
+	// Dimensions of the metric [Optional for metrics]
+	Dimensions SloObjectiveCountMetricBadCloudwatchDimensionArrayInput `pulumi:"dimensions"`
+	// JSON query
+	Json pulumi.StringPtrInput `pulumi:"json"`
+	// Name of the metric [Required for metrics]
+	MetricName pulumi.StringPtrInput `pulumi:"metricName"`
+	// Namespace of the metric
+	Namespace pulumi.StringPtrInput `pulumi:"namespace"`
+	// Region of the CloudWatch instance
+	Region pulumi.StringInput `pulumi:"region"`
+	// SQL query
+	Sql pulumi.StringPtrInput `pulumi:"sql"`
+	// Metric data aggregations
+	Stat pulumi.StringPtrInput `pulumi:"stat"`
+}
+
+func (SloObjectiveCountMetricBadCloudwatchArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadCloudwatch)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadCloudwatchArgs) ToSloObjectiveCountMetricBadCloudwatchOutput() SloObjectiveCountMetricBadCloudwatchOutput {
+	return i.ToSloObjectiveCountMetricBadCloudwatchOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadCloudwatchArgs) ToSloObjectiveCountMetricBadCloudwatchOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadCloudwatchOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadCloudwatchOutput)
+}
+
+// SloObjectiveCountMetricBadCloudwatchArrayInput is an input type that accepts SloObjectiveCountMetricBadCloudwatchArray and SloObjectiveCountMetricBadCloudwatchArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadCloudwatchArrayInput` via:
+//
+//	SloObjectiveCountMetricBadCloudwatchArray{ SloObjectiveCountMetricBadCloudwatchArgs{...} }
+type SloObjectiveCountMetricBadCloudwatchArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadCloudwatchArrayOutput() SloObjectiveCountMetricBadCloudwatchArrayOutput
+	ToSloObjectiveCountMetricBadCloudwatchArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadCloudwatchArrayOutput
+}
+
+type SloObjectiveCountMetricBadCloudwatchArray []SloObjectiveCountMetricBadCloudwatchInput
+
+func (SloObjectiveCountMetricBadCloudwatchArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadCloudwatch)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadCloudwatchArray) ToSloObjectiveCountMetricBadCloudwatchArrayOutput() SloObjectiveCountMetricBadCloudwatchArrayOutput {
+	return i.ToSloObjectiveCountMetricBadCloudwatchArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadCloudwatchArray) ToSloObjectiveCountMetricBadCloudwatchArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadCloudwatchArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadCloudwatchArrayOutput)
+}
+
+type SloObjectiveCountMetricBadCloudwatchOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadCloudwatchOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadCloudwatch)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadCloudwatchOutput) ToSloObjectiveCountMetricBadCloudwatchOutput() SloObjectiveCountMetricBadCloudwatchOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadCloudwatchOutput) ToSloObjectiveCountMetricBadCloudwatchOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadCloudwatchOutput {
+	return o
+}
+
+// AccountID used with cross-account observability feature
+func (o SloObjectiveCountMetricBadCloudwatchOutput) AccountId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadCloudwatch) *string { return v.AccountId }).(pulumi.StringPtrOutput)
+}
+
+// Dimensions of the metric [Optional for metrics]
+func (o SloObjectiveCountMetricBadCloudwatchOutput) Dimensions() SloObjectiveCountMetricBadCloudwatchDimensionArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadCloudwatch) []SloObjectiveCountMetricBadCloudwatchDimension {
+		return v.Dimensions
+	}).(SloObjectiveCountMetricBadCloudwatchDimensionArrayOutput)
+}
+
+// JSON query
+func (o SloObjectiveCountMetricBadCloudwatchOutput) Json() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadCloudwatch) *string { return v.Json }).(pulumi.StringPtrOutput)
+}
+
+// Name of the metric [Required for metrics]
+func (o SloObjectiveCountMetricBadCloudwatchOutput) MetricName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadCloudwatch) *string { return v.MetricName }).(pulumi.StringPtrOutput)
+}
+
+// Namespace of the metric
+func (o SloObjectiveCountMetricBadCloudwatchOutput) Namespace() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadCloudwatch) *string { return v.Namespace }).(pulumi.StringPtrOutput)
+}
+
+// Region of the CloudWatch instance
+func (o SloObjectiveCountMetricBadCloudwatchOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadCloudwatch) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// SQL query
+func (o SloObjectiveCountMetricBadCloudwatchOutput) Sql() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadCloudwatch) *string { return v.Sql }).(pulumi.StringPtrOutput)
+}
+
+// Metric data aggregations
+func (o SloObjectiveCountMetricBadCloudwatchOutput) Stat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadCloudwatch) *string { return v.Stat }).(pulumi.StringPtrOutput)
+}
+
+type SloObjectiveCountMetricBadCloudwatchArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadCloudwatchArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadCloudwatch)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadCloudwatchArrayOutput) ToSloObjectiveCountMetricBadCloudwatchArrayOutput() SloObjectiveCountMetricBadCloudwatchArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadCloudwatchArrayOutput) ToSloObjectiveCountMetricBadCloudwatchArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadCloudwatchArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadCloudwatchArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadCloudwatchOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadCloudwatch {
+		return vs[0].([]SloObjectiveCountMetricBadCloudwatch)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadCloudwatchOutput)
+}
+
+type SloObjectiveCountMetricBadCloudwatchDimension struct {
+	// The name of the previously defined alert method.
+	Name string `pulumi:"name"`
+	// Burn rate value.
+	Value string `pulumi:"value"`
+}
+
+// SloObjectiveCountMetricBadCloudwatchDimensionInput is an input type that accepts SloObjectiveCountMetricBadCloudwatchDimensionArgs and SloObjectiveCountMetricBadCloudwatchDimensionOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadCloudwatchDimensionInput` via:
+//
+//	SloObjectiveCountMetricBadCloudwatchDimensionArgs{...}
+type SloObjectiveCountMetricBadCloudwatchDimensionInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadCloudwatchDimensionOutput() SloObjectiveCountMetricBadCloudwatchDimensionOutput
+	ToSloObjectiveCountMetricBadCloudwatchDimensionOutputWithContext(context.Context) SloObjectiveCountMetricBadCloudwatchDimensionOutput
+}
+
+type SloObjectiveCountMetricBadCloudwatchDimensionArgs struct {
+	// The name of the previously defined alert method.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Burn rate value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (SloObjectiveCountMetricBadCloudwatchDimensionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadCloudwatchDimension)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadCloudwatchDimensionArgs) ToSloObjectiveCountMetricBadCloudwatchDimensionOutput() SloObjectiveCountMetricBadCloudwatchDimensionOutput {
+	return i.ToSloObjectiveCountMetricBadCloudwatchDimensionOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadCloudwatchDimensionArgs) ToSloObjectiveCountMetricBadCloudwatchDimensionOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadCloudwatchDimensionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadCloudwatchDimensionOutput)
+}
+
+// SloObjectiveCountMetricBadCloudwatchDimensionArrayInput is an input type that accepts SloObjectiveCountMetricBadCloudwatchDimensionArray and SloObjectiveCountMetricBadCloudwatchDimensionArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadCloudwatchDimensionArrayInput` via:
+//
+//	SloObjectiveCountMetricBadCloudwatchDimensionArray{ SloObjectiveCountMetricBadCloudwatchDimensionArgs{...} }
+type SloObjectiveCountMetricBadCloudwatchDimensionArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadCloudwatchDimensionArrayOutput() SloObjectiveCountMetricBadCloudwatchDimensionArrayOutput
+	ToSloObjectiveCountMetricBadCloudwatchDimensionArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadCloudwatchDimensionArrayOutput
+}
+
+type SloObjectiveCountMetricBadCloudwatchDimensionArray []SloObjectiveCountMetricBadCloudwatchDimensionInput
+
+func (SloObjectiveCountMetricBadCloudwatchDimensionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadCloudwatchDimension)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadCloudwatchDimensionArray) ToSloObjectiveCountMetricBadCloudwatchDimensionArrayOutput() SloObjectiveCountMetricBadCloudwatchDimensionArrayOutput {
+	return i.ToSloObjectiveCountMetricBadCloudwatchDimensionArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadCloudwatchDimensionArray) ToSloObjectiveCountMetricBadCloudwatchDimensionArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadCloudwatchDimensionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadCloudwatchDimensionArrayOutput)
+}
+
+type SloObjectiveCountMetricBadCloudwatchDimensionOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadCloudwatchDimensionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadCloudwatchDimension)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadCloudwatchDimensionOutput) ToSloObjectiveCountMetricBadCloudwatchDimensionOutput() SloObjectiveCountMetricBadCloudwatchDimensionOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadCloudwatchDimensionOutput) ToSloObjectiveCountMetricBadCloudwatchDimensionOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadCloudwatchDimensionOutput {
+	return o
+}
+
+// The name of the previously defined alert method.
+func (o SloObjectiveCountMetricBadCloudwatchDimensionOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadCloudwatchDimension) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Burn rate value.
+func (o SloObjectiveCountMetricBadCloudwatchDimensionOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadCloudwatchDimension) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadCloudwatchDimensionArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadCloudwatchDimensionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadCloudwatchDimension)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadCloudwatchDimensionArrayOutput) ToSloObjectiveCountMetricBadCloudwatchDimensionArrayOutput() SloObjectiveCountMetricBadCloudwatchDimensionArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadCloudwatchDimensionArrayOutput) ToSloObjectiveCountMetricBadCloudwatchDimensionArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadCloudwatchDimensionArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadCloudwatchDimensionArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadCloudwatchDimensionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadCloudwatchDimension {
+		return vs[0].([]SloObjectiveCountMetricBadCloudwatchDimension)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadCloudwatchDimensionOutput)
+}
+
+type SloObjectiveCountMetricBadDatadog struct {
+	// Query for the metrics
+	Query string `pulumi:"query"`
+}
+
+// SloObjectiveCountMetricBadDatadogInput is an input type that accepts SloObjectiveCountMetricBadDatadogArgs and SloObjectiveCountMetricBadDatadogOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadDatadogInput` via:
+//
+//	SloObjectiveCountMetricBadDatadogArgs{...}
+type SloObjectiveCountMetricBadDatadogInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadDatadogOutput() SloObjectiveCountMetricBadDatadogOutput
+	ToSloObjectiveCountMetricBadDatadogOutputWithContext(context.Context) SloObjectiveCountMetricBadDatadogOutput
+}
+
+type SloObjectiveCountMetricBadDatadogArgs struct {
+	// Query for the metrics
+	Query pulumi.StringInput `pulumi:"query"`
+}
+
+func (SloObjectiveCountMetricBadDatadogArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadDatadog)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadDatadogArgs) ToSloObjectiveCountMetricBadDatadogOutput() SloObjectiveCountMetricBadDatadogOutput {
+	return i.ToSloObjectiveCountMetricBadDatadogOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadDatadogArgs) ToSloObjectiveCountMetricBadDatadogOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadDatadogOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadDatadogOutput)
+}
+
+// SloObjectiveCountMetricBadDatadogArrayInput is an input type that accepts SloObjectiveCountMetricBadDatadogArray and SloObjectiveCountMetricBadDatadogArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadDatadogArrayInput` via:
+//
+//	SloObjectiveCountMetricBadDatadogArray{ SloObjectiveCountMetricBadDatadogArgs{...} }
+type SloObjectiveCountMetricBadDatadogArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadDatadogArrayOutput() SloObjectiveCountMetricBadDatadogArrayOutput
+	ToSloObjectiveCountMetricBadDatadogArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadDatadogArrayOutput
+}
+
+type SloObjectiveCountMetricBadDatadogArray []SloObjectiveCountMetricBadDatadogInput
+
+func (SloObjectiveCountMetricBadDatadogArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadDatadog)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadDatadogArray) ToSloObjectiveCountMetricBadDatadogArrayOutput() SloObjectiveCountMetricBadDatadogArrayOutput {
+	return i.ToSloObjectiveCountMetricBadDatadogArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadDatadogArray) ToSloObjectiveCountMetricBadDatadogArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadDatadogArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadDatadogArrayOutput)
+}
+
+type SloObjectiveCountMetricBadDatadogOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadDatadogOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadDatadog)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadDatadogOutput) ToSloObjectiveCountMetricBadDatadogOutput() SloObjectiveCountMetricBadDatadogOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadDatadogOutput) ToSloObjectiveCountMetricBadDatadogOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadDatadogOutput {
+	return o
+}
+
+// Query for the metrics
+func (o SloObjectiveCountMetricBadDatadogOutput) Query() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadDatadog) string { return v.Query }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadDatadogArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadDatadogArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadDatadog)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadDatadogArrayOutput) ToSloObjectiveCountMetricBadDatadogArrayOutput() SloObjectiveCountMetricBadDatadogArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadDatadogArrayOutput) ToSloObjectiveCountMetricBadDatadogArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadDatadogArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadDatadogArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadDatadogOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadDatadog {
+		return vs[0].([]SloObjectiveCountMetricBadDatadog)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadDatadogOutput)
+}
+
+type SloObjectiveCountMetricBadDynatrace struct {
+	// Selector for the metrics
+	MetricSelector string `pulumi:"metricSelector"`
+}
+
+// SloObjectiveCountMetricBadDynatraceInput is an input type that accepts SloObjectiveCountMetricBadDynatraceArgs and SloObjectiveCountMetricBadDynatraceOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadDynatraceInput` via:
+//
+//	SloObjectiveCountMetricBadDynatraceArgs{...}
+type SloObjectiveCountMetricBadDynatraceInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadDynatraceOutput() SloObjectiveCountMetricBadDynatraceOutput
+	ToSloObjectiveCountMetricBadDynatraceOutputWithContext(context.Context) SloObjectiveCountMetricBadDynatraceOutput
+}
+
+type SloObjectiveCountMetricBadDynatraceArgs struct {
+	// Selector for the metrics
+	MetricSelector pulumi.StringInput `pulumi:"metricSelector"`
+}
+
+func (SloObjectiveCountMetricBadDynatraceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadDynatrace)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadDynatraceArgs) ToSloObjectiveCountMetricBadDynatraceOutput() SloObjectiveCountMetricBadDynatraceOutput {
+	return i.ToSloObjectiveCountMetricBadDynatraceOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadDynatraceArgs) ToSloObjectiveCountMetricBadDynatraceOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadDynatraceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadDynatraceOutput)
+}
+
+// SloObjectiveCountMetricBadDynatraceArrayInput is an input type that accepts SloObjectiveCountMetricBadDynatraceArray and SloObjectiveCountMetricBadDynatraceArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadDynatraceArrayInput` via:
+//
+//	SloObjectiveCountMetricBadDynatraceArray{ SloObjectiveCountMetricBadDynatraceArgs{...} }
+type SloObjectiveCountMetricBadDynatraceArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadDynatraceArrayOutput() SloObjectiveCountMetricBadDynatraceArrayOutput
+	ToSloObjectiveCountMetricBadDynatraceArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadDynatraceArrayOutput
+}
+
+type SloObjectiveCountMetricBadDynatraceArray []SloObjectiveCountMetricBadDynatraceInput
+
+func (SloObjectiveCountMetricBadDynatraceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadDynatrace)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadDynatraceArray) ToSloObjectiveCountMetricBadDynatraceArrayOutput() SloObjectiveCountMetricBadDynatraceArrayOutput {
+	return i.ToSloObjectiveCountMetricBadDynatraceArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadDynatraceArray) ToSloObjectiveCountMetricBadDynatraceArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadDynatraceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadDynatraceArrayOutput)
+}
+
+type SloObjectiveCountMetricBadDynatraceOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadDynatraceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadDynatrace)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadDynatraceOutput) ToSloObjectiveCountMetricBadDynatraceOutput() SloObjectiveCountMetricBadDynatraceOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadDynatraceOutput) ToSloObjectiveCountMetricBadDynatraceOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadDynatraceOutput {
+	return o
+}
+
+// Selector for the metrics
+func (o SloObjectiveCountMetricBadDynatraceOutput) MetricSelector() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadDynatrace) string { return v.MetricSelector }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadDynatraceArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadDynatraceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadDynatrace)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadDynatraceArrayOutput) ToSloObjectiveCountMetricBadDynatraceArrayOutput() SloObjectiveCountMetricBadDynatraceArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadDynatraceArrayOutput) ToSloObjectiveCountMetricBadDynatraceArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadDynatraceArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadDynatraceArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadDynatraceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadDynatrace {
+		return vs[0].([]SloObjectiveCountMetricBadDynatrace)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadDynatraceOutput)
+}
+
+type SloObjectiveCountMetricBadElasticsearch struct {
+	// Index of metrics we want to query
+	Index string `pulumi:"index"`
+	// Query for the metrics
+	Query string `pulumi:"query"`
+}
+
+// SloObjectiveCountMetricBadElasticsearchInput is an input type that accepts SloObjectiveCountMetricBadElasticsearchArgs and SloObjectiveCountMetricBadElasticsearchOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadElasticsearchInput` via:
+//
+//	SloObjectiveCountMetricBadElasticsearchArgs{...}
+type SloObjectiveCountMetricBadElasticsearchInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadElasticsearchOutput() SloObjectiveCountMetricBadElasticsearchOutput
+	ToSloObjectiveCountMetricBadElasticsearchOutputWithContext(context.Context) SloObjectiveCountMetricBadElasticsearchOutput
+}
+
+type SloObjectiveCountMetricBadElasticsearchArgs struct {
+	// Index of metrics we want to query
+	Index pulumi.StringInput `pulumi:"index"`
+	// Query for the metrics
+	Query pulumi.StringInput `pulumi:"query"`
+}
+
+func (SloObjectiveCountMetricBadElasticsearchArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadElasticsearch)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadElasticsearchArgs) ToSloObjectiveCountMetricBadElasticsearchOutput() SloObjectiveCountMetricBadElasticsearchOutput {
+	return i.ToSloObjectiveCountMetricBadElasticsearchOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadElasticsearchArgs) ToSloObjectiveCountMetricBadElasticsearchOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadElasticsearchOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadElasticsearchOutput)
+}
+
+// SloObjectiveCountMetricBadElasticsearchArrayInput is an input type that accepts SloObjectiveCountMetricBadElasticsearchArray and SloObjectiveCountMetricBadElasticsearchArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadElasticsearchArrayInput` via:
+//
+//	SloObjectiveCountMetricBadElasticsearchArray{ SloObjectiveCountMetricBadElasticsearchArgs{...} }
+type SloObjectiveCountMetricBadElasticsearchArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadElasticsearchArrayOutput() SloObjectiveCountMetricBadElasticsearchArrayOutput
+	ToSloObjectiveCountMetricBadElasticsearchArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadElasticsearchArrayOutput
+}
+
+type SloObjectiveCountMetricBadElasticsearchArray []SloObjectiveCountMetricBadElasticsearchInput
+
+func (SloObjectiveCountMetricBadElasticsearchArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadElasticsearch)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadElasticsearchArray) ToSloObjectiveCountMetricBadElasticsearchArrayOutput() SloObjectiveCountMetricBadElasticsearchArrayOutput {
+	return i.ToSloObjectiveCountMetricBadElasticsearchArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadElasticsearchArray) ToSloObjectiveCountMetricBadElasticsearchArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadElasticsearchArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadElasticsearchArrayOutput)
+}
+
+type SloObjectiveCountMetricBadElasticsearchOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadElasticsearchOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadElasticsearch)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadElasticsearchOutput) ToSloObjectiveCountMetricBadElasticsearchOutput() SloObjectiveCountMetricBadElasticsearchOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadElasticsearchOutput) ToSloObjectiveCountMetricBadElasticsearchOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadElasticsearchOutput {
+	return o
+}
+
+// Index of metrics we want to query
+func (o SloObjectiveCountMetricBadElasticsearchOutput) Index() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadElasticsearch) string { return v.Index }).(pulumi.StringOutput)
+}
+
+// Query for the metrics
+func (o SloObjectiveCountMetricBadElasticsearchOutput) Query() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadElasticsearch) string { return v.Query }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadElasticsearchArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadElasticsearchArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadElasticsearch)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadElasticsearchArrayOutput) ToSloObjectiveCountMetricBadElasticsearchArrayOutput() SloObjectiveCountMetricBadElasticsearchArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadElasticsearchArrayOutput) ToSloObjectiveCountMetricBadElasticsearchArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadElasticsearchArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadElasticsearchArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadElasticsearchOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadElasticsearch {
+		return vs[0].([]SloObjectiveCountMetricBadElasticsearch)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadElasticsearchOutput)
+}
+
+type SloObjectiveCountMetricBadGcm struct {
+	// Project ID
+	ProjectId string `pulumi:"projectId"`
+	// Query for the metrics
+	Query string `pulumi:"query"`
+}
+
+// SloObjectiveCountMetricBadGcmInput is an input type that accepts SloObjectiveCountMetricBadGcmArgs and SloObjectiveCountMetricBadGcmOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadGcmInput` via:
+//
+//	SloObjectiveCountMetricBadGcmArgs{...}
+type SloObjectiveCountMetricBadGcmInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadGcmOutput() SloObjectiveCountMetricBadGcmOutput
+	ToSloObjectiveCountMetricBadGcmOutputWithContext(context.Context) SloObjectiveCountMetricBadGcmOutput
+}
+
+type SloObjectiveCountMetricBadGcmArgs struct {
+	// Project ID
+	ProjectId pulumi.StringInput `pulumi:"projectId"`
+	// Query for the metrics
+	Query pulumi.StringInput `pulumi:"query"`
+}
+
+func (SloObjectiveCountMetricBadGcmArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadGcm)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadGcmArgs) ToSloObjectiveCountMetricBadGcmOutput() SloObjectiveCountMetricBadGcmOutput {
+	return i.ToSloObjectiveCountMetricBadGcmOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadGcmArgs) ToSloObjectiveCountMetricBadGcmOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadGcmOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadGcmOutput)
+}
+
+// SloObjectiveCountMetricBadGcmArrayInput is an input type that accepts SloObjectiveCountMetricBadGcmArray and SloObjectiveCountMetricBadGcmArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadGcmArrayInput` via:
+//
+//	SloObjectiveCountMetricBadGcmArray{ SloObjectiveCountMetricBadGcmArgs{...} }
+type SloObjectiveCountMetricBadGcmArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadGcmArrayOutput() SloObjectiveCountMetricBadGcmArrayOutput
+	ToSloObjectiveCountMetricBadGcmArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadGcmArrayOutput
+}
+
+type SloObjectiveCountMetricBadGcmArray []SloObjectiveCountMetricBadGcmInput
+
+func (SloObjectiveCountMetricBadGcmArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadGcm)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadGcmArray) ToSloObjectiveCountMetricBadGcmArrayOutput() SloObjectiveCountMetricBadGcmArrayOutput {
+	return i.ToSloObjectiveCountMetricBadGcmArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadGcmArray) ToSloObjectiveCountMetricBadGcmArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadGcmArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadGcmArrayOutput)
+}
+
+type SloObjectiveCountMetricBadGcmOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadGcmOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadGcm)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadGcmOutput) ToSloObjectiveCountMetricBadGcmOutput() SloObjectiveCountMetricBadGcmOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadGcmOutput) ToSloObjectiveCountMetricBadGcmOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadGcmOutput {
+	return o
+}
+
+// Project ID
+func (o SloObjectiveCountMetricBadGcmOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadGcm) string { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// Query for the metrics
+func (o SloObjectiveCountMetricBadGcmOutput) Query() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadGcm) string { return v.Query }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadGcmArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadGcmArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadGcm)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadGcmArrayOutput) ToSloObjectiveCountMetricBadGcmArrayOutput() SloObjectiveCountMetricBadGcmArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadGcmArrayOutput) ToSloObjectiveCountMetricBadGcmArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadGcmArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadGcmArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadGcmOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadGcm {
+		return vs[0].([]SloObjectiveCountMetricBadGcm)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadGcmOutput)
+}
+
+type SloObjectiveCountMetricBadGrafanaLoki struct {
+	// Query for the logs
+	Logql string `pulumi:"logql"`
+}
+
+// SloObjectiveCountMetricBadGrafanaLokiInput is an input type that accepts SloObjectiveCountMetricBadGrafanaLokiArgs and SloObjectiveCountMetricBadGrafanaLokiOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadGrafanaLokiInput` via:
+//
+//	SloObjectiveCountMetricBadGrafanaLokiArgs{...}
+type SloObjectiveCountMetricBadGrafanaLokiInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadGrafanaLokiOutput() SloObjectiveCountMetricBadGrafanaLokiOutput
+	ToSloObjectiveCountMetricBadGrafanaLokiOutputWithContext(context.Context) SloObjectiveCountMetricBadGrafanaLokiOutput
+}
+
+type SloObjectiveCountMetricBadGrafanaLokiArgs struct {
+	// Query for the logs
+	Logql pulumi.StringInput `pulumi:"logql"`
+}
+
+func (SloObjectiveCountMetricBadGrafanaLokiArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadGrafanaLoki)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadGrafanaLokiArgs) ToSloObjectiveCountMetricBadGrafanaLokiOutput() SloObjectiveCountMetricBadGrafanaLokiOutput {
+	return i.ToSloObjectiveCountMetricBadGrafanaLokiOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadGrafanaLokiArgs) ToSloObjectiveCountMetricBadGrafanaLokiOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadGrafanaLokiOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadGrafanaLokiOutput)
+}
+
+// SloObjectiveCountMetricBadGrafanaLokiArrayInput is an input type that accepts SloObjectiveCountMetricBadGrafanaLokiArray and SloObjectiveCountMetricBadGrafanaLokiArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadGrafanaLokiArrayInput` via:
+//
+//	SloObjectiveCountMetricBadGrafanaLokiArray{ SloObjectiveCountMetricBadGrafanaLokiArgs{...} }
+type SloObjectiveCountMetricBadGrafanaLokiArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadGrafanaLokiArrayOutput() SloObjectiveCountMetricBadGrafanaLokiArrayOutput
+	ToSloObjectiveCountMetricBadGrafanaLokiArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadGrafanaLokiArrayOutput
+}
+
+type SloObjectiveCountMetricBadGrafanaLokiArray []SloObjectiveCountMetricBadGrafanaLokiInput
+
+func (SloObjectiveCountMetricBadGrafanaLokiArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadGrafanaLoki)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadGrafanaLokiArray) ToSloObjectiveCountMetricBadGrafanaLokiArrayOutput() SloObjectiveCountMetricBadGrafanaLokiArrayOutput {
+	return i.ToSloObjectiveCountMetricBadGrafanaLokiArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadGrafanaLokiArray) ToSloObjectiveCountMetricBadGrafanaLokiArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadGrafanaLokiArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadGrafanaLokiArrayOutput)
+}
+
+type SloObjectiveCountMetricBadGrafanaLokiOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadGrafanaLokiOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadGrafanaLoki)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadGrafanaLokiOutput) ToSloObjectiveCountMetricBadGrafanaLokiOutput() SloObjectiveCountMetricBadGrafanaLokiOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadGrafanaLokiOutput) ToSloObjectiveCountMetricBadGrafanaLokiOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadGrafanaLokiOutput {
+	return o
+}
+
+// Query for the logs
+func (o SloObjectiveCountMetricBadGrafanaLokiOutput) Logql() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadGrafanaLoki) string { return v.Logql }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadGrafanaLokiArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadGrafanaLokiArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadGrafanaLoki)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadGrafanaLokiArrayOutput) ToSloObjectiveCountMetricBadGrafanaLokiArrayOutput() SloObjectiveCountMetricBadGrafanaLokiArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadGrafanaLokiArrayOutput) ToSloObjectiveCountMetricBadGrafanaLokiArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadGrafanaLokiArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadGrafanaLokiArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadGrafanaLokiOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadGrafanaLoki {
+		return vs[0].([]SloObjectiveCountMetricBadGrafanaLoki)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadGrafanaLokiOutput)
+}
+
+type SloObjectiveCountMetricBadGraphite struct {
+	// Path to the metrics
+	MetricPath string `pulumi:"metricPath"`
+}
+
+// SloObjectiveCountMetricBadGraphiteInput is an input type that accepts SloObjectiveCountMetricBadGraphiteArgs and SloObjectiveCountMetricBadGraphiteOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadGraphiteInput` via:
+//
+//	SloObjectiveCountMetricBadGraphiteArgs{...}
+type SloObjectiveCountMetricBadGraphiteInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadGraphiteOutput() SloObjectiveCountMetricBadGraphiteOutput
+	ToSloObjectiveCountMetricBadGraphiteOutputWithContext(context.Context) SloObjectiveCountMetricBadGraphiteOutput
+}
+
+type SloObjectiveCountMetricBadGraphiteArgs struct {
+	// Path to the metrics
+	MetricPath pulumi.StringInput `pulumi:"metricPath"`
+}
+
+func (SloObjectiveCountMetricBadGraphiteArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadGraphite)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadGraphiteArgs) ToSloObjectiveCountMetricBadGraphiteOutput() SloObjectiveCountMetricBadGraphiteOutput {
+	return i.ToSloObjectiveCountMetricBadGraphiteOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadGraphiteArgs) ToSloObjectiveCountMetricBadGraphiteOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadGraphiteOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadGraphiteOutput)
+}
+
+// SloObjectiveCountMetricBadGraphiteArrayInput is an input type that accepts SloObjectiveCountMetricBadGraphiteArray and SloObjectiveCountMetricBadGraphiteArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadGraphiteArrayInput` via:
+//
+//	SloObjectiveCountMetricBadGraphiteArray{ SloObjectiveCountMetricBadGraphiteArgs{...} }
+type SloObjectiveCountMetricBadGraphiteArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadGraphiteArrayOutput() SloObjectiveCountMetricBadGraphiteArrayOutput
+	ToSloObjectiveCountMetricBadGraphiteArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadGraphiteArrayOutput
+}
+
+type SloObjectiveCountMetricBadGraphiteArray []SloObjectiveCountMetricBadGraphiteInput
+
+func (SloObjectiveCountMetricBadGraphiteArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadGraphite)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadGraphiteArray) ToSloObjectiveCountMetricBadGraphiteArrayOutput() SloObjectiveCountMetricBadGraphiteArrayOutput {
+	return i.ToSloObjectiveCountMetricBadGraphiteArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadGraphiteArray) ToSloObjectiveCountMetricBadGraphiteArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadGraphiteArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadGraphiteArrayOutput)
+}
+
+type SloObjectiveCountMetricBadGraphiteOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadGraphiteOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadGraphite)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadGraphiteOutput) ToSloObjectiveCountMetricBadGraphiteOutput() SloObjectiveCountMetricBadGraphiteOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadGraphiteOutput) ToSloObjectiveCountMetricBadGraphiteOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadGraphiteOutput {
+	return o
+}
+
+// Path to the metrics
+func (o SloObjectiveCountMetricBadGraphiteOutput) MetricPath() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadGraphite) string { return v.MetricPath }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadGraphiteArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadGraphiteArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadGraphite)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadGraphiteArrayOutput) ToSloObjectiveCountMetricBadGraphiteArrayOutput() SloObjectiveCountMetricBadGraphiteArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadGraphiteArrayOutput) ToSloObjectiveCountMetricBadGraphiteArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadGraphiteArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadGraphiteArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadGraphiteOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadGraphite {
+		return vs[0].([]SloObjectiveCountMetricBadGraphite)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadGraphiteOutput)
+}
+
+type SloObjectiveCountMetricBadHoneycomb struct {
+	// Column name - required for all calculation types besides 'CONCURRENCY' and 'COUNT'
+	Attribute *string `pulumi:"attribute"`
+	// Calculation type
+	Calculation string `pulumi:"calculation"`
+}
+
+// SloObjectiveCountMetricBadHoneycombInput is an input type that accepts SloObjectiveCountMetricBadHoneycombArgs and SloObjectiveCountMetricBadHoneycombOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadHoneycombInput` via:
+//
+//	SloObjectiveCountMetricBadHoneycombArgs{...}
+type SloObjectiveCountMetricBadHoneycombInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadHoneycombOutput() SloObjectiveCountMetricBadHoneycombOutput
+	ToSloObjectiveCountMetricBadHoneycombOutputWithContext(context.Context) SloObjectiveCountMetricBadHoneycombOutput
+}
+
+type SloObjectiveCountMetricBadHoneycombArgs struct {
+	// Column name - required for all calculation types besides 'CONCURRENCY' and 'COUNT'
+	Attribute pulumi.StringPtrInput `pulumi:"attribute"`
+	// Calculation type
+	Calculation pulumi.StringInput `pulumi:"calculation"`
+}
+
+func (SloObjectiveCountMetricBadHoneycombArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadHoneycomb)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadHoneycombArgs) ToSloObjectiveCountMetricBadHoneycombOutput() SloObjectiveCountMetricBadHoneycombOutput {
+	return i.ToSloObjectiveCountMetricBadHoneycombOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadHoneycombArgs) ToSloObjectiveCountMetricBadHoneycombOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadHoneycombOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadHoneycombOutput)
+}
+
+// SloObjectiveCountMetricBadHoneycombArrayInput is an input type that accepts SloObjectiveCountMetricBadHoneycombArray and SloObjectiveCountMetricBadHoneycombArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadHoneycombArrayInput` via:
+//
+//	SloObjectiveCountMetricBadHoneycombArray{ SloObjectiveCountMetricBadHoneycombArgs{...} }
+type SloObjectiveCountMetricBadHoneycombArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadHoneycombArrayOutput() SloObjectiveCountMetricBadHoneycombArrayOutput
+	ToSloObjectiveCountMetricBadHoneycombArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadHoneycombArrayOutput
+}
+
+type SloObjectiveCountMetricBadHoneycombArray []SloObjectiveCountMetricBadHoneycombInput
+
+func (SloObjectiveCountMetricBadHoneycombArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadHoneycomb)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadHoneycombArray) ToSloObjectiveCountMetricBadHoneycombArrayOutput() SloObjectiveCountMetricBadHoneycombArrayOutput {
+	return i.ToSloObjectiveCountMetricBadHoneycombArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadHoneycombArray) ToSloObjectiveCountMetricBadHoneycombArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadHoneycombArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadHoneycombArrayOutput)
+}
+
+type SloObjectiveCountMetricBadHoneycombOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadHoneycombOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadHoneycomb)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadHoneycombOutput) ToSloObjectiveCountMetricBadHoneycombOutput() SloObjectiveCountMetricBadHoneycombOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadHoneycombOutput) ToSloObjectiveCountMetricBadHoneycombOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadHoneycombOutput {
+	return o
+}
+
+// Column name - required for all calculation types besides 'CONCURRENCY' and 'COUNT'
+func (o SloObjectiveCountMetricBadHoneycombOutput) Attribute() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadHoneycomb) *string { return v.Attribute }).(pulumi.StringPtrOutput)
+}
+
+// Calculation type
+func (o SloObjectiveCountMetricBadHoneycombOutput) Calculation() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadHoneycomb) string { return v.Calculation }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadHoneycombArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadHoneycombArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadHoneycomb)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadHoneycombArrayOutput) ToSloObjectiveCountMetricBadHoneycombArrayOutput() SloObjectiveCountMetricBadHoneycombArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadHoneycombArrayOutput) ToSloObjectiveCountMetricBadHoneycombArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadHoneycombArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadHoneycombArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadHoneycombOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadHoneycomb {
+		return vs[0].([]SloObjectiveCountMetricBadHoneycomb)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadHoneycombOutput)
+}
+
+type SloObjectiveCountMetricBadInfluxdb struct {
+	// Query for the metrics
+	Query string `pulumi:"query"`
+}
+
+// SloObjectiveCountMetricBadInfluxdbInput is an input type that accepts SloObjectiveCountMetricBadInfluxdbArgs and SloObjectiveCountMetricBadInfluxdbOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadInfluxdbInput` via:
+//
+//	SloObjectiveCountMetricBadInfluxdbArgs{...}
+type SloObjectiveCountMetricBadInfluxdbInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadInfluxdbOutput() SloObjectiveCountMetricBadInfluxdbOutput
+	ToSloObjectiveCountMetricBadInfluxdbOutputWithContext(context.Context) SloObjectiveCountMetricBadInfluxdbOutput
+}
+
+type SloObjectiveCountMetricBadInfluxdbArgs struct {
+	// Query for the metrics
+	Query pulumi.StringInput `pulumi:"query"`
+}
+
+func (SloObjectiveCountMetricBadInfluxdbArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadInfluxdb)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadInfluxdbArgs) ToSloObjectiveCountMetricBadInfluxdbOutput() SloObjectiveCountMetricBadInfluxdbOutput {
+	return i.ToSloObjectiveCountMetricBadInfluxdbOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadInfluxdbArgs) ToSloObjectiveCountMetricBadInfluxdbOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadInfluxdbOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadInfluxdbOutput)
+}
+
+// SloObjectiveCountMetricBadInfluxdbArrayInput is an input type that accepts SloObjectiveCountMetricBadInfluxdbArray and SloObjectiveCountMetricBadInfluxdbArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadInfluxdbArrayInput` via:
+//
+//	SloObjectiveCountMetricBadInfluxdbArray{ SloObjectiveCountMetricBadInfluxdbArgs{...} }
+type SloObjectiveCountMetricBadInfluxdbArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadInfluxdbArrayOutput() SloObjectiveCountMetricBadInfluxdbArrayOutput
+	ToSloObjectiveCountMetricBadInfluxdbArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadInfluxdbArrayOutput
+}
+
+type SloObjectiveCountMetricBadInfluxdbArray []SloObjectiveCountMetricBadInfluxdbInput
+
+func (SloObjectiveCountMetricBadInfluxdbArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadInfluxdb)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadInfluxdbArray) ToSloObjectiveCountMetricBadInfluxdbArrayOutput() SloObjectiveCountMetricBadInfluxdbArrayOutput {
+	return i.ToSloObjectiveCountMetricBadInfluxdbArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadInfluxdbArray) ToSloObjectiveCountMetricBadInfluxdbArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadInfluxdbArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadInfluxdbArrayOutput)
+}
+
+type SloObjectiveCountMetricBadInfluxdbOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadInfluxdbOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadInfluxdb)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadInfluxdbOutput) ToSloObjectiveCountMetricBadInfluxdbOutput() SloObjectiveCountMetricBadInfluxdbOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadInfluxdbOutput) ToSloObjectiveCountMetricBadInfluxdbOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadInfluxdbOutput {
+	return o
+}
+
+// Query for the metrics
+func (o SloObjectiveCountMetricBadInfluxdbOutput) Query() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadInfluxdb) string { return v.Query }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadInfluxdbArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadInfluxdbArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadInfluxdb)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadInfluxdbArrayOutput) ToSloObjectiveCountMetricBadInfluxdbArrayOutput() SloObjectiveCountMetricBadInfluxdbArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadInfluxdbArrayOutput) ToSloObjectiveCountMetricBadInfluxdbArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadInfluxdbArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadInfluxdbArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadInfluxdbOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadInfluxdb {
+		return vs[0].([]SloObjectiveCountMetricBadInfluxdb)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadInfluxdbOutput)
+}
+
+type SloObjectiveCountMetricBadInstana struct {
+	// Infrastructure metric type
+	Applications []SloObjectiveCountMetricBadInstanaApplication `pulumi:"applications"`
+	// Infrastructure metric type
+	Infrastructures []SloObjectiveCountMetricBadInstanaInfrastructure `pulumi:"infrastructures"`
+	// Instana metric type 'application' or 'infrastructure'
+	MetricType string `pulumi:"metricType"`
+}
+
+// SloObjectiveCountMetricBadInstanaInput is an input type that accepts SloObjectiveCountMetricBadInstanaArgs and SloObjectiveCountMetricBadInstanaOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadInstanaInput` via:
+//
+//	SloObjectiveCountMetricBadInstanaArgs{...}
+type SloObjectiveCountMetricBadInstanaInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadInstanaOutput() SloObjectiveCountMetricBadInstanaOutput
+	ToSloObjectiveCountMetricBadInstanaOutputWithContext(context.Context) SloObjectiveCountMetricBadInstanaOutput
+}
+
+type SloObjectiveCountMetricBadInstanaArgs struct {
+	// Infrastructure metric type
+	Applications SloObjectiveCountMetricBadInstanaApplicationArrayInput `pulumi:"applications"`
+	// Infrastructure metric type
+	Infrastructures SloObjectiveCountMetricBadInstanaInfrastructureArrayInput `pulumi:"infrastructures"`
+	// Instana metric type 'application' or 'infrastructure'
+	MetricType pulumi.StringInput `pulumi:"metricType"`
+}
+
+func (SloObjectiveCountMetricBadInstanaArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadInstana)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadInstanaArgs) ToSloObjectiveCountMetricBadInstanaOutput() SloObjectiveCountMetricBadInstanaOutput {
+	return i.ToSloObjectiveCountMetricBadInstanaOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadInstanaArgs) ToSloObjectiveCountMetricBadInstanaOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadInstanaOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadInstanaOutput)
+}
+
+// SloObjectiveCountMetricBadInstanaArrayInput is an input type that accepts SloObjectiveCountMetricBadInstanaArray and SloObjectiveCountMetricBadInstanaArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadInstanaArrayInput` via:
+//
+//	SloObjectiveCountMetricBadInstanaArray{ SloObjectiveCountMetricBadInstanaArgs{...} }
+type SloObjectiveCountMetricBadInstanaArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadInstanaArrayOutput() SloObjectiveCountMetricBadInstanaArrayOutput
+	ToSloObjectiveCountMetricBadInstanaArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadInstanaArrayOutput
+}
+
+type SloObjectiveCountMetricBadInstanaArray []SloObjectiveCountMetricBadInstanaInput
+
+func (SloObjectiveCountMetricBadInstanaArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadInstana)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadInstanaArray) ToSloObjectiveCountMetricBadInstanaArrayOutput() SloObjectiveCountMetricBadInstanaArrayOutput {
+	return i.ToSloObjectiveCountMetricBadInstanaArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadInstanaArray) ToSloObjectiveCountMetricBadInstanaArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadInstanaArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadInstanaArrayOutput)
+}
+
+type SloObjectiveCountMetricBadInstanaOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadInstanaOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadInstana)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadInstanaOutput) ToSloObjectiveCountMetricBadInstanaOutput() SloObjectiveCountMetricBadInstanaOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadInstanaOutput) ToSloObjectiveCountMetricBadInstanaOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadInstanaOutput {
+	return o
+}
+
+// Infrastructure metric type
+func (o SloObjectiveCountMetricBadInstanaOutput) Applications() SloObjectiveCountMetricBadInstanaApplicationArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadInstana) []SloObjectiveCountMetricBadInstanaApplication {
+		return v.Applications
+	}).(SloObjectiveCountMetricBadInstanaApplicationArrayOutput)
+}
+
+// Infrastructure metric type
+func (o SloObjectiveCountMetricBadInstanaOutput) Infrastructures() SloObjectiveCountMetricBadInstanaInfrastructureArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadInstana) []SloObjectiveCountMetricBadInstanaInfrastructure {
+		return v.Infrastructures
+	}).(SloObjectiveCountMetricBadInstanaInfrastructureArrayOutput)
+}
+
+// Instana metric type 'application' or 'infrastructure'
+func (o SloObjectiveCountMetricBadInstanaOutput) MetricType() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadInstana) string { return v.MetricType }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadInstanaArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadInstanaArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadInstana)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadInstanaArrayOutput) ToSloObjectiveCountMetricBadInstanaArrayOutput() SloObjectiveCountMetricBadInstanaArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadInstanaArrayOutput) ToSloObjectiveCountMetricBadInstanaArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadInstanaArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadInstanaArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadInstanaOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadInstana {
+		return vs[0].([]SloObjectiveCountMetricBadInstana)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadInstanaOutput)
+}
+
+type SloObjectiveCountMetricBadInstanaApplication struct {
+	// Aggregation type [Required for metrics]
+	Aggregation string `pulumi:"aggregation"`
+	// API query user passes in a JSON format
+	ApiQuery string `pulumi:"apiQuery"`
+	// Group by method
+	GroupBies []SloObjectiveCountMetricBadInstanaApplicationGroupBy `pulumi:"groupBies"`
+	// Include internal
+	IncludeInternal *bool `pulumi:"includeInternal"`
+	// Include synthetic
+	IncludeSynthetic *bool `pulumi:"includeSynthetic"`
+	// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+	MetricId string `pulumi:"metricId"`
+}
+
+// SloObjectiveCountMetricBadInstanaApplicationInput is an input type that accepts SloObjectiveCountMetricBadInstanaApplicationArgs and SloObjectiveCountMetricBadInstanaApplicationOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadInstanaApplicationInput` via:
+//
+//	SloObjectiveCountMetricBadInstanaApplicationArgs{...}
+type SloObjectiveCountMetricBadInstanaApplicationInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadInstanaApplicationOutput() SloObjectiveCountMetricBadInstanaApplicationOutput
+	ToSloObjectiveCountMetricBadInstanaApplicationOutputWithContext(context.Context) SloObjectiveCountMetricBadInstanaApplicationOutput
+}
+
+type SloObjectiveCountMetricBadInstanaApplicationArgs struct {
+	// Aggregation type [Required for metrics]
+	Aggregation pulumi.StringInput `pulumi:"aggregation"`
+	// API query user passes in a JSON format
+	ApiQuery pulumi.StringInput `pulumi:"apiQuery"`
+	// Group by method
+	GroupBies SloObjectiveCountMetricBadInstanaApplicationGroupByArrayInput `pulumi:"groupBies"`
+	// Include internal
+	IncludeInternal pulumi.BoolPtrInput `pulumi:"includeInternal"`
+	// Include synthetic
+	IncludeSynthetic pulumi.BoolPtrInput `pulumi:"includeSynthetic"`
+	// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+	MetricId pulumi.StringInput `pulumi:"metricId"`
+}
+
+func (SloObjectiveCountMetricBadInstanaApplicationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadInstanaApplication)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadInstanaApplicationArgs) ToSloObjectiveCountMetricBadInstanaApplicationOutput() SloObjectiveCountMetricBadInstanaApplicationOutput {
+	return i.ToSloObjectiveCountMetricBadInstanaApplicationOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadInstanaApplicationArgs) ToSloObjectiveCountMetricBadInstanaApplicationOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadInstanaApplicationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadInstanaApplicationOutput)
+}
+
+// SloObjectiveCountMetricBadInstanaApplicationArrayInput is an input type that accepts SloObjectiveCountMetricBadInstanaApplicationArray and SloObjectiveCountMetricBadInstanaApplicationArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadInstanaApplicationArrayInput` via:
+//
+//	SloObjectiveCountMetricBadInstanaApplicationArray{ SloObjectiveCountMetricBadInstanaApplicationArgs{...} }
+type SloObjectiveCountMetricBadInstanaApplicationArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadInstanaApplicationArrayOutput() SloObjectiveCountMetricBadInstanaApplicationArrayOutput
+	ToSloObjectiveCountMetricBadInstanaApplicationArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadInstanaApplicationArrayOutput
+}
+
+type SloObjectiveCountMetricBadInstanaApplicationArray []SloObjectiveCountMetricBadInstanaApplicationInput
+
+func (SloObjectiveCountMetricBadInstanaApplicationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadInstanaApplication)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadInstanaApplicationArray) ToSloObjectiveCountMetricBadInstanaApplicationArrayOutput() SloObjectiveCountMetricBadInstanaApplicationArrayOutput {
+	return i.ToSloObjectiveCountMetricBadInstanaApplicationArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadInstanaApplicationArray) ToSloObjectiveCountMetricBadInstanaApplicationArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadInstanaApplicationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadInstanaApplicationArrayOutput)
+}
+
+type SloObjectiveCountMetricBadInstanaApplicationOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadInstanaApplicationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadInstanaApplication)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadInstanaApplicationOutput) ToSloObjectiveCountMetricBadInstanaApplicationOutput() SloObjectiveCountMetricBadInstanaApplicationOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadInstanaApplicationOutput) ToSloObjectiveCountMetricBadInstanaApplicationOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadInstanaApplicationOutput {
+	return o
+}
+
+// Aggregation type [Required for metrics]
+func (o SloObjectiveCountMetricBadInstanaApplicationOutput) Aggregation() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadInstanaApplication) string { return v.Aggregation }).(pulumi.StringOutput)
+}
+
+// API query user passes in a JSON format
+func (o SloObjectiveCountMetricBadInstanaApplicationOutput) ApiQuery() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadInstanaApplication) string { return v.ApiQuery }).(pulumi.StringOutput)
+}
+
+// Group by method
+func (o SloObjectiveCountMetricBadInstanaApplicationOutput) GroupBies() SloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadInstanaApplication) []SloObjectiveCountMetricBadInstanaApplicationGroupBy {
+		return v.GroupBies
+	}).(SloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutput)
+}
+
+// Include internal
+func (o SloObjectiveCountMetricBadInstanaApplicationOutput) IncludeInternal() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadInstanaApplication) *bool { return v.IncludeInternal }).(pulumi.BoolPtrOutput)
+}
+
+// Include synthetic
+func (o SloObjectiveCountMetricBadInstanaApplicationOutput) IncludeSynthetic() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadInstanaApplication) *bool { return v.IncludeSynthetic }).(pulumi.BoolPtrOutput)
+}
+
+// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+func (o SloObjectiveCountMetricBadInstanaApplicationOutput) MetricId() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadInstanaApplication) string { return v.MetricId }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadInstanaApplicationArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadInstanaApplicationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadInstanaApplication)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadInstanaApplicationArrayOutput) ToSloObjectiveCountMetricBadInstanaApplicationArrayOutput() SloObjectiveCountMetricBadInstanaApplicationArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadInstanaApplicationArrayOutput) ToSloObjectiveCountMetricBadInstanaApplicationArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadInstanaApplicationArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadInstanaApplicationArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadInstanaApplicationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadInstanaApplication {
+		return vs[0].([]SloObjectiveCountMetricBadInstanaApplication)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadInstanaApplicationOutput)
+}
+
+type SloObjectiveCountMetricBadInstanaApplicationGroupBy struct {
+	// Group by tag
+	Tag string `pulumi:"tag"`
+	// Tag entity - one of 'DESTINATION', 'SOURCE', 'NOT_APPLICABLE'
+	TagEntity         string  `pulumi:"tagEntity"`
+	TagSecondLevelKey *string `pulumi:"tagSecondLevelKey"`
+}
+
+// SloObjectiveCountMetricBadInstanaApplicationGroupByInput is an input type that accepts SloObjectiveCountMetricBadInstanaApplicationGroupByArgs and SloObjectiveCountMetricBadInstanaApplicationGroupByOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadInstanaApplicationGroupByInput` via:
+//
+//	SloObjectiveCountMetricBadInstanaApplicationGroupByArgs{...}
+type SloObjectiveCountMetricBadInstanaApplicationGroupByInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadInstanaApplicationGroupByOutput() SloObjectiveCountMetricBadInstanaApplicationGroupByOutput
+	ToSloObjectiveCountMetricBadInstanaApplicationGroupByOutputWithContext(context.Context) SloObjectiveCountMetricBadInstanaApplicationGroupByOutput
+}
+
+type SloObjectiveCountMetricBadInstanaApplicationGroupByArgs struct {
+	// Group by tag
+	Tag pulumi.StringInput `pulumi:"tag"`
+	// Tag entity - one of 'DESTINATION', 'SOURCE', 'NOT_APPLICABLE'
+	TagEntity         pulumi.StringInput    `pulumi:"tagEntity"`
+	TagSecondLevelKey pulumi.StringPtrInput `pulumi:"tagSecondLevelKey"`
+}
+
+func (SloObjectiveCountMetricBadInstanaApplicationGroupByArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadInstanaApplicationGroupBy)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadInstanaApplicationGroupByArgs) ToSloObjectiveCountMetricBadInstanaApplicationGroupByOutput() SloObjectiveCountMetricBadInstanaApplicationGroupByOutput {
+	return i.ToSloObjectiveCountMetricBadInstanaApplicationGroupByOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadInstanaApplicationGroupByArgs) ToSloObjectiveCountMetricBadInstanaApplicationGroupByOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadInstanaApplicationGroupByOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadInstanaApplicationGroupByOutput)
+}
+
+// SloObjectiveCountMetricBadInstanaApplicationGroupByArrayInput is an input type that accepts SloObjectiveCountMetricBadInstanaApplicationGroupByArray and SloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadInstanaApplicationGroupByArrayInput` via:
+//
+//	SloObjectiveCountMetricBadInstanaApplicationGroupByArray{ SloObjectiveCountMetricBadInstanaApplicationGroupByArgs{...} }
+type SloObjectiveCountMetricBadInstanaApplicationGroupByArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutput() SloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutput
+	ToSloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutput
+}
+
+type SloObjectiveCountMetricBadInstanaApplicationGroupByArray []SloObjectiveCountMetricBadInstanaApplicationGroupByInput
+
+func (SloObjectiveCountMetricBadInstanaApplicationGroupByArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadInstanaApplicationGroupBy)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadInstanaApplicationGroupByArray) ToSloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutput() SloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutput {
+	return i.ToSloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadInstanaApplicationGroupByArray) ToSloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutput)
+}
+
+type SloObjectiveCountMetricBadInstanaApplicationGroupByOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadInstanaApplicationGroupByOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadInstanaApplicationGroupBy)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadInstanaApplicationGroupByOutput) ToSloObjectiveCountMetricBadInstanaApplicationGroupByOutput() SloObjectiveCountMetricBadInstanaApplicationGroupByOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadInstanaApplicationGroupByOutput) ToSloObjectiveCountMetricBadInstanaApplicationGroupByOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadInstanaApplicationGroupByOutput {
+	return o
+}
+
+// Group by tag
+func (o SloObjectiveCountMetricBadInstanaApplicationGroupByOutput) Tag() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadInstanaApplicationGroupBy) string { return v.Tag }).(pulumi.StringOutput)
+}
+
+// Tag entity - one of 'DESTINATION', 'SOURCE', 'NOT_APPLICABLE'
+func (o SloObjectiveCountMetricBadInstanaApplicationGroupByOutput) TagEntity() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadInstanaApplicationGroupBy) string { return v.TagEntity }).(pulumi.StringOutput)
+}
+
+func (o SloObjectiveCountMetricBadInstanaApplicationGroupByOutput) TagSecondLevelKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadInstanaApplicationGroupBy) *string { return v.TagSecondLevelKey }).(pulumi.StringPtrOutput)
+}
+
+type SloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadInstanaApplicationGroupBy)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutput) ToSloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutput() SloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutput) ToSloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadInstanaApplicationGroupByOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadInstanaApplicationGroupBy {
+		return vs[0].([]SloObjectiveCountMetricBadInstanaApplicationGroupBy)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadInstanaApplicationGroupByOutput)
+}
+
+type SloObjectiveCountMetricBadInstanaInfrastructure struct {
+	// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+	MetricId string `pulumi:"metricId"`
+	// Metric retrieval method 'query' or 'snapshot'
+	MetricRetrievalMethod string `pulumi:"metricRetrievalMethod"`
+	// Plugin ID
+	PluginId string `pulumi:"pluginId"`
+	// Query for the metrics
+	Query *string `pulumi:"query"`
+	// Snapshot ID
+	SnapshotId *string `pulumi:"snapshotId"`
+}
+
+// SloObjectiveCountMetricBadInstanaInfrastructureInput is an input type that accepts SloObjectiveCountMetricBadInstanaInfrastructureArgs and SloObjectiveCountMetricBadInstanaInfrastructureOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadInstanaInfrastructureInput` via:
+//
+//	SloObjectiveCountMetricBadInstanaInfrastructureArgs{...}
+type SloObjectiveCountMetricBadInstanaInfrastructureInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadInstanaInfrastructureOutput() SloObjectiveCountMetricBadInstanaInfrastructureOutput
+	ToSloObjectiveCountMetricBadInstanaInfrastructureOutputWithContext(context.Context) SloObjectiveCountMetricBadInstanaInfrastructureOutput
+}
+
+type SloObjectiveCountMetricBadInstanaInfrastructureArgs struct {
+	// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+	MetricId pulumi.StringInput `pulumi:"metricId"`
+	// Metric retrieval method 'query' or 'snapshot'
+	MetricRetrievalMethod pulumi.StringInput `pulumi:"metricRetrievalMethod"`
+	// Plugin ID
+	PluginId pulumi.StringInput `pulumi:"pluginId"`
+	// Query for the metrics
+	Query pulumi.StringPtrInput `pulumi:"query"`
+	// Snapshot ID
+	SnapshotId pulumi.StringPtrInput `pulumi:"snapshotId"`
+}
+
+func (SloObjectiveCountMetricBadInstanaInfrastructureArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadInstanaInfrastructure)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadInstanaInfrastructureArgs) ToSloObjectiveCountMetricBadInstanaInfrastructureOutput() SloObjectiveCountMetricBadInstanaInfrastructureOutput {
+	return i.ToSloObjectiveCountMetricBadInstanaInfrastructureOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadInstanaInfrastructureArgs) ToSloObjectiveCountMetricBadInstanaInfrastructureOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadInstanaInfrastructureOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadInstanaInfrastructureOutput)
+}
+
+// SloObjectiveCountMetricBadInstanaInfrastructureArrayInput is an input type that accepts SloObjectiveCountMetricBadInstanaInfrastructureArray and SloObjectiveCountMetricBadInstanaInfrastructureArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadInstanaInfrastructureArrayInput` via:
+//
+//	SloObjectiveCountMetricBadInstanaInfrastructureArray{ SloObjectiveCountMetricBadInstanaInfrastructureArgs{...} }
+type SloObjectiveCountMetricBadInstanaInfrastructureArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadInstanaInfrastructureArrayOutput() SloObjectiveCountMetricBadInstanaInfrastructureArrayOutput
+	ToSloObjectiveCountMetricBadInstanaInfrastructureArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadInstanaInfrastructureArrayOutput
+}
+
+type SloObjectiveCountMetricBadInstanaInfrastructureArray []SloObjectiveCountMetricBadInstanaInfrastructureInput
+
+func (SloObjectiveCountMetricBadInstanaInfrastructureArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadInstanaInfrastructure)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadInstanaInfrastructureArray) ToSloObjectiveCountMetricBadInstanaInfrastructureArrayOutput() SloObjectiveCountMetricBadInstanaInfrastructureArrayOutput {
+	return i.ToSloObjectiveCountMetricBadInstanaInfrastructureArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadInstanaInfrastructureArray) ToSloObjectiveCountMetricBadInstanaInfrastructureArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadInstanaInfrastructureArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadInstanaInfrastructureArrayOutput)
+}
+
+type SloObjectiveCountMetricBadInstanaInfrastructureOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadInstanaInfrastructureOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadInstanaInfrastructure)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadInstanaInfrastructureOutput) ToSloObjectiveCountMetricBadInstanaInfrastructureOutput() SloObjectiveCountMetricBadInstanaInfrastructureOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadInstanaInfrastructureOutput) ToSloObjectiveCountMetricBadInstanaInfrastructureOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadInstanaInfrastructureOutput {
+	return o
+}
+
+// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+func (o SloObjectiveCountMetricBadInstanaInfrastructureOutput) MetricId() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadInstanaInfrastructure) string { return v.MetricId }).(pulumi.StringOutput)
+}
+
+// Metric retrieval method 'query' or 'snapshot'
+func (o SloObjectiveCountMetricBadInstanaInfrastructureOutput) MetricRetrievalMethod() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadInstanaInfrastructure) string { return v.MetricRetrievalMethod }).(pulumi.StringOutput)
+}
+
+// Plugin ID
+func (o SloObjectiveCountMetricBadInstanaInfrastructureOutput) PluginId() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadInstanaInfrastructure) string { return v.PluginId }).(pulumi.StringOutput)
+}
+
+// Query for the metrics
+func (o SloObjectiveCountMetricBadInstanaInfrastructureOutput) Query() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadInstanaInfrastructure) *string { return v.Query }).(pulumi.StringPtrOutput)
+}
+
+// Snapshot ID
+func (o SloObjectiveCountMetricBadInstanaInfrastructureOutput) SnapshotId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadInstanaInfrastructure) *string { return v.SnapshotId }).(pulumi.StringPtrOutput)
+}
+
+type SloObjectiveCountMetricBadInstanaInfrastructureArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadInstanaInfrastructureArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadInstanaInfrastructure)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadInstanaInfrastructureArrayOutput) ToSloObjectiveCountMetricBadInstanaInfrastructureArrayOutput() SloObjectiveCountMetricBadInstanaInfrastructureArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadInstanaInfrastructureArrayOutput) ToSloObjectiveCountMetricBadInstanaInfrastructureArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadInstanaInfrastructureArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadInstanaInfrastructureArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadInstanaInfrastructureOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadInstanaInfrastructure {
+		return vs[0].([]SloObjectiveCountMetricBadInstanaInfrastructure)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadInstanaInfrastructureOutput)
+}
+
+type SloObjectiveCountMetricBadLightstep struct {
+	// Optional value to filter by percentiles
+	Percentile *float64 `pulumi:"percentile"`
+	// ID of the metrics stream
+	StreamId *string `pulumi:"streamId"`
+	// Type of data to filter by
+	TypeOfData string `pulumi:"typeOfData"`
+	// UQL query
+	Uql *string `pulumi:"uql"`
+}
+
+// SloObjectiveCountMetricBadLightstepInput is an input type that accepts SloObjectiveCountMetricBadLightstepArgs and SloObjectiveCountMetricBadLightstepOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadLightstepInput` via:
+//
+//	SloObjectiveCountMetricBadLightstepArgs{...}
+type SloObjectiveCountMetricBadLightstepInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadLightstepOutput() SloObjectiveCountMetricBadLightstepOutput
+	ToSloObjectiveCountMetricBadLightstepOutputWithContext(context.Context) SloObjectiveCountMetricBadLightstepOutput
+}
+
+type SloObjectiveCountMetricBadLightstepArgs struct {
+	// Optional value to filter by percentiles
+	Percentile pulumi.Float64PtrInput `pulumi:"percentile"`
+	// ID of the metrics stream
+	StreamId pulumi.StringPtrInput `pulumi:"streamId"`
+	// Type of data to filter by
+	TypeOfData pulumi.StringInput `pulumi:"typeOfData"`
+	// UQL query
+	Uql pulumi.StringPtrInput `pulumi:"uql"`
+}
+
+func (SloObjectiveCountMetricBadLightstepArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadLightstep)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadLightstepArgs) ToSloObjectiveCountMetricBadLightstepOutput() SloObjectiveCountMetricBadLightstepOutput {
+	return i.ToSloObjectiveCountMetricBadLightstepOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadLightstepArgs) ToSloObjectiveCountMetricBadLightstepOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadLightstepOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadLightstepOutput)
+}
+
+// SloObjectiveCountMetricBadLightstepArrayInput is an input type that accepts SloObjectiveCountMetricBadLightstepArray and SloObjectiveCountMetricBadLightstepArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadLightstepArrayInput` via:
+//
+//	SloObjectiveCountMetricBadLightstepArray{ SloObjectiveCountMetricBadLightstepArgs{...} }
+type SloObjectiveCountMetricBadLightstepArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadLightstepArrayOutput() SloObjectiveCountMetricBadLightstepArrayOutput
+	ToSloObjectiveCountMetricBadLightstepArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadLightstepArrayOutput
+}
+
+type SloObjectiveCountMetricBadLightstepArray []SloObjectiveCountMetricBadLightstepInput
+
+func (SloObjectiveCountMetricBadLightstepArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadLightstep)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadLightstepArray) ToSloObjectiveCountMetricBadLightstepArrayOutput() SloObjectiveCountMetricBadLightstepArrayOutput {
+	return i.ToSloObjectiveCountMetricBadLightstepArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadLightstepArray) ToSloObjectiveCountMetricBadLightstepArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadLightstepArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadLightstepArrayOutput)
+}
+
+type SloObjectiveCountMetricBadLightstepOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadLightstepOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadLightstep)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadLightstepOutput) ToSloObjectiveCountMetricBadLightstepOutput() SloObjectiveCountMetricBadLightstepOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadLightstepOutput) ToSloObjectiveCountMetricBadLightstepOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadLightstepOutput {
+	return o
+}
+
+// Optional value to filter by percentiles
+func (o SloObjectiveCountMetricBadLightstepOutput) Percentile() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadLightstep) *float64 { return v.Percentile }).(pulumi.Float64PtrOutput)
+}
+
+// ID of the metrics stream
+func (o SloObjectiveCountMetricBadLightstepOutput) StreamId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadLightstep) *string { return v.StreamId }).(pulumi.StringPtrOutput)
+}
+
+// Type of data to filter by
+func (o SloObjectiveCountMetricBadLightstepOutput) TypeOfData() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadLightstep) string { return v.TypeOfData }).(pulumi.StringOutput)
+}
+
+// UQL query
+func (o SloObjectiveCountMetricBadLightstepOutput) Uql() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadLightstep) *string { return v.Uql }).(pulumi.StringPtrOutput)
+}
+
+type SloObjectiveCountMetricBadLightstepArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadLightstepArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadLightstep)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadLightstepArrayOutput) ToSloObjectiveCountMetricBadLightstepArrayOutput() SloObjectiveCountMetricBadLightstepArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadLightstepArrayOutput) ToSloObjectiveCountMetricBadLightstepArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadLightstepArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadLightstepArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadLightstepOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadLightstep {
+		return vs[0].([]SloObjectiveCountMetricBadLightstep)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadLightstepOutput)
+}
+
+type SloObjectiveCountMetricBadNewrelic struct {
+	// Query for the metrics
+	Nrql string `pulumi:"nrql"`
+}
+
+// SloObjectiveCountMetricBadNewrelicInput is an input type that accepts SloObjectiveCountMetricBadNewrelicArgs and SloObjectiveCountMetricBadNewrelicOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadNewrelicInput` via:
+//
+//	SloObjectiveCountMetricBadNewrelicArgs{...}
+type SloObjectiveCountMetricBadNewrelicInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadNewrelicOutput() SloObjectiveCountMetricBadNewrelicOutput
+	ToSloObjectiveCountMetricBadNewrelicOutputWithContext(context.Context) SloObjectiveCountMetricBadNewrelicOutput
+}
+
+type SloObjectiveCountMetricBadNewrelicArgs struct {
+	// Query for the metrics
+	Nrql pulumi.StringInput `pulumi:"nrql"`
+}
+
+func (SloObjectiveCountMetricBadNewrelicArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadNewrelic)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadNewrelicArgs) ToSloObjectiveCountMetricBadNewrelicOutput() SloObjectiveCountMetricBadNewrelicOutput {
+	return i.ToSloObjectiveCountMetricBadNewrelicOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadNewrelicArgs) ToSloObjectiveCountMetricBadNewrelicOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadNewrelicOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadNewrelicOutput)
+}
+
+// SloObjectiveCountMetricBadNewrelicArrayInput is an input type that accepts SloObjectiveCountMetricBadNewrelicArray and SloObjectiveCountMetricBadNewrelicArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadNewrelicArrayInput` via:
+//
+//	SloObjectiveCountMetricBadNewrelicArray{ SloObjectiveCountMetricBadNewrelicArgs{...} }
+type SloObjectiveCountMetricBadNewrelicArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadNewrelicArrayOutput() SloObjectiveCountMetricBadNewrelicArrayOutput
+	ToSloObjectiveCountMetricBadNewrelicArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadNewrelicArrayOutput
+}
+
+type SloObjectiveCountMetricBadNewrelicArray []SloObjectiveCountMetricBadNewrelicInput
+
+func (SloObjectiveCountMetricBadNewrelicArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadNewrelic)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadNewrelicArray) ToSloObjectiveCountMetricBadNewrelicArrayOutput() SloObjectiveCountMetricBadNewrelicArrayOutput {
+	return i.ToSloObjectiveCountMetricBadNewrelicArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadNewrelicArray) ToSloObjectiveCountMetricBadNewrelicArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadNewrelicArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadNewrelicArrayOutput)
+}
+
+type SloObjectiveCountMetricBadNewrelicOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadNewrelicOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadNewrelic)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadNewrelicOutput) ToSloObjectiveCountMetricBadNewrelicOutput() SloObjectiveCountMetricBadNewrelicOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadNewrelicOutput) ToSloObjectiveCountMetricBadNewrelicOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadNewrelicOutput {
+	return o
+}
+
+// Query for the metrics
+func (o SloObjectiveCountMetricBadNewrelicOutput) Nrql() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadNewrelic) string { return v.Nrql }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadNewrelicArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadNewrelicArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadNewrelic)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadNewrelicArrayOutput) ToSloObjectiveCountMetricBadNewrelicArrayOutput() SloObjectiveCountMetricBadNewrelicArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadNewrelicArrayOutput) ToSloObjectiveCountMetricBadNewrelicArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadNewrelicArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadNewrelicArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadNewrelicOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadNewrelic {
+		return vs[0].([]SloObjectiveCountMetricBadNewrelic)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadNewrelicOutput)
+}
+
+type SloObjectiveCountMetricBadOpentsdb struct {
+	// Query for the metrics
+	Query string `pulumi:"query"`
+}
+
+// SloObjectiveCountMetricBadOpentsdbInput is an input type that accepts SloObjectiveCountMetricBadOpentsdbArgs and SloObjectiveCountMetricBadOpentsdbOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadOpentsdbInput` via:
+//
+//	SloObjectiveCountMetricBadOpentsdbArgs{...}
+type SloObjectiveCountMetricBadOpentsdbInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadOpentsdbOutput() SloObjectiveCountMetricBadOpentsdbOutput
+	ToSloObjectiveCountMetricBadOpentsdbOutputWithContext(context.Context) SloObjectiveCountMetricBadOpentsdbOutput
+}
+
+type SloObjectiveCountMetricBadOpentsdbArgs struct {
+	// Query for the metrics
+	Query pulumi.StringInput `pulumi:"query"`
+}
+
+func (SloObjectiveCountMetricBadOpentsdbArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadOpentsdb)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadOpentsdbArgs) ToSloObjectiveCountMetricBadOpentsdbOutput() SloObjectiveCountMetricBadOpentsdbOutput {
+	return i.ToSloObjectiveCountMetricBadOpentsdbOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadOpentsdbArgs) ToSloObjectiveCountMetricBadOpentsdbOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadOpentsdbOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadOpentsdbOutput)
+}
+
+// SloObjectiveCountMetricBadOpentsdbArrayInput is an input type that accepts SloObjectiveCountMetricBadOpentsdbArray and SloObjectiveCountMetricBadOpentsdbArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadOpentsdbArrayInput` via:
+//
+//	SloObjectiveCountMetricBadOpentsdbArray{ SloObjectiveCountMetricBadOpentsdbArgs{...} }
+type SloObjectiveCountMetricBadOpentsdbArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadOpentsdbArrayOutput() SloObjectiveCountMetricBadOpentsdbArrayOutput
+	ToSloObjectiveCountMetricBadOpentsdbArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadOpentsdbArrayOutput
+}
+
+type SloObjectiveCountMetricBadOpentsdbArray []SloObjectiveCountMetricBadOpentsdbInput
+
+func (SloObjectiveCountMetricBadOpentsdbArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadOpentsdb)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadOpentsdbArray) ToSloObjectiveCountMetricBadOpentsdbArrayOutput() SloObjectiveCountMetricBadOpentsdbArrayOutput {
+	return i.ToSloObjectiveCountMetricBadOpentsdbArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadOpentsdbArray) ToSloObjectiveCountMetricBadOpentsdbArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadOpentsdbArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadOpentsdbArrayOutput)
+}
+
+type SloObjectiveCountMetricBadOpentsdbOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadOpentsdbOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadOpentsdb)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadOpentsdbOutput) ToSloObjectiveCountMetricBadOpentsdbOutput() SloObjectiveCountMetricBadOpentsdbOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadOpentsdbOutput) ToSloObjectiveCountMetricBadOpentsdbOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadOpentsdbOutput {
+	return o
+}
+
+// Query for the metrics
+func (o SloObjectiveCountMetricBadOpentsdbOutput) Query() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadOpentsdb) string { return v.Query }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadOpentsdbArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadOpentsdbArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadOpentsdb)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadOpentsdbArrayOutput) ToSloObjectiveCountMetricBadOpentsdbArrayOutput() SloObjectiveCountMetricBadOpentsdbArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadOpentsdbArrayOutput) ToSloObjectiveCountMetricBadOpentsdbArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadOpentsdbArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadOpentsdbArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadOpentsdbOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadOpentsdb {
+		return vs[0].([]SloObjectiveCountMetricBadOpentsdb)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadOpentsdbOutput)
+}
+
+type SloObjectiveCountMetricBadPingdom struct {
+	// Pingdom uptime or transaction check's ID
+	CheckId string `pulumi:"checkId"`
+	// Pingdom check type - uptime or transaction
+	CheckType *string `pulumi:"checkType"`
+	// Optional for the Uptime checks. Use it to filter the Pingdom check results by status
+	Status *string `pulumi:"status"`
+}
+
+// SloObjectiveCountMetricBadPingdomInput is an input type that accepts SloObjectiveCountMetricBadPingdomArgs and SloObjectiveCountMetricBadPingdomOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadPingdomInput` via:
+//
+//	SloObjectiveCountMetricBadPingdomArgs{...}
+type SloObjectiveCountMetricBadPingdomInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadPingdomOutput() SloObjectiveCountMetricBadPingdomOutput
+	ToSloObjectiveCountMetricBadPingdomOutputWithContext(context.Context) SloObjectiveCountMetricBadPingdomOutput
+}
+
+type SloObjectiveCountMetricBadPingdomArgs struct {
+	// Pingdom uptime or transaction check's ID
+	CheckId pulumi.StringInput `pulumi:"checkId"`
+	// Pingdom check type - uptime or transaction
+	CheckType pulumi.StringPtrInput `pulumi:"checkType"`
+	// Optional for the Uptime checks. Use it to filter the Pingdom check results by status
+	Status pulumi.StringPtrInput `pulumi:"status"`
+}
+
+func (SloObjectiveCountMetricBadPingdomArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadPingdom)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadPingdomArgs) ToSloObjectiveCountMetricBadPingdomOutput() SloObjectiveCountMetricBadPingdomOutput {
+	return i.ToSloObjectiveCountMetricBadPingdomOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadPingdomArgs) ToSloObjectiveCountMetricBadPingdomOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadPingdomOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadPingdomOutput)
+}
+
+// SloObjectiveCountMetricBadPingdomArrayInput is an input type that accepts SloObjectiveCountMetricBadPingdomArray and SloObjectiveCountMetricBadPingdomArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadPingdomArrayInput` via:
+//
+//	SloObjectiveCountMetricBadPingdomArray{ SloObjectiveCountMetricBadPingdomArgs{...} }
+type SloObjectiveCountMetricBadPingdomArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadPingdomArrayOutput() SloObjectiveCountMetricBadPingdomArrayOutput
+	ToSloObjectiveCountMetricBadPingdomArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadPingdomArrayOutput
+}
+
+type SloObjectiveCountMetricBadPingdomArray []SloObjectiveCountMetricBadPingdomInput
+
+func (SloObjectiveCountMetricBadPingdomArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadPingdom)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadPingdomArray) ToSloObjectiveCountMetricBadPingdomArrayOutput() SloObjectiveCountMetricBadPingdomArrayOutput {
+	return i.ToSloObjectiveCountMetricBadPingdomArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadPingdomArray) ToSloObjectiveCountMetricBadPingdomArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadPingdomArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadPingdomArrayOutput)
+}
+
+type SloObjectiveCountMetricBadPingdomOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadPingdomOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadPingdom)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadPingdomOutput) ToSloObjectiveCountMetricBadPingdomOutput() SloObjectiveCountMetricBadPingdomOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadPingdomOutput) ToSloObjectiveCountMetricBadPingdomOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadPingdomOutput {
+	return o
+}
+
+// Pingdom uptime or transaction check's ID
+func (o SloObjectiveCountMetricBadPingdomOutput) CheckId() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadPingdom) string { return v.CheckId }).(pulumi.StringOutput)
+}
+
+// Pingdom check type - uptime or transaction
+func (o SloObjectiveCountMetricBadPingdomOutput) CheckType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadPingdom) *string { return v.CheckType }).(pulumi.StringPtrOutput)
+}
+
+// Optional for the Uptime checks. Use it to filter the Pingdom check results by status
+func (o SloObjectiveCountMetricBadPingdomOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadPingdom) *string { return v.Status }).(pulumi.StringPtrOutput)
+}
+
+type SloObjectiveCountMetricBadPingdomArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadPingdomArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadPingdom)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadPingdomArrayOutput) ToSloObjectiveCountMetricBadPingdomArrayOutput() SloObjectiveCountMetricBadPingdomArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadPingdomArrayOutput) ToSloObjectiveCountMetricBadPingdomArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadPingdomArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadPingdomArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadPingdomOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadPingdom {
+		return vs[0].([]SloObjectiveCountMetricBadPingdom)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadPingdomOutput)
+}
+
+type SloObjectiveCountMetricBadPrometheus struct {
+	// Query for the metrics
+	Promql string `pulumi:"promql"`
+}
+
+// SloObjectiveCountMetricBadPrometheusInput is an input type that accepts SloObjectiveCountMetricBadPrometheusArgs and SloObjectiveCountMetricBadPrometheusOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadPrometheusInput` via:
+//
+//	SloObjectiveCountMetricBadPrometheusArgs{...}
+type SloObjectiveCountMetricBadPrometheusInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadPrometheusOutput() SloObjectiveCountMetricBadPrometheusOutput
+	ToSloObjectiveCountMetricBadPrometheusOutputWithContext(context.Context) SloObjectiveCountMetricBadPrometheusOutput
+}
+
+type SloObjectiveCountMetricBadPrometheusArgs struct {
+	// Query for the metrics
+	Promql pulumi.StringInput `pulumi:"promql"`
+}
+
+func (SloObjectiveCountMetricBadPrometheusArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadPrometheus)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadPrometheusArgs) ToSloObjectiveCountMetricBadPrometheusOutput() SloObjectiveCountMetricBadPrometheusOutput {
+	return i.ToSloObjectiveCountMetricBadPrometheusOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadPrometheusArgs) ToSloObjectiveCountMetricBadPrometheusOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadPrometheusOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadPrometheusOutput)
+}
+
+// SloObjectiveCountMetricBadPrometheusArrayInput is an input type that accepts SloObjectiveCountMetricBadPrometheusArray and SloObjectiveCountMetricBadPrometheusArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadPrometheusArrayInput` via:
+//
+//	SloObjectiveCountMetricBadPrometheusArray{ SloObjectiveCountMetricBadPrometheusArgs{...} }
+type SloObjectiveCountMetricBadPrometheusArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadPrometheusArrayOutput() SloObjectiveCountMetricBadPrometheusArrayOutput
+	ToSloObjectiveCountMetricBadPrometheusArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadPrometheusArrayOutput
+}
+
+type SloObjectiveCountMetricBadPrometheusArray []SloObjectiveCountMetricBadPrometheusInput
+
+func (SloObjectiveCountMetricBadPrometheusArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadPrometheus)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadPrometheusArray) ToSloObjectiveCountMetricBadPrometheusArrayOutput() SloObjectiveCountMetricBadPrometheusArrayOutput {
+	return i.ToSloObjectiveCountMetricBadPrometheusArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadPrometheusArray) ToSloObjectiveCountMetricBadPrometheusArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadPrometheusArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadPrometheusArrayOutput)
+}
+
+type SloObjectiveCountMetricBadPrometheusOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadPrometheusOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadPrometheus)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadPrometheusOutput) ToSloObjectiveCountMetricBadPrometheusOutput() SloObjectiveCountMetricBadPrometheusOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadPrometheusOutput) ToSloObjectiveCountMetricBadPrometheusOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadPrometheusOutput {
+	return o
+}
+
+// Query for the metrics
+func (o SloObjectiveCountMetricBadPrometheusOutput) Promql() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadPrometheus) string { return v.Promql }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadPrometheusArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadPrometheusArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadPrometheus)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadPrometheusArrayOutput) ToSloObjectiveCountMetricBadPrometheusArrayOutput() SloObjectiveCountMetricBadPrometheusArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadPrometheusArrayOutput) ToSloObjectiveCountMetricBadPrometheusArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadPrometheusArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadPrometheusArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadPrometheusOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadPrometheus {
+		return vs[0].([]SloObjectiveCountMetricBadPrometheus)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadPrometheusOutput)
+}
+
+type SloObjectiveCountMetricBadRedshift struct {
+	// Redshift custer ID
+	ClusterId string `pulumi:"clusterId"`
+	// Database name
+	DatabaseName string `pulumi:"databaseName"`
+	// Query for the metrics
+	Query string `pulumi:"query"`
+	// Region of the CloudWatch instance
+	Region string `pulumi:"region"`
+}
+
+// SloObjectiveCountMetricBadRedshiftInput is an input type that accepts SloObjectiveCountMetricBadRedshiftArgs and SloObjectiveCountMetricBadRedshiftOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadRedshiftInput` via:
+//
+//	SloObjectiveCountMetricBadRedshiftArgs{...}
+type SloObjectiveCountMetricBadRedshiftInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadRedshiftOutput() SloObjectiveCountMetricBadRedshiftOutput
+	ToSloObjectiveCountMetricBadRedshiftOutputWithContext(context.Context) SloObjectiveCountMetricBadRedshiftOutput
+}
+
+type SloObjectiveCountMetricBadRedshiftArgs struct {
+	// Redshift custer ID
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Database name
+	DatabaseName pulumi.StringInput `pulumi:"databaseName"`
+	// Query for the metrics
+	Query pulumi.StringInput `pulumi:"query"`
+	// Region of the CloudWatch instance
+	Region pulumi.StringInput `pulumi:"region"`
+}
+
+func (SloObjectiveCountMetricBadRedshiftArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadRedshift)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadRedshiftArgs) ToSloObjectiveCountMetricBadRedshiftOutput() SloObjectiveCountMetricBadRedshiftOutput {
+	return i.ToSloObjectiveCountMetricBadRedshiftOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadRedshiftArgs) ToSloObjectiveCountMetricBadRedshiftOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadRedshiftOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadRedshiftOutput)
+}
+
+// SloObjectiveCountMetricBadRedshiftArrayInput is an input type that accepts SloObjectiveCountMetricBadRedshiftArray and SloObjectiveCountMetricBadRedshiftArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadRedshiftArrayInput` via:
+//
+//	SloObjectiveCountMetricBadRedshiftArray{ SloObjectiveCountMetricBadRedshiftArgs{...} }
+type SloObjectiveCountMetricBadRedshiftArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadRedshiftArrayOutput() SloObjectiveCountMetricBadRedshiftArrayOutput
+	ToSloObjectiveCountMetricBadRedshiftArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadRedshiftArrayOutput
+}
+
+type SloObjectiveCountMetricBadRedshiftArray []SloObjectiveCountMetricBadRedshiftInput
+
+func (SloObjectiveCountMetricBadRedshiftArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadRedshift)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadRedshiftArray) ToSloObjectiveCountMetricBadRedshiftArrayOutput() SloObjectiveCountMetricBadRedshiftArrayOutput {
+	return i.ToSloObjectiveCountMetricBadRedshiftArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadRedshiftArray) ToSloObjectiveCountMetricBadRedshiftArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadRedshiftArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadRedshiftArrayOutput)
+}
+
+type SloObjectiveCountMetricBadRedshiftOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadRedshiftOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadRedshift)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadRedshiftOutput) ToSloObjectiveCountMetricBadRedshiftOutput() SloObjectiveCountMetricBadRedshiftOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadRedshiftOutput) ToSloObjectiveCountMetricBadRedshiftOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadRedshiftOutput {
+	return o
+}
+
+// Redshift custer ID
+func (o SloObjectiveCountMetricBadRedshiftOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadRedshift) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Database name
+func (o SloObjectiveCountMetricBadRedshiftOutput) DatabaseName() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadRedshift) string { return v.DatabaseName }).(pulumi.StringOutput)
+}
+
+// Query for the metrics
+func (o SloObjectiveCountMetricBadRedshiftOutput) Query() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadRedshift) string { return v.Query }).(pulumi.StringOutput)
+}
+
+// Region of the CloudWatch instance
+func (o SloObjectiveCountMetricBadRedshiftOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadRedshift) string { return v.Region }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadRedshiftArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadRedshiftArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadRedshift)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadRedshiftArrayOutput) ToSloObjectiveCountMetricBadRedshiftArrayOutput() SloObjectiveCountMetricBadRedshiftArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadRedshiftArrayOutput) ToSloObjectiveCountMetricBadRedshiftArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadRedshiftArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadRedshiftArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadRedshiftOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadRedshift {
+		return vs[0].([]SloObjectiveCountMetricBadRedshift)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadRedshiftOutput)
+}
+
+type SloObjectiveCountMetricBadSplunk struct {
+	// Query for the metrics
+	Query string `pulumi:"query"`
+}
+
+// SloObjectiveCountMetricBadSplunkInput is an input type that accepts SloObjectiveCountMetricBadSplunkArgs and SloObjectiveCountMetricBadSplunkOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadSplunkInput` via:
+//
+//	SloObjectiveCountMetricBadSplunkArgs{...}
+type SloObjectiveCountMetricBadSplunkInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadSplunkOutput() SloObjectiveCountMetricBadSplunkOutput
+	ToSloObjectiveCountMetricBadSplunkOutputWithContext(context.Context) SloObjectiveCountMetricBadSplunkOutput
+}
+
+type SloObjectiveCountMetricBadSplunkArgs struct {
+	// Query for the metrics
+	Query pulumi.StringInput `pulumi:"query"`
+}
+
+func (SloObjectiveCountMetricBadSplunkArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadSplunk)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadSplunkArgs) ToSloObjectiveCountMetricBadSplunkOutput() SloObjectiveCountMetricBadSplunkOutput {
+	return i.ToSloObjectiveCountMetricBadSplunkOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadSplunkArgs) ToSloObjectiveCountMetricBadSplunkOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadSplunkOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadSplunkOutput)
+}
+
+// SloObjectiveCountMetricBadSplunkArrayInput is an input type that accepts SloObjectiveCountMetricBadSplunkArray and SloObjectiveCountMetricBadSplunkArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadSplunkArrayInput` via:
+//
+//	SloObjectiveCountMetricBadSplunkArray{ SloObjectiveCountMetricBadSplunkArgs{...} }
+type SloObjectiveCountMetricBadSplunkArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadSplunkArrayOutput() SloObjectiveCountMetricBadSplunkArrayOutput
+	ToSloObjectiveCountMetricBadSplunkArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadSplunkArrayOutput
+}
+
+type SloObjectiveCountMetricBadSplunkArray []SloObjectiveCountMetricBadSplunkInput
+
+func (SloObjectiveCountMetricBadSplunkArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadSplunk)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadSplunkArray) ToSloObjectiveCountMetricBadSplunkArrayOutput() SloObjectiveCountMetricBadSplunkArrayOutput {
+	return i.ToSloObjectiveCountMetricBadSplunkArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadSplunkArray) ToSloObjectiveCountMetricBadSplunkArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadSplunkArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadSplunkArrayOutput)
+}
+
+type SloObjectiveCountMetricBadSplunkOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadSplunkOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadSplunk)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadSplunkOutput) ToSloObjectiveCountMetricBadSplunkOutput() SloObjectiveCountMetricBadSplunkOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadSplunkOutput) ToSloObjectiveCountMetricBadSplunkOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadSplunkOutput {
+	return o
+}
+
+// Query for the metrics
+func (o SloObjectiveCountMetricBadSplunkOutput) Query() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadSplunk) string { return v.Query }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadSplunkArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadSplunkArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadSplunk)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadSplunkArrayOutput) ToSloObjectiveCountMetricBadSplunkArrayOutput() SloObjectiveCountMetricBadSplunkArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadSplunkArrayOutput) ToSloObjectiveCountMetricBadSplunkArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadSplunkArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadSplunkArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadSplunkOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadSplunk {
+		return vs[0].([]SloObjectiveCountMetricBadSplunk)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadSplunkOutput)
+}
+
+type SloObjectiveCountMetricBadSplunkObservability struct {
+	// Query for the metrics
+	Program string `pulumi:"program"`
+}
+
+// SloObjectiveCountMetricBadSplunkObservabilityInput is an input type that accepts SloObjectiveCountMetricBadSplunkObservabilityArgs and SloObjectiveCountMetricBadSplunkObservabilityOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadSplunkObservabilityInput` via:
+//
+//	SloObjectiveCountMetricBadSplunkObservabilityArgs{...}
+type SloObjectiveCountMetricBadSplunkObservabilityInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadSplunkObservabilityOutput() SloObjectiveCountMetricBadSplunkObservabilityOutput
+	ToSloObjectiveCountMetricBadSplunkObservabilityOutputWithContext(context.Context) SloObjectiveCountMetricBadSplunkObservabilityOutput
+}
+
+type SloObjectiveCountMetricBadSplunkObservabilityArgs struct {
+	// Query for the metrics
+	Program pulumi.StringInput `pulumi:"program"`
+}
+
+func (SloObjectiveCountMetricBadSplunkObservabilityArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadSplunkObservability)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadSplunkObservabilityArgs) ToSloObjectiveCountMetricBadSplunkObservabilityOutput() SloObjectiveCountMetricBadSplunkObservabilityOutput {
+	return i.ToSloObjectiveCountMetricBadSplunkObservabilityOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadSplunkObservabilityArgs) ToSloObjectiveCountMetricBadSplunkObservabilityOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadSplunkObservabilityOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadSplunkObservabilityOutput)
+}
+
+// SloObjectiveCountMetricBadSplunkObservabilityArrayInput is an input type that accepts SloObjectiveCountMetricBadSplunkObservabilityArray and SloObjectiveCountMetricBadSplunkObservabilityArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadSplunkObservabilityArrayInput` via:
+//
+//	SloObjectiveCountMetricBadSplunkObservabilityArray{ SloObjectiveCountMetricBadSplunkObservabilityArgs{...} }
+type SloObjectiveCountMetricBadSplunkObservabilityArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadSplunkObservabilityArrayOutput() SloObjectiveCountMetricBadSplunkObservabilityArrayOutput
+	ToSloObjectiveCountMetricBadSplunkObservabilityArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadSplunkObservabilityArrayOutput
+}
+
+type SloObjectiveCountMetricBadSplunkObservabilityArray []SloObjectiveCountMetricBadSplunkObservabilityInput
+
+func (SloObjectiveCountMetricBadSplunkObservabilityArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadSplunkObservability)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadSplunkObservabilityArray) ToSloObjectiveCountMetricBadSplunkObservabilityArrayOutput() SloObjectiveCountMetricBadSplunkObservabilityArrayOutput {
+	return i.ToSloObjectiveCountMetricBadSplunkObservabilityArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadSplunkObservabilityArray) ToSloObjectiveCountMetricBadSplunkObservabilityArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadSplunkObservabilityArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadSplunkObservabilityArrayOutput)
+}
+
+type SloObjectiveCountMetricBadSplunkObservabilityOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadSplunkObservabilityOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadSplunkObservability)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadSplunkObservabilityOutput) ToSloObjectiveCountMetricBadSplunkObservabilityOutput() SloObjectiveCountMetricBadSplunkObservabilityOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadSplunkObservabilityOutput) ToSloObjectiveCountMetricBadSplunkObservabilityOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadSplunkObservabilityOutput {
+	return o
+}
+
+// Query for the metrics
+func (o SloObjectiveCountMetricBadSplunkObservabilityOutput) Program() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadSplunkObservability) string { return v.Program }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadSplunkObservabilityArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadSplunkObservabilityArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadSplunkObservability)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadSplunkObservabilityArrayOutput) ToSloObjectiveCountMetricBadSplunkObservabilityArrayOutput() SloObjectiveCountMetricBadSplunkObservabilityArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadSplunkObservabilityArrayOutput) ToSloObjectiveCountMetricBadSplunkObservabilityArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadSplunkObservabilityArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadSplunkObservabilityArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadSplunkObservabilityOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadSplunkObservability {
+		return vs[0].([]SloObjectiveCountMetricBadSplunkObservability)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadSplunkObservabilityOutput)
+}
+
+type SloObjectiveCountMetricBadSumologic struct {
+	// Period of data aggregation
+	Quantization *string `pulumi:"quantization"`
+	// Query for the metrics
+	Query string `pulumi:"query"`
+	// Aggregation function - avg, sum, min, max, count, none
+	Rollup *string `pulumi:"rollup"`
+	// Sumologic source - metrics or logs
+	Type string `pulumi:"type"`
+}
+
+// SloObjectiveCountMetricBadSumologicInput is an input type that accepts SloObjectiveCountMetricBadSumologicArgs and SloObjectiveCountMetricBadSumologicOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadSumologicInput` via:
+//
+//	SloObjectiveCountMetricBadSumologicArgs{...}
+type SloObjectiveCountMetricBadSumologicInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadSumologicOutput() SloObjectiveCountMetricBadSumologicOutput
+	ToSloObjectiveCountMetricBadSumologicOutputWithContext(context.Context) SloObjectiveCountMetricBadSumologicOutput
+}
+
+type SloObjectiveCountMetricBadSumologicArgs struct {
+	// Period of data aggregation
+	Quantization pulumi.StringPtrInput `pulumi:"quantization"`
+	// Query for the metrics
+	Query pulumi.StringInput `pulumi:"query"`
+	// Aggregation function - avg, sum, min, max, count, none
+	Rollup pulumi.StringPtrInput `pulumi:"rollup"`
+	// Sumologic source - metrics or logs
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (SloObjectiveCountMetricBadSumologicArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadSumologic)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadSumologicArgs) ToSloObjectiveCountMetricBadSumologicOutput() SloObjectiveCountMetricBadSumologicOutput {
+	return i.ToSloObjectiveCountMetricBadSumologicOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadSumologicArgs) ToSloObjectiveCountMetricBadSumologicOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadSumologicOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadSumologicOutput)
+}
+
+// SloObjectiveCountMetricBadSumologicArrayInput is an input type that accepts SloObjectiveCountMetricBadSumologicArray and SloObjectiveCountMetricBadSumologicArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadSumologicArrayInput` via:
+//
+//	SloObjectiveCountMetricBadSumologicArray{ SloObjectiveCountMetricBadSumologicArgs{...} }
+type SloObjectiveCountMetricBadSumologicArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadSumologicArrayOutput() SloObjectiveCountMetricBadSumologicArrayOutput
+	ToSloObjectiveCountMetricBadSumologicArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadSumologicArrayOutput
+}
+
+type SloObjectiveCountMetricBadSumologicArray []SloObjectiveCountMetricBadSumologicInput
+
+func (SloObjectiveCountMetricBadSumologicArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadSumologic)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadSumologicArray) ToSloObjectiveCountMetricBadSumologicArrayOutput() SloObjectiveCountMetricBadSumologicArrayOutput {
+	return i.ToSloObjectiveCountMetricBadSumologicArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadSumologicArray) ToSloObjectiveCountMetricBadSumologicArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadSumologicArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadSumologicArrayOutput)
+}
+
+type SloObjectiveCountMetricBadSumologicOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadSumologicOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadSumologic)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadSumologicOutput) ToSloObjectiveCountMetricBadSumologicOutput() SloObjectiveCountMetricBadSumologicOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadSumologicOutput) ToSloObjectiveCountMetricBadSumologicOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadSumologicOutput {
+	return o
+}
+
+// Period of data aggregation
+func (o SloObjectiveCountMetricBadSumologicOutput) Quantization() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadSumologic) *string { return v.Quantization }).(pulumi.StringPtrOutput)
+}
+
+// Query for the metrics
+func (o SloObjectiveCountMetricBadSumologicOutput) Query() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadSumologic) string { return v.Query }).(pulumi.StringOutput)
+}
+
+// Aggregation function - avg, sum, min, max, count, none
+func (o SloObjectiveCountMetricBadSumologicOutput) Rollup() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadSumologic) *string { return v.Rollup }).(pulumi.StringPtrOutput)
+}
+
+// Sumologic source - metrics or logs
+func (o SloObjectiveCountMetricBadSumologicOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadSumologic) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricBadSumologicArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadSumologicArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadSumologic)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadSumologicArrayOutput) ToSloObjectiveCountMetricBadSumologicArrayOutput() SloObjectiveCountMetricBadSumologicArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadSumologicArrayOutput) ToSloObjectiveCountMetricBadSumologicArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadSumologicArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadSumologicArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadSumologicOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadSumologic {
+		return vs[0].([]SloObjectiveCountMetricBadSumologic)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadSumologicOutput)
+}
+
+type SloObjectiveCountMetricBadThousandeye struct {
+	// ID of the test
+	TestId int `pulumi:"testId"`
+}
+
+// SloObjectiveCountMetricBadThousandeyeInput is an input type that accepts SloObjectiveCountMetricBadThousandeyeArgs and SloObjectiveCountMetricBadThousandeyeOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadThousandeyeInput` via:
+//
+//	SloObjectiveCountMetricBadThousandeyeArgs{...}
+type SloObjectiveCountMetricBadThousandeyeInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadThousandeyeOutput() SloObjectiveCountMetricBadThousandeyeOutput
+	ToSloObjectiveCountMetricBadThousandeyeOutputWithContext(context.Context) SloObjectiveCountMetricBadThousandeyeOutput
+}
+
+type SloObjectiveCountMetricBadThousandeyeArgs struct {
+	// ID of the test
+	TestId pulumi.IntInput `pulumi:"testId"`
+}
+
+func (SloObjectiveCountMetricBadThousandeyeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadThousandeye)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadThousandeyeArgs) ToSloObjectiveCountMetricBadThousandeyeOutput() SloObjectiveCountMetricBadThousandeyeOutput {
+	return i.ToSloObjectiveCountMetricBadThousandeyeOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadThousandeyeArgs) ToSloObjectiveCountMetricBadThousandeyeOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadThousandeyeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadThousandeyeOutput)
+}
+
+// SloObjectiveCountMetricBadThousandeyeArrayInput is an input type that accepts SloObjectiveCountMetricBadThousandeyeArray and SloObjectiveCountMetricBadThousandeyeArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricBadThousandeyeArrayInput` via:
+//
+//	SloObjectiveCountMetricBadThousandeyeArray{ SloObjectiveCountMetricBadThousandeyeArgs{...} }
+type SloObjectiveCountMetricBadThousandeyeArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricBadThousandeyeArrayOutput() SloObjectiveCountMetricBadThousandeyeArrayOutput
+	ToSloObjectiveCountMetricBadThousandeyeArrayOutputWithContext(context.Context) SloObjectiveCountMetricBadThousandeyeArrayOutput
+}
+
+type SloObjectiveCountMetricBadThousandeyeArray []SloObjectiveCountMetricBadThousandeyeInput
+
+func (SloObjectiveCountMetricBadThousandeyeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadThousandeye)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricBadThousandeyeArray) ToSloObjectiveCountMetricBadThousandeyeArrayOutput() SloObjectiveCountMetricBadThousandeyeArrayOutput {
+	return i.ToSloObjectiveCountMetricBadThousandeyeArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricBadThousandeyeArray) ToSloObjectiveCountMetricBadThousandeyeArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadThousandeyeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricBadThousandeyeArrayOutput)
+}
+
+type SloObjectiveCountMetricBadThousandeyeOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadThousandeyeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricBadThousandeye)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadThousandeyeOutput) ToSloObjectiveCountMetricBadThousandeyeOutput() SloObjectiveCountMetricBadThousandeyeOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadThousandeyeOutput) ToSloObjectiveCountMetricBadThousandeyeOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadThousandeyeOutput {
+	return o
+}
+
+// ID of the test
+func (o SloObjectiveCountMetricBadThousandeyeOutput) TestId() pulumi.IntOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricBadThousandeye) int { return v.TestId }).(pulumi.IntOutput)
+}
+
+type SloObjectiveCountMetricBadThousandeyeArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricBadThousandeyeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricBadThousandeye)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricBadThousandeyeArrayOutput) ToSloObjectiveCountMetricBadThousandeyeArrayOutput() SloObjectiveCountMetricBadThousandeyeArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadThousandeyeArrayOutput) ToSloObjectiveCountMetricBadThousandeyeArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricBadThousandeyeArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricBadThousandeyeArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricBadThousandeyeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricBadThousandeye {
+		return vs[0].([]SloObjectiveCountMetricBadThousandeye)[vs[1].(int)]
+	}).(SloObjectiveCountMetricBadThousandeyeOutput)
+}
+
 type SloObjectiveCountMetricGood struct {
-	AmazonPrometheuses    []SloObjectiveCountMetricGoodAmazonPrometheus    `pulumi:"amazonPrometheuses"`
-	Appdynamics           []SloObjectiveCountMetricGoodAppdynamic          `pulumi:"appdynamics"`
-	Bigqueries            []SloObjectiveCountMetricGoodBigquery            `pulumi:"bigqueries"`
-	Cloudwatches          []SloObjectiveCountMetricGoodCloudwatch          `pulumi:"cloudwatches"`
-	Datadogs              []SloObjectiveCountMetricGoodDatadog             `pulumi:"datadogs"`
-	Dynatraces            []SloObjectiveCountMetricGoodDynatrace           `pulumi:"dynatraces"`
-	Elasticsearches       []SloObjectiveCountMetricGoodElasticsearch       `pulumi:"elasticsearches"`
-	Gcms                  []SloObjectiveCountMetricGoodGcm                 `pulumi:"gcms"`
-	GrafanaLokis          []SloObjectiveCountMetricGoodGrafanaLoki         `pulumi:"grafanaLokis"`
-	Graphites             []SloObjectiveCountMetricGoodGraphite            `pulumi:"graphites"`
-	Influxdbs             []SloObjectiveCountMetricGoodInfluxdb            `pulumi:"influxdbs"`
-	Instanas              []SloObjectiveCountMetricGoodInstana             `pulumi:"instanas"`
-	Lightsteps            []SloObjectiveCountMetricGoodLightstep           `pulumi:"lightsteps"`
-	Newrelics             []SloObjectiveCountMetricGoodNewrelic            `pulumi:"newrelics"`
-	Opentsdbs             []SloObjectiveCountMetricGoodOpentsdb            `pulumi:"opentsdbs"`
-	Pingdoms              []SloObjectiveCountMetricGoodPingdom             `pulumi:"pingdoms"`
-	Prometheuses          []SloObjectiveCountMetricGoodPrometheus          `pulumi:"prometheuses"`
-	Redshifts             []SloObjectiveCountMetricGoodRedshift            `pulumi:"redshifts"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
+	AmazonPrometheuses []SloObjectiveCountMetricGoodAmazonPrometheus `pulumi:"amazonPrometheuses"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
+	Appdynamics []SloObjectiveCountMetricGoodAppdynamic `pulumi:"appdynamics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+	AzureMonitors []SloObjectiveCountMetricGoodAzureMonitor `pulumi:"azureMonitors"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
+	Bigqueries []SloObjectiveCountMetricGoodBigquery `pulumi:"bigqueries"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
+	Cloudwatches []SloObjectiveCountMetricGoodCloudwatch `pulumi:"cloudwatches"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
+	Datadogs []SloObjectiveCountMetricGoodDatadog `pulumi:"datadogs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
+	Dynatraces []SloObjectiveCountMetricGoodDynatrace `pulumi:"dynatraces"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
+	Elasticsearches []SloObjectiveCountMetricGoodElasticsearch `pulumi:"elasticsearches"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
+	Gcms []SloObjectiveCountMetricGoodGcm `pulumi:"gcms"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
+	GrafanaLokis []SloObjectiveCountMetricGoodGrafanaLoki `pulumi:"grafanaLokis"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
+	Graphites []SloObjectiveCountMetricGoodGraphite `pulumi:"graphites"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+	Honeycombs []SloObjectiveCountMetricGoodHoneycomb `pulumi:"honeycombs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
+	Influxdbs []SloObjectiveCountMetricGoodInfluxdb `pulumi:"influxdbs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
+	Instanas []SloObjectiveCountMetricGoodInstana `pulumi:"instanas"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
+	Lightsteps []SloObjectiveCountMetricGoodLightstep `pulumi:"lightsteps"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
+	Newrelics []SloObjectiveCountMetricGoodNewrelic `pulumi:"newrelics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
+	Opentsdbs []SloObjectiveCountMetricGoodOpentsdb `pulumi:"opentsdbs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
+	Pingdoms []SloObjectiveCountMetricGoodPingdom `pulumi:"pingdoms"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
+	Prometheuses []SloObjectiveCountMetricGoodPrometheus `pulumi:"prometheuses"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
+	Redshifts []SloObjectiveCountMetricGoodRedshift `pulumi:"redshifts"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
 	SplunkObservabilities []SloObjectiveCountMetricGoodSplunkObservability `pulumi:"splunkObservabilities"`
-	Splunks               []SloObjectiveCountMetricGoodSplunk              `pulumi:"splunks"`
-	Sumologics            []SloObjectiveCountMetricGoodSumologic           `pulumi:"sumologics"`
-	Thousandeyes          []SloObjectiveCountMetricGoodThousandeye         `pulumi:"thousandeyes"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
+	Splunks []SloObjectiveCountMetricGoodSplunk `pulumi:"splunks"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
+	Sumologics []SloObjectiveCountMetricGoodSumologic `pulumi:"sumologics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
+	Thousandeyes []SloObjectiveCountMetricGoodThousandeye `pulumi:"thousandeyes"`
 }
 
 // SloObjectiveCountMetricGoodInput is an input type that accepts SloObjectiveCountMetricGoodArgs and SloObjectiveCountMetricGoodOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodInput` via:
 //
-//          SloObjectiveCountMetricGoodArgs{...}
+//	SloObjectiveCountMetricGoodArgs{...}
 type SloObjectiveCountMetricGoodInput interface {
 	pulumi.Input
 
@@ -9148,28 +15530,54 @@ type SloObjectiveCountMetricGoodInput interface {
 }
 
 type SloObjectiveCountMetricGoodArgs struct {
-	AmazonPrometheuses    SloObjectiveCountMetricGoodAmazonPrometheusArrayInput    `pulumi:"amazonPrometheuses"`
-	Appdynamics           SloObjectiveCountMetricGoodAppdynamicArrayInput          `pulumi:"appdynamics"`
-	Bigqueries            SloObjectiveCountMetricGoodBigqueryArrayInput            `pulumi:"bigqueries"`
-	Cloudwatches          SloObjectiveCountMetricGoodCloudwatchArrayInput          `pulumi:"cloudwatches"`
-	Datadogs              SloObjectiveCountMetricGoodDatadogArrayInput             `pulumi:"datadogs"`
-	Dynatraces            SloObjectiveCountMetricGoodDynatraceArrayInput           `pulumi:"dynatraces"`
-	Elasticsearches       SloObjectiveCountMetricGoodElasticsearchArrayInput       `pulumi:"elasticsearches"`
-	Gcms                  SloObjectiveCountMetricGoodGcmArrayInput                 `pulumi:"gcms"`
-	GrafanaLokis          SloObjectiveCountMetricGoodGrafanaLokiArrayInput         `pulumi:"grafanaLokis"`
-	Graphites             SloObjectiveCountMetricGoodGraphiteArrayInput            `pulumi:"graphites"`
-	Influxdbs             SloObjectiveCountMetricGoodInfluxdbArrayInput            `pulumi:"influxdbs"`
-	Instanas              SloObjectiveCountMetricGoodInstanaArrayInput             `pulumi:"instanas"`
-	Lightsteps            SloObjectiveCountMetricGoodLightstepArrayInput           `pulumi:"lightsteps"`
-	Newrelics             SloObjectiveCountMetricGoodNewrelicArrayInput            `pulumi:"newrelics"`
-	Opentsdbs             SloObjectiveCountMetricGoodOpentsdbArrayInput            `pulumi:"opentsdbs"`
-	Pingdoms              SloObjectiveCountMetricGoodPingdomArrayInput             `pulumi:"pingdoms"`
-	Prometheuses          SloObjectiveCountMetricGoodPrometheusArrayInput          `pulumi:"prometheuses"`
-	Redshifts             SloObjectiveCountMetricGoodRedshiftArrayInput            `pulumi:"redshifts"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
+	AmazonPrometheuses SloObjectiveCountMetricGoodAmazonPrometheusArrayInput `pulumi:"amazonPrometheuses"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
+	Appdynamics SloObjectiveCountMetricGoodAppdynamicArrayInput `pulumi:"appdynamics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+	AzureMonitors SloObjectiveCountMetricGoodAzureMonitorArrayInput `pulumi:"azureMonitors"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
+	Bigqueries SloObjectiveCountMetricGoodBigqueryArrayInput `pulumi:"bigqueries"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
+	Cloudwatches SloObjectiveCountMetricGoodCloudwatchArrayInput `pulumi:"cloudwatches"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
+	Datadogs SloObjectiveCountMetricGoodDatadogArrayInput `pulumi:"datadogs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
+	Dynatraces SloObjectiveCountMetricGoodDynatraceArrayInput `pulumi:"dynatraces"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
+	Elasticsearches SloObjectiveCountMetricGoodElasticsearchArrayInput `pulumi:"elasticsearches"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
+	Gcms SloObjectiveCountMetricGoodGcmArrayInput `pulumi:"gcms"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
+	GrafanaLokis SloObjectiveCountMetricGoodGrafanaLokiArrayInput `pulumi:"grafanaLokis"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
+	Graphites SloObjectiveCountMetricGoodGraphiteArrayInput `pulumi:"graphites"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+	Honeycombs SloObjectiveCountMetricGoodHoneycombArrayInput `pulumi:"honeycombs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
+	Influxdbs SloObjectiveCountMetricGoodInfluxdbArrayInput `pulumi:"influxdbs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
+	Instanas SloObjectiveCountMetricGoodInstanaArrayInput `pulumi:"instanas"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
+	Lightsteps SloObjectiveCountMetricGoodLightstepArrayInput `pulumi:"lightsteps"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
+	Newrelics SloObjectiveCountMetricGoodNewrelicArrayInput `pulumi:"newrelics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
+	Opentsdbs SloObjectiveCountMetricGoodOpentsdbArrayInput `pulumi:"opentsdbs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
+	Pingdoms SloObjectiveCountMetricGoodPingdomArrayInput `pulumi:"pingdoms"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
+	Prometheuses SloObjectiveCountMetricGoodPrometheusArrayInput `pulumi:"prometheuses"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
+	Redshifts SloObjectiveCountMetricGoodRedshiftArrayInput `pulumi:"redshifts"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
 	SplunkObservabilities SloObjectiveCountMetricGoodSplunkObservabilityArrayInput `pulumi:"splunkObservabilities"`
-	Splunks               SloObjectiveCountMetricGoodSplunkArrayInput              `pulumi:"splunks"`
-	Sumologics            SloObjectiveCountMetricGoodSumologicArrayInput           `pulumi:"sumologics"`
-	Thousandeyes          SloObjectiveCountMetricGoodThousandeyeArrayInput         `pulumi:"thousandeyes"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
+	Splunks SloObjectiveCountMetricGoodSplunkArrayInput `pulumi:"splunks"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
+	Sumologics SloObjectiveCountMetricGoodSumologicArrayInput `pulumi:"sumologics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
+	Thousandeyes SloObjectiveCountMetricGoodThousandeyeArrayInput `pulumi:"thousandeyes"`
 }
 
 func (SloObjectiveCountMetricGoodArgs) ElementType() reflect.Type {
@@ -9187,7 +15595,7 @@ func (i SloObjectiveCountMetricGoodArgs) ToSloObjectiveCountMetricGoodOutputWith
 // SloObjectiveCountMetricGoodArrayInput is an input type that accepts SloObjectiveCountMetricGoodArray and SloObjectiveCountMetricGoodArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodArray{ SloObjectiveCountMetricGoodArgs{...} }
+//	SloObjectiveCountMetricGoodArray{ SloObjectiveCountMetricGoodArgs{...} }
 type SloObjectiveCountMetricGoodArrayInput interface {
 	pulumi.Input
 
@@ -9223,96 +15631,128 @@ func (o SloObjectiveCountMetricGoodOutput) ToSloObjectiveCountMetricGoodOutputWi
 	return o
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
 func (o SloObjectiveCountMetricGoodOutput) AmazonPrometheuses() SloObjectiveCountMetricGoodAmazonPrometheusArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodAmazonPrometheus {
 		return v.AmazonPrometheuses
 	}).(SloObjectiveCountMetricGoodAmazonPrometheusArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
 func (o SloObjectiveCountMetricGoodOutput) Appdynamics() SloObjectiveCountMetricGoodAppdynamicArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodAppdynamic { return v.Appdynamics }).(SloObjectiveCountMetricGoodAppdynamicArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+func (o SloObjectiveCountMetricGoodOutput) AzureMonitors() SloObjectiveCountMetricGoodAzureMonitorArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodAzureMonitor { return v.AzureMonitors }).(SloObjectiveCountMetricGoodAzureMonitorArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
 func (o SloObjectiveCountMetricGoodOutput) Bigqueries() SloObjectiveCountMetricGoodBigqueryArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodBigquery { return v.Bigqueries }).(SloObjectiveCountMetricGoodBigqueryArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
 func (o SloObjectiveCountMetricGoodOutput) Cloudwatches() SloObjectiveCountMetricGoodCloudwatchArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodCloudwatch { return v.Cloudwatches }).(SloObjectiveCountMetricGoodCloudwatchArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
 func (o SloObjectiveCountMetricGoodOutput) Datadogs() SloObjectiveCountMetricGoodDatadogArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodDatadog { return v.Datadogs }).(SloObjectiveCountMetricGoodDatadogArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
 func (o SloObjectiveCountMetricGoodOutput) Dynatraces() SloObjectiveCountMetricGoodDynatraceArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodDynatrace { return v.Dynatraces }).(SloObjectiveCountMetricGoodDynatraceArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
 func (o SloObjectiveCountMetricGoodOutput) Elasticsearches() SloObjectiveCountMetricGoodElasticsearchArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodElasticsearch {
 		return v.Elasticsearches
 	}).(SloObjectiveCountMetricGoodElasticsearchArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
 func (o SloObjectiveCountMetricGoodOutput) Gcms() SloObjectiveCountMetricGoodGcmArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodGcm { return v.Gcms }).(SloObjectiveCountMetricGoodGcmArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
 func (o SloObjectiveCountMetricGoodOutput) GrafanaLokis() SloObjectiveCountMetricGoodGrafanaLokiArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodGrafanaLoki { return v.GrafanaLokis }).(SloObjectiveCountMetricGoodGrafanaLokiArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
 func (o SloObjectiveCountMetricGoodOutput) Graphites() SloObjectiveCountMetricGoodGraphiteArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodGraphite { return v.Graphites }).(SloObjectiveCountMetricGoodGraphiteArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+func (o SloObjectiveCountMetricGoodOutput) Honeycombs() SloObjectiveCountMetricGoodHoneycombArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodHoneycomb { return v.Honeycombs }).(SloObjectiveCountMetricGoodHoneycombArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
 func (o SloObjectiveCountMetricGoodOutput) Influxdbs() SloObjectiveCountMetricGoodInfluxdbArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodInfluxdb { return v.Influxdbs }).(SloObjectiveCountMetricGoodInfluxdbArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
 func (o SloObjectiveCountMetricGoodOutput) Instanas() SloObjectiveCountMetricGoodInstanaArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodInstana { return v.Instanas }).(SloObjectiveCountMetricGoodInstanaArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
 func (o SloObjectiveCountMetricGoodOutput) Lightsteps() SloObjectiveCountMetricGoodLightstepArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodLightstep { return v.Lightsteps }).(SloObjectiveCountMetricGoodLightstepArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
 func (o SloObjectiveCountMetricGoodOutput) Newrelics() SloObjectiveCountMetricGoodNewrelicArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodNewrelic { return v.Newrelics }).(SloObjectiveCountMetricGoodNewrelicArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
 func (o SloObjectiveCountMetricGoodOutput) Opentsdbs() SloObjectiveCountMetricGoodOpentsdbArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodOpentsdb { return v.Opentsdbs }).(SloObjectiveCountMetricGoodOpentsdbArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
 func (o SloObjectiveCountMetricGoodOutput) Pingdoms() SloObjectiveCountMetricGoodPingdomArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodPingdom { return v.Pingdoms }).(SloObjectiveCountMetricGoodPingdomArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
 func (o SloObjectiveCountMetricGoodOutput) Prometheuses() SloObjectiveCountMetricGoodPrometheusArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodPrometheus { return v.Prometheuses }).(SloObjectiveCountMetricGoodPrometheusArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
 func (o SloObjectiveCountMetricGoodOutput) Redshifts() SloObjectiveCountMetricGoodRedshiftArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodRedshift { return v.Redshifts }).(SloObjectiveCountMetricGoodRedshiftArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
 func (o SloObjectiveCountMetricGoodOutput) SplunkObservabilities() SloObjectiveCountMetricGoodSplunkObservabilityArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodSplunkObservability {
 		return v.SplunkObservabilities
 	}).(SloObjectiveCountMetricGoodSplunkObservabilityArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
 func (o SloObjectiveCountMetricGoodOutput) Splunks() SloObjectiveCountMetricGoodSplunkArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodSplunk { return v.Splunks }).(SloObjectiveCountMetricGoodSplunkArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
 func (o SloObjectiveCountMetricGoodOutput) Sumologics() SloObjectiveCountMetricGoodSumologicArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodSumologic { return v.Sumologics }).(SloObjectiveCountMetricGoodSumologicArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
 func (o SloObjectiveCountMetricGoodOutput) Thousandeyes() SloObjectiveCountMetricGoodThousandeyeArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGood) []SloObjectiveCountMetricGoodThousandeye { return v.Thousandeyes }).(SloObjectiveCountMetricGoodThousandeyeArrayOutput)
 }
@@ -9338,13 +15778,14 @@ func (o SloObjectiveCountMetricGoodArrayOutput) Index(i pulumi.IntInput) SloObje
 }
 
 type SloObjectiveCountMetricGoodAmazonPrometheus struct {
+	// Query for the metrics
 	Promql string `pulumi:"promql"`
 }
 
 // SloObjectiveCountMetricGoodAmazonPrometheusInput is an input type that accepts SloObjectiveCountMetricGoodAmazonPrometheusArgs and SloObjectiveCountMetricGoodAmazonPrometheusOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodAmazonPrometheusInput` via:
 //
-//          SloObjectiveCountMetricGoodAmazonPrometheusArgs{...}
+//	SloObjectiveCountMetricGoodAmazonPrometheusArgs{...}
 type SloObjectiveCountMetricGoodAmazonPrometheusInput interface {
 	pulumi.Input
 
@@ -9353,6 +15794,7 @@ type SloObjectiveCountMetricGoodAmazonPrometheusInput interface {
 }
 
 type SloObjectiveCountMetricGoodAmazonPrometheusArgs struct {
+	// Query for the metrics
 	Promql pulumi.StringInput `pulumi:"promql"`
 }
 
@@ -9371,7 +15813,7 @@ func (i SloObjectiveCountMetricGoodAmazonPrometheusArgs) ToSloObjectiveCountMetr
 // SloObjectiveCountMetricGoodAmazonPrometheusArrayInput is an input type that accepts SloObjectiveCountMetricGoodAmazonPrometheusArray and SloObjectiveCountMetricGoodAmazonPrometheusArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodAmazonPrometheusArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodAmazonPrometheusArray{ SloObjectiveCountMetricGoodAmazonPrometheusArgs{...} }
+//	SloObjectiveCountMetricGoodAmazonPrometheusArray{ SloObjectiveCountMetricGoodAmazonPrometheusArgs{...} }
 type SloObjectiveCountMetricGoodAmazonPrometheusArrayInput interface {
 	pulumi.Input
 
@@ -9407,6 +15849,7 @@ func (o SloObjectiveCountMetricGoodAmazonPrometheusOutput) ToSloObjectiveCountMe
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricGoodAmazonPrometheusOutput) Promql() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodAmazonPrometheus) string { return v.Promql }).(pulumi.StringOutput)
 }
@@ -9432,14 +15875,16 @@ func (o SloObjectiveCountMetricGoodAmazonPrometheusArrayOutput) Index(i pulumi.I
 }
 
 type SloObjectiveCountMetricGoodAppdynamic struct {
+	// Name of the added application
 	ApplicationName string `pulumi:"applicationName"`
-	MetricPath      string `pulumi:"metricPath"`
+	// Path to the metrics
+	MetricPath string `pulumi:"metricPath"`
 }
 
 // SloObjectiveCountMetricGoodAppdynamicInput is an input type that accepts SloObjectiveCountMetricGoodAppdynamicArgs and SloObjectiveCountMetricGoodAppdynamicOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodAppdynamicInput` via:
 //
-//          SloObjectiveCountMetricGoodAppdynamicArgs{...}
+//	SloObjectiveCountMetricGoodAppdynamicArgs{...}
 type SloObjectiveCountMetricGoodAppdynamicInput interface {
 	pulumi.Input
 
@@ -9448,8 +15893,10 @@ type SloObjectiveCountMetricGoodAppdynamicInput interface {
 }
 
 type SloObjectiveCountMetricGoodAppdynamicArgs struct {
+	// Name of the added application
 	ApplicationName pulumi.StringInput `pulumi:"applicationName"`
-	MetricPath      pulumi.StringInput `pulumi:"metricPath"`
+	// Path to the metrics
+	MetricPath pulumi.StringInput `pulumi:"metricPath"`
 }
 
 func (SloObjectiveCountMetricGoodAppdynamicArgs) ElementType() reflect.Type {
@@ -9467,7 +15914,7 @@ func (i SloObjectiveCountMetricGoodAppdynamicArgs) ToSloObjectiveCountMetricGood
 // SloObjectiveCountMetricGoodAppdynamicArrayInput is an input type that accepts SloObjectiveCountMetricGoodAppdynamicArray and SloObjectiveCountMetricGoodAppdynamicArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodAppdynamicArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodAppdynamicArray{ SloObjectiveCountMetricGoodAppdynamicArgs{...} }
+//	SloObjectiveCountMetricGoodAppdynamicArray{ SloObjectiveCountMetricGoodAppdynamicArgs{...} }
 type SloObjectiveCountMetricGoodAppdynamicArrayInput interface {
 	pulumi.Input
 
@@ -9503,10 +15950,12 @@ func (o SloObjectiveCountMetricGoodAppdynamicOutput) ToSloObjectiveCountMetricGo
 	return o
 }
 
+// Name of the added application
 func (o SloObjectiveCountMetricGoodAppdynamicOutput) ApplicationName() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodAppdynamic) string { return v.ApplicationName }).(pulumi.StringOutput)
 }
 
+// Path to the metrics
 func (o SloObjectiveCountMetricGoodAppdynamicOutput) MetricPath() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodAppdynamic) string { return v.MetricPath }).(pulumi.StringOutput)
 }
@@ -9531,16 +15980,404 @@ func (o SloObjectiveCountMetricGoodAppdynamicArrayOutput) Index(i pulumi.IntInpu
 	}).(SloObjectiveCountMetricGoodAppdynamicOutput)
 }
 
+type SloObjectiveCountMetricGoodAzureMonitor struct {
+	// Aggregation type [Required for metrics]
+	Aggregation *string `pulumi:"aggregation"`
+	// Specifies source: 'metrics' or 'logs'
+	DataType string `pulumi:"dataType"`
+	// Dimensions of the metric [Optional for metrics]
+	Dimensions []SloObjectiveCountMetricGoodAzureMonitorDimension `pulumi:"dimensions"`
+	// Logs query in Kusto Query Language [Required for logs]
+	KqlQuery *string `pulumi:"kqlQuery"`
+	// Name of the metric [Required for metrics]
+	MetricName *string `pulumi:"metricName"`
+	// Namespace of the metric [Optional for metrics]
+	MetricNamespace *string `pulumi:"metricNamespace"`
+	// Identifier of the Azure Cloud resource [Required for metrics]
+	ResourceId *string `pulumi:"resourceId"`
+	// Log analytics workspace [Required for logs]
+	Workspaces []SloObjectiveCountMetricGoodAzureMonitorWorkspace `pulumi:"workspaces"`
+}
+
+// SloObjectiveCountMetricGoodAzureMonitorInput is an input type that accepts SloObjectiveCountMetricGoodAzureMonitorArgs and SloObjectiveCountMetricGoodAzureMonitorOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricGoodAzureMonitorInput` via:
+//
+//	SloObjectiveCountMetricGoodAzureMonitorArgs{...}
+type SloObjectiveCountMetricGoodAzureMonitorInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricGoodAzureMonitorOutput() SloObjectiveCountMetricGoodAzureMonitorOutput
+	ToSloObjectiveCountMetricGoodAzureMonitorOutputWithContext(context.Context) SloObjectiveCountMetricGoodAzureMonitorOutput
+}
+
+type SloObjectiveCountMetricGoodAzureMonitorArgs struct {
+	// Aggregation type [Required for metrics]
+	Aggregation pulumi.StringPtrInput `pulumi:"aggregation"`
+	// Specifies source: 'metrics' or 'logs'
+	DataType pulumi.StringInput `pulumi:"dataType"`
+	// Dimensions of the metric [Optional for metrics]
+	Dimensions SloObjectiveCountMetricGoodAzureMonitorDimensionArrayInput `pulumi:"dimensions"`
+	// Logs query in Kusto Query Language [Required for logs]
+	KqlQuery pulumi.StringPtrInput `pulumi:"kqlQuery"`
+	// Name of the metric [Required for metrics]
+	MetricName pulumi.StringPtrInput `pulumi:"metricName"`
+	// Namespace of the metric [Optional for metrics]
+	MetricNamespace pulumi.StringPtrInput `pulumi:"metricNamespace"`
+	// Identifier of the Azure Cloud resource [Required for metrics]
+	ResourceId pulumi.StringPtrInput `pulumi:"resourceId"`
+	// Log analytics workspace [Required for logs]
+	Workspaces SloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayInput `pulumi:"workspaces"`
+}
+
+func (SloObjectiveCountMetricGoodAzureMonitorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricGoodAzureMonitor)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricGoodAzureMonitorArgs) ToSloObjectiveCountMetricGoodAzureMonitorOutput() SloObjectiveCountMetricGoodAzureMonitorOutput {
+	return i.ToSloObjectiveCountMetricGoodAzureMonitorOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricGoodAzureMonitorArgs) ToSloObjectiveCountMetricGoodAzureMonitorOutputWithContext(ctx context.Context) SloObjectiveCountMetricGoodAzureMonitorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricGoodAzureMonitorOutput)
+}
+
+// SloObjectiveCountMetricGoodAzureMonitorArrayInput is an input type that accepts SloObjectiveCountMetricGoodAzureMonitorArray and SloObjectiveCountMetricGoodAzureMonitorArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricGoodAzureMonitorArrayInput` via:
+//
+//	SloObjectiveCountMetricGoodAzureMonitorArray{ SloObjectiveCountMetricGoodAzureMonitorArgs{...} }
+type SloObjectiveCountMetricGoodAzureMonitorArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricGoodAzureMonitorArrayOutput() SloObjectiveCountMetricGoodAzureMonitorArrayOutput
+	ToSloObjectiveCountMetricGoodAzureMonitorArrayOutputWithContext(context.Context) SloObjectiveCountMetricGoodAzureMonitorArrayOutput
+}
+
+type SloObjectiveCountMetricGoodAzureMonitorArray []SloObjectiveCountMetricGoodAzureMonitorInput
+
+func (SloObjectiveCountMetricGoodAzureMonitorArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricGoodAzureMonitor)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricGoodAzureMonitorArray) ToSloObjectiveCountMetricGoodAzureMonitorArrayOutput() SloObjectiveCountMetricGoodAzureMonitorArrayOutput {
+	return i.ToSloObjectiveCountMetricGoodAzureMonitorArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricGoodAzureMonitorArray) ToSloObjectiveCountMetricGoodAzureMonitorArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricGoodAzureMonitorArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricGoodAzureMonitorArrayOutput)
+}
+
+type SloObjectiveCountMetricGoodAzureMonitorOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricGoodAzureMonitorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricGoodAzureMonitor)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricGoodAzureMonitorOutput) ToSloObjectiveCountMetricGoodAzureMonitorOutput() SloObjectiveCountMetricGoodAzureMonitorOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricGoodAzureMonitorOutput) ToSloObjectiveCountMetricGoodAzureMonitorOutputWithContext(ctx context.Context) SloObjectiveCountMetricGoodAzureMonitorOutput {
+	return o
+}
+
+// Aggregation type [Required for metrics]
+func (o SloObjectiveCountMetricGoodAzureMonitorOutput) Aggregation() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricGoodAzureMonitor) *string { return v.Aggregation }).(pulumi.StringPtrOutput)
+}
+
+// Specifies source: 'metrics' or 'logs'
+func (o SloObjectiveCountMetricGoodAzureMonitorOutput) DataType() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricGoodAzureMonitor) string { return v.DataType }).(pulumi.StringOutput)
+}
+
+// Dimensions of the metric [Optional for metrics]
+func (o SloObjectiveCountMetricGoodAzureMonitorOutput) Dimensions() SloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricGoodAzureMonitor) []SloObjectiveCountMetricGoodAzureMonitorDimension {
+		return v.Dimensions
+	}).(SloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutput)
+}
+
+// Logs query in Kusto Query Language [Required for logs]
+func (o SloObjectiveCountMetricGoodAzureMonitorOutput) KqlQuery() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricGoodAzureMonitor) *string { return v.KqlQuery }).(pulumi.StringPtrOutput)
+}
+
+// Name of the metric [Required for metrics]
+func (o SloObjectiveCountMetricGoodAzureMonitorOutput) MetricName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricGoodAzureMonitor) *string { return v.MetricName }).(pulumi.StringPtrOutput)
+}
+
+// Namespace of the metric [Optional for metrics]
+func (o SloObjectiveCountMetricGoodAzureMonitorOutput) MetricNamespace() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricGoodAzureMonitor) *string { return v.MetricNamespace }).(pulumi.StringPtrOutput)
+}
+
+// Identifier of the Azure Cloud resource [Required for metrics]
+func (o SloObjectiveCountMetricGoodAzureMonitorOutput) ResourceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricGoodAzureMonitor) *string { return v.ResourceId }).(pulumi.StringPtrOutput)
+}
+
+// Log analytics workspace [Required for logs]
+func (o SloObjectiveCountMetricGoodAzureMonitorOutput) Workspaces() SloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricGoodAzureMonitor) []SloObjectiveCountMetricGoodAzureMonitorWorkspace {
+		return v.Workspaces
+	}).(SloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutput)
+}
+
+type SloObjectiveCountMetricGoodAzureMonitorArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricGoodAzureMonitorArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricGoodAzureMonitor)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricGoodAzureMonitorArrayOutput) ToSloObjectiveCountMetricGoodAzureMonitorArrayOutput() SloObjectiveCountMetricGoodAzureMonitorArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricGoodAzureMonitorArrayOutput) ToSloObjectiveCountMetricGoodAzureMonitorArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricGoodAzureMonitorArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricGoodAzureMonitorArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricGoodAzureMonitorOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricGoodAzureMonitor {
+		return vs[0].([]SloObjectiveCountMetricGoodAzureMonitor)[vs[1].(int)]
+	}).(SloObjectiveCountMetricGoodAzureMonitorOutput)
+}
+
+type SloObjectiveCountMetricGoodAzureMonitorDimension struct {
+	// The name of the previously defined alert method.
+	Name string `pulumi:"name"`
+	// Burn rate value.
+	Value string `pulumi:"value"`
+}
+
+// SloObjectiveCountMetricGoodAzureMonitorDimensionInput is an input type that accepts SloObjectiveCountMetricGoodAzureMonitorDimensionArgs and SloObjectiveCountMetricGoodAzureMonitorDimensionOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricGoodAzureMonitorDimensionInput` via:
+//
+//	SloObjectiveCountMetricGoodAzureMonitorDimensionArgs{...}
+type SloObjectiveCountMetricGoodAzureMonitorDimensionInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricGoodAzureMonitorDimensionOutput() SloObjectiveCountMetricGoodAzureMonitorDimensionOutput
+	ToSloObjectiveCountMetricGoodAzureMonitorDimensionOutputWithContext(context.Context) SloObjectiveCountMetricGoodAzureMonitorDimensionOutput
+}
+
+type SloObjectiveCountMetricGoodAzureMonitorDimensionArgs struct {
+	// The name of the previously defined alert method.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Burn rate value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (SloObjectiveCountMetricGoodAzureMonitorDimensionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricGoodAzureMonitorDimension)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricGoodAzureMonitorDimensionArgs) ToSloObjectiveCountMetricGoodAzureMonitorDimensionOutput() SloObjectiveCountMetricGoodAzureMonitorDimensionOutput {
+	return i.ToSloObjectiveCountMetricGoodAzureMonitorDimensionOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricGoodAzureMonitorDimensionArgs) ToSloObjectiveCountMetricGoodAzureMonitorDimensionOutputWithContext(ctx context.Context) SloObjectiveCountMetricGoodAzureMonitorDimensionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricGoodAzureMonitorDimensionOutput)
+}
+
+// SloObjectiveCountMetricGoodAzureMonitorDimensionArrayInput is an input type that accepts SloObjectiveCountMetricGoodAzureMonitorDimensionArray and SloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricGoodAzureMonitorDimensionArrayInput` via:
+//
+//	SloObjectiveCountMetricGoodAzureMonitorDimensionArray{ SloObjectiveCountMetricGoodAzureMonitorDimensionArgs{...} }
+type SloObjectiveCountMetricGoodAzureMonitorDimensionArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutput() SloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutput
+	ToSloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutputWithContext(context.Context) SloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutput
+}
+
+type SloObjectiveCountMetricGoodAzureMonitorDimensionArray []SloObjectiveCountMetricGoodAzureMonitorDimensionInput
+
+func (SloObjectiveCountMetricGoodAzureMonitorDimensionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricGoodAzureMonitorDimension)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricGoodAzureMonitorDimensionArray) ToSloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutput() SloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutput {
+	return i.ToSloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricGoodAzureMonitorDimensionArray) ToSloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutput)
+}
+
+type SloObjectiveCountMetricGoodAzureMonitorDimensionOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricGoodAzureMonitorDimensionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricGoodAzureMonitorDimension)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricGoodAzureMonitorDimensionOutput) ToSloObjectiveCountMetricGoodAzureMonitorDimensionOutput() SloObjectiveCountMetricGoodAzureMonitorDimensionOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricGoodAzureMonitorDimensionOutput) ToSloObjectiveCountMetricGoodAzureMonitorDimensionOutputWithContext(ctx context.Context) SloObjectiveCountMetricGoodAzureMonitorDimensionOutput {
+	return o
+}
+
+// The name of the previously defined alert method.
+func (o SloObjectiveCountMetricGoodAzureMonitorDimensionOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricGoodAzureMonitorDimension) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Burn rate value.
+func (o SloObjectiveCountMetricGoodAzureMonitorDimensionOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricGoodAzureMonitorDimension) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricGoodAzureMonitorDimension)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutput) ToSloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutput() SloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutput) ToSloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricGoodAzureMonitorDimensionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricGoodAzureMonitorDimension {
+		return vs[0].([]SloObjectiveCountMetricGoodAzureMonitorDimension)[vs[1].(int)]
+	}).(SloObjectiveCountMetricGoodAzureMonitorDimensionOutput)
+}
+
+type SloObjectiveCountMetricGoodAzureMonitorWorkspace struct {
+	// Resource group of the workspace
+	ResourceGroup string `pulumi:"resourceGroup"`
+	// Subscription ID of the workspace
+	SubscriptionId string `pulumi:"subscriptionId"`
+	// ID of the workspace
+	WorkspaceId string `pulumi:"workspaceId"`
+}
+
+// SloObjectiveCountMetricGoodAzureMonitorWorkspaceInput is an input type that accepts SloObjectiveCountMetricGoodAzureMonitorWorkspaceArgs and SloObjectiveCountMetricGoodAzureMonitorWorkspaceOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricGoodAzureMonitorWorkspaceInput` via:
+//
+//	SloObjectiveCountMetricGoodAzureMonitorWorkspaceArgs{...}
+type SloObjectiveCountMetricGoodAzureMonitorWorkspaceInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricGoodAzureMonitorWorkspaceOutput() SloObjectiveCountMetricGoodAzureMonitorWorkspaceOutput
+	ToSloObjectiveCountMetricGoodAzureMonitorWorkspaceOutputWithContext(context.Context) SloObjectiveCountMetricGoodAzureMonitorWorkspaceOutput
+}
+
+type SloObjectiveCountMetricGoodAzureMonitorWorkspaceArgs struct {
+	// Resource group of the workspace
+	ResourceGroup pulumi.StringInput `pulumi:"resourceGroup"`
+	// Subscription ID of the workspace
+	SubscriptionId pulumi.StringInput `pulumi:"subscriptionId"`
+	// ID of the workspace
+	WorkspaceId pulumi.StringInput `pulumi:"workspaceId"`
+}
+
+func (SloObjectiveCountMetricGoodAzureMonitorWorkspaceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricGoodAzureMonitorWorkspace)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricGoodAzureMonitorWorkspaceArgs) ToSloObjectiveCountMetricGoodAzureMonitorWorkspaceOutput() SloObjectiveCountMetricGoodAzureMonitorWorkspaceOutput {
+	return i.ToSloObjectiveCountMetricGoodAzureMonitorWorkspaceOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricGoodAzureMonitorWorkspaceArgs) ToSloObjectiveCountMetricGoodAzureMonitorWorkspaceOutputWithContext(ctx context.Context) SloObjectiveCountMetricGoodAzureMonitorWorkspaceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricGoodAzureMonitorWorkspaceOutput)
+}
+
+// SloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayInput is an input type that accepts SloObjectiveCountMetricGoodAzureMonitorWorkspaceArray and SloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayInput` via:
+//
+//	SloObjectiveCountMetricGoodAzureMonitorWorkspaceArray{ SloObjectiveCountMetricGoodAzureMonitorWorkspaceArgs{...} }
+type SloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutput() SloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutput
+	ToSloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutputWithContext(context.Context) SloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutput
+}
+
+type SloObjectiveCountMetricGoodAzureMonitorWorkspaceArray []SloObjectiveCountMetricGoodAzureMonitorWorkspaceInput
+
+func (SloObjectiveCountMetricGoodAzureMonitorWorkspaceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricGoodAzureMonitorWorkspace)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricGoodAzureMonitorWorkspaceArray) ToSloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutput() SloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutput {
+	return i.ToSloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricGoodAzureMonitorWorkspaceArray) ToSloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutput)
+}
+
+type SloObjectiveCountMetricGoodAzureMonitorWorkspaceOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricGoodAzureMonitorWorkspaceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricGoodAzureMonitorWorkspace)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricGoodAzureMonitorWorkspaceOutput) ToSloObjectiveCountMetricGoodAzureMonitorWorkspaceOutput() SloObjectiveCountMetricGoodAzureMonitorWorkspaceOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricGoodAzureMonitorWorkspaceOutput) ToSloObjectiveCountMetricGoodAzureMonitorWorkspaceOutputWithContext(ctx context.Context) SloObjectiveCountMetricGoodAzureMonitorWorkspaceOutput {
+	return o
+}
+
+// Resource group of the workspace
+func (o SloObjectiveCountMetricGoodAzureMonitorWorkspaceOutput) ResourceGroup() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricGoodAzureMonitorWorkspace) string { return v.ResourceGroup }).(pulumi.StringOutput)
+}
+
+// Subscription ID of the workspace
+func (o SloObjectiveCountMetricGoodAzureMonitorWorkspaceOutput) SubscriptionId() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricGoodAzureMonitorWorkspace) string { return v.SubscriptionId }).(pulumi.StringOutput)
+}
+
+// ID of the workspace
+func (o SloObjectiveCountMetricGoodAzureMonitorWorkspaceOutput) WorkspaceId() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricGoodAzureMonitorWorkspace) string { return v.WorkspaceId }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricGoodAzureMonitorWorkspace)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutput) ToSloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutput() SloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutput) ToSloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricGoodAzureMonitorWorkspaceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricGoodAzureMonitorWorkspace {
+		return vs[0].([]SloObjectiveCountMetricGoodAzureMonitorWorkspace)[vs[1].(int)]
+	}).(SloObjectiveCountMetricGoodAzureMonitorWorkspaceOutput)
+}
+
 type SloObjectiveCountMetricGoodBigquery struct {
-	Location  string `pulumi:"location"`
+	// Location of you BigQuery
+	Location string `pulumi:"location"`
+	// Project ID
 	ProjectId string `pulumi:"projectId"`
-	Query     string `pulumi:"query"`
+	// Query for the metrics
+	Query string `pulumi:"query"`
 }
 
 // SloObjectiveCountMetricGoodBigqueryInput is an input type that accepts SloObjectiveCountMetricGoodBigqueryArgs and SloObjectiveCountMetricGoodBigqueryOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodBigqueryInput` via:
 //
-//          SloObjectiveCountMetricGoodBigqueryArgs{...}
+//	SloObjectiveCountMetricGoodBigqueryArgs{...}
 type SloObjectiveCountMetricGoodBigqueryInput interface {
 	pulumi.Input
 
@@ -9549,9 +16386,12 @@ type SloObjectiveCountMetricGoodBigqueryInput interface {
 }
 
 type SloObjectiveCountMetricGoodBigqueryArgs struct {
-	Location  pulumi.StringInput `pulumi:"location"`
+	// Location of you BigQuery
+	Location pulumi.StringInput `pulumi:"location"`
+	// Project ID
 	ProjectId pulumi.StringInput `pulumi:"projectId"`
-	Query     pulumi.StringInput `pulumi:"query"`
+	// Query for the metrics
+	Query pulumi.StringInput `pulumi:"query"`
 }
 
 func (SloObjectiveCountMetricGoodBigqueryArgs) ElementType() reflect.Type {
@@ -9569,7 +16409,7 @@ func (i SloObjectiveCountMetricGoodBigqueryArgs) ToSloObjectiveCountMetricGoodBi
 // SloObjectiveCountMetricGoodBigqueryArrayInput is an input type that accepts SloObjectiveCountMetricGoodBigqueryArray and SloObjectiveCountMetricGoodBigqueryArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodBigqueryArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodBigqueryArray{ SloObjectiveCountMetricGoodBigqueryArgs{...} }
+//	SloObjectiveCountMetricGoodBigqueryArray{ SloObjectiveCountMetricGoodBigqueryArgs{...} }
 type SloObjectiveCountMetricGoodBigqueryArrayInput interface {
 	pulumi.Input
 
@@ -9605,14 +16445,17 @@ func (o SloObjectiveCountMetricGoodBigqueryOutput) ToSloObjectiveCountMetricGood
 	return o
 }
 
+// Location of you BigQuery
 func (o SloObjectiveCountMetricGoodBigqueryOutput) Location() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodBigquery) string { return v.Location }).(pulumi.StringOutput)
 }
 
+// Project ID
 func (o SloObjectiveCountMetricGoodBigqueryOutput) ProjectId() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodBigquery) string { return v.ProjectId }).(pulumi.StringOutput)
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricGoodBigqueryOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodBigquery) string { return v.Query }).(pulumi.StringOutput)
 }
@@ -9638,19 +16481,28 @@ func (o SloObjectiveCountMetricGoodBigqueryArrayOutput) Index(i pulumi.IntInput)
 }
 
 type SloObjectiveCountMetricGoodCloudwatch struct {
+	// AccountID used with cross-account observability feature
+	AccountId *string `pulumi:"accountId"`
+	// Dimensions of the metric [Optional for metrics]
 	Dimensions []SloObjectiveCountMetricGoodCloudwatchDimension `pulumi:"dimensions"`
-	Json       *string                                          `pulumi:"json"`
-	MetricName *string                                          `pulumi:"metricName"`
-	Namespace  *string                                          `pulumi:"namespace"`
-	Region     string                                           `pulumi:"region"`
-	Sql        *string                                          `pulumi:"sql"`
-	Stat       *string                                          `pulumi:"stat"`
+	// JSON query
+	Json *string `pulumi:"json"`
+	// Name of the metric [Required for metrics]
+	MetricName *string `pulumi:"metricName"`
+	// Namespace of the metric
+	Namespace *string `pulumi:"namespace"`
+	// Region of the CloudWatch instance
+	Region string `pulumi:"region"`
+	// SQL query
+	Sql *string `pulumi:"sql"`
+	// Metric data aggregations
+	Stat *string `pulumi:"stat"`
 }
 
 // SloObjectiveCountMetricGoodCloudwatchInput is an input type that accepts SloObjectiveCountMetricGoodCloudwatchArgs and SloObjectiveCountMetricGoodCloudwatchOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodCloudwatchInput` via:
 //
-//          SloObjectiveCountMetricGoodCloudwatchArgs{...}
+//	SloObjectiveCountMetricGoodCloudwatchArgs{...}
 type SloObjectiveCountMetricGoodCloudwatchInput interface {
 	pulumi.Input
 
@@ -9659,13 +16511,22 @@ type SloObjectiveCountMetricGoodCloudwatchInput interface {
 }
 
 type SloObjectiveCountMetricGoodCloudwatchArgs struct {
+	// AccountID used with cross-account observability feature
+	AccountId pulumi.StringPtrInput `pulumi:"accountId"`
+	// Dimensions of the metric [Optional for metrics]
 	Dimensions SloObjectiveCountMetricGoodCloudwatchDimensionArrayInput `pulumi:"dimensions"`
-	Json       pulumi.StringPtrInput                                    `pulumi:"json"`
-	MetricName pulumi.StringPtrInput                                    `pulumi:"metricName"`
-	Namespace  pulumi.StringPtrInput                                    `pulumi:"namespace"`
-	Region     pulumi.StringInput                                       `pulumi:"region"`
-	Sql        pulumi.StringPtrInput                                    `pulumi:"sql"`
-	Stat       pulumi.StringPtrInput                                    `pulumi:"stat"`
+	// JSON query
+	Json pulumi.StringPtrInput `pulumi:"json"`
+	// Name of the metric [Required for metrics]
+	MetricName pulumi.StringPtrInput `pulumi:"metricName"`
+	// Namespace of the metric
+	Namespace pulumi.StringPtrInput `pulumi:"namespace"`
+	// Region of the CloudWatch instance
+	Region pulumi.StringInput `pulumi:"region"`
+	// SQL query
+	Sql pulumi.StringPtrInput `pulumi:"sql"`
+	// Metric data aggregations
+	Stat pulumi.StringPtrInput `pulumi:"stat"`
 }
 
 func (SloObjectiveCountMetricGoodCloudwatchArgs) ElementType() reflect.Type {
@@ -9683,7 +16544,7 @@ func (i SloObjectiveCountMetricGoodCloudwatchArgs) ToSloObjectiveCountMetricGood
 // SloObjectiveCountMetricGoodCloudwatchArrayInput is an input type that accepts SloObjectiveCountMetricGoodCloudwatchArray and SloObjectiveCountMetricGoodCloudwatchArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodCloudwatchArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodCloudwatchArray{ SloObjectiveCountMetricGoodCloudwatchArgs{...} }
+//	SloObjectiveCountMetricGoodCloudwatchArray{ SloObjectiveCountMetricGoodCloudwatchArgs{...} }
 type SloObjectiveCountMetricGoodCloudwatchArrayInput interface {
 	pulumi.Input
 
@@ -9719,32 +16580,44 @@ func (o SloObjectiveCountMetricGoodCloudwatchOutput) ToSloObjectiveCountMetricGo
 	return o
 }
 
+// AccountID used with cross-account observability feature
+func (o SloObjectiveCountMetricGoodCloudwatchOutput) AccountId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricGoodCloudwatch) *string { return v.AccountId }).(pulumi.StringPtrOutput)
+}
+
+// Dimensions of the metric [Optional for metrics]
 func (o SloObjectiveCountMetricGoodCloudwatchOutput) Dimensions() SloObjectiveCountMetricGoodCloudwatchDimensionArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodCloudwatch) []SloObjectiveCountMetricGoodCloudwatchDimension {
 		return v.Dimensions
 	}).(SloObjectiveCountMetricGoodCloudwatchDimensionArrayOutput)
 }
 
+// JSON query
 func (o SloObjectiveCountMetricGoodCloudwatchOutput) Json() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodCloudwatch) *string { return v.Json }).(pulumi.StringPtrOutput)
 }
 
+// Name of the metric [Required for metrics]
 func (o SloObjectiveCountMetricGoodCloudwatchOutput) MetricName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodCloudwatch) *string { return v.MetricName }).(pulumi.StringPtrOutput)
 }
 
+// Namespace of the metric
 func (o SloObjectiveCountMetricGoodCloudwatchOutput) Namespace() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodCloudwatch) *string { return v.Namespace }).(pulumi.StringPtrOutput)
 }
 
+// Region of the CloudWatch instance
 func (o SloObjectiveCountMetricGoodCloudwatchOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodCloudwatch) string { return v.Region }).(pulumi.StringOutput)
 }
 
+// SQL query
 func (o SloObjectiveCountMetricGoodCloudwatchOutput) Sql() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodCloudwatch) *string { return v.Sql }).(pulumi.StringPtrOutput)
 }
 
+// Metric data aggregations
 func (o SloObjectiveCountMetricGoodCloudwatchOutput) Stat() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodCloudwatch) *string { return v.Stat }).(pulumi.StringPtrOutput)
 }
@@ -9770,15 +16643,16 @@ func (o SloObjectiveCountMetricGoodCloudwatchArrayOutput) Index(i pulumi.IntInpu
 }
 
 type SloObjectiveCountMetricGoodCloudwatchDimension struct {
-	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
-	Name  string `pulumi:"name"`
+	// The name of the previously defined alert method.
+	Name string `pulumi:"name"`
+	// Burn rate value.
 	Value string `pulumi:"value"`
 }
 
 // SloObjectiveCountMetricGoodCloudwatchDimensionInput is an input type that accepts SloObjectiveCountMetricGoodCloudwatchDimensionArgs and SloObjectiveCountMetricGoodCloudwatchDimensionOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodCloudwatchDimensionInput` via:
 //
-//          SloObjectiveCountMetricGoodCloudwatchDimensionArgs{...}
+//	SloObjectiveCountMetricGoodCloudwatchDimensionArgs{...}
 type SloObjectiveCountMetricGoodCloudwatchDimensionInput interface {
 	pulumi.Input
 
@@ -9787,8 +16661,9 @@ type SloObjectiveCountMetricGoodCloudwatchDimensionInput interface {
 }
 
 type SloObjectiveCountMetricGoodCloudwatchDimensionArgs struct {
-	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
-	Name  pulumi.StringInput `pulumi:"name"`
+	// The name of the previously defined alert method.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Burn rate value.
 	Value pulumi.StringInput `pulumi:"value"`
 }
 
@@ -9807,7 +16682,7 @@ func (i SloObjectiveCountMetricGoodCloudwatchDimensionArgs) ToSloObjectiveCountM
 // SloObjectiveCountMetricGoodCloudwatchDimensionArrayInput is an input type that accepts SloObjectiveCountMetricGoodCloudwatchDimensionArray and SloObjectiveCountMetricGoodCloudwatchDimensionArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodCloudwatchDimensionArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodCloudwatchDimensionArray{ SloObjectiveCountMetricGoodCloudwatchDimensionArgs{...} }
+//	SloObjectiveCountMetricGoodCloudwatchDimensionArray{ SloObjectiveCountMetricGoodCloudwatchDimensionArgs{...} }
 type SloObjectiveCountMetricGoodCloudwatchDimensionArrayInput interface {
 	pulumi.Input
 
@@ -9843,11 +16718,12 @@ func (o SloObjectiveCountMetricGoodCloudwatchDimensionOutput) ToSloObjectiveCoun
 	return o
 }
 
-// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+// The name of the previously defined alert method.
 func (o SloObjectiveCountMetricGoodCloudwatchDimensionOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodCloudwatchDimension) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Burn rate value.
 func (o SloObjectiveCountMetricGoodCloudwatchDimensionOutput) Value() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodCloudwatchDimension) string { return v.Value }).(pulumi.StringOutput)
 }
@@ -9873,13 +16749,14 @@ func (o SloObjectiveCountMetricGoodCloudwatchDimensionArrayOutput) Index(i pulum
 }
 
 type SloObjectiveCountMetricGoodDatadog struct {
+	// Query for the metrics
 	Query string `pulumi:"query"`
 }
 
 // SloObjectiveCountMetricGoodDatadogInput is an input type that accepts SloObjectiveCountMetricGoodDatadogArgs and SloObjectiveCountMetricGoodDatadogOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodDatadogInput` via:
 //
-//          SloObjectiveCountMetricGoodDatadogArgs{...}
+//	SloObjectiveCountMetricGoodDatadogArgs{...}
 type SloObjectiveCountMetricGoodDatadogInput interface {
 	pulumi.Input
 
@@ -9888,6 +16765,7 @@ type SloObjectiveCountMetricGoodDatadogInput interface {
 }
 
 type SloObjectiveCountMetricGoodDatadogArgs struct {
+	// Query for the metrics
 	Query pulumi.StringInput `pulumi:"query"`
 }
 
@@ -9906,7 +16784,7 @@ func (i SloObjectiveCountMetricGoodDatadogArgs) ToSloObjectiveCountMetricGoodDat
 // SloObjectiveCountMetricGoodDatadogArrayInput is an input type that accepts SloObjectiveCountMetricGoodDatadogArray and SloObjectiveCountMetricGoodDatadogArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodDatadogArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodDatadogArray{ SloObjectiveCountMetricGoodDatadogArgs{...} }
+//	SloObjectiveCountMetricGoodDatadogArray{ SloObjectiveCountMetricGoodDatadogArgs{...} }
 type SloObjectiveCountMetricGoodDatadogArrayInput interface {
 	pulumi.Input
 
@@ -9942,6 +16820,7 @@ func (o SloObjectiveCountMetricGoodDatadogOutput) ToSloObjectiveCountMetricGoodD
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricGoodDatadogOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodDatadog) string { return v.Query }).(pulumi.StringOutput)
 }
@@ -9967,13 +16846,14 @@ func (o SloObjectiveCountMetricGoodDatadogArrayOutput) Index(i pulumi.IntInput) 
 }
 
 type SloObjectiveCountMetricGoodDynatrace struct {
+	// Selector for the metrics
 	MetricSelector string `pulumi:"metricSelector"`
 }
 
 // SloObjectiveCountMetricGoodDynatraceInput is an input type that accepts SloObjectiveCountMetricGoodDynatraceArgs and SloObjectiveCountMetricGoodDynatraceOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodDynatraceInput` via:
 //
-//          SloObjectiveCountMetricGoodDynatraceArgs{...}
+//	SloObjectiveCountMetricGoodDynatraceArgs{...}
 type SloObjectiveCountMetricGoodDynatraceInput interface {
 	pulumi.Input
 
@@ -9982,6 +16862,7 @@ type SloObjectiveCountMetricGoodDynatraceInput interface {
 }
 
 type SloObjectiveCountMetricGoodDynatraceArgs struct {
+	// Selector for the metrics
 	MetricSelector pulumi.StringInput `pulumi:"metricSelector"`
 }
 
@@ -10000,7 +16881,7 @@ func (i SloObjectiveCountMetricGoodDynatraceArgs) ToSloObjectiveCountMetricGoodD
 // SloObjectiveCountMetricGoodDynatraceArrayInput is an input type that accepts SloObjectiveCountMetricGoodDynatraceArray and SloObjectiveCountMetricGoodDynatraceArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodDynatraceArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodDynatraceArray{ SloObjectiveCountMetricGoodDynatraceArgs{...} }
+//	SloObjectiveCountMetricGoodDynatraceArray{ SloObjectiveCountMetricGoodDynatraceArgs{...} }
 type SloObjectiveCountMetricGoodDynatraceArrayInput interface {
 	pulumi.Input
 
@@ -10036,6 +16917,7 @@ func (o SloObjectiveCountMetricGoodDynatraceOutput) ToSloObjectiveCountMetricGoo
 	return o
 }
 
+// Selector for the metrics
 func (o SloObjectiveCountMetricGoodDynatraceOutput) MetricSelector() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodDynatrace) string { return v.MetricSelector }).(pulumi.StringOutput)
 }
@@ -10061,14 +16943,16 @@ func (o SloObjectiveCountMetricGoodDynatraceArrayOutput) Index(i pulumi.IntInput
 }
 
 type SloObjectiveCountMetricGoodElasticsearch struct {
+	// Index of metrics we want to query
 	Index string `pulumi:"index"`
+	// Query for the metrics
 	Query string `pulumi:"query"`
 }
 
 // SloObjectiveCountMetricGoodElasticsearchInput is an input type that accepts SloObjectiveCountMetricGoodElasticsearchArgs and SloObjectiveCountMetricGoodElasticsearchOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodElasticsearchInput` via:
 //
-//          SloObjectiveCountMetricGoodElasticsearchArgs{...}
+//	SloObjectiveCountMetricGoodElasticsearchArgs{...}
 type SloObjectiveCountMetricGoodElasticsearchInput interface {
 	pulumi.Input
 
@@ -10077,7 +16961,9 @@ type SloObjectiveCountMetricGoodElasticsearchInput interface {
 }
 
 type SloObjectiveCountMetricGoodElasticsearchArgs struct {
+	// Index of metrics we want to query
 	Index pulumi.StringInput `pulumi:"index"`
+	// Query for the metrics
 	Query pulumi.StringInput `pulumi:"query"`
 }
 
@@ -10096,7 +16982,7 @@ func (i SloObjectiveCountMetricGoodElasticsearchArgs) ToSloObjectiveCountMetricG
 // SloObjectiveCountMetricGoodElasticsearchArrayInput is an input type that accepts SloObjectiveCountMetricGoodElasticsearchArray and SloObjectiveCountMetricGoodElasticsearchArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodElasticsearchArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodElasticsearchArray{ SloObjectiveCountMetricGoodElasticsearchArgs{...} }
+//	SloObjectiveCountMetricGoodElasticsearchArray{ SloObjectiveCountMetricGoodElasticsearchArgs{...} }
 type SloObjectiveCountMetricGoodElasticsearchArrayInput interface {
 	pulumi.Input
 
@@ -10132,10 +17018,12 @@ func (o SloObjectiveCountMetricGoodElasticsearchOutput) ToSloObjectiveCountMetri
 	return o
 }
 
+// Index of metrics we want to query
 func (o SloObjectiveCountMetricGoodElasticsearchOutput) Index() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodElasticsearch) string { return v.Index }).(pulumi.StringOutput)
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricGoodElasticsearchOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodElasticsearch) string { return v.Query }).(pulumi.StringOutput)
 }
@@ -10161,14 +17049,16 @@ func (o SloObjectiveCountMetricGoodElasticsearchArrayOutput) Index(i pulumi.IntI
 }
 
 type SloObjectiveCountMetricGoodGcm struct {
+	// Project ID
 	ProjectId string `pulumi:"projectId"`
-	Query     string `pulumi:"query"`
+	// Query for the metrics
+	Query string `pulumi:"query"`
 }
 
 // SloObjectiveCountMetricGoodGcmInput is an input type that accepts SloObjectiveCountMetricGoodGcmArgs and SloObjectiveCountMetricGoodGcmOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodGcmInput` via:
 //
-//          SloObjectiveCountMetricGoodGcmArgs{...}
+//	SloObjectiveCountMetricGoodGcmArgs{...}
 type SloObjectiveCountMetricGoodGcmInput interface {
 	pulumi.Input
 
@@ -10177,8 +17067,10 @@ type SloObjectiveCountMetricGoodGcmInput interface {
 }
 
 type SloObjectiveCountMetricGoodGcmArgs struct {
+	// Project ID
 	ProjectId pulumi.StringInput `pulumi:"projectId"`
-	Query     pulumi.StringInput `pulumi:"query"`
+	// Query for the metrics
+	Query pulumi.StringInput `pulumi:"query"`
 }
 
 func (SloObjectiveCountMetricGoodGcmArgs) ElementType() reflect.Type {
@@ -10196,7 +17088,7 @@ func (i SloObjectiveCountMetricGoodGcmArgs) ToSloObjectiveCountMetricGoodGcmOutp
 // SloObjectiveCountMetricGoodGcmArrayInput is an input type that accepts SloObjectiveCountMetricGoodGcmArray and SloObjectiveCountMetricGoodGcmArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodGcmArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodGcmArray{ SloObjectiveCountMetricGoodGcmArgs{...} }
+//	SloObjectiveCountMetricGoodGcmArray{ SloObjectiveCountMetricGoodGcmArgs{...} }
 type SloObjectiveCountMetricGoodGcmArrayInput interface {
 	pulumi.Input
 
@@ -10232,10 +17124,12 @@ func (o SloObjectiveCountMetricGoodGcmOutput) ToSloObjectiveCountMetricGoodGcmOu
 	return o
 }
 
+// Project ID
 func (o SloObjectiveCountMetricGoodGcmOutput) ProjectId() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodGcm) string { return v.ProjectId }).(pulumi.StringOutput)
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricGoodGcmOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodGcm) string { return v.Query }).(pulumi.StringOutput)
 }
@@ -10261,13 +17155,14 @@ func (o SloObjectiveCountMetricGoodGcmArrayOutput) Index(i pulumi.IntInput) SloO
 }
 
 type SloObjectiveCountMetricGoodGrafanaLoki struct {
+	// Query for the logs
 	Logql string `pulumi:"logql"`
 }
 
 // SloObjectiveCountMetricGoodGrafanaLokiInput is an input type that accepts SloObjectiveCountMetricGoodGrafanaLokiArgs and SloObjectiveCountMetricGoodGrafanaLokiOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodGrafanaLokiInput` via:
 //
-//          SloObjectiveCountMetricGoodGrafanaLokiArgs{...}
+//	SloObjectiveCountMetricGoodGrafanaLokiArgs{...}
 type SloObjectiveCountMetricGoodGrafanaLokiInput interface {
 	pulumi.Input
 
@@ -10276,6 +17171,7 @@ type SloObjectiveCountMetricGoodGrafanaLokiInput interface {
 }
 
 type SloObjectiveCountMetricGoodGrafanaLokiArgs struct {
+	// Query for the logs
 	Logql pulumi.StringInput `pulumi:"logql"`
 }
 
@@ -10294,7 +17190,7 @@ func (i SloObjectiveCountMetricGoodGrafanaLokiArgs) ToSloObjectiveCountMetricGoo
 // SloObjectiveCountMetricGoodGrafanaLokiArrayInput is an input type that accepts SloObjectiveCountMetricGoodGrafanaLokiArray and SloObjectiveCountMetricGoodGrafanaLokiArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodGrafanaLokiArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodGrafanaLokiArray{ SloObjectiveCountMetricGoodGrafanaLokiArgs{...} }
+//	SloObjectiveCountMetricGoodGrafanaLokiArray{ SloObjectiveCountMetricGoodGrafanaLokiArgs{...} }
 type SloObjectiveCountMetricGoodGrafanaLokiArrayInput interface {
 	pulumi.Input
 
@@ -10330,6 +17226,7 @@ func (o SloObjectiveCountMetricGoodGrafanaLokiOutput) ToSloObjectiveCountMetricG
 	return o
 }
 
+// Query for the logs
 func (o SloObjectiveCountMetricGoodGrafanaLokiOutput) Logql() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodGrafanaLoki) string { return v.Logql }).(pulumi.StringOutput)
 }
@@ -10355,13 +17252,14 @@ func (o SloObjectiveCountMetricGoodGrafanaLokiArrayOutput) Index(i pulumi.IntInp
 }
 
 type SloObjectiveCountMetricGoodGraphite struct {
+	// Path to the metrics
 	MetricPath string `pulumi:"metricPath"`
 }
 
 // SloObjectiveCountMetricGoodGraphiteInput is an input type that accepts SloObjectiveCountMetricGoodGraphiteArgs and SloObjectiveCountMetricGoodGraphiteOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodGraphiteInput` via:
 //
-//          SloObjectiveCountMetricGoodGraphiteArgs{...}
+//	SloObjectiveCountMetricGoodGraphiteArgs{...}
 type SloObjectiveCountMetricGoodGraphiteInput interface {
 	pulumi.Input
 
@@ -10370,6 +17268,7 @@ type SloObjectiveCountMetricGoodGraphiteInput interface {
 }
 
 type SloObjectiveCountMetricGoodGraphiteArgs struct {
+	// Path to the metrics
 	MetricPath pulumi.StringInput `pulumi:"metricPath"`
 }
 
@@ -10388,7 +17287,7 @@ func (i SloObjectiveCountMetricGoodGraphiteArgs) ToSloObjectiveCountMetricGoodGr
 // SloObjectiveCountMetricGoodGraphiteArrayInput is an input type that accepts SloObjectiveCountMetricGoodGraphiteArray and SloObjectiveCountMetricGoodGraphiteArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodGraphiteArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodGraphiteArray{ SloObjectiveCountMetricGoodGraphiteArgs{...} }
+//	SloObjectiveCountMetricGoodGraphiteArray{ SloObjectiveCountMetricGoodGraphiteArgs{...} }
 type SloObjectiveCountMetricGoodGraphiteArrayInput interface {
 	pulumi.Input
 
@@ -10424,6 +17323,7 @@ func (o SloObjectiveCountMetricGoodGraphiteOutput) ToSloObjectiveCountMetricGood
 	return o
 }
 
+// Path to the metrics
 func (o SloObjectiveCountMetricGoodGraphiteOutput) MetricPath() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodGraphite) string { return v.MetricPath }).(pulumi.StringOutput)
 }
@@ -10448,14 +17348,121 @@ func (o SloObjectiveCountMetricGoodGraphiteArrayOutput) Index(i pulumi.IntInput)
 	}).(SloObjectiveCountMetricGoodGraphiteOutput)
 }
 
+type SloObjectiveCountMetricGoodHoneycomb struct {
+	// Column name - required for all calculation types besides 'CONCURRENCY' and 'COUNT'
+	Attribute *string `pulumi:"attribute"`
+	// Calculation type
+	Calculation string `pulumi:"calculation"`
+}
+
+// SloObjectiveCountMetricGoodHoneycombInput is an input type that accepts SloObjectiveCountMetricGoodHoneycombArgs and SloObjectiveCountMetricGoodHoneycombOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricGoodHoneycombInput` via:
+//
+//	SloObjectiveCountMetricGoodHoneycombArgs{...}
+type SloObjectiveCountMetricGoodHoneycombInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricGoodHoneycombOutput() SloObjectiveCountMetricGoodHoneycombOutput
+	ToSloObjectiveCountMetricGoodHoneycombOutputWithContext(context.Context) SloObjectiveCountMetricGoodHoneycombOutput
+}
+
+type SloObjectiveCountMetricGoodHoneycombArgs struct {
+	// Column name - required for all calculation types besides 'CONCURRENCY' and 'COUNT'
+	Attribute pulumi.StringPtrInput `pulumi:"attribute"`
+	// Calculation type
+	Calculation pulumi.StringInput `pulumi:"calculation"`
+}
+
+func (SloObjectiveCountMetricGoodHoneycombArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricGoodHoneycomb)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricGoodHoneycombArgs) ToSloObjectiveCountMetricGoodHoneycombOutput() SloObjectiveCountMetricGoodHoneycombOutput {
+	return i.ToSloObjectiveCountMetricGoodHoneycombOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricGoodHoneycombArgs) ToSloObjectiveCountMetricGoodHoneycombOutputWithContext(ctx context.Context) SloObjectiveCountMetricGoodHoneycombOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricGoodHoneycombOutput)
+}
+
+// SloObjectiveCountMetricGoodHoneycombArrayInput is an input type that accepts SloObjectiveCountMetricGoodHoneycombArray and SloObjectiveCountMetricGoodHoneycombArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricGoodHoneycombArrayInput` via:
+//
+//	SloObjectiveCountMetricGoodHoneycombArray{ SloObjectiveCountMetricGoodHoneycombArgs{...} }
+type SloObjectiveCountMetricGoodHoneycombArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricGoodHoneycombArrayOutput() SloObjectiveCountMetricGoodHoneycombArrayOutput
+	ToSloObjectiveCountMetricGoodHoneycombArrayOutputWithContext(context.Context) SloObjectiveCountMetricGoodHoneycombArrayOutput
+}
+
+type SloObjectiveCountMetricGoodHoneycombArray []SloObjectiveCountMetricGoodHoneycombInput
+
+func (SloObjectiveCountMetricGoodHoneycombArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricGoodHoneycomb)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricGoodHoneycombArray) ToSloObjectiveCountMetricGoodHoneycombArrayOutput() SloObjectiveCountMetricGoodHoneycombArrayOutput {
+	return i.ToSloObjectiveCountMetricGoodHoneycombArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricGoodHoneycombArray) ToSloObjectiveCountMetricGoodHoneycombArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricGoodHoneycombArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricGoodHoneycombArrayOutput)
+}
+
+type SloObjectiveCountMetricGoodHoneycombOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricGoodHoneycombOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricGoodHoneycomb)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricGoodHoneycombOutput) ToSloObjectiveCountMetricGoodHoneycombOutput() SloObjectiveCountMetricGoodHoneycombOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricGoodHoneycombOutput) ToSloObjectiveCountMetricGoodHoneycombOutputWithContext(ctx context.Context) SloObjectiveCountMetricGoodHoneycombOutput {
+	return o
+}
+
+// Column name - required for all calculation types besides 'CONCURRENCY' and 'COUNT'
+func (o SloObjectiveCountMetricGoodHoneycombOutput) Attribute() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricGoodHoneycomb) *string { return v.Attribute }).(pulumi.StringPtrOutput)
+}
+
+// Calculation type
+func (o SloObjectiveCountMetricGoodHoneycombOutput) Calculation() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricGoodHoneycomb) string { return v.Calculation }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricGoodHoneycombArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricGoodHoneycombArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricGoodHoneycomb)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricGoodHoneycombArrayOutput) ToSloObjectiveCountMetricGoodHoneycombArrayOutput() SloObjectiveCountMetricGoodHoneycombArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricGoodHoneycombArrayOutput) ToSloObjectiveCountMetricGoodHoneycombArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricGoodHoneycombArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricGoodHoneycombArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricGoodHoneycombOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricGoodHoneycomb {
+		return vs[0].([]SloObjectiveCountMetricGoodHoneycomb)[vs[1].(int)]
+	}).(SloObjectiveCountMetricGoodHoneycombOutput)
+}
+
 type SloObjectiveCountMetricGoodInfluxdb struct {
+	// Query for the metrics
 	Query string `pulumi:"query"`
 }
 
 // SloObjectiveCountMetricGoodInfluxdbInput is an input type that accepts SloObjectiveCountMetricGoodInfluxdbArgs and SloObjectiveCountMetricGoodInfluxdbOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodInfluxdbInput` via:
 //
-//          SloObjectiveCountMetricGoodInfluxdbArgs{...}
+//	SloObjectiveCountMetricGoodInfluxdbArgs{...}
 type SloObjectiveCountMetricGoodInfluxdbInput interface {
 	pulumi.Input
 
@@ -10464,6 +17471,7 @@ type SloObjectiveCountMetricGoodInfluxdbInput interface {
 }
 
 type SloObjectiveCountMetricGoodInfluxdbArgs struct {
+	// Query for the metrics
 	Query pulumi.StringInput `pulumi:"query"`
 }
 
@@ -10482,7 +17490,7 @@ func (i SloObjectiveCountMetricGoodInfluxdbArgs) ToSloObjectiveCountMetricGoodIn
 // SloObjectiveCountMetricGoodInfluxdbArrayInput is an input type that accepts SloObjectiveCountMetricGoodInfluxdbArray and SloObjectiveCountMetricGoodInfluxdbArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodInfluxdbArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodInfluxdbArray{ SloObjectiveCountMetricGoodInfluxdbArgs{...} }
+//	SloObjectiveCountMetricGoodInfluxdbArray{ SloObjectiveCountMetricGoodInfluxdbArgs{...} }
 type SloObjectiveCountMetricGoodInfluxdbArrayInput interface {
 	pulumi.Input
 
@@ -10518,6 +17526,7 @@ func (o SloObjectiveCountMetricGoodInfluxdbOutput) ToSloObjectiveCountMetricGood
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricGoodInfluxdbOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodInfluxdb) string { return v.Query }).(pulumi.StringOutput)
 }
@@ -10543,15 +17552,18 @@ func (o SloObjectiveCountMetricGoodInfluxdbArrayOutput) Index(i pulumi.IntInput)
 }
 
 type SloObjectiveCountMetricGoodInstana struct {
-	Applications    []SloObjectiveCountMetricGoodInstanaApplication    `pulumi:"applications"`
+	// Infrastructure metric type
+	Applications []SloObjectiveCountMetricGoodInstanaApplication `pulumi:"applications"`
+	// Infrastructure metric type
 	Infrastructures []SloObjectiveCountMetricGoodInstanaInfrastructure `pulumi:"infrastructures"`
-	MetricType      string                                             `pulumi:"metricType"`
+	// Instana metric type 'application' or 'infrastructure'
+	MetricType string `pulumi:"metricType"`
 }
 
 // SloObjectiveCountMetricGoodInstanaInput is an input type that accepts SloObjectiveCountMetricGoodInstanaArgs and SloObjectiveCountMetricGoodInstanaOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodInstanaInput` via:
 //
-//          SloObjectiveCountMetricGoodInstanaArgs{...}
+//	SloObjectiveCountMetricGoodInstanaArgs{...}
 type SloObjectiveCountMetricGoodInstanaInput interface {
 	pulumi.Input
 
@@ -10560,9 +17572,12 @@ type SloObjectiveCountMetricGoodInstanaInput interface {
 }
 
 type SloObjectiveCountMetricGoodInstanaArgs struct {
-	Applications    SloObjectiveCountMetricGoodInstanaApplicationArrayInput    `pulumi:"applications"`
+	// Infrastructure metric type
+	Applications SloObjectiveCountMetricGoodInstanaApplicationArrayInput `pulumi:"applications"`
+	// Infrastructure metric type
 	Infrastructures SloObjectiveCountMetricGoodInstanaInfrastructureArrayInput `pulumi:"infrastructures"`
-	MetricType      pulumi.StringInput                                         `pulumi:"metricType"`
+	// Instana metric type 'application' or 'infrastructure'
+	MetricType pulumi.StringInput `pulumi:"metricType"`
 }
 
 func (SloObjectiveCountMetricGoodInstanaArgs) ElementType() reflect.Type {
@@ -10580,7 +17595,7 @@ func (i SloObjectiveCountMetricGoodInstanaArgs) ToSloObjectiveCountMetricGoodIns
 // SloObjectiveCountMetricGoodInstanaArrayInput is an input type that accepts SloObjectiveCountMetricGoodInstanaArray and SloObjectiveCountMetricGoodInstanaArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodInstanaArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodInstanaArray{ SloObjectiveCountMetricGoodInstanaArgs{...} }
+//	SloObjectiveCountMetricGoodInstanaArray{ SloObjectiveCountMetricGoodInstanaArgs{...} }
 type SloObjectiveCountMetricGoodInstanaArrayInput interface {
 	pulumi.Input
 
@@ -10616,18 +17631,21 @@ func (o SloObjectiveCountMetricGoodInstanaOutput) ToSloObjectiveCountMetricGoodI
 	return o
 }
 
+// Infrastructure metric type
 func (o SloObjectiveCountMetricGoodInstanaOutput) Applications() SloObjectiveCountMetricGoodInstanaApplicationArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodInstana) []SloObjectiveCountMetricGoodInstanaApplication {
 		return v.Applications
 	}).(SloObjectiveCountMetricGoodInstanaApplicationArrayOutput)
 }
 
+// Infrastructure metric type
 func (o SloObjectiveCountMetricGoodInstanaOutput) Infrastructures() SloObjectiveCountMetricGoodInstanaInfrastructureArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodInstana) []SloObjectiveCountMetricGoodInstanaInfrastructure {
 		return v.Infrastructures
 	}).(SloObjectiveCountMetricGoodInstanaInfrastructureArrayOutput)
 }
 
+// Instana metric type 'application' or 'infrastructure'
 func (o SloObjectiveCountMetricGoodInstanaOutput) MetricType() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodInstana) string { return v.MetricType }).(pulumi.StringOutput)
 }
@@ -10653,18 +17671,24 @@ func (o SloObjectiveCountMetricGoodInstanaArrayOutput) Index(i pulumi.IntInput) 
 }
 
 type SloObjectiveCountMetricGoodInstanaApplication struct {
-	Aggregation      string                                                 `pulumi:"aggregation"`
-	ApiQuery         string                                                 `pulumi:"apiQuery"`
-	GroupBies        []SloObjectiveCountMetricGoodInstanaApplicationGroupBy `pulumi:"groupBies"`
-	IncludeInternal  *bool                                                  `pulumi:"includeInternal"`
-	IncludeSynthetic *bool                                                  `pulumi:"includeSynthetic"`
-	MetricId         string                                                 `pulumi:"metricId"`
+	// Aggregation type [Required for metrics]
+	Aggregation string `pulumi:"aggregation"`
+	// API query user passes in a JSON format
+	ApiQuery string `pulumi:"apiQuery"`
+	// Group by method
+	GroupBies []SloObjectiveCountMetricGoodInstanaApplicationGroupBy `pulumi:"groupBies"`
+	// Include internal
+	IncludeInternal *bool `pulumi:"includeInternal"`
+	// Include synthetic
+	IncludeSynthetic *bool `pulumi:"includeSynthetic"`
+	// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+	MetricId string `pulumi:"metricId"`
 }
 
 // SloObjectiveCountMetricGoodInstanaApplicationInput is an input type that accepts SloObjectiveCountMetricGoodInstanaApplicationArgs and SloObjectiveCountMetricGoodInstanaApplicationOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodInstanaApplicationInput` via:
 //
-//          SloObjectiveCountMetricGoodInstanaApplicationArgs{...}
+//	SloObjectiveCountMetricGoodInstanaApplicationArgs{...}
 type SloObjectiveCountMetricGoodInstanaApplicationInput interface {
 	pulumi.Input
 
@@ -10673,12 +17697,18 @@ type SloObjectiveCountMetricGoodInstanaApplicationInput interface {
 }
 
 type SloObjectiveCountMetricGoodInstanaApplicationArgs struct {
-	Aggregation      pulumi.StringInput                                             `pulumi:"aggregation"`
-	ApiQuery         pulumi.StringInput                                             `pulumi:"apiQuery"`
-	GroupBies        SloObjectiveCountMetricGoodInstanaApplicationGroupByArrayInput `pulumi:"groupBies"`
-	IncludeInternal  pulumi.BoolPtrInput                                            `pulumi:"includeInternal"`
-	IncludeSynthetic pulumi.BoolPtrInput                                            `pulumi:"includeSynthetic"`
-	MetricId         pulumi.StringInput                                             `pulumi:"metricId"`
+	// Aggregation type [Required for metrics]
+	Aggregation pulumi.StringInput `pulumi:"aggregation"`
+	// API query user passes in a JSON format
+	ApiQuery pulumi.StringInput `pulumi:"apiQuery"`
+	// Group by method
+	GroupBies SloObjectiveCountMetricGoodInstanaApplicationGroupByArrayInput `pulumi:"groupBies"`
+	// Include internal
+	IncludeInternal pulumi.BoolPtrInput `pulumi:"includeInternal"`
+	// Include synthetic
+	IncludeSynthetic pulumi.BoolPtrInput `pulumi:"includeSynthetic"`
+	// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+	MetricId pulumi.StringInput `pulumi:"metricId"`
 }
 
 func (SloObjectiveCountMetricGoodInstanaApplicationArgs) ElementType() reflect.Type {
@@ -10696,7 +17726,7 @@ func (i SloObjectiveCountMetricGoodInstanaApplicationArgs) ToSloObjectiveCountMe
 // SloObjectiveCountMetricGoodInstanaApplicationArrayInput is an input type that accepts SloObjectiveCountMetricGoodInstanaApplicationArray and SloObjectiveCountMetricGoodInstanaApplicationArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodInstanaApplicationArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodInstanaApplicationArray{ SloObjectiveCountMetricGoodInstanaApplicationArgs{...} }
+//	SloObjectiveCountMetricGoodInstanaApplicationArray{ SloObjectiveCountMetricGoodInstanaApplicationArgs{...} }
 type SloObjectiveCountMetricGoodInstanaApplicationArrayInput interface {
 	pulumi.Input
 
@@ -10732,28 +17762,34 @@ func (o SloObjectiveCountMetricGoodInstanaApplicationOutput) ToSloObjectiveCount
 	return o
 }
 
+// Aggregation type [Required for metrics]
 func (o SloObjectiveCountMetricGoodInstanaApplicationOutput) Aggregation() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodInstanaApplication) string { return v.Aggregation }).(pulumi.StringOutput)
 }
 
+// API query user passes in a JSON format
 func (o SloObjectiveCountMetricGoodInstanaApplicationOutput) ApiQuery() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodInstanaApplication) string { return v.ApiQuery }).(pulumi.StringOutput)
 }
 
+// Group by method
 func (o SloObjectiveCountMetricGoodInstanaApplicationOutput) GroupBies() SloObjectiveCountMetricGoodInstanaApplicationGroupByArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodInstanaApplication) []SloObjectiveCountMetricGoodInstanaApplicationGroupBy {
 		return v.GroupBies
 	}).(SloObjectiveCountMetricGoodInstanaApplicationGroupByArrayOutput)
 }
 
+// Include internal
 func (o SloObjectiveCountMetricGoodInstanaApplicationOutput) IncludeInternal() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodInstanaApplication) *bool { return v.IncludeInternal }).(pulumi.BoolPtrOutput)
 }
 
+// Include synthetic
 func (o SloObjectiveCountMetricGoodInstanaApplicationOutput) IncludeSynthetic() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodInstanaApplication) *bool { return v.IncludeSynthetic }).(pulumi.BoolPtrOutput)
 }
 
+// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
 func (o SloObjectiveCountMetricGoodInstanaApplicationOutput) MetricId() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodInstanaApplication) string { return v.MetricId }).(pulumi.StringOutput)
 }
@@ -10779,7 +17815,9 @@ func (o SloObjectiveCountMetricGoodInstanaApplicationArrayOutput) Index(i pulumi
 }
 
 type SloObjectiveCountMetricGoodInstanaApplicationGroupBy struct {
-	Tag               string  `pulumi:"tag"`
+	// Group by tag
+	Tag string `pulumi:"tag"`
+	// Tag entity - one of 'DESTINATION', 'SOURCE', 'NOT_APPLICABLE'
 	TagEntity         string  `pulumi:"tagEntity"`
 	TagSecondLevelKey *string `pulumi:"tagSecondLevelKey"`
 }
@@ -10787,7 +17825,7 @@ type SloObjectiveCountMetricGoodInstanaApplicationGroupBy struct {
 // SloObjectiveCountMetricGoodInstanaApplicationGroupByInput is an input type that accepts SloObjectiveCountMetricGoodInstanaApplicationGroupByArgs and SloObjectiveCountMetricGoodInstanaApplicationGroupByOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodInstanaApplicationGroupByInput` via:
 //
-//          SloObjectiveCountMetricGoodInstanaApplicationGroupByArgs{...}
+//	SloObjectiveCountMetricGoodInstanaApplicationGroupByArgs{...}
 type SloObjectiveCountMetricGoodInstanaApplicationGroupByInput interface {
 	pulumi.Input
 
@@ -10796,7 +17834,9 @@ type SloObjectiveCountMetricGoodInstanaApplicationGroupByInput interface {
 }
 
 type SloObjectiveCountMetricGoodInstanaApplicationGroupByArgs struct {
-	Tag               pulumi.StringInput    `pulumi:"tag"`
+	// Group by tag
+	Tag pulumi.StringInput `pulumi:"tag"`
+	// Tag entity - one of 'DESTINATION', 'SOURCE', 'NOT_APPLICABLE'
 	TagEntity         pulumi.StringInput    `pulumi:"tagEntity"`
 	TagSecondLevelKey pulumi.StringPtrInput `pulumi:"tagSecondLevelKey"`
 }
@@ -10816,7 +17856,7 @@ func (i SloObjectiveCountMetricGoodInstanaApplicationGroupByArgs) ToSloObjective
 // SloObjectiveCountMetricGoodInstanaApplicationGroupByArrayInput is an input type that accepts SloObjectiveCountMetricGoodInstanaApplicationGroupByArray and SloObjectiveCountMetricGoodInstanaApplicationGroupByArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodInstanaApplicationGroupByArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodInstanaApplicationGroupByArray{ SloObjectiveCountMetricGoodInstanaApplicationGroupByArgs{...} }
+//	SloObjectiveCountMetricGoodInstanaApplicationGroupByArray{ SloObjectiveCountMetricGoodInstanaApplicationGroupByArgs{...} }
 type SloObjectiveCountMetricGoodInstanaApplicationGroupByArrayInput interface {
 	pulumi.Input
 
@@ -10852,10 +17892,12 @@ func (o SloObjectiveCountMetricGoodInstanaApplicationGroupByOutput) ToSloObjecti
 	return o
 }
 
+// Group by tag
 func (o SloObjectiveCountMetricGoodInstanaApplicationGroupByOutput) Tag() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodInstanaApplicationGroupBy) string { return v.Tag }).(pulumi.StringOutput)
 }
 
+// Tag entity - one of 'DESTINATION', 'SOURCE', 'NOT_APPLICABLE'
 func (o SloObjectiveCountMetricGoodInstanaApplicationGroupByOutput) TagEntity() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodInstanaApplicationGroupBy) string { return v.TagEntity }).(pulumi.StringOutput)
 }
@@ -10885,17 +17927,22 @@ func (o SloObjectiveCountMetricGoodInstanaApplicationGroupByArrayOutput) Index(i
 }
 
 type SloObjectiveCountMetricGoodInstanaInfrastructure struct {
-	MetricId              string  `pulumi:"metricId"`
-	MetricRetrievalMethod string  `pulumi:"metricRetrievalMethod"`
-	PluginId              string  `pulumi:"pluginId"`
-	Query                 *string `pulumi:"query"`
-	SnapshotId            *string `pulumi:"snapshotId"`
+	// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+	MetricId string `pulumi:"metricId"`
+	// Metric retrieval method 'query' or 'snapshot'
+	MetricRetrievalMethod string `pulumi:"metricRetrievalMethod"`
+	// Plugin ID
+	PluginId string `pulumi:"pluginId"`
+	// Query for the metrics
+	Query *string `pulumi:"query"`
+	// Snapshot ID
+	SnapshotId *string `pulumi:"snapshotId"`
 }
 
 // SloObjectiveCountMetricGoodInstanaInfrastructureInput is an input type that accepts SloObjectiveCountMetricGoodInstanaInfrastructureArgs and SloObjectiveCountMetricGoodInstanaInfrastructureOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodInstanaInfrastructureInput` via:
 //
-//          SloObjectiveCountMetricGoodInstanaInfrastructureArgs{...}
+//	SloObjectiveCountMetricGoodInstanaInfrastructureArgs{...}
 type SloObjectiveCountMetricGoodInstanaInfrastructureInput interface {
 	pulumi.Input
 
@@ -10904,11 +17951,16 @@ type SloObjectiveCountMetricGoodInstanaInfrastructureInput interface {
 }
 
 type SloObjectiveCountMetricGoodInstanaInfrastructureArgs struct {
-	MetricId              pulumi.StringInput    `pulumi:"metricId"`
-	MetricRetrievalMethod pulumi.StringInput    `pulumi:"metricRetrievalMethod"`
-	PluginId              pulumi.StringInput    `pulumi:"pluginId"`
-	Query                 pulumi.StringPtrInput `pulumi:"query"`
-	SnapshotId            pulumi.StringPtrInput `pulumi:"snapshotId"`
+	// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+	MetricId pulumi.StringInput `pulumi:"metricId"`
+	// Metric retrieval method 'query' or 'snapshot'
+	MetricRetrievalMethod pulumi.StringInput `pulumi:"metricRetrievalMethod"`
+	// Plugin ID
+	PluginId pulumi.StringInput `pulumi:"pluginId"`
+	// Query for the metrics
+	Query pulumi.StringPtrInput `pulumi:"query"`
+	// Snapshot ID
+	SnapshotId pulumi.StringPtrInput `pulumi:"snapshotId"`
 }
 
 func (SloObjectiveCountMetricGoodInstanaInfrastructureArgs) ElementType() reflect.Type {
@@ -10926,7 +17978,7 @@ func (i SloObjectiveCountMetricGoodInstanaInfrastructureArgs) ToSloObjectiveCoun
 // SloObjectiveCountMetricGoodInstanaInfrastructureArrayInput is an input type that accepts SloObjectiveCountMetricGoodInstanaInfrastructureArray and SloObjectiveCountMetricGoodInstanaInfrastructureArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodInstanaInfrastructureArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodInstanaInfrastructureArray{ SloObjectiveCountMetricGoodInstanaInfrastructureArgs{...} }
+//	SloObjectiveCountMetricGoodInstanaInfrastructureArray{ SloObjectiveCountMetricGoodInstanaInfrastructureArgs{...} }
 type SloObjectiveCountMetricGoodInstanaInfrastructureArrayInput interface {
 	pulumi.Input
 
@@ -10962,22 +18014,27 @@ func (o SloObjectiveCountMetricGoodInstanaInfrastructureOutput) ToSloObjectiveCo
 	return o
 }
 
+// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
 func (o SloObjectiveCountMetricGoodInstanaInfrastructureOutput) MetricId() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodInstanaInfrastructure) string { return v.MetricId }).(pulumi.StringOutput)
 }
 
+// Metric retrieval method 'query' or 'snapshot'
 func (o SloObjectiveCountMetricGoodInstanaInfrastructureOutput) MetricRetrievalMethod() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodInstanaInfrastructure) string { return v.MetricRetrievalMethod }).(pulumi.StringOutput)
 }
 
+// Plugin ID
 func (o SloObjectiveCountMetricGoodInstanaInfrastructureOutput) PluginId() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodInstanaInfrastructure) string { return v.PluginId }).(pulumi.StringOutput)
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricGoodInstanaInfrastructureOutput) Query() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodInstanaInfrastructure) *string { return v.Query }).(pulumi.StringPtrOutput)
 }
 
+// Snapshot ID
 func (o SloObjectiveCountMetricGoodInstanaInfrastructureOutput) SnapshotId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodInstanaInfrastructure) *string { return v.SnapshotId }).(pulumi.StringPtrOutput)
 }
@@ -11003,16 +18060,20 @@ func (o SloObjectiveCountMetricGoodInstanaInfrastructureArrayOutput) Index(i pul
 }
 
 type SloObjectiveCountMetricGoodLightstep struct {
+	// Optional value to filter by percentiles
 	Percentile *float64 `pulumi:"percentile"`
-	StreamId   *string  `pulumi:"streamId"`
-	TypeOfData string   `pulumi:"typeOfData"`
-	Uql        *string  `pulumi:"uql"`
+	// ID of the metrics stream
+	StreamId *string `pulumi:"streamId"`
+	// Type of data to filter by
+	TypeOfData string `pulumi:"typeOfData"`
+	// UQL query
+	Uql *string `pulumi:"uql"`
 }
 
 // SloObjectiveCountMetricGoodLightstepInput is an input type that accepts SloObjectiveCountMetricGoodLightstepArgs and SloObjectiveCountMetricGoodLightstepOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodLightstepInput` via:
 //
-//          SloObjectiveCountMetricGoodLightstepArgs{...}
+//	SloObjectiveCountMetricGoodLightstepArgs{...}
 type SloObjectiveCountMetricGoodLightstepInput interface {
 	pulumi.Input
 
@@ -11021,10 +18082,14 @@ type SloObjectiveCountMetricGoodLightstepInput interface {
 }
 
 type SloObjectiveCountMetricGoodLightstepArgs struct {
+	// Optional value to filter by percentiles
 	Percentile pulumi.Float64PtrInput `pulumi:"percentile"`
-	StreamId   pulumi.StringPtrInput  `pulumi:"streamId"`
-	TypeOfData pulumi.StringInput     `pulumi:"typeOfData"`
-	Uql        pulumi.StringPtrInput  `pulumi:"uql"`
+	// ID of the metrics stream
+	StreamId pulumi.StringPtrInput `pulumi:"streamId"`
+	// Type of data to filter by
+	TypeOfData pulumi.StringInput `pulumi:"typeOfData"`
+	// UQL query
+	Uql pulumi.StringPtrInput `pulumi:"uql"`
 }
 
 func (SloObjectiveCountMetricGoodLightstepArgs) ElementType() reflect.Type {
@@ -11042,7 +18107,7 @@ func (i SloObjectiveCountMetricGoodLightstepArgs) ToSloObjectiveCountMetricGoodL
 // SloObjectiveCountMetricGoodLightstepArrayInput is an input type that accepts SloObjectiveCountMetricGoodLightstepArray and SloObjectiveCountMetricGoodLightstepArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodLightstepArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodLightstepArray{ SloObjectiveCountMetricGoodLightstepArgs{...} }
+//	SloObjectiveCountMetricGoodLightstepArray{ SloObjectiveCountMetricGoodLightstepArgs{...} }
 type SloObjectiveCountMetricGoodLightstepArrayInput interface {
 	pulumi.Input
 
@@ -11078,18 +18143,22 @@ func (o SloObjectiveCountMetricGoodLightstepOutput) ToSloObjectiveCountMetricGoo
 	return o
 }
 
+// Optional value to filter by percentiles
 func (o SloObjectiveCountMetricGoodLightstepOutput) Percentile() pulumi.Float64PtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodLightstep) *float64 { return v.Percentile }).(pulumi.Float64PtrOutput)
 }
 
+// ID of the metrics stream
 func (o SloObjectiveCountMetricGoodLightstepOutput) StreamId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodLightstep) *string { return v.StreamId }).(pulumi.StringPtrOutput)
 }
 
+// Type of data to filter by
 func (o SloObjectiveCountMetricGoodLightstepOutput) TypeOfData() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodLightstep) string { return v.TypeOfData }).(pulumi.StringOutput)
 }
 
+// UQL query
 func (o SloObjectiveCountMetricGoodLightstepOutput) Uql() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodLightstep) *string { return v.Uql }).(pulumi.StringPtrOutput)
 }
@@ -11115,13 +18184,14 @@ func (o SloObjectiveCountMetricGoodLightstepArrayOutput) Index(i pulumi.IntInput
 }
 
 type SloObjectiveCountMetricGoodNewrelic struct {
+	// Query for the metrics
 	Nrql string `pulumi:"nrql"`
 }
 
 // SloObjectiveCountMetricGoodNewrelicInput is an input type that accepts SloObjectiveCountMetricGoodNewrelicArgs and SloObjectiveCountMetricGoodNewrelicOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodNewrelicInput` via:
 //
-//          SloObjectiveCountMetricGoodNewrelicArgs{...}
+//	SloObjectiveCountMetricGoodNewrelicArgs{...}
 type SloObjectiveCountMetricGoodNewrelicInput interface {
 	pulumi.Input
 
@@ -11130,6 +18200,7 @@ type SloObjectiveCountMetricGoodNewrelicInput interface {
 }
 
 type SloObjectiveCountMetricGoodNewrelicArgs struct {
+	// Query for the metrics
 	Nrql pulumi.StringInput `pulumi:"nrql"`
 }
 
@@ -11148,7 +18219,7 @@ func (i SloObjectiveCountMetricGoodNewrelicArgs) ToSloObjectiveCountMetricGoodNe
 // SloObjectiveCountMetricGoodNewrelicArrayInput is an input type that accepts SloObjectiveCountMetricGoodNewrelicArray and SloObjectiveCountMetricGoodNewrelicArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodNewrelicArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodNewrelicArray{ SloObjectiveCountMetricGoodNewrelicArgs{...} }
+//	SloObjectiveCountMetricGoodNewrelicArray{ SloObjectiveCountMetricGoodNewrelicArgs{...} }
 type SloObjectiveCountMetricGoodNewrelicArrayInput interface {
 	pulumi.Input
 
@@ -11184,6 +18255,7 @@ func (o SloObjectiveCountMetricGoodNewrelicOutput) ToSloObjectiveCountMetricGood
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricGoodNewrelicOutput) Nrql() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodNewrelic) string { return v.Nrql }).(pulumi.StringOutput)
 }
@@ -11209,13 +18281,14 @@ func (o SloObjectiveCountMetricGoodNewrelicArrayOutput) Index(i pulumi.IntInput)
 }
 
 type SloObjectiveCountMetricGoodOpentsdb struct {
+	// Query for the metrics
 	Query string `pulumi:"query"`
 }
 
 // SloObjectiveCountMetricGoodOpentsdbInput is an input type that accepts SloObjectiveCountMetricGoodOpentsdbArgs and SloObjectiveCountMetricGoodOpentsdbOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodOpentsdbInput` via:
 //
-//          SloObjectiveCountMetricGoodOpentsdbArgs{...}
+//	SloObjectiveCountMetricGoodOpentsdbArgs{...}
 type SloObjectiveCountMetricGoodOpentsdbInput interface {
 	pulumi.Input
 
@@ -11224,6 +18297,7 @@ type SloObjectiveCountMetricGoodOpentsdbInput interface {
 }
 
 type SloObjectiveCountMetricGoodOpentsdbArgs struct {
+	// Query for the metrics
 	Query pulumi.StringInput `pulumi:"query"`
 }
 
@@ -11242,7 +18316,7 @@ func (i SloObjectiveCountMetricGoodOpentsdbArgs) ToSloObjectiveCountMetricGoodOp
 // SloObjectiveCountMetricGoodOpentsdbArrayInput is an input type that accepts SloObjectiveCountMetricGoodOpentsdbArray and SloObjectiveCountMetricGoodOpentsdbArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodOpentsdbArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodOpentsdbArray{ SloObjectiveCountMetricGoodOpentsdbArgs{...} }
+//	SloObjectiveCountMetricGoodOpentsdbArray{ SloObjectiveCountMetricGoodOpentsdbArgs{...} }
 type SloObjectiveCountMetricGoodOpentsdbArrayInput interface {
 	pulumi.Input
 
@@ -11278,6 +18352,7 @@ func (o SloObjectiveCountMetricGoodOpentsdbOutput) ToSloObjectiveCountMetricGood
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricGoodOpentsdbOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodOpentsdb) string { return v.Query }).(pulumi.StringOutput)
 }
@@ -11303,15 +18378,18 @@ func (o SloObjectiveCountMetricGoodOpentsdbArrayOutput) Index(i pulumi.IntInput)
 }
 
 type SloObjectiveCountMetricGoodPingdom struct {
-	CheckId   string  `pulumi:"checkId"`
+	// Pingdom uptime or transaction check's ID
+	CheckId string `pulumi:"checkId"`
+	// Pingdom check type - uptime or transaction
 	CheckType *string `pulumi:"checkType"`
-	Status    *string `pulumi:"status"`
+	// Optional for the Uptime checks. Use it to filter the Pingdom check results by status
+	Status *string `pulumi:"status"`
 }
 
 // SloObjectiveCountMetricGoodPingdomInput is an input type that accepts SloObjectiveCountMetricGoodPingdomArgs and SloObjectiveCountMetricGoodPingdomOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodPingdomInput` via:
 //
-//          SloObjectiveCountMetricGoodPingdomArgs{...}
+//	SloObjectiveCountMetricGoodPingdomArgs{...}
 type SloObjectiveCountMetricGoodPingdomInput interface {
 	pulumi.Input
 
@@ -11320,9 +18398,12 @@ type SloObjectiveCountMetricGoodPingdomInput interface {
 }
 
 type SloObjectiveCountMetricGoodPingdomArgs struct {
-	CheckId   pulumi.StringInput    `pulumi:"checkId"`
+	// Pingdom uptime or transaction check's ID
+	CheckId pulumi.StringInput `pulumi:"checkId"`
+	// Pingdom check type - uptime or transaction
 	CheckType pulumi.StringPtrInput `pulumi:"checkType"`
-	Status    pulumi.StringPtrInput `pulumi:"status"`
+	// Optional for the Uptime checks. Use it to filter the Pingdom check results by status
+	Status pulumi.StringPtrInput `pulumi:"status"`
 }
 
 func (SloObjectiveCountMetricGoodPingdomArgs) ElementType() reflect.Type {
@@ -11340,7 +18421,7 @@ func (i SloObjectiveCountMetricGoodPingdomArgs) ToSloObjectiveCountMetricGoodPin
 // SloObjectiveCountMetricGoodPingdomArrayInput is an input type that accepts SloObjectiveCountMetricGoodPingdomArray and SloObjectiveCountMetricGoodPingdomArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodPingdomArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodPingdomArray{ SloObjectiveCountMetricGoodPingdomArgs{...} }
+//	SloObjectiveCountMetricGoodPingdomArray{ SloObjectiveCountMetricGoodPingdomArgs{...} }
 type SloObjectiveCountMetricGoodPingdomArrayInput interface {
 	pulumi.Input
 
@@ -11376,14 +18457,17 @@ func (o SloObjectiveCountMetricGoodPingdomOutput) ToSloObjectiveCountMetricGoodP
 	return o
 }
 
+// Pingdom uptime or transaction check's ID
 func (o SloObjectiveCountMetricGoodPingdomOutput) CheckId() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodPingdom) string { return v.CheckId }).(pulumi.StringOutput)
 }
 
+// Pingdom check type - uptime or transaction
 func (o SloObjectiveCountMetricGoodPingdomOutput) CheckType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodPingdom) *string { return v.CheckType }).(pulumi.StringPtrOutput)
 }
 
+// Optional for the Uptime checks. Use it to filter the Pingdom check results by status
 func (o SloObjectiveCountMetricGoodPingdomOutput) Status() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodPingdom) *string { return v.Status }).(pulumi.StringPtrOutput)
 }
@@ -11409,13 +18493,14 @@ func (o SloObjectiveCountMetricGoodPingdomArrayOutput) Index(i pulumi.IntInput) 
 }
 
 type SloObjectiveCountMetricGoodPrometheus struct {
+	// Query for the metrics
 	Promql string `pulumi:"promql"`
 }
 
 // SloObjectiveCountMetricGoodPrometheusInput is an input type that accepts SloObjectiveCountMetricGoodPrometheusArgs and SloObjectiveCountMetricGoodPrometheusOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodPrometheusInput` via:
 //
-//          SloObjectiveCountMetricGoodPrometheusArgs{...}
+//	SloObjectiveCountMetricGoodPrometheusArgs{...}
 type SloObjectiveCountMetricGoodPrometheusInput interface {
 	pulumi.Input
 
@@ -11424,6 +18509,7 @@ type SloObjectiveCountMetricGoodPrometheusInput interface {
 }
 
 type SloObjectiveCountMetricGoodPrometheusArgs struct {
+	// Query for the metrics
 	Promql pulumi.StringInput `pulumi:"promql"`
 }
 
@@ -11442,7 +18528,7 @@ func (i SloObjectiveCountMetricGoodPrometheusArgs) ToSloObjectiveCountMetricGood
 // SloObjectiveCountMetricGoodPrometheusArrayInput is an input type that accepts SloObjectiveCountMetricGoodPrometheusArray and SloObjectiveCountMetricGoodPrometheusArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodPrometheusArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodPrometheusArray{ SloObjectiveCountMetricGoodPrometheusArgs{...} }
+//	SloObjectiveCountMetricGoodPrometheusArray{ SloObjectiveCountMetricGoodPrometheusArgs{...} }
 type SloObjectiveCountMetricGoodPrometheusArrayInput interface {
 	pulumi.Input
 
@@ -11478,6 +18564,7 @@ func (o SloObjectiveCountMetricGoodPrometheusOutput) ToSloObjectiveCountMetricGo
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricGoodPrometheusOutput) Promql() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodPrometheus) string { return v.Promql }).(pulumi.StringOutput)
 }
@@ -11503,16 +18590,20 @@ func (o SloObjectiveCountMetricGoodPrometheusArrayOutput) Index(i pulumi.IntInpu
 }
 
 type SloObjectiveCountMetricGoodRedshift struct {
-	ClusterId    string `pulumi:"clusterId"`
+	// Redshift custer ID
+	ClusterId string `pulumi:"clusterId"`
+	// Database name
 	DatabaseName string `pulumi:"databaseName"`
-	Query        string `pulumi:"query"`
-	Region       string `pulumi:"region"`
+	// Query for the metrics
+	Query string `pulumi:"query"`
+	// Region of the CloudWatch instance
+	Region string `pulumi:"region"`
 }
 
 // SloObjectiveCountMetricGoodRedshiftInput is an input type that accepts SloObjectiveCountMetricGoodRedshiftArgs and SloObjectiveCountMetricGoodRedshiftOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodRedshiftInput` via:
 //
-//          SloObjectiveCountMetricGoodRedshiftArgs{...}
+//	SloObjectiveCountMetricGoodRedshiftArgs{...}
 type SloObjectiveCountMetricGoodRedshiftInput interface {
 	pulumi.Input
 
@@ -11521,10 +18612,14 @@ type SloObjectiveCountMetricGoodRedshiftInput interface {
 }
 
 type SloObjectiveCountMetricGoodRedshiftArgs struct {
-	ClusterId    pulumi.StringInput `pulumi:"clusterId"`
+	// Redshift custer ID
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Database name
 	DatabaseName pulumi.StringInput `pulumi:"databaseName"`
-	Query        pulumi.StringInput `pulumi:"query"`
-	Region       pulumi.StringInput `pulumi:"region"`
+	// Query for the metrics
+	Query pulumi.StringInput `pulumi:"query"`
+	// Region of the CloudWatch instance
+	Region pulumi.StringInput `pulumi:"region"`
 }
 
 func (SloObjectiveCountMetricGoodRedshiftArgs) ElementType() reflect.Type {
@@ -11542,7 +18637,7 @@ func (i SloObjectiveCountMetricGoodRedshiftArgs) ToSloObjectiveCountMetricGoodRe
 // SloObjectiveCountMetricGoodRedshiftArrayInput is an input type that accepts SloObjectiveCountMetricGoodRedshiftArray and SloObjectiveCountMetricGoodRedshiftArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodRedshiftArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodRedshiftArray{ SloObjectiveCountMetricGoodRedshiftArgs{...} }
+//	SloObjectiveCountMetricGoodRedshiftArray{ SloObjectiveCountMetricGoodRedshiftArgs{...} }
 type SloObjectiveCountMetricGoodRedshiftArrayInput interface {
 	pulumi.Input
 
@@ -11578,18 +18673,22 @@ func (o SloObjectiveCountMetricGoodRedshiftOutput) ToSloObjectiveCountMetricGood
 	return o
 }
 
+// Redshift custer ID
 func (o SloObjectiveCountMetricGoodRedshiftOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodRedshift) string { return v.ClusterId }).(pulumi.StringOutput)
 }
 
+// Database name
 func (o SloObjectiveCountMetricGoodRedshiftOutput) DatabaseName() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodRedshift) string { return v.DatabaseName }).(pulumi.StringOutput)
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricGoodRedshiftOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodRedshift) string { return v.Query }).(pulumi.StringOutput)
 }
 
+// Region of the CloudWatch instance
 func (o SloObjectiveCountMetricGoodRedshiftOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodRedshift) string { return v.Region }).(pulumi.StringOutput)
 }
@@ -11615,13 +18714,14 @@ func (o SloObjectiveCountMetricGoodRedshiftArrayOutput) Index(i pulumi.IntInput)
 }
 
 type SloObjectiveCountMetricGoodSplunk struct {
+	// Query for the metrics
 	Query string `pulumi:"query"`
 }
 
 // SloObjectiveCountMetricGoodSplunkInput is an input type that accepts SloObjectiveCountMetricGoodSplunkArgs and SloObjectiveCountMetricGoodSplunkOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodSplunkInput` via:
 //
-//          SloObjectiveCountMetricGoodSplunkArgs{...}
+//	SloObjectiveCountMetricGoodSplunkArgs{...}
 type SloObjectiveCountMetricGoodSplunkInput interface {
 	pulumi.Input
 
@@ -11630,6 +18730,7 @@ type SloObjectiveCountMetricGoodSplunkInput interface {
 }
 
 type SloObjectiveCountMetricGoodSplunkArgs struct {
+	// Query for the metrics
 	Query pulumi.StringInput `pulumi:"query"`
 }
 
@@ -11648,7 +18749,7 @@ func (i SloObjectiveCountMetricGoodSplunkArgs) ToSloObjectiveCountMetricGoodSplu
 // SloObjectiveCountMetricGoodSplunkArrayInput is an input type that accepts SloObjectiveCountMetricGoodSplunkArray and SloObjectiveCountMetricGoodSplunkArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodSplunkArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodSplunkArray{ SloObjectiveCountMetricGoodSplunkArgs{...} }
+//	SloObjectiveCountMetricGoodSplunkArray{ SloObjectiveCountMetricGoodSplunkArgs{...} }
 type SloObjectiveCountMetricGoodSplunkArrayInput interface {
 	pulumi.Input
 
@@ -11684,6 +18785,7 @@ func (o SloObjectiveCountMetricGoodSplunkOutput) ToSloObjectiveCountMetricGoodSp
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricGoodSplunkOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodSplunk) string { return v.Query }).(pulumi.StringOutput)
 }
@@ -11709,13 +18811,14 @@ func (o SloObjectiveCountMetricGoodSplunkArrayOutput) Index(i pulumi.IntInput) S
 }
 
 type SloObjectiveCountMetricGoodSplunkObservability struct {
+	// Query for the metrics
 	Program string `pulumi:"program"`
 }
 
 // SloObjectiveCountMetricGoodSplunkObservabilityInput is an input type that accepts SloObjectiveCountMetricGoodSplunkObservabilityArgs and SloObjectiveCountMetricGoodSplunkObservabilityOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodSplunkObservabilityInput` via:
 //
-//          SloObjectiveCountMetricGoodSplunkObservabilityArgs{...}
+//	SloObjectiveCountMetricGoodSplunkObservabilityArgs{...}
 type SloObjectiveCountMetricGoodSplunkObservabilityInput interface {
 	pulumi.Input
 
@@ -11724,6 +18827,7 @@ type SloObjectiveCountMetricGoodSplunkObservabilityInput interface {
 }
 
 type SloObjectiveCountMetricGoodSplunkObservabilityArgs struct {
+	// Query for the metrics
 	Program pulumi.StringInput `pulumi:"program"`
 }
 
@@ -11742,7 +18846,7 @@ func (i SloObjectiveCountMetricGoodSplunkObservabilityArgs) ToSloObjectiveCountM
 // SloObjectiveCountMetricGoodSplunkObservabilityArrayInput is an input type that accepts SloObjectiveCountMetricGoodSplunkObservabilityArray and SloObjectiveCountMetricGoodSplunkObservabilityArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodSplunkObservabilityArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodSplunkObservabilityArray{ SloObjectiveCountMetricGoodSplunkObservabilityArgs{...} }
+//	SloObjectiveCountMetricGoodSplunkObservabilityArray{ SloObjectiveCountMetricGoodSplunkObservabilityArgs{...} }
 type SloObjectiveCountMetricGoodSplunkObservabilityArrayInput interface {
 	pulumi.Input
 
@@ -11778,6 +18882,7 @@ func (o SloObjectiveCountMetricGoodSplunkObservabilityOutput) ToSloObjectiveCoun
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricGoodSplunkObservabilityOutput) Program() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodSplunkObservability) string { return v.Program }).(pulumi.StringOutput)
 }
@@ -11803,16 +18908,20 @@ func (o SloObjectiveCountMetricGoodSplunkObservabilityArrayOutput) Index(i pulum
 }
 
 type SloObjectiveCountMetricGoodSumologic struct {
+	// Period of data aggregation
 	Quantization *string `pulumi:"quantization"`
-	Query        string  `pulumi:"query"`
-	Rollup       *string `pulumi:"rollup"`
-	Type         string  `pulumi:"type"`
+	// Query for the metrics
+	Query string `pulumi:"query"`
+	// Aggregation function - avg, sum, min, max, count, none
+	Rollup *string `pulumi:"rollup"`
+	// Sumologic source - metrics or logs
+	Type string `pulumi:"type"`
 }
 
 // SloObjectiveCountMetricGoodSumologicInput is an input type that accepts SloObjectiveCountMetricGoodSumologicArgs and SloObjectiveCountMetricGoodSumologicOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodSumologicInput` via:
 //
-//          SloObjectiveCountMetricGoodSumologicArgs{...}
+//	SloObjectiveCountMetricGoodSumologicArgs{...}
 type SloObjectiveCountMetricGoodSumologicInput interface {
 	pulumi.Input
 
@@ -11821,10 +18930,14 @@ type SloObjectiveCountMetricGoodSumologicInput interface {
 }
 
 type SloObjectiveCountMetricGoodSumologicArgs struct {
+	// Period of data aggregation
 	Quantization pulumi.StringPtrInput `pulumi:"quantization"`
-	Query        pulumi.StringInput    `pulumi:"query"`
-	Rollup       pulumi.StringPtrInput `pulumi:"rollup"`
-	Type         pulumi.StringInput    `pulumi:"type"`
+	// Query for the metrics
+	Query pulumi.StringInput `pulumi:"query"`
+	// Aggregation function - avg, sum, min, max, count, none
+	Rollup pulumi.StringPtrInput `pulumi:"rollup"`
+	// Sumologic source - metrics or logs
+	Type pulumi.StringInput `pulumi:"type"`
 }
 
 func (SloObjectiveCountMetricGoodSumologicArgs) ElementType() reflect.Type {
@@ -11842,7 +18955,7 @@ func (i SloObjectiveCountMetricGoodSumologicArgs) ToSloObjectiveCountMetricGoodS
 // SloObjectiveCountMetricGoodSumologicArrayInput is an input type that accepts SloObjectiveCountMetricGoodSumologicArray and SloObjectiveCountMetricGoodSumologicArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodSumologicArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodSumologicArray{ SloObjectiveCountMetricGoodSumologicArgs{...} }
+//	SloObjectiveCountMetricGoodSumologicArray{ SloObjectiveCountMetricGoodSumologicArgs{...} }
 type SloObjectiveCountMetricGoodSumologicArrayInput interface {
 	pulumi.Input
 
@@ -11878,18 +18991,22 @@ func (o SloObjectiveCountMetricGoodSumologicOutput) ToSloObjectiveCountMetricGoo
 	return o
 }
 
+// Period of data aggregation
 func (o SloObjectiveCountMetricGoodSumologicOutput) Quantization() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodSumologic) *string { return v.Quantization }).(pulumi.StringPtrOutput)
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricGoodSumologicOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodSumologic) string { return v.Query }).(pulumi.StringOutput)
 }
 
+// Aggregation function - avg, sum, min, max, count, none
 func (o SloObjectiveCountMetricGoodSumologicOutput) Rollup() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodSumologic) *string { return v.Rollup }).(pulumi.StringPtrOutput)
 }
 
+// Sumologic source - metrics or logs
 func (o SloObjectiveCountMetricGoodSumologicOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodSumologic) string { return v.Type }).(pulumi.StringOutput)
 }
@@ -11915,13 +19032,14 @@ func (o SloObjectiveCountMetricGoodSumologicArrayOutput) Index(i pulumi.IntInput
 }
 
 type SloObjectiveCountMetricGoodThousandeye struct {
+	// ID of the test
 	TestId int `pulumi:"testId"`
 }
 
 // SloObjectiveCountMetricGoodThousandeyeInput is an input type that accepts SloObjectiveCountMetricGoodThousandeyeArgs and SloObjectiveCountMetricGoodThousandeyeOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodThousandeyeInput` via:
 //
-//          SloObjectiveCountMetricGoodThousandeyeArgs{...}
+//	SloObjectiveCountMetricGoodThousandeyeArgs{...}
 type SloObjectiveCountMetricGoodThousandeyeInput interface {
 	pulumi.Input
 
@@ -11930,6 +19048,7 @@ type SloObjectiveCountMetricGoodThousandeyeInput interface {
 }
 
 type SloObjectiveCountMetricGoodThousandeyeArgs struct {
+	// ID of the test
 	TestId pulumi.IntInput `pulumi:"testId"`
 }
 
@@ -11948,7 +19067,7 @@ func (i SloObjectiveCountMetricGoodThousandeyeArgs) ToSloObjectiveCountMetricGoo
 // SloObjectiveCountMetricGoodThousandeyeArrayInput is an input type that accepts SloObjectiveCountMetricGoodThousandeyeArray and SloObjectiveCountMetricGoodThousandeyeArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricGoodThousandeyeArrayInput` via:
 //
-//          SloObjectiveCountMetricGoodThousandeyeArray{ SloObjectiveCountMetricGoodThousandeyeArgs{...} }
+//	SloObjectiveCountMetricGoodThousandeyeArray{ SloObjectiveCountMetricGoodThousandeyeArgs{...} }
 type SloObjectiveCountMetricGoodThousandeyeArrayInput interface {
 	pulumi.Input
 
@@ -11984,6 +19103,7 @@ func (o SloObjectiveCountMetricGoodThousandeyeOutput) ToSloObjectiveCountMetricG
 	return o
 }
 
+// ID of the test
 func (o SloObjectiveCountMetricGoodThousandeyeOutput) TestId() pulumi.IntOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricGoodThousandeye) int { return v.TestId }).(pulumi.IntOutput)
 }
@@ -12009,34 +19129,60 @@ func (o SloObjectiveCountMetricGoodThousandeyeArrayOutput) Index(i pulumi.IntInp
 }
 
 type SloObjectiveCountMetricTotal struct {
-	AmazonPrometheuses    []SloObjectiveCountMetricTotalAmazonPrometheus    `pulumi:"amazonPrometheuses"`
-	Appdynamics           []SloObjectiveCountMetricTotalAppdynamic          `pulumi:"appdynamics"`
-	Bigqueries            []SloObjectiveCountMetricTotalBigquery            `pulumi:"bigqueries"`
-	Cloudwatches          []SloObjectiveCountMetricTotalCloudwatch          `pulumi:"cloudwatches"`
-	Datadogs              []SloObjectiveCountMetricTotalDatadog             `pulumi:"datadogs"`
-	Dynatraces            []SloObjectiveCountMetricTotalDynatrace           `pulumi:"dynatraces"`
-	Elasticsearches       []SloObjectiveCountMetricTotalElasticsearch       `pulumi:"elasticsearches"`
-	Gcms                  []SloObjectiveCountMetricTotalGcm                 `pulumi:"gcms"`
-	GrafanaLokis          []SloObjectiveCountMetricTotalGrafanaLoki         `pulumi:"grafanaLokis"`
-	Graphites             []SloObjectiveCountMetricTotalGraphite            `pulumi:"graphites"`
-	Influxdbs             []SloObjectiveCountMetricTotalInfluxdb            `pulumi:"influxdbs"`
-	Instanas              []SloObjectiveCountMetricTotalInstana             `pulumi:"instanas"`
-	Lightsteps            []SloObjectiveCountMetricTotalLightstep           `pulumi:"lightsteps"`
-	Newrelics             []SloObjectiveCountMetricTotalNewrelic            `pulumi:"newrelics"`
-	Opentsdbs             []SloObjectiveCountMetricTotalOpentsdb            `pulumi:"opentsdbs"`
-	Pingdoms              []SloObjectiveCountMetricTotalPingdom             `pulumi:"pingdoms"`
-	Prometheuses          []SloObjectiveCountMetricTotalPrometheus          `pulumi:"prometheuses"`
-	Redshifts             []SloObjectiveCountMetricTotalRedshift            `pulumi:"redshifts"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
+	AmazonPrometheuses []SloObjectiveCountMetricTotalAmazonPrometheus `pulumi:"amazonPrometheuses"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
+	Appdynamics []SloObjectiveCountMetricTotalAppdynamic `pulumi:"appdynamics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+	AzureMonitors []SloObjectiveCountMetricTotalAzureMonitor `pulumi:"azureMonitors"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
+	Bigqueries []SloObjectiveCountMetricTotalBigquery `pulumi:"bigqueries"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
+	Cloudwatches []SloObjectiveCountMetricTotalCloudwatch `pulumi:"cloudwatches"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
+	Datadogs []SloObjectiveCountMetricTotalDatadog `pulumi:"datadogs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
+	Dynatraces []SloObjectiveCountMetricTotalDynatrace `pulumi:"dynatraces"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
+	Elasticsearches []SloObjectiveCountMetricTotalElasticsearch `pulumi:"elasticsearches"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
+	Gcms []SloObjectiveCountMetricTotalGcm `pulumi:"gcms"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
+	GrafanaLokis []SloObjectiveCountMetricTotalGrafanaLoki `pulumi:"grafanaLokis"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
+	Graphites []SloObjectiveCountMetricTotalGraphite `pulumi:"graphites"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+	Honeycombs []SloObjectiveCountMetricTotalHoneycomb `pulumi:"honeycombs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
+	Influxdbs []SloObjectiveCountMetricTotalInfluxdb `pulumi:"influxdbs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
+	Instanas []SloObjectiveCountMetricTotalInstana `pulumi:"instanas"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
+	Lightsteps []SloObjectiveCountMetricTotalLightstep `pulumi:"lightsteps"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
+	Newrelics []SloObjectiveCountMetricTotalNewrelic `pulumi:"newrelics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
+	Opentsdbs []SloObjectiveCountMetricTotalOpentsdb `pulumi:"opentsdbs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
+	Pingdoms []SloObjectiveCountMetricTotalPingdom `pulumi:"pingdoms"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
+	Prometheuses []SloObjectiveCountMetricTotalPrometheus `pulumi:"prometheuses"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
+	Redshifts []SloObjectiveCountMetricTotalRedshift `pulumi:"redshifts"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
 	SplunkObservabilities []SloObjectiveCountMetricTotalSplunkObservability `pulumi:"splunkObservabilities"`
-	Splunks               []SloObjectiveCountMetricTotalSplunk              `pulumi:"splunks"`
-	Sumologics            []SloObjectiveCountMetricTotalSumologic           `pulumi:"sumologics"`
-	Thousandeyes          []SloObjectiveCountMetricTotalThousandeye         `pulumi:"thousandeyes"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
+	Splunks []SloObjectiveCountMetricTotalSplunk `pulumi:"splunks"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
+	Sumologics []SloObjectiveCountMetricTotalSumologic `pulumi:"sumologics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
+	Thousandeyes []SloObjectiveCountMetricTotalThousandeye `pulumi:"thousandeyes"`
 }
 
 // SloObjectiveCountMetricTotalInput is an input type that accepts SloObjectiveCountMetricTotalArgs and SloObjectiveCountMetricTotalOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalInput` via:
 //
-//          SloObjectiveCountMetricTotalArgs{...}
+//	SloObjectiveCountMetricTotalArgs{...}
 type SloObjectiveCountMetricTotalInput interface {
 	pulumi.Input
 
@@ -12045,28 +19191,54 @@ type SloObjectiveCountMetricTotalInput interface {
 }
 
 type SloObjectiveCountMetricTotalArgs struct {
-	AmazonPrometheuses    SloObjectiveCountMetricTotalAmazonPrometheusArrayInput    `pulumi:"amazonPrometheuses"`
-	Appdynamics           SloObjectiveCountMetricTotalAppdynamicArrayInput          `pulumi:"appdynamics"`
-	Bigqueries            SloObjectiveCountMetricTotalBigqueryArrayInput            `pulumi:"bigqueries"`
-	Cloudwatches          SloObjectiveCountMetricTotalCloudwatchArrayInput          `pulumi:"cloudwatches"`
-	Datadogs              SloObjectiveCountMetricTotalDatadogArrayInput             `pulumi:"datadogs"`
-	Dynatraces            SloObjectiveCountMetricTotalDynatraceArrayInput           `pulumi:"dynatraces"`
-	Elasticsearches       SloObjectiveCountMetricTotalElasticsearchArrayInput       `pulumi:"elasticsearches"`
-	Gcms                  SloObjectiveCountMetricTotalGcmArrayInput                 `pulumi:"gcms"`
-	GrafanaLokis          SloObjectiveCountMetricTotalGrafanaLokiArrayInput         `pulumi:"grafanaLokis"`
-	Graphites             SloObjectiveCountMetricTotalGraphiteArrayInput            `pulumi:"graphites"`
-	Influxdbs             SloObjectiveCountMetricTotalInfluxdbArrayInput            `pulumi:"influxdbs"`
-	Instanas              SloObjectiveCountMetricTotalInstanaArrayInput             `pulumi:"instanas"`
-	Lightsteps            SloObjectiveCountMetricTotalLightstepArrayInput           `pulumi:"lightsteps"`
-	Newrelics             SloObjectiveCountMetricTotalNewrelicArrayInput            `pulumi:"newrelics"`
-	Opentsdbs             SloObjectiveCountMetricTotalOpentsdbArrayInput            `pulumi:"opentsdbs"`
-	Pingdoms              SloObjectiveCountMetricTotalPingdomArrayInput             `pulumi:"pingdoms"`
-	Prometheuses          SloObjectiveCountMetricTotalPrometheusArrayInput          `pulumi:"prometheuses"`
-	Redshifts             SloObjectiveCountMetricTotalRedshiftArrayInput            `pulumi:"redshifts"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
+	AmazonPrometheuses SloObjectiveCountMetricTotalAmazonPrometheusArrayInput `pulumi:"amazonPrometheuses"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
+	Appdynamics SloObjectiveCountMetricTotalAppdynamicArrayInput `pulumi:"appdynamics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+	AzureMonitors SloObjectiveCountMetricTotalAzureMonitorArrayInput `pulumi:"azureMonitors"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
+	Bigqueries SloObjectiveCountMetricTotalBigqueryArrayInput `pulumi:"bigqueries"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
+	Cloudwatches SloObjectiveCountMetricTotalCloudwatchArrayInput `pulumi:"cloudwatches"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
+	Datadogs SloObjectiveCountMetricTotalDatadogArrayInput `pulumi:"datadogs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
+	Dynatraces SloObjectiveCountMetricTotalDynatraceArrayInput `pulumi:"dynatraces"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
+	Elasticsearches SloObjectiveCountMetricTotalElasticsearchArrayInput `pulumi:"elasticsearches"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
+	Gcms SloObjectiveCountMetricTotalGcmArrayInput `pulumi:"gcms"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
+	GrafanaLokis SloObjectiveCountMetricTotalGrafanaLokiArrayInput `pulumi:"grafanaLokis"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
+	Graphites SloObjectiveCountMetricTotalGraphiteArrayInput `pulumi:"graphites"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+	Honeycombs SloObjectiveCountMetricTotalHoneycombArrayInput `pulumi:"honeycombs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
+	Influxdbs SloObjectiveCountMetricTotalInfluxdbArrayInput `pulumi:"influxdbs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
+	Instanas SloObjectiveCountMetricTotalInstanaArrayInput `pulumi:"instanas"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
+	Lightsteps SloObjectiveCountMetricTotalLightstepArrayInput `pulumi:"lightsteps"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
+	Newrelics SloObjectiveCountMetricTotalNewrelicArrayInput `pulumi:"newrelics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
+	Opentsdbs SloObjectiveCountMetricTotalOpentsdbArrayInput `pulumi:"opentsdbs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
+	Pingdoms SloObjectiveCountMetricTotalPingdomArrayInput `pulumi:"pingdoms"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
+	Prometheuses SloObjectiveCountMetricTotalPrometheusArrayInput `pulumi:"prometheuses"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
+	Redshifts SloObjectiveCountMetricTotalRedshiftArrayInput `pulumi:"redshifts"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
 	SplunkObservabilities SloObjectiveCountMetricTotalSplunkObservabilityArrayInput `pulumi:"splunkObservabilities"`
-	Splunks               SloObjectiveCountMetricTotalSplunkArrayInput              `pulumi:"splunks"`
-	Sumologics            SloObjectiveCountMetricTotalSumologicArrayInput           `pulumi:"sumologics"`
-	Thousandeyes          SloObjectiveCountMetricTotalThousandeyeArrayInput         `pulumi:"thousandeyes"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
+	Splunks SloObjectiveCountMetricTotalSplunkArrayInput `pulumi:"splunks"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
+	Sumologics SloObjectiveCountMetricTotalSumologicArrayInput `pulumi:"sumologics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
+	Thousandeyes SloObjectiveCountMetricTotalThousandeyeArrayInput `pulumi:"thousandeyes"`
 }
 
 func (SloObjectiveCountMetricTotalArgs) ElementType() reflect.Type {
@@ -12084,7 +19256,7 @@ func (i SloObjectiveCountMetricTotalArgs) ToSloObjectiveCountMetricTotalOutputWi
 // SloObjectiveCountMetricTotalArrayInput is an input type that accepts SloObjectiveCountMetricTotalArray and SloObjectiveCountMetricTotalArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalArray{ SloObjectiveCountMetricTotalArgs{...} }
+//	SloObjectiveCountMetricTotalArray{ SloObjectiveCountMetricTotalArgs{...} }
 type SloObjectiveCountMetricTotalArrayInput interface {
 	pulumi.Input
 
@@ -12120,96 +19292,130 @@ func (o SloObjectiveCountMetricTotalOutput) ToSloObjectiveCountMetricTotalOutput
 	return o
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
 func (o SloObjectiveCountMetricTotalOutput) AmazonPrometheuses() SloObjectiveCountMetricTotalAmazonPrometheusArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalAmazonPrometheus {
 		return v.AmazonPrometheuses
 	}).(SloObjectiveCountMetricTotalAmazonPrometheusArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
 func (o SloObjectiveCountMetricTotalOutput) Appdynamics() SloObjectiveCountMetricTotalAppdynamicArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalAppdynamic { return v.Appdynamics }).(SloObjectiveCountMetricTotalAppdynamicArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+func (o SloObjectiveCountMetricTotalOutput) AzureMonitors() SloObjectiveCountMetricTotalAzureMonitorArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalAzureMonitor {
+		return v.AzureMonitors
+	}).(SloObjectiveCountMetricTotalAzureMonitorArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
 func (o SloObjectiveCountMetricTotalOutput) Bigqueries() SloObjectiveCountMetricTotalBigqueryArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalBigquery { return v.Bigqueries }).(SloObjectiveCountMetricTotalBigqueryArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
 func (o SloObjectiveCountMetricTotalOutput) Cloudwatches() SloObjectiveCountMetricTotalCloudwatchArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalCloudwatch { return v.Cloudwatches }).(SloObjectiveCountMetricTotalCloudwatchArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
 func (o SloObjectiveCountMetricTotalOutput) Datadogs() SloObjectiveCountMetricTotalDatadogArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalDatadog { return v.Datadogs }).(SloObjectiveCountMetricTotalDatadogArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
 func (o SloObjectiveCountMetricTotalOutput) Dynatraces() SloObjectiveCountMetricTotalDynatraceArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalDynatrace { return v.Dynatraces }).(SloObjectiveCountMetricTotalDynatraceArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
 func (o SloObjectiveCountMetricTotalOutput) Elasticsearches() SloObjectiveCountMetricTotalElasticsearchArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalElasticsearch {
 		return v.Elasticsearches
 	}).(SloObjectiveCountMetricTotalElasticsearchArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
 func (o SloObjectiveCountMetricTotalOutput) Gcms() SloObjectiveCountMetricTotalGcmArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalGcm { return v.Gcms }).(SloObjectiveCountMetricTotalGcmArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
 func (o SloObjectiveCountMetricTotalOutput) GrafanaLokis() SloObjectiveCountMetricTotalGrafanaLokiArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalGrafanaLoki { return v.GrafanaLokis }).(SloObjectiveCountMetricTotalGrafanaLokiArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
 func (o SloObjectiveCountMetricTotalOutput) Graphites() SloObjectiveCountMetricTotalGraphiteArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalGraphite { return v.Graphites }).(SloObjectiveCountMetricTotalGraphiteArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+func (o SloObjectiveCountMetricTotalOutput) Honeycombs() SloObjectiveCountMetricTotalHoneycombArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalHoneycomb { return v.Honeycombs }).(SloObjectiveCountMetricTotalHoneycombArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
 func (o SloObjectiveCountMetricTotalOutput) Influxdbs() SloObjectiveCountMetricTotalInfluxdbArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalInfluxdb { return v.Influxdbs }).(SloObjectiveCountMetricTotalInfluxdbArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
 func (o SloObjectiveCountMetricTotalOutput) Instanas() SloObjectiveCountMetricTotalInstanaArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalInstana { return v.Instanas }).(SloObjectiveCountMetricTotalInstanaArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
 func (o SloObjectiveCountMetricTotalOutput) Lightsteps() SloObjectiveCountMetricTotalLightstepArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalLightstep { return v.Lightsteps }).(SloObjectiveCountMetricTotalLightstepArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
 func (o SloObjectiveCountMetricTotalOutput) Newrelics() SloObjectiveCountMetricTotalNewrelicArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalNewrelic { return v.Newrelics }).(SloObjectiveCountMetricTotalNewrelicArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
 func (o SloObjectiveCountMetricTotalOutput) Opentsdbs() SloObjectiveCountMetricTotalOpentsdbArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalOpentsdb { return v.Opentsdbs }).(SloObjectiveCountMetricTotalOpentsdbArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
 func (o SloObjectiveCountMetricTotalOutput) Pingdoms() SloObjectiveCountMetricTotalPingdomArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalPingdom { return v.Pingdoms }).(SloObjectiveCountMetricTotalPingdomArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
 func (o SloObjectiveCountMetricTotalOutput) Prometheuses() SloObjectiveCountMetricTotalPrometheusArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalPrometheus { return v.Prometheuses }).(SloObjectiveCountMetricTotalPrometheusArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
 func (o SloObjectiveCountMetricTotalOutput) Redshifts() SloObjectiveCountMetricTotalRedshiftArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalRedshift { return v.Redshifts }).(SloObjectiveCountMetricTotalRedshiftArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
 func (o SloObjectiveCountMetricTotalOutput) SplunkObservabilities() SloObjectiveCountMetricTotalSplunkObservabilityArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalSplunkObservability {
 		return v.SplunkObservabilities
 	}).(SloObjectiveCountMetricTotalSplunkObservabilityArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
 func (o SloObjectiveCountMetricTotalOutput) Splunks() SloObjectiveCountMetricTotalSplunkArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalSplunk { return v.Splunks }).(SloObjectiveCountMetricTotalSplunkArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
 func (o SloObjectiveCountMetricTotalOutput) Sumologics() SloObjectiveCountMetricTotalSumologicArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalSumologic { return v.Sumologics }).(SloObjectiveCountMetricTotalSumologicArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
 func (o SloObjectiveCountMetricTotalOutput) Thousandeyes() SloObjectiveCountMetricTotalThousandeyeArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotal) []SloObjectiveCountMetricTotalThousandeye { return v.Thousandeyes }).(SloObjectiveCountMetricTotalThousandeyeArrayOutput)
 }
@@ -12235,13 +19441,14 @@ func (o SloObjectiveCountMetricTotalArrayOutput) Index(i pulumi.IntInput) SloObj
 }
 
 type SloObjectiveCountMetricTotalAmazonPrometheus struct {
+	// Query for the metrics
 	Promql string `pulumi:"promql"`
 }
 
 // SloObjectiveCountMetricTotalAmazonPrometheusInput is an input type that accepts SloObjectiveCountMetricTotalAmazonPrometheusArgs and SloObjectiveCountMetricTotalAmazonPrometheusOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalAmazonPrometheusInput` via:
 //
-//          SloObjectiveCountMetricTotalAmazonPrometheusArgs{...}
+//	SloObjectiveCountMetricTotalAmazonPrometheusArgs{...}
 type SloObjectiveCountMetricTotalAmazonPrometheusInput interface {
 	pulumi.Input
 
@@ -12250,6 +19457,7 @@ type SloObjectiveCountMetricTotalAmazonPrometheusInput interface {
 }
 
 type SloObjectiveCountMetricTotalAmazonPrometheusArgs struct {
+	// Query for the metrics
 	Promql pulumi.StringInput `pulumi:"promql"`
 }
 
@@ -12268,7 +19476,7 @@ func (i SloObjectiveCountMetricTotalAmazonPrometheusArgs) ToSloObjectiveCountMet
 // SloObjectiveCountMetricTotalAmazonPrometheusArrayInput is an input type that accepts SloObjectiveCountMetricTotalAmazonPrometheusArray and SloObjectiveCountMetricTotalAmazonPrometheusArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalAmazonPrometheusArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalAmazonPrometheusArray{ SloObjectiveCountMetricTotalAmazonPrometheusArgs{...} }
+//	SloObjectiveCountMetricTotalAmazonPrometheusArray{ SloObjectiveCountMetricTotalAmazonPrometheusArgs{...} }
 type SloObjectiveCountMetricTotalAmazonPrometheusArrayInput interface {
 	pulumi.Input
 
@@ -12304,6 +19512,7 @@ func (o SloObjectiveCountMetricTotalAmazonPrometheusOutput) ToSloObjectiveCountM
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricTotalAmazonPrometheusOutput) Promql() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalAmazonPrometheus) string { return v.Promql }).(pulumi.StringOutput)
 }
@@ -12329,14 +19538,16 @@ func (o SloObjectiveCountMetricTotalAmazonPrometheusArrayOutput) Index(i pulumi.
 }
 
 type SloObjectiveCountMetricTotalAppdynamic struct {
+	// Name of the added application
 	ApplicationName string `pulumi:"applicationName"`
-	MetricPath      string `pulumi:"metricPath"`
+	// Path to the metrics
+	MetricPath string `pulumi:"metricPath"`
 }
 
 // SloObjectiveCountMetricTotalAppdynamicInput is an input type that accepts SloObjectiveCountMetricTotalAppdynamicArgs and SloObjectiveCountMetricTotalAppdynamicOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalAppdynamicInput` via:
 //
-//          SloObjectiveCountMetricTotalAppdynamicArgs{...}
+//	SloObjectiveCountMetricTotalAppdynamicArgs{...}
 type SloObjectiveCountMetricTotalAppdynamicInput interface {
 	pulumi.Input
 
@@ -12345,8 +19556,10 @@ type SloObjectiveCountMetricTotalAppdynamicInput interface {
 }
 
 type SloObjectiveCountMetricTotalAppdynamicArgs struct {
+	// Name of the added application
 	ApplicationName pulumi.StringInput `pulumi:"applicationName"`
-	MetricPath      pulumi.StringInput `pulumi:"metricPath"`
+	// Path to the metrics
+	MetricPath pulumi.StringInput `pulumi:"metricPath"`
 }
 
 func (SloObjectiveCountMetricTotalAppdynamicArgs) ElementType() reflect.Type {
@@ -12364,7 +19577,7 @@ func (i SloObjectiveCountMetricTotalAppdynamicArgs) ToSloObjectiveCountMetricTot
 // SloObjectiveCountMetricTotalAppdynamicArrayInput is an input type that accepts SloObjectiveCountMetricTotalAppdynamicArray and SloObjectiveCountMetricTotalAppdynamicArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalAppdynamicArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalAppdynamicArray{ SloObjectiveCountMetricTotalAppdynamicArgs{...} }
+//	SloObjectiveCountMetricTotalAppdynamicArray{ SloObjectiveCountMetricTotalAppdynamicArgs{...} }
 type SloObjectiveCountMetricTotalAppdynamicArrayInput interface {
 	pulumi.Input
 
@@ -12400,10 +19613,12 @@ func (o SloObjectiveCountMetricTotalAppdynamicOutput) ToSloObjectiveCountMetricT
 	return o
 }
 
+// Name of the added application
 func (o SloObjectiveCountMetricTotalAppdynamicOutput) ApplicationName() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalAppdynamic) string { return v.ApplicationName }).(pulumi.StringOutput)
 }
 
+// Path to the metrics
 func (o SloObjectiveCountMetricTotalAppdynamicOutput) MetricPath() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalAppdynamic) string { return v.MetricPath }).(pulumi.StringOutput)
 }
@@ -12428,16 +19643,404 @@ func (o SloObjectiveCountMetricTotalAppdynamicArrayOutput) Index(i pulumi.IntInp
 	}).(SloObjectiveCountMetricTotalAppdynamicOutput)
 }
 
+type SloObjectiveCountMetricTotalAzureMonitor struct {
+	// Aggregation type [Required for metrics]
+	Aggregation *string `pulumi:"aggregation"`
+	// Specifies source: 'metrics' or 'logs'
+	DataType string `pulumi:"dataType"`
+	// Dimensions of the metric [Optional for metrics]
+	Dimensions []SloObjectiveCountMetricTotalAzureMonitorDimension `pulumi:"dimensions"`
+	// Logs query in Kusto Query Language [Required for logs]
+	KqlQuery *string `pulumi:"kqlQuery"`
+	// Name of the metric [Required for metrics]
+	MetricName *string `pulumi:"metricName"`
+	// Namespace of the metric [Optional for metrics]
+	MetricNamespace *string `pulumi:"metricNamespace"`
+	// Identifier of the Azure Cloud resource [Required for metrics]
+	ResourceId *string `pulumi:"resourceId"`
+	// Log analytics workspace [Required for logs]
+	Workspaces []SloObjectiveCountMetricTotalAzureMonitorWorkspace `pulumi:"workspaces"`
+}
+
+// SloObjectiveCountMetricTotalAzureMonitorInput is an input type that accepts SloObjectiveCountMetricTotalAzureMonitorArgs and SloObjectiveCountMetricTotalAzureMonitorOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricTotalAzureMonitorInput` via:
+//
+//	SloObjectiveCountMetricTotalAzureMonitorArgs{...}
+type SloObjectiveCountMetricTotalAzureMonitorInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricTotalAzureMonitorOutput() SloObjectiveCountMetricTotalAzureMonitorOutput
+	ToSloObjectiveCountMetricTotalAzureMonitorOutputWithContext(context.Context) SloObjectiveCountMetricTotalAzureMonitorOutput
+}
+
+type SloObjectiveCountMetricTotalAzureMonitorArgs struct {
+	// Aggregation type [Required for metrics]
+	Aggregation pulumi.StringPtrInput `pulumi:"aggregation"`
+	// Specifies source: 'metrics' or 'logs'
+	DataType pulumi.StringInput `pulumi:"dataType"`
+	// Dimensions of the metric [Optional for metrics]
+	Dimensions SloObjectiveCountMetricTotalAzureMonitorDimensionArrayInput `pulumi:"dimensions"`
+	// Logs query in Kusto Query Language [Required for logs]
+	KqlQuery pulumi.StringPtrInput `pulumi:"kqlQuery"`
+	// Name of the metric [Required for metrics]
+	MetricName pulumi.StringPtrInput `pulumi:"metricName"`
+	// Namespace of the metric [Optional for metrics]
+	MetricNamespace pulumi.StringPtrInput `pulumi:"metricNamespace"`
+	// Identifier of the Azure Cloud resource [Required for metrics]
+	ResourceId pulumi.StringPtrInput `pulumi:"resourceId"`
+	// Log analytics workspace [Required for logs]
+	Workspaces SloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayInput `pulumi:"workspaces"`
+}
+
+func (SloObjectiveCountMetricTotalAzureMonitorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricTotalAzureMonitor)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricTotalAzureMonitorArgs) ToSloObjectiveCountMetricTotalAzureMonitorOutput() SloObjectiveCountMetricTotalAzureMonitorOutput {
+	return i.ToSloObjectiveCountMetricTotalAzureMonitorOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricTotalAzureMonitorArgs) ToSloObjectiveCountMetricTotalAzureMonitorOutputWithContext(ctx context.Context) SloObjectiveCountMetricTotalAzureMonitorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricTotalAzureMonitorOutput)
+}
+
+// SloObjectiveCountMetricTotalAzureMonitorArrayInput is an input type that accepts SloObjectiveCountMetricTotalAzureMonitorArray and SloObjectiveCountMetricTotalAzureMonitorArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricTotalAzureMonitorArrayInput` via:
+//
+//	SloObjectiveCountMetricTotalAzureMonitorArray{ SloObjectiveCountMetricTotalAzureMonitorArgs{...} }
+type SloObjectiveCountMetricTotalAzureMonitorArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricTotalAzureMonitorArrayOutput() SloObjectiveCountMetricTotalAzureMonitorArrayOutput
+	ToSloObjectiveCountMetricTotalAzureMonitorArrayOutputWithContext(context.Context) SloObjectiveCountMetricTotalAzureMonitorArrayOutput
+}
+
+type SloObjectiveCountMetricTotalAzureMonitorArray []SloObjectiveCountMetricTotalAzureMonitorInput
+
+func (SloObjectiveCountMetricTotalAzureMonitorArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricTotalAzureMonitor)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricTotalAzureMonitorArray) ToSloObjectiveCountMetricTotalAzureMonitorArrayOutput() SloObjectiveCountMetricTotalAzureMonitorArrayOutput {
+	return i.ToSloObjectiveCountMetricTotalAzureMonitorArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricTotalAzureMonitorArray) ToSloObjectiveCountMetricTotalAzureMonitorArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricTotalAzureMonitorArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricTotalAzureMonitorArrayOutput)
+}
+
+type SloObjectiveCountMetricTotalAzureMonitorOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricTotalAzureMonitorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricTotalAzureMonitor)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricTotalAzureMonitorOutput) ToSloObjectiveCountMetricTotalAzureMonitorOutput() SloObjectiveCountMetricTotalAzureMonitorOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricTotalAzureMonitorOutput) ToSloObjectiveCountMetricTotalAzureMonitorOutputWithContext(ctx context.Context) SloObjectiveCountMetricTotalAzureMonitorOutput {
+	return o
+}
+
+// Aggregation type [Required for metrics]
+func (o SloObjectiveCountMetricTotalAzureMonitorOutput) Aggregation() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricTotalAzureMonitor) *string { return v.Aggregation }).(pulumi.StringPtrOutput)
+}
+
+// Specifies source: 'metrics' or 'logs'
+func (o SloObjectiveCountMetricTotalAzureMonitorOutput) DataType() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricTotalAzureMonitor) string { return v.DataType }).(pulumi.StringOutput)
+}
+
+// Dimensions of the metric [Optional for metrics]
+func (o SloObjectiveCountMetricTotalAzureMonitorOutput) Dimensions() SloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricTotalAzureMonitor) []SloObjectiveCountMetricTotalAzureMonitorDimension {
+		return v.Dimensions
+	}).(SloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutput)
+}
+
+// Logs query in Kusto Query Language [Required for logs]
+func (o SloObjectiveCountMetricTotalAzureMonitorOutput) KqlQuery() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricTotalAzureMonitor) *string { return v.KqlQuery }).(pulumi.StringPtrOutput)
+}
+
+// Name of the metric [Required for metrics]
+func (o SloObjectiveCountMetricTotalAzureMonitorOutput) MetricName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricTotalAzureMonitor) *string { return v.MetricName }).(pulumi.StringPtrOutput)
+}
+
+// Namespace of the metric [Optional for metrics]
+func (o SloObjectiveCountMetricTotalAzureMonitorOutput) MetricNamespace() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricTotalAzureMonitor) *string { return v.MetricNamespace }).(pulumi.StringPtrOutput)
+}
+
+// Identifier of the Azure Cloud resource [Required for metrics]
+func (o SloObjectiveCountMetricTotalAzureMonitorOutput) ResourceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricTotalAzureMonitor) *string { return v.ResourceId }).(pulumi.StringPtrOutput)
+}
+
+// Log analytics workspace [Required for logs]
+func (o SloObjectiveCountMetricTotalAzureMonitorOutput) Workspaces() SloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricTotalAzureMonitor) []SloObjectiveCountMetricTotalAzureMonitorWorkspace {
+		return v.Workspaces
+	}).(SloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutput)
+}
+
+type SloObjectiveCountMetricTotalAzureMonitorArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricTotalAzureMonitorArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricTotalAzureMonitor)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricTotalAzureMonitorArrayOutput) ToSloObjectiveCountMetricTotalAzureMonitorArrayOutput() SloObjectiveCountMetricTotalAzureMonitorArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricTotalAzureMonitorArrayOutput) ToSloObjectiveCountMetricTotalAzureMonitorArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricTotalAzureMonitorArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricTotalAzureMonitorArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricTotalAzureMonitorOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricTotalAzureMonitor {
+		return vs[0].([]SloObjectiveCountMetricTotalAzureMonitor)[vs[1].(int)]
+	}).(SloObjectiveCountMetricTotalAzureMonitorOutput)
+}
+
+type SloObjectiveCountMetricTotalAzureMonitorDimension struct {
+	// The name of the previously defined alert method.
+	Name string `pulumi:"name"`
+	// Burn rate value.
+	Value string `pulumi:"value"`
+}
+
+// SloObjectiveCountMetricTotalAzureMonitorDimensionInput is an input type that accepts SloObjectiveCountMetricTotalAzureMonitorDimensionArgs and SloObjectiveCountMetricTotalAzureMonitorDimensionOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricTotalAzureMonitorDimensionInput` via:
+//
+//	SloObjectiveCountMetricTotalAzureMonitorDimensionArgs{...}
+type SloObjectiveCountMetricTotalAzureMonitorDimensionInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricTotalAzureMonitorDimensionOutput() SloObjectiveCountMetricTotalAzureMonitorDimensionOutput
+	ToSloObjectiveCountMetricTotalAzureMonitorDimensionOutputWithContext(context.Context) SloObjectiveCountMetricTotalAzureMonitorDimensionOutput
+}
+
+type SloObjectiveCountMetricTotalAzureMonitorDimensionArgs struct {
+	// The name of the previously defined alert method.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Burn rate value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (SloObjectiveCountMetricTotalAzureMonitorDimensionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricTotalAzureMonitorDimension)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricTotalAzureMonitorDimensionArgs) ToSloObjectiveCountMetricTotalAzureMonitorDimensionOutput() SloObjectiveCountMetricTotalAzureMonitorDimensionOutput {
+	return i.ToSloObjectiveCountMetricTotalAzureMonitorDimensionOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricTotalAzureMonitorDimensionArgs) ToSloObjectiveCountMetricTotalAzureMonitorDimensionOutputWithContext(ctx context.Context) SloObjectiveCountMetricTotalAzureMonitorDimensionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricTotalAzureMonitorDimensionOutput)
+}
+
+// SloObjectiveCountMetricTotalAzureMonitorDimensionArrayInput is an input type that accepts SloObjectiveCountMetricTotalAzureMonitorDimensionArray and SloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricTotalAzureMonitorDimensionArrayInput` via:
+//
+//	SloObjectiveCountMetricTotalAzureMonitorDimensionArray{ SloObjectiveCountMetricTotalAzureMonitorDimensionArgs{...} }
+type SloObjectiveCountMetricTotalAzureMonitorDimensionArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutput() SloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutput
+	ToSloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutputWithContext(context.Context) SloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutput
+}
+
+type SloObjectiveCountMetricTotalAzureMonitorDimensionArray []SloObjectiveCountMetricTotalAzureMonitorDimensionInput
+
+func (SloObjectiveCountMetricTotalAzureMonitorDimensionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricTotalAzureMonitorDimension)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricTotalAzureMonitorDimensionArray) ToSloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutput() SloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutput {
+	return i.ToSloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricTotalAzureMonitorDimensionArray) ToSloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutput)
+}
+
+type SloObjectiveCountMetricTotalAzureMonitorDimensionOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricTotalAzureMonitorDimensionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricTotalAzureMonitorDimension)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricTotalAzureMonitorDimensionOutput) ToSloObjectiveCountMetricTotalAzureMonitorDimensionOutput() SloObjectiveCountMetricTotalAzureMonitorDimensionOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricTotalAzureMonitorDimensionOutput) ToSloObjectiveCountMetricTotalAzureMonitorDimensionOutputWithContext(ctx context.Context) SloObjectiveCountMetricTotalAzureMonitorDimensionOutput {
+	return o
+}
+
+// The name of the previously defined alert method.
+func (o SloObjectiveCountMetricTotalAzureMonitorDimensionOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricTotalAzureMonitorDimension) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Burn rate value.
+func (o SloObjectiveCountMetricTotalAzureMonitorDimensionOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricTotalAzureMonitorDimension) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricTotalAzureMonitorDimension)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutput) ToSloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutput() SloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutput) ToSloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricTotalAzureMonitorDimensionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricTotalAzureMonitorDimension {
+		return vs[0].([]SloObjectiveCountMetricTotalAzureMonitorDimension)[vs[1].(int)]
+	}).(SloObjectiveCountMetricTotalAzureMonitorDimensionOutput)
+}
+
+type SloObjectiveCountMetricTotalAzureMonitorWorkspace struct {
+	// Resource group of the workspace
+	ResourceGroup string `pulumi:"resourceGroup"`
+	// Subscription ID of the workspace
+	SubscriptionId string `pulumi:"subscriptionId"`
+	// ID of the workspace
+	WorkspaceId string `pulumi:"workspaceId"`
+}
+
+// SloObjectiveCountMetricTotalAzureMonitorWorkspaceInput is an input type that accepts SloObjectiveCountMetricTotalAzureMonitorWorkspaceArgs and SloObjectiveCountMetricTotalAzureMonitorWorkspaceOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricTotalAzureMonitorWorkspaceInput` via:
+//
+//	SloObjectiveCountMetricTotalAzureMonitorWorkspaceArgs{...}
+type SloObjectiveCountMetricTotalAzureMonitorWorkspaceInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricTotalAzureMonitorWorkspaceOutput() SloObjectiveCountMetricTotalAzureMonitorWorkspaceOutput
+	ToSloObjectiveCountMetricTotalAzureMonitorWorkspaceOutputWithContext(context.Context) SloObjectiveCountMetricTotalAzureMonitorWorkspaceOutput
+}
+
+type SloObjectiveCountMetricTotalAzureMonitorWorkspaceArgs struct {
+	// Resource group of the workspace
+	ResourceGroup pulumi.StringInput `pulumi:"resourceGroup"`
+	// Subscription ID of the workspace
+	SubscriptionId pulumi.StringInput `pulumi:"subscriptionId"`
+	// ID of the workspace
+	WorkspaceId pulumi.StringInput `pulumi:"workspaceId"`
+}
+
+func (SloObjectiveCountMetricTotalAzureMonitorWorkspaceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricTotalAzureMonitorWorkspace)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricTotalAzureMonitorWorkspaceArgs) ToSloObjectiveCountMetricTotalAzureMonitorWorkspaceOutput() SloObjectiveCountMetricTotalAzureMonitorWorkspaceOutput {
+	return i.ToSloObjectiveCountMetricTotalAzureMonitorWorkspaceOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricTotalAzureMonitorWorkspaceArgs) ToSloObjectiveCountMetricTotalAzureMonitorWorkspaceOutputWithContext(ctx context.Context) SloObjectiveCountMetricTotalAzureMonitorWorkspaceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricTotalAzureMonitorWorkspaceOutput)
+}
+
+// SloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayInput is an input type that accepts SloObjectiveCountMetricTotalAzureMonitorWorkspaceArray and SloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayInput` via:
+//
+//	SloObjectiveCountMetricTotalAzureMonitorWorkspaceArray{ SloObjectiveCountMetricTotalAzureMonitorWorkspaceArgs{...} }
+type SloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutput() SloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutput
+	ToSloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutputWithContext(context.Context) SloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutput
+}
+
+type SloObjectiveCountMetricTotalAzureMonitorWorkspaceArray []SloObjectiveCountMetricTotalAzureMonitorWorkspaceInput
+
+func (SloObjectiveCountMetricTotalAzureMonitorWorkspaceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricTotalAzureMonitorWorkspace)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricTotalAzureMonitorWorkspaceArray) ToSloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutput() SloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutput {
+	return i.ToSloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricTotalAzureMonitorWorkspaceArray) ToSloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutput)
+}
+
+type SloObjectiveCountMetricTotalAzureMonitorWorkspaceOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricTotalAzureMonitorWorkspaceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricTotalAzureMonitorWorkspace)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricTotalAzureMonitorWorkspaceOutput) ToSloObjectiveCountMetricTotalAzureMonitorWorkspaceOutput() SloObjectiveCountMetricTotalAzureMonitorWorkspaceOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricTotalAzureMonitorWorkspaceOutput) ToSloObjectiveCountMetricTotalAzureMonitorWorkspaceOutputWithContext(ctx context.Context) SloObjectiveCountMetricTotalAzureMonitorWorkspaceOutput {
+	return o
+}
+
+// Resource group of the workspace
+func (o SloObjectiveCountMetricTotalAzureMonitorWorkspaceOutput) ResourceGroup() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricTotalAzureMonitorWorkspace) string { return v.ResourceGroup }).(pulumi.StringOutput)
+}
+
+// Subscription ID of the workspace
+func (o SloObjectiveCountMetricTotalAzureMonitorWorkspaceOutput) SubscriptionId() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricTotalAzureMonitorWorkspace) string { return v.SubscriptionId }).(pulumi.StringOutput)
+}
+
+// ID of the workspace
+func (o SloObjectiveCountMetricTotalAzureMonitorWorkspaceOutput) WorkspaceId() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricTotalAzureMonitorWorkspace) string { return v.WorkspaceId }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricTotalAzureMonitorWorkspace)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutput) ToSloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutput() SloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutput) ToSloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricTotalAzureMonitorWorkspaceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricTotalAzureMonitorWorkspace {
+		return vs[0].([]SloObjectiveCountMetricTotalAzureMonitorWorkspace)[vs[1].(int)]
+	}).(SloObjectiveCountMetricTotalAzureMonitorWorkspaceOutput)
+}
+
 type SloObjectiveCountMetricTotalBigquery struct {
-	Location  string `pulumi:"location"`
+	// Location of you BigQuery
+	Location string `pulumi:"location"`
+	// Project ID
 	ProjectId string `pulumi:"projectId"`
-	Query     string `pulumi:"query"`
+	// Query for the metrics
+	Query string `pulumi:"query"`
 }
 
 // SloObjectiveCountMetricTotalBigqueryInput is an input type that accepts SloObjectiveCountMetricTotalBigqueryArgs and SloObjectiveCountMetricTotalBigqueryOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalBigqueryInput` via:
 //
-//          SloObjectiveCountMetricTotalBigqueryArgs{...}
+//	SloObjectiveCountMetricTotalBigqueryArgs{...}
 type SloObjectiveCountMetricTotalBigqueryInput interface {
 	pulumi.Input
 
@@ -12446,9 +20049,12 @@ type SloObjectiveCountMetricTotalBigqueryInput interface {
 }
 
 type SloObjectiveCountMetricTotalBigqueryArgs struct {
-	Location  pulumi.StringInput `pulumi:"location"`
+	// Location of you BigQuery
+	Location pulumi.StringInput `pulumi:"location"`
+	// Project ID
 	ProjectId pulumi.StringInput `pulumi:"projectId"`
-	Query     pulumi.StringInput `pulumi:"query"`
+	// Query for the metrics
+	Query pulumi.StringInput `pulumi:"query"`
 }
 
 func (SloObjectiveCountMetricTotalBigqueryArgs) ElementType() reflect.Type {
@@ -12466,7 +20072,7 @@ func (i SloObjectiveCountMetricTotalBigqueryArgs) ToSloObjectiveCountMetricTotal
 // SloObjectiveCountMetricTotalBigqueryArrayInput is an input type that accepts SloObjectiveCountMetricTotalBigqueryArray and SloObjectiveCountMetricTotalBigqueryArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalBigqueryArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalBigqueryArray{ SloObjectiveCountMetricTotalBigqueryArgs{...} }
+//	SloObjectiveCountMetricTotalBigqueryArray{ SloObjectiveCountMetricTotalBigqueryArgs{...} }
 type SloObjectiveCountMetricTotalBigqueryArrayInput interface {
 	pulumi.Input
 
@@ -12502,14 +20108,17 @@ func (o SloObjectiveCountMetricTotalBigqueryOutput) ToSloObjectiveCountMetricTot
 	return o
 }
 
+// Location of you BigQuery
 func (o SloObjectiveCountMetricTotalBigqueryOutput) Location() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalBigquery) string { return v.Location }).(pulumi.StringOutput)
 }
 
+// Project ID
 func (o SloObjectiveCountMetricTotalBigqueryOutput) ProjectId() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalBigquery) string { return v.ProjectId }).(pulumi.StringOutput)
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricTotalBigqueryOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalBigquery) string { return v.Query }).(pulumi.StringOutput)
 }
@@ -12535,19 +20144,28 @@ func (o SloObjectiveCountMetricTotalBigqueryArrayOutput) Index(i pulumi.IntInput
 }
 
 type SloObjectiveCountMetricTotalCloudwatch struct {
+	// AccountID used with cross-account observability feature
+	AccountId *string `pulumi:"accountId"`
+	// Dimensions of the metric [Optional for metrics]
 	Dimensions []SloObjectiveCountMetricTotalCloudwatchDimension `pulumi:"dimensions"`
-	Json       *string                                           `pulumi:"json"`
-	MetricName *string                                           `pulumi:"metricName"`
-	Namespace  *string                                           `pulumi:"namespace"`
-	Region     string                                            `pulumi:"region"`
-	Sql        *string                                           `pulumi:"sql"`
-	Stat       *string                                           `pulumi:"stat"`
+	// JSON query
+	Json *string `pulumi:"json"`
+	// Name of the metric [Required for metrics]
+	MetricName *string `pulumi:"metricName"`
+	// Namespace of the metric
+	Namespace *string `pulumi:"namespace"`
+	// Region of the CloudWatch instance
+	Region string `pulumi:"region"`
+	// SQL query
+	Sql *string `pulumi:"sql"`
+	// Metric data aggregations
+	Stat *string `pulumi:"stat"`
 }
 
 // SloObjectiveCountMetricTotalCloudwatchInput is an input type that accepts SloObjectiveCountMetricTotalCloudwatchArgs and SloObjectiveCountMetricTotalCloudwatchOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalCloudwatchInput` via:
 //
-//          SloObjectiveCountMetricTotalCloudwatchArgs{...}
+//	SloObjectiveCountMetricTotalCloudwatchArgs{...}
 type SloObjectiveCountMetricTotalCloudwatchInput interface {
 	pulumi.Input
 
@@ -12556,13 +20174,22 @@ type SloObjectiveCountMetricTotalCloudwatchInput interface {
 }
 
 type SloObjectiveCountMetricTotalCloudwatchArgs struct {
+	// AccountID used with cross-account observability feature
+	AccountId pulumi.StringPtrInput `pulumi:"accountId"`
+	// Dimensions of the metric [Optional for metrics]
 	Dimensions SloObjectiveCountMetricTotalCloudwatchDimensionArrayInput `pulumi:"dimensions"`
-	Json       pulumi.StringPtrInput                                     `pulumi:"json"`
-	MetricName pulumi.StringPtrInput                                     `pulumi:"metricName"`
-	Namespace  pulumi.StringPtrInput                                     `pulumi:"namespace"`
-	Region     pulumi.StringInput                                        `pulumi:"region"`
-	Sql        pulumi.StringPtrInput                                     `pulumi:"sql"`
-	Stat       pulumi.StringPtrInput                                     `pulumi:"stat"`
+	// JSON query
+	Json pulumi.StringPtrInput `pulumi:"json"`
+	// Name of the metric [Required for metrics]
+	MetricName pulumi.StringPtrInput `pulumi:"metricName"`
+	// Namespace of the metric
+	Namespace pulumi.StringPtrInput `pulumi:"namespace"`
+	// Region of the CloudWatch instance
+	Region pulumi.StringInput `pulumi:"region"`
+	// SQL query
+	Sql pulumi.StringPtrInput `pulumi:"sql"`
+	// Metric data aggregations
+	Stat pulumi.StringPtrInput `pulumi:"stat"`
 }
 
 func (SloObjectiveCountMetricTotalCloudwatchArgs) ElementType() reflect.Type {
@@ -12580,7 +20207,7 @@ func (i SloObjectiveCountMetricTotalCloudwatchArgs) ToSloObjectiveCountMetricTot
 // SloObjectiveCountMetricTotalCloudwatchArrayInput is an input type that accepts SloObjectiveCountMetricTotalCloudwatchArray and SloObjectiveCountMetricTotalCloudwatchArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalCloudwatchArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalCloudwatchArray{ SloObjectiveCountMetricTotalCloudwatchArgs{...} }
+//	SloObjectiveCountMetricTotalCloudwatchArray{ SloObjectiveCountMetricTotalCloudwatchArgs{...} }
 type SloObjectiveCountMetricTotalCloudwatchArrayInput interface {
 	pulumi.Input
 
@@ -12616,32 +20243,44 @@ func (o SloObjectiveCountMetricTotalCloudwatchOutput) ToSloObjectiveCountMetricT
 	return o
 }
 
+// AccountID used with cross-account observability feature
+func (o SloObjectiveCountMetricTotalCloudwatchOutput) AccountId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricTotalCloudwatch) *string { return v.AccountId }).(pulumi.StringPtrOutput)
+}
+
+// Dimensions of the metric [Optional for metrics]
 func (o SloObjectiveCountMetricTotalCloudwatchOutput) Dimensions() SloObjectiveCountMetricTotalCloudwatchDimensionArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalCloudwatch) []SloObjectiveCountMetricTotalCloudwatchDimension {
 		return v.Dimensions
 	}).(SloObjectiveCountMetricTotalCloudwatchDimensionArrayOutput)
 }
 
+// JSON query
 func (o SloObjectiveCountMetricTotalCloudwatchOutput) Json() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalCloudwatch) *string { return v.Json }).(pulumi.StringPtrOutput)
 }
 
+// Name of the metric [Required for metrics]
 func (o SloObjectiveCountMetricTotalCloudwatchOutput) MetricName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalCloudwatch) *string { return v.MetricName }).(pulumi.StringPtrOutput)
 }
 
+// Namespace of the metric
 func (o SloObjectiveCountMetricTotalCloudwatchOutput) Namespace() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalCloudwatch) *string { return v.Namespace }).(pulumi.StringPtrOutput)
 }
 
+// Region of the CloudWatch instance
 func (o SloObjectiveCountMetricTotalCloudwatchOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalCloudwatch) string { return v.Region }).(pulumi.StringOutput)
 }
 
+// SQL query
 func (o SloObjectiveCountMetricTotalCloudwatchOutput) Sql() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalCloudwatch) *string { return v.Sql }).(pulumi.StringPtrOutput)
 }
 
+// Metric data aggregations
 func (o SloObjectiveCountMetricTotalCloudwatchOutput) Stat() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalCloudwatch) *string { return v.Stat }).(pulumi.StringPtrOutput)
 }
@@ -12667,15 +20306,16 @@ func (o SloObjectiveCountMetricTotalCloudwatchArrayOutput) Index(i pulumi.IntInp
 }
 
 type SloObjectiveCountMetricTotalCloudwatchDimension struct {
-	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
-	Name  string `pulumi:"name"`
+	// The name of the previously defined alert method.
+	Name string `pulumi:"name"`
+	// Burn rate value.
 	Value string `pulumi:"value"`
 }
 
 // SloObjectiveCountMetricTotalCloudwatchDimensionInput is an input type that accepts SloObjectiveCountMetricTotalCloudwatchDimensionArgs and SloObjectiveCountMetricTotalCloudwatchDimensionOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalCloudwatchDimensionInput` via:
 //
-//          SloObjectiveCountMetricTotalCloudwatchDimensionArgs{...}
+//	SloObjectiveCountMetricTotalCloudwatchDimensionArgs{...}
 type SloObjectiveCountMetricTotalCloudwatchDimensionInput interface {
 	pulumi.Input
 
@@ -12684,8 +20324,9 @@ type SloObjectiveCountMetricTotalCloudwatchDimensionInput interface {
 }
 
 type SloObjectiveCountMetricTotalCloudwatchDimensionArgs struct {
-	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
-	Name  pulumi.StringInput `pulumi:"name"`
+	// The name of the previously defined alert method.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Burn rate value.
 	Value pulumi.StringInput `pulumi:"value"`
 }
 
@@ -12704,7 +20345,7 @@ func (i SloObjectiveCountMetricTotalCloudwatchDimensionArgs) ToSloObjectiveCount
 // SloObjectiveCountMetricTotalCloudwatchDimensionArrayInput is an input type that accepts SloObjectiveCountMetricTotalCloudwatchDimensionArray and SloObjectiveCountMetricTotalCloudwatchDimensionArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalCloudwatchDimensionArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalCloudwatchDimensionArray{ SloObjectiveCountMetricTotalCloudwatchDimensionArgs{...} }
+//	SloObjectiveCountMetricTotalCloudwatchDimensionArray{ SloObjectiveCountMetricTotalCloudwatchDimensionArgs{...} }
 type SloObjectiveCountMetricTotalCloudwatchDimensionArrayInput interface {
 	pulumi.Input
 
@@ -12740,11 +20381,12 @@ func (o SloObjectiveCountMetricTotalCloudwatchDimensionOutput) ToSloObjectiveCou
 	return o
 }
 
-// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+// The name of the previously defined alert method.
 func (o SloObjectiveCountMetricTotalCloudwatchDimensionOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalCloudwatchDimension) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Burn rate value.
 func (o SloObjectiveCountMetricTotalCloudwatchDimensionOutput) Value() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalCloudwatchDimension) string { return v.Value }).(pulumi.StringOutput)
 }
@@ -12770,13 +20412,14 @@ func (o SloObjectiveCountMetricTotalCloudwatchDimensionArrayOutput) Index(i pulu
 }
 
 type SloObjectiveCountMetricTotalDatadog struct {
+	// Query for the metrics
 	Query string `pulumi:"query"`
 }
 
 // SloObjectiveCountMetricTotalDatadogInput is an input type that accepts SloObjectiveCountMetricTotalDatadogArgs and SloObjectiveCountMetricTotalDatadogOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalDatadogInput` via:
 //
-//          SloObjectiveCountMetricTotalDatadogArgs{...}
+//	SloObjectiveCountMetricTotalDatadogArgs{...}
 type SloObjectiveCountMetricTotalDatadogInput interface {
 	pulumi.Input
 
@@ -12785,6 +20428,7 @@ type SloObjectiveCountMetricTotalDatadogInput interface {
 }
 
 type SloObjectiveCountMetricTotalDatadogArgs struct {
+	// Query for the metrics
 	Query pulumi.StringInput `pulumi:"query"`
 }
 
@@ -12803,7 +20447,7 @@ func (i SloObjectiveCountMetricTotalDatadogArgs) ToSloObjectiveCountMetricTotalD
 // SloObjectiveCountMetricTotalDatadogArrayInput is an input type that accepts SloObjectiveCountMetricTotalDatadogArray and SloObjectiveCountMetricTotalDatadogArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalDatadogArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalDatadogArray{ SloObjectiveCountMetricTotalDatadogArgs{...} }
+//	SloObjectiveCountMetricTotalDatadogArray{ SloObjectiveCountMetricTotalDatadogArgs{...} }
 type SloObjectiveCountMetricTotalDatadogArrayInput interface {
 	pulumi.Input
 
@@ -12839,6 +20483,7 @@ func (o SloObjectiveCountMetricTotalDatadogOutput) ToSloObjectiveCountMetricTota
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricTotalDatadogOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalDatadog) string { return v.Query }).(pulumi.StringOutput)
 }
@@ -12864,13 +20509,14 @@ func (o SloObjectiveCountMetricTotalDatadogArrayOutput) Index(i pulumi.IntInput)
 }
 
 type SloObjectiveCountMetricTotalDynatrace struct {
+	// Selector for the metrics
 	MetricSelector string `pulumi:"metricSelector"`
 }
 
 // SloObjectiveCountMetricTotalDynatraceInput is an input type that accepts SloObjectiveCountMetricTotalDynatraceArgs and SloObjectiveCountMetricTotalDynatraceOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalDynatraceInput` via:
 //
-//          SloObjectiveCountMetricTotalDynatraceArgs{...}
+//	SloObjectiveCountMetricTotalDynatraceArgs{...}
 type SloObjectiveCountMetricTotalDynatraceInput interface {
 	pulumi.Input
 
@@ -12879,6 +20525,7 @@ type SloObjectiveCountMetricTotalDynatraceInput interface {
 }
 
 type SloObjectiveCountMetricTotalDynatraceArgs struct {
+	// Selector for the metrics
 	MetricSelector pulumi.StringInput `pulumi:"metricSelector"`
 }
 
@@ -12897,7 +20544,7 @@ func (i SloObjectiveCountMetricTotalDynatraceArgs) ToSloObjectiveCountMetricTota
 // SloObjectiveCountMetricTotalDynatraceArrayInput is an input type that accepts SloObjectiveCountMetricTotalDynatraceArray and SloObjectiveCountMetricTotalDynatraceArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalDynatraceArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalDynatraceArray{ SloObjectiveCountMetricTotalDynatraceArgs{...} }
+//	SloObjectiveCountMetricTotalDynatraceArray{ SloObjectiveCountMetricTotalDynatraceArgs{...} }
 type SloObjectiveCountMetricTotalDynatraceArrayInput interface {
 	pulumi.Input
 
@@ -12933,6 +20580,7 @@ func (o SloObjectiveCountMetricTotalDynatraceOutput) ToSloObjectiveCountMetricTo
 	return o
 }
 
+// Selector for the metrics
 func (o SloObjectiveCountMetricTotalDynatraceOutput) MetricSelector() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalDynatrace) string { return v.MetricSelector }).(pulumi.StringOutput)
 }
@@ -12958,14 +20606,16 @@ func (o SloObjectiveCountMetricTotalDynatraceArrayOutput) Index(i pulumi.IntInpu
 }
 
 type SloObjectiveCountMetricTotalElasticsearch struct {
+	// Index of metrics we want to query
 	Index string `pulumi:"index"`
+	// Query for the metrics
 	Query string `pulumi:"query"`
 }
 
 // SloObjectiveCountMetricTotalElasticsearchInput is an input type that accepts SloObjectiveCountMetricTotalElasticsearchArgs and SloObjectiveCountMetricTotalElasticsearchOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalElasticsearchInput` via:
 //
-//          SloObjectiveCountMetricTotalElasticsearchArgs{...}
+//	SloObjectiveCountMetricTotalElasticsearchArgs{...}
 type SloObjectiveCountMetricTotalElasticsearchInput interface {
 	pulumi.Input
 
@@ -12974,7 +20624,9 @@ type SloObjectiveCountMetricTotalElasticsearchInput interface {
 }
 
 type SloObjectiveCountMetricTotalElasticsearchArgs struct {
+	// Index of metrics we want to query
 	Index pulumi.StringInput `pulumi:"index"`
+	// Query for the metrics
 	Query pulumi.StringInput `pulumi:"query"`
 }
 
@@ -12993,7 +20645,7 @@ func (i SloObjectiveCountMetricTotalElasticsearchArgs) ToSloObjectiveCountMetric
 // SloObjectiveCountMetricTotalElasticsearchArrayInput is an input type that accepts SloObjectiveCountMetricTotalElasticsearchArray and SloObjectiveCountMetricTotalElasticsearchArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalElasticsearchArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalElasticsearchArray{ SloObjectiveCountMetricTotalElasticsearchArgs{...} }
+//	SloObjectiveCountMetricTotalElasticsearchArray{ SloObjectiveCountMetricTotalElasticsearchArgs{...} }
 type SloObjectiveCountMetricTotalElasticsearchArrayInput interface {
 	pulumi.Input
 
@@ -13029,10 +20681,12 @@ func (o SloObjectiveCountMetricTotalElasticsearchOutput) ToSloObjectiveCountMetr
 	return o
 }
 
+// Index of metrics we want to query
 func (o SloObjectiveCountMetricTotalElasticsearchOutput) Index() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalElasticsearch) string { return v.Index }).(pulumi.StringOutput)
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricTotalElasticsearchOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalElasticsearch) string { return v.Query }).(pulumi.StringOutput)
 }
@@ -13058,14 +20712,16 @@ func (o SloObjectiveCountMetricTotalElasticsearchArrayOutput) Index(i pulumi.Int
 }
 
 type SloObjectiveCountMetricTotalGcm struct {
+	// Project ID
 	ProjectId string `pulumi:"projectId"`
-	Query     string `pulumi:"query"`
+	// Query for the metrics
+	Query string `pulumi:"query"`
 }
 
 // SloObjectiveCountMetricTotalGcmInput is an input type that accepts SloObjectiveCountMetricTotalGcmArgs and SloObjectiveCountMetricTotalGcmOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalGcmInput` via:
 //
-//          SloObjectiveCountMetricTotalGcmArgs{...}
+//	SloObjectiveCountMetricTotalGcmArgs{...}
 type SloObjectiveCountMetricTotalGcmInput interface {
 	pulumi.Input
 
@@ -13074,8 +20730,10 @@ type SloObjectiveCountMetricTotalGcmInput interface {
 }
 
 type SloObjectiveCountMetricTotalGcmArgs struct {
+	// Project ID
 	ProjectId pulumi.StringInput `pulumi:"projectId"`
-	Query     pulumi.StringInput `pulumi:"query"`
+	// Query for the metrics
+	Query pulumi.StringInput `pulumi:"query"`
 }
 
 func (SloObjectiveCountMetricTotalGcmArgs) ElementType() reflect.Type {
@@ -13093,7 +20751,7 @@ func (i SloObjectiveCountMetricTotalGcmArgs) ToSloObjectiveCountMetricTotalGcmOu
 // SloObjectiveCountMetricTotalGcmArrayInput is an input type that accepts SloObjectiveCountMetricTotalGcmArray and SloObjectiveCountMetricTotalGcmArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalGcmArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalGcmArray{ SloObjectiveCountMetricTotalGcmArgs{...} }
+//	SloObjectiveCountMetricTotalGcmArray{ SloObjectiveCountMetricTotalGcmArgs{...} }
 type SloObjectiveCountMetricTotalGcmArrayInput interface {
 	pulumi.Input
 
@@ -13129,10 +20787,12 @@ func (o SloObjectiveCountMetricTotalGcmOutput) ToSloObjectiveCountMetricTotalGcm
 	return o
 }
 
+// Project ID
 func (o SloObjectiveCountMetricTotalGcmOutput) ProjectId() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalGcm) string { return v.ProjectId }).(pulumi.StringOutput)
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricTotalGcmOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalGcm) string { return v.Query }).(pulumi.StringOutput)
 }
@@ -13158,13 +20818,14 @@ func (o SloObjectiveCountMetricTotalGcmArrayOutput) Index(i pulumi.IntInput) Slo
 }
 
 type SloObjectiveCountMetricTotalGrafanaLoki struct {
+	// Query for the logs
 	Logql string `pulumi:"logql"`
 }
 
 // SloObjectiveCountMetricTotalGrafanaLokiInput is an input type that accepts SloObjectiveCountMetricTotalGrafanaLokiArgs and SloObjectiveCountMetricTotalGrafanaLokiOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalGrafanaLokiInput` via:
 //
-//          SloObjectiveCountMetricTotalGrafanaLokiArgs{...}
+//	SloObjectiveCountMetricTotalGrafanaLokiArgs{...}
 type SloObjectiveCountMetricTotalGrafanaLokiInput interface {
 	pulumi.Input
 
@@ -13173,6 +20834,7 @@ type SloObjectiveCountMetricTotalGrafanaLokiInput interface {
 }
 
 type SloObjectiveCountMetricTotalGrafanaLokiArgs struct {
+	// Query for the logs
 	Logql pulumi.StringInput `pulumi:"logql"`
 }
 
@@ -13191,7 +20853,7 @@ func (i SloObjectiveCountMetricTotalGrafanaLokiArgs) ToSloObjectiveCountMetricTo
 // SloObjectiveCountMetricTotalGrafanaLokiArrayInput is an input type that accepts SloObjectiveCountMetricTotalGrafanaLokiArray and SloObjectiveCountMetricTotalGrafanaLokiArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalGrafanaLokiArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalGrafanaLokiArray{ SloObjectiveCountMetricTotalGrafanaLokiArgs{...} }
+//	SloObjectiveCountMetricTotalGrafanaLokiArray{ SloObjectiveCountMetricTotalGrafanaLokiArgs{...} }
 type SloObjectiveCountMetricTotalGrafanaLokiArrayInput interface {
 	pulumi.Input
 
@@ -13227,6 +20889,7 @@ func (o SloObjectiveCountMetricTotalGrafanaLokiOutput) ToSloObjectiveCountMetric
 	return o
 }
 
+// Query for the logs
 func (o SloObjectiveCountMetricTotalGrafanaLokiOutput) Logql() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalGrafanaLoki) string { return v.Logql }).(pulumi.StringOutput)
 }
@@ -13252,13 +20915,14 @@ func (o SloObjectiveCountMetricTotalGrafanaLokiArrayOutput) Index(i pulumi.IntIn
 }
 
 type SloObjectiveCountMetricTotalGraphite struct {
+	// Path to the metrics
 	MetricPath string `pulumi:"metricPath"`
 }
 
 // SloObjectiveCountMetricTotalGraphiteInput is an input type that accepts SloObjectiveCountMetricTotalGraphiteArgs and SloObjectiveCountMetricTotalGraphiteOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalGraphiteInput` via:
 //
-//          SloObjectiveCountMetricTotalGraphiteArgs{...}
+//	SloObjectiveCountMetricTotalGraphiteArgs{...}
 type SloObjectiveCountMetricTotalGraphiteInput interface {
 	pulumi.Input
 
@@ -13267,6 +20931,7 @@ type SloObjectiveCountMetricTotalGraphiteInput interface {
 }
 
 type SloObjectiveCountMetricTotalGraphiteArgs struct {
+	// Path to the metrics
 	MetricPath pulumi.StringInput `pulumi:"metricPath"`
 }
 
@@ -13285,7 +20950,7 @@ func (i SloObjectiveCountMetricTotalGraphiteArgs) ToSloObjectiveCountMetricTotal
 // SloObjectiveCountMetricTotalGraphiteArrayInput is an input type that accepts SloObjectiveCountMetricTotalGraphiteArray and SloObjectiveCountMetricTotalGraphiteArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalGraphiteArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalGraphiteArray{ SloObjectiveCountMetricTotalGraphiteArgs{...} }
+//	SloObjectiveCountMetricTotalGraphiteArray{ SloObjectiveCountMetricTotalGraphiteArgs{...} }
 type SloObjectiveCountMetricTotalGraphiteArrayInput interface {
 	pulumi.Input
 
@@ -13321,6 +20986,7 @@ func (o SloObjectiveCountMetricTotalGraphiteOutput) ToSloObjectiveCountMetricTot
 	return o
 }
 
+// Path to the metrics
 func (o SloObjectiveCountMetricTotalGraphiteOutput) MetricPath() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalGraphite) string { return v.MetricPath }).(pulumi.StringOutput)
 }
@@ -13345,14 +21011,121 @@ func (o SloObjectiveCountMetricTotalGraphiteArrayOutput) Index(i pulumi.IntInput
 	}).(SloObjectiveCountMetricTotalGraphiteOutput)
 }
 
+type SloObjectiveCountMetricTotalHoneycomb struct {
+	// Column name - required for all calculation types besides 'CONCURRENCY' and 'COUNT'
+	Attribute *string `pulumi:"attribute"`
+	// Calculation type
+	Calculation string `pulumi:"calculation"`
+}
+
+// SloObjectiveCountMetricTotalHoneycombInput is an input type that accepts SloObjectiveCountMetricTotalHoneycombArgs and SloObjectiveCountMetricTotalHoneycombOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricTotalHoneycombInput` via:
+//
+//	SloObjectiveCountMetricTotalHoneycombArgs{...}
+type SloObjectiveCountMetricTotalHoneycombInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricTotalHoneycombOutput() SloObjectiveCountMetricTotalHoneycombOutput
+	ToSloObjectiveCountMetricTotalHoneycombOutputWithContext(context.Context) SloObjectiveCountMetricTotalHoneycombOutput
+}
+
+type SloObjectiveCountMetricTotalHoneycombArgs struct {
+	// Column name - required for all calculation types besides 'CONCURRENCY' and 'COUNT'
+	Attribute pulumi.StringPtrInput `pulumi:"attribute"`
+	// Calculation type
+	Calculation pulumi.StringInput `pulumi:"calculation"`
+}
+
+func (SloObjectiveCountMetricTotalHoneycombArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricTotalHoneycomb)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricTotalHoneycombArgs) ToSloObjectiveCountMetricTotalHoneycombOutput() SloObjectiveCountMetricTotalHoneycombOutput {
+	return i.ToSloObjectiveCountMetricTotalHoneycombOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricTotalHoneycombArgs) ToSloObjectiveCountMetricTotalHoneycombOutputWithContext(ctx context.Context) SloObjectiveCountMetricTotalHoneycombOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricTotalHoneycombOutput)
+}
+
+// SloObjectiveCountMetricTotalHoneycombArrayInput is an input type that accepts SloObjectiveCountMetricTotalHoneycombArray and SloObjectiveCountMetricTotalHoneycombArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveCountMetricTotalHoneycombArrayInput` via:
+//
+//	SloObjectiveCountMetricTotalHoneycombArray{ SloObjectiveCountMetricTotalHoneycombArgs{...} }
+type SloObjectiveCountMetricTotalHoneycombArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveCountMetricTotalHoneycombArrayOutput() SloObjectiveCountMetricTotalHoneycombArrayOutput
+	ToSloObjectiveCountMetricTotalHoneycombArrayOutputWithContext(context.Context) SloObjectiveCountMetricTotalHoneycombArrayOutput
+}
+
+type SloObjectiveCountMetricTotalHoneycombArray []SloObjectiveCountMetricTotalHoneycombInput
+
+func (SloObjectiveCountMetricTotalHoneycombArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricTotalHoneycomb)(nil)).Elem()
+}
+
+func (i SloObjectiveCountMetricTotalHoneycombArray) ToSloObjectiveCountMetricTotalHoneycombArrayOutput() SloObjectiveCountMetricTotalHoneycombArrayOutput {
+	return i.ToSloObjectiveCountMetricTotalHoneycombArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveCountMetricTotalHoneycombArray) ToSloObjectiveCountMetricTotalHoneycombArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricTotalHoneycombArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveCountMetricTotalHoneycombArrayOutput)
+}
+
+type SloObjectiveCountMetricTotalHoneycombOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricTotalHoneycombOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveCountMetricTotalHoneycomb)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricTotalHoneycombOutput) ToSloObjectiveCountMetricTotalHoneycombOutput() SloObjectiveCountMetricTotalHoneycombOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricTotalHoneycombOutput) ToSloObjectiveCountMetricTotalHoneycombOutputWithContext(ctx context.Context) SloObjectiveCountMetricTotalHoneycombOutput {
+	return o
+}
+
+// Column name - required for all calculation types besides 'CONCURRENCY' and 'COUNT'
+func (o SloObjectiveCountMetricTotalHoneycombOutput) Attribute() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricTotalHoneycomb) *string { return v.Attribute }).(pulumi.StringPtrOutput)
+}
+
+// Calculation type
+func (o SloObjectiveCountMetricTotalHoneycombOutput) Calculation() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveCountMetricTotalHoneycomb) string { return v.Calculation }).(pulumi.StringOutput)
+}
+
+type SloObjectiveCountMetricTotalHoneycombArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveCountMetricTotalHoneycombArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveCountMetricTotalHoneycomb)(nil)).Elem()
+}
+
+func (o SloObjectiveCountMetricTotalHoneycombArrayOutput) ToSloObjectiveCountMetricTotalHoneycombArrayOutput() SloObjectiveCountMetricTotalHoneycombArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricTotalHoneycombArrayOutput) ToSloObjectiveCountMetricTotalHoneycombArrayOutputWithContext(ctx context.Context) SloObjectiveCountMetricTotalHoneycombArrayOutput {
+	return o
+}
+
+func (o SloObjectiveCountMetricTotalHoneycombArrayOutput) Index(i pulumi.IntInput) SloObjectiveCountMetricTotalHoneycombOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveCountMetricTotalHoneycomb {
+		return vs[0].([]SloObjectiveCountMetricTotalHoneycomb)[vs[1].(int)]
+	}).(SloObjectiveCountMetricTotalHoneycombOutput)
+}
+
 type SloObjectiveCountMetricTotalInfluxdb struct {
+	// Query for the metrics
 	Query string `pulumi:"query"`
 }
 
 // SloObjectiveCountMetricTotalInfluxdbInput is an input type that accepts SloObjectiveCountMetricTotalInfluxdbArgs and SloObjectiveCountMetricTotalInfluxdbOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalInfluxdbInput` via:
 //
-//          SloObjectiveCountMetricTotalInfluxdbArgs{...}
+//	SloObjectiveCountMetricTotalInfluxdbArgs{...}
 type SloObjectiveCountMetricTotalInfluxdbInput interface {
 	pulumi.Input
 
@@ -13361,6 +21134,7 @@ type SloObjectiveCountMetricTotalInfluxdbInput interface {
 }
 
 type SloObjectiveCountMetricTotalInfluxdbArgs struct {
+	// Query for the metrics
 	Query pulumi.StringInput `pulumi:"query"`
 }
 
@@ -13379,7 +21153,7 @@ func (i SloObjectiveCountMetricTotalInfluxdbArgs) ToSloObjectiveCountMetricTotal
 // SloObjectiveCountMetricTotalInfluxdbArrayInput is an input type that accepts SloObjectiveCountMetricTotalInfluxdbArray and SloObjectiveCountMetricTotalInfluxdbArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalInfluxdbArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalInfluxdbArray{ SloObjectiveCountMetricTotalInfluxdbArgs{...} }
+//	SloObjectiveCountMetricTotalInfluxdbArray{ SloObjectiveCountMetricTotalInfluxdbArgs{...} }
 type SloObjectiveCountMetricTotalInfluxdbArrayInput interface {
 	pulumi.Input
 
@@ -13415,6 +21189,7 @@ func (o SloObjectiveCountMetricTotalInfluxdbOutput) ToSloObjectiveCountMetricTot
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricTotalInfluxdbOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalInfluxdb) string { return v.Query }).(pulumi.StringOutput)
 }
@@ -13440,15 +21215,18 @@ func (o SloObjectiveCountMetricTotalInfluxdbArrayOutput) Index(i pulumi.IntInput
 }
 
 type SloObjectiveCountMetricTotalInstana struct {
-	Applications    []SloObjectiveCountMetricTotalInstanaApplication    `pulumi:"applications"`
+	// Infrastructure metric type
+	Applications []SloObjectiveCountMetricTotalInstanaApplication `pulumi:"applications"`
+	// Infrastructure metric type
 	Infrastructures []SloObjectiveCountMetricTotalInstanaInfrastructure `pulumi:"infrastructures"`
-	MetricType      string                                              `pulumi:"metricType"`
+	// Instana metric type 'application' or 'infrastructure'
+	MetricType string `pulumi:"metricType"`
 }
 
 // SloObjectiveCountMetricTotalInstanaInput is an input type that accepts SloObjectiveCountMetricTotalInstanaArgs and SloObjectiveCountMetricTotalInstanaOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalInstanaInput` via:
 //
-//          SloObjectiveCountMetricTotalInstanaArgs{...}
+//	SloObjectiveCountMetricTotalInstanaArgs{...}
 type SloObjectiveCountMetricTotalInstanaInput interface {
 	pulumi.Input
 
@@ -13457,9 +21235,12 @@ type SloObjectiveCountMetricTotalInstanaInput interface {
 }
 
 type SloObjectiveCountMetricTotalInstanaArgs struct {
-	Applications    SloObjectiveCountMetricTotalInstanaApplicationArrayInput    `pulumi:"applications"`
+	// Infrastructure metric type
+	Applications SloObjectiveCountMetricTotalInstanaApplicationArrayInput `pulumi:"applications"`
+	// Infrastructure metric type
 	Infrastructures SloObjectiveCountMetricTotalInstanaInfrastructureArrayInput `pulumi:"infrastructures"`
-	MetricType      pulumi.StringInput                                          `pulumi:"metricType"`
+	// Instana metric type 'application' or 'infrastructure'
+	MetricType pulumi.StringInput `pulumi:"metricType"`
 }
 
 func (SloObjectiveCountMetricTotalInstanaArgs) ElementType() reflect.Type {
@@ -13477,7 +21258,7 @@ func (i SloObjectiveCountMetricTotalInstanaArgs) ToSloObjectiveCountMetricTotalI
 // SloObjectiveCountMetricTotalInstanaArrayInput is an input type that accepts SloObjectiveCountMetricTotalInstanaArray and SloObjectiveCountMetricTotalInstanaArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalInstanaArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalInstanaArray{ SloObjectiveCountMetricTotalInstanaArgs{...} }
+//	SloObjectiveCountMetricTotalInstanaArray{ SloObjectiveCountMetricTotalInstanaArgs{...} }
 type SloObjectiveCountMetricTotalInstanaArrayInput interface {
 	pulumi.Input
 
@@ -13513,18 +21294,21 @@ func (o SloObjectiveCountMetricTotalInstanaOutput) ToSloObjectiveCountMetricTota
 	return o
 }
 
+// Infrastructure metric type
 func (o SloObjectiveCountMetricTotalInstanaOutput) Applications() SloObjectiveCountMetricTotalInstanaApplicationArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalInstana) []SloObjectiveCountMetricTotalInstanaApplication {
 		return v.Applications
 	}).(SloObjectiveCountMetricTotalInstanaApplicationArrayOutput)
 }
 
+// Infrastructure metric type
 func (o SloObjectiveCountMetricTotalInstanaOutput) Infrastructures() SloObjectiveCountMetricTotalInstanaInfrastructureArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalInstana) []SloObjectiveCountMetricTotalInstanaInfrastructure {
 		return v.Infrastructures
 	}).(SloObjectiveCountMetricTotalInstanaInfrastructureArrayOutput)
 }
 
+// Instana metric type 'application' or 'infrastructure'
 func (o SloObjectiveCountMetricTotalInstanaOutput) MetricType() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalInstana) string { return v.MetricType }).(pulumi.StringOutput)
 }
@@ -13550,18 +21334,24 @@ func (o SloObjectiveCountMetricTotalInstanaArrayOutput) Index(i pulumi.IntInput)
 }
 
 type SloObjectiveCountMetricTotalInstanaApplication struct {
-	Aggregation      string                                                  `pulumi:"aggregation"`
-	ApiQuery         string                                                  `pulumi:"apiQuery"`
-	GroupBies        []SloObjectiveCountMetricTotalInstanaApplicationGroupBy `pulumi:"groupBies"`
-	IncludeInternal  *bool                                                   `pulumi:"includeInternal"`
-	IncludeSynthetic *bool                                                   `pulumi:"includeSynthetic"`
-	MetricId         string                                                  `pulumi:"metricId"`
+	// Aggregation type [Required for metrics]
+	Aggregation string `pulumi:"aggregation"`
+	// API query user passes in a JSON format
+	ApiQuery string `pulumi:"apiQuery"`
+	// Group by method
+	GroupBies []SloObjectiveCountMetricTotalInstanaApplicationGroupBy `pulumi:"groupBies"`
+	// Include internal
+	IncludeInternal *bool `pulumi:"includeInternal"`
+	// Include synthetic
+	IncludeSynthetic *bool `pulumi:"includeSynthetic"`
+	// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+	MetricId string `pulumi:"metricId"`
 }
 
 // SloObjectiveCountMetricTotalInstanaApplicationInput is an input type that accepts SloObjectiveCountMetricTotalInstanaApplicationArgs and SloObjectiveCountMetricTotalInstanaApplicationOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalInstanaApplicationInput` via:
 //
-//          SloObjectiveCountMetricTotalInstanaApplicationArgs{...}
+//	SloObjectiveCountMetricTotalInstanaApplicationArgs{...}
 type SloObjectiveCountMetricTotalInstanaApplicationInput interface {
 	pulumi.Input
 
@@ -13570,12 +21360,18 @@ type SloObjectiveCountMetricTotalInstanaApplicationInput interface {
 }
 
 type SloObjectiveCountMetricTotalInstanaApplicationArgs struct {
-	Aggregation      pulumi.StringInput                                              `pulumi:"aggregation"`
-	ApiQuery         pulumi.StringInput                                              `pulumi:"apiQuery"`
-	GroupBies        SloObjectiveCountMetricTotalInstanaApplicationGroupByArrayInput `pulumi:"groupBies"`
-	IncludeInternal  pulumi.BoolPtrInput                                             `pulumi:"includeInternal"`
-	IncludeSynthetic pulumi.BoolPtrInput                                             `pulumi:"includeSynthetic"`
-	MetricId         pulumi.StringInput                                              `pulumi:"metricId"`
+	// Aggregation type [Required for metrics]
+	Aggregation pulumi.StringInput `pulumi:"aggregation"`
+	// API query user passes in a JSON format
+	ApiQuery pulumi.StringInput `pulumi:"apiQuery"`
+	// Group by method
+	GroupBies SloObjectiveCountMetricTotalInstanaApplicationGroupByArrayInput `pulumi:"groupBies"`
+	// Include internal
+	IncludeInternal pulumi.BoolPtrInput `pulumi:"includeInternal"`
+	// Include synthetic
+	IncludeSynthetic pulumi.BoolPtrInput `pulumi:"includeSynthetic"`
+	// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+	MetricId pulumi.StringInput `pulumi:"metricId"`
 }
 
 func (SloObjectiveCountMetricTotalInstanaApplicationArgs) ElementType() reflect.Type {
@@ -13593,7 +21389,7 @@ func (i SloObjectiveCountMetricTotalInstanaApplicationArgs) ToSloObjectiveCountM
 // SloObjectiveCountMetricTotalInstanaApplicationArrayInput is an input type that accepts SloObjectiveCountMetricTotalInstanaApplicationArray and SloObjectiveCountMetricTotalInstanaApplicationArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalInstanaApplicationArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalInstanaApplicationArray{ SloObjectiveCountMetricTotalInstanaApplicationArgs{...} }
+//	SloObjectiveCountMetricTotalInstanaApplicationArray{ SloObjectiveCountMetricTotalInstanaApplicationArgs{...} }
 type SloObjectiveCountMetricTotalInstanaApplicationArrayInput interface {
 	pulumi.Input
 
@@ -13629,28 +21425,34 @@ func (o SloObjectiveCountMetricTotalInstanaApplicationOutput) ToSloObjectiveCoun
 	return o
 }
 
+// Aggregation type [Required for metrics]
 func (o SloObjectiveCountMetricTotalInstanaApplicationOutput) Aggregation() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalInstanaApplication) string { return v.Aggregation }).(pulumi.StringOutput)
 }
 
+// API query user passes in a JSON format
 func (o SloObjectiveCountMetricTotalInstanaApplicationOutput) ApiQuery() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalInstanaApplication) string { return v.ApiQuery }).(pulumi.StringOutput)
 }
 
+// Group by method
 func (o SloObjectiveCountMetricTotalInstanaApplicationOutput) GroupBies() SloObjectiveCountMetricTotalInstanaApplicationGroupByArrayOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalInstanaApplication) []SloObjectiveCountMetricTotalInstanaApplicationGroupBy {
 		return v.GroupBies
 	}).(SloObjectiveCountMetricTotalInstanaApplicationGroupByArrayOutput)
 }
 
+// Include internal
 func (o SloObjectiveCountMetricTotalInstanaApplicationOutput) IncludeInternal() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalInstanaApplication) *bool { return v.IncludeInternal }).(pulumi.BoolPtrOutput)
 }
 
+// Include synthetic
 func (o SloObjectiveCountMetricTotalInstanaApplicationOutput) IncludeSynthetic() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalInstanaApplication) *bool { return v.IncludeSynthetic }).(pulumi.BoolPtrOutput)
 }
 
+// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
 func (o SloObjectiveCountMetricTotalInstanaApplicationOutput) MetricId() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalInstanaApplication) string { return v.MetricId }).(pulumi.StringOutput)
 }
@@ -13676,7 +21478,9 @@ func (o SloObjectiveCountMetricTotalInstanaApplicationArrayOutput) Index(i pulum
 }
 
 type SloObjectiveCountMetricTotalInstanaApplicationGroupBy struct {
-	Tag               string  `pulumi:"tag"`
+	// Group by tag
+	Tag string `pulumi:"tag"`
+	// Tag entity - one of 'DESTINATION', 'SOURCE', 'NOT_APPLICABLE'
 	TagEntity         string  `pulumi:"tagEntity"`
 	TagSecondLevelKey *string `pulumi:"tagSecondLevelKey"`
 }
@@ -13684,7 +21488,7 @@ type SloObjectiveCountMetricTotalInstanaApplicationGroupBy struct {
 // SloObjectiveCountMetricTotalInstanaApplicationGroupByInput is an input type that accepts SloObjectiveCountMetricTotalInstanaApplicationGroupByArgs and SloObjectiveCountMetricTotalInstanaApplicationGroupByOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalInstanaApplicationGroupByInput` via:
 //
-//          SloObjectiveCountMetricTotalInstanaApplicationGroupByArgs{...}
+//	SloObjectiveCountMetricTotalInstanaApplicationGroupByArgs{...}
 type SloObjectiveCountMetricTotalInstanaApplicationGroupByInput interface {
 	pulumi.Input
 
@@ -13693,7 +21497,9 @@ type SloObjectiveCountMetricTotalInstanaApplicationGroupByInput interface {
 }
 
 type SloObjectiveCountMetricTotalInstanaApplicationGroupByArgs struct {
-	Tag               pulumi.StringInput    `pulumi:"tag"`
+	// Group by tag
+	Tag pulumi.StringInput `pulumi:"tag"`
+	// Tag entity - one of 'DESTINATION', 'SOURCE', 'NOT_APPLICABLE'
 	TagEntity         pulumi.StringInput    `pulumi:"tagEntity"`
 	TagSecondLevelKey pulumi.StringPtrInput `pulumi:"tagSecondLevelKey"`
 }
@@ -13713,7 +21519,7 @@ func (i SloObjectiveCountMetricTotalInstanaApplicationGroupByArgs) ToSloObjectiv
 // SloObjectiveCountMetricTotalInstanaApplicationGroupByArrayInput is an input type that accepts SloObjectiveCountMetricTotalInstanaApplicationGroupByArray and SloObjectiveCountMetricTotalInstanaApplicationGroupByArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalInstanaApplicationGroupByArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalInstanaApplicationGroupByArray{ SloObjectiveCountMetricTotalInstanaApplicationGroupByArgs{...} }
+//	SloObjectiveCountMetricTotalInstanaApplicationGroupByArray{ SloObjectiveCountMetricTotalInstanaApplicationGroupByArgs{...} }
 type SloObjectiveCountMetricTotalInstanaApplicationGroupByArrayInput interface {
 	pulumi.Input
 
@@ -13749,10 +21555,12 @@ func (o SloObjectiveCountMetricTotalInstanaApplicationGroupByOutput) ToSloObject
 	return o
 }
 
+// Group by tag
 func (o SloObjectiveCountMetricTotalInstanaApplicationGroupByOutput) Tag() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalInstanaApplicationGroupBy) string { return v.Tag }).(pulumi.StringOutput)
 }
 
+// Tag entity - one of 'DESTINATION', 'SOURCE', 'NOT_APPLICABLE'
 func (o SloObjectiveCountMetricTotalInstanaApplicationGroupByOutput) TagEntity() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalInstanaApplicationGroupBy) string { return v.TagEntity }).(pulumi.StringOutput)
 }
@@ -13782,17 +21590,22 @@ func (o SloObjectiveCountMetricTotalInstanaApplicationGroupByArrayOutput) Index(
 }
 
 type SloObjectiveCountMetricTotalInstanaInfrastructure struct {
-	MetricId              string  `pulumi:"metricId"`
-	MetricRetrievalMethod string  `pulumi:"metricRetrievalMethod"`
-	PluginId              string  `pulumi:"pluginId"`
-	Query                 *string `pulumi:"query"`
-	SnapshotId            *string `pulumi:"snapshotId"`
+	// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+	MetricId string `pulumi:"metricId"`
+	// Metric retrieval method 'query' or 'snapshot'
+	MetricRetrievalMethod string `pulumi:"metricRetrievalMethod"`
+	// Plugin ID
+	PluginId string `pulumi:"pluginId"`
+	// Query for the metrics
+	Query *string `pulumi:"query"`
+	// Snapshot ID
+	SnapshotId *string `pulumi:"snapshotId"`
 }
 
 // SloObjectiveCountMetricTotalInstanaInfrastructureInput is an input type that accepts SloObjectiveCountMetricTotalInstanaInfrastructureArgs and SloObjectiveCountMetricTotalInstanaInfrastructureOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalInstanaInfrastructureInput` via:
 //
-//          SloObjectiveCountMetricTotalInstanaInfrastructureArgs{...}
+//	SloObjectiveCountMetricTotalInstanaInfrastructureArgs{...}
 type SloObjectiveCountMetricTotalInstanaInfrastructureInput interface {
 	pulumi.Input
 
@@ -13801,11 +21614,16 @@ type SloObjectiveCountMetricTotalInstanaInfrastructureInput interface {
 }
 
 type SloObjectiveCountMetricTotalInstanaInfrastructureArgs struct {
-	MetricId              pulumi.StringInput    `pulumi:"metricId"`
-	MetricRetrievalMethod pulumi.StringInput    `pulumi:"metricRetrievalMethod"`
-	PluginId              pulumi.StringInput    `pulumi:"pluginId"`
-	Query                 pulumi.StringPtrInput `pulumi:"query"`
-	SnapshotId            pulumi.StringPtrInput `pulumi:"snapshotId"`
+	// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+	MetricId pulumi.StringInput `pulumi:"metricId"`
+	// Metric retrieval method 'query' or 'snapshot'
+	MetricRetrievalMethod pulumi.StringInput `pulumi:"metricRetrievalMethod"`
+	// Plugin ID
+	PluginId pulumi.StringInput `pulumi:"pluginId"`
+	// Query for the metrics
+	Query pulumi.StringPtrInput `pulumi:"query"`
+	// Snapshot ID
+	SnapshotId pulumi.StringPtrInput `pulumi:"snapshotId"`
 }
 
 func (SloObjectiveCountMetricTotalInstanaInfrastructureArgs) ElementType() reflect.Type {
@@ -13823,7 +21641,7 @@ func (i SloObjectiveCountMetricTotalInstanaInfrastructureArgs) ToSloObjectiveCou
 // SloObjectiveCountMetricTotalInstanaInfrastructureArrayInput is an input type that accepts SloObjectiveCountMetricTotalInstanaInfrastructureArray and SloObjectiveCountMetricTotalInstanaInfrastructureArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalInstanaInfrastructureArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalInstanaInfrastructureArray{ SloObjectiveCountMetricTotalInstanaInfrastructureArgs{...} }
+//	SloObjectiveCountMetricTotalInstanaInfrastructureArray{ SloObjectiveCountMetricTotalInstanaInfrastructureArgs{...} }
 type SloObjectiveCountMetricTotalInstanaInfrastructureArrayInput interface {
 	pulumi.Input
 
@@ -13859,22 +21677,27 @@ func (o SloObjectiveCountMetricTotalInstanaInfrastructureOutput) ToSloObjectiveC
 	return o
 }
 
+// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
 func (o SloObjectiveCountMetricTotalInstanaInfrastructureOutput) MetricId() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalInstanaInfrastructure) string { return v.MetricId }).(pulumi.StringOutput)
 }
 
+// Metric retrieval method 'query' or 'snapshot'
 func (o SloObjectiveCountMetricTotalInstanaInfrastructureOutput) MetricRetrievalMethod() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalInstanaInfrastructure) string { return v.MetricRetrievalMethod }).(pulumi.StringOutput)
 }
 
+// Plugin ID
 func (o SloObjectiveCountMetricTotalInstanaInfrastructureOutput) PluginId() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalInstanaInfrastructure) string { return v.PluginId }).(pulumi.StringOutput)
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricTotalInstanaInfrastructureOutput) Query() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalInstanaInfrastructure) *string { return v.Query }).(pulumi.StringPtrOutput)
 }
 
+// Snapshot ID
 func (o SloObjectiveCountMetricTotalInstanaInfrastructureOutput) SnapshotId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalInstanaInfrastructure) *string { return v.SnapshotId }).(pulumi.StringPtrOutput)
 }
@@ -13900,16 +21723,20 @@ func (o SloObjectiveCountMetricTotalInstanaInfrastructureArrayOutput) Index(i pu
 }
 
 type SloObjectiveCountMetricTotalLightstep struct {
+	// Optional value to filter by percentiles
 	Percentile *float64 `pulumi:"percentile"`
-	StreamId   *string  `pulumi:"streamId"`
-	TypeOfData string   `pulumi:"typeOfData"`
-	Uql        *string  `pulumi:"uql"`
+	// ID of the metrics stream
+	StreamId *string `pulumi:"streamId"`
+	// Type of data to filter by
+	TypeOfData string `pulumi:"typeOfData"`
+	// UQL query
+	Uql *string `pulumi:"uql"`
 }
 
 // SloObjectiveCountMetricTotalLightstepInput is an input type that accepts SloObjectiveCountMetricTotalLightstepArgs and SloObjectiveCountMetricTotalLightstepOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalLightstepInput` via:
 //
-//          SloObjectiveCountMetricTotalLightstepArgs{...}
+//	SloObjectiveCountMetricTotalLightstepArgs{...}
 type SloObjectiveCountMetricTotalLightstepInput interface {
 	pulumi.Input
 
@@ -13918,10 +21745,14 @@ type SloObjectiveCountMetricTotalLightstepInput interface {
 }
 
 type SloObjectiveCountMetricTotalLightstepArgs struct {
+	// Optional value to filter by percentiles
 	Percentile pulumi.Float64PtrInput `pulumi:"percentile"`
-	StreamId   pulumi.StringPtrInput  `pulumi:"streamId"`
-	TypeOfData pulumi.StringInput     `pulumi:"typeOfData"`
-	Uql        pulumi.StringPtrInput  `pulumi:"uql"`
+	// ID of the metrics stream
+	StreamId pulumi.StringPtrInput `pulumi:"streamId"`
+	// Type of data to filter by
+	TypeOfData pulumi.StringInput `pulumi:"typeOfData"`
+	// UQL query
+	Uql pulumi.StringPtrInput `pulumi:"uql"`
 }
 
 func (SloObjectiveCountMetricTotalLightstepArgs) ElementType() reflect.Type {
@@ -13939,7 +21770,7 @@ func (i SloObjectiveCountMetricTotalLightstepArgs) ToSloObjectiveCountMetricTota
 // SloObjectiveCountMetricTotalLightstepArrayInput is an input type that accepts SloObjectiveCountMetricTotalLightstepArray and SloObjectiveCountMetricTotalLightstepArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalLightstepArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalLightstepArray{ SloObjectiveCountMetricTotalLightstepArgs{...} }
+//	SloObjectiveCountMetricTotalLightstepArray{ SloObjectiveCountMetricTotalLightstepArgs{...} }
 type SloObjectiveCountMetricTotalLightstepArrayInput interface {
 	pulumi.Input
 
@@ -13975,18 +21806,22 @@ func (o SloObjectiveCountMetricTotalLightstepOutput) ToSloObjectiveCountMetricTo
 	return o
 }
 
+// Optional value to filter by percentiles
 func (o SloObjectiveCountMetricTotalLightstepOutput) Percentile() pulumi.Float64PtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalLightstep) *float64 { return v.Percentile }).(pulumi.Float64PtrOutput)
 }
 
+// ID of the metrics stream
 func (o SloObjectiveCountMetricTotalLightstepOutput) StreamId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalLightstep) *string { return v.StreamId }).(pulumi.StringPtrOutput)
 }
 
+// Type of data to filter by
 func (o SloObjectiveCountMetricTotalLightstepOutput) TypeOfData() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalLightstep) string { return v.TypeOfData }).(pulumi.StringOutput)
 }
 
+// UQL query
 func (o SloObjectiveCountMetricTotalLightstepOutput) Uql() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalLightstep) *string { return v.Uql }).(pulumi.StringPtrOutput)
 }
@@ -14012,13 +21847,14 @@ func (o SloObjectiveCountMetricTotalLightstepArrayOutput) Index(i pulumi.IntInpu
 }
 
 type SloObjectiveCountMetricTotalNewrelic struct {
+	// Query for the metrics
 	Nrql string `pulumi:"nrql"`
 }
 
 // SloObjectiveCountMetricTotalNewrelicInput is an input type that accepts SloObjectiveCountMetricTotalNewrelicArgs and SloObjectiveCountMetricTotalNewrelicOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalNewrelicInput` via:
 //
-//          SloObjectiveCountMetricTotalNewrelicArgs{...}
+//	SloObjectiveCountMetricTotalNewrelicArgs{...}
 type SloObjectiveCountMetricTotalNewrelicInput interface {
 	pulumi.Input
 
@@ -14027,6 +21863,7 @@ type SloObjectiveCountMetricTotalNewrelicInput interface {
 }
 
 type SloObjectiveCountMetricTotalNewrelicArgs struct {
+	// Query for the metrics
 	Nrql pulumi.StringInput `pulumi:"nrql"`
 }
 
@@ -14045,7 +21882,7 @@ func (i SloObjectiveCountMetricTotalNewrelicArgs) ToSloObjectiveCountMetricTotal
 // SloObjectiveCountMetricTotalNewrelicArrayInput is an input type that accepts SloObjectiveCountMetricTotalNewrelicArray and SloObjectiveCountMetricTotalNewrelicArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalNewrelicArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalNewrelicArray{ SloObjectiveCountMetricTotalNewrelicArgs{...} }
+//	SloObjectiveCountMetricTotalNewrelicArray{ SloObjectiveCountMetricTotalNewrelicArgs{...} }
 type SloObjectiveCountMetricTotalNewrelicArrayInput interface {
 	pulumi.Input
 
@@ -14081,6 +21918,7 @@ func (o SloObjectiveCountMetricTotalNewrelicOutput) ToSloObjectiveCountMetricTot
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricTotalNewrelicOutput) Nrql() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalNewrelic) string { return v.Nrql }).(pulumi.StringOutput)
 }
@@ -14106,13 +21944,14 @@ func (o SloObjectiveCountMetricTotalNewrelicArrayOutput) Index(i pulumi.IntInput
 }
 
 type SloObjectiveCountMetricTotalOpentsdb struct {
+	// Query for the metrics
 	Query string `pulumi:"query"`
 }
 
 // SloObjectiveCountMetricTotalOpentsdbInput is an input type that accepts SloObjectiveCountMetricTotalOpentsdbArgs and SloObjectiveCountMetricTotalOpentsdbOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalOpentsdbInput` via:
 //
-//          SloObjectiveCountMetricTotalOpentsdbArgs{...}
+//	SloObjectiveCountMetricTotalOpentsdbArgs{...}
 type SloObjectiveCountMetricTotalOpentsdbInput interface {
 	pulumi.Input
 
@@ -14121,6 +21960,7 @@ type SloObjectiveCountMetricTotalOpentsdbInput interface {
 }
 
 type SloObjectiveCountMetricTotalOpentsdbArgs struct {
+	// Query for the metrics
 	Query pulumi.StringInput `pulumi:"query"`
 }
 
@@ -14139,7 +21979,7 @@ func (i SloObjectiveCountMetricTotalOpentsdbArgs) ToSloObjectiveCountMetricTotal
 // SloObjectiveCountMetricTotalOpentsdbArrayInput is an input type that accepts SloObjectiveCountMetricTotalOpentsdbArray and SloObjectiveCountMetricTotalOpentsdbArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalOpentsdbArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalOpentsdbArray{ SloObjectiveCountMetricTotalOpentsdbArgs{...} }
+//	SloObjectiveCountMetricTotalOpentsdbArray{ SloObjectiveCountMetricTotalOpentsdbArgs{...} }
 type SloObjectiveCountMetricTotalOpentsdbArrayInput interface {
 	pulumi.Input
 
@@ -14175,6 +22015,7 @@ func (o SloObjectiveCountMetricTotalOpentsdbOutput) ToSloObjectiveCountMetricTot
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricTotalOpentsdbOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalOpentsdb) string { return v.Query }).(pulumi.StringOutput)
 }
@@ -14200,15 +22041,18 @@ func (o SloObjectiveCountMetricTotalOpentsdbArrayOutput) Index(i pulumi.IntInput
 }
 
 type SloObjectiveCountMetricTotalPingdom struct {
-	CheckId   string  `pulumi:"checkId"`
+	// Pingdom uptime or transaction check's ID
+	CheckId string `pulumi:"checkId"`
+	// Pingdom check type - uptime or transaction
 	CheckType *string `pulumi:"checkType"`
-	Status    *string `pulumi:"status"`
+	// Optional for the Uptime checks. Use it to filter the Pingdom check results by status
+	Status *string `pulumi:"status"`
 }
 
 // SloObjectiveCountMetricTotalPingdomInput is an input type that accepts SloObjectiveCountMetricTotalPingdomArgs and SloObjectiveCountMetricTotalPingdomOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalPingdomInput` via:
 //
-//          SloObjectiveCountMetricTotalPingdomArgs{...}
+//	SloObjectiveCountMetricTotalPingdomArgs{...}
 type SloObjectiveCountMetricTotalPingdomInput interface {
 	pulumi.Input
 
@@ -14217,9 +22061,12 @@ type SloObjectiveCountMetricTotalPingdomInput interface {
 }
 
 type SloObjectiveCountMetricTotalPingdomArgs struct {
-	CheckId   pulumi.StringInput    `pulumi:"checkId"`
+	// Pingdom uptime or transaction check's ID
+	CheckId pulumi.StringInput `pulumi:"checkId"`
+	// Pingdom check type - uptime or transaction
 	CheckType pulumi.StringPtrInput `pulumi:"checkType"`
-	Status    pulumi.StringPtrInput `pulumi:"status"`
+	// Optional for the Uptime checks. Use it to filter the Pingdom check results by status
+	Status pulumi.StringPtrInput `pulumi:"status"`
 }
 
 func (SloObjectiveCountMetricTotalPingdomArgs) ElementType() reflect.Type {
@@ -14237,7 +22084,7 @@ func (i SloObjectiveCountMetricTotalPingdomArgs) ToSloObjectiveCountMetricTotalP
 // SloObjectiveCountMetricTotalPingdomArrayInput is an input type that accepts SloObjectiveCountMetricTotalPingdomArray and SloObjectiveCountMetricTotalPingdomArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalPingdomArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalPingdomArray{ SloObjectiveCountMetricTotalPingdomArgs{...} }
+//	SloObjectiveCountMetricTotalPingdomArray{ SloObjectiveCountMetricTotalPingdomArgs{...} }
 type SloObjectiveCountMetricTotalPingdomArrayInput interface {
 	pulumi.Input
 
@@ -14273,14 +22120,17 @@ func (o SloObjectiveCountMetricTotalPingdomOutput) ToSloObjectiveCountMetricTota
 	return o
 }
 
+// Pingdom uptime or transaction check's ID
 func (o SloObjectiveCountMetricTotalPingdomOutput) CheckId() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalPingdom) string { return v.CheckId }).(pulumi.StringOutput)
 }
 
+// Pingdom check type - uptime or transaction
 func (o SloObjectiveCountMetricTotalPingdomOutput) CheckType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalPingdom) *string { return v.CheckType }).(pulumi.StringPtrOutput)
 }
 
+// Optional for the Uptime checks. Use it to filter the Pingdom check results by status
 func (o SloObjectiveCountMetricTotalPingdomOutput) Status() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalPingdom) *string { return v.Status }).(pulumi.StringPtrOutput)
 }
@@ -14306,13 +22156,14 @@ func (o SloObjectiveCountMetricTotalPingdomArrayOutput) Index(i pulumi.IntInput)
 }
 
 type SloObjectiveCountMetricTotalPrometheus struct {
+	// Query for the metrics
 	Promql string `pulumi:"promql"`
 }
 
 // SloObjectiveCountMetricTotalPrometheusInput is an input type that accepts SloObjectiveCountMetricTotalPrometheusArgs and SloObjectiveCountMetricTotalPrometheusOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalPrometheusInput` via:
 //
-//          SloObjectiveCountMetricTotalPrometheusArgs{...}
+//	SloObjectiveCountMetricTotalPrometheusArgs{...}
 type SloObjectiveCountMetricTotalPrometheusInput interface {
 	pulumi.Input
 
@@ -14321,6 +22172,7 @@ type SloObjectiveCountMetricTotalPrometheusInput interface {
 }
 
 type SloObjectiveCountMetricTotalPrometheusArgs struct {
+	// Query for the metrics
 	Promql pulumi.StringInput `pulumi:"promql"`
 }
 
@@ -14339,7 +22191,7 @@ func (i SloObjectiveCountMetricTotalPrometheusArgs) ToSloObjectiveCountMetricTot
 // SloObjectiveCountMetricTotalPrometheusArrayInput is an input type that accepts SloObjectiveCountMetricTotalPrometheusArray and SloObjectiveCountMetricTotalPrometheusArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalPrometheusArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalPrometheusArray{ SloObjectiveCountMetricTotalPrometheusArgs{...} }
+//	SloObjectiveCountMetricTotalPrometheusArray{ SloObjectiveCountMetricTotalPrometheusArgs{...} }
 type SloObjectiveCountMetricTotalPrometheusArrayInput interface {
 	pulumi.Input
 
@@ -14375,6 +22227,7 @@ func (o SloObjectiveCountMetricTotalPrometheusOutput) ToSloObjectiveCountMetricT
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricTotalPrometheusOutput) Promql() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalPrometheus) string { return v.Promql }).(pulumi.StringOutput)
 }
@@ -14400,16 +22253,20 @@ func (o SloObjectiveCountMetricTotalPrometheusArrayOutput) Index(i pulumi.IntInp
 }
 
 type SloObjectiveCountMetricTotalRedshift struct {
-	ClusterId    string `pulumi:"clusterId"`
+	// Redshift custer ID
+	ClusterId string `pulumi:"clusterId"`
+	// Database name
 	DatabaseName string `pulumi:"databaseName"`
-	Query        string `pulumi:"query"`
-	Region       string `pulumi:"region"`
+	// Query for the metrics
+	Query string `pulumi:"query"`
+	// Region of the CloudWatch instance
+	Region string `pulumi:"region"`
 }
 
 // SloObjectiveCountMetricTotalRedshiftInput is an input type that accepts SloObjectiveCountMetricTotalRedshiftArgs and SloObjectiveCountMetricTotalRedshiftOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalRedshiftInput` via:
 //
-//          SloObjectiveCountMetricTotalRedshiftArgs{...}
+//	SloObjectiveCountMetricTotalRedshiftArgs{...}
 type SloObjectiveCountMetricTotalRedshiftInput interface {
 	pulumi.Input
 
@@ -14418,10 +22275,14 @@ type SloObjectiveCountMetricTotalRedshiftInput interface {
 }
 
 type SloObjectiveCountMetricTotalRedshiftArgs struct {
-	ClusterId    pulumi.StringInput `pulumi:"clusterId"`
+	// Redshift custer ID
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Database name
 	DatabaseName pulumi.StringInput `pulumi:"databaseName"`
-	Query        pulumi.StringInput `pulumi:"query"`
-	Region       pulumi.StringInput `pulumi:"region"`
+	// Query for the metrics
+	Query pulumi.StringInput `pulumi:"query"`
+	// Region of the CloudWatch instance
+	Region pulumi.StringInput `pulumi:"region"`
 }
 
 func (SloObjectiveCountMetricTotalRedshiftArgs) ElementType() reflect.Type {
@@ -14439,7 +22300,7 @@ func (i SloObjectiveCountMetricTotalRedshiftArgs) ToSloObjectiveCountMetricTotal
 // SloObjectiveCountMetricTotalRedshiftArrayInput is an input type that accepts SloObjectiveCountMetricTotalRedshiftArray and SloObjectiveCountMetricTotalRedshiftArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalRedshiftArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalRedshiftArray{ SloObjectiveCountMetricTotalRedshiftArgs{...} }
+//	SloObjectiveCountMetricTotalRedshiftArray{ SloObjectiveCountMetricTotalRedshiftArgs{...} }
 type SloObjectiveCountMetricTotalRedshiftArrayInput interface {
 	pulumi.Input
 
@@ -14475,18 +22336,22 @@ func (o SloObjectiveCountMetricTotalRedshiftOutput) ToSloObjectiveCountMetricTot
 	return o
 }
 
+// Redshift custer ID
 func (o SloObjectiveCountMetricTotalRedshiftOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalRedshift) string { return v.ClusterId }).(pulumi.StringOutput)
 }
 
+// Database name
 func (o SloObjectiveCountMetricTotalRedshiftOutput) DatabaseName() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalRedshift) string { return v.DatabaseName }).(pulumi.StringOutput)
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricTotalRedshiftOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalRedshift) string { return v.Query }).(pulumi.StringOutput)
 }
 
+// Region of the CloudWatch instance
 func (o SloObjectiveCountMetricTotalRedshiftOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalRedshift) string { return v.Region }).(pulumi.StringOutput)
 }
@@ -14512,13 +22377,14 @@ func (o SloObjectiveCountMetricTotalRedshiftArrayOutput) Index(i pulumi.IntInput
 }
 
 type SloObjectiveCountMetricTotalSplunk struct {
+	// Query for the metrics
 	Query string `pulumi:"query"`
 }
 
 // SloObjectiveCountMetricTotalSplunkInput is an input type that accepts SloObjectiveCountMetricTotalSplunkArgs and SloObjectiveCountMetricTotalSplunkOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalSplunkInput` via:
 //
-//          SloObjectiveCountMetricTotalSplunkArgs{...}
+//	SloObjectiveCountMetricTotalSplunkArgs{...}
 type SloObjectiveCountMetricTotalSplunkInput interface {
 	pulumi.Input
 
@@ -14527,6 +22393,7 @@ type SloObjectiveCountMetricTotalSplunkInput interface {
 }
 
 type SloObjectiveCountMetricTotalSplunkArgs struct {
+	// Query for the metrics
 	Query pulumi.StringInput `pulumi:"query"`
 }
 
@@ -14545,7 +22412,7 @@ func (i SloObjectiveCountMetricTotalSplunkArgs) ToSloObjectiveCountMetricTotalSp
 // SloObjectiveCountMetricTotalSplunkArrayInput is an input type that accepts SloObjectiveCountMetricTotalSplunkArray and SloObjectiveCountMetricTotalSplunkArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalSplunkArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalSplunkArray{ SloObjectiveCountMetricTotalSplunkArgs{...} }
+//	SloObjectiveCountMetricTotalSplunkArray{ SloObjectiveCountMetricTotalSplunkArgs{...} }
 type SloObjectiveCountMetricTotalSplunkArrayInput interface {
 	pulumi.Input
 
@@ -14581,6 +22448,7 @@ func (o SloObjectiveCountMetricTotalSplunkOutput) ToSloObjectiveCountMetricTotal
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricTotalSplunkOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalSplunk) string { return v.Query }).(pulumi.StringOutput)
 }
@@ -14606,13 +22474,14 @@ func (o SloObjectiveCountMetricTotalSplunkArrayOutput) Index(i pulumi.IntInput) 
 }
 
 type SloObjectiveCountMetricTotalSplunkObservability struct {
+	// Query for the metrics
 	Program string `pulumi:"program"`
 }
 
 // SloObjectiveCountMetricTotalSplunkObservabilityInput is an input type that accepts SloObjectiveCountMetricTotalSplunkObservabilityArgs and SloObjectiveCountMetricTotalSplunkObservabilityOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalSplunkObservabilityInput` via:
 //
-//          SloObjectiveCountMetricTotalSplunkObservabilityArgs{...}
+//	SloObjectiveCountMetricTotalSplunkObservabilityArgs{...}
 type SloObjectiveCountMetricTotalSplunkObservabilityInput interface {
 	pulumi.Input
 
@@ -14621,6 +22490,7 @@ type SloObjectiveCountMetricTotalSplunkObservabilityInput interface {
 }
 
 type SloObjectiveCountMetricTotalSplunkObservabilityArgs struct {
+	// Query for the metrics
 	Program pulumi.StringInput `pulumi:"program"`
 }
 
@@ -14639,7 +22509,7 @@ func (i SloObjectiveCountMetricTotalSplunkObservabilityArgs) ToSloObjectiveCount
 // SloObjectiveCountMetricTotalSplunkObservabilityArrayInput is an input type that accepts SloObjectiveCountMetricTotalSplunkObservabilityArray and SloObjectiveCountMetricTotalSplunkObservabilityArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalSplunkObservabilityArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalSplunkObservabilityArray{ SloObjectiveCountMetricTotalSplunkObservabilityArgs{...} }
+//	SloObjectiveCountMetricTotalSplunkObservabilityArray{ SloObjectiveCountMetricTotalSplunkObservabilityArgs{...} }
 type SloObjectiveCountMetricTotalSplunkObservabilityArrayInput interface {
 	pulumi.Input
 
@@ -14675,6 +22545,7 @@ func (o SloObjectiveCountMetricTotalSplunkObservabilityOutput) ToSloObjectiveCou
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricTotalSplunkObservabilityOutput) Program() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalSplunkObservability) string { return v.Program }).(pulumi.StringOutput)
 }
@@ -14700,16 +22571,20 @@ func (o SloObjectiveCountMetricTotalSplunkObservabilityArrayOutput) Index(i pulu
 }
 
 type SloObjectiveCountMetricTotalSumologic struct {
+	// Period of data aggregation
 	Quantization *string `pulumi:"quantization"`
-	Query        string  `pulumi:"query"`
-	Rollup       *string `pulumi:"rollup"`
-	Type         string  `pulumi:"type"`
+	// Query for the metrics
+	Query string `pulumi:"query"`
+	// Aggregation function - avg, sum, min, max, count, none
+	Rollup *string `pulumi:"rollup"`
+	// Sumologic source - metrics or logs
+	Type string `pulumi:"type"`
 }
 
 // SloObjectiveCountMetricTotalSumologicInput is an input type that accepts SloObjectiveCountMetricTotalSumologicArgs and SloObjectiveCountMetricTotalSumologicOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalSumologicInput` via:
 //
-//          SloObjectiveCountMetricTotalSumologicArgs{...}
+//	SloObjectiveCountMetricTotalSumologicArgs{...}
 type SloObjectiveCountMetricTotalSumologicInput interface {
 	pulumi.Input
 
@@ -14718,10 +22593,14 @@ type SloObjectiveCountMetricTotalSumologicInput interface {
 }
 
 type SloObjectiveCountMetricTotalSumologicArgs struct {
+	// Period of data aggregation
 	Quantization pulumi.StringPtrInput `pulumi:"quantization"`
-	Query        pulumi.StringInput    `pulumi:"query"`
-	Rollup       pulumi.StringPtrInput `pulumi:"rollup"`
-	Type         pulumi.StringInput    `pulumi:"type"`
+	// Query for the metrics
+	Query pulumi.StringInput `pulumi:"query"`
+	// Aggregation function - avg, sum, min, max, count, none
+	Rollup pulumi.StringPtrInput `pulumi:"rollup"`
+	// Sumologic source - metrics or logs
+	Type pulumi.StringInput `pulumi:"type"`
 }
 
 func (SloObjectiveCountMetricTotalSumologicArgs) ElementType() reflect.Type {
@@ -14739,7 +22618,7 @@ func (i SloObjectiveCountMetricTotalSumologicArgs) ToSloObjectiveCountMetricTota
 // SloObjectiveCountMetricTotalSumologicArrayInput is an input type that accepts SloObjectiveCountMetricTotalSumologicArray and SloObjectiveCountMetricTotalSumologicArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalSumologicArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalSumologicArray{ SloObjectiveCountMetricTotalSumologicArgs{...} }
+//	SloObjectiveCountMetricTotalSumologicArray{ SloObjectiveCountMetricTotalSumologicArgs{...} }
 type SloObjectiveCountMetricTotalSumologicArrayInput interface {
 	pulumi.Input
 
@@ -14775,18 +22654,22 @@ func (o SloObjectiveCountMetricTotalSumologicOutput) ToSloObjectiveCountMetricTo
 	return o
 }
 
+// Period of data aggregation
 func (o SloObjectiveCountMetricTotalSumologicOutput) Quantization() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalSumologic) *string { return v.Quantization }).(pulumi.StringPtrOutput)
 }
 
+// Query for the metrics
 func (o SloObjectiveCountMetricTotalSumologicOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalSumologic) string { return v.Query }).(pulumi.StringOutput)
 }
 
+// Aggregation function - avg, sum, min, max, count, none
 func (o SloObjectiveCountMetricTotalSumologicOutput) Rollup() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalSumologic) *string { return v.Rollup }).(pulumi.StringPtrOutput)
 }
 
+// Sumologic source - metrics or logs
 func (o SloObjectiveCountMetricTotalSumologicOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalSumologic) string { return v.Type }).(pulumi.StringOutput)
 }
@@ -14812,13 +22695,14 @@ func (o SloObjectiveCountMetricTotalSumologicArrayOutput) Index(i pulumi.IntInpu
 }
 
 type SloObjectiveCountMetricTotalThousandeye struct {
+	// ID of the test
 	TestId int `pulumi:"testId"`
 }
 
 // SloObjectiveCountMetricTotalThousandeyeInput is an input type that accepts SloObjectiveCountMetricTotalThousandeyeArgs and SloObjectiveCountMetricTotalThousandeyeOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalThousandeyeInput` via:
 //
-//          SloObjectiveCountMetricTotalThousandeyeArgs{...}
+//	SloObjectiveCountMetricTotalThousandeyeArgs{...}
 type SloObjectiveCountMetricTotalThousandeyeInput interface {
 	pulumi.Input
 
@@ -14827,6 +22711,7 @@ type SloObjectiveCountMetricTotalThousandeyeInput interface {
 }
 
 type SloObjectiveCountMetricTotalThousandeyeArgs struct {
+	// ID of the test
 	TestId pulumi.IntInput `pulumi:"testId"`
 }
 
@@ -14845,7 +22730,7 @@ func (i SloObjectiveCountMetricTotalThousandeyeArgs) ToSloObjectiveCountMetricTo
 // SloObjectiveCountMetricTotalThousandeyeArrayInput is an input type that accepts SloObjectiveCountMetricTotalThousandeyeArray and SloObjectiveCountMetricTotalThousandeyeArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveCountMetricTotalThousandeyeArrayInput` via:
 //
-//          SloObjectiveCountMetricTotalThousandeyeArray{ SloObjectiveCountMetricTotalThousandeyeArgs{...} }
+//	SloObjectiveCountMetricTotalThousandeyeArray{ SloObjectiveCountMetricTotalThousandeyeArgs{...} }
 type SloObjectiveCountMetricTotalThousandeyeArrayInput interface {
 	pulumi.Input
 
@@ -14881,6 +22766,7 @@ func (o SloObjectiveCountMetricTotalThousandeyeOutput) ToSloObjectiveCountMetric
 	return o
 }
 
+// ID of the test
 func (o SloObjectiveCountMetricTotalThousandeyeOutput) TestId() pulumi.IntOutput {
 	return o.ApplyT(func(v SloObjectiveCountMetricTotalThousandeye) int { return v.TestId }).(pulumi.IntOutput)
 }
@@ -14906,13 +22792,14 @@ func (o SloObjectiveCountMetricTotalThousandeyeArrayOutput) Index(i pulumi.IntIn
 }
 
 type SloObjectiveRawMetric struct {
+	// Query for the metrics
 	Queries []SloObjectiveRawMetricQuery `pulumi:"queries"`
 }
 
 // SloObjectiveRawMetricInput is an input type that accepts SloObjectiveRawMetricArgs and SloObjectiveRawMetricOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricInput` via:
 //
-//          SloObjectiveRawMetricArgs{...}
+//	SloObjectiveRawMetricArgs{...}
 type SloObjectiveRawMetricInput interface {
 	pulumi.Input
 
@@ -14921,6 +22808,7 @@ type SloObjectiveRawMetricInput interface {
 }
 
 type SloObjectiveRawMetricArgs struct {
+	// Query for the metrics
 	Queries SloObjectiveRawMetricQueryArrayInput `pulumi:"queries"`
 }
 
@@ -14939,7 +22827,7 @@ func (i SloObjectiveRawMetricArgs) ToSloObjectiveRawMetricOutputWithContext(ctx 
 // SloObjectiveRawMetricArrayInput is an input type that accepts SloObjectiveRawMetricArray and SloObjectiveRawMetricArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricArrayInput` via:
 //
-//          SloObjectiveRawMetricArray{ SloObjectiveRawMetricArgs{...} }
+//	SloObjectiveRawMetricArray{ SloObjectiveRawMetricArgs{...} }
 type SloObjectiveRawMetricArrayInput interface {
 	pulumi.Input
 
@@ -14975,6 +22863,7 @@ func (o SloObjectiveRawMetricOutput) ToSloObjectiveRawMetricOutputWithContext(ct
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveRawMetricOutput) Queries() SloObjectiveRawMetricQueryArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetric) []SloObjectiveRawMetricQuery { return v.Queries }).(SloObjectiveRawMetricQueryArrayOutput)
 }
@@ -15000,34 +22889,60 @@ func (o SloObjectiveRawMetricArrayOutput) Index(i pulumi.IntInput) SloObjectiveR
 }
 
 type SloObjectiveRawMetricQuery struct {
-	AmazonPrometheuses    []SloObjectiveRawMetricQueryAmazonPrometheus    `pulumi:"amazonPrometheuses"`
-	Appdynamics           []SloObjectiveRawMetricQueryAppdynamic          `pulumi:"appdynamics"`
-	Bigqueries            []SloObjectiveRawMetricQueryBigquery            `pulumi:"bigqueries"`
-	Cloudwatches          []SloObjectiveRawMetricQueryCloudwatch          `pulumi:"cloudwatches"`
-	Datadogs              []SloObjectiveRawMetricQueryDatadog             `pulumi:"datadogs"`
-	Dynatraces            []SloObjectiveRawMetricQueryDynatrace           `pulumi:"dynatraces"`
-	Elasticsearches       []SloObjectiveRawMetricQueryElasticsearch       `pulumi:"elasticsearches"`
-	Gcms                  []SloObjectiveRawMetricQueryGcm                 `pulumi:"gcms"`
-	GrafanaLokis          []SloObjectiveRawMetricQueryGrafanaLoki         `pulumi:"grafanaLokis"`
-	Graphites             []SloObjectiveRawMetricQueryGraphite            `pulumi:"graphites"`
-	Influxdbs             []SloObjectiveRawMetricQueryInfluxdb            `pulumi:"influxdbs"`
-	Instanas              []SloObjectiveRawMetricQueryInstana             `pulumi:"instanas"`
-	Lightsteps            []SloObjectiveRawMetricQueryLightstep           `pulumi:"lightsteps"`
-	Newrelics             []SloObjectiveRawMetricQueryNewrelic            `pulumi:"newrelics"`
-	Opentsdbs             []SloObjectiveRawMetricQueryOpentsdb            `pulumi:"opentsdbs"`
-	Pingdoms              []SloObjectiveRawMetricQueryPingdom             `pulumi:"pingdoms"`
-	Prometheuses          []SloObjectiveRawMetricQueryPrometheus          `pulumi:"prometheuses"`
-	Redshifts             []SloObjectiveRawMetricQueryRedshift            `pulumi:"redshifts"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
+	AmazonPrometheuses []SloObjectiveRawMetricQueryAmazonPrometheus `pulumi:"amazonPrometheuses"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
+	Appdynamics []SloObjectiveRawMetricQueryAppdynamic `pulumi:"appdynamics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+	AzureMonitors []SloObjectiveRawMetricQueryAzureMonitor `pulumi:"azureMonitors"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
+	Bigqueries []SloObjectiveRawMetricQueryBigquery `pulumi:"bigqueries"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
+	Cloudwatches []SloObjectiveRawMetricQueryCloudwatch `pulumi:"cloudwatches"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
+	Datadogs []SloObjectiveRawMetricQueryDatadog `pulumi:"datadogs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
+	Dynatraces []SloObjectiveRawMetricQueryDynatrace `pulumi:"dynatraces"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
+	Elasticsearches []SloObjectiveRawMetricQueryElasticsearch `pulumi:"elasticsearches"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
+	Gcms []SloObjectiveRawMetricQueryGcm `pulumi:"gcms"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
+	GrafanaLokis []SloObjectiveRawMetricQueryGrafanaLoki `pulumi:"grafanaLokis"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
+	Graphites []SloObjectiveRawMetricQueryGraphite `pulumi:"graphites"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+	Honeycombs []SloObjectiveRawMetricQueryHoneycomb `pulumi:"honeycombs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
+	Influxdbs []SloObjectiveRawMetricQueryInfluxdb `pulumi:"influxdbs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
+	Instanas []SloObjectiveRawMetricQueryInstana `pulumi:"instanas"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
+	Lightsteps []SloObjectiveRawMetricQueryLightstep `pulumi:"lightsteps"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
+	Newrelics []SloObjectiveRawMetricQueryNewrelic `pulumi:"newrelics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
+	Opentsdbs []SloObjectiveRawMetricQueryOpentsdb `pulumi:"opentsdbs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
+	Pingdoms []SloObjectiveRawMetricQueryPingdom `pulumi:"pingdoms"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
+	Prometheuses []SloObjectiveRawMetricQueryPrometheus `pulumi:"prometheuses"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
+	Redshifts []SloObjectiveRawMetricQueryRedshift `pulumi:"redshifts"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
 	SplunkObservabilities []SloObjectiveRawMetricQuerySplunkObservability `pulumi:"splunkObservabilities"`
-	Splunks               []SloObjectiveRawMetricQuerySplunk              `pulumi:"splunks"`
-	Sumologics            []SloObjectiveRawMetricQuerySumologic           `pulumi:"sumologics"`
-	Thousandeyes          []SloObjectiveRawMetricQueryThousandeye         `pulumi:"thousandeyes"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
+	Splunks []SloObjectiveRawMetricQuerySplunk `pulumi:"splunks"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
+	Sumologics []SloObjectiveRawMetricQuerySumologic `pulumi:"sumologics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
+	Thousandeyes []SloObjectiveRawMetricQueryThousandeye `pulumi:"thousandeyes"`
 }
 
 // SloObjectiveRawMetricQueryInput is an input type that accepts SloObjectiveRawMetricQueryArgs and SloObjectiveRawMetricQueryOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryInput` via:
 //
-//          SloObjectiveRawMetricQueryArgs{...}
+//	SloObjectiveRawMetricQueryArgs{...}
 type SloObjectiveRawMetricQueryInput interface {
 	pulumi.Input
 
@@ -15036,28 +22951,54 @@ type SloObjectiveRawMetricQueryInput interface {
 }
 
 type SloObjectiveRawMetricQueryArgs struct {
-	AmazonPrometheuses    SloObjectiveRawMetricQueryAmazonPrometheusArrayInput    `pulumi:"amazonPrometheuses"`
-	Appdynamics           SloObjectiveRawMetricQueryAppdynamicArrayInput          `pulumi:"appdynamics"`
-	Bigqueries            SloObjectiveRawMetricQueryBigqueryArrayInput            `pulumi:"bigqueries"`
-	Cloudwatches          SloObjectiveRawMetricQueryCloudwatchArrayInput          `pulumi:"cloudwatches"`
-	Datadogs              SloObjectiveRawMetricQueryDatadogArrayInput             `pulumi:"datadogs"`
-	Dynatraces            SloObjectiveRawMetricQueryDynatraceArrayInput           `pulumi:"dynatraces"`
-	Elasticsearches       SloObjectiveRawMetricQueryElasticsearchArrayInput       `pulumi:"elasticsearches"`
-	Gcms                  SloObjectiveRawMetricQueryGcmArrayInput                 `pulumi:"gcms"`
-	GrafanaLokis          SloObjectiveRawMetricQueryGrafanaLokiArrayInput         `pulumi:"grafanaLokis"`
-	Graphites             SloObjectiveRawMetricQueryGraphiteArrayInput            `pulumi:"graphites"`
-	Influxdbs             SloObjectiveRawMetricQueryInfluxdbArrayInput            `pulumi:"influxdbs"`
-	Instanas              SloObjectiveRawMetricQueryInstanaArrayInput             `pulumi:"instanas"`
-	Lightsteps            SloObjectiveRawMetricQueryLightstepArrayInput           `pulumi:"lightsteps"`
-	Newrelics             SloObjectiveRawMetricQueryNewrelicArrayInput            `pulumi:"newrelics"`
-	Opentsdbs             SloObjectiveRawMetricQueryOpentsdbArrayInput            `pulumi:"opentsdbs"`
-	Pingdoms              SloObjectiveRawMetricQueryPingdomArrayInput             `pulumi:"pingdoms"`
-	Prometheuses          SloObjectiveRawMetricQueryPrometheusArrayInput          `pulumi:"prometheuses"`
-	Redshifts             SloObjectiveRawMetricQueryRedshiftArrayInput            `pulumi:"redshifts"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
+	AmazonPrometheuses SloObjectiveRawMetricQueryAmazonPrometheusArrayInput `pulumi:"amazonPrometheuses"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
+	Appdynamics SloObjectiveRawMetricQueryAppdynamicArrayInput `pulumi:"appdynamics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+	AzureMonitors SloObjectiveRawMetricQueryAzureMonitorArrayInput `pulumi:"azureMonitors"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
+	Bigqueries SloObjectiveRawMetricQueryBigqueryArrayInput `pulumi:"bigqueries"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
+	Cloudwatches SloObjectiveRawMetricQueryCloudwatchArrayInput `pulumi:"cloudwatches"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
+	Datadogs SloObjectiveRawMetricQueryDatadogArrayInput `pulumi:"datadogs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
+	Dynatraces SloObjectiveRawMetricQueryDynatraceArrayInput `pulumi:"dynatraces"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
+	Elasticsearches SloObjectiveRawMetricQueryElasticsearchArrayInput `pulumi:"elasticsearches"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
+	Gcms SloObjectiveRawMetricQueryGcmArrayInput `pulumi:"gcms"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
+	GrafanaLokis SloObjectiveRawMetricQueryGrafanaLokiArrayInput `pulumi:"grafanaLokis"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
+	Graphites SloObjectiveRawMetricQueryGraphiteArrayInput `pulumi:"graphites"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+	Honeycombs SloObjectiveRawMetricQueryHoneycombArrayInput `pulumi:"honeycombs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
+	Influxdbs SloObjectiveRawMetricQueryInfluxdbArrayInput `pulumi:"influxdbs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
+	Instanas SloObjectiveRawMetricQueryInstanaArrayInput `pulumi:"instanas"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
+	Lightsteps SloObjectiveRawMetricQueryLightstepArrayInput `pulumi:"lightsteps"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
+	Newrelics SloObjectiveRawMetricQueryNewrelicArrayInput `pulumi:"newrelics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
+	Opentsdbs SloObjectiveRawMetricQueryOpentsdbArrayInput `pulumi:"opentsdbs"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
+	Pingdoms SloObjectiveRawMetricQueryPingdomArrayInput `pulumi:"pingdoms"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
+	Prometheuses SloObjectiveRawMetricQueryPrometheusArrayInput `pulumi:"prometheuses"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
+	Redshifts SloObjectiveRawMetricQueryRedshiftArrayInput `pulumi:"redshifts"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
 	SplunkObservabilities SloObjectiveRawMetricQuerySplunkObservabilityArrayInput `pulumi:"splunkObservabilities"`
-	Splunks               SloObjectiveRawMetricQuerySplunkArrayInput              `pulumi:"splunks"`
-	Sumologics            SloObjectiveRawMetricQuerySumologicArrayInput           `pulumi:"sumologics"`
-	Thousandeyes          SloObjectiveRawMetricQueryThousandeyeArrayInput         `pulumi:"thousandeyes"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
+	Splunks SloObjectiveRawMetricQuerySplunkArrayInput `pulumi:"splunks"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
+	Sumologics SloObjectiveRawMetricQuerySumologicArrayInput `pulumi:"sumologics"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
+	Thousandeyes SloObjectiveRawMetricQueryThousandeyeArrayInput `pulumi:"thousandeyes"`
 }
 
 func (SloObjectiveRawMetricQueryArgs) ElementType() reflect.Type {
@@ -15075,7 +23016,7 @@ func (i SloObjectiveRawMetricQueryArgs) ToSloObjectiveRawMetricQueryOutputWithCo
 // SloObjectiveRawMetricQueryArrayInput is an input type that accepts SloObjectiveRawMetricQueryArray and SloObjectiveRawMetricQueryArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryArray{ SloObjectiveRawMetricQueryArgs{...} }
+//	SloObjectiveRawMetricQueryArray{ SloObjectiveRawMetricQueryArgs{...} }
 type SloObjectiveRawMetricQueryArrayInput interface {
 	pulumi.Input
 
@@ -15111,94 +23052,126 @@ func (o SloObjectiveRawMetricQueryOutput) ToSloObjectiveRawMetricQueryOutputWith
 	return o
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
 func (o SloObjectiveRawMetricQueryOutput) AmazonPrometheuses() SloObjectiveRawMetricQueryAmazonPrometheusArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQueryAmazonPrometheus {
 		return v.AmazonPrometheuses
 	}).(SloObjectiveRawMetricQueryAmazonPrometheusArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
 func (o SloObjectiveRawMetricQueryOutput) Appdynamics() SloObjectiveRawMetricQueryAppdynamicArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQueryAppdynamic { return v.Appdynamics }).(SloObjectiveRawMetricQueryAppdynamicArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+func (o SloObjectiveRawMetricQueryOutput) AzureMonitors() SloObjectiveRawMetricQueryAzureMonitorArrayOutput {
+	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQueryAzureMonitor { return v.AzureMonitors }).(SloObjectiveRawMetricQueryAzureMonitorArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
 func (o SloObjectiveRawMetricQueryOutput) Bigqueries() SloObjectiveRawMetricQueryBigqueryArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQueryBigquery { return v.Bigqueries }).(SloObjectiveRawMetricQueryBigqueryArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
 func (o SloObjectiveRawMetricQueryOutput) Cloudwatches() SloObjectiveRawMetricQueryCloudwatchArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQueryCloudwatch { return v.Cloudwatches }).(SloObjectiveRawMetricQueryCloudwatchArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
 func (o SloObjectiveRawMetricQueryOutput) Datadogs() SloObjectiveRawMetricQueryDatadogArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQueryDatadog { return v.Datadogs }).(SloObjectiveRawMetricQueryDatadogArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
 func (o SloObjectiveRawMetricQueryOutput) Dynatraces() SloObjectiveRawMetricQueryDynatraceArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQueryDynatrace { return v.Dynatraces }).(SloObjectiveRawMetricQueryDynatraceArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
 func (o SloObjectiveRawMetricQueryOutput) Elasticsearches() SloObjectiveRawMetricQueryElasticsearchArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQueryElasticsearch { return v.Elasticsearches }).(SloObjectiveRawMetricQueryElasticsearchArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
 func (o SloObjectiveRawMetricQueryOutput) Gcms() SloObjectiveRawMetricQueryGcmArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQueryGcm { return v.Gcms }).(SloObjectiveRawMetricQueryGcmArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
 func (o SloObjectiveRawMetricQueryOutput) GrafanaLokis() SloObjectiveRawMetricQueryGrafanaLokiArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQueryGrafanaLoki { return v.GrafanaLokis }).(SloObjectiveRawMetricQueryGrafanaLokiArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
 func (o SloObjectiveRawMetricQueryOutput) Graphites() SloObjectiveRawMetricQueryGraphiteArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQueryGraphite { return v.Graphites }).(SloObjectiveRawMetricQueryGraphiteArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+func (o SloObjectiveRawMetricQueryOutput) Honeycombs() SloObjectiveRawMetricQueryHoneycombArrayOutput {
+	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQueryHoneycomb { return v.Honeycombs }).(SloObjectiveRawMetricQueryHoneycombArrayOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
 func (o SloObjectiveRawMetricQueryOutput) Influxdbs() SloObjectiveRawMetricQueryInfluxdbArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQueryInfluxdb { return v.Influxdbs }).(SloObjectiveRawMetricQueryInfluxdbArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
 func (o SloObjectiveRawMetricQueryOutput) Instanas() SloObjectiveRawMetricQueryInstanaArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQueryInstana { return v.Instanas }).(SloObjectiveRawMetricQueryInstanaArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
 func (o SloObjectiveRawMetricQueryOutput) Lightsteps() SloObjectiveRawMetricQueryLightstepArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQueryLightstep { return v.Lightsteps }).(SloObjectiveRawMetricQueryLightstepArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
 func (o SloObjectiveRawMetricQueryOutput) Newrelics() SloObjectiveRawMetricQueryNewrelicArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQueryNewrelic { return v.Newrelics }).(SloObjectiveRawMetricQueryNewrelicArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
 func (o SloObjectiveRawMetricQueryOutput) Opentsdbs() SloObjectiveRawMetricQueryOpentsdbArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQueryOpentsdb { return v.Opentsdbs }).(SloObjectiveRawMetricQueryOpentsdbArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
 func (o SloObjectiveRawMetricQueryOutput) Pingdoms() SloObjectiveRawMetricQueryPingdomArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQueryPingdom { return v.Pingdoms }).(SloObjectiveRawMetricQueryPingdomArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
 func (o SloObjectiveRawMetricQueryOutput) Prometheuses() SloObjectiveRawMetricQueryPrometheusArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQueryPrometheus { return v.Prometheuses }).(SloObjectiveRawMetricQueryPrometheusArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
 func (o SloObjectiveRawMetricQueryOutput) Redshifts() SloObjectiveRawMetricQueryRedshiftArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQueryRedshift { return v.Redshifts }).(SloObjectiveRawMetricQueryRedshiftArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
 func (o SloObjectiveRawMetricQueryOutput) SplunkObservabilities() SloObjectiveRawMetricQuerySplunkObservabilityArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQuerySplunkObservability {
 		return v.SplunkObservabilities
 	}).(SloObjectiveRawMetricQuerySplunkObservabilityArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
 func (o SloObjectiveRawMetricQueryOutput) Splunks() SloObjectiveRawMetricQuerySplunkArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQuerySplunk { return v.Splunks }).(SloObjectiveRawMetricQuerySplunkArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
 func (o SloObjectiveRawMetricQueryOutput) Sumologics() SloObjectiveRawMetricQuerySumologicArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQuerySumologic { return v.Sumologics }).(SloObjectiveRawMetricQuerySumologicArrayOutput)
 }
 
+// [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
 func (o SloObjectiveRawMetricQueryOutput) Thousandeyes() SloObjectiveRawMetricQueryThousandeyeArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuery) []SloObjectiveRawMetricQueryThousandeye { return v.Thousandeyes }).(SloObjectiveRawMetricQueryThousandeyeArrayOutput)
 }
@@ -15224,13 +23197,14 @@ func (o SloObjectiveRawMetricQueryArrayOutput) Index(i pulumi.IntInput) SloObjec
 }
 
 type SloObjectiveRawMetricQueryAmazonPrometheus struct {
+	// Query for the metrics
 	Promql string `pulumi:"promql"`
 }
 
 // SloObjectiveRawMetricQueryAmazonPrometheusInput is an input type that accepts SloObjectiveRawMetricQueryAmazonPrometheusArgs and SloObjectiveRawMetricQueryAmazonPrometheusOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryAmazonPrometheusInput` via:
 //
-//          SloObjectiveRawMetricQueryAmazonPrometheusArgs{...}
+//	SloObjectiveRawMetricQueryAmazonPrometheusArgs{...}
 type SloObjectiveRawMetricQueryAmazonPrometheusInput interface {
 	pulumi.Input
 
@@ -15239,6 +23213,7 @@ type SloObjectiveRawMetricQueryAmazonPrometheusInput interface {
 }
 
 type SloObjectiveRawMetricQueryAmazonPrometheusArgs struct {
+	// Query for the metrics
 	Promql pulumi.StringInput `pulumi:"promql"`
 }
 
@@ -15257,7 +23232,7 @@ func (i SloObjectiveRawMetricQueryAmazonPrometheusArgs) ToSloObjectiveRawMetricQ
 // SloObjectiveRawMetricQueryAmazonPrometheusArrayInput is an input type that accepts SloObjectiveRawMetricQueryAmazonPrometheusArray and SloObjectiveRawMetricQueryAmazonPrometheusArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryAmazonPrometheusArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryAmazonPrometheusArray{ SloObjectiveRawMetricQueryAmazonPrometheusArgs{...} }
+//	SloObjectiveRawMetricQueryAmazonPrometheusArray{ SloObjectiveRawMetricQueryAmazonPrometheusArgs{...} }
 type SloObjectiveRawMetricQueryAmazonPrometheusArrayInput interface {
 	pulumi.Input
 
@@ -15293,6 +23268,7 @@ func (o SloObjectiveRawMetricQueryAmazonPrometheusOutput) ToSloObjectiveRawMetri
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveRawMetricQueryAmazonPrometheusOutput) Promql() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryAmazonPrometheus) string { return v.Promql }).(pulumi.StringOutput)
 }
@@ -15318,14 +23294,16 @@ func (o SloObjectiveRawMetricQueryAmazonPrometheusArrayOutput) Index(i pulumi.In
 }
 
 type SloObjectiveRawMetricQueryAppdynamic struct {
+	// Name of the added application
 	ApplicationName string `pulumi:"applicationName"`
-	MetricPath      string `pulumi:"metricPath"`
+	// Path to the metrics
+	MetricPath string `pulumi:"metricPath"`
 }
 
 // SloObjectiveRawMetricQueryAppdynamicInput is an input type that accepts SloObjectiveRawMetricQueryAppdynamicArgs and SloObjectiveRawMetricQueryAppdynamicOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryAppdynamicInput` via:
 //
-//          SloObjectiveRawMetricQueryAppdynamicArgs{...}
+//	SloObjectiveRawMetricQueryAppdynamicArgs{...}
 type SloObjectiveRawMetricQueryAppdynamicInput interface {
 	pulumi.Input
 
@@ -15334,8 +23312,10 @@ type SloObjectiveRawMetricQueryAppdynamicInput interface {
 }
 
 type SloObjectiveRawMetricQueryAppdynamicArgs struct {
+	// Name of the added application
 	ApplicationName pulumi.StringInput `pulumi:"applicationName"`
-	MetricPath      pulumi.StringInput `pulumi:"metricPath"`
+	// Path to the metrics
+	MetricPath pulumi.StringInput `pulumi:"metricPath"`
 }
 
 func (SloObjectiveRawMetricQueryAppdynamicArgs) ElementType() reflect.Type {
@@ -15353,7 +23333,7 @@ func (i SloObjectiveRawMetricQueryAppdynamicArgs) ToSloObjectiveRawMetricQueryAp
 // SloObjectiveRawMetricQueryAppdynamicArrayInput is an input type that accepts SloObjectiveRawMetricQueryAppdynamicArray and SloObjectiveRawMetricQueryAppdynamicArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryAppdynamicArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryAppdynamicArray{ SloObjectiveRawMetricQueryAppdynamicArgs{...} }
+//	SloObjectiveRawMetricQueryAppdynamicArray{ SloObjectiveRawMetricQueryAppdynamicArgs{...} }
 type SloObjectiveRawMetricQueryAppdynamicArrayInput interface {
 	pulumi.Input
 
@@ -15389,10 +23369,12 @@ func (o SloObjectiveRawMetricQueryAppdynamicOutput) ToSloObjectiveRawMetricQuery
 	return o
 }
 
+// Name of the added application
 func (o SloObjectiveRawMetricQueryAppdynamicOutput) ApplicationName() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryAppdynamic) string { return v.ApplicationName }).(pulumi.StringOutput)
 }
 
+// Path to the metrics
 func (o SloObjectiveRawMetricQueryAppdynamicOutput) MetricPath() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryAppdynamic) string { return v.MetricPath }).(pulumi.StringOutput)
 }
@@ -15417,16 +23399,404 @@ func (o SloObjectiveRawMetricQueryAppdynamicArrayOutput) Index(i pulumi.IntInput
 	}).(SloObjectiveRawMetricQueryAppdynamicOutput)
 }
 
+type SloObjectiveRawMetricQueryAzureMonitor struct {
+	// Aggregation type [Required for metrics]
+	Aggregation *string `pulumi:"aggregation"`
+	// Specifies source: 'metrics' or 'logs'
+	DataType string `pulumi:"dataType"`
+	// Dimensions of the metric [Optional for metrics]
+	Dimensions []SloObjectiveRawMetricQueryAzureMonitorDimension `pulumi:"dimensions"`
+	// Logs query in Kusto Query Language [Required for logs]
+	KqlQuery *string `pulumi:"kqlQuery"`
+	// Name of the metric [Required for metrics]
+	MetricName *string `pulumi:"metricName"`
+	// Namespace of the metric [Optional for metrics]
+	MetricNamespace *string `pulumi:"metricNamespace"`
+	// Identifier of the Azure Cloud resource [Required for metrics]
+	ResourceId *string `pulumi:"resourceId"`
+	// Log analytics workspace [Required for logs]
+	Workspaces []SloObjectiveRawMetricQueryAzureMonitorWorkspace `pulumi:"workspaces"`
+}
+
+// SloObjectiveRawMetricQueryAzureMonitorInput is an input type that accepts SloObjectiveRawMetricQueryAzureMonitorArgs and SloObjectiveRawMetricQueryAzureMonitorOutput values.
+// You can construct a concrete instance of `SloObjectiveRawMetricQueryAzureMonitorInput` via:
+//
+//	SloObjectiveRawMetricQueryAzureMonitorArgs{...}
+type SloObjectiveRawMetricQueryAzureMonitorInput interface {
+	pulumi.Input
+
+	ToSloObjectiveRawMetricQueryAzureMonitorOutput() SloObjectiveRawMetricQueryAzureMonitorOutput
+	ToSloObjectiveRawMetricQueryAzureMonitorOutputWithContext(context.Context) SloObjectiveRawMetricQueryAzureMonitorOutput
+}
+
+type SloObjectiveRawMetricQueryAzureMonitorArgs struct {
+	// Aggregation type [Required for metrics]
+	Aggregation pulumi.StringPtrInput `pulumi:"aggregation"`
+	// Specifies source: 'metrics' or 'logs'
+	DataType pulumi.StringInput `pulumi:"dataType"`
+	// Dimensions of the metric [Optional for metrics]
+	Dimensions SloObjectiveRawMetricQueryAzureMonitorDimensionArrayInput `pulumi:"dimensions"`
+	// Logs query in Kusto Query Language [Required for logs]
+	KqlQuery pulumi.StringPtrInput `pulumi:"kqlQuery"`
+	// Name of the metric [Required for metrics]
+	MetricName pulumi.StringPtrInput `pulumi:"metricName"`
+	// Namespace of the metric [Optional for metrics]
+	MetricNamespace pulumi.StringPtrInput `pulumi:"metricNamespace"`
+	// Identifier of the Azure Cloud resource [Required for metrics]
+	ResourceId pulumi.StringPtrInput `pulumi:"resourceId"`
+	// Log analytics workspace [Required for logs]
+	Workspaces SloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayInput `pulumi:"workspaces"`
+}
+
+func (SloObjectiveRawMetricQueryAzureMonitorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveRawMetricQueryAzureMonitor)(nil)).Elem()
+}
+
+func (i SloObjectiveRawMetricQueryAzureMonitorArgs) ToSloObjectiveRawMetricQueryAzureMonitorOutput() SloObjectiveRawMetricQueryAzureMonitorOutput {
+	return i.ToSloObjectiveRawMetricQueryAzureMonitorOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveRawMetricQueryAzureMonitorArgs) ToSloObjectiveRawMetricQueryAzureMonitorOutputWithContext(ctx context.Context) SloObjectiveRawMetricQueryAzureMonitorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveRawMetricQueryAzureMonitorOutput)
+}
+
+// SloObjectiveRawMetricQueryAzureMonitorArrayInput is an input type that accepts SloObjectiveRawMetricQueryAzureMonitorArray and SloObjectiveRawMetricQueryAzureMonitorArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveRawMetricQueryAzureMonitorArrayInput` via:
+//
+//	SloObjectiveRawMetricQueryAzureMonitorArray{ SloObjectiveRawMetricQueryAzureMonitorArgs{...} }
+type SloObjectiveRawMetricQueryAzureMonitorArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveRawMetricQueryAzureMonitorArrayOutput() SloObjectiveRawMetricQueryAzureMonitorArrayOutput
+	ToSloObjectiveRawMetricQueryAzureMonitorArrayOutputWithContext(context.Context) SloObjectiveRawMetricQueryAzureMonitorArrayOutput
+}
+
+type SloObjectiveRawMetricQueryAzureMonitorArray []SloObjectiveRawMetricQueryAzureMonitorInput
+
+func (SloObjectiveRawMetricQueryAzureMonitorArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveRawMetricQueryAzureMonitor)(nil)).Elem()
+}
+
+func (i SloObjectiveRawMetricQueryAzureMonitorArray) ToSloObjectiveRawMetricQueryAzureMonitorArrayOutput() SloObjectiveRawMetricQueryAzureMonitorArrayOutput {
+	return i.ToSloObjectiveRawMetricQueryAzureMonitorArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveRawMetricQueryAzureMonitorArray) ToSloObjectiveRawMetricQueryAzureMonitorArrayOutputWithContext(ctx context.Context) SloObjectiveRawMetricQueryAzureMonitorArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveRawMetricQueryAzureMonitorArrayOutput)
+}
+
+type SloObjectiveRawMetricQueryAzureMonitorOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveRawMetricQueryAzureMonitorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveRawMetricQueryAzureMonitor)(nil)).Elem()
+}
+
+func (o SloObjectiveRawMetricQueryAzureMonitorOutput) ToSloObjectiveRawMetricQueryAzureMonitorOutput() SloObjectiveRawMetricQueryAzureMonitorOutput {
+	return o
+}
+
+func (o SloObjectiveRawMetricQueryAzureMonitorOutput) ToSloObjectiveRawMetricQueryAzureMonitorOutputWithContext(ctx context.Context) SloObjectiveRawMetricQueryAzureMonitorOutput {
+	return o
+}
+
+// Aggregation type [Required for metrics]
+func (o SloObjectiveRawMetricQueryAzureMonitorOutput) Aggregation() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveRawMetricQueryAzureMonitor) *string { return v.Aggregation }).(pulumi.StringPtrOutput)
+}
+
+// Specifies source: 'metrics' or 'logs'
+func (o SloObjectiveRawMetricQueryAzureMonitorOutput) DataType() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveRawMetricQueryAzureMonitor) string { return v.DataType }).(pulumi.StringOutput)
+}
+
+// Dimensions of the metric [Optional for metrics]
+func (o SloObjectiveRawMetricQueryAzureMonitorOutput) Dimensions() SloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutput {
+	return o.ApplyT(func(v SloObjectiveRawMetricQueryAzureMonitor) []SloObjectiveRawMetricQueryAzureMonitorDimension {
+		return v.Dimensions
+	}).(SloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutput)
+}
+
+// Logs query in Kusto Query Language [Required for logs]
+func (o SloObjectiveRawMetricQueryAzureMonitorOutput) KqlQuery() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveRawMetricQueryAzureMonitor) *string { return v.KqlQuery }).(pulumi.StringPtrOutput)
+}
+
+// Name of the metric [Required for metrics]
+func (o SloObjectiveRawMetricQueryAzureMonitorOutput) MetricName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveRawMetricQueryAzureMonitor) *string { return v.MetricName }).(pulumi.StringPtrOutput)
+}
+
+// Namespace of the metric [Optional for metrics]
+func (o SloObjectiveRawMetricQueryAzureMonitorOutput) MetricNamespace() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveRawMetricQueryAzureMonitor) *string { return v.MetricNamespace }).(pulumi.StringPtrOutput)
+}
+
+// Identifier of the Azure Cloud resource [Required for metrics]
+func (o SloObjectiveRawMetricQueryAzureMonitorOutput) ResourceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveRawMetricQueryAzureMonitor) *string { return v.ResourceId }).(pulumi.StringPtrOutput)
+}
+
+// Log analytics workspace [Required for logs]
+func (o SloObjectiveRawMetricQueryAzureMonitorOutput) Workspaces() SloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutput {
+	return o.ApplyT(func(v SloObjectiveRawMetricQueryAzureMonitor) []SloObjectiveRawMetricQueryAzureMonitorWorkspace {
+		return v.Workspaces
+	}).(SloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutput)
+}
+
+type SloObjectiveRawMetricQueryAzureMonitorArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveRawMetricQueryAzureMonitorArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveRawMetricQueryAzureMonitor)(nil)).Elem()
+}
+
+func (o SloObjectiveRawMetricQueryAzureMonitorArrayOutput) ToSloObjectiveRawMetricQueryAzureMonitorArrayOutput() SloObjectiveRawMetricQueryAzureMonitorArrayOutput {
+	return o
+}
+
+func (o SloObjectiveRawMetricQueryAzureMonitorArrayOutput) ToSloObjectiveRawMetricQueryAzureMonitorArrayOutputWithContext(ctx context.Context) SloObjectiveRawMetricQueryAzureMonitorArrayOutput {
+	return o
+}
+
+func (o SloObjectiveRawMetricQueryAzureMonitorArrayOutput) Index(i pulumi.IntInput) SloObjectiveRawMetricQueryAzureMonitorOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveRawMetricQueryAzureMonitor {
+		return vs[0].([]SloObjectiveRawMetricQueryAzureMonitor)[vs[1].(int)]
+	}).(SloObjectiveRawMetricQueryAzureMonitorOutput)
+}
+
+type SloObjectiveRawMetricQueryAzureMonitorDimension struct {
+	// The name of the previously defined alert method.
+	Name string `pulumi:"name"`
+	// Burn rate value.
+	Value string `pulumi:"value"`
+}
+
+// SloObjectiveRawMetricQueryAzureMonitorDimensionInput is an input type that accepts SloObjectiveRawMetricQueryAzureMonitorDimensionArgs and SloObjectiveRawMetricQueryAzureMonitorDimensionOutput values.
+// You can construct a concrete instance of `SloObjectiveRawMetricQueryAzureMonitorDimensionInput` via:
+//
+//	SloObjectiveRawMetricQueryAzureMonitorDimensionArgs{...}
+type SloObjectiveRawMetricQueryAzureMonitorDimensionInput interface {
+	pulumi.Input
+
+	ToSloObjectiveRawMetricQueryAzureMonitorDimensionOutput() SloObjectiveRawMetricQueryAzureMonitorDimensionOutput
+	ToSloObjectiveRawMetricQueryAzureMonitorDimensionOutputWithContext(context.Context) SloObjectiveRawMetricQueryAzureMonitorDimensionOutput
+}
+
+type SloObjectiveRawMetricQueryAzureMonitorDimensionArgs struct {
+	// The name of the previously defined alert method.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Burn rate value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (SloObjectiveRawMetricQueryAzureMonitorDimensionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveRawMetricQueryAzureMonitorDimension)(nil)).Elem()
+}
+
+func (i SloObjectiveRawMetricQueryAzureMonitorDimensionArgs) ToSloObjectiveRawMetricQueryAzureMonitorDimensionOutput() SloObjectiveRawMetricQueryAzureMonitorDimensionOutput {
+	return i.ToSloObjectiveRawMetricQueryAzureMonitorDimensionOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveRawMetricQueryAzureMonitorDimensionArgs) ToSloObjectiveRawMetricQueryAzureMonitorDimensionOutputWithContext(ctx context.Context) SloObjectiveRawMetricQueryAzureMonitorDimensionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveRawMetricQueryAzureMonitorDimensionOutput)
+}
+
+// SloObjectiveRawMetricQueryAzureMonitorDimensionArrayInput is an input type that accepts SloObjectiveRawMetricQueryAzureMonitorDimensionArray and SloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveRawMetricQueryAzureMonitorDimensionArrayInput` via:
+//
+//	SloObjectiveRawMetricQueryAzureMonitorDimensionArray{ SloObjectiveRawMetricQueryAzureMonitorDimensionArgs{...} }
+type SloObjectiveRawMetricQueryAzureMonitorDimensionArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutput() SloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutput
+	ToSloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutputWithContext(context.Context) SloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutput
+}
+
+type SloObjectiveRawMetricQueryAzureMonitorDimensionArray []SloObjectiveRawMetricQueryAzureMonitorDimensionInput
+
+func (SloObjectiveRawMetricQueryAzureMonitorDimensionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveRawMetricQueryAzureMonitorDimension)(nil)).Elem()
+}
+
+func (i SloObjectiveRawMetricQueryAzureMonitorDimensionArray) ToSloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutput() SloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutput {
+	return i.ToSloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveRawMetricQueryAzureMonitorDimensionArray) ToSloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutputWithContext(ctx context.Context) SloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutput)
+}
+
+type SloObjectiveRawMetricQueryAzureMonitorDimensionOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveRawMetricQueryAzureMonitorDimensionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveRawMetricQueryAzureMonitorDimension)(nil)).Elem()
+}
+
+func (o SloObjectiveRawMetricQueryAzureMonitorDimensionOutput) ToSloObjectiveRawMetricQueryAzureMonitorDimensionOutput() SloObjectiveRawMetricQueryAzureMonitorDimensionOutput {
+	return o
+}
+
+func (o SloObjectiveRawMetricQueryAzureMonitorDimensionOutput) ToSloObjectiveRawMetricQueryAzureMonitorDimensionOutputWithContext(ctx context.Context) SloObjectiveRawMetricQueryAzureMonitorDimensionOutput {
+	return o
+}
+
+// The name of the previously defined alert method.
+func (o SloObjectiveRawMetricQueryAzureMonitorDimensionOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveRawMetricQueryAzureMonitorDimension) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Burn rate value.
+func (o SloObjectiveRawMetricQueryAzureMonitorDimensionOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveRawMetricQueryAzureMonitorDimension) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type SloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveRawMetricQueryAzureMonitorDimension)(nil)).Elem()
+}
+
+func (o SloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutput) ToSloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutput() SloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutput {
+	return o
+}
+
+func (o SloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutput) ToSloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutputWithContext(ctx context.Context) SloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutput {
+	return o
+}
+
+func (o SloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutput) Index(i pulumi.IntInput) SloObjectiveRawMetricQueryAzureMonitorDimensionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveRawMetricQueryAzureMonitorDimension {
+		return vs[0].([]SloObjectiveRawMetricQueryAzureMonitorDimension)[vs[1].(int)]
+	}).(SloObjectiveRawMetricQueryAzureMonitorDimensionOutput)
+}
+
+type SloObjectiveRawMetricQueryAzureMonitorWorkspace struct {
+	// Resource group of the workspace
+	ResourceGroup string `pulumi:"resourceGroup"`
+	// Subscription ID of the workspace
+	SubscriptionId string `pulumi:"subscriptionId"`
+	// ID of the workspace
+	WorkspaceId string `pulumi:"workspaceId"`
+}
+
+// SloObjectiveRawMetricQueryAzureMonitorWorkspaceInput is an input type that accepts SloObjectiveRawMetricQueryAzureMonitorWorkspaceArgs and SloObjectiveRawMetricQueryAzureMonitorWorkspaceOutput values.
+// You can construct a concrete instance of `SloObjectiveRawMetricQueryAzureMonitorWorkspaceInput` via:
+//
+//	SloObjectiveRawMetricQueryAzureMonitorWorkspaceArgs{...}
+type SloObjectiveRawMetricQueryAzureMonitorWorkspaceInput interface {
+	pulumi.Input
+
+	ToSloObjectiveRawMetricQueryAzureMonitorWorkspaceOutput() SloObjectiveRawMetricQueryAzureMonitorWorkspaceOutput
+	ToSloObjectiveRawMetricQueryAzureMonitorWorkspaceOutputWithContext(context.Context) SloObjectiveRawMetricQueryAzureMonitorWorkspaceOutput
+}
+
+type SloObjectiveRawMetricQueryAzureMonitorWorkspaceArgs struct {
+	// Resource group of the workspace
+	ResourceGroup pulumi.StringInput `pulumi:"resourceGroup"`
+	// Subscription ID of the workspace
+	SubscriptionId pulumi.StringInput `pulumi:"subscriptionId"`
+	// ID of the workspace
+	WorkspaceId pulumi.StringInput `pulumi:"workspaceId"`
+}
+
+func (SloObjectiveRawMetricQueryAzureMonitorWorkspaceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveRawMetricQueryAzureMonitorWorkspace)(nil)).Elem()
+}
+
+func (i SloObjectiveRawMetricQueryAzureMonitorWorkspaceArgs) ToSloObjectiveRawMetricQueryAzureMonitorWorkspaceOutput() SloObjectiveRawMetricQueryAzureMonitorWorkspaceOutput {
+	return i.ToSloObjectiveRawMetricQueryAzureMonitorWorkspaceOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveRawMetricQueryAzureMonitorWorkspaceArgs) ToSloObjectiveRawMetricQueryAzureMonitorWorkspaceOutputWithContext(ctx context.Context) SloObjectiveRawMetricQueryAzureMonitorWorkspaceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveRawMetricQueryAzureMonitorWorkspaceOutput)
+}
+
+// SloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayInput is an input type that accepts SloObjectiveRawMetricQueryAzureMonitorWorkspaceArray and SloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayInput` via:
+//
+//	SloObjectiveRawMetricQueryAzureMonitorWorkspaceArray{ SloObjectiveRawMetricQueryAzureMonitorWorkspaceArgs{...} }
+type SloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutput() SloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutput
+	ToSloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutputWithContext(context.Context) SloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutput
+}
+
+type SloObjectiveRawMetricQueryAzureMonitorWorkspaceArray []SloObjectiveRawMetricQueryAzureMonitorWorkspaceInput
+
+func (SloObjectiveRawMetricQueryAzureMonitorWorkspaceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveRawMetricQueryAzureMonitorWorkspace)(nil)).Elem()
+}
+
+func (i SloObjectiveRawMetricQueryAzureMonitorWorkspaceArray) ToSloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutput() SloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutput {
+	return i.ToSloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveRawMetricQueryAzureMonitorWorkspaceArray) ToSloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutputWithContext(ctx context.Context) SloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutput)
+}
+
+type SloObjectiveRawMetricQueryAzureMonitorWorkspaceOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveRawMetricQueryAzureMonitorWorkspaceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveRawMetricQueryAzureMonitorWorkspace)(nil)).Elem()
+}
+
+func (o SloObjectiveRawMetricQueryAzureMonitorWorkspaceOutput) ToSloObjectiveRawMetricQueryAzureMonitorWorkspaceOutput() SloObjectiveRawMetricQueryAzureMonitorWorkspaceOutput {
+	return o
+}
+
+func (o SloObjectiveRawMetricQueryAzureMonitorWorkspaceOutput) ToSloObjectiveRawMetricQueryAzureMonitorWorkspaceOutputWithContext(ctx context.Context) SloObjectiveRawMetricQueryAzureMonitorWorkspaceOutput {
+	return o
+}
+
+// Resource group of the workspace
+func (o SloObjectiveRawMetricQueryAzureMonitorWorkspaceOutput) ResourceGroup() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveRawMetricQueryAzureMonitorWorkspace) string { return v.ResourceGroup }).(pulumi.StringOutput)
+}
+
+// Subscription ID of the workspace
+func (o SloObjectiveRawMetricQueryAzureMonitorWorkspaceOutput) SubscriptionId() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveRawMetricQueryAzureMonitorWorkspace) string { return v.SubscriptionId }).(pulumi.StringOutput)
+}
+
+// ID of the workspace
+func (o SloObjectiveRawMetricQueryAzureMonitorWorkspaceOutput) WorkspaceId() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveRawMetricQueryAzureMonitorWorkspace) string { return v.WorkspaceId }).(pulumi.StringOutput)
+}
+
+type SloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveRawMetricQueryAzureMonitorWorkspace)(nil)).Elem()
+}
+
+func (o SloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutput) ToSloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutput() SloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutput {
+	return o
+}
+
+func (o SloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutput) ToSloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutputWithContext(ctx context.Context) SloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutput {
+	return o
+}
+
+func (o SloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutput) Index(i pulumi.IntInput) SloObjectiveRawMetricQueryAzureMonitorWorkspaceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveRawMetricQueryAzureMonitorWorkspace {
+		return vs[0].([]SloObjectiveRawMetricQueryAzureMonitorWorkspace)[vs[1].(int)]
+	}).(SloObjectiveRawMetricQueryAzureMonitorWorkspaceOutput)
+}
+
 type SloObjectiveRawMetricQueryBigquery struct {
-	Location  string `pulumi:"location"`
+	// Location of you BigQuery
+	Location string `pulumi:"location"`
+	// Project ID
 	ProjectId string `pulumi:"projectId"`
-	Query     string `pulumi:"query"`
+	// Query for the metrics
+	Query string `pulumi:"query"`
 }
 
 // SloObjectiveRawMetricQueryBigqueryInput is an input type that accepts SloObjectiveRawMetricQueryBigqueryArgs and SloObjectiveRawMetricQueryBigqueryOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryBigqueryInput` via:
 //
-//          SloObjectiveRawMetricQueryBigqueryArgs{...}
+//	SloObjectiveRawMetricQueryBigqueryArgs{...}
 type SloObjectiveRawMetricQueryBigqueryInput interface {
 	pulumi.Input
 
@@ -15435,9 +23805,12 @@ type SloObjectiveRawMetricQueryBigqueryInput interface {
 }
 
 type SloObjectiveRawMetricQueryBigqueryArgs struct {
-	Location  pulumi.StringInput `pulumi:"location"`
+	// Location of you BigQuery
+	Location pulumi.StringInput `pulumi:"location"`
+	// Project ID
 	ProjectId pulumi.StringInput `pulumi:"projectId"`
-	Query     pulumi.StringInput `pulumi:"query"`
+	// Query for the metrics
+	Query pulumi.StringInput `pulumi:"query"`
 }
 
 func (SloObjectiveRawMetricQueryBigqueryArgs) ElementType() reflect.Type {
@@ -15455,7 +23828,7 @@ func (i SloObjectiveRawMetricQueryBigqueryArgs) ToSloObjectiveRawMetricQueryBigq
 // SloObjectiveRawMetricQueryBigqueryArrayInput is an input type that accepts SloObjectiveRawMetricQueryBigqueryArray and SloObjectiveRawMetricQueryBigqueryArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryBigqueryArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryBigqueryArray{ SloObjectiveRawMetricQueryBigqueryArgs{...} }
+//	SloObjectiveRawMetricQueryBigqueryArray{ SloObjectiveRawMetricQueryBigqueryArgs{...} }
 type SloObjectiveRawMetricQueryBigqueryArrayInput interface {
 	pulumi.Input
 
@@ -15491,14 +23864,17 @@ func (o SloObjectiveRawMetricQueryBigqueryOutput) ToSloObjectiveRawMetricQueryBi
 	return o
 }
 
+// Location of you BigQuery
 func (o SloObjectiveRawMetricQueryBigqueryOutput) Location() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryBigquery) string { return v.Location }).(pulumi.StringOutput)
 }
 
+// Project ID
 func (o SloObjectiveRawMetricQueryBigqueryOutput) ProjectId() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryBigquery) string { return v.ProjectId }).(pulumi.StringOutput)
 }
 
+// Query for the metrics
 func (o SloObjectiveRawMetricQueryBigqueryOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryBigquery) string { return v.Query }).(pulumi.StringOutput)
 }
@@ -15524,19 +23900,28 @@ func (o SloObjectiveRawMetricQueryBigqueryArrayOutput) Index(i pulumi.IntInput) 
 }
 
 type SloObjectiveRawMetricQueryCloudwatch struct {
+	// AccountID used with cross-account observability feature
+	AccountId *string `pulumi:"accountId"`
+	// Dimensions of the metric [Optional for metrics]
 	Dimensions []SloObjectiveRawMetricQueryCloudwatchDimension `pulumi:"dimensions"`
-	Json       *string                                         `pulumi:"json"`
-	MetricName *string                                         `pulumi:"metricName"`
-	Namespace  *string                                         `pulumi:"namespace"`
-	Region     string                                          `pulumi:"region"`
-	Sql        *string                                         `pulumi:"sql"`
-	Stat       *string                                         `pulumi:"stat"`
+	// JSON query
+	Json *string `pulumi:"json"`
+	// Name of the metric [Required for metrics]
+	MetricName *string `pulumi:"metricName"`
+	// Namespace of the metric
+	Namespace *string `pulumi:"namespace"`
+	// Region of the CloudWatch instance
+	Region string `pulumi:"region"`
+	// SQL query
+	Sql *string `pulumi:"sql"`
+	// Metric data aggregations
+	Stat *string `pulumi:"stat"`
 }
 
 // SloObjectiveRawMetricQueryCloudwatchInput is an input type that accepts SloObjectiveRawMetricQueryCloudwatchArgs and SloObjectiveRawMetricQueryCloudwatchOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryCloudwatchInput` via:
 //
-//          SloObjectiveRawMetricQueryCloudwatchArgs{...}
+//	SloObjectiveRawMetricQueryCloudwatchArgs{...}
 type SloObjectiveRawMetricQueryCloudwatchInput interface {
 	pulumi.Input
 
@@ -15545,13 +23930,22 @@ type SloObjectiveRawMetricQueryCloudwatchInput interface {
 }
 
 type SloObjectiveRawMetricQueryCloudwatchArgs struct {
+	// AccountID used with cross-account observability feature
+	AccountId pulumi.StringPtrInput `pulumi:"accountId"`
+	// Dimensions of the metric [Optional for metrics]
 	Dimensions SloObjectiveRawMetricQueryCloudwatchDimensionArrayInput `pulumi:"dimensions"`
-	Json       pulumi.StringPtrInput                                   `pulumi:"json"`
-	MetricName pulumi.StringPtrInput                                   `pulumi:"metricName"`
-	Namespace  pulumi.StringPtrInput                                   `pulumi:"namespace"`
-	Region     pulumi.StringInput                                      `pulumi:"region"`
-	Sql        pulumi.StringPtrInput                                   `pulumi:"sql"`
-	Stat       pulumi.StringPtrInput                                   `pulumi:"stat"`
+	// JSON query
+	Json pulumi.StringPtrInput `pulumi:"json"`
+	// Name of the metric [Required for metrics]
+	MetricName pulumi.StringPtrInput `pulumi:"metricName"`
+	// Namespace of the metric
+	Namespace pulumi.StringPtrInput `pulumi:"namespace"`
+	// Region of the CloudWatch instance
+	Region pulumi.StringInput `pulumi:"region"`
+	// SQL query
+	Sql pulumi.StringPtrInput `pulumi:"sql"`
+	// Metric data aggregations
+	Stat pulumi.StringPtrInput `pulumi:"stat"`
 }
 
 func (SloObjectiveRawMetricQueryCloudwatchArgs) ElementType() reflect.Type {
@@ -15569,7 +23963,7 @@ func (i SloObjectiveRawMetricQueryCloudwatchArgs) ToSloObjectiveRawMetricQueryCl
 // SloObjectiveRawMetricQueryCloudwatchArrayInput is an input type that accepts SloObjectiveRawMetricQueryCloudwatchArray and SloObjectiveRawMetricQueryCloudwatchArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryCloudwatchArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryCloudwatchArray{ SloObjectiveRawMetricQueryCloudwatchArgs{...} }
+//	SloObjectiveRawMetricQueryCloudwatchArray{ SloObjectiveRawMetricQueryCloudwatchArgs{...} }
 type SloObjectiveRawMetricQueryCloudwatchArrayInput interface {
 	pulumi.Input
 
@@ -15605,32 +23999,44 @@ func (o SloObjectiveRawMetricQueryCloudwatchOutput) ToSloObjectiveRawMetricQuery
 	return o
 }
 
+// AccountID used with cross-account observability feature
+func (o SloObjectiveRawMetricQueryCloudwatchOutput) AccountId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveRawMetricQueryCloudwatch) *string { return v.AccountId }).(pulumi.StringPtrOutput)
+}
+
+// Dimensions of the metric [Optional for metrics]
 func (o SloObjectiveRawMetricQueryCloudwatchOutput) Dimensions() SloObjectiveRawMetricQueryCloudwatchDimensionArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryCloudwatch) []SloObjectiveRawMetricQueryCloudwatchDimension {
 		return v.Dimensions
 	}).(SloObjectiveRawMetricQueryCloudwatchDimensionArrayOutput)
 }
 
+// JSON query
 func (o SloObjectiveRawMetricQueryCloudwatchOutput) Json() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryCloudwatch) *string { return v.Json }).(pulumi.StringPtrOutput)
 }
 
+// Name of the metric [Required for metrics]
 func (o SloObjectiveRawMetricQueryCloudwatchOutput) MetricName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryCloudwatch) *string { return v.MetricName }).(pulumi.StringPtrOutput)
 }
 
+// Namespace of the metric
 func (o SloObjectiveRawMetricQueryCloudwatchOutput) Namespace() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryCloudwatch) *string { return v.Namespace }).(pulumi.StringPtrOutput)
 }
 
+// Region of the CloudWatch instance
 func (o SloObjectiveRawMetricQueryCloudwatchOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryCloudwatch) string { return v.Region }).(pulumi.StringOutput)
 }
 
+// SQL query
 func (o SloObjectiveRawMetricQueryCloudwatchOutput) Sql() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryCloudwatch) *string { return v.Sql }).(pulumi.StringPtrOutput)
 }
 
+// Metric data aggregations
 func (o SloObjectiveRawMetricQueryCloudwatchOutput) Stat() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryCloudwatch) *string { return v.Stat }).(pulumi.StringPtrOutput)
 }
@@ -15656,15 +24062,16 @@ func (o SloObjectiveRawMetricQueryCloudwatchArrayOutput) Index(i pulumi.IntInput
 }
 
 type SloObjectiveRawMetricQueryCloudwatchDimension struct {
-	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
-	Name  string `pulumi:"name"`
+	// The name of the previously defined alert method.
+	Name string `pulumi:"name"`
+	// Burn rate value.
 	Value string `pulumi:"value"`
 }
 
 // SloObjectiveRawMetricQueryCloudwatchDimensionInput is an input type that accepts SloObjectiveRawMetricQueryCloudwatchDimensionArgs and SloObjectiveRawMetricQueryCloudwatchDimensionOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryCloudwatchDimensionInput` via:
 //
-//          SloObjectiveRawMetricQueryCloudwatchDimensionArgs{...}
+//	SloObjectiveRawMetricQueryCloudwatchDimensionArgs{...}
 type SloObjectiveRawMetricQueryCloudwatchDimensionInput interface {
 	pulumi.Input
 
@@ -15673,8 +24080,9 @@ type SloObjectiveRawMetricQueryCloudwatchDimensionInput interface {
 }
 
 type SloObjectiveRawMetricQueryCloudwatchDimensionArgs struct {
-	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
-	Name  pulumi.StringInput `pulumi:"name"`
+	// The name of the previously defined alert method.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Burn rate value.
 	Value pulumi.StringInput `pulumi:"value"`
 }
 
@@ -15693,7 +24101,7 @@ func (i SloObjectiveRawMetricQueryCloudwatchDimensionArgs) ToSloObjectiveRawMetr
 // SloObjectiveRawMetricQueryCloudwatchDimensionArrayInput is an input type that accepts SloObjectiveRawMetricQueryCloudwatchDimensionArray and SloObjectiveRawMetricQueryCloudwatchDimensionArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryCloudwatchDimensionArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryCloudwatchDimensionArray{ SloObjectiveRawMetricQueryCloudwatchDimensionArgs{...} }
+//	SloObjectiveRawMetricQueryCloudwatchDimensionArray{ SloObjectiveRawMetricQueryCloudwatchDimensionArgs{...} }
 type SloObjectiveRawMetricQueryCloudwatchDimensionArrayInput interface {
 	pulumi.Input
 
@@ -15729,11 +24137,12 @@ func (o SloObjectiveRawMetricQueryCloudwatchDimensionOutput) ToSloObjectiveRawMe
 	return o
 }
 
-// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+// The name of the previously defined alert method.
 func (o SloObjectiveRawMetricQueryCloudwatchDimensionOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryCloudwatchDimension) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Burn rate value.
 func (o SloObjectiveRawMetricQueryCloudwatchDimensionOutput) Value() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryCloudwatchDimension) string { return v.Value }).(pulumi.StringOutput)
 }
@@ -15759,13 +24168,14 @@ func (o SloObjectiveRawMetricQueryCloudwatchDimensionArrayOutput) Index(i pulumi
 }
 
 type SloObjectiveRawMetricQueryDatadog struct {
+	// Query for the metrics
 	Query string `pulumi:"query"`
 }
 
 // SloObjectiveRawMetricQueryDatadogInput is an input type that accepts SloObjectiveRawMetricQueryDatadogArgs and SloObjectiveRawMetricQueryDatadogOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryDatadogInput` via:
 //
-//          SloObjectiveRawMetricQueryDatadogArgs{...}
+//	SloObjectiveRawMetricQueryDatadogArgs{...}
 type SloObjectiveRawMetricQueryDatadogInput interface {
 	pulumi.Input
 
@@ -15774,6 +24184,7 @@ type SloObjectiveRawMetricQueryDatadogInput interface {
 }
 
 type SloObjectiveRawMetricQueryDatadogArgs struct {
+	// Query for the metrics
 	Query pulumi.StringInput `pulumi:"query"`
 }
 
@@ -15792,7 +24203,7 @@ func (i SloObjectiveRawMetricQueryDatadogArgs) ToSloObjectiveRawMetricQueryDatad
 // SloObjectiveRawMetricQueryDatadogArrayInput is an input type that accepts SloObjectiveRawMetricQueryDatadogArray and SloObjectiveRawMetricQueryDatadogArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryDatadogArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryDatadogArray{ SloObjectiveRawMetricQueryDatadogArgs{...} }
+//	SloObjectiveRawMetricQueryDatadogArray{ SloObjectiveRawMetricQueryDatadogArgs{...} }
 type SloObjectiveRawMetricQueryDatadogArrayInput interface {
 	pulumi.Input
 
@@ -15828,6 +24239,7 @@ func (o SloObjectiveRawMetricQueryDatadogOutput) ToSloObjectiveRawMetricQueryDat
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveRawMetricQueryDatadogOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryDatadog) string { return v.Query }).(pulumi.StringOutput)
 }
@@ -15853,13 +24265,14 @@ func (o SloObjectiveRawMetricQueryDatadogArrayOutput) Index(i pulumi.IntInput) S
 }
 
 type SloObjectiveRawMetricQueryDynatrace struct {
+	// Selector for the metrics
 	MetricSelector string `pulumi:"metricSelector"`
 }
 
 // SloObjectiveRawMetricQueryDynatraceInput is an input type that accepts SloObjectiveRawMetricQueryDynatraceArgs and SloObjectiveRawMetricQueryDynatraceOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryDynatraceInput` via:
 //
-//          SloObjectiveRawMetricQueryDynatraceArgs{...}
+//	SloObjectiveRawMetricQueryDynatraceArgs{...}
 type SloObjectiveRawMetricQueryDynatraceInput interface {
 	pulumi.Input
 
@@ -15868,6 +24281,7 @@ type SloObjectiveRawMetricQueryDynatraceInput interface {
 }
 
 type SloObjectiveRawMetricQueryDynatraceArgs struct {
+	// Selector for the metrics
 	MetricSelector pulumi.StringInput `pulumi:"metricSelector"`
 }
 
@@ -15886,7 +24300,7 @@ func (i SloObjectiveRawMetricQueryDynatraceArgs) ToSloObjectiveRawMetricQueryDyn
 // SloObjectiveRawMetricQueryDynatraceArrayInput is an input type that accepts SloObjectiveRawMetricQueryDynatraceArray and SloObjectiveRawMetricQueryDynatraceArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryDynatraceArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryDynatraceArray{ SloObjectiveRawMetricQueryDynatraceArgs{...} }
+//	SloObjectiveRawMetricQueryDynatraceArray{ SloObjectiveRawMetricQueryDynatraceArgs{...} }
 type SloObjectiveRawMetricQueryDynatraceArrayInput interface {
 	pulumi.Input
 
@@ -15922,6 +24336,7 @@ func (o SloObjectiveRawMetricQueryDynatraceOutput) ToSloObjectiveRawMetricQueryD
 	return o
 }
 
+// Selector for the metrics
 func (o SloObjectiveRawMetricQueryDynatraceOutput) MetricSelector() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryDynatrace) string { return v.MetricSelector }).(pulumi.StringOutput)
 }
@@ -15947,14 +24362,16 @@ func (o SloObjectiveRawMetricQueryDynatraceArrayOutput) Index(i pulumi.IntInput)
 }
 
 type SloObjectiveRawMetricQueryElasticsearch struct {
+	// Index of metrics we want to query
 	Index string `pulumi:"index"`
+	// Query for the metrics
 	Query string `pulumi:"query"`
 }
 
 // SloObjectiveRawMetricQueryElasticsearchInput is an input type that accepts SloObjectiveRawMetricQueryElasticsearchArgs and SloObjectiveRawMetricQueryElasticsearchOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryElasticsearchInput` via:
 //
-//          SloObjectiveRawMetricQueryElasticsearchArgs{...}
+//	SloObjectiveRawMetricQueryElasticsearchArgs{...}
 type SloObjectiveRawMetricQueryElasticsearchInput interface {
 	pulumi.Input
 
@@ -15963,7 +24380,9 @@ type SloObjectiveRawMetricQueryElasticsearchInput interface {
 }
 
 type SloObjectiveRawMetricQueryElasticsearchArgs struct {
+	// Index of metrics we want to query
 	Index pulumi.StringInput `pulumi:"index"`
+	// Query for the metrics
 	Query pulumi.StringInput `pulumi:"query"`
 }
 
@@ -15982,7 +24401,7 @@ func (i SloObjectiveRawMetricQueryElasticsearchArgs) ToSloObjectiveRawMetricQuer
 // SloObjectiveRawMetricQueryElasticsearchArrayInput is an input type that accepts SloObjectiveRawMetricQueryElasticsearchArray and SloObjectiveRawMetricQueryElasticsearchArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryElasticsearchArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryElasticsearchArray{ SloObjectiveRawMetricQueryElasticsearchArgs{...} }
+//	SloObjectiveRawMetricQueryElasticsearchArray{ SloObjectiveRawMetricQueryElasticsearchArgs{...} }
 type SloObjectiveRawMetricQueryElasticsearchArrayInput interface {
 	pulumi.Input
 
@@ -16018,10 +24437,12 @@ func (o SloObjectiveRawMetricQueryElasticsearchOutput) ToSloObjectiveRawMetricQu
 	return o
 }
 
+// Index of metrics we want to query
 func (o SloObjectiveRawMetricQueryElasticsearchOutput) Index() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryElasticsearch) string { return v.Index }).(pulumi.StringOutput)
 }
 
+// Query for the metrics
 func (o SloObjectiveRawMetricQueryElasticsearchOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryElasticsearch) string { return v.Query }).(pulumi.StringOutput)
 }
@@ -16047,14 +24468,16 @@ func (o SloObjectiveRawMetricQueryElasticsearchArrayOutput) Index(i pulumi.IntIn
 }
 
 type SloObjectiveRawMetricQueryGcm struct {
+	// Project ID
 	ProjectId string `pulumi:"projectId"`
-	Query     string `pulumi:"query"`
+	// Query for the metrics
+	Query string `pulumi:"query"`
 }
 
 // SloObjectiveRawMetricQueryGcmInput is an input type that accepts SloObjectiveRawMetricQueryGcmArgs and SloObjectiveRawMetricQueryGcmOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryGcmInput` via:
 //
-//          SloObjectiveRawMetricQueryGcmArgs{...}
+//	SloObjectiveRawMetricQueryGcmArgs{...}
 type SloObjectiveRawMetricQueryGcmInput interface {
 	pulumi.Input
 
@@ -16063,8 +24486,10 @@ type SloObjectiveRawMetricQueryGcmInput interface {
 }
 
 type SloObjectiveRawMetricQueryGcmArgs struct {
+	// Project ID
 	ProjectId pulumi.StringInput `pulumi:"projectId"`
-	Query     pulumi.StringInput `pulumi:"query"`
+	// Query for the metrics
+	Query pulumi.StringInput `pulumi:"query"`
 }
 
 func (SloObjectiveRawMetricQueryGcmArgs) ElementType() reflect.Type {
@@ -16082,7 +24507,7 @@ func (i SloObjectiveRawMetricQueryGcmArgs) ToSloObjectiveRawMetricQueryGcmOutput
 // SloObjectiveRawMetricQueryGcmArrayInput is an input type that accepts SloObjectiveRawMetricQueryGcmArray and SloObjectiveRawMetricQueryGcmArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryGcmArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryGcmArray{ SloObjectiveRawMetricQueryGcmArgs{...} }
+//	SloObjectiveRawMetricQueryGcmArray{ SloObjectiveRawMetricQueryGcmArgs{...} }
 type SloObjectiveRawMetricQueryGcmArrayInput interface {
 	pulumi.Input
 
@@ -16118,10 +24543,12 @@ func (o SloObjectiveRawMetricQueryGcmOutput) ToSloObjectiveRawMetricQueryGcmOutp
 	return o
 }
 
+// Project ID
 func (o SloObjectiveRawMetricQueryGcmOutput) ProjectId() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryGcm) string { return v.ProjectId }).(pulumi.StringOutput)
 }
 
+// Query for the metrics
 func (o SloObjectiveRawMetricQueryGcmOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryGcm) string { return v.Query }).(pulumi.StringOutput)
 }
@@ -16147,13 +24574,14 @@ func (o SloObjectiveRawMetricQueryGcmArrayOutput) Index(i pulumi.IntInput) SloOb
 }
 
 type SloObjectiveRawMetricQueryGrafanaLoki struct {
+	// Query for the logs
 	Logql string `pulumi:"logql"`
 }
 
 // SloObjectiveRawMetricQueryGrafanaLokiInput is an input type that accepts SloObjectiveRawMetricQueryGrafanaLokiArgs and SloObjectiveRawMetricQueryGrafanaLokiOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryGrafanaLokiInput` via:
 //
-//          SloObjectiveRawMetricQueryGrafanaLokiArgs{...}
+//	SloObjectiveRawMetricQueryGrafanaLokiArgs{...}
 type SloObjectiveRawMetricQueryGrafanaLokiInput interface {
 	pulumi.Input
 
@@ -16162,6 +24590,7 @@ type SloObjectiveRawMetricQueryGrafanaLokiInput interface {
 }
 
 type SloObjectiveRawMetricQueryGrafanaLokiArgs struct {
+	// Query for the logs
 	Logql pulumi.StringInput `pulumi:"logql"`
 }
 
@@ -16180,7 +24609,7 @@ func (i SloObjectiveRawMetricQueryGrafanaLokiArgs) ToSloObjectiveRawMetricQueryG
 // SloObjectiveRawMetricQueryGrafanaLokiArrayInput is an input type that accepts SloObjectiveRawMetricQueryGrafanaLokiArray and SloObjectiveRawMetricQueryGrafanaLokiArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryGrafanaLokiArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryGrafanaLokiArray{ SloObjectiveRawMetricQueryGrafanaLokiArgs{...} }
+//	SloObjectiveRawMetricQueryGrafanaLokiArray{ SloObjectiveRawMetricQueryGrafanaLokiArgs{...} }
 type SloObjectiveRawMetricQueryGrafanaLokiArrayInput interface {
 	pulumi.Input
 
@@ -16216,6 +24645,7 @@ func (o SloObjectiveRawMetricQueryGrafanaLokiOutput) ToSloObjectiveRawMetricQuer
 	return o
 }
 
+// Query for the logs
 func (o SloObjectiveRawMetricQueryGrafanaLokiOutput) Logql() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryGrafanaLoki) string { return v.Logql }).(pulumi.StringOutput)
 }
@@ -16241,13 +24671,14 @@ func (o SloObjectiveRawMetricQueryGrafanaLokiArrayOutput) Index(i pulumi.IntInpu
 }
 
 type SloObjectiveRawMetricQueryGraphite struct {
+	// Path to the metrics
 	MetricPath string `pulumi:"metricPath"`
 }
 
 // SloObjectiveRawMetricQueryGraphiteInput is an input type that accepts SloObjectiveRawMetricQueryGraphiteArgs and SloObjectiveRawMetricQueryGraphiteOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryGraphiteInput` via:
 //
-//          SloObjectiveRawMetricQueryGraphiteArgs{...}
+//	SloObjectiveRawMetricQueryGraphiteArgs{...}
 type SloObjectiveRawMetricQueryGraphiteInput interface {
 	pulumi.Input
 
@@ -16256,6 +24687,7 @@ type SloObjectiveRawMetricQueryGraphiteInput interface {
 }
 
 type SloObjectiveRawMetricQueryGraphiteArgs struct {
+	// Path to the metrics
 	MetricPath pulumi.StringInput `pulumi:"metricPath"`
 }
 
@@ -16274,7 +24706,7 @@ func (i SloObjectiveRawMetricQueryGraphiteArgs) ToSloObjectiveRawMetricQueryGrap
 // SloObjectiveRawMetricQueryGraphiteArrayInput is an input type that accepts SloObjectiveRawMetricQueryGraphiteArray and SloObjectiveRawMetricQueryGraphiteArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryGraphiteArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryGraphiteArray{ SloObjectiveRawMetricQueryGraphiteArgs{...} }
+//	SloObjectiveRawMetricQueryGraphiteArray{ SloObjectiveRawMetricQueryGraphiteArgs{...} }
 type SloObjectiveRawMetricQueryGraphiteArrayInput interface {
 	pulumi.Input
 
@@ -16310,6 +24742,7 @@ func (o SloObjectiveRawMetricQueryGraphiteOutput) ToSloObjectiveRawMetricQueryGr
 	return o
 }
 
+// Path to the metrics
 func (o SloObjectiveRawMetricQueryGraphiteOutput) MetricPath() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryGraphite) string { return v.MetricPath }).(pulumi.StringOutput)
 }
@@ -16334,14 +24767,121 @@ func (o SloObjectiveRawMetricQueryGraphiteArrayOutput) Index(i pulumi.IntInput) 
 	}).(SloObjectiveRawMetricQueryGraphiteOutput)
 }
 
+type SloObjectiveRawMetricQueryHoneycomb struct {
+	// Column name - required for all calculation types besides 'CONCURRENCY' and 'COUNT'
+	Attribute *string `pulumi:"attribute"`
+	// Calculation type
+	Calculation string `pulumi:"calculation"`
+}
+
+// SloObjectiveRawMetricQueryHoneycombInput is an input type that accepts SloObjectiveRawMetricQueryHoneycombArgs and SloObjectiveRawMetricQueryHoneycombOutput values.
+// You can construct a concrete instance of `SloObjectiveRawMetricQueryHoneycombInput` via:
+//
+//	SloObjectiveRawMetricQueryHoneycombArgs{...}
+type SloObjectiveRawMetricQueryHoneycombInput interface {
+	pulumi.Input
+
+	ToSloObjectiveRawMetricQueryHoneycombOutput() SloObjectiveRawMetricQueryHoneycombOutput
+	ToSloObjectiveRawMetricQueryHoneycombOutputWithContext(context.Context) SloObjectiveRawMetricQueryHoneycombOutput
+}
+
+type SloObjectiveRawMetricQueryHoneycombArgs struct {
+	// Column name - required for all calculation types besides 'CONCURRENCY' and 'COUNT'
+	Attribute pulumi.StringPtrInput `pulumi:"attribute"`
+	// Calculation type
+	Calculation pulumi.StringInput `pulumi:"calculation"`
+}
+
+func (SloObjectiveRawMetricQueryHoneycombArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveRawMetricQueryHoneycomb)(nil)).Elem()
+}
+
+func (i SloObjectiveRawMetricQueryHoneycombArgs) ToSloObjectiveRawMetricQueryHoneycombOutput() SloObjectiveRawMetricQueryHoneycombOutput {
+	return i.ToSloObjectiveRawMetricQueryHoneycombOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveRawMetricQueryHoneycombArgs) ToSloObjectiveRawMetricQueryHoneycombOutputWithContext(ctx context.Context) SloObjectiveRawMetricQueryHoneycombOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveRawMetricQueryHoneycombOutput)
+}
+
+// SloObjectiveRawMetricQueryHoneycombArrayInput is an input type that accepts SloObjectiveRawMetricQueryHoneycombArray and SloObjectiveRawMetricQueryHoneycombArrayOutput values.
+// You can construct a concrete instance of `SloObjectiveRawMetricQueryHoneycombArrayInput` via:
+//
+//	SloObjectiveRawMetricQueryHoneycombArray{ SloObjectiveRawMetricQueryHoneycombArgs{...} }
+type SloObjectiveRawMetricQueryHoneycombArrayInput interface {
+	pulumi.Input
+
+	ToSloObjectiveRawMetricQueryHoneycombArrayOutput() SloObjectiveRawMetricQueryHoneycombArrayOutput
+	ToSloObjectiveRawMetricQueryHoneycombArrayOutputWithContext(context.Context) SloObjectiveRawMetricQueryHoneycombArrayOutput
+}
+
+type SloObjectiveRawMetricQueryHoneycombArray []SloObjectiveRawMetricQueryHoneycombInput
+
+func (SloObjectiveRawMetricQueryHoneycombArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveRawMetricQueryHoneycomb)(nil)).Elem()
+}
+
+func (i SloObjectiveRawMetricQueryHoneycombArray) ToSloObjectiveRawMetricQueryHoneycombArrayOutput() SloObjectiveRawMetricQueryHoneycombArrayOutput {
+	return i.ToSloObjectiveRawMetricQueryHoneycombArrayOutputWithContext(context.Background())
+}
+
+func (i SloObjectiveRawMetricQueryHoneycombArray) ToSloObjectiveRawMetricQueryHoneycombArrayOutputWithContext(ctx context.Context) SloObjectiveRawMetricQueryHoneycombArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SloObjectiveRawMetricQueryHoneycombArrayOutput)
+}
+
+type SloObjectiveRawMetricQueryHoneycombOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveRawMetricQueryHoneycombOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SloObjectiveRawMetricQueryHoneycomb)(nil)).Elem()
+}
+
+func (o SloObjectiveRawMetricQueryHoneycombOutput) ToSloObjectiveRawMetricQueryHoneycombOutput() SloObjectiveRawMetricQueryHoneycombOutput {
+	return o
+}
+
+func (o SloObjectiveRawMetricQueryHoneycombOutput) ToSloObjectiveRawMetricQueryHoneycombOutputWithContext(ctx context.Context) SloObjectiveRawMetricQueryHoneycombOutput {
+	return o
+}
+
+// Column name - required for all calculation types besides 'CONCURRENCY' and 'COUNT'
+func (o SloObjectiveRawMetricQueryHoneycombOutput) Attribute() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SloObjectiveRawMetricQueryHoneycomb) *string { return v.Attribute }).(pulumi.StringPtrOutput)
+}
+
+// Calculation type
+func (o SloObjectiveRawMetricQueryHoneycombOutput) Calculation() pulumi.StringOutput {
+	return o.ApplyT(func(v SloObjectiveRawMetricQueryHoneycomb) string { return v.Calculation }).(pulumi.StringOutput)
+}
+
+type SloObjectiveRawMetricQueryHoneycombArrayOutput struct{ *pulumi.OutputState }
+
+func (SloObjectiveRawMetricQueryHoneycombArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SloObjectiveRawMetricQueryHoneycomb)(nil)).Elem()
+}
+
+func (o SloObjectiveRawMetricQueryHoneycombArrayOutput) ToSloObjectiveRawMetricQueryHoneycombArrayOutput() SloObjectiveRawMetricQueryHoneycombArrayOutput {
+	return o
+}
+
+func (o SloObjectiveRawMetricQueryHoneycombArrayOutput) ToSloObjectiveRawMetricQueryHoneycombArrayOutputWithContext(ctx context.Context) SloObjectiveRawMetricQueryHoneycombArrayOutput {
+	return o
+}
+
+func (o SloObjectiveRawMetricQueryHoneycombArrayOutput) Index(i pulumi.IntInput) SloObjectiveRawMetricQueryHoneycombOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SloObjectiveRawMetricQueryHoneycomb {
+		return vs[0].([]SloObjectiveRawMetricQueryHoneycomb)[vs[1].(int)]
+	}).(SloObjectiveRawMetricQueryHoneycombOutput)
+}
+
 type SloObjectiveRawMetricQueryInfluxdb struct {
+	// Query for the metrics
 	Query string `pulumi:"query"`
 }
 
 // SloObjectiveRawMetricQueryInfluxdbInput is an input type that accepts SloObjectiveRawMetricQueryInfluxdbArgs and SloObjectiveRawMetricQueryInfluxdbOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryInfluxdbInput` via:
 //
-//          SloObjectiveRawMetricQueryInfluxdbArgs{...}
+//	SloObjectiveRawMetricQueryInfluxdbArgs{...}
 type SloObjectiveRawMetricQueryInfluxdbInput interface {
 	pulumi.Input
 
@@ -16350,6 +24890,7 @@ type SloObjectiveRawMetricQueryInfluxdbInput interface {
 }
 
 type SloObjectiveRawMetricQueryInfluxdbArgs struct {
+	// Query for the metrics
 	Query pulumi.StringInput `pulumi:"query"`
 }
 
@@ -16368,7 +24909,7 @@ func (i SloObjectiveRawMetricQueryInfluxdbArgs) ToSloObjectiveRawMetricQueryInfl
 // SloObjectiveRawMetricQueryInfluxdbArrayInput is an input type that accepts SloObjectiveRawMetricQueryInfluxdbArray and SloObjectiveRawMetricQueryInfluxdbArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryInfluxdbArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryInfluxdbArray{ SloObjectiveRawMetricQueryInfluxdbArgs{...} }
+//	SloObjectiveRawMetricQueryInfluxdbArray{ SloObjectiveRawMetricQueryInfluxdbArgs{...} }
 type SloObjectiveRawMetricQueryInfluxdbArrayInput interface {
 	pulumi.Input
 
@@ -16404,6 +24945,7 @@ func (o SloObjectiveRawMetricQueryInfluxdbOutput) ToSloObjectiveRawMetricQueryIn
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveRawMetricQueryInfluxdbOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryInfluxdb) string { return v.Query }).(pulumi.StringOutput)
 }
@@ -16429,15 +24971,18 @@ func (o SloObjectiveRawMetricQueryInfluxdbArrayOutput) Index(i pulumi.IntInput) 
 }
 
 type SloObjectiveRawMetricQueryInstana struct {
-	Applications    []SloObjectiveRawMetricQueryInstanaApplication    `pulumi:"applications"`
+	// Infrastructure metric type
+	Applications []SloObjectiveRawMetricQueryInstanaApplication `pulumi:"applications"`
+	// Infrastructure metric type
 	Infrastructures []SloObjectiveRawMetricQueryInstanaInfrastructure `pulumi:"infrastructures"`
-	MetricType      string                                            `pulumi:"metricType"`
+	// Instana metric type 'application' or 'infrastructure'
+	MetricType string `pulumi:"metricType"`
 }
 
 // SloObjectiveRawMetricQueryInstanaInput is an input type that accepts SloObjectiveRawMetricQueryInstanaArgs and SloObjectiveRawMetricQueryInstanaOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryInstanaInput` via:
 //
-//          SloObjectiveRawMetricQueryInstanaArgs{...}
+//	SloObjectiveRawMetricQueryInstanaArgs{...}
 type SloObjectiveRawMetricQueryInstanaInput interface {
 	pulumi.Input
 
@@ -16446,9 +24991,12 @@ type SloObjectiveRawMetricQueryInstanaInput interface {
 }
 
 type SloObjectiveRawMetricQueryInstanaArgs struct {
-	Applications    SloObjectiveRawMetricQueryInstanaApplicationArrayInput    `pulumi:"applications"`
+	// Infrastructure metric type
+	Applications SloObjectiveRawMetricQueryInstanaApplicationArrayInput `pulumi:"applications"`
+	// Infrastructure metric type
 	Infrastructures SloObjectiveRawMetricQueryInstanaInfrastructureArrayInput `pulumi:"infrastructures"`
-	MetricType      pulumi.StringInput                                        `pulumi:"metricType"`
+	// Instana metric type 'application' or 'infrastructure'
+	MetricType pulumi.StringInput `pulumi:"metricType"`
 }
 
 func (SloObjectiveRawMetricQueryInstanaArgs) ElementType() reflect.Type {
@@ -16466,7 +25014,7 @@ func (i SloObjectiveRawMetricQueryInstanaArgs) ToSloObjectiveRawMetricQueryInsta
 // SloObjectiveRawMetricQueryInstanaArrayInput is an input type that accepts SloObjectiveRawMetricQueryInstanaArray and SloObjectiveRawMetricQueryInstanaArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryInstanaArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryInstanaArray{ SloObjectiveRawMetricQueryInstanaArgs{...} }
+//	SloObjectiveRawMetricQueryInstanaArray{ SloObjectiveRawMetricQueryInstanaArgs{...} }
 type SloObjectiveRawMetricQueryInstanaArrayInput interface {
 	pulumi.Input
 
@@ -16502,18 +25050,21 @@ func (o SloObjectiveRawMetricQueryInstanaOutput) ToSloObjectiveRawMetricQueryIns
 	return o
 }
 
+// Infrastructure metric type
 func (o SloObjectiveRawMetricQueryInstanaOutput) Applications() SloObjectiveRawMetricQueryInstanaApplicationArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryInstana) []SloObjectiveRawMetricQueryInstanaApplication {
 		return v.Applications
 	}).(SloObjectiveRawMetricQueryInstanaApplicationArrayOutput)
 }
 
+// Infrastructure metric type
 func (o SloObjectiveRawMetricQueryInstanaOutput) Infrastructures() SloObjectiveRawMetricQueryInstanaInfrastructureArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryInstana) []SloObjectiveRawMetricQueryInstanaInfrastructure {
 		return v.Infrastructures
 	}).(SloObjectiveRawMetricQueryInstanaInfrastructureArrayOutput)
 }
 
+// Instana metric type 'application' or 'infrastructure'
 func (o SloObjectiveRawMetricQueryInstanaOutput) MetricType() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryInstana) string { return v.MetricType }).(pulumi.StringOutput)
 }
@@ -16539,18 +25090,24 @@ func (o SloObjectiveRawMetricQueryInstanaArrayOutput) Index(i pulumi.IntInput) S
 }
 
 type SloObjectiveRawMetricQueryInstanaApplication struct {
-	Aggregation      string                                                `pulumi:"aggregation"`
-	ApiQuery         string                                                `pulumi:"apiQuery"`
-	GroupBies        []SloObjectiveRawMetricQueryInstanaApplicationGroupBy `pulumi:"groupBies"`
-	IncludeInternal  *bool                                                 `pulumi:"includeInternal"`
-	IncludeSynthetic *bool                                                 `pulumi:"includeSynthetic"`
-	MetricId         string                                                `pulumi:"metricId"`
+	// Aggregation type [Required for metrics]
+	Aggregation string `pulumi:"aggregation"`
+	// API query user passes in a JSON format
+	ApiQuery string `pulumi:"apiQuery"`
+	// Group by method
+	GroupBies []SloObjectiveRawMetricQueryInstanaApplicationGroupBy `pulumi:"groupBies"`
+	// Include internal
+	IncludeInternal *bool `pulumi:"includeInternal"`
+	// Include synthetic
+	IncludeSynthetic *bool `pulumi:"includeSynthetic"`
+	// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+	MetricId string `pulumi:"metricId"`
 }
 
 // SloObjectiveRawMetricQueryInstanaApplicationInput is an input type that accepts SloObjectiveRawMetricQueryInstanaApplicationArgs and SloObjectiveRawMetricQueryInstanaApplicationOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryInstanaApplicationInput` via:
 //
-//          SloObjectiveRawMetricQueryInstanaApplicationArgs{...}
+//	SloObjectiveRawMetricQueryInstanaApplicationArgs{...}
 type SloObjectiveRawMetricQueryInstanaApplicationInput interface {
 	pulumi.Input
 
@@ -16559,12 +25116,18 @@ type SloObjectiveRawMetricQueryInstanaApplicationInput interface {
 }
 
 type SloObjectiveRawMetricQueryInstanaApplicationArgs struct {
-	Aggregation      pulumi.StringInput                                            `pulumi:"aggregation"`
-	ApiQuery         pulumi.StringInput                                            `pulumi:"apiQuery"`
-	GroupBies        SloObjectiveRawMetricQueryInstanaApplicationGroupByArrayInput `pulumi:"groupBies"`
-	IncludeInternal  pulumi.BoolPtrInput                                           `pulumi:"includeInternal"`
-	IncludeSynthetic pulumi.BoolPtrInput                                           `pulumi:"includeSynthetic"`
-	MetricId         pulumi.StringInput                                            `pulumi:"metricId"`
+	// Aggregation type [Required for metrics]
+	Aggregation pulumi.StringInput `pulumi:"aggregation"`
+	// API query user passes in a JSON format
+	ApiQuery pulumi.StringInput `pulumi:"apiQuery"`
+	// Group by method
+	GroupBies SloObjectiveRawMetricQueryInstanaApplicationGroupByArrayInput `pulumi:"groupBies"`
+	// Include internal
+	IncludeInternal pulumi.BoolPtrInput `pulumi:"includeInternal"`
+	// Include synthetic
+	IncludeSynthetic pulumi.BoolPtrInput `pulumi:"includeSynthetic"`
+	// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+	MetricId pulumi.StringInput `pulumi:"metricId"`
 }
 
 func (SloObjectiveRawMetricQueryInstanaApplicationArgs) ElementType() reflect.Type {
@@ -16582,7 +25145,7 @@ func (i SloObjectiveRawMetricQueryInstanaApplicationArgs) ToSloObjectiveRawMetri
 // SloObjectiveRawMetricQueryInstanaApplicationArrayInput is an input type that accepts SloObjectiveRawMetricQueryInstanaApplicationArray and SloObjectiveRawMetricQueryInstanaApplicationArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryInstanaApplicationArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryInstanaApplicationArray{ SloObjectiveRawMetricQueryInstanaApplicationArgs{...} }
+//	SloObjectiveRawMetricQueryInstanaApplicationArray{ SloObjectiveRawMetricQueryInstanaApplicationArgs{...} }
 type SloObjectiveRawMetricQueryInstanaApplicationArrayInput interface {
 	pulumi.Input
 
@@ -16618,28 +25181,34 @@ func (o SloObjectiveRawMetricQueryInstanaApplicationOutput) ToSloObjectiveRawMet
 	return o
 }
 
+// Aggregation type [Required for metrics]
 func (o SloObjectiveRawMetricQueryInstanaApplicationOutput) Aggregation() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryInstanaApplication) string { return v.Aggregation }).(pulumi.StringOutput)
 }
 
+// API query user passes in a JSON format
 func (o SloObjectiveRawMetricQueryInstanaApplicationOutput) ApiQuery() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryInstanaApplication) string { return v.ApiQuery }).(pulumi.StringOutput)
 }
 
+// Group by method
 func (o SloObjectiveRawMetricQueryInstanaApplicationOutput) GroupBies() SloObjectiveRawMetricQueryInstanaApplicationGroupByArrayOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryInstanaApplication) []SloObjectiveRawMetricQueryInstanaApplicationGroupBy {
 		return v.GroupBies
 	}).(SloObjectiveRawMetricQueryInstanaApplicationGroupByArrayOutput)
 }
 
+// Include internal
 func (o SloObjectiveRawMetricQueryInstanaApplicationOutput) IncludeInternal() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryInstanaApplication) *bool { return v.IncludeInternal }).(pulumi.BoolPtrOutput)
 }
 
+// Include synthetic
 func (o SloObjectiveRawMetricQueryInstanaApplicationOutput) IncludeSynthetic() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryInstanaApplication) *bool { return v.IncludeSynthetic }).(pulumi.BoolPtrOutput)
 }
 
+// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
 func (o SloObjectiveRawMetricQueryInstanaApplicationOutput) MetricId() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryInstanaApplication) string { return v.MetricId }).(pulumi.StringOutput)
 }
@@ -16665,7 +25234,9 @@ func (o SloObjectiveRawMetricQueryInstanaApplicationArrayOutput) Index(i pulumi.
 }
 
 type SloObjectiveRawMetricQueryInstanaApplicationGroupBy struct {
-	Tag               string  `pulumi:"tag"`
+	// Group by tag
+	Tag string `pulumi:"tag"`
+	// Tag entity - one of 'DESTINATION', 'SOURCE', 'NOT_APPLICABLE'
 	TagEntity         string  `pulumi:"tagEntity"`
 	TagSecondLevelKey *string `pulumi:"tagSecondLevelKey"`
 }
@@ -16673,7 +25244,7 @@ type SloObjectiveRawMetricQueryInstanaApplicationGroupBy struct {
 // SloObjectiveRawMetricQueryInstanaApplicationGroupByInput is an input type that accepts SloObjectiveRawMetricQueryInstanaApplicationGroupByArgs and SloObjectiveRawMetricQueryInstanaApplicationGroupByOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryInstanaApplicationGroupByInput` via:
 //
-//          SloObjectiveRawMetricQueryInstanaApplicationGroupByArgs{...}
+//	SloObjectiveRawMetricQueryInstanaApplicationGroupByArgs{...}
 type SloObjectiveRawMetricQueryInstanaApplicationGroupByInput interface {
 	pulumi.Input
 
@@ -16682,7 +25253,9 @@ type SloObjectiveRawMetricQueryInstanaApplicationGroupByInput interface {
 }
 
 type SloObjectiveRawMetricQueryInstanaApplicationGroupByArgs struct {
-	Tag               pulumi.StringInput    `pulumi:"tag"`
+	// Group by tag
+	Tag pulumi.StringInput `pulumi:"tag"`
+	// Tag entity - one of 'DESTINATION', 'SOURCE', 'NOT_APPLICABLE'
 	TagEntity         pulumi.StringInput    `pulumi:"tagEntity"`
 	TagSecondLevelKey pulumi.StringPtrInput `pulumi:"tagSecondLevelKey"`
 }
@@ -16702,7 +25275,7 @@ func (i SloObjectiveRawMetricQueryInstanaApplicationGroupByArgs) ToSloObjectiveR
 // SloObjectiveRawMetricQueryInstanaApplicationGroupByArrayInput is an input type that accepts SloObjectiveRawMetricQueryInstanaApplicationGroupByArray and SloObjectiveRawMetricQueryInstanaApplicationGroupByArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryInstanaApplicationGroupByArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryInstanaApplicationGroupByArray{ SloObjectiveRawMetricQueryInstanaApplicationGroupByArgs{...} }
+//	SloObjectiveRawMetricQueryInstanaApplicationGroupByArray{ SloObjectiveRawMetricQueryInstanaApplicationGroupByArgs{...} }
 type SloObjectiveRawMetricQueryInstanaApplicationGroupByArrayInput interface {
 	pulumi.Input
 
@@ -16738,10 +25311,12 @@ func (o SloObjectiveRawMetricQueryInstanaApplicationGroupByOutput) ToSloObjectiv
 	return o
 }
 
+// Group by tag
 func (o SloObjectiveRawMetricQueryInstanaApplicationGroupByOutput) Tag() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryInstanaApplicationGroupBy) string { return v.Tag }).(pulumi.StringOutput)
 }
 
+// Tag entity - one of 'DESTINATION', 'SOURCE', 'NOT_APPLICABLE'
 func (o SloObjectiveRawMetricQueryInstanaApplicationGroupByOutput) TagEntity() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryInstanaApplicationGroupBy) string { return v.TagEntity }).(pulumi.StringOutput)
 }
@@ -16771,17 +25346,22 @@ func (o SloObjectiveRawMetricQueryInstanaApplicationGroupByArrayOutput) Index(i 
 }
 
 type SloObjectiveRawMetricQueryInstanaInfrastructure struct {
-	MetricId              string  `pulumi:"metricId"`
-	MetricRetrievalMethod string  `pulumi:"metricRetrievalMethod"`
-	PluginId              string  `pulumi:"pluginId"`
-	Query                 *string `pulumi:"query"`
-	SnapshotId            *string `pulumi:"snapshotId"`
+	// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+	MetricId string `pulumi:"metricId"`
+	// Metric retrieval method 'query' or 'snapshot'
+	MetricRetrievalMethod string `pulumi:"metricRetrievalMethod"`
+	// Plugin ID
+	PluginId string `pulumi:"pluginId"`
+	// Query for the metrics
+	Query *string `pulumi:"query"`
+	// Snapshot ID
+	SnapshotId *string `pulumi:"snapshotId"`
 }
 
 // SloObjectiveRawMetricQueryInstanaInfrastructureInput is an input type that accepts SloObjectiveRawMetricQueryInstanaInfrastructureArgs and SloObjectiveRawMetricQueryInstanaInfrastructureOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryInstanaInfrastructureInput` via:
 //
-//          SloObjectiveRawMetricQueryInstanaInfrastructureArgs{...}
+//	SloObjectiveRawMetricQueryInstanaInfrastructureArgs{...}
 type SloObjectiveRawMetricQueryInstanaInfrastructureInput interface {
 	pulumi.Input
 
@@ -16790,11 +25370,16 @@ type SloObjectiveRawMetricQueryInstanaInfrastructureInput interface {
 }
 
 type SloObjectiveRawMetricQueryInstanaInfrastructureArgs struct {
-	MetricId              pulumi.StringInput    `pulumi:"metricId"`
-	MetricRetrievalMethod pulumi.StringInput    `pulumi:"metricRetrievalMethod"`
-	PluginId              pulumi.StringInput    `pulumi:"pluginId"`
-	Query                 pulumi.StringPtrInput `pulumi:"query"`
-	SnapshotId            pulumi.StringPtrInput `pulumi:"snapshotId"`
+	// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+	MetricId pulumi.StringInput `pulumi:"metricId"`
+	// Metric retrieval method 'query' or 'snapshot'
+	MetricRetrievalMethod pulumi.StringInput `pulumi:"metricRetrievalMethod"`
+	// Plugin ID
+	PluginId pulumi.StringInput `pulumi:"pluginId"`
+	// Query for the metrics
+	Query pulumi.StringPtrInput `pulumi:"query"`
+	// Snapshot ID
+	SnapshotId pulumi.StringPtrInput `pulumi:"snapshotId"`
 }
 
 func (SloObjectiveRawMetricQueryInstanaInfrastructureArgs) ElementType() reflect.Type {
@@ -16812,7 +25397,7 @@ func (i SloObjectiveRawMetricQueryInstanaInfrastructureArgs) ToSloObjectiveRawMe
 // SloObjectiveRawMetricQueryInstanaInfrastructureArrayInput is an input type that accepts SloObjectiveRawMetricQueryInstanaInfrastructureArray and SloObjectiveRawMetricQueryInstanaInfrastructureArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryInstanaInfrastructureArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryInstanaInfrastructureArray{ SloObjectiveRawMetricQueryInstanaInfrastructureArgs{...} }
+//	SloObjectiveRawMetricQueryInstanaInfrastructureArray{ SloObjectiveRawMetricQueryInstanaInfrastructureArgs{...} }
 type SloObjectiveRawMetricQueryInstanaInfrastructureArrayInput interface {
 	pulumi.Input
 
@@ -16848,22 +25433,27 @@ func (o SloObjectiveRawMetricQueryInstanaInfrastructureOutput) ToSloObjectiveRaw
 	return o
 }
 
+// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
 func (o SloObjectiveRawMetricQueryInstanaInfrastructureOutput) MetricId() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryInstanaInfrastructure) string { return v.MetricId }).(pulumi.StringOutput)
 }
 
+// Metric retrieval method 'query' or 'snapshot'
 func (o SloObjectiveRawMetricQueryInstanaInfrastructureOutput) MetricRetrievalMethod() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryInstanaInfrastructure) string { return v.MetricRetrievalMethod }).(pulumi.StringOutput)
 }
 
+// Plugin ID
 func (o SloObjectiveRawMetricQueryInstanaInfrastructureOutput) PluginId() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryInstanaInfrastructure) string { return v.PluginId }).(pulumi.StringOutput)
 }
 
+// Query for the metrics
 func (o SloObjectiveRawMetricQueryInstanaInfrastructureOutput) Query() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryInstanaInfrastructure) *string { return v.Query }).(pulumi.StringPtrOutput)
 }
 
+// Snapshot ID
 func (o SloObjectiveRawMetricQueryInstanaInfrastructureOutput) SnapshotId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryInstanaInfrastructure) *string { return v.SnapshotId }).(pulumi.StringPtrOutput)
 }
@@ -16889,16 +25479,20 @@ func (o SloObjectiveRawMetricQueryInstanaInfrastructureArrayOutput) Index(i pulu
 }
 
 type SloObjectiveRawMetricQueryLightstep struct {
+	// Optional value to filter by percentiles
 	Percentile *float64 `pulumi:"percentile"`
-	StreamId   *string  `pulumi:"streamId"`
-	TypeOfData string   `pulumi:"typeOfData"`
-	Uql        *string  `pulumi:"uql"`
+	// ID of the metrics stream
+	StreamId *string `pulumi:"streamId"`
+	// Type of data to filter by
+	TypeOfData string `pulumi:"typeOfData"`
+	// UQL query
+	Uql *string `pulumi:"uql"`
 }
 
 // SloObjectiveRawMetricQueryLightstepInput is an input type that accepts SloObjectiveRawMetricQueryLightstepArgs and SloObjectiveRawMetricQueryLightstepOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryLightstepInput` via:
 //
-//          SloObjectiveRawMetricQueryLightstepArgs{...}
+//	SloObjectiveRawMetricQueryLightstepArgs{...}
 type SloObjectiveRawMetricQueryLightstepInput interface {
 	pulumi.Input
 
@@ -16907,10 +25501,14 @@ type SloObjectiveRawMetricQueryLightstepInput interface {
 }
 
 type SloObjectiveRawMetricQueryLightstepArgs struct {
+	// Optional value to filter by percentiles
 	Percentile pulumi.Float64PtrInput `pulumi:"percentile"`
-	StreamId   pulumi.StringPtrInput  `pulumi:"streamId"`
-	TypeOfData pulumi.StringInput     `pulumi:"typeOfData"`
-	Uql        pulumi.StringPtrInput  `pulumi:"uql"`
+	// ID of the metrics stream
+	StreamId pulumi.StringPtrInput `pulumi:"streamId"`
+	// Type of data to filter by
+	TypeOfData pulumi.StringInput `pulumi:"typeOfData"`
+	// UQL query
+	Uql pulumi.StringPtrInput `pulumi:"uql"`
 }
 
 func (SloObjectiveRawMetricQueryLightstepArgs) ElementType() reflect.Type {
@@ -16928,7 +25526,7 @@ func (i SloObjectiveRawMetricQueryLightstepArgs) ToSloObjectiveRawMetricQueryLig
 // SloObjectiveRawMetricQueryLightstepArrayInput is an input type that accepts SloObjectiveRawMetricQueryLightstepArray and SloObjectiveRawMetricQueryLightstepArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryLightstepArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryLightstepArray{ SloObjectiveRawMetricQueryLightstepArgs{...} }
+//	SloObjectiveRawMetricQueryLightstepArray{ SloObjectiveRawMetricQueryLightstepArgs{...} }
 type SloObjectiveRawMetricQueryLightstepArrayInput interface {
 	pulumi.Input
 
@@ -16964,18 +25562,22 @@ func (o SloObjectiveRawMetricQueryLightstepOutput) ToSloObjectiveRawMetricQueryL
 	return o
 }
 
+// Optional value to filter by percentiles
 func (o SloObjectiveRawMetricQueryLightstepOutput) Percentile() pulumi.Float64PtrOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryLightstep) *float64 { return v.Percentile }).(pulumi.Float64PtrOutput)
 }
 
+// ID of the metrics stream
 func (o SloObjectiveRawMetricQueryLightstepOutput) StreamId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryLightstep) *string { return v.StreamId }).(pulumi.StringPtrOutput)
 }
 
+// Type of data to filter by
 func (o SloObjectiveRawMetricQueryLightstepOutput) TypeOfData() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryLightstep) string { return v.TypeOfData }).(pulumi.StringOutput)
 }
 
+// UQL query
 func (o SloObjectiveRawMetricQueryLightstepOutput) Uql() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryLightstep) *string { return v.Uql }).(pulumi.StringPtrOutput)
 }
@@ -17001,13 +25603,14 @@ func (o SloObjectiveRawMetricQueryLightstepArrayOutput) Index(i pulumi.IntInput)
 }
 
 type SloObjectiveRawMetricQueryNewrelic struct {
+	// Query for the metrics
 	Nrql string `pulumi:"nrql"`
 }
 
 // SloObjectiveRawMetricQueryNewrelicInput is an input type that accepts SloObjectiveRawMetricQueryNewrelicArgs and SloObjectiveRawMetricQueryNewrelicOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryNewrelicInput` via:
 //
-//          SloObjectiveRawMetricQueryNewrelicArgs{...}
+//	SloObjectiveRawMetricQueryNewrelicArgs{...}
 type SloObjectiveRawMetricQueryNewrelicInput interface {
 	pulumi.Input
 
@@ -17016,6 +25619,7 @@ type SloObjectiveRawMetricQueryNewrelicInput interface {
 }
 
 type SloObjectiveRawMetricQueryNewrelicArgs struct {
+	// Query for the metrics
 	Nrql pulumi.StringInput `pulumi:"nrql"`
 }
 
@@ -17034,7 +25638,7 @@ func (i SloObjectiveRawMetricQueryNewrelicArgs) ToSloObjectiveRawMetricQueryNewr
 // SloObjectiveRawMetricQueryNewrelicArrayInput is an input type that accepts SloObjectiveRawMetricQueryNewrelicArray and SloObjectiveRawMetricQueryNewrelicArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryNewrelicArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryNewrelicArray{ SloObjectiveRawMetricQueryNewrelicArgs{...} }
+//	SloObjectiveRawMetricQueryNewrelicArray{ SloObjectiveRawMetricQueryNewrelicArgs{...} }
 type SloObjectiveRawMetricQueryNewrelicArrayInput interface {
 	pulumi.Input
 
@@ -17070,6 +25674,7 @@ func (o SloObjectiveRawMetricQueryNewrelicOutput) ToSloObjectiveRawMetricQueryNe
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveRawMetricQueryNewrelicOutput) Nrql() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryNewrelic) string { return v.Nrql }).(pulumi.StringOutput)
 }
@@ -17095,13 +25700,14 @@ func (o SloObjectiveRawMetricQueryNewrelicArrayOutput) Index(i pulumi.IntInput) 
 }
 
 type SloObjectiveRawMetricQueryOpentsdb struct {
+	// Query for the metrics
 	Query string `pulumi:"query"`
 }
 
 // SloObjectiveRawMetricQueryOpentsdbInput is an input type that accepts SloObjectiveRawMetricQueryOpentsdbArgs and SloObjectiveRawMetricQueryOpentsdbOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryOpentsdbInput` via:
 //
-//          SloObjectiveRawMetricQueryOpentsdbArgs{...}
+//	SloObjectiveRawMetricQueryOpentsdbArgs{...}
 type SloObjectiveRawMetricQueryOpentsdbInput interface {
 	pulumi.Input
 
@@ -17110,6 +25716,7 @@ type SloObjectiveRawMetricQueryOpentsdbInput interface {
 }
 
 type SloObjectiveRawMetricQueryOpentsdbArgs struct {
+	// Query for the metrics
 	Query pulumi.StringInput `pulumi:"query"`
 }
 
@@ -17128,7 +25735,7 @@ func (i SloObjectiveRawMetricQueryOpentsdbArgs) ToSloObjectiveRawMetricQueryOpen
 // SloObjectiveRawMetricQueryOpentsdbArrayInput is an input type that accepts SloObjectiveRawMetricQueryOpentsdbArray and SloObjectiveRawMetricQueryOpentsdbArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryOpentsdbArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryOpentsdbArray{ SloObjectiveRawMetricQueryOpentsdbArgs{...} }
+//	SloObjectiveRawMetricQueryOpentsdbArray{ SloObjectiveRawMetricQueryOpentsdbArgs{...} }
 type SloObjectiveRawMetricQueryOpentsdbArrayInput interface {
 	pulumi.Input
 
@@ -17164,6 +25771,7 @@ func (o SloObjectiveRawMetricQueryOpentsdbOutput) ToSloObjectiveRawMetricQueryOp
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveRawMetricQueryOpentsdbOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryOpentsdb) string { return v.Query }).(pulumi.StringOutput)
 }
@@ -17189,15 +25797,18 @@ func (o SloObjectiveRawMetricQueryOpentsdbArrayOutput) Index(i pulumi.IntInput) 
 }
 
 type SloObjectiveRawMetricQueryPingdom struct {
-	CheckId   string  `pulumi:"checkId"`
+	// Pingdom uptime or transaction check's ID
+	CheckId string `pulumi:"checkId"`
+	// Pingdom check type - uptime or transaction
 	CheckType *string `pulumi:"checkType"`
-	Status    *string `pulumi:"status"`
+	// Optional for the Uptime checks. Use it to filter the Pingdom check results by status
+	Status *string `pulumi:"status"`
 }
 
 // SloObjectiveRawMetricQueryPingdomInput is an input type that accepts SloObjectiveRawMetricQueryPingdomArgs and SloObjectiveRawMetricQueryPingdomOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryPingdomInput` via:
 //
-//          SloObjectiveRawMetricQueryPingdomArgs{...}
+//	SloObjectiveRawMetricQueryPingdomArgs{...}
 type SloObjectiveRawMetricQueryPingdomInput interface {
 	pulumi.Input
 
@@ -17206,9 +25817,12 @@ type SloObjectiveRawMetricQueryPingdomInput interface {
 }
 
 type SloObjectiveRawMetricQueryPingdomArgs struct {
-	CheckId   pulumi.StringInput    `pulumi:"checkId"`
+	// Pingdom uptime or transaction check's ID
+	CheckId pulumi.StringInput `pulumi:"checkId"`
+	// Pingdom check type - uptime or transaction
 	CheckType pulumi.StringPtrInput `pulumi:"checkType"`
-	Status    pulumi.StringPtrInput `pulumi:"status"`
+	// Optional for the Uptime checks. Use it to filter the Pingdom check results by status
+	Status pulumi.StringPtrInput `pulumi:"status"`
 }
 
 func (SloObjectiveRawMetricQueryPingdomArgs) ElementType() reflect.Type {
@@ -17226,7 +25840,7 @@ func (i SloObjectiveRawMetricQueryPingdomArgs) ToSloObjectiveRawMetricQueryPingd
 // SloObjectiveRawMetricQueryPingdomArrayInput is an input type that accepts SloObjectiveRawMetricQueryPingdomArray and SloObjectiveRawMetricQueryPingdomArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryPingdomArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryPingdomArray{ SloObjectiveRawMetricQueryPingdomArgs{...} }
+//	SloObjectiveRawMetricQueryPingdomArray{ SloObjectiveRawMetricQueryPingdomArgs{...} }
 type SloObjectiveRawMetricQueryPingdomArrayInput interface {
 	pulumi.Input
 
@@ -17262,14 +25876,17 @@ func (o SloObjectiveRawMetricQueryPingdomOutput) ToSloObjectiveRawMetricQueryPin
 	return o
 }
 
+// Pingdom uptime or transaction check's ID
 func (o SloObjectiveRawMetricQueryPingdomOutput) CheckId() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryPingdom) string { return v.CheckId }).(pulumi.StringOutput)
 }
 
+// Pingdom check type - uptime or transaction
 func (o SloObjectiveRawMetricQueryPingdomOutput) CheckType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryPingdom) *string { return v.CheckType }).(pulumi.StringPtrOutput)
 }
 
+// Optional for the Uptime checks. Use it to filter the Pingdom check results by status
 func (o SloObjectiveRawMetricQueryPingdomOutput) Status() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryPingdom) *string { return v.Status }).(pulumi.StringPtrOutput)
 }
@@ -17295,13 +25912,14 @@ func (o SloObjectiveRawMetricQueryPingdomArrayOutput) Index(i pulumi.IntInput) S
 }
 
 type SloObjectiveRawMetricQueryPrometheus struct {
+	// Query for the metrics
 	Promql string `pulumi:"promql"`
 }
 
 // SloObjectiveRawMetricQueryPrometheusInput is an input type that accepts SloObjectiveRawMetricQueryPrometheusArgs and SloObjectiveRawMetricQueryPrometheusOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryPrometheusInput` via:
 //
-//          SloObjectiveRawMetricQueryPrometheusArgs{...}
+//	SloObjectiveRawMetricQueryPrometheusArgs{...}
 type SloObjectiveRawMetricQueryPrometheusInput interface {
 	pulumi.Input
 
@@ -17310,6 +25928,7 @@ type SloObjectiveRawMetricQueryPrometheusInput interface {
 }
 
 type SloObjectiveRawMetricQueryPrometheusArgs struct {
+	// Query for the metrics
 	Promql pulumi.StringInput `pulumi:"promql"`
 }
 
@@ -17328,7 +25947,7 @@ func (i SloObjectiveRawMetricQueryPrometheusArgs) ToSloObjectiveRawMetricQueryPr
 // SloObjectiveRawMetricQueryPrometheusArrayInput is an input type that accepts SloObjectiveRawMetricQueryPrometheusArray and SloObjectiveRawMetricQueryPrometheusArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryPrometheusArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryPrometheusArray{ SloObjectiveRawMetricQueryPrometheusArgs{...} }
+//	SloObjectiveRawMetricQueryPrometheusArray{ SloObjectiveRawMetricQueryPrometheusArgs{...} }
 type SloObjectiveRawMetricQueryPrometheusArrayInput interface {
 	pulumi.Input
 
@@ -17364,6 +25983,7 @@ func (o SloObjectiveRawMetricQueryPrometheusOutput) ToSloObjectiveRawMetricQuery
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveRawMetricQueryPrometheusOutput) Promql() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryPrometheus) string { return v.Promql }).(pulumi.StringOutput)
 }
@@ -17389,16 +26009,20 @@ func (o SloObjectiveRawMetricQueryPrometheusArrayOutput) Index(i pulumi.IntInput
 }
 
 type SloObjectiveRawMetricQueryRedshift struct {
-	ClusterId    string `pulumi:"clusterId"`
+	// Redshift custer ID
+	ClusterId string `pulumi:"clusterId"`
+	// Database name
 	DatabaseName string `pulumi:"databaseName"`
-	Query        string `pulumi:"query"`
-	Region       string `pulumi:"region"`
+	// Query for the metrics
+	Query string `pulumi:"query"`
+	// Region of the CloudWatch instance
+	Region string `pulumi:"region"`
 }
 
 // SloObjectiveRawMetricQueryRedshiftInput is an input type that accepts SloObjectiveRawMetricQueryRedshiftArgs and SloObjectiveRawMetricQueryRedshiftOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryRedshiftInput` via:
 //
-//          SloObjectiveRawMetricQueryRedshiftArgs{...}
+//	SloObjectiveRawMetricQueryRedshiftArgs{...}
 type SloObjectiveRawMetricQueryRedshiftInput interface {
 	pulumi.Input
 
@@ -17407,10 +26031,14 @@ type SloObjectiveRawMetricQueryRedshiftInput interface {
 }
 
 type SloObjectiveRawMetricQueryRedshiftArgs struct {
-	ClusterId    pulumi.StringInput `pulumi:"clusterId"`
+	// Redshift custer ID
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Database name
 	DatabaseName pulumi.StringInput `pulumi:"databaseName"`
-	Query        pulumi.StringInput `pulumi:"query"`
-	Region       pulumi.StringInput `pulumi:"region"`
+	// Query for the metrics
+	Query pulumi.StringInput `pulumi:"query"`
+	// Region of the CloudWatch instance
+	Region pulumi.StringInput `pulumi:"region"`
 }
 
 func (SloObjectiveRawMetricQueryRedshiftArgs) ElementType() reflect.Type {
@@ -17428,7 +26056,7 @@ func (i SloObjectiveRawMetricQueryRedshiftArgs) ToSloObjectiveRawMetricQueryReds
 // SloObjectiveRawMetricQueryRedshiftArrayInput is an input type that accepts SloObjectiveRawMetricQueryRedshiftArray and SloObjectiveRawMetricQueryRedshiftArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryRedshiftArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryRedshiftArray{ SloObjectiveRawMetricQueryRedshiftArgs{...} }
+//	SloObjectiveRawMetricQueryRedshiftArray{ SloObjectiveRawMetricQueryRedshiftArgs{...} }
 type SloObjectiveRawMetricQueryRedshiftArrayInput interface {
 	pulumi.Input
 
@@ -17464,18 +26092,22 @@ func (o SloObjectiveRawMetricQueryRedshiftOutput) ToSloObjectiveRawMetricQueryRe
 	return o
 }
 
+// Redshift custer ID
 func (o SloObjectiveRawMetricQueryRedshiftOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryRedshift) string { return v.ClusterId }).(pulumi.StringOutput)
 }
 
+// Database name
 func (o SloObjectiveRawMetricQueryRedshiftOutput) DatabaseName() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryRedshift) string { return v.DatabaseName }).(pulumi.StringOutput)
 }
 
+// Query for the metrics
 func (o SloObjectiveRawMetricQueryRedshiftOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryRedshift) string { return v.Query }).(pulumi.StringOutput)
 }
 
+// Region of the CloudWatch instance
 func (o SloObjectiveRawMetricQueryRedshiftOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryRedshift) string { return v.Region }).(pulumi.StringOutput)
 }
@@ -17501,13 +26133,14 @@ func (o SloObjectiveRawMetricQueryRedshiftArrayOutput) Index(i pulumi.IntInput) 
 }
 
 type SloObjectiveRawMetricQuerySplunk struct {
+	// Query for the metrics
 	Query string `pulumi:"query"`
 }
 
 // SloObjectiveRawMetricQuerySplunkInput is an input type that accepts SloObjectiveRawMetricQuerySplunkArgs and SloObjectiveRawMetricQuerySplunkOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQuerySplunkInput` via:
 //
-//          SloObjectiveRawMetricQuerySplunkArgs{...}
+//	SloObjectiveRawMetricQuerySplunkArgs{...}
 type SloObjectiveRawMetricQuerySplunkInput interface {
 	pulumi.Input
 
@@ -17516,6 +26149,7 @@ type SloObjectiveRawMetricQuerySplunkInput interface {
 }
 
 type SloObjectiveRawMetricQuerySplunkArgs struct {
+	// Query for the metrics
 	Query pulumi.StringInput `pulumi:"query"`
 }
 
@@ -17534,7 +26168,7 @@ func (i SloObjectiveRawMetricQuerySplunkArgs) ToSloObjectiveRawMetricQuerySplunk
 // SloObjectiveRawMetricQuerySplunkArrayInput is an input type that accepts SloObjectiveRawMetricQuerySplunkArray and SloObjectiveRawMetricQuerySplunkArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQuerySplunkArrayInput` via:
 //
-//          SloObjectiveRawMetricQuerySplunkArray{ SloObjectiveRawMetricQuerySplunkArgs{...} }
+//	SloObjectiveRawMetricQuerySplunkArray{ SloObjectiveRawMetricQuerySplunkArgs{...} }
 type SloObjectiveRawMetricQuerySplunkArrayInput interface {
 	pulumi.Input
 
@@ -17570,6 +26204,7 @@ func (o SloObjectiveRawMetricQuerySplunkOutput) ToSloObjectiveRawMetricQuerySplu
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveRawMetricQuerySplunkOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuerySplunk) string { return v.Query }).(pulumi.StringOutput)
 }
@@ -17595,13 +26230,14 @@ func (o SloObjectiveRawMetricQuerySplunkArrayOutput) Index(i pulumi.IntInput) Sl
 }
 
 type SloObjectiveRawMetricQuerySplunkObservability struct {
+	// Query for the metrics
 	Program string `pulumi:"program"`
 }
 
 // SloObjectiveRawMetricQuerySplunkObservabilityInput is an input type that accepts SloObjectiveRawMetricQuerySplunkObservabilityArgs and SloObjectiveRawMetricQuerySplunkObservabilityOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQuerySplunkObservabilityInput` via:
 //
-//          SloObjectiveRawMetricQuerySplunkObservabilityArgs{...}
+//	SloObjectiveRawMetricQuerySplunkObservabilityArgs{...}
 type SloObjectiveRawMetricQuerySplunkObservabilityInput interface {
 	pulumi.Input
 
@@ -17610,6 +26246,7 @@ type SloObjectiveRawMetricQuerySplunkObservabilityInput interface {
 }
 
 type SloObjectiveRawMetricQuerySplunkObservabilityArgs struct {
+	// Query for the metrics
 	Program pulumi.StringInput `pulumi:"program"`
 }
 
@@ -17628,7 +26265,7 @@ func (i SloObjectiveRawMetricQuerySplunkObservabilityArgs) ToSloObjectiveRawMetr
 // SloObjectiveRawMetricQuerySplunkObservabilityArrayInput is an input type that accepts SloObjectiveRawMetricQuerySplunkObservabilityArray and SloObjectiveRawMetricQuerySplunkObservabilityArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQuerySplunkObservabilityArrayInput` via:
 //
-//          SloObjectiveRawMetricQuerySplunkObservabilityArray{ SloObjectiveRawMetricQuerySplunkObservabilityArgs{...} }
+//	SloObjectiveRawMetricQuerySplunkObservabilityArray{ SloObjectiveRawMetricQuerySplunkObservabilityArgs{...} }
 type SloObjectiveRawMetricQuerySplunkObservabilityArrayInput interface {
 	pulumi.Input
 
@@ -17664,6 +26301,7 @@ func (o SloObjectiveRawMetricQuerySplunkObservabilityOutput) ToSloObjectiveRawMe
 	return o
 }
 
+// Query for the metrics
 func (o SloObjectiveRawMetricQuerySplunkObservabilityOutput) Program() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuerySplunkObservability) string { return v.Program }).(pulumi.StringOutput)
 }
@@ -17689,16 +26327,20 @@ func (o SloObjectiveRawMetricQuerySplunkObservabilityArrayOutput) Index(i pulumi
 }
 
 type SloObjectiveRawMetricQuerySumologic struct {
+	// Period of data aggregation
 	Quantization *string `pulumi:"quantization"`
-	Query        string  `pulumi:"query"`
-	Rollup       *string `pulumi:"rollup"`
-	Type         string  `pulumi:"type"`
+	// Query for the metrics
+	Query string `pulumi:"query"`
+	// Aggregation function - avg, sum, min, max, count, none
+	Rollup *string `pulumi:"rollup"`
+	// Sumologic source - metrics or logs
+	Type string `pulumi:"type"`
 }
 
 // SloObjectiveRawMetricQuerySumologicInput is an input type that accepts SloObjectiveRawMetricQuerySumologicArgs and SloObjectiveRawMetricQuerySumologicOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQuerySumologicInput` via:
 //
-//          SloObjectiveRawMetricQuerySumologicArgs{...}
+//	SloObjectiveRawMetricQuerySumologicArgs{...}
 type SloObjectiveRawMetricQuerySumologicInput interface {
 	pulumi.Input
 
@@ -17707,10 +26349,14 @@ type SloObjectiveRawMetricQuerySumologicInput interface {
 }
 
 type SloObjectiveRawMetricQuerySumologicArgs struct {
+	// Period of data aggregation
 	Quantization pulumi.StringPtrInput `pulumi:"quantization"`
-	Query        pulumi.StringInput    `pulumi:"query"`
-	Rollup       pulumi.StringPtrInput `pulumi:"rollup"`
-	Type         pulumi.StringInput    `pulumi:"type"`
+	// Query for the metrics
+	Query pulumi.StringInput `pulumi:"query"`
+	// Aggregation function - avg, sum, min, max, count, none
+	Rollup pulumi.StringPtrInput `pulumi:"rollup"`
+	// Sumologic source - metrics or logs
+	Type pulumi.StringInput `pulumi:"type"`
 }
 
 func (SloObjectiveRawMetricQuerySumologicArgs) ElementType() reflect.Type {
@@ -17728,7 +26374,7 @@ func (i SloObjectiveRawMetricQuerySumologicArgs) ToSloObjectiveRawMetricQuerySum
 // SloObjectiveRawMetricQuerySumologicArrayInput is an input type that accepts SloObjectiveRawMetricQuerySumologicArray and SloObjectiveRawMetricQuerySumologicArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQuerySumologicArrayInput` via:
 //
-//          SloObjectiveRawMetricQuerySumologicArray{ SloObjectiveRawMetricQuerySumologicArgs{...} }
+//	SloObjectiveRawMetricQuerySumologicArray{ SloObjectiveRawMetricQuerySumologicArgs{...} }
 type SloObjectiveRawMetricQuerySumologicArrayInput interface {
 	pulumi.Input
 
@@ -17764,18 +26410,22 @@ func (o SloObjectiveRawMetricQuerySumologicOutput) ToSloObjectiveRawMetricQueryS
 	return o
 }
 
+// Period of data aggregation
 func (o SloObjectiveRawMetricQuerySumologicOutput) Quantization() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuerySumologic) *string { return v.Quantization }).(pulumi.StringPtrOutput)
 }
 
+// Query for the metrics
 func (o SloObjectiveRawMetricQuerySumologicOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuerySumologic) string { return v.Query }).(pulumi.StringOutput)
 }
 
+// Aggregation function - avg, sum, min, max, count, none
 func (o SloObjectiveRawMetricQuerySumologicOutput) Rollup() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuerySumologic) *string { return v.Rollup }).(pulumi.StringPtrOutput)
 }
 
+// Sumologic source - metrics or logs
 func (o SloObjectiveRawMetricQuerySumologicOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQuerySumologic) string { return v.Type }).(pulumi.StringOutput)
 }
@@ -17801,13 +26451,14 @@ func (o SloObjectiveRawMetricQuerySumologicArrayOutput) Index(i pulumi.IntInput)
 }
 
 type SloObjectiveRawMetricQueryThousandeye struct {
+	// ID of the test
 	TestId int `pulumi:"testId"`
 }
 
 // SloObjectiveRawMetricQueryThousandeyeInput is an input type that accepts SloObjectiveRawMetricQueryThousandeyeArgs and SloObjectiveRawMetricQueryThousandeyeOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryThousandeyeInput` via:
 //
-//          SloObjectiveRawMetricQueryThousandeyeArgs{...}
+//	SloObjectiveRawMetricQueryThousandeyeArgs{...}
 type SloObjectiveRawMetricQueryThousandeyeInput interface {
 	pulumi.Input
 
@@ -17816,6 +26467,7 @@ type SloObjectiveRawMetricQueryThousandeyeInput interface {
 }
 
 type SloObjectiveRawMetricQueryThousandeyeArgs struct {
+	// ID of the test
 	TestId pulumi.IntInput `pulumi:"testId"`
 }
 
@@ -17834,7 +26486,7 @@ func (i SloObjectiveRawMetricQueryThousandeyeArgs) ToSloObjectiveRawMetricQueryT
 // SloObjectiveRawMetricQueryThousandeyeArrayInput is an input type that accepts SloObjectiveRawMetricQueryThousandeyeArray and SloObjectiveRawMetricQueryThousandeyeArrayOutput values.
 // You can construct a concrete instance of `SloObjectiveRawMetricQueryThousandeyeArrayInput` via:
 //
-//          SloObjectiveRawMetricQueryThousandeyeArray{ SloObjectiveRawMetricQueryThousandeyeArgs{...} }
+//	SloObjectiveRawMetricQueryThousandeyeArray{ SloObjectiveRawMetricQueryThousandeyeArgs{...} }
 type SloObjectiveRawMetricQueryThousandeyeArrayInput interface {
 	pulumi.Input
 
@@ -17870,6 +26522,7 @@ func (o SloObjectiveRawMetricQueryThousandeyeOutput) ToSloObjectiveRawMetricQuer
 	return o
 }
 
+// ID of the test
 func (o SloObjectiveRawMetricQueryThousandeyeOutput) TestId() pulumi.IntOutput {
 	return o.ApplyT(func(v SloObjectiveRawMetricQueryThousandeye) int { return v.TestId }).(pulumi.IntOutput)
 }
@@ -17910,7 +26563,7 @@ type SloTimeWindow struct {
 // SloTimeWindowInput is an input type that accepts SloTimeWindowArgs and SloTimeWindowOutput values.
 // You can construct a concrete instance of `SloTimeWindowInput` via:
 //
-//          SloTimeWindowArgs{...}
+//	SloTimeWindowArgs{...}
 type SloTimeWindowInput interface {
 	pulumi.Input
 
@@ -17954,11 +26607,11 @@ func (i SloTimeWindowArgs) ToSloTimeWindowPtrOutputWithContext(ctx context.Conte
 // SloTimeWindowPtrInput is an input type that accepts SloTimeWindowArgs, SloTimeWindowPtr and SloTimeWindowPtrOutput values.
 // You can construct a concrete instance of `SloTimeWindowPtrInput` via:
 //
-//          SloTimeWindowArgs{...}
+//	        SloTimeWindowArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type SloTimeWindowPtrInput interface {
 	pulumi.Input
 
@@ -18108,14 +26761,16 @@ func (o SloTimeWindowPtrOutput) Unit() pulumi.StringPtrOutput {
 }
 
 type SloTimeWindowCalendar struct {
+	// Date of the start
 	StartTime string `pulumi:"startTime"`
-	TimeZone  string `pulumi:"timeZone"`
+	// Timezone name in IANA Time Zone Database
+	TimeZone string `pulumi:"timeZone"`
 }
 
 // SloTimeWindowCalendarInput is an input type that accepts SloTimeWindowCalendarArgs and SloTimeWindowCalendarOutput values.
 // You can construct a concrete instance of `SloTimeWindowCalendarInput` via:
 //
-//          SloTimeWindowCalendarArgs{...}
+//	SloTimeWindowCalendarArgs{...}
 type SloTimeWindowCalendarInput interface {
 	pulumi.Input
 
@@ -18124,8 +26779,10 @@ type SloTimeWindowCalendarInput interface {
 }
 
 type SloTimeWindowCalendarArgs struct {
+	// Date of the start
 	StartTime pulumi.StringInput `pulumi:"startTime"`
-	TimeZone  pulumi.StringInput `pulumi:"timeZone"`
+	// Timezone name in IANA Time Zone Database
+	TimeZone pulumi.StringInput `pulumi:"timeZone"`
 }
 
 func (SloTimeWindowCalendarArgs) ElementType() reflect.Type {
@@ -18143,7 +26800,7 @@ func (i SloTimeWindowCalendarArgs) ToSloTimeWindowCalendarOutputWithContext(ctx 
 // SloTimeWindowCalendarArrayInput is an input type that accepts SloTimeWindowCalendarArray and SloTimeWindowCalendarArrayOutput values.
 // You can construct a concrete instance of `SloTimeWindowCalendarArrayInput` via:
 //
-//          SloTimeWindowCalendarArray{ SloTimeWindowCalendarArgs{...} }
+//	SloTimeWindowCalendarArray{ SloTimeWindowCalendarArgs{...} }
 type SloTimeWindowCalendarArrayInput interface {
 	pulumi.Input
 
@@ -18179,10 +26836,12 @@ func (o SloTimeWindowCalendarOutput) ToSloTimeWindowCalendarOutputWithContext(ct
 	return o
 }
 
+// Date of the start
 func (o SloTimeWindowCalendarOutput) StartTime() pulumi.StringOutput {
 	return o.ApplyT(func(v SloTimeWindowCalendar) string { return v.StartTime }).(pulumi.StringOutput)
 }
 
+// Timezone name in IANA Time Zone Database
 func (o SloTimeWindowCalendarOutput) TimeZone() pulumi.StringOutput {
 	return o.ApplyT(func(v SloTimeWindowCalendar) string { return v.TimeZone }).(pulumi.StringOutput)
 }
@@ -18212,6 +26871,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AgentAmazonPrometheusConfigPtrInput)(nil)).Elem(), AgentAmazonPrometheusConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AgentAppdynamicsConfigInput)(nil)).Elem(), AgentAppdynamicsConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AgentAppdynamicsConfigPtrInput)(nil)).Elem(), AgentAppdynamicsConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AgentAzureMonitorConfigInput)(nil)).Elem(), AgentAzureMonitorConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AgentAzureMonitorConfigPtrInput)(nil)).Elem(), AgentAzureMonitorConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AgentBigqueryConfigInput)(nil)).Elem(), AgentBigqueryConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AgentBigqueryConfigPtrInput)(nil)).Elem(), AgentBigqueryConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AgentCloudwatchConfigInput)(nil)).Elem(), AgentCloudwatchConfigArgs{})
@@ -18228,6 +26889,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AgentGrafanaLokiConfigPtrInput)(nil)).Elem(), AgentGrafanaLokiConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AgentGraphiteConfigInput)(nil)).Elem(), AgentGraphiteConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AgentGraphiteConfigPtrInput)(nil)).Elem(), AgentGraphiteConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AgentHistoricalDataRetrievalInput)(nil)).Elem(), AgentHistoricalDataRetrievalArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AgentHistoricalDataRetrievalPtrInput)(nil)).Elem(), AgentHistoricalDataRetrievalArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AgentHistoricalDataRetrievalDefaultDurationInput)(nil)).Elem(), AgentHistoricalDataRetrievalDefaultDurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AgentHistoricalDataRetrievalDefaultDurationArrayInput)(nil)).Elem(), AgentHistoricalDataRetrievalDefaultDurationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AgentHistoricalDataRetrievalMaxDurationInput)(nil)).Elem(), AgentHistoricalDataRetrievalMaxDurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AgentHistoricalDataRetrievalMaxDurationArrayInput)(nil)).Elem(), AgentHistoricalDataRetrievalMaxDurationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AgentHoneycombConfigInput)(nil)).Elem(), AgentHoneycombConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AgentHoneycombConfigPtrInput)(nil)).Elem(), AgentHoneycombConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AgentInfluxdbConfigInput)(nil)).Elem(), AgentInfluxdbConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AgentInfluxdbConfigPtrInput)(nil)).Elem(), AgentInfluxdbConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AgentInstanaConfigInput)(nil)).Elem(), AgentInstanaConfigArgs{})
@@ -18254,12 +26923,28 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AgentSumologicConfigPtrInput)(nil)).Elem(), AgentSumologicConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AgentThousandeyesConfigInput)(nil)).Elem(), AgentThousandeyesConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AgentThousandeyesConfigPtrInput)(nil)).Elem(), AgentThousandeyesConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlertMethodPagerdutySendResolutionInput)(nil)).Elem(), AlertMethodPagerdutySendResolutionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlertMethodPagerdutySendResolutionPtrInput)(nil)).Elem(), AlertMethodPagerdutySendResolutionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlertPolicyAlertMethodInput)(nil)).Elem(), AlertPolicyAlertMethodArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlertPolicyAlertMethodArrayInput)(nil)).Elem(), AlertPolicyAlertMethodArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlertPolicyConditionInput)(nil)).Elem(), AlertPolicyConditionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlertPolicyConditionArrayInput)(nil)).Elem(), AlertPolicyConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DirectAppdynamicsHistoricalDataRetrievalInput)(nil)).Elem(), DirectAppdynamicsHistoricalDataRetrievalArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DirectAppdynamicsHistoricalDataRetrievalPtrInput)(nil)).Elem(), DirectAppdynamicsHistoricalDataRetrievalArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DirectAppdynamicsHistoricalDataRetrievalDefaultDurationInput)(nil)).Elem(), DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayInput)(nil)).Elem(), DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DirectAppdynamicsHistoricalDataRetrievalMaxDurationInput)(nil)).Elem(), DirectAppdynamicsHistoricalDataRetrievalMaxDurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayInput)(nil)).Elem(), DirectAppdynamicsHistoricalDataRetrievalMaxDurationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DirectAppdynamicsQueryDelayInput)(nil)).Elem(), DirectAppdynamicsQueryDelayArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DirectAppdynamicsQueryDelayPtrInput)(nil)).Elem(), DirectAppdynamicsQueryDelayArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DirectAzureMonitorHistoricalDataRetrievalInput)(nil)).Elem(), DirectAzureMonitorHistoricalDataRetrievalArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DirectAzureMonitorHistoricalDataRetrievalPtrInput)(nil)).Elem(), DirectAzureMonitorHistoricalDataRetrievalArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DirectAzureMonitorHistoricalDataRetrievalDefaultDurationInput)(nil)).Elem(), DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayInput)(nil)).Elem(), DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DirectAzureMonitorHistoricalDataRetrievalMaxDurationInput)(nil)).Elem(), DirectAzureMonitorHistoricalDataRetrievalMaxDurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayInput)(nil)).Elem(), DirectAzureMonitorHistoricalDataRetrievalMaxDurationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DirectAzureMonitorQueryDelayInput)(nil)).Elem(), DirectAzureMonitorQueryDelayArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DirectAzureMonitorQueryDelayPtrInput)(nil)).Elem(), DirectAzureMonitorQueryDelayArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DirectBigqueryQueryDelayInput)(nil)).Elem(), DirectBigqueryQueryDelayArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DirectBigqueryQueryDelayPtrInput)(nil)).Elem(), DirectBigqueryQueryDelayArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DirectCloudwatchHistoricalDataRetrievalInput)(nil)).Elem(), DirectCloudwatchHistoricalDataRetrievalArgs{})
@@ -18288,6 +26973,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DirectDynatraceQueryDelayPtrInput)(nil)).Elem(), DirectDynatraceQueryDelayArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DirectGcmQueryDelayInput)(nil)).Elem(), DirectGcmQueryDelayArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DirectGcmQueryDelayPtrInput)(nil)).Elem(), DirectGcmQueryDelayArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DirectHoneycombHistoricalDataRetrievalInput)(nil)).Elem(), DirectHoneycombHistoricalDataRetrievalArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DirectHoneycombHistoricalDataRetrievalPtrInput)(nil)).Elem(), DirectHoneycombHistoricalDataRetrievalArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DirectHoneycombHistoricalDataRetrievalDefaultDurationInput)(nil)).Elem(), DirectHoneycombHistoricalDataRetrievalDefaultDurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayInput)(nil)).Elem(), DirectHoneycombHistoricalDataRetrievalDefaultDurationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DirectHoneycombHistoricalDataRetrievalMaxDurationInput)(nil)).Elem(), DirectHoneycombHistoricalDataRetrievalMaxDurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DirectHoneycombHistoricalDataRetrievalMaxDurationArrayInput)(nil)).Elem(), DirectHoneycombHistoricalDataRetrievalMaxDurationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DirectHoneycombQueryDelayInput)(nil)).Elem(), DirectHoneycombQueryDelayArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DirectHoneycombQueryDelayPtrInput)(nil)).Elem(), DirectHoneycombQueryDelayArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DirectInfluxdbQueryDelayInput)(nil)).Elem(), DirectInfluxdbQueryDelayArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DirectInfluxdbQueryDelayPtrInput)(nil)).Elem(), DirectInfluxdbQueryDelayArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DirectInstanaQueryDelayInput)(nil)).Elem(), DirectInstanaQueryDelayArgs{})
@@ -18330,6 +27023,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectLabelArrayInput)(nil)).Elem(), ProjectLabelArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ServiceLabelInput)(nil)).Elem(), ServiceLabelArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ServiceLabelArrayInput)(nil)).Elem(), ServiceLabelArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloAnomalyConfigInput)(nil)).Elem(), SloAnomalyConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloAnomalyConfigPtrInput)(nil)).Elem(), SloAnomalyConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloAnomalyConfigNoDataInput)(nil)).Elem(), SloAnomalyConfigNoDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloAnomalyConfigNoDataPtrInput)(nil)).Elem(), SloAnomalyConfigNoDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloAnomalyConfigNoDataAlertMethodInput)(nil)).Elem(), SloAnomalyConfigNoDataAlertMethodArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloAnomalyConfigNoDataAlertMethodArrayInput)(nil)).Elem(), SloAnomalyConfigNoDataAlertMethodArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloAttachmentInput)(nil)).Elem(), SloAttachmentArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloAttachmentArrayInput)(nil)).Elem(), SloAttachmentArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloCompositeInput)(nil)).Elem(), SloCompositeArgs{})
@@ -18344,12 +27043,80 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveArrayInput)(nil)).Elem(), SloObjectiveArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricInput)(nil)).Elem(), SloObjectiveCountMetricArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricArrayInput)(nil)).Elem(), SloObjectiveCountMetricArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadInput)(nil)).Elem(), SloObjectiveCountMetricBadArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadAmazonPrometheusInput)(nil)).Elem(), SloObjectiveCountMetricBadAmazonPrometheusArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadAmazonPrometheusArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadAmazonPrometheusArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadAppdynamicInput)(nil)).Elem(), SloObjectiveCountMetricBadAppdynamicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadAppdynamicArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadAppdynamicArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadAzureMonitorInput)(nil)).Elem(), SloObjectiveCountMetricBadAzureMonitorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadAzureMonitorArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadAzureMonitorArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadAzureMonitorDimensionInput)(nil)).Elem(), SloObjectiveCountMetricBadAzureMonitorDimensionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadAzureMonitorDimensionArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadAzureMonitorDimensionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadAzureMonitorWorkspaceInput)(nil)).Elem(), SloObjectiveCountMetricBadAzureMonitorWorkspaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadAzureMonitorWorkspaceArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadAzureMonitorWorkspaceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadBigqueryInput)(nil)).Elem(), SloObjectiveCountMetricBadBigqueryArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadBigqueryArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadBigqueryArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadCloudwatchInput)(nil)).Elem(), SloObjectiveCountMetricBadCloudwatchArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadCloudwatchArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadCloudwatchArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadCloudwatchDimensionInput)(nil)).Elem(), SloObjectiveCountMetricBadCloudwatchDimensionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadCloudwatchDimensionArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadCloudwatchDimensionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadDatadogInput)(nil)).Elem(), SloObjectiveCountMetricBadDatadogArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadDatadogArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadDatadogArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadDynatraceInput)(nil)).Elem(), SloObjectiveCountMetricBadDynatraceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadDynatraceArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadDynatraceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadElasticsearchInput)(nil)).Elem(), SloObjectiveCountMetricBadElasticsearchArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadElasticsearchArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadElasticsearchArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadGcmInput)(nil)).Elem(), SloObjectiveCountMetricBadGcmArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadGcmArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadGcmArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadGrafanaLokiInput)(nil)).Elem(), SloObjectiveCountMetricBadGrafanaLokiArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadGrafanaLokiArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadGrafanaLokiArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadGraphiteInput)(nil)).Elem(), SloObjectiveCountMetricBadGraphiteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadGraphiteArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadGraphiteArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadHoneycombInput)(nil)).Elem(), SloObjectiveCountMetricBadHoneycombArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadHoneycombArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadHoneycombArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadInfluxdbInput)(nil)).Elem(), SloObjectiveCountMetricBadInfluxdbArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadInfluxdbArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadInfluxdbArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadInstanaInput)(nil)).Elem(), SloObjectiveCountMetricBadInstanaArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadInstanaArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadInstanaArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadInstanaApplicationInput)(nil)).Elem(), SloObjectiveCountMetricBadInstanaApplicationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadInstanaApplicationArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadInstanaApplicationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadInstanaApplicationGroupByInput)(nil)).Elem(), SloObjectiveCountMetricBadInstanaApplicationGroupByArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadInstanaApplicationGroupByArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadInstanaApplicationGroupByArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadInstanaInfrastructureInput)(nil)).Elem(), SloObjectiveCountMetricBadInstanaInfrastructureArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadInstanaInfrastructureArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadInstanaInfrastructureArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadLightstepInput)(nil)).Elem(), SloObjectiveCountMetricBadLightstepArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadLightstepArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadLightstepArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadNewrelicInput)(nil)).Elem(), SloObjectiveCountMetricBadNewrelicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadNewrelicArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadNewrelicArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadOpentsdbInput)(nil)).Elem(), SloObjectiveCountMetricBadOpentsdbArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadOpentsdbArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadOpentsdbArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadPingdomInput)(nil)).Elem(), SloObjectiveCountMetricBadPingdomArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadPingdomArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadPingdomArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadPrometheusInput)(nil)).Elem(), SloObjectiveCountMetricBadPrometheusArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadPrometheusArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadPrometheusArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadRedshiftInput)(nil)).Elem(), SloObjectiveCountMetricBadRedshiftArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadRedshiftArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadRedshiftArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadSplunkInput)(nil)).Elem(), SloObjectiveCountMetricBadSplunkArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadSplunkArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadSplunkArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadSplunkObservabilityInput)(nil)).Elem(), SloObjectiveCountMetricBadSplunkObservabilityArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadSplunkObservabilityArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadSplunkObservabilityArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadSumologicInput)(nil)).Elem(), SloObjectiveCountMetricBadSumologicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadSumologicArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadSumologicArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadThousandeyeInput)(nil)).Elem(), SloObjectiveCountMetricBadThousandeyeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricBadThousandeyeArrayInput)(nil)).Elem(), SloObjectiveCountMetricBadThousandeyeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodInput)(nil)).Elem(), SloObjectiveCountMetricGoodArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodArrayInput)(nil)).Elem(), SloObjectiveCountMetricGoodArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodAmazonPrometheusInput)(nil)).Elem(), SloObjectiveCountMetricGoodAmazonPrometheusArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodAmazonPrometheusArrayInput)(nil)).Elem(), SloObjectiveCountMetricGoodAmazonPrometheusArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodAppdynamicInput)(nil)).Elem(), SloObjectiveCountMetricGoodAppdynamicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodAppdynamicArrayInput)(nil)).Elem(), SloObjectiveCountMetricGoodAppdynamicArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodAzureMonitorInput)(nil)).Elem(), SloObjectiveCountMetricGoodAzureMonitorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodAzureMonitorArrayInput)(nil)).Elem(), SloObjectiveCountMetricGoodAzureMonitorArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodAzureMonitorDimensionInput)(nil)).Elem(), SloObjectiveCountMetricGoodAzureMonitorDimensionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodAzureMonitorDimensionArrayInput)(nil)).Elem(), SloObjectiveCountMetricGoodAzureMonitorDimensionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodAzureMonitorWorkspaceInput)(nil)).Elem(), SloObjectiveCountMetricGoodAzureMonitorWorkspaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayInput)(nil)).Elem(), SloObjectiveCountMetricGoodAzureMonitorWorkspaceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodBigqueryInput)(nil)).Elem(), SloObjectiveCountMetricGoodBigqueryArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodBigqueryArrayInput)(nil)).Elem(), SloObjectiveCountMetricGoodBigqueryArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodCloudwatchInput)(nil)).Elem(), SloObjectiveCountMetricGoodCloudwatchArgs{})
@@ -18368,6 +27135,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodGrafanaLokiArrayInput)(nil)).Elem(), SloObjectiveCountMetricGoodGrafanaLokiArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodGraphiteInput)(nil)).Elem(), SloObjectiveCountMetricGoodGraphiteArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodGraphiteArrayInput)(nil)).Elem(), SloObjectiveCountMetricGoodGraphiteArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodHoneycombInput)(nil)).Elem(), SloObjectiveCountMetricGoodHoneycombArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodHoneycombArrayInput)(nil)).Elem(), SloObjectiveCountMetricGoodHoneycombArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodInfluxdbInput)(nil)).Elem(), SloObjectiveCountMetricGoodInfluxdbArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodInfluxdbArrayInput)(nil)).Elem(), SloObjectiveCountMetricGoodInfluxdbArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricGoodInstanaInput)(nil)).Elem(), SloObjectiveCountMetricGoodInstanaArgs{})
@@ -18404,6 +27173,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricTotalAmazonPrometheusArrayInput)(nil)).Elem(), SloObjectiveCountMetricTotalAmazonPrometheusArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricTotalAppdynamicInput)(nil)).Elem(), SloObjectiveCountMetricTotalAppdynamicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricTotalAppdynamicArrayInput)(nil)).Elem(), SloObjectiveCountMetricTotalAppdynamicArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricTotalAzureMonitorInput)(nil)).Elem(), SloObjectiveCountMetricTotalAzureMonitorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricTotalAzureMonitorArrayInput)(nil)).Elem(), SloObjectiveCountMetricTotalAzureMonitorArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricTotalAzureMonitorDimensionInput)(nil)).Elem(), SloObjectiveCountMetricTotalAzureMonitorDimensionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricTotalAzureMonitorDimensionArrayInput)(nil)).Elem(), SloObjectiveCountMetricTotalAzureMonitorDimensionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricTotalAzureMonitorWorkspaceInput)(nil)).Elem(), SloObjectiveCountMetricTotalAzureMonitorWorkspaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayInput)(nil)).Elem(), SloObjectiveCountMetricTotalAzureMonitorWorkspaceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricTotalBigqueryInput)(nil)).Elem(), SloObjectiveCountMetricTotalBigqueryArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricTotalBigqueryArrayInput)(nil)).Elem(), SloObjectiveCountMetricTotalBigqueryArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricTotalCloudwatchInput)(nil)).Elem(), SloObjectiveCountMetricTotalCloudwatchArgs{})
@@ -18422,6 +27197,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricTotalGrafanaLokiArrayInput)(nil)).Elem(), SloObjectiveCountMetricTotalGrafanaLokiArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricTotalGraphiteInput)(nil)).Elem(), SloObjectiveCountMetricTotalGraphiteArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricTotalGraphiteArrayInput)(nil)).Elem(), SloObjectiveCountMetricTotalGraphiteArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricTotalHoneycombInput)(nil)).Elem(), SloObjectiveCountMetricTotalHoneycombArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricTotalHoneycombArrayInput)(nil)).Elem(), SloObjectiveCountMetricTotalHoneycombArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricTotalInfluxdbInput)(nil)).Elem(), SloObjectiveCountMetricTotalInfluxdbArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricTotalInfluxdbArrayInput)(nil)).Elem(), SloObjectiveCountMetricTotalInfluxdbArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveCountMetricTotalInstanaInput)(nil)).Elem(), SloObjectiveCountMetricTotalInstanaArgs{})
@@ -18460,6 +27237,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveRawMetricQueryAmazonPrometheusArrayInput)(nil)).Elem(), SloObjectiveRawMetricQueryAmazonPrometheusArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveRawMetricQueryAppdynamicInput)(nil)).Elem(), SloObjectiveRawMetricQueryAppdynamicArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveRawMetricQueryAppdynamicArrayInput)(nil)).Elem(), SloObjectiveRawMetricQueryAppdynamicArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveRawMetricQueryAzureMonitorInput)(nil)).Elem(), SloObjectiveRawMetricQueryAzureMonitorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveRawMetricQueryAzureMonitorArrayInput)(nil)).Elem(), SloObjectiveRawMetricQueryAzureMonitorArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveRawMetricQueryAzureMonitorDimensionInput)(nil)).Elem(), SloObjectiveRawMetricQueryAzureMonitorDimensionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveRawMetricQueryAzureMonitorDimensionArrayInput)(nil)).Elem(), SloObjectiveRawMetricQueryAzureMonitorDimensionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveRawMetricQueryAzureMonitorWorkspaceInput)(nil)).Elem(), SloObjectiveRawMetricQueryAzureMonitorWorkspaceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayInput)(nil)).Elem(), SloObjectiveRawMetricQueryAzureMonitorWorkspaceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveRawMetricQueryBigqueryInput)(nil)).Elem(), SloObjectiveRawMetricQueryBigqueryArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveRawMetricQueryBigqueryArrayInput)(nil)).Elem(), SloObjectiveRawMetricQueryBigqueryArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveRawMetricQueryCloudwatchInput)(nil)).Elem(), SloObjectiveRawMetricQueryCloudwatchArgs{})
@@ -18478,6 +27261,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveRawMetricQueryGrafanaLokiArrayInput)(nil)).Elem(), SloObjectiveRawMetricQueryGrafanaLokiArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveRawMetricQueryGraphiteInput)(nil)).Elem(), SloObjectiveRawMetricQueryGraphiteArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveRawMetricQueryGraphiteArrayInput)(nil)).Elem(), SloObjectiveRawMetricQueryGraphiteArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveRawMetricQueryHoneycombInput)(nil)).Elem(), SloObjectiveRawMetricQueryHoneycombArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveRawMetricQueryHoneycombArrayInput)(nil)).Elem(), SloObjectiveRawMetricQueryHoneycombArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveRawMetricQueryInfluxdbInput)(nil)).Elem(), SloObjectiveRawMetricQueryInfluxdbArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveRawMetricQueryInfluxdbArrayInput)(nil)).Elem(), SloObjectiveRawMetricQueryInfluxdbArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SloObjectiveRawMetricQueryInstanaInput)(nil)).Elem(), SloObjectiveRawMetricQueryInstanaArgs{})
@@ -18516,6 +27301,8 @@ func init() {
 	pulumi.RegisterOutputType(AgentAmazonPrometheusConfigPtrOutput{})
 	pulumi.RegisterOutputType(AgentAppdynamicsConfigOutput{})
 	pulumi.RegisterOutputType(AgentAppdynamicsConfigPtrOutput{})
+	pulumi.RegisterOutputType(AgentAzureMonitorConfigOutput{})
+	pulumi.RegisterOutputType(AgentAzureMonitorConfigPtrOutput{})
 	pulumi.RegisterOutputType(AgentBigqueryConfigOutput{})
 	pulumi.RegisterOutputType(AgentBigqueryConfigPtrOutput{})
 	pulumi.RegisterOutputType(AgentCloudwatchConfigOutput{})
@@ -18532,6 +27319,14 @@ func init() {
 	pulumi.RegisterOutputType(AgentGrafanaLokiConfigPtrOutput{})
 	pulumi.RegisterOutputType(AgentGraphiteConfigOutput{})
 	pulumi.RegisterOutputType(AgentGraphiteConfigPtrOutput{})
+	pulumi.RegisterOutputType(AgentHistoricalDataRetrievalOutput{})
+	pulumi.RegisterOutputType(AgentHistoricalDataRetrievalPtrOutput{})
+	pulumi.RegisterOutputType(AgentHistoricalDataRetrievalDefaultDurationOutput{})
+	pulumi.RegisterOutputType(AgentHistoricalDataRetrievalDefaultDurationArrayOutput{})
+	pulumi.RegisterOutputType(AgentHistoricalDataRetrievalMaxDurationOutput{})
+	pulumi.RegisterOutputType(AgentHistoricalDataRetrievalMaxDurationArrayOutput{})
+	pulumi.RegisterOutputType(AgentHoneycombConfigOutput{})
+	pulumi.RegisterOutputType(AgentHoneycombConfigPtrOutput{})
 	pulumi.RegisterOutputType(AgentInfluxdbConfigOutput{})
 	pulumi.RegisterOutputType(AgentInfluxdbConfigPtrOutput{})
 	pulumi.RegisterOutputType(AgentInstanaConfigOutput{})
@@ -18558,12 +27353,28 @@ func init() {
 	pulumi.RegisterOutputType(AgentSumologicConfigPtrOutput{})
 	pulumi.RegisterOutputType(AgentThousandeyesConfigOutput{})
 	pulumi.RegisterOutputType(AgentThousandeyesConfigPtrOutput{})
+	pulumi.RegisterOutputType(AlertMethodPagerdutySendResolutionOutput{})
+	pulumi.RegisterOutputType(AlertMethodPagerdutySendResolutionPtrOutput{})
 	pulumi.RegisterOutputType(AlertPolicyAlertMethodOutput{})
 	pulumi.RegisterOutputType(AlertPolicyAlertMethodArrayOutput{})
 	pulumi.RegisterOutputType(AlertPolicyConditionOutput{})
 	pulumi.RegisterOutputType(AlertPolicyConditionArrayOutput{})
+	pulumi.RegisterOutputType(DirectAppdynamicsHistoricalDataRetrievalOutput{})
+	pulumi.RegisterOutputType(DirectAppdynamicsHistoricalDataRetrievalPtrOutput{})
+	pulumi.RegisterOutputType(DirectAppdynamicsHistoricalDataRetrievalDefaultDurationOutput{})
+	pulumi.RegisterOutputType(DirectAppdynamicsHistoricalDataRetrievalDefaultDurationArrayOutput{})
+	pulumi.RegisterOutputType(DirectAppdynamicsHistoricalDataRetrievalMaxDurationOutput{})
+	pulumi.RegisterOutputType(DirectAppdynamicsHistoricalDataRetrievalMaxDurationArrayOutput{})
 	pulumi.RegisterOutputType(DirectAppdynamicsQueryDelayOutput{})
 	pulumi.RegisterOutputType(DirectAppdynamicsQueryDelayPtrOutput{})
+	pulumi.RegisterOutputType(DirectAzureMonitorHistoricalDataRetrievalOutput{})
+	pulumi.RegisterOutputType(DirectAzureMonitorHistoricalDataRetrievalPtrOutput{})
+	pulumi.RegisterOutputType(DirectAzureMonitorHistoricalDataRetrievalDefaultDurationOutput{})
+	pulumi.RegisterOutputType(DirectAzureMonitorHistoricalDataRetrievalDefaultDurationArrayOutput{})
+	pulumi.RegisterOutputType(DirectAzureMonitorHistoricalDataRetrievalMaxDurationOutput{})
+	pulumi.RegisterOutputType(DirectAzureMonitorHistoricalDataRetrievalMaxDurationArrayOutput{})
+	pulumi.RegisterOutputType(DirectAzureMonitorQueryDelayOutput{})
+	pulumi.RegisterOutputType(DirectAzureMonitorQueryDelayPtrOutput{})
 	pulumi.RegisterOutputType(DirectBigqueryQueryDelayOutput{})
 	pulumi.RegisterOutputType(DirectBigqueryQueryDelayPtrOutput{})
 	pulumi.RegisterOutputType(DirectCloudwatchHistoricalDataRetrievalOutput{})
@@ -18592,6 +27403,14 @@ func init() {
 	pulumi.RegisterOutputType(DirectDynatraceQueryDelayPtrOutput{})
 	pulumi.RegisterOutputType(DirectGcmQueryDelayOutput{})
 	pulumi.RegisterOutputType(DirectGcmQueryDelayPtrOutput{})
+	pulumi.RegisterOutputType(DirectHoneycombHistoricalDataRetrievalOutput{})
+	pulumi.RegisterOutputType(DirectHoneycombHistoricalDataRetrievalPtrOutput{})
+	pulumi.RegisterOutputType(DirectHoneycombHistoricalDataRetrievalDefaultDurationOutput{})
+	pulumi.RegisterOutputType(DirectHoneycombHistoricalDataRetrievalDefaultDurationArrayOutput{})
+	pulumi.RegisterOutputType(DirectHoneycombHistoricalDataRetrievalMaxDurationOutput{})
+	pulumi.RegisterOutputType(DirectHoneycombHistoricalDataRetrievalMaxDurationArrayOutput{})
+	pulumi.RegisterOutputType(DirectHoneycombQueryDelayOutput{})
+	pulumi.RegisterOutputType(DirectHoneycombQueryDelayPtrOutput{})
 	pulumi.RegisterOutputType(DirectInfluxdbQueryDelayOutput{})
 	pulumi.RegisterOutputType(DirectInfluxdbQueryDelayPtrOutput{})
 	pulumi.RegisterOutputType(DirectInstanaQueryDelayOutput{})
@@ -18634,6 +27453,12 @@ func init() {
 	pulumi.RegisterOutputType(ProjectLabelArrayOutput{})
 	pulumi.RegisterOutputType(ServiceLabelOutput{})
 	pulumi.RegisterOutputType(ServiceLabelArrayOutput{})
+	pulumi.RegisterOutputType(SloAnomalyConfigOutput{})
+	pulumi.RegisterOutputType(SloAnomalyConfigPtrOutput{})
+	pulumi.RegisterOutputType(SloAnomalyConfigNoDataOutput{})
+	pulumi.RegisterOutputType(SloAnomalyConfigNoDataPtrOutput{})
+	pulumi.RegisterOutputType(SloAnomalyConfigNoDataAlertMethodOutput{})
+	pulumi.RegisterOutputType(SloAnomalyConfigNoDataAlertMethodArrayOutput{})
 	pulumi.RegisterOutputType(SloAttachmentOutput{})
 	pulumi.RegisterOutputType(SloAttachmentArrayOutput{})
 	pulumi.RegisterOutputType(SloCompositeOutput{})
@@ -18648,12 +27473,80 @@ func init() {
 	pulumi.RegisterOutputType(SloObjectiveArrayOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadAmazonPrometheusOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadAmazonPrometheusArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadAppdynamicOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadAppdynamicArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadAzureMonitorOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadAzureMonitorArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadAzureMonitorDimensionOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadAzureMonitorDimensionArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadAzureMonitorWorkspaceOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadAzureMonitorWorkspaceArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadBigqueryOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadBigqueryArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadCloudwatchOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadCloudwatchArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadCloudwatchDimensionOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadCloudwatchDimensionArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadDatadogOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadDatadogArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadDynatraceOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadDynatraceArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadElasticsearchOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadElasticsearchArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadGcmOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadGcmArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadGrafanaLokiOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadGrafanaLokiArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadGraphiteOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadGraphiteArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadHoneycombOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadHoneycombArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadInfluxdbOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadInfluxdbArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadInstanaOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadInstanaArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadInstanaApplicationOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadInstanaApplicationArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadInstanaApplicationGroupByOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadInstanaApplicationGroupByArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadInstanaInfrastructureOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadInstanaInfrastructureArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadLightstepOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadLightstepArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadNewrelicOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadNewrelicArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadOpentsdbOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadOpentsdbArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadPingdomOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadPingdomArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadPrometheusOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadPrometheusArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadRedshiftOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadRedshiftArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadSplunkOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadSplunkArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadSplunkObservabilityOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadSplunkObservabilityArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadSumologicOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadSumologicArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadThousandeyeOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricBadThousandeyeArrayOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodArrayOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodAmazonPrometheusOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodAmazonPrometheusArrayOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodAppdynamicOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodAppdynamicArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodAzureMonitorOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodAzureMonitorArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodAzureMonitorDimensionOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodAzureMonitorDimensionArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodAzureMonitorWorkspaceOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodAzureMonitorWorkspaceArrayOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodBigqueryOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodBigqueryArrayOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodCloudwatchOutput{})
@@ -18672,6 +27565,8 @@ func init() {
 	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodGrafanaLokiArrayOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodGraphiteOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodGraphiteArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodHoneycombOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodHoneycombArrayOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodInfluxdbOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodInfluxdbArrayOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricGoodInstanaOutput{})
@@ -18708,6 +27603,12 @@ func init() {
 	pulumi.RegisterOutputType(SloObjectiveCountMetricTotalAmazonPrometheusArrayOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricTotalAppdynamicOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricTotalAppdynamicArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricTotalAzureMonitorOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricTotalAzureMonitorArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricTotalAzureMonitorDimensionOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricTotalAzureMonitorDimensionArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricTotalAzureMonitorWorkspaceOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricTotalAzureMonitorWorkspaceArrayOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricTotalBigqueryOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricTotalBigqueryArrayOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricTotalCloudwatchOutput{})
@@ -18726,6 +27627,8 @@ func init() {
 	pulumi.RegisterOutputType(SloObjectiveCountMetricTotalGrafanaLokiArrayOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricTotalGraphiteOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricTotalGraphiteArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricTotalHoneycombOutput{})
+	pulumi.RegisterOutputType(SloObjectiveCountMetricTotalHoneycombArrayOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricTotalInfluxdbOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricTotalInfluxdbArrayOutput{})
 	pulumi.RegisterOutputType(SloObjectiveCountMetricTotalInstanaOutput{})
@@ -18764,6 +27667,12 @@ func init() {
 	pulumi.RegisterOutputType(SloObjectiveRawMetricQueryAmazonPrometheusArrayOutput{})
 	pulumi.RegisterOutputType(SloObjectiveRawMetricQueryAppdynamicOutput{})
 	pulumi.RegisterOutputType(SloObjectiveRawMetricQueryAppdynamicArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveRawMetricQueryAzureMonitorOutput{})
+	pulumi.RegisterOutputType(SloObjectiveRawMetricQueryAzureMonitorArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveRawMetricQueryAzureMonitorDimensionOutput{})
+	pulumi.RegisterOutputType(SloObjectiveRawMetricQueryAzureMonitorDimensionArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveRawMetricQueryAzureMonitorWorkspaceOutput{})
+	pulumi.RegisterOutputType(SloObjectiveRawMetricQueryAzureMonitorWorkspaceArrayOutput{})
 	pulumi.RegisterOutputType(SloObjectiveRawMetricQueryBigqueryOutput{})
 	pulumi.RegisterOutputType(SloObjectiveRawMetricQueryBigqueryArrayOutput{})
 	pulumi.RegisterOutputType(SloObjectiveRawMetricQueryCloudwatchOutput{})
@@ -18782,6 +27691,8 @@ func init() {
 	pulumi.RegisterOutputType(SloObjectiveRawMetricQueryGrafanaLokiArrayOutput{})
 	pulumi.RegisterOutputType(SloObjectiveRawMetricQueryGraphiteOutput{})
 	pulumi.RegisterOutputType(SloObjectiveRawMetricQueryGraphiteArrayOutput{})
+	pulumi.RegisterOutputType(SloObjectiveRawMetricQueryHoneycombOutput{})
+	pulumi.RegisterOutputType(SloObjectiveRawMetricQueryHoneycombArrayOutput{})
 	pulumi.RegisterOutputType(SloObjectiveRawMetricQueryInfluxdbOutput{})
 	pulumi.RegisterOutputType(SloObjectiveRawMetricQueryInfluxdbArrayOutput{})
 	pulumi.RegisterOutputType(SloObjectiveRawMetricQueryInstanaOutput{})

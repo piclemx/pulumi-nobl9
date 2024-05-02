@@ -7,7 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -36,7 +37,14 @@ func NewAlertMethodMsteams(ctx *pulumi.Context,
 	if args.Project == nil {
 		return nil, errors.New("invalid value for required argument 'Project'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.Url != nil {
+		args.Url = pulumi.ToSecret(args.Url).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"url",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AlertMethodMsteams
 	err := ctx.RegisterResource("nobl9:index/alertMethodMsteams:AlertMethodMsteams", name, args, &resource, opts...)
 	if err != nil {
@@ -141,7 +149,7 @@ func (i *AlertMethodMsteams) ToAlertMethodMsteamsOutputWithContext(ctx context.C
 // AlertMethodMsteamsArrayInput is an input type that accepts AlertMethodMsteamsArray and AlertMethodMsteamsArrayOutput values.
 // You can construct a concrete instance of `AlertMethodMsteamsArrayInput` via:
 //
-//          AlertMethodMsteamsArray{ AlertMethodMsteamsArgs{...} }
+//	AlertMethodMsteamsArray{ AlertMethodMsteamsArgs{...} }
 type AlertMethodMsteamsArrayInput interface {
 	pulumi.Input
 
@@ -166,7 +174,7 @@ func (i AlertMethodMsteamsArray) ToAlertMethodMsteamsArrayOutputWithContext(ctx 
 // AlertMethodMsteamsMapInput is an input type that accepts AlertMethodMsteamsMap and AlertMethodMsteamsMapOutput values.
 // You can construct a concrete instance of `AlertMethodMsteamsMapInput` via:
 //
-//          AlertMethodMsteamsMap{ "key": AlertMethodMsteamsArgs{...} }
+//	AlertMethodMsteamsMap{ "key": AlertMethodMsteamsArgs{...} }
 type AlertMethodMsteamsMapInput interface {
 	pulumi.Input
 

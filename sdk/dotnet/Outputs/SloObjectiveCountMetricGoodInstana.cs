@@ -6,15 +6,25 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class SloObjectiveCountMetricGoodInstana
     {
+        /// <summary>
+        /// Infrastructure metric type
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricGoodInstanaApplication> Applications;
+        /// <summary>
+        /// Infrastructure metric type
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricGoodInstanaInfrastructure> Infrastructures;
+        /// <summary>
+        /// Instana metric type 'application' or 'infrastructure'
+        /// </summary>
         public readonly string MetricType;
 
         [OutputConstructor]

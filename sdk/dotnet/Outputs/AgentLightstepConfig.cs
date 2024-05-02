@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
@@ -21,15 +22,22 @@ namespace Pulumi.Nobl9.Outputs
         /// Name of the Lightstep project.
         /// </summary>
         public readonly string Project;
+        /// <summary>
+        /// Lightstep API URL. Nobl9 will use https://api.lightstep.com if empty.
+        /// </summary>
+        public readonly string? Url;
 
         [OutputConstructor]
         private AgentLightstepConfig(
             string organization,
 
-            string project)
+            string project,
+
+            string? url)
         {
             Organization = organization;
             Project = project;
+            Url = url;
         }
     }
 }

@@ -6,13 +6,17 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class SloObjectiveCountMetricTotalThousandeye
     {
+        /// <summary>
+        /// ID of the test
+        /// </summary>
         public readonly int TestId;
 
         [OutputConstructor]

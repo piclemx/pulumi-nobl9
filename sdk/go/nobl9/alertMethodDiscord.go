@@ -7,7 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -36,7 +37,14 @@ func NewAlertMethodDiscord(ctx *pulumi.Context,
 	if args.Project == nil {
 		return nil, errors.New("invalid value for required argument 'Project'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.Url != nil {
+		args.Url = pulumi.ToSecret(args.Url).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"url",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AlertMethodDiscord
 	err := ctx.RegisterResource("nobl9:index/alertMethodDiscord:AlertMethodDiscord", name, args, &resource, opts...)
 	if err != nil {
@@ -141,7 +149,7 @@ func (i *AlertMethodDiscord) ToAlertMethodDiscordOutputWithContext(ctx context.C
 // AlertMethodDiscordArrayInput is an input type that accepts AlertMethodDiscordArray and AlertMethodDiscordArrayOutput values.
 // You can construct a concrete instance of `AlertMethodDiscordArrayInput` via:
 //
-//          AlertMethodDiscordArray{ AlertMethodDiscordArgs{...} }
+//	AlertMethodDiscordArray{ AlertMethodDiscordArgs{...} }
 type AlertMethodDiscordArrayInput interface {
 	pulumi.Input
 
@@ -166,7 +174,7 @@ func (i AlertMethodDiscordArray) ToAlertMethodDiscordArrayOutputWithContext(ctx 
 // AlertMethodDiscordMapInput is an input type that accepts AlertMethodDiscordMap and AlertMethodDiscordMapOutput values.
 // You can construct a concrete instance of `AlertMethodDiscordMapInput` via:
 //
-//          AlertMethodDiscordMap{ "key": AlertMethodDiscordArgs{...} }
+//	AlertMethodDiscordMap{ "key": AlertMethodDiscordArgs{...} }
 type AlertMethodDiscordMapInput interface {
 	pulumi.Input
 

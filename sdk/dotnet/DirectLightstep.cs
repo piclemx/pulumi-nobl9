@@ -6,11 +6,12 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9
+namespace Piclemx.Nobl9
 {
     /// <summary>
-    /// Lightstep is an observability platform that enables distributed tracing, that can be used to rapidly pinpoint the causes of failures and poor performance across the deeply complex dependencies among services, teams, and workloads in modern production systems. Nobl9 integration with Lightstep enables organizations to establish service level objectives from performance data captured through distributed traces in the Lightstep platform. Nobl9 connects with Lightstep to collect SLI measurements and compare them to SLO targets.
+    /// Lightstep is an observability platform that enables distributed tracing, that can be used to rapidly pinpoint the causes of failures and poor performance across the deeply complex dependencies among services, teams, and workloads in modern production systems. Nobl9 integration with Lightstep enables organizations to establish service level objectives from performance data captured through distributed traces in the Lightstep platform. Nobl9 connects to Lightstep for SLI measurement collection and comparison with SLO targets.
     /// 
     /// For more information, refer to [Lightstep Direct | Nobl9 Documentation](https://docs.nobl9.com/Sources/lightstep#lightstep-direct).
     /// 
@@ -18,8 +19,9 @@ namespace Pulumi.Nobl9
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
-    /// using Nobl9 = Pulumi.Nobl9;
+    /// using Nobl9 = Piclemx.Nobl9;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
@@ -48,12 +50,8 @@ namespace Pulumi.Nobl9
     ///         },
     ///         LightstepOrganization = "acme",
     ///         LightstepProject = "project1",
+    ///         LogCollectionEnabled = true,
     ///         Project = "terraform",
-    ///         SourceOfs = new[]
-    ///         {
-    ///             "Metrics",
-    ///             "Services",
-    ///         },
     ///     });
     /// 
     /// });
@@ -87,7 +85,7 @@ namespace Pulumi.Nobl9
         /// [Replay configuration documentation](https://docs.nobl9.com/replay)
         /// </summary>
         [Output("historicalDataRetrieval")]
-        public Output<Outputs.DirectLightstepHistoricalDataRetrieval?> HistoricalDataRetrieval { get; private set; } = null!;
+        public Output<Outputs.DirectLightstepHistoricalDataRetrieval> HistoricalDataRetrieval { get; private set; } = null!;
 
         /// <summary>
         /// Organization name registered in Lightstep.
@@ -100,6 +98,12 @@ namespace Pulumi.Nobl9
         /// </summary>
         [Output("lightstepProject")]
         public Output<string> LightstepProject { get; private set; } = null!;
+
+        /// <summary>
+        /// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+        /// </summary>
+        [Output("logCollectionEnabled")]
+        public Output<bool?> LogCollectionEnabled { get; private set; } = null!;
 
         /// <summary>
         /// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
@@ -117,10 +121,16 @@ namespace Pulumi.Nobl9
         /// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
         /// </summary>
         [Output("queryDelay")]
-        public Output<Outputs.DirectLightstepQueryDelay?> QueryDelay { get; private set; } = null!;
+        public Output<Outputs.DirectLightstepQueryDelay> QueryDelay { get; private set; } = null!;
 
         /// <summary>
-        /// Source of Metrics and/or Services.
+        /// Release channel of the created datasource [stable/beta]
+        /// </summary>
+        [Output("releaseChannel")]
+        public Output<string> ReleaseChannel { get; private set; } = null!;
+
+        /// <summary>
+        /// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
         /// </summary>
         [Output("sourceOfs")]
         public Output<ImmutableArray<string>> SourceOfs { get; private set; } = null!;
@@ -130,6 +140,12 @@ namespace Pulumi.Nobl9
         /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
+
+        /// <summary>
+        /// Lightstep API URL. Nobl9 will use https://api.lightstep.com if empty.
+        /// </summary>
+        [Output("url")]
+        public Output<string?> Url { get; private set; } = null!;
 
 
         /// <summary>
@@ -154,7 +170,11 @@ namespace Pulumi.Nobl9
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/piclemx/pulumi-nobl9/releases/",
+                PluginDownloadURL = "github://api.github.com/piclemx/pulumi-nobl9",
+                AdditionalSecretOutputs =
+                {
+                    "appToken",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -178,11 +198,21 @@ namespace Pulumi.Nobl9
 
     public sealed class DirectLightstepArgs : global::Pulumi.ResourceArgs
     {
+        [Input("appToken")]
+        private Input<string>? _appToken;
+
         /// <summary>
         /// [required] | Lightstep App Token.
         /// </summary>
-        [Input("appToken")]
-        public Input<string>? AppToken { get; set; }
+        public Input<string>? AppToken
+        {
+            get => _appToken;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _appToken = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
@@ -215,6 +245,12 @@ namespace Pulumi.Nobl9
         public Input<string> LightstepProject { get; set; } = null!;
 
         /// <summary>
+        /// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+        /// </summary>
+        [Input("logCollectionEnabled")]
+        public Input<bool>? LogCollectionEnabled { get; set; }
+
+        /// <summary>
         /// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
         /// </summary>
         [Input("name")]
@@ -232,17 +268,30 @@ namespace Pulumi.Nobl9
         [Input("queryDelay")]
         public Input<Inputs.DirectLightstepQueryDelayArgs>? QueryDelay { get; set; }
 
-        [Input("sourceOfs", required: true)]
+        /// <summary>
+        /// Release channel of the created datasource [stable/beta]
+        /// </summary>
+        [Input("releaseChannel")]
+        public Input<string>? ReleaseChannel { get; set; }
+
+        [Input("sourceOfs")]
         private InputList<string>? _sourceOfs;
 
         /// <summary>
-        /// Source of Metrics and/or Services.
+        /// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
         /// </summary>
+        [Obsolete(@"'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.")]
         public InputList<string> SourceOfs
         {
             get => _sourceOfs ?? (_sourceOfs = new InputList<string>());
             set => _sourceOfs = value;
         }
+
+        /// <summary>
+        /// Lightstep API URL. Nobl9 will use https://api.lightstep.com if empty.
+        /// </summary>
+        [Input("url")]
+        public Input<string>? Url { get; set; }
 
         public DirectLightstepArgs()
         {
@@ -252,11 +301,21 @@ namespace Pulumi.Nobl9
 
     public sealed class DirectLightstepState : global::Pulumi.ResourceArgs
     {
+        [Input("appToken")]
+        private Input<string>? _appToken;
+
         /// <summary>
         /// [required] | Lightstep App Token.
         /// </summary>
-        [Input("appToken")]
-        public Input<string>? AppToken { get; set; }
+        public Input<string>? AppToken
+        {
+            get => _appToken;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _appToken = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
@@ -289,6 +348,12 @@ namespace Pulumi.Nobl9
         public Input<string>? LightstepProject { get; set; }
 
         /// <summary>
+        /// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+        /// </summary>
+        [Input("logCollectionEnabled")]
+        public Input<bool>? LogCollectionEnabled { get; set; }
+
+        /// <summary>
         /// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
         /// </summary>
         [Input("name")]
@@ -306,12 +371,19 @@ namespace Pulumi.Nobl9
         [Input("queryDelay")]
         public Input<Inputs.DirectLightstepQueryDelayGetArgs>? QueryDelay { get; set; }
 
+        /// <summary>
+        /// Release channel of the created datasource [stable/beta]
+        /// </summary>
+        [Input("releaseChannel")]
+        public Input<string>? ReleaseChannel { get; set; }
+
         [Input("sourceOfs")]
         private InputList<string>? _sourceOfs;
 
         /// <summary>
-        /// Source of Metrics and/or Services.
+        /// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
         /// </summary>
+        [Obsolete(@"'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.")]
         public InputList<string> SourceOfs
         {
             get => _sourceOfs ?? (_sourceOfs = new InputList<string>());
@@ -323,6 +395,12 @@ namespace Pulumi.Nobl9
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
+
+        /// <summary>
+        /// Lightstep API URL. Nobl9 will use https://api.lightstep.com if empty.
+        /// </summary>
+        [Input("url")]
+        public Input<string>? Url { get; set; }
 
         public DirectLightstepState()
         {

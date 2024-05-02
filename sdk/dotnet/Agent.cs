@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9
+namespace Piclemx.Nobl9
 {
     /// <summary>
     /// The Agent is a lightweight application that executes the queries defined for your Nobl9 SLOs. Queries are written in the language supported by the data source in question and executed via native APIs.
@@ -20,8 +21,9 @@ namespace Pulumi.Nobl9
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
-    /// using Nobl9 = Pulumi.Nobl9;
+    /// using Nobl9 = Piclemx.Nobl9;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
@@ -34,12 +36,8 @@ namespace Pulumi.Nobl9
     ///     var thisAgent = new Nobl9.Agent("thisAgent", new()
     ///     {
     ///         Project = thisProject.Name,
-    ///         SourceOfs = new[]
-    ///         {
-    ///             "Metrics",
-    ///             "Services",
-    ///         },
     ///         AgentType = "prometheus",
+    ///         ReleaseChannel = "stable",
     ///         PrometheusConfig = new Nobl9.Inputs.AgentPrometheusConfigArgs
     ///         {
     ///             Url = "http://web.net",
@@ -72,6 +70,12 @@ namespace Pulumi.Nobl9
         /// </summary>
         [Output("appdynamicsConfig")]
         public Output<Outputs.AgentAppdynamicsConfig?> AppdynamicsConfig { get; private set; } = null!;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#azure-monitor-agent)
+        /// </summary>
+        [Output("azureMonitorConfig")]
+        public Output<Outputs.AgentAzureMonitorConfig?> AzureMonitorConfig { get; private set; } = null!;
 
         /// <summary>
         /// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#bigquery-agent)
@@ -146,6 +150,18 @@ namespace Pulumi.Nobl9
         public Output<Outputs.AgentGraphiteConfig?> GraphiteConfig { get; private set; } = null!;
 
         /// <summary>
+        /// [Replay configuration documentation](https://docs.nobl9.com/replay)
+        /// </summary>
+        [Output("historicalDataRetrieval")]
+        public Output<Outputs.AgentHistoricalDataRetrieval> HistoricalDataRetrieval { get; private set; } = null!;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#hc-agent)
+        /// </summary>
+        [Output("honeycombConfig")]
+        public Output<Outputs.AgentHoneycombConfig?> HoneycombConfig { get; private set; } = null!;
+
+        /// <summary>
         /// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#influxdb-agent)
         /// </summary>
         [Output("influxdbConfig")]
@@ -188,7 +204,7 @@ namespace Pulumi.Nobl9
         public Output<Outputs.AgentPingdomConfig?> PingdomConfig { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+        /// Name of the Lightstep project.
         /// </summary>
         [Output("project")]
         public Output<string> Project { get; private set; } = null!;
@@ -203,7 +219,7 @@ namespace Pulumi.Nobl9
         /// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
         /// </summary>
         [Output("queryDelay")]
-        public Output<Outputs.AgentQueryDelay?> QueryDelay { get; private set; } = null!;
+        public Output<Outputs.AgentQueryDelay> QueryDelay { get; private set; } = null!;
 
         /// <summary>
         /// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/?_highlight=redshift#amazon-redshift-agent)
@@ -212,7 +228,13 @@ namespace Pulumi.Nobl9
         public Output<Outputs.AgentRedshiftConfig?> RedshiftConfig { get; private set; } = null!;
 
         /// <summary>
-        /// Source of Metrics and/or Services.
+        /// Release channel of the created datasource [stable/beta]
+        /// </summary>
+        [Output("releaseChannel")]
+        public Output<string> ReleaseChannel { get; private set; } = null!;
+
+        /// <summary>
+        /// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
         /// </summary>
         [Output("sourceOfs")]
         public Output<ImmutableArray<string>> SourceOfs { get; private set; } = null!;
@@ -270,7 +292,7 @@ namespace Pulumi.Nobl9
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/piclemx/pulumi-nobl9/releases/",
+                PluginDownloadURL = "github://api.github.com/piclemx/pulumi-nobl9",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -311,6 +333,12 @@ namespace Pulumi.Nobl9
         /// </summary>
         [Input("appdynamicsConfig")]
         public Input<Inputs.AgentAppdynamicsConfigArgs>? AppdynamicsConfig { get; set; }
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#azure-monitor-agent)
+        /// </summary>
+        [Input("azureMonitorConfig")]
+        public Input<Inputs.AgentAzureMonitorConfigArgs>? AzureMonitorConfig { get; set; }
 
         /// <summary>
         /// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#bigquery-agent)
@@ -373,6 +401,18 @@ namespace Pulumi.Nobl9
         public Input<Inputs.AgentGraphiteConfigArgs>? GraphiteConfig { get; set; }
 
         /// <summary>
+        /// [Replay configuration documentation](https://docs.nobl9.com/replay)
+        /// </summary>
+        [Input("historicalDataRetrieval")]
+        public Input<Inputs.AgentHistoricalDataRetrievalArgs>? HistoricalDataRetrieval { get; set; }
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#hc-agent)
+        /// </summary>
+        [Input("honeycombConfig")]
+        public Input<Inputs.AgentHoneycombConfigArgs>? HoneycombConfig { get; set; }
+
+        /// <summary>
         /// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#influxdb-agent)
         /// </summary>
         [Input("influxdbConfig")]
@@ -415,7 +455,7 @@ namespace Pulumi.Nobl9
         public Input<Inputs.AgentPingdomConfigArgs>? PingdomConfig { get; set; }
 
         /// <summary>
-        /// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+        /// Name of the Lightstep project.
         /// </summary>
         [Input("project", required: true)]
         public Input<string> Project { get; set; } = null!;
@@ -438,12 +478,19 @@ namespace Pulumi.Nobl9
         [Input("redshiftConfig")]
         public Input<Inputs.AgentRedshiftConfigArgs>? RedshiftConfig { get; set; }
 
-        [Input("sourceOfs", required: true)]
+        /// <summary>
+        /// Release channel of the created datasource [stable/beta]
+        /// </summary>
+        [Input("releaseChannel")]
+        public Input<string>? ReleaseChannel { get; set; }
+
+        [Input("sourceOfs")]
         private InputList<string>? _sourceOfs;
 
         /// <summary>
-        /// Source of Metrics and/or Services.
+        /// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
         /// </summary>
+        [Obsolete(@"'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.")]
         public InputList<string> SourceOfs
         {
             get => _sourceOfs ?? (_sourceOfs = new InputList<string>());
@@ -499,6 +546,12 @@ namespace Pulumi.Nobl9
         /// </summary>
         [Input("appdynamicsConfig")]
         public Input<Inputs.AgentAppdynamicsConfigGetArgs>? AppdynamicsConfig { get; set; }
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#azure-monitor-agent)
+        /// </summary>
+        [Input("azureMonitorConfig")]
+        public Input<Inputs.AgentAzureMonitorConfigGetArgs>? AzureMonitorConfig { get; set; }
 
         /// <summary>
         /// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#bigquery-agent)
@@ -573,6 +626,18 @@ namespace Pulumi.Nobl9
         public Input<Inputs.AgentGraphiteConfigGetArgs>? GraphiteConfig { get; set; }
 
         /// <summary>
+        /// [Replay configuration documentation](https://docs.nobl9.com/replay)
+        /// </summary>
+        [Input("historicalDataRetrieval")]
+        public Input<Inputs.AgentHistoricalDataRetrievalGetArgs>? HistoricalDataRetrieval { get; set; }
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#hc-agent)
+        /// </summary>
+        [Input("honeycombConfig")]
+        public Input<Inputs.AgentHoneycombConfigGetArgs>? HoneycombConfig { get; set; }
+
+        /// <summary>
         /// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#influxdb-agent)
         /// </summary>
         [Input("influxdbConfig")]
@@ -615,7 +680,7 @@ namespace Pulumi.Nobl9
         public Input<Inputs.AgentPingdomConfigGetArgs>? PingdomConfig { get; set; }
 
         /// <summary>
-        /// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+        /// Name of the Lightstep project.
         /// </summary>
         [Input("project")]
         public Input<string>? Project { get; set; }
@@ -638,12 +703,19 @@ namespace Pulumi.Nobl9
         [Input("redshiftConfig")]
         public Input<Inputs.AgentRedshiftConfigGetArgs>? RedshiftConfig { get; set; }
 
+        /// <summary>
+        /// Release channel of the created datasource [stable/beta]
+        /// </summary>
+        [Input("releaseChannel")]
+        public Input<string>? ReleaseChannel { get; set; }
+
         [Input("sourceOfs")]
         private InputList<string>? _sourceOfs;
 
         /// <summary>
-        /// Source of Metrics and/or Services.
+        /// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
         /// </summary>
+        [Obsolete(@"'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.")]
         public InputList<string> SourceOfs
         {
             get => _sourceOfs ?? (_sourceOfs = new InputList<string>());

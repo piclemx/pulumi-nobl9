@@ -7,12 +7,12 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// New Relic is a software solution that monitors performance and availability. It sets and rates application performance across the environment using a standardized Apdex (application performance index) score. Nobl9 connects with New Relic to collect SLI measurements and compare them to SLO targets.
-//
+// New Relic is a software solution that monitors performance and availability. It sets and rates application performance across the environment using a standardized Apdex (application performance index) score. Nobl9 connects to New Relic for SLI measurement collection and comparison with SLO targets.
 // For more information, refer to [New Relic Direct | Nobl9 Documentation](https://docs.nobl9.com/Sources/new-relic#new-relic-direct).
 //
 // ## Example Usage
@@ -21,43 +21,42 @@ import (
 // package main
 //
 // import (
-// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := nobl9.NewDirectNewrelic(ctx, "test-newrelic", &nobl9.DirectNewrelicArgs{
-// 			AccountId:   pulumi.Int(1234),
-// 			Description: pulumi.String("desc"),
-// 			HistoricalDataRetrieval: &DirectNewrelicHistoricalDataRetrievalArgs{
-// 				DefaultDurations: DirectNewrelicHistoricalDataRetrievalDefaultDurationArray{
-// 					&DirectNewrelicHistoricalDataRetrievalDefaultDurationArgs{
-// 						Unit:  pulumi.String("Day"),
-// 						Value: pulumi.Int(0),
-// 					},
-// 				},
-// 				MaxDurations: DirectNewrelicHistoricalDataRetrievalMaxDurationArray{
-// 					&DirectNewrelicHistoricalDataRetrievalMaxDurationArgs{
-// 						Unit:  pulumi.String("Day"),
-// 						Value: pulumi.Int(30),
-// 					},
-// 				},
-// 			},
-// 			InsightsQueryKey: pulumi.String("secret"),
-// 			Project:          pulumi.String("terraform"),
-// 			SourceOfs: pulumi.StringArray{
-// 				pulumi.String("Metrics"),
-// 				pulumi.String("Services"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := nobl9.NewDirectNewrelic(ctx, "test-newrelic", &nobl9.DirectNewrelicArgs{
+//				AccountId:   pulumi.Int(1234),
+//				Description: pulumi.String("desc"),
+//				HistoricalDataRetrieval: &nobl9.DirectNewrelicHistoricalDataRetrievalArgs{
+//					DefaultDurations: nobl9.DirectNewrelicHistoricalDataRetrievalDefaultDurationArray{
+//						&nobl9.DirectNewrelicHistoricalDataRetrievalDefaultDurationArgs{
+//							Unit:  pulumi.String("Day"),
+//							Value: pulumi.Int(0),
+//						},
+//					},
+//					MaxDurations: nobl9.DirectNewrelicHistoricalDataRetrievalMaxDurationArray{
+//						&nobl9.DirectNewrelicHistoricalDataRetrievalMaxDurationArgs{
+//							Unit:  pulumi.String("Day"),
+//							Value: pulumi.Int(30),
+//						},
+//					},
+//				},
+//				InsightsQueryKey:     pulumi.String("secret"),
+//				LogCollectionEnabled: pulumi.Bool(true),
+//				Project:              pulumi.String("terraform"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -72,16 +71,22 @@ type DirectNewrelic struct {
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrOutput `pulumi:"displayName"`
 	// [Replay configuration documentation](https://docs.nobl9.com/replay)
-	HistoricalDataRetrieval DirectNewrelicHistoricalDataRetrievalPtrOutput `pulumi:"historicalDataRetrieval"`
+	HistoricalDataRetrieval DirectNewrelicHistoricalDataRetrievalOutput `pulumi:"historicalDataRetrieval"`
 	// [required] | New Relic Insights Query Key.
 	InsightsQueryKey pulumi.StringOutput `pulumi:"insightsQueryKey"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrOutput `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringOutput `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-	QueryDelay DirectNewrelicQueryDelayPtrOutput `pulumi:"queryDelay"`
-	// Source of Metrics and/or Services.
+	QueryDelay DirectNewrelicQueryDelayOutput `pulumi:"queryDelay"`
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringOutput `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayOutput `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status pulumi.StringOutput `pulumi:"status"`
@@ -100,10 +105,14 @@ func NewDirectNewrelic(ctx *pulumi.Context,
 	if args.Project == nil {
 		return nil, errors.New("invalid value for required argument 'Project'")
 	}
-	if args.SourceOfs == nil {
-		return nil, errors.New("invalid value for required argument 'SourceOfs'")
+	if args.InsightsQueryKey != nil {
+		args.InsightsQueryKey = pulumi.ToSecret(args.InsightsQueryKey).(pulumi.StringPtrInput)
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"insightsQueryKey",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DirectNewrelic
 	err := ctx.RegisterResource("nobl9:index/directNewrelic:DirectNewrelic", name, args, &resource, opts...)
 	if err != nil {
@@ -136,13 +145,19 @@ type directNewrelicState struct {
 	HistoricalDataRetrieval *DirectNewrelicHistoricalDataRetrieval `pulumi:"historicalDataRetrieval"`
 	// [required] | New Relic Insights Query Key.
 	InsightsQueryKey *string `pulumi:"insightsQueryKey"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project *string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectNewrelicQueryDelay `pulumi:"queryDelay"`
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status *string `pulumi:"status"`
@@ -159,13 +174,19 @@ type DirectNewrelicState struct {
 	HistoricalDataRetrieval DirectNewrelicHistoricalDataRetrievalPtrInput
 	// [required] | New Relic Insights Query Key.
 	InsightsQueryKey pulumi.StringPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringPtrInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectNewrelicQueryDelayPtrInput
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 	// The status of the created direct.
 	Status pulumi.StringPtrInput
@@ -186,13 +207,19 @@ type directNewrelicArgs struct {
 	HistoricalDataRetrieval *DirectNewrelicHistoricalDataRetrieval `pulumi:"historicalDataRetrieval"`
 	// [required] | New Relic Insights Query Key.
 	InsightsQueryKey *string `pulumi:"insightsQueryKey"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectNewrelicQueryDelay `pulumi:"queryDelay"`
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 }
 
@@ -208,13 +235,19 @@ type DirectNewrelicArgs struct {
 	HistoricalDataRetrieval DirectNewrelicHistoricalDataRetrievalPtrInput
 	// [required] | New Relic Insights Query Key.
 	InsightsQueryKey pulumi.StringPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectNewrelicQueryDelayPtrInput
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 }
 
@@ -244,7 +277,7 @@ func (i *DirectNewrelic) ToDirectNewrelicOutputWithContext(ctx context.Context) 
 // DirectNewrelicArrayInput is an input type that accepts DirectNewrelicArray and DirectNewrelicArrayOutput values.
 // You can construct a concrete instance of `DirectNewrelicArrayInput` via:
 //
-//          DirectNewrelicArray{ DirectNewrelicArgs{...} }
+//	DirectNewrelicArray{ DirectNewrelicArgs{...} }
 type DirectNewrelicArrayInput interface {
 	pulumi.Input
 
@@ -269,7 +302,7 @@ func (i DirectNewrelicArray) ToDirectNewrelicArrayOutputWithContext(ctx context.
 // DirectNewrelicMapInput is an input type that accepts DirectNewrelicMap and DirectNewrelicMapOutput values.
 // You can construct a concrete instance of `DirectNewrelicMapInput` via:
 //
-//          DirectNewrelicMap{ "key": DirectNewrelicArgs{...} }
+//	DirectNewrelicMap{ "key": DirectNewrelicArgs{...} }
 type DirectNewrelicMapInput interface {
 	pulumi.Input
 
@@ -321,15 +354,18 @@ func (o DirectNewrelicOutput) DisplayName() pulumi.StringPtrOutput {
 }
 
 // [Replay configuration documentation](https://docs.nobl9.com/replay)
-func (o DirectNewrelicOutput) HistoricalDataRetrieval() DirectNewrelicHistoricalDataRetrievalPtrOutput {
-	return o.ApplyT(func(v *DirectNewrelic) DirectNewrelicHistoricalDataRetrievalPtrOutput {
-		return v.HistoricalDataRetrieval
-	}).(DirectNewrelicHistoricalDataRetrievalPtrOutput)
+func (o DirectNewrelicOutput) HistoricalDataRetrieval() DirectNewrelicHistoricalDataRetrievalOutput {
+	return o.ApplyT(func(v *DirectNewrelic) DirectNewrelicHistoricalDataRetrievalOutput { return v.HistoricalDataRetrieval }).(DirectNewrelicHistoricalDataRetrievalOutput)
 }
 
 // [required] | New Relic Insights Query Key.
 func (o DirectNewrelicOutput) InsightsQueryKey() pulumi.StringOutput {
 	return o.ApplyT(func(v *DirectNewrelic) pulumi.StringOutput { return v.InsightsQueryKey }).(pulumi.StringOutput)
+}
+
+// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+func (o DirectNewrelicOutput) LogCollectionEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DirectNewrelic) pulumi.BoolPtrOutput { return v.LogCollectionEnabled }).(pulumi.BoolPtrOutput)
 }
 
 // Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
@@ -343,11 +379,18 @@ func (o DirectNewrelicOutput) Project() pulumi.StringOutput {
 }
 
 // [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-func (o DirectNewrelicOutput) QueryDelay() DirectNewrelicQueryDelayPtrOutput {
-	return o.ApplyT(func(v *DirectNewrelic) DirectNewrelicQueryDelayPtrOutput { return v.QueryDelay }).(DirectNewrelicQueryDelayPtrOutput)
+func (o DirectNewrelicOutput) QueryDelay() DirectNewrelicQueryDelayOutput {
+	return o.ApplyT(func(v *DirectNewrelic) DirectNewrelicQueryDelayOutput { return v.QueryDelay }).(DirectNewrelicQueryDelayOutput)
 }
 
-// Source of Metrics and/or Services.
+// Release channel of the created datasource [stable/beta]
+func (o DirectNewrelicOutput) ReleaseChannel() pulumi.StringOutput {
+	return o.ApplyT(func(v *DirectNewrelic) pulumi.StringOutput { return v.ReleaseChannel }).(pulumi.StringOutput)
+}
+
+// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+//
+// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 func (o DirectNewrelicOutput) SourceOfs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *DirectNewrelic) pulumi.StringArrayOutput { return v.SourceOfs }).(pulumi.StringArrayOutput)
 }

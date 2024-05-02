@@ -4,9 +4,12 @@
 package config
 
 import (
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 )
+
+var _ = internal.GetEnvOrDefault
 
 // the [Client ID](https://docs.nobl9.com/sloctl-user-guide/#configuration) of your Nobl9 account required to connect to
 // Nobl9.
@@ -34,9 +37,6 @@ func GetOktaAuthServer(ctx *pulumi.Context) string {
 func GetOktaOrgUrl(ctx *pulumi.Context) string {
 	return config.Get(ctx, "nobl9:oktaOrgUrl")
 }
-
-// Nobl9 [Organization ID](https://docs.nobl9.com/API_Documentation/api-endpoints-for-slo-annotations/#common-headers) that
-// contains resources managed by the Nobl9 Terraform provider.
 func GetOrganization(ctx *pulumi.Context) string {
 	return config.Get(ctx, "nobl9:organization")
 }

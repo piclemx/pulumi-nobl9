@@ -7,7 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -24,6 +25,8 @@ type AlertMethodPagerduty struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringOutput `pulumi:"project"`
+	// Sends a notification after the cooldown period is over.
+	SendResolution AlertMethodPagerdutySendResolutionPtrOutput `pulumi:"sendResolution"`
 }
 
 // NewAlertMethodPagerduty registers a new resource with the given unique name, arguments, and options.
@@ -36,7 +39,14 @@ func NewAlertMethodPagerduty(ctx *pulumi.Context,
 	if args.Project == nil {
 		return nil, errors.New("invalid value for required argument 'Project'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.IntegrationKey != nil {
+		args.IntegrationKey = pulumi.ToSecret(args.IntegrationKey).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"integrationKey",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AlertMethodPagerduty
 	err := ctx.RegisterResource("nobl9:index/alertMethodPagerduty:AlertMethodPagerduty", name, args, &resource, opts...)
 	if err != nil {
@@ -69,6 +79,8 @@ type alertMethodPagerdutyState struct {
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project *string `pulumi:"project"`
+	// Sends a notification after the cooldown period is over.
+	SendResolution *AlertMethodPagerdutySendResolution `pulumi:"sendResolution"`
 }
 
 type AlertMethodPagerdutyState struct {
@@ -82,6 +94,8 @@ type AlertMethodPagerdutyState struct {
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringPtrInput
+	// Sends a notification after the cooldown period is over.
+	SendResolution AlertMethodPagerdutySendResolutionPtrInput
 }
 
 func (AlertMethodPagerdutyState) ElementType() reflect.Type {
@@ -99,6 +113,8 @@ type alertMethodPagerdutyArgs struct {
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project string `pulumi:"project"`
+	// Sends a notification after the cooldown period is over.
+	SendResolution *AlertMethodPagerdutySendResolution `pulumi:"sendResolution"`
 }
 
 // The set of arguments for constructing a AlertMethodPagerduty resource.
@@ -113,6 +129,8 @@ type AlertMethodPagerdutyArgs struct {
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringInput
+	// Sends a notification after the cooldown period is over.
+	SendResolution AlertMethodPagerdutySendResolutionPtrInput
 }
 
 func (AlertMethodPagerdutyArgs) ElementType() reflect.Type {
@@ -141,7 +159,7 @@ func (i *AlertMethodPagerduty) ToAlertMethodPagerdutyOutputWithContext(ctx conte
 // AlertMethodPagerdutyArrayInput is an input type that accepts AlertMethodPagerdutyArray and AlertMethodPagerdutyArrayOutput values.
 // You can construct a concrete instance of `AlertMethodPagerdutyArrayInput` via:
 //
-//          AlertMethodPagerdutyArray{ AlertMethodPagerdutyArgs{...} }
+//	AlertMethodPagerdutyArray{ AlertMethodPagerdutyArgs{...} }
 type AlertMethodPagerdutyArrayInput interface {
 	pulumi.Input
 
@@ -166,7 +184,7 @@ func (i AlertMethodPagerdutyArray) ToAlertMethodPagerdutyArrayOutputWithContext(
 // AlertMethodPagerdutyMapInput is an input type that accepts AlertMethodPagerdutyMap and AlertMethodPagerdutyMapOutput values.
 // You can construct a concrete instance of `AlertMethodPagerdutyMapInput` via:
 //
-//          AlertMethodPagerdutyMap{ "key": AlertMethodPagerdutyArgs{...} }
+//	AlertMethodPagerdutyMap{ "key": AlertMethodPagerdutyArgs{...} }
 type AlertMethodPagerdutyMapInput interface {
 	pulumi.Input
 
@@ -225,6 +243,11 @@ func (o AlertMethodPagerdutyOutput) Name() pulumi.StringOutput {
 // Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 func (o AlertMethodPagerdutyOutput) Project() pulumi.StringOutput {
 	return o.ApplyT(func(v *AlertMethodPagerduty) pulumi.StringOutput { return v.Project }).(pulumi.StringOutput)
+}
+
+// Sends a notification after the cooldown period is over.
+func (o AlertMethodPagerdutyOutput) SendResolution() AlertMethodPagerdutySendResolutionPtrOutput {
+	return o.ApplyT(func(v *AlertMethodPagerduty) AlertMethodPagerdutySendResolutionPtrOutput { return v.SendResolution }).(AlertMethodPagerdutySendResolutionPtrOutput)
 }
 
 type AlertMethodPagerdutyArrayOutput struct{ *pulumi.OutputState }

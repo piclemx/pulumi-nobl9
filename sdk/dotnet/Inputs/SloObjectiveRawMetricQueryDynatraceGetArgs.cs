@@ -6,12 +6,16 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Inputs
+namespace Piclemx.Nobl9.Inputs
 {
 
     public sealed class SloObjectiveRawMetricQueryDynatraceGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Selector for the metrics
+        /// </summary>
         [Input("metricSelector", required: true)]
         public Input<string> MetricSelector { get; set; } = null!;
 

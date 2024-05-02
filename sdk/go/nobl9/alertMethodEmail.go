@@ -7,7 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -16,8 +17,10 @@ type AlertMethodEmail struct {
 
 	// Blind carbon copy recipients. The maximum number of recipients is 10.
 	Bccs pulumi.StringArrayOutput `pulumi:"bccs"`
-	// The Body of the email alert. For the format of the body and the list of variables that you can define, refer to the [Nobl9 documentation](https://docs.nobl9.com/Alerting/Alert_methods/email-alert#yaml-configuration).
-	Body pulumi.StringOutput `pulumi:"body"`
+	// This value was used as the template for the email alert's body. 'body' is deprecated and not used anywhere; however, its' kept for backward compatibility.
+	//
+	// Deprecated: 'body' indicated the email alert's body. It has been deprecated since the Nobl9 1.57 release and is no longer used to generate emails. You can safely remove it from your configuration file.
+	Body pulumi.StringPtrOutput `pulumi:"body"`
 	// Carbon copy recipients. The maximum number of recipients is 10.
 	Ccs pulumi.StringArrayOutput `pulumi:"ccs"`
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
@@ -28,8 +31,10 @@ type AlertMethodEmail struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringOutput `pulumi:"project"`
-	// The Subject of the email alert.
-	Subject pulumi.StringOutput `pulumi:"subject"`
+	// This value was used as the email alert's subject. 'subject' is deprecated and not used anywhere; however, its' kept for backward compatibility.
+	//
+	// Deprecated: 'subject' indicated the email alert's subject. It has been deprecated since the Nobl9 1.57 release and is no longer used to generate emails. You can safely remove it from your configuration file.
+	Subject pulumi.StringPtrOutput `pulumi:"subject"`
 	// Recipients. The maximum number of recipients is 10.
 	Tos pulumi.StringArrayOutput `pulumi:"tos"`
 }
@@ -41,19 +46,13 @@ func NewAlertMethodEmail(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.Body == nil {
-		return nil, errors.New("invalid value for required argument 'Body'")
-	}
 	if args.Project == nil {
 		return nil, errors.New("invalid value for required argument 'Project'")
-	}
-	if args.Subject == nil {
-		return nil, errors.New("invalid value for required argument 'Subject'")
 	}
 	if args.Tos == nil {
 		return nil, errors.New("invalid value for required argument 'Tos'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AlertMethodEmail
 	err := ctx.RegisterResource("nobl9:index/alertMethodEmail:AlertMethodEmail", name, args, &resource, opts...)
 	if err != nil {
@@ -78,7 +77,9 @@ func GetAlertMethodEmail(ctx *pulumi.Context,
 type alertMethodEmailState struct {
 	// Blind carbon copy recipients. The maximum number of recipients is 10.
 	Bccs []string `pulumi:"bccs"`
-	// The Body of the email alert. For the format of the body and the list of variables that you can define, refer to the [Nobl9 documentation](https://docs.nobl9.com/Alerting/Alert_methods/email-alert#yaml-configuration).
+	// This value was used as the template for the email alert's body. 'body' is deprecated and not used anywhere; however, its' kept for backward compatibility.
+	//
+	// Deprecated: 'body' indicated the email alert's body. It has been deprecated since the Nobl9 1.57 release and is no longer used to generate emails. You can safely remove it from your configuration file.
 	Body *string `pulumi:"body"`
 	// Carbon copy recipients. The maximum number of recipients is 10.
 	Ccs []string `pulumi:"ccs"`
@@ -90,7 +91,9 @@ type alertMethodEmailState struct {
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project *string `pulumi:"project"`
-	// The Subject of the email alert.
+	// This value was used as the email alert's subject. 'subject' is deprecated and not used anywhere; however, its' kept for backward compatibility.
+	//
+	// Deprecated: 'subject' indicated the email alert's subject. It has been deprecated since the Nobl9 1.57 release and is no longer used to generate emails. You can safely remove it from your configuration file.
 	Subject *string `pulumi:"subject"`
 	// Recipients. The maximum number of recipients is 10.
 	Tos []string `pulumi:"tos"`
@@ -99,7 +102,9 @@ type alertMethodEmailState struct {
 type AlertMethodEmailState struct {
 	// Blind carbon copy recipients. The maximum number of recipients is 10.
 	Bccs pulumi.StringArrayInput
-	// The Body of the email alert. For the format of the body and the list of variables that you can define, refer to the [Nobl9 documentation](https://docs.nobl9.com/Alerting/Alert_methods/email-alert#yaml-configuration).
+	// This value was used as the template for the email alert's body. 'body' is deprecated and not used anywhere; however, its' kept for backward compatibility.
+	//
+	// Deprecated: 'body' indicated the email alert's body. It has been deprecated since the Nobl9 1.57 release and is no longer used to generate emails. You can safely remove it from your configuration file.
 	Body pulumi.StringPtrInput
 	// Carbon copy recipients. The maximum number of recipients is 10.
 	Ccs pulumi.StringArrayInput
@@ -111,7 +116,9 @@ type AlertMethodEmailState struct {
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringPtrInput
-	// The Subject of the email alert.
+	// This value was used as the email alert's subject. 'subject' is deprecated and not used anywhere; however, its' kept for backward compatibility.
+	//
+	// Deprecated: 'subject' indicated the email alert's subject. It has been deprecated since the Nobl9 1.57 release and is no longer used to generate emails. You can safely remove it from your configuration file.
 	Subject pulumi.StringPtrInput
 	// Recipients. The maximum number of recipients is 10.
 	Tos pulumi.StringArrayInput
@@ -124,8 +131,10 @@ func (AlertMethodEmailState) ElementType() reflect.Type {
 type alertMethodEmailArgs struct {
 	// Blind carbon copy recipients. The maximum number of recipients is 10.
 	Bccs []string `pulumi:"bccs"`
-	// The Body of the email alert. For the format of the body and the list of variables that you can define, refer to the [Nobl9 documentation](https://docs.nobl9.com/Alerting/Alert_methods/email-alert#yaml-configuration).
-	Body string `pulumi:"body"`
+	// This value was used as the template for the email alert's body. 'body' is deprecated and not used anywhere; however, its' kept for backward compatibility.
+	//
+	// Deprecated: 'body' indicated the email alert's body. It has been deprecated since the Nobl9 1.57 release and is no longer used to generate emails. You can safely remove it from your configuration file.
+	Body *string `pulumi:"body"`
 	// Carbon copy recipients. The maximum number of recipients is 10.
 	Ccs []string `pulumi:"ccs"`
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
@@ -136,8 +145,10 @@ type alertMethodEmailArgs struct {
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project string `pulumi:"project"`
-	// The Subject of the email alert.
-	Subject string `pulumi:"subject"`
+	// This value was used as the email alert's subject. 'subject' is deprecated and not used anywhere; however, its' kept for backward compatibility.
+	//
+	// Deprecated: 'subject' indicated the email alert's subject. It has been deprecated since the Nobl9 1.57 release and is no longer used to generate emails. You can safely remove it from your configuration file.
+	Subject *string `pulumi:"subject"`
 	// Recipients. The maximum number of recipients is 10.
 	Tos []string `pulumi:"tos"`
 }
@@ -146,8 +157,10 @@ type alertMethodEmailArgs struct {
 type AlertMethodEmailArgs struct {
 	// Blind carbon copy recipients. The maximum number of recipients is 10.
 	Bccs pulumi.StringArrayInput
-	// The Body of the email alert. For the format of the body and the list of variables that you can define, refer to the [Nobl9 documentation](https://docs.nobl9.com/Alerting/Alert_methods/email-alert#yaml-configuration).
-	Body pulumi.StringInput
+	// This value was used as the template for the email alert's body. 'body' is deprecated and not used anywhere; however, its' kept for backward compatibility.
+	//
+	// Deprecated: 'body' indicated the email alert's body. It has been deprecated since the Nobl9 1.57 release and is no longer used to generate emails. You can safely remove it from your configuration file.
+	Body pulumi.StringPtrInput
 	// Carbon copy recipients. The maximum number of recipients is 10.
 	Ccs pulumi.StringArrayInput
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
@@ -158,8 +171,10 @@ type AlertMethodEmailArgs struct {
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringInput
-	// The Subject of the email alert.
-	Subject pulumi.StringInput
+	// This value was used as the email alert's subject. 'subject' is deprecated and not used anywhere; however, its' kept for backward compatibility.
+	//
+	// Deprecated: 'subject' indicated the email alert's subject. It has been deprecated since the Nobl9 1.57 release and is no longer used to generate emails. You can safely remove it from your configuration file.
+	Subject pulumi.StringPtrInput
 	// Recipients. The maximum number of recipients is 10.
 	Tos pulumi.StringArrayInput
 }
@@ -190,7 +205,7 @@ func (i *AlertMethodEmail) ToAlertMethodEmailOutputWithContext(ctx context.Conte
 // AlertMethodEmailArrayInput is an input type that accepts AlertMethodEmailArray and AlertMethodEmailArrayOutput values.
 // You can construct a concrete instance of `AlertMethodEmailArrayInput` via:
 //
-//          AlertMethodEmailArray{ AlertMethodEmailArgs{...} }
+//	AlertMethodEmailArray{ AlertMethodEmailArgs{...} }
 type AlertMethodEmailArrayInput interface {
 	pulumi.Input
 
@@ -215,7 +230,7 @@ func (i AlertMethodEmailArray) ToAlertMethodEmailArrayOutputWithContext(ctx cont
 // AlertMethodEmailMapInput is an input type that accepts AlertMethodEmailMap and AlertMethodEmailMapOutput values.
 // You can construct a concrete instance of `AlertMethodEmailMapInput` via:
 //
-//          AlertMethodEmailMap{ "key": AlertMethodEmailArgs{...} }
+//	AlertMethodEmailMap{ "key": AlertMethodEmailArgs{...} }
 type AlertMethodEmailMapInput interface {
 	pulumi.Input
 
@@ -256,9 +271,11 @@ func (o AlertMethodEmailOutput) Bccs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AlertMethodEmail) pulumi.StringArrayOutput { return v.Bccs }).(pulumi.StringArrayOutput)
 }
 
-// The Body of the email alert. For the format of the body and the list of variables that you can define, refer to the [Nobl9 documentation](https://docs.nobl9.com/Alerting/Alert_methods/email-alert#yaml-configuration).
-func (o AlertMethodEmailOutput) Body() pulumi.StringOutput {
-	return o.ApplyT(func(v *AlertMethodEmail) pulumi.StringOutput { return v.Body }).(pulumi.StringOutput)
+// This value was used as the template for the email alert's body. 'body' is deprecated and not used anywhere; however, its' kept for backward compatibility.
+//
+// Deprecated: 'body' indicated the email alert's body. It has been deprecated since the Nobl9 1.57 release and is no longer used to generate emails. You can safely remove it from your configuration file.
+func (o AlertMethodEmailOutput) Body() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AlertMethodEmail) pulumi.StringPtrOutput { return v.Body }).(pulumi.StringPtrOutput)
 }
 
 // Carbon copy recipients. The maximum number of recipients is 10.
@@ -286,9 +303,11 @@ func (o AlertMethodEmailOutput) Project() pulumi.StringOutput {
 	return o.ApplyT(func(v *AlertMethodEmail) pulumi.StringOutput { return v.Project }).(pulumi.StringOutput)
 }
 
-// The Subject of the email alert.
-func (o AlertMethodEmailOutput) Subject() pulumi.StringOutput {
-	return o.ApplyT(func(v *AlertMethodEmail) pulumi.StringOutput { return v.Subject }).(pulumi.StringOutput)
+// This value was used as the email alert's subject. 'subject' is deprecated and not used anywhere; however, its' kept for backward compatibility.
+//
+// Deprecated: 'subject' indicated the email alert's subject. It has been deprecated since the Nobl9 1.57 release and is no longer used to generate emails. You can safely remove it from your configuration file.
+func (o AlertMethodEmailOutput) Subject() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AlertMethodEmail) pulumi.StringPtrOutput { return v.Subject }).(pulumi.StringPtrOutput)
 }
 
 // Recipients. The maximum number of recipients is 10.

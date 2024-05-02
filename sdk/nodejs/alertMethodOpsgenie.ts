@@ -84,7 +84,7 @@ export class AlertMethodOpsgenie extends pulumi.CustomResource {
             if ((!args || args.url === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'url'");
             }
-            resourceInputs["auth"] = args ? args.auth : undefined;
+            resourceInputs["auth"] = args?.auth ? pulumi.secret(args.auth) : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["displayName"] = args ? args.displayName : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
@@ -92,6 +92,8 @@ export class AlertMethodOpsgenie extends pulumi.CustomResource {
             resourceInputs["url"] = args ? args.url : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["auth"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(AlertMethodOpsgenie.__pulumiType, name, resourceInputs, opts);
     }
 }

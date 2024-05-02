@@ -7,7 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -36,7 +37,14 @@ func NewAlertMethodSlack(ctx *pulumi.Context,
 	if args.Project == nil {
 		return nil, errors.New("invalid value for required argument 'Project'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.Url != nil {
+		args.Url = pulumi.ToSecret(args.Url).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"url",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AlertMethodSlack
 	err := ctx.RegisterResource("nobl9:index/alertMethodSlack:AlertMethodSlack", name, args, &resource, opts...)
 	if err != nil {
@@ -141,7 +149,7 @@ func (i *AlertMethodSlack) ToAlertMethodSlackOutputWithContext(ctx context.Conte
 // AlertMethodSlackArrayInput is an input type that accepts AlertMethodSlackArray and AlertMethodSlackArrayOutput values.
 // You can construct a concrete instance of `AlertMethodSlackArrayInput` via:
 //
-//          AlertMethodSlackArray{ AlertMethodSlackArgs{...} }
+//	AlertMethodSlackArray{ AlertMethodSlackArgs{...} }
 type AlertMethodSlackArrayInput interface {
 	pulumi.Input
 
@@ -166,7 +174,7 @@ func (i AlertMethodSlackArray) ToAlertMethodSlackArrayOutputWithContext(ctx cont
 // AlertMethodSlackMapInput is an input type that accepts AlertMethodSlackMap and AlertMethodSlackMapOutput values.
 // You can construct a concrete instance of `AlertMethodSlackMapInput` via:
 //
-//          AlertMethodSlackMap{ "key": AlertMethodSlackArgs{...} }
+//	AlertMethodSlackMap{ "key": AlertMethodSlackArgs{...} }
 type AlertMethodSlackMapInput interface {
 	pulumi.Input
 

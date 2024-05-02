@@ -6,24 +6,40 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Inputs
+namespace Piclemx.Nobl9.Inputs
 {
 
     public sealed class SloObjectiveCountMetricGoodInstanaInfrastructureArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+        /// </summary>
         [Input("metricId", required: true)]
         public Input<string> MetricId { get; set; } = null!;
 
+        /// <summary>
+        /// Metric retrieval method 'query' or 'snapshot'
+        /// </summary>
         [Input("metricRetrievalMethod", required: true)]
         public Input<string> MetricRetrievalMethod { get; set; } = null!;
 
+        /// <summary>
+        /// Plugin ID
+        /// </summary>
         [Input("pluginId", required: true)]
         public Input<string> PluginId { get; set; } = null!;
 
+        /// <summary>
+        /// Query for the metrics
+        /// </summary>
         [Input("query")]
         public Input<string>? Query { get; set; }
 
+        /// <summary>
+        /// Snapshot ID
+        /// </summary>
         [Input("snapshotId")]
         public Input<string>? SnapshotId { get; set; }
 

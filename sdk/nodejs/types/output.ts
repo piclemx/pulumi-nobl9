@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 
 export interface AgentAmazonPrometheusConfig {
     /**
@@ -20,6 +21,13 @@ export interface AgentAppdynamicsConfig {
      * Base URL to the AppDynamics Controller.
      */
     url: string;
+}
+
+export interface AgentAzureMonitorConfig {
+    /**
+     * Azure Tenant Id.
+     */
+    tenantId: string;
 }
 
 export interface AgentBigqueryConfig {
@@ -66,6 +74,42 @@ export interface AgentGraphiteConfig {
     url: string;
 }
 
+export interface AgentHistoricalDataRetrieval {
+    /**
+     * Used by default for any SLOs connected to this data source.
+     */
+    defaultDurations: outputs.AgentHistoricalDataRetrievalDefaultDuration[];
+    /**
+     * Defines the maximum period for which data can be retrieved.
+     */
+    maxDurations: outputs.AgentHistoricalDataRetrievalMaxDuration[];
+}
+
+export interface AgentHistoricalDataRetrievalDefaultDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
+    unit: string;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
+    value: number;
+}
+
+export interface AgentHistoricalDataRetrievalMaxDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
+    unit: string;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
+    value: number;
+}
+
+export interface AgentHoneycombConfig {
+}
+
 export interface AgentInfluxdbConfig {
     /**
      * API URL endpoint to the InfluxDB's instance.
@@ -89,6 +133,10 @@ export interface AgentLightstepConfig {
      * Name of the Lightstep project.
      */
     project: string;
+    /**
+     * Lightstep API URL. Nobl9 will use https://api.lightstep.com if empty.
+     */
+    url?: string;
 }
 
 export interface AgentNewrelicConfig {
@@ -153,6 +201,13 @@ export interface AgentSumologicConfig {
 export interface AgentThousandeyesConfig {
 }
 
+export interface AlertMethodPagerdutySendResolution {
+    /**
+     * A message that will be attached to your 'all clear' notification.
+     */
+    message?: string;
+}
+
 export interface AlertPolicyAlertMethod {
     /**
      * The name of the previously defined alert method.
@@ -166,11 +221,15 @@ export interface AlertPolicyAlertMethod {
 
 export interface AlertPolicyCondition {
     /**
+     * Duration over which the burn rate is evaluated.
+     */
+    alertingWindow?: string;
+    /**
      * Indicates how long a given condition needs to be valid to mark the condition as true.
      */
     lastsFor?: string;
     /**
-     * One of `timeToBurnBudget` | `burnRate` | `burnedBudget`.
+     * One of `timeToBurnBudget` | `timeToBurnEntireBudget` | `burnRate` | `burnedBudget`.
      */
     measurement: string;
     /**
@@ -178,12 +237,89 @@ export interface AlertPolicyCondition {
      */
     value?: number;
     /**
-     * Used with `timeToBurnBudget`, indicates when the budget would be exhausted. The expected value is a string in time duration string format.
+     * Used with `timeToBurnBudget` or `timeToBurnEntireBudget`, indicates when the budget would be exhausted. The expected value is a string in time duration string format.
      */
     valueString?: string;
 }
 
+export interface DirectAppdynamicsHistoricalDataRetrieval {
+    /**
+     * Used by default for any SLOs connected to this data source.
+     */
+    defaultDurations: outputs.DirectAppdynamicsHistoricalDataRetrievalDefaultDuration[];
+    /**
+     * Defines the maximum period for which data can be retrieved.
+     */
+    maxDurations: outputs.DirectAppdynamicsHistoricalDataRetrievalMaxDuration[];
+}
+
+export interface DirectAppdynamicsHistoricalDataRetrievalDefaultDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
+    unit: string;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
+    value: number;
+}
+
+export interface DirectAppdynamicsHistoricalDataRetrievalMaxDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
+    unit: string;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
+    value: number;
+}
+
 export interface DirectAppdynamicsQueryDelay {
+    /**
+     * Must be one of Minute or Second.
+     */
+    unit: string;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
+    value: number;
+}
+
+export interface DirectAzureMonitorHistoricalDataRetrieval {
+    /**
+     * Used by default for any SLOs connected to this data source.
+     */
+    defaultDurations: outputs.DirectAzureMonitorHistoricalDataRetrievalDefaultDuration[];
+    /**
+     * Defines the maximum period for which data can be retrieved.
+     */
+    maxDurations: outputs.DirectAzureMonitorHistoricalDataRetrievalMaxDuration[];
+}
+
+export interface DirectAzureMonitorHistoricalDataRetrievalDefaultDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
+    unit: string;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
+    value: number;
+}
+
+export interface DirectAzureMonitorHistoricalDataRetrievalMaxDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
+    unit: string;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
+    value: number;
+}
+
+export interface DirectAzureMonitorQueryDelay {
     /**
      * Must be one of Minute or Second.
      */
@@ -217,12 +353,24 @@ export interface DirectCloudwatchHistoricalDataRetrieval {
 }
 
 export interface DirectCloudwatchHistoricalDataRetrievalDefaultDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: string;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: number;
 }
 
 export interface DirectCloudwatchHistoricalDataRetrievalMaxDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: string;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: number;
 }
 
@@ -249,12 +397,24 @@ export interface DirectDatadogHistoricalDataRetrieval {
 }
 
 export interface DirectDatadogHistoricalDataRetrievalDefaultDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: string;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: number;
 }
 
 export interface DirectDatadogHistoricalDataRetrievalMaxDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: string;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: number;
 }
 
@@ -281,12 +441,24 @@ export interface DirectDynatraceHistoricalDataRetrieval {
 }
 
 export interface DirectDynatraceHistoricalDataRetrievalDefaultDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: string;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: number;
 }
 
 export interface DirectDynatraceHistoricalDataRetrievalMaxDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: string;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: number;
 }
 
@@ -302,6 +474,50 @@ export interface DirectDynatraceQueryDelay {
 }
 
 export interface DirectGcmQueryDelay {
+    /**
+     * Must be one of Minute or Second.
+     */
+    unit: string;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
+    value: number;
+}
+
+export interface DirectHoneycombHistoricalDataRetrieval {
+    /**
+     * Used by default for any SLOs connected to this data source.
+     */
+    defaultDurations: outputs.DirectHoneycombHistoricalDataRetrievalDefaultDuration[];
+    /**
+     * Defines the maximum period for which data can be retrieved.
+     */
+    maxDurations: outputs.DirectHoneycombHistoricalDataRetrievalMaxDuration[];
+}
+
+export interface DirectHoneycombHistoricalDataRetrievalDefaultDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
+    unit: string;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
+    value: number;
+}
+
+export interface DirectHoneycombHistoricalDataRetrievalMaxDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
+    unit: string;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
+    value: number;
+}
+
+export interface DirectHoneycombQueryDelay {
     /**
      * Must be one of Minute or Second.
      */
@@ -346,12 +562,24 @@ export interface DirectLightstepHistoricalDataRetrieval {
 }
 
 export interface DirectLightstepHistoricalDataRetrievalDefaultDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: string;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: number;
 }
 
 export interface DirectLightstepHistoricalDataRetrievalMaxDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: string;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: number;
 }
 
@@ -378,12 +606,24 @@ export interface DirectNewrelicHistoricalDataRetrieval {
 }
 
 export interface DirectNewrelicHistoricalDataRetrievalDefaultDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: string;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: number;
 }
 
 export interface DirectNewrelicHistoricalDataRetrievalMaxDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: string;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: number;
 }
 
@@ -432,12 +672,24 @@ export interface DirectSplunkHistoricalDataRetrieval {
 }
 
 export interface DirectSplunkHistoricalDataRetrievalDefaultDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: string;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: number;
 }
 
 export interface DirectSplunkHistoricalDataRetrievalMaxDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: string;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: number;
 }
 
@@ -507,6 +759,31 @@ export interface ServiceLabel {
     values: string[];
 }
 
+export interface SloAnomalyConfig {
+    /**
+     * Alert Policies attached to SLO
+     */
+    noData: outputs.SloAnomalyConfigNoData;
+}
+
+export interface SloAnomalyConfigNoData {
+    /**
+     * Alert methods attached to Anomaly Config
+     */
+    alertMethods: outputs.SloAnomalyConfigNoDataAlertMethod[];
+}
+
+export interface SloAnomalyConfigNoDataAlertMethod {
+    /**
+     * The name of the previously defined alert method.
+     */
+    name: string;
+    /**
+     * Project name the Alert Method is in,  must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
+     */
+    project: string;
+}
+
 export interface SloAttachment {
     /**
      * Name displayed for the attachment. Max. length: 63 characters.
@@ -530,7 +807,13 @@ export interface SloComposite {
 }
 
 export interface SloCompositeBurnRateCondition {
+    /**
+     * Type of logical operation
+     */
     op: string;
+    /**
+     * Burn rate value.
+     */
     value: number;
 }
 
@@ -562,7 +845,7 @@ export interface SloLabel {
 
 export interface SloObjective {
     /**
-     * Compares two time series, indicating the ratio of the count of good values to total values.
+     * Compares two time series, calculating the ratio of either good or bad values to the total number of values. Fill either the 'good' or 'bad' series, but not both.
      */
     countMetrics?: outputs.SloObjectiveCountMetric[];
     /**
@@ -596,516 +879,2020 @@ export interface SloObjective {
 }
 
 export interface SloObjectiveCountMetric {
+    /**
+     * Configuration for bad time series metrics.
+     */
+    bads?: outputs.SloObjectiveCountMetricBad[];
+    /**
+     * Configuration for good time series metrics.
+     */
     goods?: outputs.SloObjectiveCountMetricGood[];
+    /**
+     * Should the metrics be incrementing or not
+     */
     incremental: boolean;
-    totals?: outputs.SloObjectiveCountMetricTotal[];
+    /**
+     * Configuration for metric source
+     */
+    totals: outputs.SloObjectiveCountMetricTotal[];
+}
+
+export interface SloObjectiveCountMetricBad {
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
+     */
+    amazonPrometheuses?: outputs.SloObjectiveCountMetricBadAmazonPrometheus[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
+     */
+    appdynamics?: outputs.SloObjectiveCountMetricBadAppdynamic[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+     */
+    azureMonitors?: outputs.SloObjectiveCountMetricBadAzureMonitor[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
+     */
+    bigqueries?: outputs.SloObjectiveCountMetricBadBigquery[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
+     */
+    cloudwatches?: outputs.SloObjectiveCountMetricBadCloudwatch[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
+     */
+    datadogs?: outputs.SloObjectiveCountMetricBadDatadog[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
+     */
+    dynatraces?: outputs.SloObjectiveCountMetricBadDynatrace[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
+     */
+    elasticsearches?: outputs.SloObjectiveCountMetricBadElasticsearch[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
+     */
+    gcms?: outputs.SloObjectiveCountMetricBadGcm[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
+     */
+    grafanaLokis?: outputs.SloObjectiveCountMetricBadGrafanaLoki[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
+     */
+    graphites?: outputs.SloObjectiveCountMetricBadGraphite[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+     */
+    honeycombs?: outputs.SloObjectiveCountMetricBadHoneycomb[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
+     */
+    influxdbs?: outputs.SloObjectiveCountMetricBadInfluxdb[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
+     */
+    instanas?: outputs.SloObjectiveCountMetricBadInstana[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
+     */
+    lightsteps?: outputs.SloObjectiveCountMetricBadLightstep[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
+     */
+    newrelics?: outputs.SloObjectiveCountMetricBadNewrelic[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
+     */
+    opentsdbs?: outputs.SloObjectiveCountMetricBadOpentsdb[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
+     */
+    pingdoms?: outputs.SloObjectiveCountMetricBadPingdom[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
+     */
+    prometheuses?: outputs.SloObjectiveCountMetricBadPrometheus[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
+     */
+    redshifts?: outputs.SloObjectiveCountMetricBadRedshift[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
+     */
+    splunkObservabilities?: outputs.SloObjectiveCountMetricBadSplunkObservability[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
+     */
+    splunks?: outputs.SloObjectiveCountMetricBadSplunk[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
+     */
+    sumologics?: outputs.SloObjectiveCountMetricBadSumologic[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
+     */
+    thousandeyes?: outputs.SloObjectiveCountMetricBadThousandeye[];
+}
+
+export interface SloObjectiveCountMetricBadAmazonPrometheus {
+    /**
+     * Query for the metrics
+     */
+    promql: string;
+}
+
+export interface SloObjectiveCountMetricBadAppdynamic {
+    /**
+     * Name of the added application
+     */
+    applicationName: string;
+    /**
+     * Path to the metrics
+     */
+    metricPath: string;
+}
+
+export interface SloObjectiveCountMetricBadAzureMonitor {
+    /**
+     * Aggregation type [Required for metrics]
+     */
+    aggregation?: string;
+    /**
+     * Specifies source: 'metrics' or 'logs'
+     */
+    dataType: string;
+    /**
+     * Dimensions of the metric [Optional for metrics]
+     */
+    dimensions?: outputs.SloObjectiveCountMetricBadAzureMonitorDimension[];
+    /**
+     * Logs query in Kusto Query Language [Required for logs]
+     */
+    kqlQuery?: string;
+    /**
+     * Name of the metric [Required for metrics]
+     */
+    metricName?: string;
+    /**
+     * Namespace of the metric [Optional for metrics]
+     */
+    metricNamespace?: string;
+    /**
+     * Identifier of the Azure Cloud resource [Required for metrics]
+     */
+    resourceId?: string;
+    /**
+     * Log analytics workspace [Required for logs]
+     */
+    workspaces?: outputs.SloObjectiveCountMetricBadAzureMonitorWorkspace[];
+}
+
+export interface SloObjectiveCountMetricBadAzureMonitorDimension {
+    /**
+     * The name of the previously defined alert method.
+     */
+    name: string;
+    /**
+     * Burn rate value.
+     */
+    value: string;
+}
+
+export interface SloObjectiveCountMetricBadAzureMonitorWorkspace {
+    /**
+     * Resource group of the workspace
+     */
+    resourceGroup: string;
+    /**
+     * Subscription ID of the workspace
+     */
+    subscriptionId: string;
+    /**
+     * ID of the workspace
+     */
+    workspaceId: string;
+}
+
+export interface SloObjectiveCountMetricBadBigquery {
+    /**
+     * Location of you BigQuery
+     */
+    location: string;
+    /**
+     * Project ID
+     */
+    projectId: string;
+    /**
+     * Query for the metrics
+     */
+    query: string;
+}
+
+export interface SloObjectiveCountMetricBadCloudwatch {
+    /**
+     * AccountID used with cross-account observability feature
+     */
+    accountId?: string;
+    /**
+     * Dimensions of the metric [Optional for metrics]
+     */
+    dimensions?: outputs.SloObjectiveCountMetricBadCloudwatchDimension[];
+    /**
+     * JSON query
+     */
+    json?: string;
+    /**
+     * Name of the metric [Required for metrics]
+     */
+    metricName?: string;
+    /**
+     * Namespace of the metric
+     */
+    namespace?: string;
+    /**
+     * Region of the CloudWatch instance
+     */
+    region: string;
+    /**
+     * SQL query
+     */
+    sql?: string;
+    /**
+     * Metric data aggregations
+     */
+    stat?: string;
+}
+
+export interface SloObjectiveCountMetricBadCloudwatchDimension {
+    /**
+     * The name of the previously defined alert method.
+     */
+    name: string;
+    /**
+     * Burn rate value.
+     */
+    value: string;
+}
+
+export interface SloObjectiveCountMetricBadDatadog {
+    /**
+     * Query for the metrics
+     */
+    query: string;
+}
+
+export interface SloObjectiveCountMetricBadDynatrace {
+    /**
+     * Selector for the metrics
+     */
+    metricSelector: string;
+}
+
+export interface SloObjectiveCountMetricBadElasticsearch {
+    /**
+     * Index of metrics we want to query
+     */
+    index: string;
+    /**
+     * Query for the metrics
+     */
+    query: string;
+}
+
+export interface SloObjectiveCountMetricBadGcm {
+    /**
+     * Project ID
+     */
+    projectId: string;
+    /**
+     * Query for the metrics
+     */
+    query: string;
+}
+
+export interface SloObjectiveCountMetricBadGrafanaLoki {
+    /**
+     * Query for the logs
+     */
+    logql: string;
+}
+
+export interface SloObjectiveCountMetricBadGraphite {
+    /**
+     * Path to the metrics
+     */
+    metricPath: string;
+}
+
+export interface SloObjectiveCountMetricBadHoneycomb {
+    /**
+     * Column name - required for all calculation types besides 'CONCURRENCY' and 'COUNT'
+     */
+    attribute?: string;
+    /**
+     * Calculation type
+     */
+    calculation: string;
+}
+
+export interface SloObjectiveCountMetricBadInfluxdb {
+    /**
+     * Query for the metrics
+     */
+    query: string;
+}
+
+export interface SloObjectiveCountMetricBadInstana {
+    /**
+     * Infrastructure metric type
+     */
+    applications?: outputs.SloObjectiveCountMetricBadInstanaApplication[];
+    /**
+     * Infrastructure metric type
+     */
+    infrastructures?: outputs.SloObjectiveCountMetricBadInstanaInfrastructure[];
+    /**
+     * Instana metric type 'application' or 'infrastructure'
+     */
+    metricType: string;
+}
+
+export interface SloObjectiveCountMetricBadInstanaApplication {
+    /**
+     * Aggregation type [Required for metrics]
+     */
+    aggregation: string;
+    /**
+     * API query user passes in a JSON format
+     */
+    apiQuery: string;
+    /**
+     * Group by method
+     */
+    groupBies: outputs.SloObjectiveCountMetricBadInstanaApplicationGroupBy[];
+    /**
+     * Include internal
+     */
+    includeInternal?: boolean;
+    /**
+     * Include synthetic
+     */
+    includeSynthetic?: boolean;
+    /**
+     * Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+     */
+    metricId: string;
+}
+
+export interface SloObjectiveCountMetricBadInstanaApplicationGroupBy {
+    /**
+     * Group by tag
+     */
+    tag: string;
+    /**
+     * Tag entity - one of 'DESTINATION', 'SOURCE', 'NOT_APPLICABLE'
+     */
+    tagEntity: string;
+    tagSecondLevelKey?: string;
+}
+
+export interface SloObjectiveCountMetricBadInstanaInfrastructure {
+    /**
+     * Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+     */
+    metricId: string;
+    /**
+     * Metric retrieval method 'query' or 'snapshot'
+     */
+    metricRetrievalMethod: string;
+    /**
+     * Plugin ID
+     */
+    pluginId: string;
+    /**
+     * Query for the metrics
+     */
+    query?: string;
+    /**
+     * Snapshot ID
+     */
+    snapshotId?: string;
+}
+
+export interface SloObjectiveCountMetricBadLightstep {
+    /**
+     * Optional value to filter by percentiles
+     */
+    percentile?: number;
+    /**
+     * ID of the metrics stream
+     */
+    streamId?: string;
+    /**
+     * Type of data to filter by
+     */
+    typeOfData: string;
+    /**
+     * UQL query
+     */
+    uql?: string;
+}
+
+export interface SloObjectiveCountMetricBadNewrelic {
+    /**
+     * Query for the metrics
+     */
+    nrql: string;
+}
+
+export interface SloObjectiveCountMetricBadOpentsdb {
+    /**
+     * Query for the metrics
+     */
+    query: string;
+}
+
+export interface SloObjectiveCountMetricBadPingdom {
+    /**
+     * Pingdom uptime or transaction check's ID
+     */
+    checkId: string;
+    /**
+     * Pingdom check type - uptime or transaction
+     */
+    checkType?: string;
+    /**
+     * Optional for the Uptime checks. Use it to filter the Pingdom check results by status
+     */
+    status?: string;
+}
+
+export interface SloObjectiveCountMetricBadPrometheus {
+    /**
+     * Query for the metrics
+     */
+    promql: string;
+}
+
+export interface SloObjectiveCountMetricBadRedshift {
+    /**
+     * Redshift custer ID
+     */
+    clusterId: string;
+    /**
+     * Database name
+     */
+    databaseName: string;
+    /**
+     * Query for the metrics
+     */
+    query: string;
+    /**
+     * Region of the CloudWatch instance
+     */
+    region: string;
+}
+
+export interface SloObjectiveCountMetricBadSplunk {
+    /**
+     * Query for the metrics
+     */
+    query: string;
+}
+
+export interface SloObjectiveCountMetricBadSplunkObservability {
+    /**
+     * Query for the metrics
+     */
+    program: string;
+}
+
+export interface SloObjectiveCountMetricBadSumologic {
+    /**
+     * Period of data aggregation
+     */
+    quantization?: string;
+    /**
+     * Query for the metrics
+     */
+    query: string;
+    /**
+     * Aggregation function - avg, sum, min, max, count, none
+     */
+    rollup?: string;
+    /**
+     * Sumologic source - metrics or logs
+     */
+    type: string;
+}
+
+export interface SloObjectiveCountMetricBadThousandeye {
+    /**
+     * ID of the test
+     */
+    testId: number;
 }
 
 export interface SloObjectiveCountMetricGood {
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
+     */
     amazonPrometheuses?: outputs.SloObjectiveCountMetricGoodAmazonPrometheus[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
+     */
     appdynamics?: outputs.SloObjectiveCountMetricGoodAppdynamic[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+     */
+    azureMonitors?: outputs.SloObjectiveCountMetricGoodAzureMonitor[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
+     */
     bigqueries?: outputs.SloObjectiveCountMetricGoodBigquery[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
+     */
     cloudwatches?: outputs.SloObjectiveCountMetricGoodCloudwatch[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
+     */
     datadogs?: outputs.SloObjectiveCountMetricGoodDatadog[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
+     */
     dynatraces?: outputs.SloObjectiveCountMetricGoodDynatrace[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
+     */
     elasticsearches?: outputs.SloObjectiveCountMetricGoodElasticsearch[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
+     */
     gcms?: outputs.SloObjectiveCountMetricGoodGcm[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
+     */
     grafanaLokis?: outputs.SloObjectiveCountMetricGoodGrafanaLoki[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
+     */
     graphites?: outputs.SloObjectiveCountMetricGoodGraphite[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+     */
+    honeycombs?: outputs.SloObjectiveCountMetricGoodHoneycomb[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
+     */
     influxdbs?: outputs.SloObjectiveCountMetricGoodInfluxdb[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
+     */
     instanas?: outputs.SloObjectiveCountMetricGoodInstana[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
+     */
     lightsteps?: outputs.SloObjectiveCountMetricGoodLightstep[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
+     */
     newrelics?: outputs.SloObjectiveCountMetricGoodNewrelic[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
+     */
     opentsdbs?: outputs.SloObjectiveCountMetricGoodOpentsdb[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
+     */
     pingdoms?: outputs.SloObjectiveCountMetricGoodPingdom[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
+     */
     prometheuses?: outputs.SloObjectiveCountMetricGoodPrometheus[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
+     */
     redshifts?: outputs.SloObjectiveCountMetricGoodRedshift[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
+     */
     splunkObservabilities?: outputs.SloObjectiveCountMetricGoodSplunkObservability[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
+     */
     splunks?: outputs.SloObjectiveCountMetricGoodSplunk[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
+     */
     sumologics?: outputs.SloObjectiveCountMetricGoodSumologic[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
+     */
     thousandeyes?: outputs.SloObjectiveCountMetricGoodThousandeye[];
 }
 
 export interface SloObjectiveCountMetricGoodAmazonPrometheus {
+    /**
+     * Query for the metrics
+     */
     promql: string;
 }
 
 export interface SloObjectiveCountMetricGoodAppdynamic {
+    /**
+     * Name of the added application
+     */
     applicationName: string;
+    /**
+     * Path to the metrics
+     */
     metricPath: string;
 }
 
+export interface SloObjectiveCountMetricGoodAzureMonitor {
+    /**
+     * Aggregation type [Required for metrics]
+     */
+    aggregation?: string;
+    /**
+     * Specifies source: 'metrics' or 'logs'
+     */
+    dataType: string;
+    /**
+     * Dimensions of the metric [Optional for metrics]
+     */
+    dimensions?: outputs.SloObjectiveCountMetricGoodAzureMonitorDimension[];
+    /**
+     * Logs query in Kusto Query Language [Required for logs]
+     */
+    kqlQuery?: string;
+    /**
+     * Name of the metric [Required for metrics]
+     */
+    metricName?: string;
+    /**
+     * Namespace of the metric [Optional for metrics]
+     */
+    metricNamespace?: string;
+    /**
+     * Identifier of the Azure Cloud resource [Required for metrics]
+     */
+    resourceId?: string;
+    /**
+     * Log analytics workspace [Required for logs]
+     */
+    workspaces?: outputs.SloObjectiveCountMetricGoodAzureMonitorWorkspace[];
+}
+
+export interface SloObjectiveCountMetricGoodAzureMonitorDimension {
+    /**
+     * The name of the previously defined alert method.
+     */
+    name: string;
+    /**
+     * Burn rate value.
+     */
+    value: string;
+}
+
+export interface SloObjectiveCountMetricGoodAzureMonitorWorkspace {
+    /**
+     * Resource group of the workspace
+     */
+    resourceGroup: string;
+    /**
+     * Subscription ID of the workspace
+     */
+    subscriptionId: string;
+    /**
+     * ID of the workspace
+     */
+    workspaceId: string;
+}
+
 export interface SloObjectiveCountMetricGoodBigquery {
+    /**
+     * Location of you BigQuery
+     */
     location: string;
+    /**
+     * Project ID
+     */
     projectId: string;
+    /**
+     * Query for the metrics
+     */
     query: string;
 }
 
 export interface SloObjectiveCountMetricGoodCloudwatch {
+    /**
+     * AccountID used with cross-account observability feature
+     */
+    accountId?: string;
+    /**
+     * Dimensions of the metric [Optional for metrics]
+     */
     dimensions?: outputs.SloObjectiveCountMetricGoodCloudwatchDimension[];
+    /**
+     * JSON query
+     */
     json?: string;
+    /**
+     * Name of the metric [Required for metrics]
+     */
     metricName?: string;
+    /**
+     * Namespace of the metric
+     */
     namespace?: string;
+    /**
+     * Region of the CloudWatch instance
+     */
     region: string;
+    /**
+     * SQL query
+     */
     sql?: string;
+    /**
+     * Metric data aggregations
+     */
     stat?: string;
 }
 
 export interface SloObjectiveCountMetricGoodCloudwatchDimension {
     /**
-     * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+     * The name of the previously defined alert method.
      */
     name: string;
+    /**
+     * Burn rate value.
+     */
     value: string;
 }
 
 export interface SloObjectiveCountMetricGoodDatadog {
+    /**
+     * Query for the metrics
+     */
     query: string;
 }
 
 export interface SloObjectiveCountMetricGoodDynatrace {
+    /**
+     * Selector for the metrics
+     */
     metricSelector: string;
 }
 
 export interface SloObjectiveCountMetricGoodElasticsearch {
+    /**
+     * Index of metrics we want to query
+     */
     index: string;
+    /**
+     * Query for the metrics
+     */
     query: string;
 }
 
 export interface SloObjectiveCountMetricGoodGcm {
+    /**
+     * Project ID
+     */
     projectId: string;
+    /**
+     * Query for the metrics
+     */
     query: string;
 }
 
 export interface SloObjectiveCountMetricGoodGrafanaLoki {
+    /**
+     * Query for the logs
+     */
     logql: string;
 }
 
 export interface SloObjectiveCountMetricGoodGraphite {
+    /**
+     * Path to the metrics
+     */
     metricPath: string;
 }
 
+export interface SloObjectiveCountMetricGoodHoneycomb {
+    /**
+     * Column name - required for all calculation types besides 'CONCURRENCY' and 'COUNT'
+     */
+    attribute?: string;
+    /**
+     * Calculation type
+     */
+    calculation: string;
+}
+
 export interface SloObjectiveCountMetricGoodInfluxdb {
+    /**
+     * Query for the metrics
+     */
     query: string;
 }
 
 export interface SloObjectiveCountMetricGoodInstana {
+    /**
+     * Infrastructure metric type
+     */
     applications?: outputs.SloObjectiveCountMetricGoodInstanaApplication[];
+    /**
+     * Infrastructure metric type
+     */
     infrastructures?: outputs.SloObjectiveCountMetricGoodInstanaInfrastructure[];
+    /**
+     * Instana metric type 'application' or 'infrastructure'
+     */
     metricType: string;
 }
 
 export interface SloObjectiveCountMetricGoodInstanaApplication {
+    /**
+     * Aggregation type [Required for metrics]
+     */
     aggregation: string;
+    /**
+     * API query user passes in a JSON format
+     */
     apiQuery: string;
+    /**
+     * Group by method
+     */
     groupBies: outputs.SloObjectiveCountMetricGoodInstanaApplicationGroupBy[];
+    /**
+     * Include internal
+     */
     includeInternal?: boolean;
+    /**
+     * Include synthetic
+     */
     includeSynthetic?: boolean;
+    /**
+     * Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+     */
     metricId: string;
 }
 
 export interface SloObjectiveCountMetricGoodInstanaApplicationGroupBy {
+    /**
+     * Group by tag
+     */
     tag: string;
+    /**
+     * Tag entity - one of 'DESTINATION', 'SOURCE', 'NOT_APPLICABLE'
+     */
     tagEntity: string;
     tagSecondLevelKey?: string;
 }
 
 export interface SloObjectiveCountMetricGoodInstanaInfrastructure {
+    /**
+     * Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+     */
     metricId: string;
+    /**
+     * Metric retrieval method 'query' or 'snapshot'
+     */
     metricRetrievalMethod: string;
+    /**
+     * Plugin ID
+     */
     pluginId: string;
+    /**
+     * Query for the metrics
+     */
     query?: string;
+    /**
+     * Snapshot ID
+     */
     snapshotId?: string;
 }
 
 export interface SloObjectiveCountMetricGoodLightstep {
+    /**
+     * Optional value to filter by percentiles
+     */
     percentile?: number;
+    /**
+     * ID of the metrics stream
+     */
     streamId?: string;
+    /**
+     * Type of data to filter by
+     */
     typeOfData: string;
+    /**
+     * UQL query
+     */
     uql?: string;
 }
 
 export interface SloObjectiveCountMetricGoodNewrelic {
+    /**
+     * Query for the metrics
+     */
     nrql: string;
 }
 
 export interface SloObjectiveCountMetricGoodOpentsdb {
+    /**
+     * Query for the metrics
+     */
     query: string;
 }
 
 export interface SloObjectiveCountMetricGoodPingdom {
+    /**
+     * Pingdom uptime or transaction check's ID
+     */
     checkId: string;
+    /**
+     * Pingdom check type - uptime or transaction
+     */
     checkType?: string;
+    /**
+     * Optional for the Uptime checks. Use it to filter the Pingdom check results by status
+     */
     status?: string;
 }
 
 export interface SloObjectiveCountMetricGoodPrometheus {
+    /**
+     * Query for the metrics
+     */
     promql: string;
 }
 
 export interface SloObjectiveCountMetricGoodRedshift {
+    /**
+     * Redshift custer ID
+     */
     clusterId: string;
+    /**
+     * Database name
+     */
     databaseName: string;
+    /**
+     * Query for the metrics
+     */
     query: string;
+    /**
+     * Region of the CloudWatch instance
+     */
     region: string;
 }
 
 export interface SloObjectiveCountMetricGoodSplunk {
+    /**
+     * Query for the metrics
+     */
     query: string;
 }
 
 export interface SloObjectiveCountMetricGoodSplunkObservability {
+    /**
+     * Query for the metrics
+     */
     program: string;
 }
 
 export interface SloObjectiveCountMetricGoodSumologic {
+    /**
+     * Period of data aggregation
+     */
     quantization?: string;
+    /**
+     * Query for the metrics
+     */
     query: string;
+    /**
+     * Aggregation function - avg, sum, min, max, count, none
+     */
     rollup?: string;
+    /**
+     * Sumologic source - metrics or logs
+     */
     type: string;
 }
 
 export interface SloObjectiveCountMetricGoodThousandeye {
+    /**
+     * ID of the test
+     */
     testId: number;
 }
 
 export interface SloObjectiveCountMetricTotal {
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
+     */
     amazonPrometheuses?: outputs.SloObjectiveCountMetricTotalAmazonPrometheus[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
+     */
     appdynamics?: outputs.SloObjectiveCountMetricTotalAppdynamic[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+     */
+    azureMonitors?: outputs.SloObjectiveCountMetricTotalAzureMonitor[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
+     */
     bigqueries?: outputs.SloObjectiveCountMetricTotalBigquery[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
+     */
     cloudwatches?: outputs.SloObjectiveCountMetricTotalCloudwatch[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
+     */
     datadogs?: outputs.SloObjectiveCountMetricTotalDatadog[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
+     */
     dynatraces?: outputs.SloObjectiveCountMetricTotalDynatrace[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
+     */
     elasticsearches?: outputs.SloObjectiveCountMetricTotalElasticsearch[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
+     */
     gcms?: outputs.SloObjectiveCountMetricTotalGcm[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
+     */
     grafanaLokis?: outputs.SloObjectiveCountMetricTotalGrafanaLoki[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
+     */
     graphites?: outputs.SloObjectiveCountMetricTotalGraphite[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+     */
+    honeycombs?: outputs.SloObjectiveCountMetricTotalHoneycomb[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
+     */
     influxdbs?: outputs.SloObjectiveCountMetricTotalInfluxdb[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
+     */
     instanas?: outputs.SloObjectiveCountMetricTotalInstana[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
+     */
     lightsteps?: outputs.SloObjectiveCountMetricTotalLightstep[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
+     */
     newrelics?: outputs.SloObjectiveCountMetricTotalNewrelic[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
+     */
     opentsdbs?: outputs.SloObjectiveCountMetricTotalOpentsdb[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
+     */
     pingdoms?: outputs.SloObjectiveCountMetricTotalPingdom[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
+     */
     prometheuses?: outputs.SloObjectiveCountMetricTotalPrometheus[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
+     */
     redshifts?: outputs.SloObjectiveCountMetricTotalRedshift[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
+     */
     splunkObservabilities?: outputs.SloObjectiveCountMetricTotalSplunkObservability[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
+     */
     splunks?: outputs.SloObjectiveCountMetricTotalSplunk[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
+     */
     sumologics?: outputs.SloObjectiveCountMetricTotalSumologic[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
+     */
     thousandeyes?: outputs.SloObjectiveCountMetricTotalThousandeye[];
 }
 
 export interface SloObjectiveCountMetricTotalAmazonPrometheus {
+    /**
+     * Query for the metrics
+     */
     promql: string;
 }
 
 export interface SloObjectiveCountMetricTotalAppdynamic {
+    /**
+     * Name of the added application
+     */
     applicationName: string;
+    /**
+     * Path to the metrics
+     */
     metricPath: string;
 }
 
+export interface SloObjectiveCountMetricTotalAzureMonitor {
+    /**
+     * Aggregation type [Required for metrics]
+     */
+    aggregation?: string;
+    /**
+     * Specifies source: 'metrics' or 'logs'
+     */
+    dataType: string;
+    /**
+     * Dimensions of the metric [Optional for metrics]
+     */
+    dimensions?: outputs.SloObjectiveCountMetricTotalAzureMonitorDimension[];
+    /**
+     * Logs query in Kusto Query Language [Required for logs]
+     */
+    kqlQuery?: string;
+    /**
+     * Name of the metric [Required for metrics]
+     */
+    metricName?: string;
+    /**
+     * Namespace of the metric [Optional for metrics]
+     */
+    metricNamespace?: string;
+    /**
+     * Identifier of the Azure Cloud resource [Required for metrics]
+     */
+    resourceId?: string;
+    /**
+     * Log analytics workspace [Required for logs]
+     */
+    workspaces?: outputs.SloObjectiveCountMetricTotalAzureMonitorWorkspace[];
+}
+
+export interface SloObjectiveCountMetricTotalAzureMonitorDimension {
+    /**
+     * The name of the previously defined alert method.
+     */
+    name: string;
+    /**
+     * Burn rate value.
+     */
+    value: string;
+}
+
+export interface SloObjectiveCountMetricTotalAzureMonitorWorkspace {
+    /**
+     * Resource group of the workspace
+     */
+    resourceGroup: string;
+    /**
+     * Subscription ID of the workspace
+     */
+    subscriptionId: string;
+    /**
+     * ID of the workspace
+     */
+    workspaceId: string;
+}
+
 export interface SloObjectiveCountMetricTotalBigquery {
+    /**
+     * Location of you BigQuery
+     */
     location: string;
+    /**
+     * Project ID
+     */
     projectId: string;
+    /**
+     * Query for the metrics
+     */
     query: string;
 }
 
 export interface SloObjectiveCountMetricTotalCloudwatch {
+    /**
+     * AccountID used with cross-account observability feature
+     */
+    accountId?: string;
+    /**
+     * Dimensions of the metric [Optional for metrics]
+     */
     dimensions?: outputs.SloObjectiveCountMetricTotalCloudwatchDimension[];
+    /**
+     * JSON query
+     */
     json?: string;
+    /**
+     * Name of the metric [Required for metrics]
+     */
     metricName?: string;
+    /**
+     * Namespace of the metric
+     */
     namespace?: string;
+    /**
+     * Region of the CloudWatch instance
+     */
     region: string;
+    /**
+     * SQL query
+     */
     sql?: string;
+    /**
+     * Metric data aggregations
+     */
     stat?: string;
 }
 
 export interface SloObjectiveCountMetricTotalCloudwatchDimension {
     /**
-     * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+     * The name of the previously defined alert method.
      */
     name: string;
+    /**
+     * Burn rate value.
+     */
     value: string;
 }
 
 export interface SloObjectiveCountMetricTotalDatadog {
+    /**
+     * Query for the metrics
+     */
     query: string;
 }
 
 export interface SloObjectiveCountMetricTotalDynatrace {
+    /**
+     * Selector for the metrics
+     */
     metricSelector: string;
 }
 
 export interface SloObjectiveCountMetricTotalElasticsearch {
+    /**
+     * Index of metrics we want to query
+     */
     index: string;
+    /**
+     * Query for the metrics
+     */
     query: string;
 }
 
 export interface SloObjectiveCountMetricTotalGcm {
+    /**
+     * Project ID
+     */
     projectId: string;
+    /**
+     * Query for the metrics
+     */
     query: string;
 }
 
 export interface SloObjectiveCountMetricTotalGrafanaLoki {
+    /**
+     * Query for the logs
+     */
     logql: string;
 }
 
 export interface SloObjectiveCountMetricTotalGraphite {
+    /**
+     * Path to the metrics
+     */
     metricPath: string;
 }
 
+export interface SloObjectiveCountMetricTotalHoneycomb {
+    /**
+     * Column name - required for all calculation types besides 'CONCURRENCY' and 'COUNT'
+     */
+    attribute?: string;
+    /**
+     * Calculation type
+     */
+    calculation: string;
+}
+
 export interface SloObjectiveCountMetricTotalInfluxdb {
+    /**
+     * Query for the metrics
+     */
     query: string;
 }
 
 export interface SloObjectiveCountMetricTotalInstana {
+    /**
+     * Infrastructure metric type
+     */
     applications?: outputs.SloObjectiveCountMetricTotalInstanaApplication[];
+    /**
+     * Infrastructure metric type
+     */
     infrastructures?: outputs.SloObjectiveCountMetricTotalInstanaInfrastructure[];
+    /**
+     * Instana metric type 'application' or 'infrastructure'
+     */
     metricType: string;
 }
 
 export interface SloObjectiveCountMetricTotalInstanaApplication {
+    /**
+     * Aggregation type [Required for metrics]
+     */
     aggregation: string;
+    /**
+     * API query user passes in a JSON format
+     */
     apiQuery: string;
+    /**
+     * Group by method
+     */
     groupBies: outputs.SloObjectiveCountMetricTotalInstanaApplicationGroupBy[];
+    /**
+     * Include internal
+     */
     includeInternal?: boolean;
+    /**
+     * Include synthetic
+     */
     includeSynthetic?: boolean;
+    /**
+     * Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+     */
     metricId: string;
 }
 
 export interface SloObjectiveCountMetricTotalInstanaApplicationGroupBy {
+    /**
+     * Group by tag
+     */
     tag: string;
+    /**
+     * Tag entity - one of 'DESTINATION', 'SOURCE', 'NOT_APPLICABLE'
+     */
     tagEntity: string;
     tagSecondLevelKey?: string;
 }
 
 export interface SloObjectiveCountMetricTotalInstanaInfrastructure {
+    /**
+     * Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+     */
     metricId: string;
+    /**
+     * Metric retrieval method 'query' or 'snapshot'
+     */
     metricRetrievalMethod: string;
+    /**
+     * Plugin ID
+     */
     pluginId: string;
+    /**
+     * Query for the metrics
+     */
     query?: string;
+    /**
+     * Snapshot ID
+     */
     snapshotId?: string;
 }
 
 export interface SloObjectiveCountMetricTotalLightstep {
+    /**
+     * Optional value to filter by percentiles
+     */
     percentile?: number;
+    /**
+     * ID of the metrics stream
+     */
     streamId?: string;
+    /**
+     * Type of data to filter by
+     */
     typeOfData: string;
+    /**
+     * UQL query
+     */
     uql?: string;
 }
 
 export interface SloObjectiveCountMetricTotalNewrelic {
+    /**
+     * Query for the metrics
+     */
     nrql: string;
 }
 
 export interface SloObjectiveCountMetricTotalOpentsdb {
+    /**
+     * Query for the metrics
+     */
     query: string;
 }
 
 export interface SloObjectiveCountMetricTotalPingdom {
+    /**
+     * Pingdom uptime or transaction check's ID
+     */
     checkId: string;
+    /**
+     * Pingdom check type - uptime or transaction
+     */
     checkType?: string;
+    /**
+     * Optional for the Uptime checks. Use it to filter the Pingdom check results by status
+     */
     status?: string;
 }
 
 export interface SloObjectiveCountMetricTotalPrometheus {
+    /**
+     * Query for the metrics
+     */
     promql: string;
 }
 
 export interface SloObjectiveCountMetricTotalRedshift {
+    /**
+     * Redshift custer ID
+     */
     clusterId: string;
+    /**
+     * Database name
+     */
     databaseName: string;
+    /**
+     * Query for the metrics
+     */
     query: string;
+    /**
+     * Region of the CloudWatch instance
+     */
     region: string;
 }
 
 export interface SloObjectiveCountMetricTotalSplunk {
+    /**
+     * Query for the metrics
+     */
     query: string;
 }
 
 export interface SloObjectiveCountMetricTotalSplunkObservability {
+    /**
+     * Query for the metrics
+     */
     program: string;
 }
 
 export interface SloObjectiveCountMetricTotalSumologic {
+    /**
+     * Period of data aggregation
+     */
     quantization?: string;
+    /**
+     * Query for the metrics
+     */
     query: string;
+    /**
+     * Aggregation function - avg, sum, min, max, count, none
+     */
     rollup?: string;
+    /**
+     * Sumologic source - metrics or logs
+     */
     type: string;
 }
 
 export interface SloObjectiveCountMetricTotalThousandeye {
+    /**
+     * ID of the test
+     */
     testId: number;
 }
 
 export interface SloObjectiveRawMetric {
-    queries?: outputs.SloObjectiveRawMetricQuery[];
+    /**
+     * Query for the metrics
+     */
+    queries: outputs.SloObjectiveRawMetricQuery[];
 }
 
 export interface SloObjectiveRawMetricQuery {
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
+     */
     amazonPrometheuses?: outputs.SloObjectiveRawMetricQueryAmazonPrometheus[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
+     */
     appdynamics?: outputs.SloObjectiveRawMetricQueryAppdynamic[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+     */
+    azureMonitors?: outputs.SloObjectiveRawMetricQueryAzureMonitor[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
+     */
     bigqueries?: outputs.SloObjectiveRawMetricQueryBigquery[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
+     */
     cloudwatches?: outputs.SloObjectiveRawMetricQueryCloudwatch[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
+     */
     datadogs?: outputs.SloObjectiveRawMetricQueryDatadog[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
+     */
     dynatraces?: outputs.SloObjectiveRawMetricQueryDynatrace[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
+     */
     elasticsearches?: outputs.SloObjectiveRawMetricQueryElasticsearch[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
+     */
     gcms?: outputs.SloObjectiveRawMetricQueryGcm[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
+     */
     grafanaLokis?: outputs.SloObjectiveRawMetricQueryGrafanaLoki[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
+     */
     graphites?: outputs.SloObjectiveRawMetricQueryGraphite[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+     */
+    honeycombs?: outputs.SloObjectiveRawMetricQueryHoneycomb[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
+     */
     influxdbs?: outputs.SloObjectiveRawMetricQueryInfluxdb[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
+     */
     instanas?: outputs.SloObjectiveRawMetricQueryInstana[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
+     */
     lightsteps?: outputs.SloObjectiveRawMetricQueryLightstep[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
+     */
     newrelics?: outputs.SloObjectiveRawMetricQueryNewrelic[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
+     */
     opentsdbs?: outputs.SloObjectiveRawMetricQueryOpentsdb[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
+     */
     pingdoms?: outputs.SloObjectiveRawMetricQueryPingdom[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
+     */
     prometheuses?: outputs.SloObjectiveRawMetricQueryPrometheus[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
+     */
     redshifts?: outputs.SloObjectiveRawMetricQueryRedshift[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
+     */
     splunkObservabilities?: outputs.SloObjectiveRawMetricQuerySplunkObservability[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
+     */
     splunks?: outputs.SloObjectiveRawMetricQuerySplunk[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
+     */
     sumologics?: outputs.SloObjectiveRawMetricQuerySumologic[];
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
+     */
     thousandeyes?: outputs.SloObjectiveRawMetricQueryThousandeye[];
 }
 
 export interface SloObjectiveRawMetricQueryAmazonPrometheus {
+    /**
+     * Query for the metrics
+     */
     promql: string;
 }
 
 export interface SloObjectiveRawMetricQueryAppdynamic {
+    /**
+     * Name of the added application
+     */
     applicationName: string;
+    /**
+     * Path to the metrics
+     */
     metricPath: string;
 }
 
+export interface SloObjectiveRawMetricQueryAzureMonitor {
+    /**
+     * Aggregation type [Required for metrics]
+     */
+    aggregation?: string;
+    /**
+     * Specifies source: 'metrics' or 'logs'
+     */
+    dataType: string;
+    /**
+     * Dimensions of the metric [Optional for metrics]
+     */
+    dimensions?: outputs.SloObjectiveRawMetricQueryAzureMonitorDimension[];
+    /**
+     * Logs query in Kusto Query Language [Required for logs]
+     */
+    kqlQuery?: string;
+    /**
+     * Name of the metric [Required for metrics]
+     */
+    metricName?: string;
+    /**
+     * Namespace of the metric [Optional for metrics]
+     */
+    metricNamespace?: string;
+    /**
+     * Identifier of the Azure Cloud resource [Required for metrics]
+     */
+    resourceId?: string;
+    /**
+     * Log analytics workspace [Required for logs]
+     */
+    workspaces?: outputs.SloObjectiveRawMetricQueryAzureMonitorWorkspace[];
+}
+
+export interface SloObjectiveRawMetricQueryAzureMonitorDimension {
+    /**
+     * The name of the previously defined alert method.
+     */
+    name: string;
+    /**
+     * Burn rate value.
+     */
+    value: string;
+}
+
+export interface SloObjectiveRawMetricQueryAzureMonitorWorkspace {
+    /**
+     * Resource group of the workspace
+     */
+    resourceGroup: string;
+    /**
+     * Subscription ID of the workspace
+     */
+    subscriptionId: string;
+    /**
+     * ID of the workspace
+     */
+    workspaceId: string;
+}
+
 export interface SloObjectiveRawMetricQueryBigquery {
+    /**
+     * Location of you BigQuery
+     */
     location: string;
+    /**
+     * Project ID
+     */
     projectId: string;
+    /**
+     * Query for the metrics
+     */
     query: string;
 }
 
 export interface SloObjectiveRawMetricQueryCloudwatch {
+    /**
+     * AccountID used with cross-account observability feature
+     */
+    accountId?: string;
+    /**
+     * Dimensions of the metric [Optional for metrics]
+     */
     dimensions?: outputs.SloObjectiveRawMetricQueryCloudwatchDimension[];
+    /**
+     * JSON query
+     */
     json?: string;
+    /**
+     * Name of the metric [Required for metrics]
+     */
     metricName?: string;
+    /**
+     * Namespace of the metric
+     */
     namespace?: string;
+    /**
+     * Region of the CloudWatch instance
+     */
     region: string;
+    /**
+     * SQL query
+     */
     sql?: string;
+    /**
+     * Metric data aggregations
+     */
     stat?: string;
 }
 
 export interface SloObjectiveRawMetricQueryCloudwatchDimension {
     /**
-     * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+     * The name of the previously defined alert method.
      */
     name: string;
+    /**
+     * Burn rate value.
+     */
     value: string;
 }
 
 export interface SloObjectiveRawMetricQueryDatadog {
+    /**
+     * Query for the metrics
+     */
     query: string;
 }
 
 export interface SloObjectiveRawMetricQueryDynatrace {
+    /**
+     * Selector for the metrics
+     */
     metricSelector: string;
 }
 
 export interface SloObjectiveRawMetricQueryElasticsearch {
+    /**
+     * Index of metrics we want to query
+     */
     index: string;
+    /**
+     * Query for the metrics
+     */
     query: string;
 }
 
 export interface SloObjectiveRawMetricQueryGcm {
+    /**
+     * Project ID
+     */
     projectId: string;
+    /**
+     * Query for the metrics
+     */
     query: string;
 }
 
 export interface SloObjectiveRawMetricQueryGrafanaLoki {
+    /**
+     * Query for the logs
+     */
     logql: string;
 }
 
 export interface SloObjectiveRawMetricQueryGraphite {
+    /**
+     * Path to the metrics
+     */
     metricPath: string;
 }
 
+export interface SloObjectiveRawMetricQueryHoneycomb {
+    /**
+     * Column name - required for all calculation types besides 'CONCURRENCY' and 'COUNT'
+     */
+    attribute?: string;
+    /**
+     * Calculation type
+     */
+    calculation: string;
+}
+
 export interface SloObjectiveRawMetricQueryInfluxdb {
+    /**
+     * Query for the metrics
+     */
     query: string;
 }
 
 export interface SloObjectiveRawMetricQueryInstana {
+    /**
+     * Infrastructure metric type
+     */
     applications?: outputs.SloObjectiveRawMetricQueryInstanaApplication[];
+    /**
+     * Infrastructure metric type
+     */
     infrastructures?: outputs.SloObjectiveRawMetricQueryInstanaInfrastructure[];
+    /**
+     * Instana metric type 'application' or 'infrastructure'
+     */
     metricType: string;
 }
 
 export interface SloObjectiveRawMetricQueryInstanaApplication {
+    /**
+     * Aggregation type [Required for metrics]
+     */
     aggregation: string;
+    /**
+     * API query user passes in a JSON format
+     */
     apiQuery: string;
+    /**
+     * Group by method
+     */
     groupBies: outputs.SloObjectiveRawMetricQueryInstanaApplicationGroupBy[];
+    /**
+     * Include internal
+     */
     includeInternal?: boolean;
+    /**
+     * Include synthetic
+     */
     includeSynthetic?: boolean;
+    /**
+     * Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+     */
     metricId: string;
 }
 
 export interface SloObjectiveRawMetricQueryInstanaApplicationGroupBy {
+    /**
+     * Group by tag
+     */
     tag: string;
+    /**
+     * Tag entity - one of 'DESTINATION', 'SOURCE', 'NOT_APPLICABLE'
+     */
     tagEntity: string;
     tagSecondLevelKey?: string;
 }
 
 export interface SloObjectiveRawMetricQueryInstanaInfrastructure {
+    /**
+     * Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+     */
     metricId: string;
+    /**
+     * Metric retrieval method 'query' or 'snapshot'
+     */
     metricRetrievalMethod: string;
+    /**
+     * Plugin ID
+     */
     pluginId: string;
+    /**
+     * Query for the metrics
+     */
     query?: string;
+    /**
+     * Snapshot ID
+     */
     snapshotId?: string;
 }
 
 export interface SloObjectiveRawMetricQueryLightstep {
+    /**
+     * Optional value to filter by percentiles
+     */
     percentile?: number;
+    /**
+     * ID of the metrics stream
+     */
     streamId?: string;
+    /**
+     * Type of data to filter by
+     */
     typeOfData: string;
+    /**
+     * UQL query
+     */
     uql?: string;
 }
 
 export interface SloObjectiveRawMetricQueryNewrelic {
+    /**
+     * Query for the metrics
+     */
     nrql: string;
 }
 
 export interface SloObjectiveRawMetricQueryOpentsdb {
+    /**
+     * Query for the metrics
+     */
     query: string;
 }
 
 export interface SloObjectiveRawMetricQueryPingdom {
+    /**
+     * Pingdom uptime or transaction check's ID
+     */
     checkId: string;
+    /**
+     * Pingdom check type - uptime or transaction
+     */
     checkType?: string;
+    /**
+     * Optional for the Uptime checks. Use it to filter the Pingdom check results by status
+     */
     status?: string;
 }
 
 export interface SloObjectiveRawMetricQueryPrometheus {
+    /**
+     * Query for the metrics
+     */
     promql: string;
 }
 
 export interface SloObjectiveRawMetricQueryRedshift {
+    /**
+     * Redshift custer ID
+     */
     clusterId: string;
+    /**
+     * Database name
+     */
     databaseName: string;
+    /**
+     * Query for the metrics
+     */
     query: string;
+    /**
+     * Region of the CloudWatch instance
+     */
     region: string;
 }
 
 export interface SloObjectiveRawMetricQuerySplunk {
+    /**
+     * Query for the metrics
+     */
     query: string;
 }
 
 export interface SloObjectiveRawMetricQuerySplunkObservability {
+    /**
+     * Query for the metrics
+     */
     program: string;
 }
 
 export interface SloObjectiveRawMetricQuerySumologic {
+    /**
+     * Period of data aggregation
+     */
     quantization?: string;
+    /**
+     * Query for the metrics
+     */
     query: string;
+    /**
+     * Aggregation function - avg, sum, min, max, count, none
+     */
     rollup?: string;
+    /**
+     * Sumologic source - metrics or logs
+     */
     type: string;
 }
 
 export interface SloObjectiveRawMetricQueryThousandeye {
+    /**
+     * ID of the test
+     */
     testId: number;
 }
 
@@ -1133,7 +2920,13 @@ export interface SloTimeWindow {
 }
 
 export interface SloTimeWindowCalendar {
+    /**
+     * Date of the start
+     */
     startTime: string;
+    /**
+     * Timezone name in IANA Time Zone Database
+     */
     timeZone: string;
 }
 

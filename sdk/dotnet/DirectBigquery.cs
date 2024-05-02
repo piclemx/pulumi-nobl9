@@ -6,11 +6,12 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9
+namespace Piclemx.Nobl9
 {
     /// <summary>
-    /// Google BigQuery is a serverless data warehouse that enables scalable analysis over petabytes of data. It is a Platform as a Service that supports querying using ANSI SQL. BigQuery integration with Nobl9 enables users to turn their big data into valuable business insights. Nobl9 connects with BigQuery to collect SLI measurements and compare them to SLO targets.
+    /// Google BigQuery is a serverless data warehouse that enables scalable analysis over petabytes of data. It is a Platform as a Service that supports querying using ANSI SQL. BigQuery integration with Nobl9 enables users to turn their big data into valuable business insights. Nobl9 connects to BigQuery for SLI measurement collection and comparison with SLO targets.
     /// 
     /// For more information, refer to [BigQuery Direct | Nobl9 Documentation](https://docs.nobl9.com/Sources/bigquery#bigquery-direct)
     /// 
@@ -18,21 +19,18 @@ namespace Pulumi.Nobl9
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
-    /// using Nobl9 = Pulumi.Nobl9;
+    /// using Nobl9 = Piclemx.Nobl9;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
     ///     var test_bigquery = new Nobl9.DirectBigquery("test-bigquery", new()
     ///     {
     ///         Description = "desc",
+    ///         LogCollectionEnabled = true,
     ///         Project = "terraform",
     ///         ServiceAccountKey = "secret",
-    ///         SourceOfs = new[]
-    ///         {
-    ///             "Metrics",
-    ///             "Services",
-    ///         },
     ///     });
     /// 
     /// });
@@ -57,6 +55,12 @@ namespace Pulumi.Nobl9
         public Output<string?> DisplayName { get; private set; } = null!;
 
         /// <summary>
+        /// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+        /// </summary>
+        [Output("logCollectionEnabled")]
+        public Output<bool?> LogCollectionEnabled { get; private set; } = null!;
+
+        /// <summary>
         /// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
         /// </summary>
         [Output("name")]
@@ -72,7 +76,13 @@ namespace Pulumi.Nobl9
         /// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
         /// </summary>
         [Output("queryDelay")]
-        public Output<Outputs.DirectBigqueryQueryDelay?> QueryDelay { get; private set; } = null!;
+        public Output<Outputs.DirectBigqueryQueryDelay> QueryDelay { get; private set; } = null!;
+
+        /// <summary>
+        /// Release channel of the created datasource [stable/beta]
+        /// </summary>
+        [Output("releaseChannel")]
+        public Output<string> ReleaseChannel { get; private set; } = null!;
 
         /// <summary>
         /// [required] | Service Account Key.
@@ -81,7 +91,7 @@ namespace Pulumi.Nobl9
         public Output<string> ServiceAccountKey { get; private set; } = null!;
 
         /// <summary>
-        /// Source of Metrics and/or Services.
+        /// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
         /// </summary>
         [Output("sourceOfs")]
         public Output<ImmutableArray<string>> SourceOfs { get; private set; } = null!;
@@ -115,7 +125,11 @@ namespace Pulumi.Nobl9
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/piclemx/pulumi-nobl9/releases/",
+                PluginDownloadURL = "github://api.github.com/piclemx/pulumi-nobl9",
+                AdditionalSecretOutputs =
+                {
+                    "serviceAccountKey",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -152,6 +166,12 @@ namespace Pulumi.Nobl9
         public Input<string>? DisplayName { get; set; }
 
         /// <summary>
+        /// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+        /// </summary>
+        [Input("logCollectionEnabled")]
+        public Input<bool>? LogCollectionEnabled { get; set; }
+
+        /// <summary>
         /// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
         /// </summary>
         [Input("name")]
@@ -170,17 +190,34 @@ namespace Pulumi.Nobl9
         public Input<Inputs.DirectBigqueryQueryDelayArgs>? QueryDelay { get; set; }
 
         /// <summary>
+        /// Release channel of the created datasource [stable/beta]
+        /// </summary>
+        [Input("releaseChannel")]
+        public Input<string>? ReleaseChannel { get; set; }
+
+        [Input("serviceAccountKey")]
+        private Input<string>? _serviceAccountKey;
+
+        /// <summary>
         /// [required] | Service Account Key.
         /// </summary>
-        [Input("serviceAccountKey")]
-        public Input<string>? ServiceAccountKey { get; set; }
+        public Input<string>? ServiceAccountKey
+        {
+            get => _serviceAccountKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _serviceAccountKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
-        [Input("sourceOfs", required: true)]
+        [Input("sourceOfs")]
         private InputList<string>? _sourceOfs;
 
         /// <summary>
-        /// Source of Metrics and/or Services.
+        /// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
         /// </summary>
+        [Obsolete(@"'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.")]
         public InputList<string> SourceOfs
         {
             get => _sourceOfs ?? (_sourceOfs = new InputList<string>());
@@ -208,6 +245,12 @@ namespace Pulumi.Nobl9
         public Input<string>? DisplayName { get; set; }
 
         /// <summary>
+        /// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+        /// </summary>
+        [Input("logCollectionEnabled")]
+        public Input<bool>? LogCollectionEnabled { get; set; }
+
+        /// <summary>
         /// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
         /// </summary>
         [Input("name")]
@@ -226,17 +269,34 @@ namespace Pulumi.Nobl9
         public Input<Inputs.DirectBigqueryQueryDelayGetArgs>? QueryDelay { get; set; }
 
         /// <summary>
+        /// Release channel of the created datasource [stable/beta]
+        /// </summary>
+        [Input("releaseChannel")]
+        public Input<string>? ReleaseChannel { get; set; }
+
+        [Input("serviceAccountKey")]
+        private Input<string>? _serviceAccountKey;
+
+        /// <summary>
         /// [required] | Service Account Key.
         /// </summary>
-        [Input("serviceAccountKey")]
-        public Input<string>? ServiceAccountKey { get; set; }
+        public Input<string>? ServiceAccountKey
+        {
+            get => _serviceAccountKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _serviceAccountKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("sourceOfs")]
         private InputList<string>? _sourceOfs;
 
         /// <summary>
-        /// Source of Metrics and/or Services.
+        /// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
         /// </summary>
+        [Obsolete(@"'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.")]
         public InputList<string> SourceOfs
         {
             get => _sourceOfs ?? (_sourceOfs = new InputList<string>());

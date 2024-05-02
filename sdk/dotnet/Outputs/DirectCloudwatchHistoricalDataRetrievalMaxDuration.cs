@@ -6,14 +6,21 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class DirectCloudwatchHistoricalDataRetrievalMaxDuration
     {
+        /// <summary>
+        /// Must be one of Minute, Hour, or Day.
+        /// </summary>
         public readonly string Unit;
+        /// <summary>
+        /// Must be an integer greater than or equal to 0.
+        /// </summary>
         public readonly int Value;
 
         [OutputConstructor]

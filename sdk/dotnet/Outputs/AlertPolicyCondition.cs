@@ -6,19 +6,24 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class AlertPolicyCondition
     {
         /// <summary>
+        /// Duration over which the burn rate is evaluated.
+        /// </summary>
+        public readonly string? AlertingWindow;
+        /// <summary>
         /// Indicates how long a given condition needs to be valid to mark the condition as true.
         /// </summary>
         public readonly string? LastsFor;
         /// <summary>
-        /// One of `timeToBurnBudget` | `burnRate` | `burnedBudget`.
+        /// One of `timeToBurnBudget` | `timeToBurnEntireBudget` | `burnRate` | `burnedBudget`.
         /// </summary>
         public readonly string Measurement;
         /// <summary>
@@ -26,12 +31,14 @@ namespace Pulumi.Nobl9.Outputs
         /// </summary>
         public readonly double? Value;
         /// <summary>
-        /// Used with `timeToBurnBudget`, indicates when the budget would be exhausted. The expected value is a string in time duration string format.
+        /// Used with `timeToBurnBudget` or `timeToBurnEntireBudget`, indicates when the budget would be exhausted. The expected value is a string in time duration string format.
         /// </summary>
         public readonly string? ValueString;
 
         [OutputConstructor]
         private AlertPolicyCondition(
+            string? alertingWindow,
+
             string? lastsFor,
 
             string measurement,
@@ -40,6 +47,7 @@ namespace Pulumi.Nobl9.Outputs
 
             string? valueString)
         {
+            AlertingWindow = alertingWindow;
             LastsFor = lastsFor;
             Measurement = measurement;
             Value = value;

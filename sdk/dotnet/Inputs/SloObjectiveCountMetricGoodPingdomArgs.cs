@@ -6,18 +6,28 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Inputs
+namespace Piclemx.Nobl9.Inputs
 {
 
     public sealed class SloObjectiveCountMetricGoodPingdomArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Pingdom uptime or transaction check's ID
+        /// </summary>
         [Input("checkId", required: true)]
         public Input<string> CheckId { get; set; } = null!;
 
+        /// <summary>
+        /// Pingdom check type - uptime or transaction
+        /// </summary>
         [Input("checkType")]
         public Input<string>? CheckType { get; set; }
 
+        /// <summary>
+        /// Optional for the Uptime checks. Use it to filter the Pingdom check results by status
+        /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
 

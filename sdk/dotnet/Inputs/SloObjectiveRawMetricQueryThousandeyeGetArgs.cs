@@ -6,12 +6,16 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Inputs
+namespace Piclemx.Nobl9.Inputs
 {
 
     public sealed class SloObjectiveRawMetricQueryThousandeyeGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// ID of the test
+        /// </summary>
         [Input("testId", required: true)]
         public Input<int> TestId { get; set; } = null!;
 

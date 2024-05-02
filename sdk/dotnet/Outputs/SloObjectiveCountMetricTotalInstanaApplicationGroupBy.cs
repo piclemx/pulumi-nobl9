@@ -6,14 +6,21 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class SloObjectiveCountMetricTotalInstanaApplicationGroupBy
     {
+        /// <summary>
+        /// Group by tag
+        /// </summary>
         public readonly string Tag;
+        /// <summary>
+        /// Tag entity - one of 'DESTINATION', 'SOURCE', 'NOT_APPLICABLE'
+        /// </summary>
         public readonly string TagEntity;
         public readonly string? TagSecondLevelKey;
 

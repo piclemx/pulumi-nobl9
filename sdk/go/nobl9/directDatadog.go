@@ -7,11 +7,12 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Datadog is a cloud-scale application observability solution that monitors servers, databases, tools, and services. Nobl9 connects with Datadog to collect SLI measurements and compare them to SLO targets.
+// Datadog is a cloud-scale application observability solution that monitors servers, databases, tools, and services. Nobl9 connects to Datadog for SLI measurement collection and comparison with SLO targets.
 //
 // For more information, refer to [Datadog Direct | Nobl9 Documentation](https://docs.nobl9.com/Sources/datadog#datadog-direct).
 //
@@ -21,44 +22,43 @@ import (
 // package main
 //
 // import (
-// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := nobl9.NewDirectDatadog(ctx, "test-datadog", &nobl9.DirectDatadogArgs{
-// 			ApiKey:         pulumi.String("secret"),
-// 			ApplicationKey: pulumi.String("secret"),
-// 			Description:    pulumi.String("desc"),
-// 			HistoricalDataRetrieval: &DirectDatadogHistoricalDataRetrievalArgs{
-// 				DefaultDurations: DirectDatadogHistoricalDataRetrievalDefaultDurationArray{
-// 					&DirectDatadogHistoricalDataRetrievalDefaultDurationArgs{
-// 						Unit:  pulumi.String("Day"),
-// 						Value: pulumi.Int(0),
-// 					},
-// 				},
-// 				MaxDurations: DirectDatadogHistoricalDataRetrievalMaxDurationArray{
-// 					&DirectDatadogHistoricalDataRetrievalMaxDurationArgs{
-// 						Unit:  pulumi.String("Day"),
-// 						Value: pulumi.Int(30),
-// 					},
-// 				},
-// 			},
-// 			Project: pulumi.String("terraform"),
-// 			Site:    pulumi.String("eu"),
-// 			SourceOfs: pulumi.StringArray{
-// 				pulumi.String("Metrics"),
-// 				pulumi.String("Services"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := nobl9.NewDirectDatadog(ctx, "test-datadog", &nobl9.DirectDatadogArgs{
+//				ApiKey:         pulumi.String("secret"),
+//				ApplicationKey: pulumi.String("secret"),
+//				Description:    pulumi.String("desc"),
+//				HistoricalDataRetrieval: &nobl9.DirectDatadogHistoricalDataRetrievalArgs{
+//					DefaultDurations: nobl9.DirectDatadogHistoricalDataRetrievalDefaultDurationArray{
+//						&nobl9.DirectDatadogHistoricalDataRetrievalDefaultDurationArgs{
+//							Unit:  pulumi.String("Day"),
+//							Value: pulumi.Int(0),
+//						},
+//					},
+//					MaxDurations: nobl9.DirectDatadogHistoricalDataRetrievalMaxDurationArray{
+//						&nobl9.DirectDatadogHistoricalDataRetrievalMaxDurationArgs{
+//							Unit:  pulumi.String("Day"),
+//							Value: pulumi.Int(30),
+//						},
+//					},
+//				},
+//				LogCollectionEnabled: pulumi.Bool(true),
+//				Project:              pulumi.String("terraform"),
+//				Site:                 pulumi.String("eu"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -75,16 +75,22 @@ type DirectDatadog struct {
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrOutput `pulumi:"displayName"`
 	// [Replay configuration documentation](https://docs.nobl9.com/replay)
-	HistoricalDataRetrieval DirectDatadogHistoricalDataRetrievalPtrOutput `pulumi:"historicalDataRetrieval"`
+	HistoricalDataRetrieval DirectDatadogHistoricalDataRetrievalOutput `pulumi:"historicalDataRetrieval"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrOutput `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringOutput `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-	QueryDelay DirectDatadogQueryDelayPtrOutput `pulumi:"queryDelay"`
+	QueryDelay DirectDatadogQueryDelayOutput `pulumi:"queryDelay"`
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringOutput `pulumi:"releaseChannel"`
 	// `com` or `eu`, Datadog SaaS instance, which corresponds to one of Datadog's two locations (https://www.datadoghq.com/ in the U.S. or https://datadoghq.eu/ in the European Union).
 	Site pulumi.StringOutput `pulumi:"site"`
-	// Source of Metrics and/or Services.
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayOutput `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status pulumi.StringOutput `pulumi:"status"`
@@ -103,10 +109,18 @@ func NewDirectDatadog(ctx *pulumi.Context,
 	if args.Site == nil {
 		return nil, errors.New("invalid value for required argument 'Site'")
 	}
-	if args.SourceOfs == nil {
-		return nil, errors.New("invalid value for required argument 'SourceOfs'")
+	if args.ApiKey != nil {
+		args.ApiKey = pulumi.ToSecret(args.ApiKey).(pulumi.StringPtrInput)
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.ApplicationKey != nil {
+		args.ApplicationKey = pulumi.ToSecret(args.ApplicationKey).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"apiKey",
+		"applicationKey",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DirectDatadog
 	err := ctx.RegisterResource("nobl9:index/directDatadog:DirectDatadog", name, args, &resource, opts...)
 	if err != nil {
@@ -139,15 +153,21 @@ type directDatadogState struct {
 	DisplayName *string `pulumi:"displayName"`
 	// [Replay configuration documentation](https://docs.nobl9.com/replay)
 	HistoricalDataRetrieval *DirectDatadogHistoricalDataRetrieval `pulumi:"historicalDataRetrieval"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project *string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectDatadogQueryDelay `pulumi:"queryDelay"`
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
 	// `com` or `eu`, Datadog SaaS instance, which corresponds to one of Datadog's two locations (https://www.datadoghq.com/ in the U.S. or https://datadoghq.eu/ in the European Union).
 	Site *string `pulumi:"site"`
-	// Source of Metrics and/or Services.
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status *string `pulumi:"status"`
@@ -164,15 +184,21 @@ type DirectDatadogState struct {
 	DisplayName pulumi.StringPtrInput
 	// [Replay configuration documentation](https://docs.nobl9.com/replay)
 	HistoricalDataRetrieval DirectDatadogHistoricalDataRetrievalPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringPtrInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectDatadogQueryDelayPtrInput
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
 	// `com` or `eu`, Datadog SaaS instance, which corresponds to one of Datadog's two locations (https://www.datadoghq.com/ in the U.S. or https://datadoghq.eu/ in the European Union).
 	Site pulumi.StringPtrInput
-	// Source of Metrics and/or Services.
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 	// The status of the created direct.
 	Status pulumi.StringPtrInput
@@ -193,15 +219,21 @@ type directDatadogArgs struct {
 	DisplayName *string `pulumi:"displayName"`
 	// [Replay configuration documentation](https://docs.nobl9.com/replay)
 	HistoricalDataRetrieval *DirectDatadogHistoricalDataRetrieval `pulumi:"historicalDataRetrieval"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectDatadogQueryDelay `pulumi:"queryDelay"`
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
 	// `com` or `eu`, Datadog SaaS instance, which corresponds to one of Datadog's two locations (https://www.datadoghq.com/ in the U.S. or https://datadoghq.eu/ in the European Union).
 	Site string `pulumi:"site"`
-	// Source of Metrics and/or Services.
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 }
 
@@ -217,15 +249,21 @@ type DirectDatadogArgs struct {
 	DisplayName pulumi.StringPtrInput
 	// [Replay configuration documentation](https://docs.nobl9.com/replay)
 	HistoricalDataRetrieval DirectDatadogHistoricalDataRetrievalPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectDatadogQueryDelayPtrInput
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
 	// `com` or `eu`, Datadog SaaS instance, which corresponds to one of Datadog's two locations (https://www.datadoghq.com/ in the U.S. or https://datadoghq.eu/ in the European Union).
 	Site pulumi.StringInput
-	// Source of Metrics and/or Services.
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 }
 
@@ -255,7 +293,7 @@ func (i *DirectDatadog) ToDirectDatadogOutputWithContext(ctx context.Context) Di
 // DirectDatadogArrayInput is an input type that accepts DirectDatadogArray and DirectDatadogArrayOutput values.
 // You can construct a concrete instance of `DirectDatadogArrayInput` via:
 //
-//          DirectDatadogArray{ DirectDatadogArgs{...} }
+//	DirectDatadogArray{ DirectDatadogArgs{...} }
 type DirectDatadogArrayInput interface {
 	pulumi.Input
 
@@ -280,7 +318,7 @@ func (i DirectDatadogArray) ToDirectDatadogArrayOutputWithContext(ctx context.Co
 // DirectDatadogMapInput is an input type that accepts DirectDatadogMap and DirectDatadogMapOutput values.
 // You can construct a concrete instance of `DirectDatadogMapInput` via:
 //
-//          DirectDatadogMap{ "key": DirectDatadogArgs{...} }
+//	DirectDatadogMap{ "key": DirectDatadogArgs{...} }
 type DirectDatadogMapInput interface {
 	pulumi.Input
 
@@ -337,8 +375,13 @@ func (o DirectDatadogOutput) DisplayName() pulumi.StringPtrOutput {
 }
 
 // [Replay configuration documentation](https://docs.nobl9.com/replay)
-func (o DirectDatadogOutput) HistoricalDataRetrieval() DirectDatadogHistoricalDataRetrievalPtrOutput {
-	return o.ApplyT(func(v *DirectDatadog) DirectDatadogHistoricalDataRetrievalPtrOutput { return v.HistoricalDataRetrieval }).(DirectDatadogHistoricalDataRetrievalPtrOutput)
+func (o DirectDatadogOutput) HistoricalDataRetrieval() DirectDatadogHistoricalDataRetrievalOutput {
+	return o.ApplyT(func(v *DirectDatadog) DirectDatadogHistoricalDataRetrievalOutput { return v.HistoricalDataRetrieval }).(DirectDatadogHistoricalDataRetrievalOutput)
+}
+
+// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+func (o DirectDatadogOutput) LogCollectionEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DirectDatadog) pulumi.BoolPtrOutput { return v.LogCollectionEnabled }).(pulumi.BoolPtrOutput)
 }
 
 // Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
@@ -352,8 +395,13 @@ func (o DirectDatadogOutput) Project() pulumi.StringOutput {
 }
 
 // [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-func (o DirectDatadogOutput) QueryDelay() DirectDatadogQueryDelayPtrOutput {
-	return o.ApplyT(func(v *DirectDatadog) DirectDatadogQueryDelayPtrOutput { return v.QueryDelay }).(DirectDatadogQueryDelayPtrOutput)
+func (o DirectDatadogOutput) QueryDelay() DirectDatadogQueryDelayOutput {
+	return o.ApplyT(func(v *DirectDatadog) DirectDatadogQueryDelayOutput { return v.QueryDelay }).(DirectDatadogQueryDelayOutput)
+}
+
+// Release channel of the created datasource [stable/beta]
+func (o DirectDatadogOutput) ReleaseChannel() pulumi.StringOutput {
+	return o.ApplyT(func(v *DirectDatadog) pulumi.StringOutput { return v.ReleaseChannel }).(pulumi.StringOutput)
 }
 
 // `com` or `eu`, Datadog SaaS instance, which corresponds to one of Datadog's two locations (https://www.datadoghq.com/ in the U.S. or https://datadoghq.eu/ in the European Union).
@@ -361,7 +409,9 @@ func (o DirectDatadogOutput) Site() pulumi.StringOutput {
 	return o.ApplyT(func(v *DirectDatadog) pulumi.StringOutput { return v.Site }).(pulumi.StringOutput)
 }
 
-// Source of Metrics and/or Services.
+// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+//
+// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 func (o DirectDatadogOutput) SourceOfs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *DirectDatadog) pulumi.StringArrayOutput { return v.SourceOfs }).(pulumi.StringArrayOutput)
 }

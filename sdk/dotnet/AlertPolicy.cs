@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9
+namespace Piclemx.Nobl9
 {
     /// <summary>
     /// An **Alert Policy** expresses a set of conditions you want to track or monitor. The conditions for an Alert Policy define what is monitored and when to activate an alert: when the performance of your service is declining, Nobl9 will send a notification to a predefined channel.
     /// 
-    /// A Nobl9 AlertPolicy accepts up to 7 conditions. All the specified conditions must be satisfied to trigger an alert.
+    /// A Nobl9 AlertPolicy accepts up to 3 conditions. All the specified conditions must be satisfied to trigger an alert.
     /// 
     /// For more details, refer to the [Alert Policy configuration | Nobl9 Documentation](https://docs.nobl9.com/yaml-guide#alertpolicy).
     /// 
@@ -22,8 +23,9 @@ namespace Pulumi.Nobl9
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
-    /// using Nobl9 = Pulumi.Nobl9;
+    /// using Nobl9 = Piclemx.Nobl9;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
@@ -46,6 +48,7 @@ namespace Pulumi.Nobl9
     ///         DisplayName = thisProject.DisplayName.Apply(displayName =&gt; $"{displayName} Front Page Latency"),
     ///         Severity = "High",
     ///         Description = "Alert when page latency is &gt; 2000 and error budget would be exhausted",
+    ///         Cooldown = "5m",
     ///         Conditions = new[]
     ///         {
     ///             new Nobl9.Inputs.AlertPolicyConditionArgs
@@ -60,6 +63,48 @@ namespace Pulumi.Nobl9
     ///             new Nobl9.Inputs.AlertPolicyAlertMethodArgs
     ///             {
     ///                 Name = "my-alert-method",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     var thisIndex_alertPolicyAlertPolicy = new Nobl9.AlertPolicy("thisIndex/alertPolicyAlertPolicy", new()
+    ///     {
+    ///         Project = thisProject.Name,
+    ///         DisplayName = thisProject.DisplayName.Apply(displayName =&gt; $"{displayName} Slow Burn (1x12h and 2x15min)"),
+    ///         Severity = "Low",
+    ///         Description = "The budget is slowly exhausting and not recovering.",
+    ///         Cooldown = "5m",
+    ///         Conditions = new[]
+    ///         {
+    ///             new Nobl9.Inputs.AlertPolicyConditionArgs
+    ///             {
+    ///                 Measurement = "averageBurnRate",
+    ///                 Value = 1,
+    ///                 AlertingWindow = "12h",
+    ///             },
+    ///             new Nobl9.Inputs.AlertPolicyConditionArgs
+    ///             {
+    ///                 Measurement = "averageBurnRate",
+    ///                 Value = 2,
+    ///                 AlertingWindow = "15m",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     var thisNobl9Index_alertPolicyAlertPolicy = new Nobl9.AlertPolicy("thisNobl9Index/alertPolicyAlertPolicy", new()
+    ///     {
+    ///         Project = thisProject.Name,
+    ///         DisplayName = thisProject.DisplayName.Apply(displayName =&gt; $"{displayName} Fast Burn (20x5min)"),
+    ///         Severity = "High",
+    ///         Description = "There’s been a significant spike in burn rate over a brief period.",
+    ///         Cooldown = "5m",
+    ///         Conditions = new[]
+    ///         {
+    ///             new Nobl9.Inputs.AlertPolicyConditionArgs
+    ///             {
+    ///                 Measurement = "averageBurnRate",
+    ///                 Value = 20,
+    ///                 AlertingWindow = "5m",
     ///             },
     ///         },
     ///     });
@@ -83,6 +128,12 @@ namespace Pulumi.Nobl9
         public Output<ImmutableArray<Outputs.AlertPolicyCondition>> Conditions { get; private set; } = null!;
 
         /// <summary>
+        /// An interval measured from the last time stamp when all alert policy conditions were satisfied before alert is marked as resolved
+        /// </summary>
+        [Output("cooldown")]
+        public Output<string?> Cooldown { get; private set; } = null!;
+
+        /// <summary>
         /// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
         /// </summary>
         [Output("description")]
@@ -95,13 +146,13 @@ namespace Pulumi.Nobl9
         public Output<string?> DisplayName { get; private set; } = null!;
 
         /// <summary>
-        /// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+        /// The name of the previously defined alert method.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+        /// Project name the Alert Method is in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
         /// </summary>
         [Output("project")]
         public Output<string> Project { get; private set; } = null!;
@@ -135,7 +186,7 @@ namespace Pulumi.Nobl9
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/piclemx/pulumi-nobl9/releases/",
+                PluginDownloadURL = "github://api.github.com/piclemx/pulumi-nobl9",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -180,6 +231,12 @@ namespace Pulumi.Nobl9
         }
 
         /// <summary>
+        /// An interval measured from the last time stamp when all alert policy conditions were satisfied before alert is marked as resolved
+        /// </summary>
+        [Input("cooldown")]
+        public Input<string>? Cooldown { get; set; }
+
+        /// <summary>
         /// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
         /// </summary>
         [Input("description")]
@@ -192,13 +249,13 @@ namespace Pulumi.Nobl9
         public Input<string>? DisplayName { get; set; }
 
         /// <summary>
-        /// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+        /// The name of the previously defined alert method.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+        /// Project name the Alert Method is in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
         /// </summary>
         [Input("project", required: true)]
         public Input<string> Project { get; set; } = null!;
@@ -238,6 +295,12 @@ namespace Pulumi.Nobl9
         }
 
         /// <summary>
+        /// An interval measured from the last time stamp when all alert policy conditions were satisfied before alert is marked as resolved
+        /// </summary>
+        [Input("cooldown")]
+        public Input<string>? Cooldown { get; set; }
+
+        /// <summary>
         /// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
         /// </summary>
         [Input("description")]
@@ -250,13 +313,13 @@ namespace Pulumi.Nobl9
         public Input<string>? DisplayName { get; set; }
 
         /// <summary>
-        /// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+        /// The name of the previously defined alert method.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+        /// Project name the Alert Method is in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
         /// </summary>
         [Input("project")]
         public Input<string>? Project { get; set; }

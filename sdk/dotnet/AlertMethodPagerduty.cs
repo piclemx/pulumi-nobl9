@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9
+namespace Piclemx.Nobl9
 {
     [Nobl9ResourceType("nobl9:index/alertMethodPagerduty:AlertMethodPagerduty")]
     public partial class AlertMethodPagerduty : global::Pulumi.CustomResource
@@ -42,6 +43,12 @@ namespace Pulumi.Nobl9
         [Output("project")]
         public Output<string> Project { get; private set; } = null!;
 
+        /// <summary>
+        /// Sends a notification after the cooldown period is over.
+        /// </summary>
+        [Output("sendResolution")]
+        public Output<Outputs.AlertMethodPagerdutySendResolution?> SendResolution { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a AlertMethodPagerduty resource with the given unique name, arguments, and options.
@@ -65,7 +72,11 @@ namespace Pulumi.Nobl9
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/piclemx/pulumi-nobl9/releases/",
+                PluginDownloadURL = "github://api.github.com/piclemx/pulumi-nobl9",
+                AdditionalSecretOutputs =
+                {
+                    "integrationKey",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -101,11 +112,21 @@ namespace Pulumi.Nobl9
         [Input("displayName")]
         public Input<string>? DisplayName { get; set; }
 
+        [Input("integrationKey")]
+        private Input<string>? _integrationKey;
+
         /// <summary>
         /// PagerDuty Integration Key. For more details, check [Services and integrations](https://support.pagerduty.com/docs/services-and-integrations).
         /// </summary>
-        [Input("integrationKey")]
-        public Input<string>? IntegrationKey { get; set; }
+        public Input<string>? IntegrationKey
+        {
+            get => _integrationKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _integrationKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
@@ -118,6 +139,12 @@ namespace Pulumi.Nobl9
         /// </summary>
         [Input("project", required: true)]
         public Input<string> Project { get; set; } = null!;
+
+        /// <summary>
+        /// Sends a notification after the cooldown period is over.
+        /// </summary>
+        [Input("sendResolution")]
+        public Input<Inputs.AlertMethodPagerdutySendResolutionArgs>? SendResolution { get; set; }
 
         public AlertMethodPagerdutyArgs()
         {
@@ -139,11 +166,21 @@ namespace Pulumi.Nobl9
         [Input("displayName")]
         public Input<string>? DisplayName { get; set; }
 
+        [Input("integrationKey")]
+        private Input<string>? _integrationKey;
+
         /// <summary>
         /// PagerDuty Integration Key. For more details, check [Services and integrations](https://support.pagerduty.com/docs/services-and-integrations).
         /// </summary>
-        [Input("integrationKey")]
-        public Input<string>? IntegrationKey { get; set; }
+        public Input<string>? IntegrationKey
+        {
+            get => _integrationKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _integrationKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
@@ -156,6 +193,12 @@ namespace Pulumi.Nobl9
         /// </summary>
         [Input("project")]
         public Input<string>? Project { get; set; }
+
+        /// <summary>
+        /// Sends a notification after the cooldown period is over.
+        /// </summary>
+        [Input("sendResolution")]
+        public Input<Inputs.AlertMethodPagerdutySendResolutionGetArgs>? SendResolution { get; set; }
 
         public AlertMethodPagerdutyState()
         {

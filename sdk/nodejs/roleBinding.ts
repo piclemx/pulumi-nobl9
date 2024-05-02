@@ -11,12 +11,12 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as nobl9 from "@pulumi/nobl9";
+ * import * as nobl9 from "@piclemx/pulumi-nobl9";
  *
- * const thisRoleBinding = new nobl9.RoleBinding("this", {
- *     projectRef: "1234567890asdfghjkl",
+ * const _this = new nobl9.RoleBinding("this", {
+ *     groupRef: "test",
+ *     projectRef: "default",
  *     roleRef: "project-owner",
- *     user: "1234567890asdfghjkl",
  * });
  * ```
  * ## Useful Links
@@ -58,21 +58,25 @@ export class RoleBinding extends pulumi.CustomResource {
      */
     public readonly displayName!: pulumi.Output<string | undefined>;
     /**
+     * Group name that can be retrieved from the Nobl9 UI (**Settings** > **Access Controls** > **Groups**) or using sloctl `get usergroups` command.
+     */
+    public readonly groupRef!: pulumi.Output<string | undefined>;
+    /**
      * Automatically generated, unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Project name, the project in which we want the user to assume the specified role. When `projectRef` is empty, `roleRef` must contain an Organization Role.
+     * Project name, the project in which we want the user or group to assume the specified role. When `projectRef` is empty, `roleRef` must contain an Organization Role.
      */
     public readonly projectRef!: pulumi.Output<string | undefined>;
     /**
-     * Role name; the role that you want the user to assume.
+     * Role name; the role that you want the user or group to assume.
      */
     public readonly roleRef!: pulumi.Output<string>;
     /**
-     * Okta User ID that can be retrieved from the Nobl9 UI (**Settings** > **Users**).
+     * Okta User ID that can be retrieved from the Nobl9 UI (**Settings** > **Access Controls** > **Users**).
      */
-    public readonly user!: pulumi.Output<string>;
+    public readonly user!: pulumi.Output<string | undefined>;
 
     /**
      * Create a RoleBinding resource with the given unique name, arguments, and options.
@@ -88,6 +92,7 @@ export class RoleBinding extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as RoleBindingState | undefined;
             resourceInputs["displayName"] = state ? state.displayName : undefined;
+            resourceInputs["groupRef"] = state ? state.groupRef : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["projectRef"] = state ? state.projectRef : undefined;
             resourceInputs["roleRef"] = state ? state.roleRef : undefined;
@@ -97,10 +102,8 @@ export class RoleBinding extends pulumi.CustomResource {
             if ((!args || args.roleRef === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'roleRef'");
             }
-            if ((!args || args.user === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'user'");
-            }
             resourceInputs["displayName"] = args ? args.displayName : undefined;
+            resourceInputs["groupRef"] = args ? args.groupRef : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["projectRef"] = args ? args.projectRef : undefined;
             resourceInputs["roleRef"] = args ? args.roleRef : undefined;
@@ -120,19 +123,23 @@ export interface RoleBindingState {
      */
     displayName?: pulumi.Input<string>;
     /**
+     * Group name that can be retrieved from the Nobl9 UI (**Settings** > **Access Controls** > **Groups**) or using sloctl `get usergroups` command.
+     */
+    groupRef?: pulumi.Input<string>;
+    /**
      * Automatically generated, unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
     name?: pulumi.Input<string>;
     /**
-     * Project name, the project in which we want the user to assume the specified role. When `projectRef` is empty, `roleRef` must contain an Organization Role.
+     * Project name, the project in which we want the user or group to assume the specified role. When `projectRef` is empty, `roleRef` must contain an Organization Role.
      */
     projectRef?: pulumi.Input<string>;
     /**
-     * Role name; the role that you want the user to assume.
+     * Role name; the role that you want the user or group to assume.
      */
     roleRef?: pulumi.Input<string>;
     /**
-     * Okta User ID that can be retrieved from the Nobl9 UI (**Settings** > **Users**).
+     * Okta User ID that can be retrieved from the Nobl9 UI (**Settings** > **Access Controls** > **Users**).
      */
     user?: pulumi.Input<string>;
 }
@@ -146,19 +153,23 @@ export interface RoleBindingArgs {
      */
     displayName?: pulumi.Input<string>;
     /**
+     * Group name that can be retrieved from the Nobl9 UI (**Settings** > **Access Controls** > **Groups**) or using sloctl `get usergroups` command.
+     */
+    groupRef?: pulumi.Input<string>;
+    /**
      * Automatically generated, unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
     name?: pulumi.Input<string>;
     /**
-     * Project name, the project in which we want the user to assume the specified role. When `projectRef` is empty, `roleRef` must contain an Organization Role.
+     * Project name, the project in which we want the user or group to assume the specified role. When `projectRef` is empty, `roleRef` must contain an Organization Role.
      */
     projectRef?: pulumi.Input<string>;
     /**
-     * Role name; the role that you want the user to assume.
+     * Role name; the role that you want the user or group to assume.
      */
     roleRef: pulumi.Input<string>;
     /**
-     * Okta User ID that can be retrieved from the Nobl9 UI (**Settings** > **Users**).
+     * Okta User ID that can be retrieved from the Nobl9 UI (**Settings** > **Access Controls** > **Users**).
      */
-    user: pulumi.Input<string>;
+    user?: pulumi.Input<string>;
 }

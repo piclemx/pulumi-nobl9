@@ -6,25 +6,49 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Inputs
+namespace Piclemx.Nobl9.Inputs
 {
 
     public sealed class SloObjectiveCountMetricArgs : global::Pulumi.ResourceArgs
     {
+        [Input("bads")]
+        private InputList<Inputs.SloObjectiveCountMetricBadArgs>? _bads;
+
+        /// <summary>
+        /// Configuration for bad time series metrics.
+        /// </summary>
+        public InputList<Inputs.SloObjectiveCountMetricBadArgs> Bads
+        {
+            get => _bads ?? (_bads = new InputList<Inputs.SloObjectiveCountMetricBadArgs>());
+            set => _bads = value;
+        }
+
         [Input("goods")]
         private InputList<Inputs.SloObjectiveCountMetricGoodArgs>? _goods;
+
+        /// <summary>
+        /// Configuration for good time series metrics.
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodArgs> Goods
         {
             get => _goods ?? (_goods = new InputList<Inputs.SloObjectiveCountMetricGoodArgs>());
             set => _goods = value;
         }
 
+        /// <summary>
+        /// Should the metrics be incrementing or not
+        /// </summary>
         [Input("incremental", required: true)]
         public Input<bool> Incremental { get; set; } = null!;
 
-        [Input("totals")]
+        [Input("totals", required: true)]
         private InputList<Inputs.SloObjectiveCountMetricTotalArgs>? _totals;
+
+        /// <summary>
+        /// Configuration for metric source
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricTotalArgs> Totals
         {
             get => _totals ?? (_totals = new InputList<Inputs.SloObjectiveCountMetricTotalArgs>());

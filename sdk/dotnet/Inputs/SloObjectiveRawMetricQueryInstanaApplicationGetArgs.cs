@@ -6,32 +6,52 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Inputs
+namespace Piclemx.Nobl9.Inputs
 {
 
     public sealed class SloObjectiveRawMetricQueryInstanaApplicationGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Aggregation type [Required for metrics]
+        /// </summary>
         [Input("aggregation", required: true)]
         public Input<string> Aggregation { get; set; } = null!;
 
+        /// <summary>
+        /// API query user passes in a JSON format
+        /// </summary>
         [Input("apiQuery", required: true)]
         public Input<string> ApiQuery { get; set; } = null!;
 
         [Input("groupBies", required: true)]
         private InputList<Inputs.SloObjectiveRawMetricQueryInstanaApplicationGroupByGetArgs>? _groupBies;
+
+        /// <summary>
+        /// Group by method
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryInstanaApplicationGroupByGetArgs> GroupBies
         {
             get => _groupBies ?? (_groupBies = new InputList<Inputs.SloObjectiveRawMetricQueryInstanaApplicationGroupByGetArgs>());
             set => _groupBies = value;
         }
 
+        /// <summary>
+        /// Include internal
+        /// </summary>
         [Input("includeInternal")]
         public Input<bool>? IncludeInternal { get; set; }
 
+        /// <summary>
+        /// Include synthetic
+        /// </summary>
         [Input("includeSynthetic")]
         public Input<bool>? IncludeSynthetic { get; set; }
 
+        /// <summary>
+        /// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+        /// </summary>
         [Input("metricId", required: true)]
         public Input<string> MetricId { get; set; } = null!;
 

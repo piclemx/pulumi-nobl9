@@ -6,14 +6,21 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class SloObjectiveRawMetricQueryAppdynamic
     {
+        /// <summary>
+        /// Name of the added application
+        /// </summary>
         public readonly string ApplicationName;
+        /// <summary>
+        /// Path to the metrics
+        /// </summary>
         public readonly string MetricPath;
 
         [OutputConstructor]

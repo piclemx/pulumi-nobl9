@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Inputs
+namespace Piclemx.Nobl9.Inputs
 {
 
     public sealed class AgentLightstepConfigArgs : global::Pulumi.ResourceArgs
@@ -23,6 +24,12 @@ namespace Pulumi.Nobl9.Inputs
         /// </summary>
         [Input("project", required: true)]
         public Input<string> Project { get; set; } = null!;
+
+        /// <summary>
+        /// Lightstep API URL. Nobl9 will use https://api.lightstep.com if empty.
+        /// </summary>
+        [Input("url")]
+        public Input<string>? Url { get; set; }
 
         public AgentLightstepConfigArgs()
         {

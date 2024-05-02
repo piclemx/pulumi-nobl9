@@ -2,11 +2,12 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * InfluxDB is an open source time series database platform that enables users to collect, process, and analyze data to optimize their infrastructure. Nobl9 connects with InfluxDB to collect SLI measurements and compare them to SLO targets.
+ * InfluxDB is an open source time series database platform that enables users to collect, process, and analyze data to optimize their infrastructure. Nobl9 connects to InfluxDB for SLI measurement collection and comparison with SLO targets.
  *
  * For more information, refer to [InfluxDB Direct | Nobl9 Documentation](https://docs.nobl9.com/Sources/influxdb#influxdb-direct).
  *
@@ -14,17 +15,14 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as nobl9 from "@pulumi/nobl9";
+ * import * as nobl9 from "@piclemx/pulumi-nobl9";
  *
  * const test_influxdb = new nobl9.DirectInfluxdb("test-influxdb", {
  *     apiToken: "secret",
  *     description: "desc",
+ *     logCollectionEnabled: true,
  *     organizationId: "secret",
  *     project: "terraform",
- *     sourceOfs: [
- *         "Metrics",
- *         "Services",
- *     ],
  *     url: "https://web.net",
  * });
  * ```
@@ -73,6 +71,10 @@ export class DirectInfluxdb extends pulumi.CustomResource {
      */
     public readonly displayName!: pulumi.Output<string | undefined>;
     /**
+     * [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+     */
+    public readonly logCollectionEnabled!: pulumi.Output<boolean | undefined>;
+    /**
      * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
     public readonly name!: pulumi.Output<string>;
@@ -87,11 +89,17 @@ export class DirectInfluxdb extends pulumi.CustomResource {
     /**
      * [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
      */
-    public readonly queryDelay!: pulumi.Output<outputs.DirectInfluxdbQueryDelay | undefined>;
+    public readonly queryDelay!: pulumi.Output<outputs.DirectInfluxdbQueryDelay>;
     /**
-     * Source of Metrics and/or Services.
+     * Release channel of the created datasource [stable/beta]
      */
-    public readonly sourceOfs!: pulumi.Output<string[]>;
+    public readonly releaseChannel!: pulumi.Output<string>;
+    /**
+     * This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+     *
+     * @deprecated 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
+     */
+    public readonly sourceOfs!: pulumi.Output<string[] | undefined>;
     /**
      * The status of the created direct.
      */
@@ -117,10 +125,12 @@ export class DirectInfluxdb extends pulumi.CustomResource {
             resourceInputs["apiToken"] = state ? state.apiToken : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["displayName"] = state ? state.displayName : undefined;
+            resourceInputs["logCollectionEnabled"] = state ? state.logCollectionEnabled : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["organizationId"] = state ? state.organizationId : undefined;
             resourceInputs["project"] = state ? state.project : undefined;
             resourceInputs["queryDelay"] = state ? state.queryDelay : undefined;
+            resourceInputs["releaseChannel"] = state ? state.releaseChannel : undefined;
             resourceInputs["sourceOfs"] = state ? state.sourceOfs : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
             resourceInputs["url"] = state ? state.url : undefined;
@@ -129,24 +139,25 @@ export class DirectInfluxdb extends pulumi.CustomResource {
             if ((!args || args.project === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'project'");
             }
-            if ((!args || args.sourceOfs === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'sourceOfs'");
-            }
             if ((!args || args.url === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'url'");
             }
-            resourceInputs["apiToken"] = args ? args.apiToken : undefined;
+            resourceInputs["apiToken"] = args?.apiToken ? pulumi.secret(args.apiToken) : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["displayName"] = args ? args.displayName : undefined;
+            resourceInputs["logCollectionEnabled"] = args ? args.logCollectionEnabled : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["organizationId"] = args ? args.organizationId : undefined;
+            resourceInputs["organizationId"] = args?.organizationId ? pulumi.secret(args.organizationId) : undefined;
             resourceInputs["project"] = args ? args.project : undefined;
             resourceInputs["queryDelay"] = args ? args.queryDelay : undefined;
+            resourceInputs["releaseChannel"] = args ? args.releaseChannel : undefined;
             resourceInputs["sourceOfs"] = args ? args.sourceOfs : undefined;
             resourceInputs["url"] = args ? args.url : undefined;
             resourceInputs["status"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["apiToken", "organizationId"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(DirectInfluxdb.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -168,6 +179,10 @@ export interface DirectInfluxdbState {
      */
     displayName?: pulumi.Input<string>;
     /**
+     * [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+     */
+    logCollectionEnabled?: pulumi.Input<boolean>;
+    /**
      * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
     name?: pulumi.Input<string>;
@@ -184,7 +199,13 @@ export interface DirectInfluxdbState {
      */
     queryDelay?: pulumi.Input<inputs.DirectInfluxdbQueryDelay>;
     /**
-     * Source of Metrics and/or Services.
+     * Release channel of the created datasource [stable/beta]
+     */
+    releaseChannel?: pulumi.Input<string>;
+    /**
+     * This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+     *
+     * @deprecated 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
      */
     sourceOfs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -214,6 +235,10 @@ export interface DirectInfluxdbArgs {
      */
     displayName?: pulumi.Input<string>;
     /**
+     * [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+     */
+    logCollectionEnabled?: pulumi.Input<boolean>;
+    /**
      * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
     name?: pulumi.Input<string>;
@@ -230,9 +255,15 @@ export interface DirectInfluxdbArgs {
      */
     queryDelay?: pulumi.Input<inputs.DirectInfluxdbQueryDelay>;
     /**
-     * Source of Metrics and/or Services.
+     * Release channel of the created datasource [stable/beta]
      */
-    sourceOfs: pulumi.Input<pulumi.Input<string>[]>;
+    releaseChannel?: pulumi.Input<string>;
+    /**
+     * This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+     *
+     * @deprecated 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
+     */
+    sourceOfs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * API URL endpoint to the InfluxDB's instance.
      */

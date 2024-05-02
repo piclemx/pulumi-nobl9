@@ -7,11 +7,12 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Amazon Redshift is a managed scalable database warehouse where Nobl9 users can store their metrics information. Nobl9 connects with Amazon Redshift to collect SLI measurements and compare them to SLO targets.
+// Amazon Redshift is a managed scalable database warehouse where Nobl9 users can store their metrics information. Nobl9 connects to Amazon Redshift for SLI measurement collection and comparison with SLO targets.
 //
 // For more information, refer to [Amazon Redshift Direct | Nobl9 Documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/?_highlight=redshift#amazon-redshift-direct).
 //
@@ -21,29 +22,28 @@ import (
 // package main
 //
 // import (
-// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := nobl9.NewDirectRedshift(ctx, "test-redshift", &nobl9.DirectRedshiftArgs{
-// 			AccessKeyId:     pulumi.String("secret"),
-// 			Description:     pulumi.String("desc"),
-// 			Project:         pulumi.String("terraform"),
-// 			SecretAccessKey: pulumi.String("secret"),
-// 			SecretArn:       pulumi.String("aws:arn"),
-// 			SourceOfs: pulumi.StringArray{
-// 				pulumi.String("Metrics"),
-// 				pulumi.String("Services"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := nobl9.NewDirectRedshift(ctx, "test-redshift", &nobl9.DirectRedshiftArgs{
+//				Description:          pulumi.String("desc"),
+//				LogCollectionEnabled: pulumi.Bool(true),
+//				Project:              pulumi.String("terraform"),
+//				RoleArn:              pulumi.String("secret"),
+//				SecretArn:            pulumi.String("aws:arn"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -51,23 +51,27 @@ import (
 type DirectRedshift struct {
 	pulumi.CustomResourceState
 
-	// [required] | AWS Access Key ID.
-	AccessKeyId pulumi.StringOutput `pulumi:"accessKeyId"`
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrOutput `pulumi:"displayName"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrOutput `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringOutput `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-	QueryDelay DirectRedshiftQueryDelayPtrOutput `pulumi:"queryDelay"`
-	// [required] | AWS Secret Access Key.
-	SecretAccessKey pulumi.StringOutput `pulumi:"secretAccessKey"`
+	QueryDelay DirectRedshiftQueryDelayOutput `pulumi:"queryDelay"`
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringOutput `pulumi:"releaseChannel"`
+	// [required] | ARN of the AWS IAM Role to assume.
+	RoleArn pulumi.StringOutput `pulumi:"roleArn"`
 	// AWS Secret ARN.
 	SecretArn pulumi.StringOutput `pulumi:"secretArn"`
-	// Source of Metrics and/or Services.
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayOutput `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status pulumi.StringOutput `pulumi:"status"`
@@ -83,10 +87,18 @@ func NewDirectRedshift(ctx *pulumi.Context,
 	if args.Project == nil {
 		return nil, errors.New("invalid value for required argument 'Project'")
 	}
-	if args.SourceOfs == nil {
-		return nil, errors.New("invalid value for required argument 'SourceOfs'")
+	if args.RoleArn != nil {
+		args.RoleArn = pulumi.ToSecret(args.RoleArn).(pulumi.StringPtrInput)
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.SecretArn != nil {
+		args.SecretArn = pulumi.ToSecret(args.SecretArn).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"roleArn",
+		"secretArn",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DirectRedshift
 	err := ctx.RegisterResource("nobl9:index/directRedshift:DirectRedshift", name, args, &resource, opts...)
 	if err != nil {
@@ -109,46 +121,54 @@ func GetDirectRedshift(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering DirectRedshift resources.
 type directRedshiftState struct {
-	// [required] | AWS Access Key ID.
-	AccessKeyId *string `pulumi:"accessKeyId"`
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 	Description *string `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName *string `pulumi:"displayName"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project *string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectRedshiftQueryDelay `pulumi:"queryDelay"`
-	// [required] | AWS Secret Access Key.
-	SecretAccessKey *string `pulumi:"secretAccessKey"`
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
+	// [required] | ARN of the AWS IAM Role to assume.
+	RoleArn *string `pulumi:"roleArn"`
 	// AWS Secret ARN.
 	SecretArn *string `pulumi:"secretArn"`
-	// Source of Metrics and/or Services.
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status *string `pulumi:"status"`
 }
 
 type DirectRedshiftState struct {
-	// [required] | AWS Access Key ID.
-	AccessKeyId pulumi.StringPtrInput
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 	Description pulumi.StringPtrInput
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringPtrInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectRedshiftQueryDelayPtrInput
-	// [required] | AWS Secret Access Key.
-	SecretAccessKey pulumi.StringPtrInput
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
+	// [required] | ARN of the AWS IAM Role to assume.
+	RoleArn pulumi.StringPtrInput
 	// AWS Secret ARN.
 	SecretArn pulumi.StringPtrInput
-	// Source of Metrics and/or Services.
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 	// The status of the created direct.
 	Status pulumi.StringPtrInput
@@ -159,45 +179,53 @@ func (DirectRedshiftState) ElementType() reflect.Type {
 }
 
 type directRedshiftArgs struct {
-	// [required] | AWS Access Key ID.
-	AccessKeyId *string `pulumi:"accessKeyId"`
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 	Description *string `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName *string `pulumi:"displayName"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectRedshiftQueryDelay `pulumi:"queryDelay"`
-	// [required] | AWS Secret Access Key.
-	SecretAccessKey *string `pulumi:"secretAccessKey"`
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
+	// [required] | ARN of the AWS IAM Role to assume.
+	RoleArn *string `pulumi:"roleArn"`
 	// AWS Secret ARN.
 	SecretArn *string `pulumi:"secretArn"`
-	// Source of Metrics and/or Services.
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 }
 
 // The set of arguments for constructing a DirectRedshift resource.
 type DirectRedshiftArgs struct {
-	// [required] | AWS Access Key ID.
-	AccessKeyId pulumi.StringPtrInput
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 	Description pulumi.StringPtrInput
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectRedshiftQueryDelayPtrInput
-	// [required] | AWS Secret Access Key.
-	SecretAccessKey pulumi.StringPtrInput
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
+	// [required] | ARN of the AWS IAM Role to assume.
+	RoleArn pulumi.StringPtrInput
 	// AWS Secret ARN.
 	SecretArn pulumi.StringPtrInput
-	// Source of Metrics and/or Services.
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 }
 
@@ -227,7 +255,7 @@ func (i *DirectRedshift) ToDirectRedshiftOutputWithContext(ctx context.Context) 
 // DirectRedshiftArrayInput is an input type that accepts DirectRedshiftArray and DirectRedshiftArrayOutput values.
 // You can construct a concrete instance of `DirectRedshiftArrayInput` via:
 //
-//          DirectRedshiftArray{ DirectRedshiftArgs{...} }
+//	DirectRedshiftArray{ DirectRedshiftArgs{...} }
 type DirectRedshiftArrayInput interface {
 	pulumi.Input
 
@@ -252,7 +280,7 @@ func (i DirectRedshiftArray) ToDirectRedshiftArrayOutputWithContext(ctx context.
 // DirectRedshiftMapInput is an input type that accepts DirectRedshiftMap and DirectRedshiftMapOutput values.
 // You can construct a concrete instance of `DirectRedshiftMapInput` via:
 //
-//          DirectRedshiftMap{ "key": DirectRedshiftArgs{...} }
+//	DirectRedshiftMap{ "key": DirectRedshiftArgs{...} }
 type DirectRedshiftMapInput interface {
 	pulumi.Input
 
@@ -288,11 +316,6 @@ func (o DirectRedshiftOutput) ToDirectRedshiftOutputWithContext(ctx context.Cont
 	return o
 }
 
-// [required] | AWS Access Key ID.
-func (o DirectRedshiftOutput) AccessKeyId() pulumi.StringOutput {
-	return o.ApplyT(func(v *DirectRedshift) pulumi.StringOutput { return v.AccessKeyId }).(pulumi.StringOutput)
-}
-
 // Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 func (o DirectRedshiftOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DirectRedshift) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
@@ -301,6 +324,11 @@ func (o DirectRedshiftOutput) Description() pulumi.StringPtrOutput {
 // User-friendly display name of the resource.
 func (o DirectRedshiftOutput) DisplayName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DirectRedshift) pulumi.StringPtrOutput { return v.DisplayName }).(pulumi.StringPtrOutput)
+}
+
+// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+func (o DirectRedshiftOutput) LogCollectionEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DirectRedshift) pulumi.BoolPtrOutput { return v.LogCollectionEnabled }).(pulumi.BoolPtrOutput)
 }
 
 // Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
@@ -314,13 +342,18 @@ func (o DirectRedshiftOutput) Project() pulumi.StringOutput {
 }
 
 // [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-func (o DirectRedshiftOutput) QueryDelay() DirectRedshiftQueryDelayPtrOutput {
-	return o.ApplyT(func(v *DirectRedshift) DirectRedshiftQueryDelayPtrOutput { return v.QueryDelay }).(DirectRedshiftQueryDelayPtrOutput)
+func (o DirectRedshiftOutput) QueryDelay() DirectRedshiftQueryDelayOutput {
+	return o.ApplyT(func(v *DirectRedshift) DirectRedshiftQueryDelayOutput { return v.QueryDelay }).(DirectRedshiftQueryDelayOutput)
 }
 
-// [required] | AWS Secret Access Key.
-func (o DirectRedshiftOutput) SecretAccessKey() pulumi.StringOutput {
-	return o.ApplyT(func(v *DirectRedshift) pulumi.StringOutput { return v.SecretAccessKey }).(pulumi.StringOutput)
+// Release channel of the created datasource [stable/beta]
+func (o DirectRedshiftOutput) ReleaseChannel() pulumi.StringOutput {
+	return o.ApplyT(func(v *DirectRedshift) pulumi.StringOutput { return v.ReleaseChannel }).(pulumi.StringOutput)
+}
+
+// [required] | ARN of the AWS IAM Role to assume.
+func (o DirectRedshiftOutput) RoleArn() pulumi.StringOutput {
+	return o.ApplyT(func(v *DirectRedshift) pulumi.StringOutput { return v.RoleArn }).(pulumi.StringOutput)
 }
 
 // AWS Secret ARN.
@@ -328,7 +361,9 @@ func (o DirectRedshiftOutput) SecretArn() pulumi.StringOutput {
 	return o.ApplyT(func(v *DirectRedshift) pulumi.StringOutput { return v.SecretArn }).(pulumi.StringOutput)
 }
 
-// Source of Metrics and/or Services.
+// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+//
+// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 func (o DirectRedshiftOutput) SourceOfs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *DirectRedshift) pulumi.StringArrayOutput { return v.SourceOfs }).(pulumi.StringArrayOutput)
 }

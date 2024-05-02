@@ -7,7 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -19,23 +20,26 @@ import (
 // package main
 //
 // import (
-// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := nobl9.NewRoleBinding(ctx, "this", &nobl9.RoleBindingArgs{
-// 			ProjectRef: pulumi.String("1234567890asdfghjkl"),
-// 			RoleRef:    pulumi.String("project-owner"),
-// 			User:       pulumi.String("1234567890asdfghjkl"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := nobl9.NewRoleBinding(ctx, "this", &nobl9.RoleBindingArgs{
+//				GroupRef:   pulumi.String("test"),
+//				ProjectRef: pulumi.String("default"),
+//				RoleRef:    pulumi.String("project-owner"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ## Useful Links
 //
@@ -47,14 +51,16 @@ type RoleBinding struct {
 
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrOutput `pulumi:"displayName"`
+	// Group name that can be retrieved from the Nobl9 UI (**Settings** > **Access Controls** > **Groups**) or using sloctl `get usergroups` command.
+	GroupRef pulumi.StringPtrOutput `pulumi:"groupRef"`
 	// Automatically generated, unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Project name, the project in which we want the user to assume the specified role. When `projectRef` is empty, `roleRef` must contain an Organization Role.
+	// Project name, the project in which we want the user or group to assume the specified role. When `projectRef` is empty, `roleRef` must contain an Organization Role.
 	ProjectRef pulumi.StringPtrOutput `pulumi:"projectRef"`
-	// Role name; the role that you want the user to assume.
+	// Role name; the role that you want the user or group to assume.
 	RoleRef pulumi.StringOutput `pulumi:"roleRef"`
-	// Okta User ID that can be retrieved from the Nobl9 UI (**Settings** > **Users**).
-	User pulumi.StringOutput `pulumi:"user"`
+	// Okta User ID that can be retrieved from the Nobl9 UI (**Settings** > **Access Controls** > **Users**).
+	User pulumi.StringPtrOutput `pulumi:"user"`
 }
 
 // NewRoleBinding registers a new resource with the given unique name, arguments, and options.
@@ -67,10 +73,7 @@ func NewRoleBinding(ctx *pulumi.Context,
 	if args.RoleRef == nil {
 		return nil, errors.New("invalid value for required argument 'RoleRef'")
 	}
-	if args.User == nil {
-		return nil, errors.New("invalid value for required argument 'User'")
-	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RoleBinding
 	err := ctx.RegisterResource("nobl9:index/roleBinding:RoleBinding", name, args, &resource, opts...)
 	if err != nil {
@@ -95,26 +98,30 @@ func GetRoleBinding(ctx *pulumi.Context,
 type roleBindingState struct {
 	// User-friendly display name of the resource.
 	DisplayName *string `pulumi:"displayName"`
+	// Group name that can be retrieved from the Nobl9 UI (**Settings** > **Access Controls** > **Groups**) or using sloctl `get usergroups` command.
+	GroupRef *string `pulumi:"groupRef"`
 	// Automatically generated, unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
-	// Project name, the project in which we want the user to assume the specified role. When `projectRef` is empty, `roleRef` must contain an Organization Role.
+	// Project name, the project in which we want the user or group to assume the specified role. When `projectRef` is empty, `roleRef` must contain an Organization Role.
 	ProjectRef *string `pulumi:"projectRef"`
-	// Role name; the role that you want the user to assume.
+	// Role name; the role that you want the user or group to assume.
 	RoleRef *string `pulumi:"roleRef"`
-	// Okta User ID that can be retrieved from the Nobl9 UI (**Settings** > **Users**).
+	// Okta User ID that can be retrieved from the Nobl9 UI (**Settings** > **Access Controls** > **Users**).
 	User *string `pulumi:"user"`
 }
 
 type RoleBindingState struct {
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrInput
+	// Group name that can be retrieved from the Nobl9 UI (**Settings** > **Access Controls** > **Groups**) or using sloctl `get usergroups` command.
+	GroupRef pulumi.StringPtrInput
 	// Automatically generated, unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
-	// Project name, the project in which we want the user to assume the specified role. When `projectRef` is empty, `roleRef` must contain an Organization Role.
+	// Project name, the project in which we want the user or group to assume the specified role. When `projectRef` is empty, `roleRef` must contain an Organization Role.
 	ProjectRef pulumi.StringPtrInput
-	// Role name; the role that you want the user to assume.
+	// Role name; the role that you want the user or group to assume.
 	RoleRef pulumi.StringPtrInput
-	// Okta User ID that can be retrieved from the Nobl9 UI (**Settings** > **Users**).
+	// Okta User ID that can be retrieved from the Nobl9 UI (**Settings** > **Access Controls** > **Users**).
 	User pulumi.StringPtrInput
 }
 
@@ -125,28 +132,32 @@ func (RoleBindingState) ElementType() reflect.Type {
 type roleBindingArgs struct {
 	// User-friendly display name of the resource.
 	DisplayName *string `pulumi:"displayName"`
+	// Group name that can be retrieved from the Nobl9 UI (**Settings** > **Access Controls** > **Groups**) or using sloctl `get usergroups` command.
+	GroupRef *string `pulumi:"groupRef"`
 	// Automatically generated, unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
-	// Project name, the project in which we want the user to assume the specified role. When `projectRef` is empty, `roleRef` must contain an Organization Role.
+	// Project name, the project in which we want the user or group to assume the specified role. When `projectRef` is empty, `roleRef` must contain an Organization Role.
 	ProjectRef *string `pulumi:"projectRef"`
-	// Role name; the role that you want the user to assume.
+	// Role name; the role that you want the user or group to assume.
 	RoleRef string `pulumi:"roleRef"`
-	// Okta User ID that can be retrieved from the Nobl9 UI (**Settings** > **Users**).
-	User string `pulumi:"user"`
+	// Okta User ID that can be retrieved from the Nobl9 UI (**Settings** > **Access Controls** > **Users**).
+	User *string `pulumi:"user"`
 }
 
 // The set of arguments for constructing a RoleBinding resource.
 type RoleBindingArgs struct {
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrInput
+	// Group name that can be retrieved from the Nobl9 UI (**Settings** > **Access Controls** > **Groups**) or using sloctl `get usergroups` command.
+	GroupRef pulumi.StringPtrInput
 	// Automatically generated, unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
-	// Project name, the project in which we want the user to assume the specified role. When `projectRef` is empty, `roleRef` must contain an Organization Role.
+	// Project name, the project in which we want the user or group to assume the specified role. When `projectRef` is empty, `roleRef` must contain an Organization Role.
 	ProjectRef pulumi.StringPtrInput
-	// Role name; the role that you want the user to assume.
+	// Role name; the role that you want the user or group to assume.
 	RoleRef pulumi.StringInput
-	// Okta User ID that can be retrieved from the Nobl9 UI (**Settings** > **Users**).
-	User pulumi.StringInput
+	// Okta User ID that can be retrieved from the Nobl9 UI (**Settings** > **Access Controls** > **Users**).
+	User pulumi.StringPtrInput
 }
 
 func (RoleBindingArgs) ElementType() reflect.Type {
@@ -175,7 +186,7 @@ func (i *RoleBinding) ToRoleBindingOutputWithContext(ctx context.Context) RoleBi
 // RoleBindingArrayInput is an input type that accepts RoleBindingArray and RoleBindingArrayOutput values.
 // You can construct a concrete instance of `RoleBindingArrayInput` via:
 //
-//          RoleBindingArray{ RoleBindingArgs{...} }
+//	RoleBindingArray{ RoleBindingArgs{...} }
 type RoleBindingArrayInput interface {
 	pulumi.Input
 
@@ -200,7 +211,7 @@ func (i RoleBindingArray) ToRoleBindingArrayOutputWithContext(ctx context.Contex
 // RoleBindingMapInput is an input type that accepts RoleBindingMap and RoleBindingMapOutput values.
 // You can construct a concrete instance of `RoleBindingMapInput` via:
 //
-//          RoleBindingMap{ "key": RoleBindingArgs{...} }
+//	RoleBindingMap{ "key": RoleBindingArgs{...} }
 type RoleBindingMapInput interface {
 	pulumi.Input
 
@@ -241,24 +252,29 @@ func (o RoleBindingOutput) DisplayName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RoleBinding) pulumi.StringPtrOutput { return v.DisplayName }).(pulumi.StringPtrOutput)
 }
 
+// Group name that can be retrieved from the Nobl9 UI (**Settings** > **Access Controls** > **Groups**) or using sloctl `get usergroups` command.
+func (o RoleBindingOutput) GroupRef() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RoleBinding) pulumi.StringPtrOutput { return v.GroupRef }).(pulumi.StringPtrOutput)
+}
+
 // Automatically generated, unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 func (o RoleBindingOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *RoleBinding) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Project name, the project in which we want the user to assume the specified role. When `projectRef` is empty, `roleRef` must contain an Organization Role.
+// Project name, the project in which we want the user or group to assume the specified role. When `projectRef` is empty, `roleRef` must contain an Organization Role.
 func (o RoleBindingOutput) ProjectRef() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RoleBinding) pulumi.StringPtrOutput { return v.ProjectRef }).(pulumi.StringPtrOutput)
 }
 
-// Role name; the role that you want the user to assume.
+// Role name; the role that you want the user or group to assume.
 func (o RoleBindingOutput) RoleRef() pulumi.StringOutput {
 	return o.ApplyT(func(v *RoleBinding) pulumi.StringOutput { return v.RoleRef }).(pulumi.StringOutput)
 }
 
-// Okta User ID that can be retrieved from the Nobl9 UI (**Settings** > **Users**).
-func (o RoleBindingOutput) User() pulumi.StringOutput {
-	return o.ApplyT(func(v *RoleBinding) pulumi.StringOutput { return v.User }).(pulumi.StringOutput)
+// Okta User ID that can be retrieved from the Nobl9 UI (**Settings** > **Access Controls** > **Users**).
+func (o RoleBindingOutput) User() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RoleBinding) pulumi.StringPtrOutput { return v.User }).(pulumi.StringPtrOutput)
 }
 
 type RoleBindingArrayOutput struct{ *pulumi.OutputState }

@@ -7,11 +7,12 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Amazon CloudWatch is a monitoring and observability service and a repository that aggregates data from more than 70 AWS data sources. CloudWatch also allows users to publish custom metrics from their services. Creating SLOs using this data is a powerful tool to monitor large portfolios of products. Nobl9 connects with Amazon CloudWatch to collect SLI measurements and compare them to SLO targets.
+// Amazon CloudWatch is a monitoring and observability service and a repository that aggregates data from more than 70 AWS data sources. CloudWatch also allows users to publish custom metrics from their services. Creating SLOs using this data is a powerful tool to monitor large portfolios of products. Nobl9 connects to Amazon CloudWatch for SLI measurement collection and comparison with SLO targets.
 //
 // For more information, refer to [Amazon CloudWatch Direct | Nobl9 Documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#cloudwatch-direct)
 //
@@ -21,43 +22,41 @@ import (
 // package main
 //
 // import (
-// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := nobl9.NewDirectCloudwatch(ctx, "test-cloudwatch", &nobl9.DirectCloudwatchArgs{
-// 			AccessKeyId: pulumi.String("secret"),
-// 			Description: pulumi.String("desc"),
-// 			HistoricalDataRetrieval: &DirectCloudwatchHistoricalDataRetrievalArgs{
-// 				DefaultDurations: DirectCloudwatchHistoricalDataRetrievalDefaultDurationArray{
-// 					&DirectCloudwatchHistoricalDataRetrievalDefaultDurationArgs{
-// 						Unit:  pulumi.String("Day"),
-// 						Value: pulumi.Int(0),
-// 					},
-// 				},
-// 				MaxDurations: DirectCloudwatchHistoricalDataRetrievalMaxDurationArray{
-// 					&DirectCloudwatchHistoricalDataRetrievalMaxDurationArgs{
-// 						Unit:  pulumi.String("Day"),
-// 						Value: pulumi.Int(15),
-// 					},
-// 				},
-// 			},
-// 			Project:         pulumi.String("terraform"),
-// 			SecretAccessKey: pulumi.String("secret"),
-// 			SourceOfs: pulumi.StringArray{
-// 				pulumi.String("Metrics"),
-// 				pulumi.String("Services"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := nobl9.NewDirectCloudwatch(ctx, "test-cloudwatch", &nobl9.DirectCloudwatchArgs{
+//				Description: pulumi.String("desc"),
+//				HistoricalDataRetrieval: &nobl9.DirectCloudwatchHistoricalDataRetrievalArgs{
+//					DefaultDurations: nobl9.DirectCloudwatchHistoricalDataRetrievalDefaultDurationArray{
+//						&nobl9.DirectCloudwatchHistoricalDataRetrievalDefaultDurationArgs{
+//							Unit:  pulumi.String("Day"),
+//							Value: pulumi.Int(0),
+//						},
+//					},
+//					MaxDurations: nobl9.DirectCloudwatchHistoricalDataRetrievalMaxDurationArray{
+//						&nobl9.DirectCloudwatchHistoricalDataRetrievalMaxDurationArgs{
+//							Unit:  pulumi.String("Day"),
+//							Value: pulumi.Int(15),
+//						},
+//					},
+//				},
+//				LogCollectionEnabled: pulumi.Bool(true),
+//				Project:              pulumi.String("terraform"),
+//				RoleArn:              pulumi.String("secret"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -65,23 +64,27 @@ import (
 type DirectCloudwatch struct {
 	pulumi.CustomResourceState
 
-	// [required] | AWS Access Key ID.
-	AccessKeyId pulumi.StringOutput `pulumi:"accessKeyId"`
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrOutput `pulumi:"displayName"`
 	// [Replay configuration documentation](https://docs.nobl9.com/replay)
-	HistoricalDataRetrieval DirectCloudwatchHistoricalDataRetrievalPtrOutput `pulumi:"historicalDataRetrieval"`
+	HistoricalDataRetrieval DirectCloudwatchHistoricalDataRetrievalOutput `pulumi:"historicalDataRetrieval"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrOutput `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringOutput `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-	QueryDelay DirectCloudwatchQueryDelayPtrOutput `pulumi:"queryDelay"`
-	// [required] | AWS Secret Access Key.
-	SecretAccessKey pulumi.StringOutput `pulumi:"secretAccessKey"`
-	// Source of Metrics and/or Services.
+	QueryDelay DirectCloudwatchQueryDelayOutput `pulumi:"queryDelay"`
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringOutput `pulumi:"releaseChannel"`
+	// [required] | ARN of the AWS IAM Role to assume.
+	RoleArn pulumi.StringOutput `pulumi:"roleArn"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayOutput `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status pulumi.StringOutput `pulumi:"status"`
@@ -97,10 +100,14 @@ func NewDirectCloudwatch(ctx *pulumi.Context,
 	if args.Project == nil {
 		return nil, errors.New("invalid value for required argument 'Project'")
 	}
-	if args.SourceOfs == nil {
-		return nil, errors.New("invalid value for required argument 'SourceOfs'")
+	if args.RoleArn != nil {
+		args.RoleArn = pulumi.ToSecret(args.RoleArn).(pulumi.StringPtrInput)
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"roleArn",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DirectCloudwatch
 	err := ctx.RegisterResource("nobl9:index/directCloudwatch:DirectCloudwatch", name, args, &resource, opts...)
 	if err != nil {
@@ -123,46 +130,54 @@ func GetDirectCloudwatch(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering DirectCloudwatch resources.
 type directCloudwatchState struct {
-	// [required] | AWS Access Key ID.
-	AccessKeyId *string `pulumi:"accessKeyId"`
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 	Description *string `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName *string `pulumi:"displayName"`
 	// [Replay configuration documentation](https://docs.nobl9.com/replay)
 	HistoricalDataRetrieval *DirectCloudwatchHistoricalDataRetrieval `pulumi:"historicalDataRetrieval"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project *string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectCloudwatchQueryDelay `pulumi:"queryDelay"`
-	// [required] | AWS Secret Access Key.
-	SecretAccessKey *string `pulumi:"secretAccessKey"`
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
+	// [required] | ARN of the AWS IAM Role to assume.
+	RoleArn *string `pulumi:"roleArn"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status *string `pulumi:"status"`
 }
 
 type DirectCloudwatchState struct {
-	// [required] | AWS Access Key ID.
-	AccessKeyId pulumi.StringPtrInput
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 	Description pulumi.StringPtrInput
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrInput
 	// [Replay configuration documentation](https://docs.nobl9.com/replay)
 	HistoricalDataRetrieval DirectCloudwatchHistoricalDataRetrievalPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringPtrInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectCloudwatchQueryDelayPtrInput
-	// [required] | AWS Secret Access Key.
-	SecretAccessKey pulumi.StringPtrInput
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
+	// [required] | ARN of the AWS IAM Role to assume.
+	RoleArn pulumi.StringPtrInput
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 	// The status of the created direct.
 	Status pulumi.StringPtrInput
@@ -173,45 +188,53 @@ func (DirectCloudwatchState) ElementType() reflect.Type {
 }
 
 type directCloudwatchArgs struct {
-	// [required] | AWS Access Key ID.
-	AccessKeyId *string `pulumi:"accessKeyId"`
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 	Description *string `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName *string `pulumi:"displayName"`
 	// [Replay configuration documentation](https://docs.nobl9.com/replay)
 	HistoricalDataRetrieval *DirectCloudwatchHistoricalDataRetrieval `pulumi:"historicalDataRetrieval"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectCloudwatchQueryDelay `pulumi:"queryDelay"`
-	// [required] | AWS Secret Access Key.
-	SecretAccessKey *string `pulumi:"secretAccessKey"`
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
+	// [required] | ARN of the AWS IAM Role to assume.
+	RoleArn *string `pulumi:"roleArn"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 }
 
 // The set of arguments for constructing a DirectCloudwatch resource.
 type DirectCloudwatchArgs struct {
-	// [required] | AWS Access Key ID.
-	AccessKeyId pulumi.StringPtrInput
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 	Description pulumi.StringPtrInput
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrInput
 	// [Replay configuration documentation](https://docs.nobl9.com/replay)
 	HistoricalDataRetrieval DirectCloudwatchHistoricalDataRetrievalPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectCloudwatchQueryDelayPtrInput
-	// [required] | AWS Secret Access Key.
-	SecretAccessKey pulumi.StringPtrInput
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
+	// [required] | ARN of the AWS IAM Role to assume.
+	RoleArn pulumi.StringPtrInput
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 }
 
@@ -241,7 +264,7 @@ func (i *DirectCloudwatch) ToDirectCloudwatchOutputWithContext(ctx context.Conte
 // DirectCloudwatchArrayInput is an input type that accepts DirectCloudwatchArray and DirectCloudwatchArrayOutput values.
 // You can construct a concrete instance of `DirectCloudwatchArrayInput` via:
 //
-//          DirectCloudwatchArray{ DirectCloudwatchArgs{...} }
+//	DirectCloudwatchArray{ DirectCloudwatchArgs{...} }
 type DirectCloudwatchArrayInput interface {
 	pulumi.Input
 
@@ -266,7 +289,7 @@ func (i DirectCloudwatchArray) ToDirectCloudwatchArrayOutputWithContext(ctx cont
 // DirectCloudwatchMapInput is an input type that accepts DirectCloudwatchMap and DirectCloudwatchMapOutput values.
 // You can construct a concrete instance of `DirectCloudwatchMapInput` via:
 //
-//          DirectCloudwatchMap{ "key": DirectCloudwatchArgs{...} }
+//	DirectCloudwatchMap{ "key": DirectCloudwatchArgs{...} }
 type DirectCloudwatchMapInput interface {
 	pulumi.Input
 
@@ -302,11 +325,6 @@ func (o DirectCloudwatchOutput) ToDirectCloudwatchOutputWithContext(ctx context.
 	return o
 }
 
-// [required] | AWS Access Key ID.
-func (o DirectCloudwatchOutput) AccessKeyId() pulumi.StringOutput {
-	return o.ApplyT(func(v *DirectCloudwatch) pulumi.StringOutput { return v.AccessKeyId }).(pulumi.StringOutput)
-}
-
 // Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 func (o DirectCloudwatchOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DirectCloudwatch) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
@@ -318,10 +336,15 @@ func (o DirectCloudwatchOutput) DisplayName() pulumi.StringPtrOutput {
 }
 
 // [Replay configuration documentation](https://docs.nobl9.com/replay)
-func (o DirectCloudwatchOutput) HistoricalDataRetrieval() DirectCloudwatchHistoricalDataRetrievalPtrOutput {
-	return o.ApplyT(func(v *DirectCloudwatch) DirectCloudwatchHistoricalDataRetrievalPtrOutput {
+func (o DirectCloudwatchOutput) HistoricalDataRetrieval() DirectCloudwatchHistoricalDataRetrievalOutput {
+	return o.ApplyT(func(v *DirectCloudwatch) DirectCloudwatchHistoricalDataRetrievalOutput {
 		return v.HistoricalDataRetrieval
-	}).(DirectCloudwatchHistoricalDataRetrievalPtrOutput)
+	}).(DirectCloudwatchHistoricalDataRetrievalOutput)
+}
+
+// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+func (o DirectCloudwatchOutput) LogCollectionEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DirectCloudwatch) pulumi.BoolPtrOutput { return v.LogCollectionEnabled }).(pulumi.BoolPtrOutput)
 }
 
 // Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
@@ -335,16 +358,23 @@ func (o DirectCloudwatchOutput) Project() pulumi.StringOutput {
 }
 
 // [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-func (o DirectCloudwatchOutput) QueryDelay() DirectCloudwatchQueryDelayPtrOutput {
-	return o.ApplyT(func(v *DirectCloudwatch) DirectCloudwatchQueryDelayPtrOutput { return v.QueryDelay }).(DirectCloudwatchQueryDelayPtrOutput)
+func (o DirectCloudwatchOutput) QueryDelay() DirectCloudwatchQueryDelayOutput {
+	return o.ApplyT(func(v *DirectCloudwatch) DirectCloudwatchQueryDelayOutput { return v.QueryDelay }).(DirectCloudwatchQueryDelayOutput)
 }
 
-// [required] | AWS Secret Access Key.
-func (o DirectCloudwatchOutput) SecretAccessKey() pulumi.StringOutput {
-	return o.ApplyT(func(v *DirectCloudwatch) pulumi.StringOutput { return v.SecretAccessKey }).(pulumi.StringOutput)
+// Release channel of the created datasource [stable/beta]
+func (o DirectCloudwatchOutput) ReleaseChannel() pulumi.StringOutput {
+	return o.ApplyT(func(v *DirectCloudwatch) pulumi.StringOutput { return v.ReleaseChannel }).(pulumi.StringOutput)
 }
 
-// Source of Metrics and/or Services.
+// [required] | ARN of the AWS IAM Role to assume.
+func (o DirectCloudwatchOutput) RoleArn() pulumi.StringOutput {
+	return o.ApplyT(func(v *DirectCloudwatch) pulumi.StringOutput { return v.RoleArn }).(pulumi.StringOutput)
+}
+
+// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+//
+// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 func (o DirectCloudwatchOutput) SourceOfs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *DirectCloudwatch) pulumi.StringArrayOutput { return v.SourceOfs }).(pulumi.StringArrayOutput)
 }

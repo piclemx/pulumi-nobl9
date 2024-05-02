@@ -7,11 +7,12 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Google Cloud Monitoring (GCM) provides visibility into the performance, uptime, and overall health of cloud-powered applications. It collects metrics, events, and metadata from Google Cloud, hosted uptime probes, and application instrumentation. Nobl9 connects with GCM to collect SLI measurements and compare them to SLO targets.
+// Google Cloud Monitoring (GCM) provides visibility into the performance, uptime, and overall health of cloud-powered applications. It collects metrics, events, and metadata from Google Cloud, hosted uptime probes, and application instrumentation. Nobl9 connects to GCM for SLI measurement collection and comparison with SLO targets.
 //
 // For more information, refer to [Google Cloud Monitoring Direct | Nobl9 Documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#google-cloud-monitoring-direct).
 //
@@ -21,27 +22,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := nobl9.NewDirectGcm(ctx, "test-gcm", &nobl9.DirectGcmArgs{
-// 			Description:       pulumi.String("desc"),
-// 			Project:           pulumi.String("terraform"),
-// 			ServiceAccountKey: pulumi.String("secret"),
-// 			SourceOfs: pulumi.StringArray{
-// 				pulumi.String("Metrics"),
-// 				pulumi.String("Services"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := nobl9.NewDirectGcm(ctx, "test-gcm", &nobl9.DirectGcmArgs{
+//				Description:          pulumi.String("desc"),
+//				LogCollectionEnabled: pulumi.Bool(true),
+//				Project:              pulumi.String("terraform"),
+//				ServiceAccountKey:    pulumi.String("secret"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -53,15 +54,21 @@ type DirectGcm struct {
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrOutput `pulumi:"displayName"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrOutput `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringOutput `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-	QueryDelay DirectGcmQueryDelayPtrOutput `pulumi:"queryDelay"`
+	QueryDelay DirectGcmQueryDelayOutput `pulumi:"queryDelay"`
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringOutput `pulumi:"releaseChannel"`
 	// [required] | Service Account Key.
 	ServiceAccountKey pulumi.StringOutput `pulumi:"serviceAccountKey"`
-	// Source of Metrics and/or Services.
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayOutput `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status pulumi.StringOutput `pulumi:"status"`
@@ -77,10 +84,14 @@ func NewDirectGcm(ctx *pulumi.Context,
 	if args.Project == nil {
 		return nil, errors.New("invalid value for required argument 'Project'")
 	}
-	if args.SourceOfs == nil {
-		return nil, errors.New("invalid value for required argument 'SourceOfs'")
+	if args.ServiceAccountKey != nil {
+		args.ServiceAccountKey = pulumi.ToSecret(args.ServiceAccountKey).(pulumi.StringPtrInput)
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"serviceAccountKey",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DirectGcm
 	err := ctx.RegisterResource("nobl9:index/directGcm:DirectGcm", name, args, &resource, opts...)
 	if err != nil {
@@ -107,15 +118,21 @@ type directGcmState struct {
 	Description *string `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName *string `pulumi:"displayName"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project *string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectGcmQueryDelay `pulumi:"queryDelay"`
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
 	// [required] | Service Account Key.
 	ServiceAccountKey *string `pulumi:"serviceAccountKey"`
-	// Source of Metrics and/or Services.
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status *string `pulumi:"status"`
@@ -126,15 +143,21 @@ type DirectGcmState struct {
 	Description pulumi.StringPtrInput
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringPtrInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectGcmQueryDelayPtrInput
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
 	// [required] | Service Account Key.
 	ServiceAccountKey pulumi.StringPtrInput
-	// Source of Metrics and/or Services.
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 	// The status of the created direct.
 	Status pulumi.StringPtrInput
@@ -149,15 +172,21 @@ type directGcmArgs struct {
 	Description *string `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName *string `pulumi:"displayName"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectGcmQueryDelay `pulumi:"queryDelay"`
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
 	// [required] | Service Account Key.
 	ServiceAccountKey *string `pulumi:"serviceAccountKey"`
-	// Source of Metrics and/or Services.
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 }
 
@@ -167,15 +196,21 @@ type DirectGcmArgs struct {
 	Description pulumi.StringPtrInput
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectGcmQueryDelayPtrInput
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
 	// [required] | Service Account Key.
 	ServiceAccountKey pulumi.StringPtrInput
-	// Source of Metrics and/or Services.
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 }
 
@@ -205,7 +240,7 @@ func (i *DirectGcm) ToDirectGcmOutputWithContext(ctx context.Context) DirectGcmO
 // DirectGcmArrayInput is an input type that accepts DirectGcmArray and DirectGcmArrayOutput values.
 // You can construct a concrete instance of `DirectGcmArrayInput` via:
 //
-//          DirectGcmArray{ DirectGcmArgs{...} }
+//	DirectGcmArray{ DirectGcmArgs{...} }
 type DirectGcmArrayInput interface {
 	pulumi.Input
 
@@ -230,7 +265,7 @@ func (i DirectGcmArray) ToDirectGcmArrayOutputWithContext(ctx context.Context) D
 // DirectGcmMapInput is an input type that accepts DirectGcmMap and DirectGcmMapOutput values.
 // You can construct a concrete instance of `DirectGcmMapInput` via:
 //
-//          DirectGcmMap{ "key": DirectGcmArgs{...} }
+//	DirectGcmMap{ "key": DirectGcmArgs{...} }
 type DirectGcmMapInput interface {
 	pulumi.Input
 
@@ -276,6 +311,11 @@ func (o DirectGcmOutput) DisplayName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DirectGcm) pulumi.StringPtrOutput { return v.DisplayName }).(pulumi.StringPtrOutput)
 }
 
+// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+func (o DirectGcmOutput) LogCollectionEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DirectGcm) pulumi.BoolPtrOutput { return v.LogCollectionEnabled }).(pulumi.BoolPtrOutput)
+}
+
 // Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 func (o DirectGcmOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *DirectGcm) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
@@ -287,8 +327,13 @@ func (o DirectGcmOutput) Project() pulumi.StringOutput {
 }
 
 // [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-func (o DirectGcmOutput) QueryDelay() DirectGcmQueryDelayPtrOutput {
-	return o.ApplyT(func(v *DirectGcm) DirectGcmQueryDelayPtrOutput { return v.QueryDelay }).(DirectGcmQueryDelayPtrOutput)
+func (o DirectGcmOutput) QueryDelay() DirectGcmQueryDelayOutput {
+	return o.ApplyT(func(v *DirectGcm) DirectGcmQueryDelayOutput { return v.QueryDelay }).(DirectGcmQueryDelayOutput)
+}
+
+// Release channel of the created datasource [stable/beta]
+func (o DirectGcmOutput) ReleaseChannel() pulumi.StringOutput {
+	return o.ApplyT(func(v *DirectGcm) pulumi.StringOutput { return v.ReleaseChannel }).(pulumi.StringOutput)
 }
 
 // [required] | Service Account Key.
@@ -296,7 +341,9 @@ func (o DirectGcmOutput) ServiceAccountKey() pulumi.StringOutput {
 	return o.ApplyT(func(v *DirectGcm) pulumi.StringOutput { return v.ServiceAccountKey }).(pulumi.StringOutput)
 }
 
-// Source of Metrics and/or Services.
+// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+//
+// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 func (o DirectGcmOutput) SourceOfs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *DirectGcm) pulumi.StringArrayOutput { return v.SourceOfs }).(pulumi.StringArrayOutput)
 }
