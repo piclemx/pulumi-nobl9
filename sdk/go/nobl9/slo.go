@@ -7,7 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -15,6 +16,171 @@ import (
 //
 // For more information, refer to [SLO configuration documentation](https://docs.nobl9.com/yaml-guide#slo)
 //
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"fmt"
+//
+//	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			thisProject, err := nobl9.NewProject(ctx, "thisProject", &nobl9.ProjectArgs{
+//				DisplayName: pulumi.String("Test N9 Terraform"),
+//				Description: pulumi.String("An example N9 Terraform project"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			thisService, err := nobl9.NewService(ctx, "thisService", &nobl9.ServiceArgs{
+//				Project: thisProject.Name,
+//				DisplayName: thisProject.DisplayName.ApplyT(func(displayName *string) (string, error) {
+//					return fmt.Sprintf("%v Front Page", displayName), nil
+//				}).(pulumi.StringOutput),
+//				Description: pulumi.String("Front page service"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = nobl9.NewSlo(ctx, "thisSlo", &nobl9.SloArgs{
+//				Service:         thisService.Name,
+//				BudgetingMethod: pulumi.String("Occurrences"),
+//				Project:         thisProject.Name,
+//				Labels: nobl9.SloLabelArray{
+//					&nobl9.SloLabelArgs{
+//						Key: pulumi.String("env"),
+//						Values: pulumi.StringArray{
+//							pulumi.String("dev"),
+//							pulumi.String("prod"),
+//						},
+//					},
+//					&nobl9.SloLabelArgs{
+//						Key: pulumi.String("team"),
+//						Values: pulumi.StringArray{
+//							pulumi.String("red"),
+//						},
+//					},
+//				},
+//				Attachments: nobl9.SloAttachmentArray{
+//					&nobl9.SloAttachmentArgs{
+//						Url:         pulumi.String("https://www.nobl9.com/"),
+//						DisplayName: pulumi.String("Nobl9 Reliability Center"),
+//					},
+//					&nobl9.SloAttachmentArgs{
+//						Url:         pulumi.String("https://duckduckgo.com/"),
+//						DisplayName: pulumi.String("Nice search engine"),
+//					},
+//				},
+//				AlertPolicies: pulumi.StringArray{
+//					pulumi.String("foo-front-page-latency"),
+//				},
+//				TimeWindow: &nobl9.SloTimeWindowArgs{
+//					Unit:      pulumi.String("Day"),
+//					Count:     pulumi.Int(30),
+//					IsRolling: pulumi.Bool(true),
+//				},
+//				Objectives: nobl9.SloObjectiveArray{
+//					&nobl9.SloObjectiveArgs{
+//						Name:        pulumi.String("tf-objective-1"),
+//						Target:      pulumi.Float64(0.99),
+//						DisplayName: pulumi.String("OK"),
+//						Value:       pulumi.Float64(2000),
+//						Op:          pulumi.String("gte"),
+//						RawMetrics: nobl9.SloObjectiveRawMetricArray{
+//							&nobl9.SloObjectiveRawMetricArgs{
+//								Queries: nobl9.SloObjectiveRawMetricQueryArray{
+//									&nobl9.SloObjectiveRawMetricQueryArgs{
+//										Prometheuses: nobl9.SloObjectiveRawMetricQueryPrometheusArray{
+//											&nobl9.SloObjectiveRawMetricQueryPrometheusArgs{
+//												Promql: pulumi.String("          latency_west_c7{code=\"ALL\",instance=\"localhost:3000\",job=\"prometheus\",service=\"glob_account\"}\n"),
+//											},
+//										},
+//									},
+//								},
+//							},
+//						},
+//					},
+//				},
+//				Indicator: &nobl9.SloIndicatorArgs{
+//					Name: pulumi.String("test-terraform-prom-agent"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = nobl9.NewSlo(ctx, "thisIndex/sloSlo", &nobl9.SloArgs{
+//				Service:         thisService.Name,
+//				BudgetingMethod: pulumi.String("Occurrences"),
+//				Project:         thisProject.Name,
+//				TimeWindow: &nobl9.SloTimeWindowArgs{
+//					Unit:      pulumi.String("Day"),
+//					Count:     pulumi.Int(30),
+//					IsRolling: pulumi.Bool(true),
+//				},
+//				Objectives: nobl9.SloObjectiveArray{
+//					&nobl9.SloObjectiveArgs{
+//						Name:        pulumi.String("tf-objective-1"),
+//						Target:      pulumi.Float64(0.99),
+//						DisplayName: pulumi.String("OK"),
+//						Value:       pulumi.Float64(1),
+//						CountMetrics: nobl9.SloObjectiveCountMetricArray{
+//							&nobl9.SloObjectiveCountMetricArgs{
+//								Incremental: pulumi.Bool(true),
+//								Goods: nobl9.SloObjectiveCountMetricGoodArray{
+//									&nobl9.SloObjectiveCountMetricGoodArgs{
+//										Prometheuses: nobl9.SloObjectiveCountMetricGoodPrometheusArray{
+//											&nobl9.SloObjectiveCountMetricGoodPrometheusArgs{
+//												Promql: pulumi.String("1.0"),
+//											},
+//										},
+//									},
+//								},
+//								Totals: nobl9.SloObjectiveCountMetricTotalArray{
+//									&nobl9.SloObjectiveCountMetricTotalArgs{
+//										Prometheuses: nobl9.SloObjectiveCountMetricTotalPrometheusArray{
+//											&nobl9.SloObjectiveCountMetricTotalPrometheusArgs{
+//												Promql: pulumi.String("1.0"),
+//											},
+//										},
+//									},
+//								},
+//							},
+//						},
+//					},
+//				},
+//				Indicator: &nobl9.SloIndicatorArgs{
+//					Name: pulumi.String("test-terraform-prom-agent"),
+//				},
+//				AnomalyConfig: &nobl9.SloAnomalyConfigArgs{
+//					NoData: &nobl9.SloAnomalyConfigNoDataArgs{
+//						AlertMethods: nobl9.SloAnomalyConfigNoDataAlertMethodArray{
+//							&nobl9.SloAnomalyConfigNoDataAlertMethodArgs{
+//								Name:    pulumi.String("foo-method-method"),
+//								Project: pulumi.String("default"),
+//							},
+//							&nobl9.SloAnomalyConfigNoDataAlertMethodArgs{
+//								Name:    pulumi.String("bar-alert-method"),
+//								Project: pulumi.String("default"),
+//							},
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 // ## Nobl9 Official Documentation
 //
 // https://docs.nobl9.com/SLOs_as_code/?_highlight=slo
@@ -23,6 +189,9 @@ type Slo struct {
 
 	// Alert Policies attached to SLO
 	AlertPolicies pulumi.StringArrayOutput `pulumi:"alertPolicies"`
+	// Configuration for Anomalies. Currently supported Anomaly Type is NoData
+	AnomalyConfig SloAnomalyConfigPtrOutput `pulumi:"anomalyConfig"`
+	Attachment    SloAttachmentArrayOutput  `pulumi:"attachment"`
 	// Deprecated: "attachments" argument is deprecated use "attachment" instead
 	Attachments SloAttachmentArrayOutput `pulumi:"attachments"`
 	// Method which will be use to calculate budget
@@ -31,16 +200,16 @@ type Slo struct {
 	Composite SloCompositePtrOutput `pulumi:"composite"`
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
-	// User-friendly display name of the resource.
+	// Name displayed for the attachment. Max. length: 63 characters.
 	DisplayName pulumi.StringPtrOutput `pulumi:"displayName"`
 	Indicator   SloIndicatorOutput     `pulumi:"indicator"`
 	// [Labels](https://docs.nobl9.com/Features/labels/) containing a single key and a list of values.
 	Labels SloLabelArrayOutput `pulumi:"labels"`
-	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// The name of the previously defined alert method.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// [Objectives documentation](https://docs.nobl9.com/yaml-guide#objective)
 	Objectives SloObjectiveArrayOutput `pulumi:"objectives"`
-	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// Project name the Alert Method is in,  must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
 	Project pulumi.StringOutput `pulumi:"project"`
 	// Name of the service
 	Service    pulumi.StringOutput `pulumi:"service"`
@@ -72,7 +241,7 @@ func NewSlo(ctx *pulumi.Context,
 	if args.TimeWindow == nil {
 		return nil, errors.New("invalid value for required argument 'TimeWindow'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Slo
 	err := ctx.RegisterResource("nobl9:index/slo:Slo", name, args, &resource, opts...)
 	if err != nil {
@@ -97,6 +266,9 @@ func GetSlo(ctx *pulumi.Context,
 type sloState struct {
 	// Alert Policies attached to SLO
 	AlertPolicies []string `pulumi:"alertPolicies"`
+	// Configuration for Anomalies. Currently supported Anomaly Type is NoData
+	AnomalyConfig *SloAnomalyConfig `pulumi:"anomalyConfig"`
+	Attachment    []SloAttachment   `pulumi:"attachment"`
 	// Deprecated: "attachments" argument is deprecated use "attachment" instead
 	Attachments []SloAttachment `pulumi:"attachments"`
 	// Method which will be use to calculate budget
@@ -105,16 +277,16 @@ type sloState struct {
 	Composite *SloComposite `pulumi:"composite"`
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 	Description *string `pulumi:"description"`
-	// User-friendly display name of the resource.
+	// Name displayed for the attachment. Max. length: 63 characters.
 	DisplayName *string       `pulumi:"displayName"`
 	Indicator   *SloIndicator `pulumi:"indicator"`
 	// [Labels](https://docs.nobl9.com/Features/labels/) containing a single key and a list of values.
 	Labels []SloLabel `pulumi:"labels"`
-	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// The name of the previously defined alert method.
 	Name *string `pulumi:"name"`
 	// [Objectives documentation](https://docs.nobl9.com/yaml-guide#objective)
 	Objectives []SloObjective `pulumi:"objectives"`
-	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// Project name the Alert Method is in,  must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
 	Project *string `pulumi:"project"`
 	// Name of the service
 	Service    *string        `pulumi:"service"`
@@ -124,6 +296,9 @@ type sloState struct {
 type SloState struct {
 	// Alert Policies attached to SLO
 	AlertPolicies pulumi.StringArrayInput
+	// Configuration for Anomalies. Currently supported Anomaly Type is NoData
+	AnomalyConfig SloAnomalyConfigPtrInput
+	Attachment    SloAttachmentArrayInput
 	// Deprecated: "attachments" argument is deprecated use "attachment" instead
 	Attachments SloAttachmentArrayInput
 	// Method which will be use to calculate budget
@@ -132,16 +307,16 @@ type SloState struct {
 	Composite SloCompositePtrInput
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 	Description pulumi.StringPtrInput
-	// User-friendly display name of the resource.
+	// Name displayed for the attachment. Max. length: 63 characters.
 	DisplayName pulumi.StringPtrInput
 	Indicator   SloIndicatorPtrInput
 	// [Labels](https://docs.nobl9.com/Features/labels/) containing a single key and a list of values.
 	Labels SloLabelArrayInput
-	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// The name of the previously defined alert method.
 	Name pulumi.StringPtrInput
 	// [Objectives documentation](https://docs.nobl9.com/yaml-guide#objective)
 	Objectives SloObjectiveArrayInput
-	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// Project name the Alert Method is in,  must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
 	Project pulumi.StringPtrInput
 	// Name of the service
 	Service    pulumi.StringPtrInput
@@ -155,6 +330,9 @@ func (SloState) ElementType() reflect.Type {
 type sloArgs struct {
 	// Alert Policies attached to SLO
 	AlertPolicies []string `pulumi:"alertPolicies"`
+	// Configuration for Anomalies. Currently supported Anomaly Type is NoData
+	AnomalyConfig *SloAnomalyConfig `pulumi:"anomalyConfig"`
+	Attachment    []SloAttachment   `pulumi:"attachment"`
 	// Deprecated: "attachments" argument is deprecated use "attachment" instead
 	Attachments []SloAttachment `pulumi:"attachments"`
 	// Method which will be use to calculate budget
@@ -163,16 +341,16 @@ type sloArgs struct {
 	Composite *SloComposite `pulumi:"composite"`
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 	Description *string `pulumi:"description"`
-	// User-friendly display name of the resource.
+	// Name displayed for the attachment. Max. length: 63 characters.
 	DisplayName *string      `pulumi:"displayName"`
 	Indicator   SloIndicator `pulumi:"indicator"`
 	// [Labels](https://docs.nobl9.com/Features/labels/) containing a single key and a list of values.
 	Labels []SloLabel `pulumi:"labels"`
-	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// The name of the previously defined alert method.
 	Name *string `pulumi:"name"`
 	// [Objectives documentation](https://docs.nobl9.com/yaml-guide#objective)
 	Objectives []SloObjective `pulumi:"objectives"`
-	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// Project name the Alert Method is in,  must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
 	Project string `pulumi:"project"`
 	// Name of the service
 	Service    string        `pulumi:"service"`
@@ -183,6 +361,9 @@ type sloArgs struct {
 type SloArgs struct {
 	// Alert Policies attached to SLO
 	AlertPolicies pulumi.StringArrayInput
+	// Configuration for Anomalies. Currently supported Anomaly Type is NoData
+	AnomalyConfig SloAnomalyConfigPtrInput
+	Attachment    SloAttachmentArrayInput
 	// Deprecated: "attachments" argument is deprecated use "attachment" instead
 	Attachments SloAttachmentArrayInput
 	// Method which will be use to calculate budget
@@ -191,16 +372,16 @@ type SloArgs struct {
 	Composite SloCompositePtrInput
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 	Description pulumi.StringPtrInput
-	// User-friendly display name of the resource.
+	// Name displayed for the attachment. Max. length: 63 characters.
 	DisplayName pulumi.StringPtrInput
 	Indicator   SloIndicatorInput
 	// [Labels](https://docs.nobl9.com/Features/labels/) containing a single key and a list of values.
 	Labels SloLabelArrayInput
-	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// The name of the previously defined alert method.
 	Name pulumi.StringPtrInput
 	// [Objectives documentation](https://docs.nobl9.com/yaml-guide#objective)
 	Objectives SloObjectiveArrayInput
-	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// Project name the Alert Method is in,  must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
 	Project pulumi.StringInput
 	// Name of the service
 	Service    pulumi.StringInput
@@ -233,7 +414,7 @@ func (i *Slo) ToSloOutputWithContext(ctx context.Context) SloOutput {
 // SloArrayInput is an input type that accepts SloArray and SloArrayOutput values.
 // You can construct a concrete instance of `SloArrayInput` via:
 //
-//          SloArray{ SloArgs{...} }
+//	SloArray{ SloArgs{...} }
 type SloArrayInput interface {
 	pulumi.Input
 
@@ -258,7 +439,7 @@ func (i SloArray) ToSloArrayOutputWithContext(ctx context.Context) SloArrayOutpu
 // SloMapInput is an input type that accepts SloMap and SloMapOutput values.
 // You can construct a concrete instance of `SloMapInput` via:
 //
-//          SloMap{ "key": SloArgs{...} }
+//	SloMap{ "key": SloArgs{...} }
 type SloMapInput interface {
 	pulumi.Input
 
@@ -299,6 +480,15 @@ func (o SloOutput) AlertPolicies() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Slo) pulumi.StringArrayOutput { return v.AlertPolicies }).(pulumi.StringArrayOutput)
 }
 
+// Configuration for Anomalies. Currently supported Anomaly Type is NoData
+func (o SloOutput) AnomalyConfig() SloAnomalyConfigPtrOutput {
+	return o.ApplyT(func(v *Slo) SloAnomalyConfigPtrOutput { return v.AnomalyConfig }).(SloAnomalyConfigPtrOutput)
+}
+
+func (o SloOutput) Attachment() SloAttachmentArrayOutput {
+	return o.ApplyT(func(v *Slo) SloAttachmentArrayOutput { return v.Attachment }).(SloAttachmentArrayOutput)
+}
+
 // Deprecated: "attachments" argument is deprecated use "attachment" instead
 func (o SloOutput) Attachments() SloAttachmentArrayOutput {
 	return o.ApplyT(func(v *Slo) SloAttachmentArrayOutput { return v.Attachments }).(SloAttachmentArrayOutput)
@@ -319,7 +509,7 @@ func (o SloOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Slo) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-// User-friendly display name of the resource.
+// Name displayed for the attachment. Max. length: 63 characters.
 func (o SloOutput) DisplayName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Slo) pulumi.StringPtrOutput { return v.DisplayName }).(pulumi.StringPtrOutput)
 }
@@ -333,7 +523,7 @@ func (o SloOutput) Labels() SloLabelArrayOutput {
 	return o.ApplyT(func(v *Slo) SloLabelArrayOutput { return v.Labels }).(SloLabelArrayOutput)
 }
 
-// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+// The name of the previously defined alert method.
 func (o SloOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Slo) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
@@ -343,7 +533,7 @@ func (o SloOutput) Objectives() SloObjectiveArrayOutput {
 	return o.ApplyT(func(v *Slo) SloObjectiveArrayOutput { return v.Objectives }).(SloObjectiveArrayOutput)
 }
 
-// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+// Project name the Alert Method is in,  must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
 func (o SloOutput) Project() pulumi.StringOutput {
 	return o.ApplyT(func(v *Slo) pulumi.StringOutput { return v.Project }).(pulumi.StringOutput)
 }

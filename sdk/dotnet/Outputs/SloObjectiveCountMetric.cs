@@ -6,25 +6,42 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class SloObjectiveCountMetric
     {
+        /// <summary>
+        /// Configuration for bad time series metrics.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.SloObjectiveCountMetricBad> Bads;
+        /// <summary>
+        /// Configuration for good time series metrics.
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricGood> Goods;
+        /// <summary>
+        /// Should the metrics be incrementing or not
+        /// </summary>
         public readonly bool Incremental;
+        /// <summary>
+        /// Configuration for metric source
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotal> Totals;
 
         [OutputConstructor]
         private SloObjectiveCountMetric(
+            ImmutableArray<Outputs.SloObjectiveCountMetricBad> bads,
+
             ImmutableArray<Outputs.SloObjectiveCountMetricGood> goods,
 
             bool incremental,
 
             ImmutableArray<Outputs.SloObjectiveCountMetricTotal> totals)
         {
+            Bads = bads;
             Goods = goods;
             Incremental = incremental;
             Totals = totals;

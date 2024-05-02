@@ -6,12 +6,16 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Inputs
+namespace Piclemx.Nobl9.Inputs
 {
 
     public sealed class SloObjectiveCountMetricTotalGrafanaLokiArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Query for the logs
+        /// </summary>
         [Input("logql", required: true)]
         public Input<string> Logql { get; set; } = null!;
 

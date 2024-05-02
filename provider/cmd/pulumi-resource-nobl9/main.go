@@ -19,15 +19,14 @@ package main
 import (
 	_ "embed"
 
-	nobl9 "github.com/piclemx/pulumi-nobl9/provider"
-	"github.com/piclemx/pulumi-nobl9/provider/pkg/version"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+	"github.com/piclemx/pulumi-nobl9/provider/pkg/version"
+	nobl9 "github.com/piclemx/pulumi-nobl9/provider"
 )
 
 //go:embed schema-embed.json
 var pulumiSchema []byte
 
 func main() {
-	// Modify the path to point to the new provider
 	tfbridge.Main("nobl9", version.Version, nobl9.Provider(), pulumiSchema)
 }

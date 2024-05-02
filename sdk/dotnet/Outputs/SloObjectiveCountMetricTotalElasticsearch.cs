@@ -6,14 +6,21 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class SloObjectiveCountMetricTotalElasticsearch
     {
+        /// <summary>
+        /// Index of metrics we want to query
+        /// </summary>
         public readonly string Index;
+        /// <summary>
+        /// Query for the metrics
+        /// </summary>
         public readonly string Query;
 
         [OutputConstructor]

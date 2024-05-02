@@ -64,10 +64,6 @@ Object.defineProperty(exports, "oktaOrgUrl", {
     enumerable: true,
 });
 
-/**
- * Nobl9 [Organization ID](https://docs.nobl9.com/API_Documentation/api-endpoints-for-slo-annotations/#common-headers) that
- * contains resources managed by the Nobl9 Terraform provider.
- */
 export declare const organization: string | undefined;
 Object.defineProperty(exports, "organization", {
     get() {

@@ -4,11 +4,11 @@
 using System;
 using System.Collections.Immutable;
 
-namespace Pulumi.Nobl9
+namespace Piclemx.Nobl9
 {
     public static class Config
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "IDE1006", Justification = 
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "IDE1006", Justification = 
         "Double underscore prefix used to avoid conflicts with variable names.")]
         private sealed class __Value<T>
         {
@@ -30,7 +30,7 @@ namespace Pulumi.Nobl9
             }
         }
 
-        private static readonly Pulumi.Config __config = new Pulumi.Config("nobl9");
+        private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("nobl9");
 
         private static readonly __Value<string?> _clientId = new __Value<string?>(() => __config.Get("clientId"));
         /// <summary>
@@ -85,10 +85,6 @@ namespace Pulumi.Nobl9
         }
 
         private static readonly __Value<string?> _organization = new __Value<string?>(() => __config.Get("organization"));
-        /// <summary>
-        /// Nobl9 [Organization ID](https://docs.nobl9.com/API_Documentation/api-endpoints-for-slo-annotations/#common-headers) that
-        /// contains resources managed by the Nobl9 Terraform provider.
-        /// </summary>
         public static string? Organization
         {
             get => _organization.Get();

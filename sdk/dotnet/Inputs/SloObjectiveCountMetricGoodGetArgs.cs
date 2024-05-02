@@ -6,14 +6,19 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Inputs
+namespace Piclemx.Nobl9.Inputs
 {
 
     public sealed class SloObjectiveCountMetricGoodGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("amazonPrometheuses")]
         private InputList<Inputs.SloObjectiveCountMetricGoodAmazonPrometheusGetArgs>? _amazonPrometheuses;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodAmazonPrometheusGetArgs> AmazonPrometheuses
         {
             get => _amazonPrometheuses ?? (_amazonPrometheuses = new InputList<Inputs.SloObjectiveCountMetricGoodAmazonPrometheusGetArgs>());
@@ -22,14 +27,34 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("appdynamics")]
         private InputList<Inputs.SloObjectiveCountMetricGoodAppdynamicGetArgs>? _appdynamics;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodAppdynamicGetArgs> Appdynamics
         {
             get => _appdynamics ?? (_appdynamics = new InputList<Inputs.SloObjectiveCountMetricGoodAppdynamicGetArgs>());
             set => _appdynamics = value;
         }
 
+        [Input("azureMonitors")]
+        private InputList<Inputs.SloObjectiveCountMetricGoodAzureMonitorGetArgs>? _azureMonitors;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+        /// </summary>
+        public InputList<Inputs.SloObjectiveCountMetricGoodAzureMonitorGetArgs> AzureMonitors
+        {
+            get => _azureMonitors ?? (_azureMonitors = new InputList<Inputs.SloObjectiveCountMetricGoodAzureMonitorGetArgs>());
+            set => _azureMonitors = value;
+        }
+
         [Input("bigqueries")]
         private InputList<Inputs.SloObjectiveCountMetricGoodBigqueryGetArgs>? _bigqueries;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodBigqueryGetArgs> Bigqueries
         {
             get => _bigqueries ?? (_bigqueries = new InputList<Inputs.SloObjectiveCountMetricGoodBigqueryGetArgs>());
@@ -38,6 +63,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("cloudwatches")]
         private InputList<Inputs.SloObjectiveCountMetricGoodCloudwatchGetArgs>? _cloudwatches;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodCloudwatchGetArgs> Cloudwatches
         {
             get => _cloudwatches ?? (_cloudwatches = new InputList<Inputs.SloObjectiveCountMetricGoodCloudwatchGetArgs>());
@@ -46,6 +75,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("datadogs")]
         private InputList<Inputs.SloObjectiveCountMetricGoodDatadogGetArgs>? _datadogs;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodDatadogGetArgs> Datadogs
         {
             get => _datadogs ?? (_datadogs = new InputList<Inputs.SloObjectiveCountMetricGoodDatadogGetArgs>());
@@ -54,6 +87,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("dynatraces")]
         private InputList<Inputs.SloObjectiveCountMetricGoodDynatraceGetArgs>? _dynatraces;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodDynatraceGetArgs> Dynatraces
         {
             get => _dynatraces ?? (_dynatraces = new InputList<Inputs.SloObjectiveCountMetricGoodDynatraceGetArgs>());
@@ -62,6 +99,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("elasticsearches")]
         private InputList<Inputs.SloObjectiveCountMetricGoodElasticsearchGetArgs>? _elasticsearches;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodElasticsearchGetArgs> Elasticsearches
         {
             get => _elasticsearches ?? (_elasticsearches = new InputList<Inputs.SloObjectiveCountMetricGoodElasticsearchGetArgs>());
@@ -70,6 +111,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("gcms")]
         private InputList<Inputs.SloObjectiveCountMetricGoodGcmGetArgs>? _gcms;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodGcmGetArgs> Gcms
         {
             get => _gcms ?? (_gcms = new InputList<Inputs.SloObjectiveCountMetricGoodGcmGetArgs>());
@@ -78,6 +123,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("grafanaLokis")]
         private InputList<Inputs.SloObjectiveCountMetricGoodGrafanaLokiGetArgs>? _grafanaLokis;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodGrafanaLokiGetArgs> GrafanaLokis
         {
             get => _grafanaLokis ?? (_grafanaLokis = new InputList<Inputs.SloObjectiveCountMetricGoodGrafanaLokiGetArgs>());
@@ -86,14 +135,34 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("graphites")]
         private InputList<Inputs.SloObjectiveCountMetricGoodGraphiteGetArgs>? _graphites;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodGraphiteGetArgs> Graphites
         {
             get => _graphites ?? (_graphites = new InputList<Inputs.SloObjectiveCountMetricGoodGraphiteGetArgs>());
             set => _graphites = value;
         }
 
+        [Input("honeycombs")]
+        private InputList<Inputs.SloObjectiveCountMetricGoodHoneycombGetArgs>? _honeycombs;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+        /// </summary>
+        public InputList<Inputs.SloObjectiveCountMetricGoodHoneycombGetArgs> Honeycombs
+        {
+            get => _honeycombs ?? (_honeycombs = new InputList<Inputs.SloObjectiveCountMetricGoodHoneycombGetArgs>());
+            set => _honeycombs = value;
+        }
+
         [Input("influxdbs")]
         private InputList<Inputs.SloObjectiveCountMetricGoodInfluxdbGetArgs>? _influxdbs;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodInfluxdbGetArgs> Influxdbs
         {
             get => _influxdbs ?? (_influxdbs = new InputList<Inputs.SloObjectiveCountMetricGoodInfluxdbGetArgs>());
@@ -102,6 +171,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("instanas")]
         private InputList<Inputs.SloObjectiveCountMetricGoodInstanaGetArgs>? _instanas;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodInstanaGetArgs> Instanas
         {
             get => _instanas ?? (_instanas = new InputList<Inputs.SloObjectiveCountMetricGoodInstanaGetArgs>());
@@ -110,6 +183,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("lightsteps")]
         private InputList<Inputs.SloObjectiveCountMetricGoodLightstepGetArgs>? _lightsteps;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodLightstepGetArgs> Lightsteps
         {
             get => _lightsteps ?? (_lightsteps = new InputList<Inputs.SloObjectiveCountMetricGoodLightstepGetArgs>());
@@ -118,6 +195,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("newrelics")]
         private InputList<Inputs.SloObjectiveCountMetricGoodNewrelicGetArgs>? _newrelics;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodNewrelicGetArgs> Newrelics
         {
             get => _newrelics ?? (_newrelics = new InputList<Inputs.SloObjectiveCountMetricGoodNewrelicGetArgs>());
@@ -126,6 +207,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("opentsdbs")]
         private InputList<Inputs.SloObjectiveCountMetricGoodOpentsdbGetArgs>? _opentsdbs;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodOpentsdbGetArgs> Opentsdbs
         {
             get => _opentsdbs ?? (_opentsdbs = new InputList<Inputs.SloObjectiveCountMetricGoodOpentsdbGetArgs>());
@@ -134,6 +219,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("pingdoms")]
         private InputList<Inputs.SloObjectiveCountMetricGoodPingdomGetArgs>? _pingdoms;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodPingdomGetArgs> Pingdoms
         {
             get => _pingdoms ?? (_pingdoms = new InputList<Inputs.SloObjectiveCountMetricGoodPingdomGetArgs>());
@@ -142,6 +231,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("prometheuses")]
         private InputList<Inputs.SloObjectiveCountMetricGoodPrometheusGetArgs>? _prometheuses;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodPrometheusGetArgs> Prometheuses
         {
             get => _prometheuses ?? (_prometheuses = new InputList<Inputs.SloObjectiveCountMetricGoodPrometheusGetArgs>());
@@ -150,6 +243,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("redshifts")]
         private InputList<Inputs.SloObjectiveCountMetricGoodRedshiftGetArgs>? _redshifts;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodRedshiftGetArgs> Redshifts
         {
             get => _redshifts ?? (_redshifts = new InputList<Inputs.SloObjectiveCountMetricGoodRedshiftGetArgs>());
@@ -158,6 +255,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("splunkObservabilities")]
         private InputList<Inputs.SloObjectiveCountMetricGoodSplunkObservabilityGetArgs>? _splunkObservabilities;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodSplunkObservabilityGetArgs> SplunkObservabilities
         {
             get => _splunkObservabilities ?? (_splunkObservabilities = new InputList<Inputs.SloObjectiveCountMetricGoodSplunkObservabilityGetArgs>());
@@ -166,6 +267,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("splunks")]
         private InputList<Inputs.SloObjectiveCountMetricGoodSplunkGetArgs>? _splunks;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodSplunkGetArgs> Splunks
         {
             get => _splunks ?? (_splunks = new InputList<Inputs.SloObjectiveCountMetricGoodSplunkGetArgs>());
@@ -174,6 +279,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("sumologics")]
         private InputList<Inputs.SloObjectiveCountMetricGoodSumologicGetArgs>? _sumologics;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodSumologicGetArgs> Sumologics
         {
             get => _sumologics ?? (_sumologics = new InputList<Inputs.SloObjectiveCountMetricGoodSumologicGetArgs>());
@@ -182,6 +291,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("thousandeyes")]
         private InputList<Inputs.SloObjectiveCountMetricGoodThousandeyeGetArgs>? _thousandeyes;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
+        /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricGoodThousandeyeGetArgs> Thousandeyes
         {
             get => _thousandeyes ?? (_thousandeyes = new InputList<Inputs.SloObjectiveCountMetricGoodThousandeyeGetArgs>());

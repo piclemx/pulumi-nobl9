@@ -80,9 +80,11 @@ export class AlertMethodDiscord extends pulumi.CustomResource {
             resourceInputs["displayName"] = args ? args.displayName : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["project"] = args ? args.project : undefined;
-            resourceInputs["url"] = args ? args.url : undefined;
+            resourceInputs["url"] = args?.url ? pulumi.secret(args.url) : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["url"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(AlertMethodDiscord.__pulumiType, name, resourceInputs, opts);
     }
 }

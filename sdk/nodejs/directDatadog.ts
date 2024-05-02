@@ -2,11 +2,12 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * Datadog is a cloud-scale application observability solution that monitors servers, databases, tools, and services. Nobl9 connects with Datadog to collect SLI measurements and compare them to SLO targets.
+ * Datadog is a cloud-scale application observability solution that monitors servers, databases, tools, and services. Nobl9 connects to Datadog for SLI measurement collection and comparison with SLO targets.
  *
  * For more information, refer to [Datadog Direct | Nobl9 Documentation](https://docs.nobl9.com/Sources/datadog#datadog-direct).
  *
@@ -14,7 +15,7 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as nobl9 from "@pulumi/nobl9";
+ * import * as nobl9 from "@piclemx/pulumi-nobl9";
  *
  * const test_datadog = new nobl9.DirectDatadog("test-datadog", {
  *     apiKey: "secret",
@@ -30,12 +31,9 @@ import * as utilities from "./utilities";
  *             value: 30,
  *         }],
  *     },
+ *     logCollectionEnabled: true,
  *     project: "terraform",
  *     site: "eu",
- *     sourceOfs: [
- *         "Metrics",
- *         "Services",
- *     ],
  * });
  * ```
  * ## Nobl9 Official Documentation
@@ -89,7 +87,11 @@ export class DirectDatadog extends pulumi.CustomResource {
     /**
      * [Replay configuration documentation](https://docs.nobl9.com/replay)
      */
-    public readonly historicalDataRetrieval!: pulumi.Output<outputs.DirectDatadogHistoricalDataRetrieval | undefined>;
+    public readonly historicalDataRetrieval!: pulumi.Output<outputs.DirectDatadogHistoricalDataRetrieval>;
+    /**
+     * [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+     */
+    public readonly logCollectionEnabled!: pulumi.Output<boolean | undefined>;
     /**
      * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
@@ -101,15 +103,21 @@ export class DirectDatadog extends pulumi.CustomResource {
     /**
      * [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
      */
-    public readonly queryDelay!: pulumi.Output<outputs.DirectDatadogQueryDelay | undefined>;
+    public readonly queryDelay!: pulumi.Output<outputs.DirectDatadogQueryDelay>;
+    /**
+     * Release channel of the created datasource [stable/beta]
+     */
+    public readonly releaseChannel!: pulumi.Output<string>;
     /**
      * `com` or `eu`, Datadog SaaS instance, which corresponds to one of Datadog's two locations (https://www.datadoghq.com/ in the U.S. or https://datadoghq.eu/ in the European Union).
      */
     public readonly site!: pulumi.Output<string>;
     /**
-     * Source of Metrics and/or Services.
+     * This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+     *
+     * @deprecated 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
      */
-    public readonly sourceOfs!: pulumi.Output<string[]>;
+    public readonly sourceOfs!: pulumi.Output<string[] | undefined>;
     /**
      * The status of the created direct.
      */
@@ -133,9 +141,11 @@ export class DirectDatadog extends pulumi.CustomResource {
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["displayName"] = state ? state.displayName : undefined;
             resourceInputs["historicalDataRetrieval"] = state ? state.historicalDataRetrieval : undefined;
+            resourceInputs["logCollectionEnabled"] = state ? state.logCollectionEnabled : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["project"] = state ? state.project : undefined;
             resourceInputs["queryDelay"] = state ? state.queryDelay : undefined;
+            resourceInputs["releaseChannel"] = state ? state.releaseChannel : undefined;
             resourceInputs["site"] = state ? state.site : undefined;
             resourceInputs["sourceOfs"] = state ? state.sourceOfs : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
@@ -147,22 +157,23 @@ export class DirectDatadog extends pulumi.CustomResource {
             if ((!args || args.site === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'site'");
             }
-            if ((!args || args.sourceOfs === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'sourceOfs'");
-            }
-            resourceInputs["apiKey"] = args ? args.apiKey : undefined;
-            resourceInputs["applicationKey"] = args ? args.applicationKey : undefined;
+            resourceInputs["apiKey"] = args?.apiKey ? pulumi.secret(args.apiKey) : undefined;
+            resourceInputs["applicationKey"] = args?.applicationKey ? pulumi.secret(args.applicationKey) : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["displayName"] = args ? args.displayName : undefined;
             resourceInputs["historicalDataRetrieval"] = args ? args.historicalDataRetrieval : undefined;
+            resourceInputs["logCollectionEnabled"] = args ? args.logCollectionEnabled : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["project"] = args ? args.project : undefined;
             resourceInputs["queryDelay"] = args ? args.queryDelay : undefined;
+            resourceInputs["releaseChannel"] = args ? args.releaseChannel : undefined;
             resourceInputs["site"] = args ? args.site : undefined;
             resourceInputs["sourceOfs"] = args ? args.sourceOfs : undefined;
             resourceInputs["status"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["apiKey", "applicationKey"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(DirectDatadog.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -192,6 +203,10 @@ export interface DirectDatadogState {
      */
     historicalDataRetrieval?: pulumi.Input<inputs.DirectDatadogHistoricalDataRetrieval>;
     /**
+     * [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+     */
+    logCollectionEnabled?: pulumi.Input<boolean>;
+    /**
      * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
     name?: pulumi.Input<string>;
@@ -204,11 +219,17 @@ export interface DirectDatadogState {
      */
     queryDelay?: pulumi.Input<inputs.DirectDatadogQueryDelay>;
     /**
+     * Release channel of the created datasource [stable/beta]
+     */
+    releaseChannel?: pulumi.Input<string>;
+    /**
      * `com` or `eu`, Datadog SaaS instance, which corresponds to one of Datadog's two locations (https://www.datadoghq.com/ in the U.S. or https://datadoghq.eu/ in the European Union).
      */
     site?: pulumi.Input<string>;
     /**
-     * Source of Metrics and/or Services.
+     * This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+     *
+     * @deprecated 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
      */
     sourceOfs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -242,6 +263,10 @@ export interface DirectDatadogArgs {
      */
     historicalDataRetrieval?: pulumi.Input<inputs.DirectDatadogHistoricalDataRetrieval>;
     /**
+     * [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+     */
+    logCollectionEnabled?: pulumi.Input<boolean>;
+    /**
      * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
     name?: pulumi.Input<string>;
@@ -254,11 +279,17 @@ export interface DirectDatadogArgs {
      */
     queryDelay?: pulumi.Input<inputs.DirectDatadogQueryDelay>;
     /**
+     * Release channel of the created datasource [stable/beta]
+     */
+    releaseChannel?: pulumi.Input<string>;
+    /**
      * `com` or `eu`, Datadog SaaS instance, which corresponds to one of Datadog's two locations (https://www.datadoghq.com/ in the U.S. or https://datadoghq.eu/ in the European Union).
      */
     site: pulumi.Input<string>;
     /**
-     * Source of Metrics and/or Services.
+     * This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+     *
+     * @deprecated 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
      */
-    sourceOfs: pulumi.Input<pulumi.Input<string>[]>;
+    sourceOfs?: pulumi.Input<pulumi.Input<string>[]>;
 }

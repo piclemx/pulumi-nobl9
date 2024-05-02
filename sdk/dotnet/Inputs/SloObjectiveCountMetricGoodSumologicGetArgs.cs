@@ -6,21 +6,34 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Inputs
+namespace Piclemx.Nobl9.Inputs
 {
 
     public sealed class SloObjectiveCountMetricGoodSumologicGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Period of data aggregation
+        /// </summary>
         [Input("quantization")]
         public Input<string>? Quantization { get; set; }
 
+        /// <summary>
+        /// Query for the metrics
+        /// </summary>
         [Input("query", required: true)]
         public Input<string> Query { get; set; } = null!;
 
+        /// <summary>
+        /// Aggregation function - avg, sum, min, max, count, none
+        /// </summary>
         [Input("rollup")]
         public Input<string>? Rollup { get; set; }
 
+        /// <summary>
+        /// Sumologic source - metrics or logs
+        /// </summary>
         [Input("type", required: true)]
         public Input<string> Type { get; set; } = null!;
 

@@ -7,12 +7,12 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Dynatrace is a software intelligence platform that monitors and optimizes application performance, development and security, IT infrastructure, and user experience. The Dynatrace Software Intelligence Platform maps, and monitors applications, microservices, container orchestration platforms such as Kubernetes, and IT infrastructure running in multi-cloud and hybrid-cloud environments, and provides automated problem remediation. Nobl9 connects with Dynatrace to collect SLI measurements and compare them to SLO targets.
-//
+// Dynatrace is a software intelligence platform that monitors and optimizes application performance, development and security, IT infrastructure, and user experience. The Dynatrace Software Intelligence Platform maps, and monitors applications, microservices, container orchestration platforms such as Kubernetes, and IT infrastructure running in multi-cloud and hybrid-cloud environments, and provides automated problem remediation. Nobl9 connects to Dynatrace for SLI measurement collection and comparison with SLO targets.
 // For more information, refer to [Dynatrace Direct | Nobl9 Documentation](https://docs.nobl9.com/Sources/dynatrace#dynatrace-direct).
 //
 // ## Example Usage
@@ -21,43 +21,42 @@ import (
 // package main
 //
 // import (
-// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := nobl9.NewDirectDynatrace(ctx, "test-dynatrace", &nobl9.DirectDynatraceArgs{
-// 			Description:    pulumi.String("desc"),
-// 			DynatraceToken: pulumi.String("secret"),
-// 			HistoricalDataRetrieval: &DirectDynatraceHistoricalDataRetrievalArgs{
-// 				DefaultDurations: DirectDynatraceHistoricalDataRetrievalDefaultDurationArray{
-// 					&DirectDynatraceHistoricalDataRetrievalDefaultDurationArgs{
-// 						Unit:  pulumi.String("Day"),
-// 						Value: pulumi.Int(1),
-// 					},
-// 				},
-// 				MaxDurations: DirectDynatraceHistoricalDataRetrievalMaxDurationArray{
-// 					&DirectDynatraceHistoricalDataRetrievalMaxDurationArgs{
-// 						Unit:  pulumi.String("Day"),
-// 						Value: pulumi.Int(10),
-// 					},
-// 				},
-// 			},
-// 			Project: pulumi.String("terraform"),
-// 			SourceOfs: pulumi.StringArray{
-// 				pulumi.String("Metrics"),
-// 				pulumi.String("Services"),
-// 			},
-// 			Url: pulumi.String("https://web.net"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := nobl9.NewDirectDynatrace(ctx, "test-dynatrace", &nobl9.DirectDynatraceArgs{
+//				Description:    pulumi.String("desc"),
+//				DynatraceToken: pulumi.String("secret"),
+//				HistoricalDataRetrieval: &nobl9.DirectDynatraceHistoricalDataRetrievalArgs{
+//					DefaultDurations: nobl9.DirectDynatraceHistoricalDataRetrievalDefaultDurationArray{
+//						&nobl9.DirectDynatraceHistoricalDataRetrievalDefaultDurationArgs{
+//							Unit:  pulumi.String("Day"),
+//							Value: pulumi.Int(1),
+//						},
+//					},
+//					MaxDurations: nobl9.DirectDynatraceHistoricalDataRetrievalMaxDurationArray{
+//						&nobl9.DirectDynatraceHistoricalDataRetrievalMaxDurationArgs{
+//							Unit:  pulumi.String("Day"),
+//							Value: pulumi.Int(10),
+//						},
+//					},
+//				},
+//				LogCollectionEnabled: pulumi.Bool(true),
+//				Project:              pulumi.String("terraform"),
+//				Url:                  pulumi.String("https://web.net"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -72,14 +71,20 @@ type DirectDynatrace struct {
 	// [required] | Dynatrace Token.
 	DynatraceToken pulumi.StringOutput `pulumi:"dynatraceToken"`
 	// [Replay configuration documentation](https://docs.nobl9.com/replay)
-	HistoricalDataRetrieval DirectDynatraceHistoricalDataRetrievalPtrOutput `pulumi:"historicalDataRetrieval"`
+	HistoricalDataRetrieval DirectDynatraceHistoricalDataRetrievalOutput `pulumi:"historicalDataRetrieval"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrOutput `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringOutput `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-	QueryDelay DirectDynatraceQueryDelayPtrOutput `pulumi:"queryDelay"`
-	// Source of Metrics and/or Services.
+	QueryDelay DirectDynatraceQueryDelayOutput `pulumi:"queryDelay"`
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringOutput `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayOutput `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status pulumi.StringOutput `pulumi:"status"`
@@ -97,13 +102,17 @@ func NewDirectDynatrace(ctx *pulumi.Context,
 	if args.Project == nil {
 		return nil, errors.New("invalid value for required argument 'Project'")
 	}
-	if args.SourceOfs == nil {
-		return nil, errors.New("invalid value for required argument 'SourceOfs'")
-	}
 	if args.Url == nil {
 		return nil, errors.New("invalid value for required argument 'Url'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.DynatraceToken != nil {
+		args.DynatraceToken = pulumi.ToSecret(args.DynatraceToken).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"dynatraceToken",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DirectDynatrace
 	err := ctx.RegisterResource("nobl9:index/directDynatrace:DirectDynatrace", name, args, &resource, opts...)
 	if err != nil {
@@ -134,13 +143,19 @@ type directDynatraceState struct {
 	DynatraceToken *string `pulumi:"dynatraceToken"`
 	// [Replay configuration documentation](https://docs.nobl9.com/replay)
 	HistoricalDataRetrieval *DirectDynatraceHistoricalDataRetrieval `pulumi:"historicalDataRetrieval"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project *string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectDynatraceQueryDelay `pulumi:"queryDelay"`
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status *string `pulumi:"status"`
@@ -157,13 +172,19 @@ type DirectDynatraceState struct {
 	DynatraceToken pulumi.StringPtrInput
 	// [Replay configuration documentation](https://docs.nobl9.com/replay)
 	HistoricalDataRetrieval DirectDynatraceHistoricalDataRetrievalPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringPtrInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectDynatraceQueryDelayPtrInput
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 	// The status of the created direct.
 	Status pulumi.StringPtrInput
@@ -184,13 +205,19 @@ type directDynatraceArgs struct {
 	DynatraceToken *string `pulumi:"dynatraceToken"`
 	// [Replay configuration documentation](https://docs.nobl9.com/replay)
 	HistoricalDataRetrieval *DirectDynatraceHistoricalDataRetrieval `pulumi:"historicalDataRetrieval"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectDynatraceQueryDelay `pulumi:"queryDelay"`
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 	// Dynatrace API URL.
 	Url string `pulumi:"url"`
@@ -206,13 +233,19 @@ type DirectDynatraceArgs struct {
 	DynatraceToken pulumi.StringPtrInput
 	// [Replay configuration documentation](https://docs.nobl9.com/replay)
 	HistoricalDataRetrieval DirectDynatraceHistoricalDataRetrievalPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectDynatraceQueryDelayPtrInput
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 	// Dynatrace API URL.
 	Url pulumi.StringInput
@@ -244,7 +277,7 @@ func (i *DirectDynatrace) ToDirectDynatraceOutputWithContext(ctx context.Context
 // DirectDynatraceArrayInput is an input type that accepts DirectDynatraceArray and DirectDynatraceArrayOutput values.
 // You can construct a concrete instance of `DirectDynatraceArrayInput` via:
 //
-//          DirectDynatraceArray{ DirectDynatraceArgs{...} }
+//	DirectDynatraceArray{ DirectDynatraceArgs{...} }
 type DirectDynatraceArrayInput interface {
 	pulumi.Input
 
@@ -269,7 +302,7 @@ func (i DirectDynatraceArray) ToDirectDynatraceArrayOutputWithContext(ctx contex
 // DirectDynatraceMapInput is an input type that accepts DirectDynatraceMap and DirectDynatraceMapOutput values.
 // You can construct a concrete instance of `DirectDynatraceMapInput` via:
 //
-//          DirectDynatraceMap{ "key": DirectDynatraceArgs{...} }
+//	DirectDynatraceMap{ "key": DirectDynatraceArgs{...} }
 type DirectDynatraceMapInput interface {
 	pulumi.Input
 
@@ -321,10 +354,15 @@ func (o DirectDynatraceOutput) DynatraceToken() pulumi.StringOutput {
 }
 
 // [Replay configuration documentation](https://docs.nobl9.com/replay)
-func (o DirectDynatraceOutput) HistoricalDataRetrieval() DirectDynatraceHistoricalDataRetrievalPtrOutput {
-	return o.ApplyT(func(v *DirectDynatrace) DirectDynatraceHistoricalDataRetrievalPtrOutput {
+func (o DirectDynatraceOutput) HistoricalDataRetrieval() DirectDynatraceHistoricalDataRetrievalOutput {
+	return o.ApplyT(func(v *DirectDynatrace) DirectDynatraceHistoricalDataRetrievalOutput {
 		return v.HistoricalDataRetrieval
-	}).(DirectDynatraceHistoricalDataRetrievalPtrOutput)
+	}).(DirectDynatraceHistoricalDataRetrievalOutput)
+}
+
+// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+func (o DirectDynatraceOutput) LogCollectionEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DirectDynatrace) pulumi.BoolPtrOutput { return v.LogCollectionEnabled }).(pulumi.BoolPtrOutput)
 }
 
 // Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
@@ -338,11 +376,18 @@ func (o DirectDynatraceOutput) Project() pulumi.StringOutput {
 }
 
 // [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-func (o DirectDynatraceOutput) QueryDelay() DirectDynatraceQueryDelayPtrOutput {
-	return o.ApplyT(func(v *DirectDynatrace) DirectDynatraceQueryDelayPtrOutput { return v.QueryDelay }).(DirectDynatraceQueryDelayPtrOutput)
+func (o DirectDynatraceOutput) QueryDelay() DirectDynatraceQueryDelayOutput {
+	return o.ApplyT(func(v *DirectDynatrace) DirectDynatraceQueryDelayOutput { return v.QueryDelay }).(DirectDynatraceQueryDelayOutput)
 }
 
-// Source of Metrics and/or Services.
+// Release channel of the created datasource [stable/beta]
+func (o DirectDynatraceOutput) ReleaseChannel() pulumi.StringOutput {
+	return o.ApplyT(func(v *DirectDynatrace) pulumi.StringOutput { return v.ReleaseChannel }).(pulumi.StringOutput)
+}
+
+// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+//
+// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 func (o DirectDynatraceOutput) SourceOfs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *DirectDynatrace) pulumi.StringArrayOutput { return v.SourceOfs }).(pulumi.StringArrayOutput)
 }

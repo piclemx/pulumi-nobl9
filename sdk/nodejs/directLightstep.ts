@@ -2,11 +2,12 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * Lightstep is an observability platform that enables distributed tracing, that can be used to rapidly pinpoint the causes of failures and poor performance across the deeply complex dependencies among services, teams, and workloads in modern production systems. Nobl9 integration with Lightstep enables organizations to establish service level objectives from performance data captured through distributed traces in the Lightstep platform. Nobl9 connects with Lightstep to collect SLI measurements and compare them to SLO targets.
+ * Lightstep is an observability platform that enables distributed tracing, that can be used to rapidly pinpoint the causes of failures and poor performance across the deeply complex dependencies among services, teams, and workloads in modern production systems. Nobl9 integration with Lightstep enables organizations to establish service level objectives from performance data captured through distributed traces in the Lightstep platform. Nobl9 connects to Lightstep for SLI measurement collection and comparison with SLO targets.
  *
  * For more information, refer to [Lightstep Direct | Nobl9 Documentation](https://docs.nobl9.com/Sources/lightstep#lightstep-direct).
  *
@@ -14,7 +15,7 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as nobl9 from "@pulumi/nobl9";
+ * import * as nobl9 from "@piclemx/pulumi-nobl9";
  *
  * const test_lightstep = new nobl9.DirectLightstep("test-lightstep", {
  *     appToken: "secret",
@@ -31,11 +32,8 @@ import * as utilities from "./utilities";
  *     },
  *     lightstepOrganization: "acme",
  *     lightstepProject: "project1",
+ *     logCollectionEnabled: true,
  *     project: "terraform",
- *     sourceOfs: [
- *         "Metrics",
- *         "Services",
- *     ],
  * });
  * ```
  * ## Nobl9 Official Documentation
@@ -85,7 +83,7 @@ export class DirectLightstep extends pulumi.CustomResource {
     /**
      * [Replay configuration documentation](https://docs.nobl9.com/replay)
      */
-    public readonly historicalDataRetrieval!: pulumi.Output<outputs.DirectLightstepHistoricalDataRetrieval | undefined>;
+    public readonly historicalDataRetrieval!: pulumi.Output<outputs.DirectLightstepHistoricalDataRetrieval>;
     /**
      * Organization name registered in Lightstep.
      */
@@ -94,6 +92,10 @@ export class DirectLightstep extends pulumi.CustomResource {
      * Name of the Lightstep project.
      */
     public readonly lightstepProject!: pulumi.Output<string>;
+    /**
+     * [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+     */
+    public readonly logCollectionEnabled!: pulumi.Output<boolean | undefined>;
     /**
      * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
@@ -105,15 +107,25 @@ export class DirectLightstep extends pulumi.CustomResource {
     /**
      * [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
      */
-    public readonly queryDelay!: pulumi.Output<outputs.DirectLightstepQueryDelay | undefined>;
+    public readonly queryDelay!: pulumi.Output<outputs.DirectLightstepQueryDelay>;
     /**
-     * Source of Metrics and/or Services.
+     * Release channel of the created datasource [stable/beta]
      */
-    public readonly sourceOfs!: pulumi.Output<string[]>;
+    public readonly releaseChannel!: pulumi.Output<string>;
+    /**
+     * This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+     *
+     * @deprecated 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
+     */
+    public readonly sourceOfs!: pulumi.Output<string[] | undefined>;
     /**
      * The status of the created direct.
      */
     public /*out*/ readonly status!: pulumi.Output<string>;
+    /**
+     * Lightstep API URL. Nobl9 will use https://api.lightstep.com if empty.
+     */
+    public readonly url!: pulumi.Output<string | undefined>;
 
     /**
      * Create a DirectLightstep resource with the given unique name, arguments, and options.
@@ -134,11 +146,14 @@ export class DirectLightstep extends pulumi.CustomResource {
             resourceInputs["historicalDataRetrieval"] = state ? state.historicalDataRetrieval : undefined;
             resourceInputs["lightstepOrganization"] = state ? state.lightstepOrganization : undefined;
             resourceInputs["lightstepProject"] = state ? state.lightstepProject : undefined;
+            resourceInputs["logCollectionEnabled"] = state ? state.logCollectionEnabled : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["project"] = state ? state.project : undefined;
             resourceInputs["queryDelay"] = state ? state.queryDelay : undefined;
+            resourceInputs["releaseChannel"] = state ? state.releaseChannel : undefined;
             resourceInputs["sourceOfs"] = state ? state.sourceOfs : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
+            resourceInputs["url"] = state ? state.url : undefined;
         } else {
             const args = argsOrState as DirectLightstepArgs | undefined;
             if ((!args || args.lightstepOrganization === undefined) && !opts.urn) {
@@ -150,22 +165,24 @@ export class DirectLightstep extends pulumi.CustomResource {
             if ((!args || args.project === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'project'");
             }
-            if ((!args || args.sourceOfs === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'sourceOfs'");
-            }
-            resourceInputs["appToken"] = args ? args.appToken : undefined;
+            resourceInputs["appToken"] = args?.appToken ? pulumi.secret(args.appToken) : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["displayName"] = args ? args.displayName : undefined;
             resourceInputs["historicalDataRetrieval"] = args ? args.historicalDataRetrieval : undefined;
             resourceInputs["lightstepOrganization"] = args ? args.lightstepOrganization : undefined;
             resourceInputs["lightstepProject"] = args ? args.lightstepProject : undefined;
+            resourceInputs["logCollectionEnabled"] = args ? args.logCollectionEnabled : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["project"] = args ? args.project : undefined;
             resourceInputs["queryDelay"] = args ? args.queryDelay : undefined;
+            resourceInputs["releaseChannel"] = args ? args.releaseChannel : undefined;
             resourceInputs["sourceOfs"] = args ? args.sourceOfs : undefined;
+            resourceInputs["url"] = args ? args.url : undefined;
             resourceInputs["status"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["appToken"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(DirectLightstep.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -199,6 +216,10 @@ export interface DirectLightstepState {
      */
     lightstepProject?: pulumi.Input<string>;
     /**
+     * [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+     */
+    logCollectionEnabled?: pulumi.Input<boolean>;
+    /**
      * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
     name?: pulumi.Input<string>;
@@ -211,13 +232,23 @@ export interface DirectLightstepState {
      */
     queryDelay?: pulumi.Input<inputs.DirectLightstepQueryDelay>;
     /**
-     * Source of Metrics and/or Services.
+     * Release channel of the created datasource [stable/beta]
+     */
+    releaseChannel?: pulumi.Input<string>;
+    /**
+     * This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+     *
+     * @deprecated 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
      */
     sourceOfs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The status of the created direct.
      */
     status?: pulumi.Input<string>;
+    /**
+     * Lightstep API URL. Nobl9 will use https://api.lightstep.com if empty.
+     */
+    url?: pulumi.Input<string>;
 }
 
 /**
@@ -249,6 +280,10 @@ export interface DirectLightstepArgs {
      */
     lightstepProject: pulumi.Input<string>;
     /**
+     * [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+     */
+    logCollectionEnabled?: pulumi.Input<boolean>;
+    /**
      * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
     name?: pulumi.Input<string>;
@@ -261,7 +296,17 @@ export interface DirectLightstepArgs {
      */
     queryDelay?: pulumi.Input<inputs.DirectLightstepQueryDelay>;
     /**
-     * Source of Metrics and/or Services.
+     * Release channel of the created datasource [stable/beta]
      */
-    sourceOfs: pulumi.Input<pulumi.Input<string>[]>;
+    releaseChannel?: pulumi.Input<string>;
+    /**
+     * This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+     *
+     * @deprecated 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
+     */
+    sourceOfs?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Lightstep API URL. Nobl9 will use https://api.lightstep.com if empty.
+     */
+    url?: pulumi.Input<string>;
 }

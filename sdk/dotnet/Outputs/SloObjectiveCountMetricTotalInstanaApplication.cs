@@ -6,18 +6,37 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class SloObjectiveCountMetricTotalInstanaApplication
     {
+        /// <summary>
+        /// Aggregation type [Required for metrics]
+        /// </summary>
         public readonly string Aggregation;
+        /// <summary>
+        /// API query user passes in a JSON format
+        /// </summary>
         public readonly string ApiQuery;
+        /// <summary>
+        /// Group by method
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricTotalInstanaApplicationGroupBy> GroupBies;
+        /// <summary>
+        /// Include internal
+        /// </summary>
         public readonly bool? IncludeInternal;
+        /// <summary>
+        /// Include synthetic
+        /// </summary>
         public readonly bool? IncludeSynthetic;
+        /// <summary>
+        /// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+        /// </summary>
         public readonly string MetricId;
 
         [OutputConstructor]

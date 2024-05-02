@@ -6,14 +6,204 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9
+namespace Piclemx.Nobl9
 {
     /// <summary>
     /// An SLO is a target value or range of values for a service that is measured by a service level indicator (SLI). SLOs allows you to define the reliability of your products and services in terms of customer expectations. You can create SLOs for user journeys, internal services, or even infrastructure.
     /// 
     /// For more information, refer to [SLO configuration documentation](https://docs.nobl9.com/yaml-guide#slo)
     /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Nobl9 = Piclemx.Nobl9;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var thisProject = new Nobl9.Project("thisProject", new()
+    ///     {
+    ///         DisplayName = "Test N9 Terraform",
+    ///         Description = "An example N9 Terraform project",
+    ///     });
+    /// 
+    ///     var thisService = new Nobl9.Service("thisService", new()
+    ///     {
+    ///         Project = thisProject.Name,
+    ///         DisplayName = thisProject.DisplayName.Apply(displayName =&gt; $"{displayName} Front Page"),
+    ///         Description = "Front page service",
+    ///     });
+    /// 
+    ///     var thisSlo = new Nobl9.Slo("thisSlo", new()
+    ///     {
+    ///         Service = thisService.Name,
+    ///         BudgetingMethod = "Occurrences",
+    ///         Project = thisProject.Name,
+    ///         Labels = new[]
+    ///         {
+    ///             new Nobl9.Inputs.SloLabelArgs
+    ///             {
+    ///                 Key = "env",
+    ///                 Values = new[]
+    ///                 {
+    ///                     "dev",
+    ///                     "prod",
+    ///                 },
+    ///             },
+    ///             new Nobl9.Inputs.SloLabelArgs
+    ///             {
+    ///                 Key = "team",
+    ///                 Values = new[]
+    ///                 {
+    ///                     "red",
+    ///                 },
+    ///             },
+    ///         },
+    ///         Attachments = new[]
+    ///         {
+    ///             new Nobl9.Inputs.SloAttachmentArgs
+    ///             {
+    ///                 Url = "https://www.nobl9.com/",
+    ///                 DisplayName = "Nobl9 Reliability Center",
+    ///             },
+    ///             new Nobl9.Inputs.SloAttachmentArgs
+    ///             {
+    ///                 Url = "https://duckduckgo.com/",
+    ///                 DisplayName = "Nice search engine",
+    ///             },
+    ///         },
+    ///         AlertPolicies = new[]
+    ///         {
+    ///             "foo-front-page-latency",
+    ///         },
+    ///         TimeWindow = new Nobl9.Inputs.SloTimeWindowArgs
+    ///         {
+    ///             Unit = "Day",
+    ///             Count = 30,
+    ///             IsRolling = true,
+    ///         },
+    ///         Objectives = new[]
+    ///         {
+    ///             new Nobl9.Inputs.SloObjectiveArgs
+    ///             {
+    ///                 Name = "tf-objective-1",
+    ///                 Target = 0.99,
+    ///                 DisplayName = "OK",
+    ///                 Value = 2000,
+    ///                 Op = "gte",
+    ///                 RawMetrics = new[]
+    ///                 {
+    ///                     new Nobl9.Inputs.SloObjectiveRawMetricArgs
+    ///                     {
+    ///                         Queries = new[]
+    ///                         {
+    ///                             new Nobl9.Inputs.SloObjectiveRawMetricQueryArgs
+    ///                             {
+    ///                                 Prometheuses = new[]
+    ///                                 {
+    ///                                     new Nobl9.Inputs.SloObjectiveRawMetricQueryPrometheusArgs
+    ///                                     {
+    ///                                         Promql = @"          latency_west_c7{code=""ALL"",instance=""localhost:3000"",job=""prometheus"",service=""glob_account""}
+    /// ",
+    ///                                     },
+    ///                                 },
+    ///                             },
+    ///                         },
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///         Indicator = new Nobl9.Inputs.SloIndicatorArgs
+    ///         {
+    ///             Name = "test-terraform-prom-agent",
+    ///         },
+    ///     });
+    /// 
+    ///     var thisIndex_sloSlo = new Nobl9.Slo("thisIndex/sloSlo", new()
+    ///     {
+    ///         Service = thisService.Name,
+    ///         BudgetingMethod = "Occurrences",
+    ///         Project = thisProject.Name,
+    ///         TimeWindow = new Nobl9.Inputs.SloTimeWindowArgs
+    ///         {
+    ///             Unit = "Day",
+    ///             Count = 30,
+    ///             IsRolling = true,
+    ///         },
+    ///         Objectives = new[]
+    ///         {
+    ///             new Nobl9.Inputs.SloObjectiveArgs
+    ///             {
+    ///                 Name = "tf-objective-1",
+    ///                 Target = 0.99,
+    ///                 DisplayName = "OK",
+    ///                 Value = 1,
+    ///                 CountMetrics = new[]
+    ///                 {
+    ///                     new Nobl9.Inputs.SloObjectiveCountMetricArgs
+    ///                     {
+    ///                         Incremental = true,
+    ///                         Goods = new[]
+    ///                         {
+    ///                             new Nobl9.Inputs.SloObjectiveCountMetricGoodArgs
+    ///                             {
+    ///                                 Prometheuses = new[]
+    ///                                 {
+    ///                                     new Nobl9.Inputs.SloObjectiveCountMetricGoodPrometheusArgs
+    ///                                     {
+    ///                                         Promql = "1.0",
+    ///                                     },
+    ///                                 },
+    ///                             },
+    ///                         },
+    ///                         Totals = new[]
+    ///                         {
+    ///                             new Nobl9.Inputs.SloObjectiveCountMetricTotalArgs
+    ///                             {
+    ///                                 Prometheuses = new[]
+    ///                                 {
+    ///                                     new Nobl9.Inputs.SloObjectiveCountMetricTotalPrometheusArgs
+    ///                                     {
+    ///                                         Promql = "1.0",
+    ///                                     },
+    ///                                 },
+    ///                             },
+    ///                         },
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///         Indicator = new Nobl9.Inputs.SloIndicatorArgs
+    ///         {
+    ///             Name = "test-terraform-prom-agent",
+    ///         },
+    ///         AnomalyConfig = new Nobl9.Inputs.SloAnomalyConfigArgs
+    ///         {
+    ///             NoData = new Nobl9.Inputs.SloAnomalyConfigNoDataArgs
+    ///             {
+    ///                 AlertMethods = new[]
+    ///                 {
+    ///                     new Nobl9.Inputs.SloAnomalyConfigNoDataAlertMethodArgs
+    ///                     {
+    ///                         Name = "foo-method-method",
+    ///                         Project = "default",
+    ///                     },
+    ///                     new Nobl9.Inputs.SloAnomalyConfigNoDataAlertMethodArgs
+    ///                     {
+    ///                         Name = "bar-alert-method",
+    ///                         Project = "default",
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
     /// ## Nobl9 Official Documentation
     /// 
     /// https://docs.nobl9.com/SLOs_as_code/?_highlight=slo
@@ -26,6 +216,15 @@ namespace Pulumi.Nobl9
         /// </summary>
         [Output("alertPolicies")]
         public Output<ImmutableArray<string>> AlertPolicies { get; private set; } = null!;
+
+        /// <summary>
+        /// Configuration for Anomalies. Currently supported Anomaly Type is NoData
+        /// </summary>
+        [Output("anomalyConfig")]
+        public Output<Outputs.SloAnomalyConfig?> AnomalyConfig { get; private set; } = null!;
+
+        [Output("attachment")]
+        public Output<ImmutableArray<Outputs.SloAttachment>> Attachment { get; private set; } = null!;
 
         [Output("attachments")]
         public Output<ImmutableArray<Outputs.SloAttachment>> Attachments { get; private set; } = null!;
@@ -49,7 +248,7 @@ namespace Pulumi.Nobl9
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// User-friendly display name of the resource.
+        /// Name displayed for the attachment. Max. length: 63 characters.
         /// </summary>
         [Output("displayName")]
         public Output<string?> DisplayName { get; private set; } = null!;
@@ -64,7 +263,7 @@ namespace Pulumi.Nobl9
         public Output<ImmutableArray<Outputs.SloLabel>> Labels { get; private set; } = null!;
 
         /// <summary>
-        /// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+        /// The name of the previously defined alert method.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
@@ -76,7 +275,7 @@ namespace Pulumi.Nobl9
         public Output<ImmutableArray<Outputs.SloObjective>> Objectives { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+        /// Project name the Alert Method is in,  must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
         /// </summary>
         [Output("project")]
         public Output<string> Project { get; private set; } = null!;
@@ -113,7 +312,7 @@ namespace Pulumi.Nobl9
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/piclemx/pulumi-nobl9/releases/",
+                PluginDownloadURL = "github://api.github.com/piclemx/pulumi-nobl9",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -149,6 +348,20 @@ namespace Pulumi.Nobl9
             set => _alertPolicies = value;
         }
 
+        /// <summary>
+        /// Configuration for Anomalies. Currently supported Anomaly Type is NoData
+        /// </summary>
+        [Input("anomalyConfig")]
+        public Input<Inputs.SloAnomalyConfigArgs>? AnomalyConfig { get; set; }
+
+        [Input("attachment")]
+        private InputList<Inputs.SloAttachmentArgs>? _attachment;
+        public InputList<Inputs.SloAttachmentArgs> Attachment
+        {
+            get => _attachment ?? (_attachment = new InputList<Inputs.SloAttachmentArgs>());
+            set => _attachment = value;
+        }
+
         [Input("attachments")]
         private InputList<Inputs.SloAttachmentArgs>? _attachments;
         [Obsolete(@"""attachments"" argument is deprecated use ""attachment"" instead")]
@@ -177,7 +390,7 @@ namespace Pulumi.Nobl9
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// User-friendly display name of the resource.
+        /// Name displayed for the attachment. Max. length: 63 characters.
         /// </summary>
         [Input("displayName")]
         public Input<string>? DisplayName { get; set; }
@@ -198,7 +411,7 @@ namespace Pulumi.Nobl9
         }
 
         /// <summary>
-        /// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+        /// The name of the previously defined alert method.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -216,7 +429,7 @@ namespace Pulumi.Nobl9
         }
 
         /// <summary>
-        /// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+        /// Project name the Alert Method is in,  must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
         /// </summary>
         [Input("project", required: true)]
         public Input<string> Project { get; set; } = null!;
@@ -250,6 +463,20 @@ namespace Pulumi.Nobl9
             set => _alertPolicies = value;
         }
 
+        /// <summary>
+        /// Configuration for Anomalies. Currently supported Anomaly Type is NoData
+        /// </summary>
+        [Input("anomalyConfig")]
+        public Input<Inputs.SloAnomalyConfigGetArgs>? AnomalyConfig { get; set; }
+
+        [Input("attachment")]
+        private InputList<Inputs.SloAttachmentGetArgs>? _attachment;
+        public InputList<Inputs.SloAttachmentGetArgs> Attachment
+        {
+            get => _attachment ?? (_attachment = new InputList<Inputs.SloAttachmentGetArgs>());
+            set => _attachment = value;
+        }
+
         [Input("attachments")]
         private InputList<Inputs.SloAttachmentGetArgs>? _attachments;
         [Obsolete(@"""attachments"" argument is deprecated use ""attachment"" instead")]
@@ -278,7 +505,7 @@ namespace Pulumi.Nobl9
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// User-friendly display name of the resource.
+        /// Name displayed for the attachment. Max. length: 63 characters.
         /// </summary>
         [Input("displayName")]
         public Input<string>? DisplayName { get; set; }
@@ -299,7 +526,7 @@ namespace Pulumi.Nobl9
         }
 
         /// <summary>
-        /// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+        /// The name of the previously defined alert method.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -317,7 +544,7 @@ namespace Pulumi.Nobl9
         }
 
         /// <summary>
-        /// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+        /// Project name the Alert Method is in,  must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
         /// </summary>
         [Input("project")]
         public Input<string>? Project { get; set; }

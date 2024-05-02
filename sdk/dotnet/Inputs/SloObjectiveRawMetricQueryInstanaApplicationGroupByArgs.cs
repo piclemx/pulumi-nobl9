@@ -6,15 +6,22 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Inputs
+namespace Piclemx.Nobl9.Inputs
 {
 
     public sealed class SloObjectiveRawMetricQueryInstanaApplicationGroupByArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Group by tag
+        /// </summary>
         [Input("tag", required: true)]
         public Input<string> Tag { get; set; } = null!;
 
+        /// <summary>
+        /// Tag entity - one of 'DESTINATION', 'SOURCE', 'NOT_APPLICABLE'
+        /// </summary>
         [Input("tagEntity", required: true)]
         public Input<string> TagEntity { get; set; } = null!;
 

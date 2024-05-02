@@ -6,14 +6,19 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Inputs
+namespace Piclemx.Nobl9.Inputs
 {
 
     public sealed class SloObjectiveRawMetricQueryArgs : global::Pulumi.ResourceArgs
     {
         [Input("amazonPrometheuses")]
         private InputList<Inputs.SloObjectiveRawMetricQueryAmazonPrometheusArgs>? _amazonPrometheuses;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryAmazonPrometheusArgs> AmazonPrometheuses
         {
             get => _amazonPrometheuses ?? (_amazonPrometheuses = new InputList<Inputs.SloObjectiveRawMetricQueryAmazonPrometheusArgs>());
@@ -22,14 +27,34 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("appdynamics")]
         private InputList<Inputs.SloObjectiveRawMetricQueryAppdynamicArgs>? _appdynamics;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryAppdynamicArgs> Appdynamics
         {
             get => _appdynamics ?? (_appdynamics = new InputList<Inputs.SloObjectiveRawMetricQueryAppdynamicArgs>());
             set => _appdynamics = value;
         }
 
+        [Input("azureMonitors")]
+        private InputList<Inputs.SloObjectiveRawMetricQueryAzureMonitorArgs>? _azureMonitors;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+        /// </summary>
+        public InputList<Inputs.SloObjectiveRawMetricQueryAzureMonitorArgs> AzureMonitors
+        {
+            get => _azureMonitors ?? (_azureMonitors = new InputList<Inputs.SloObjectiveRawMetricQueryAzureMonitorArgs>());
+            set => _azureMonitors = value;
+        }
+
         [Input("bigqueries")]
         private InputList<Inputs.SloObjectiveRawMetricQueryBigqueryArgs>? _bigqueries;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryBigqueryArgs> Bigqueries
         {
             get => _bigqueries ?? (_bigqueries = new InputList<Inputs.SloObjectiveRawMetricQueryBigqueryArgs>());
@@ -38,6 +63,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("cloudwatches")]
         private InputList<Inputs.SloObjectiveRawMetricQueryCloudwatchArgs>? _cloudwatches;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryCloudwatchArgs> Cloudwatches
         {
             get => _cloudwatches ?? (_cloudwatches = new InputList<Inputs.SloObjectiveRawMetricQueryCloudwatchArgs>());
@@ -46,6 +75,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("datadogs")]
         private InputList<Inputs.SloObjectiveRawMetricQueryDatadogArgs>? _datadogs;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryDatadogArgs> Datadogs
         {
             get => _datadogs ?? (_datadogs = new InputList<Inputs.SloObjectiveRawMetricQueryDatadogArgs>());
@@ -54,6 +87,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("dynatraces")]
         private InputList<Inputs.SloObjectiveRawMetricQueryDynatraceArgs>? _dynatraces;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryDynatraceArgs> Dynatraces
         {
             get => _dynatraces ?? (_dynatraces = new InputList<Inputs.SloObjectiveRawMetricQueryDynatraceArgs>());
@@ -62,6 +99,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("elasticsearches")]
         private InputList<Inputs.SloObjectiveRawMetricQueryElasticsearchArgs>? _elasticsearches;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryElasticsearchArgs> Elasticsearches
         {
             get => _elasticsearches ?? (_elasticsearches = new InputList<Inputs.SloObjectiveRawMetricQueryElasticsearchArgs>());
@@ -70,6 +111,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("gcms")]
         private InputList<Inputs.SloObjectiveRawMetricQueryGcmArgs>? _gcms;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryGcmArgs> Gcms
         {
             get => _gcms ?? (_gcms = new InputList<Inputs.SloObjectiveRawMetricQueryGcmArgs>());
@@ -78,6 +123,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("grafanaLokis")]
         private InputList<Inputs.SloObjectiveRawMetricQueryGrafanaLokiArgs>? _grafanaLokis;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryGrafanaLokiArgs> GrafanaLokis
         {
             get => _grafanaLokis ?? (_grafanaLokis = new InputList<Inputs.SloObjectiveRawMetricQueryGrafanaLokiArgs>());
@@ -86,14 +135,34 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("graphites")]
         private InputList<Inputs.SloObjectiveRawMetricQueryGraphiteArgs>? _graphites;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryGraphiteArgs> Graphites
         {
             get => _graphites ?? (_graphites = new InputList<Inputs.SloObjectiveRawMetricQueryGraphiteArgs>());
             set => _graphites = value;
         }
 
+        [Input("honeycombs")]
+        private InputList<Inputs.SloObjectiveRawMetricQueryHoneycombArgs>? _honeycombs;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+        /// </summary>
+        public InputList<Inputs.SloObjectiveRawMetricQueryHoneycombArgs> Honeycombs
+        {
+            get => _honeycombs ?? (_honeycombs = new InputList<Inputs.SloObjectiveRawMetricQueryHoneycombArgs>());
+            set => _honeycombs = value;
+        }
+
         [Input("influxdbs")]
         private InputList<Inputs.SloObjectiveRawMetricQueryInfluxdbArgs>? _influxdbs;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryInfluxdbArgs> Influxdbs
         {
             get => _influxdbs ?? (_influxdbs = new InputList<Inputs.SloObjectiveRawMetricQueryInfluxdbArgs>());
@@ -102,6 +171,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("instanas")]
         private InputList<Inputs.SloObjectiveRawMetricQueryInstanaArgs>? _instanas;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryInstanaArgs> Instanas
         {
             get => _instanas ?? (_instanas = new InputList<Inputs.SloObjectiveRawMetricQueryInstanaArgs>());
@@ -110,6 +183,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("lightsteps")]
         private InputList<Inputs.SloObjectiveRawMetricQueryLightstepArgs>? _lightsteps;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryLightstepArgs> Lightsteps
         {
             get => _lightsteps ?? (_lightsteps = new InputList<Inputs.SloObjectiveRawMetricQueryLightstepArgs>());
@@ -118,6 +195,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("newrelics")]
         private InputList<Inputs.SloObjectiveRawMetricQueryNewrelicArgs>? _newrelics;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryNewrelicArgs> Newrelics
         {
             get => _newrelics ?? (_newrelics = new InputList<Inputs.SloObjectiveRawMetricQueryNewrelicArgs>());
@@ -126,6 +207,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("opentsdbs")]
         private InputList<Inputs.SloObjectiveRawMetricQueryOpentsdbArgs>? _opentsdbs;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryOpentsdbArgs> Opentsdbs
         {
             get => _opentsdbs ?? (_opentsdbs = new InputList<Inputs.SloObjectiveRawMetricQueryOpentsdbArgs>());
@@ -134,6 +219,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("pingdoms")]
         private InputList<Inputs.SloObjectiveRawMetricQueryPingdomArgs>? _pingdoms;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryPingdomArgs> Pingdoms
         {
             get => _pingdoms ?? (_pingdoms = new InputList<Inputs.SloObjectiveRawMetricQueryPingdomArgs>());
@@ -142,6 +231,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("prometheuses")]
         private InputList<Inputs.SloObjectiveRawMetricQueryPrometheusArgs>? _prometheuses;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryPrometheusArgs> Prometheuses
         {
             get => _prometheuses ?? (_prometheuses = new InputList<Inputs.SloObjectiveRawMetricQueryPrometheusArgs>());
@@ -150,6 +243,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("redshifts")]
         private InputList<Inputs.SloObjectiveRawMetricQueryRedshiftArgs>? _redshifts;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryRedshiftArgs> Redshifts
         {
             get => _redshifts ?? (_redshifts = new InputList<Inputs.SloObjectiveRawMetricQueryRedshiftArgs>());
@@ -158,6 +255,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("splunkObservabilities")]
         private InputList<Inputs.SloObjectiveRawMetricQuerySplunkObservabilityArgs>? _splunkObservabilities;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQuerySplunkObservabilityArgs> SplunkObservabilities
         {
             get => _splunkObservabilities ?? (_splunkObservabilities = new InputList<Inputs.SloObjectiveRawMetricQuerySplunkObservabilityArgs>());
@@ -166,6 +267,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("splunks")]
         private InputList<Inputs.SloObjectiveRawMetricQuerySplunkArgs>? _splunks;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQuerySplunkArgs> Splunks
         {
             get => _splunks ?? (_splunks = new InputList<Inputs.SloObjectiveRawMetricQuerySplunkArgs>());
@@ -174,6 +279,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("sumologics")]
         private InputList<Inputs.SloObjectiveRawMetricQuerySumologicArgs>? _sumologics;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQuerySumologicArgs> Sumologics
         {
             get => _sumologics ?? (_sumologics = new InputList<Inputs.SloObjectiveRawMetricQuerySumologicArgs>());
@@ -182,6 +291,10 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("thousandeyes")]
         private InputList<Inputs.SloObjectiveRawMetricQueryThousandeyeArgs>? _thousandeyes;
+
+        /// <summary>
+        /// [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryThousandeyeArgs> Thousandeyes
         {
             get => _thousandeyes ?? (_thousandeyes = new InputList<Inputs.SloObjectiveRawMetricQueryThousandeyeArgs>());

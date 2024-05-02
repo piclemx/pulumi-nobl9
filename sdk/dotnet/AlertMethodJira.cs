@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9
+namespace Piclemx.Nobl9
 {
     [Nobl9ResourceType("nobl9:index/alertMethodJira:AlertMethodJira")]
     public partial class AlertMethodJira : global::Pulumi.CustomResource
@@ -83,7 +84,11 @@ namespace Pulumi.Nobl9
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/piclemx/pulumi-nobl9/releases/",
+                PluginDownloadURL = "github://api.github.com/piclemx/pulumi-nobl9",
+                AdditionalSecretOutputs =
+                {
+                    "apitoken",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -107,11 +112,21 @@ namespace Pulumi.Nobl9
 
     public sealed class AlertMethodJiraArgs : global::Pulumi.ResourceArgs
     {
+        [Input("apitoken")]
+        private Input<string>? _apitoken;
+
         /// <summary>
         /// [API Token](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/) with access rights to the project.
         /// </summary>
-        [Input("apitoken")]
-        public Input<string>? Apitoken { get; set; }
+        public Input<string>? Apitoken
+        {
+            get => _apitoken;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _apitoken = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
@@ -163,11 +178,21 @@ namespace Pulumi.Nobl9
 
     public sealed class AlertMethodJiraState : global::Pulumi.ResourceArgs
     {
+        [Input("apitoken")]
+        private Input<string>? _apitoken;
+
         /// <summary>
         /// [API Token](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/) with access rights to the project.
         /// </summary>
-        [Input("apitoken")]
-        public Input<string>? Apitoken { get; set; }
+        public Input<string>? Apitoken
+        {
+            get => _apitoken;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _apitoken = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.

@@ -3,32 +3,13 @@
 # *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import errno
+import os
 from setuptools import setup, find_packages
 from setuptools.command.install import install
 from subprocess import check_call
 
 
-VERSION = "0.0.0"
-PLUGIN_VERSION = "0.0.0"
-
-class InstallPluginCommand(install):
-    def run(self):
-        install.run(self)
-        try:
-            check_call(['pulumi', 'plugin', 'install', 'resource', 'nobl9', PLUGIN_VERSION, '--server', 'https://github.com/piclemx/pulumi-nobl9/releases/'])
-        except OSError as error:
-            if error.errno == errno.ENOENT:
-                print(f"""
-                There was an error installing the nobl9 resource provider plugin.
-                It looks like `pulumi` is not installed on your system.
-                Please visit https://pulumi.com/ to install the Pulumi CLI.
-                You may try manually installing the plugin by running
-                `pulumi plugin install resource nobl9 {PLUGIN_VERSION}`
-                """)
-            else:
-                raise
-
-
+VERSION = os.getenv("PULUMI_PYTHON_VERSION", "0.0.0")
 def readme():
     try:
         with open('README.md', encoding='utf-8') as f:
@@ -37,28 +18,27 @@ def readme():
         return "nobl9 Pulumi Package - Development Version"
 
 
-setup(name='pulumi_nobl9',
+setup(name='piclemx_pulumi_nobl9',
+      python_requires='>=3.7',
       version=VERSION,
-      description="A Pulumi package for creating and managing Nobl9 cloud resources.",
+      description="A Pulumi package for creating and managing Nobl9 resources",
       long_description=readme(),
       long_description_content_type='text/markdown',
-      cmdclass={
-          'install': InstallPluginCommand,
-      },
-      keywords='pulumi nobl9 n9 category/cloud',
-      url='https://www.pulumi.com',
+      keywords='pulumi nobl9 category/monitoring',
+      url='https://github.com/piclemx/pulumi-nobl9',
       project_urls={
           'Repository': 'https://github.com/piclemx/pulumi-nobl9'
       },
       license='Apache-2.0',
       packages=find_packages(),
       package_data={
-          'pulumi_nobl9': [
+          'piclemx_pulumi_nobl9': [
               'py.typed',
               'pulumi-plugin.json',
           ]
       },
       install_requires=[
+          'importlib-metadata>=6.0.0,<7.0.0; python_version < "3.8"',
           'parver>=0.2.1',
           'pulumi>=3.0.0,<4.0.0',
           'semver>=2.8.1'

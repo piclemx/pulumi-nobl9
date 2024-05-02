@@ -7,11 +7,12 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Splunk Observability allows users to search, monitor, and analyze machine-generated big data. Splunk Observability enables collecting and monitoring metrics, logs, and traces from common data sources. Data collection and monitoring in one place enables full-stack, end-to-end observability of the entire infrastructure. Nobl9 connects with Splunk Observability to collect SLI measurements and compare them to SLO targets.
+// Splunk Observability allows users to search, monitor, and analyze machine-generated big data. Splunk Observability enables collecting and monitoring metrics, logs, and traces from common data sources. Data collection and monitoring in one place enables full-stack, end-to-end observability of the entire infrastructure. Nobl9 connects to Splunk Observability for SLI measurement collection and comparison with SLO targets.
 //
 // For more information, refer to [Splunk Observability Direct | Nobl9 Documentation](https://docs.nobl9.com/Sources/splunk-observability/#splunk-observability-direct).
 //
@@ -21,28 +22,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := nobl9.NewDirectSplunkObservability(ctx, "test-splunkobservability", &nobl9.DirectSplunkObservabilityArgs{
-// 			AccessToken: pulumi.String("secret"),
-// 			Description: pulumi.String("desc"),
-// 			Project:     pulumi.String("terraform"),
-// 			Realm:       pulumi.String("eu"),
-// 			SourceOfs: pulumi.StringArray{
-// 				pulumi.String("Metrics"),
-// 				pulumi.String("Services"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := nobl9.NewDirectSplunkObservability(ctx, "test-splunk-observability", &nobl9.DirectSplunkObservabilityArgs{
+//				AccessToken: pulumi.String("secret"),
+//				Description: pulumi.String("desc"),
+//				Project:     pulumi.String("terraform"),
+//				Realm:       pulumi.String("eu"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -61,10 +61,14 @@ type DirectSplunkObservability struct {
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringOutput `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-	QueryDelay DirectSplunkObservabilityQueryDelayPtrOutput `pulumi:"queryDelay"`
+	QueryDelay DirectSplunkObservabilityQueryDelayOutput `pulumi:"queryDelay"`
 	// SplunkObservability Realm.
 	Realm pulumi.StringOutput `pulumi:"realm"`
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringOutput `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayOutput `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status pulumi.StringOutput `pulumi:"status"`
@@ -83,10 +87,14 @@ func NewDirectSplunkObservability(ctx *pulumi.Context,
 	if args.Realm == nil {
 		return nil, errors.New("invalid value for required argument 'Realm'")
 	}
-	if args.SourceOfs == nil {
-		return nil, errors.New("invalid value for required argument 'SourceOfs'")
+	if args.AccessToken != nil {
+		args.AccessToken = pulumi.ToSecret(args.AccessToken).(pulumi.StringPtrInput)
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"accessToken",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DirectSplunkObservability
 	err := ctx.RegisterResource("nobl9:index/directSplunkObservability:DirectSplunkObservability", name, args, &resource, opts...)
 	if err != nil {
@@ -123,7 +131,11 @@ type directSplunkObservabilityState struct {
 	QueryDelay *DirectSplunkObservabilityQueryDelay `pulumi:"queryDelay"`
 	// SplunkObservability Realm.
 	Realm *string `pulumi:"realm"`
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status *string `pulumi:"status"`
@@ -144,7 +156,11 @@ type DirectSplunkObservabilityState struct {
 	QueryDelay DirectSplunkObservabilityQueryDelayPtrInput
 	// SplunkObservability Realm.
 	Realm pulumi.StringPtrInput
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 	// The status of the created direct.
 	Status pulumi.StringPtrInput
@@ -169,7 +185,11 @@ type directSplunkObservabilityArgs struct {
 	QueryDelay *DirectSplunkObservabilityQueryDelay `pulumi:"queryDelay"`
 	// SplunkObservability Realm.
 	Realm string `pulumi:"realm"`
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 }
 
@@ -189,7 +209,11 @@ type DirectSplunkObservabilityArgs struct {
 	QueryDelay DirectSplunkObservabilityQueryDelayPtrInput
 	// SplunkObservability Realm.
 	Realm pulumi.StringInput
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 }
 
@@ -219,7 +243,7 @@ func (i *DirectSplunkObservability) ToDirectSplunkObservabilityOutputWithContext
 // DirectSplunkObservabilityArrayInput is an input type that accepts DirectSplunkObservabilityArray and DirectSplunkObservabilityArrayOutput values.
 // You can construct a concrete instance of `DirectSplunkObservabilityArrayInput` via:
 //
-//          DirectSplunkObservabilityArray{ DirectSplunkObservabilityArgs{...} }
+//	DirectSplunkObservabilityArray{ DirectSplunkObservabilityArgs{...} }
 type DirectSplunkObservabilityArrayInput interface {
 	pulumi.Input
 
@@ -244,7 +268,7 @@ func (i DirectSplunkObservabilityArray) ToDirectSplunkObservabilityArrayOutputWi
 // DirectSplunkObservabilityMapInput is an input type that accepts DirectSplunkObservabilityMap and DirectSplunkObservabilityMapOutput values.
 // You can construct a concrete instance of `DirectSplunkObservabilityMapInput` via:
 //
-//          DirectSplunkObservabilityMap{ "key": DirectSplunkObservabilityArgs{...} }
+//	DirectSplunkObservabilityMap{ "key": DirectSplunkObservabilityArgs{...} }
 type DirectSplunkObservabilityMapInput interface {
 	pulumi.Input
 
@@ -306,8 +330,8 @@ func (o DirectSplunkObservabilityOutput) Project() pulumi.StringOutput {
 }
 
 // [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-func (o DirectSplunkObservabilityOutput) QueryDelay() DirectSplunkObservabilityQueryDelayPtrOutput {
-	return o.ApplyT(func(v *DirectSplunkObservability) DirectSplunkObservabilityQueryDelayPtrOutput { return v.QueryDelay }).(DirectSplunkObservabilityQueryDelayPtrOutput)
+func (o DirectSplunkObservabilityOutput) QueryDelay() DirectSplunkObservabilityQueryDelayOutput {
+	return o.ApplyT(func(v *DirectSplunkObservability) DirectSplunkObservabilityQueryDelayOutput { return v.QueryDelay }).(DirectSplunkObservabilityQueryDelayOutput)
 }
 
 // SplunkObservability Realm.
@@ -315,7 +339,14 @@ func (o DirectSplunkObservabilityOutput) Realm() pulumi.StringOutput {
 	return o.ApplyT(func(v *DirectSplunkObservability) pulumi.StringOutput { return v.Realm }).(pulumi.StringOutput)
 }
 
-// Source of Metrics and/or Services.
+// Release channel of the created datasource [stable/beta]
+func (o DirectSplunkObservabilityOutput) ReleaseChannel() pulumi.StringOutput {
+	return o.ApplyT(func(v *DirectSplunkObservability) pulumi.StringOutput { return v.ReleaseChannel }).(pulumi.StringOutput)
+}
+
+// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+//
+// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 func (o DirectSplunkObservabilityOutput) SourceOfs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *DirectSplunkObservability) pulumi.StringArrayOutput { return v.SourceOfs }).(pulumi.StringArrayOutput)
 }

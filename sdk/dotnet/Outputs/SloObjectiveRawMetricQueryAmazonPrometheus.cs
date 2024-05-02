@@ -6,13 +6,17 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class SloObjectiveRawMetricQueryAmazonPrometheus
     {
+        /// <summary>
+        /// Query for the metrics
+        /// </summary>
         public readonly string Promql;
 
         [OutputConstructor]

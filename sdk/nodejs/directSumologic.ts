@@ -2,11 +2,12 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * Sumo Logic is an observability platform that provides visibility into AWS, Azure, and GCP cloud applications and infrastructure. Nobl9 connects with Sumo Logic to collect SLI measurements and compare them to SLO targets.
+ * Sumo Logic is an observability platform that provides visibility into AWS, Azure, and GCP cloud applications and infrastructure. Nobl9 connects to Sumo Logic for SLI measurement collection and comparison with SLO targets.
  *
  * For more information, refer to [Sumo Logic Direct | Nobl9 Documentation](https://docs.nobl9.com/Sources/sumo-logic#sumo-logic-direct).
  *
@@ -14,14 +15,14 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as nobl9 from "@pulumi/nobl9";
+ * import * as nobl9 from "@piclemx/pulumi-nobl9";
  *
  * const test_sumologic = new nobl9.DirectSumologic("test-sumologic", {
  *     accessId: "secret",
  *     accessKey: "secret",
  *     description: "desc",
+ *     logCollectionEnabled: true,
  *     project: "terraform",
- *     sourceOfs: ["Metrics"],
  *     url: "http://web.net",
  * });
  * ```
@@ -74,6 +75,10 @@ export class DirectSumologic extends pulumi.CustomResource {
      */
     public readonly displayName!: pulumi.Output<string | undefined>;
     /**
+     * [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+     */
+    public readonly logCollectionEnabled!: pulumi.Output<boolean | undefined>;
+    /**
      * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
     public readonly name!: pulumi.Output<string>;
@@ -84,11 +89,17 @@ export class DirectSumologic extends pulumi.CustomResource {
     /**
      * [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
      */
-    public readonly queryDelay!: pulumi.Output<outputs.DirectSumologicQueryDelay | undefined>;
+    public readonly queryDelay!: pulumi.Output<outputs.DirectSumologicQueryDelay>;
     /**
-     * Source of Metrics and/or Services.
+     * Release channel of the created datasource [stable/beta]
      */
-    public readonly sourceOfs!: pulumi.Output<string[]>;
+    public readonly releaseChannel!: pulumi.Output<string>;
+    /**
+     * This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+     *
+     * @deprecated 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
+     */
+    public readonly sourceOfs!: pulumi.Output<string[] | undefined>;
     /**
      * The status of the created direct.
      */
@@ -115,9 +126,11 @@ export class DirectSumologic extends pulumi.CustomResource {
             resourceInputs["accessKey"] = state ? state.accessKey : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["displayName"] = state ? state.displayName : undefined;
+            resourceInputs["logCollectionEnabled"] = state ? state.logCollectionEnabled : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["project"] = state ? state.project : undefined;
             resourceInputs["queryDelay"] = state ? state.queryDelay : undefined;
+            resourceInputs["releaseChannel"] = state ? state.releaseChannel : undefined;
             resourceInputs["sourceOfs"] = state ? state.sourceOfs : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
             resourceInputs["url"] = state ? state.url : undefined;
@@ -126,24 +139,25 @@ export class DirectSumologic extends pulumi.CustomResource {
             if ((!args || args.project === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'project'");
             }
-            if ((!args || args.sourceOfs === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'sourceOfs'");
-            }
             if ((!args || args.url === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'url'");
             }
-            resourceInputs["accessId"] = args ? args.accessId : undefined;
-            resourceInputs["accessKey"] = args ? args.accessKey : undefined;
+            resourceInputs["accessId"] = args?.accessId ? pulumi.secret(args.accessId) : undefined;
+            resourceInputs["accessKey"] = args?.accessKey ? pulumi.secret(args.accessKey) : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["displayName"] = args ? args.displayName : undefined;
+            resourceInputs["logCollectionEnabled"] = args ? args.logCollectionEnabled : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["project"] = args ? args.project : undefined;
             resourceInputs["queryDelay"] = args ? args.queryDelay : undefined;
+            resourceInputs["releaseChannel"] = args ? args.releaseChannel : undefined;
             resourceInputs["sourceOfs"] = args ? args.sourceOfs : undefined;
             resourceInputs["url"] = args ? args.url : undefined;
             resourceInputs["status"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["accessId", "accessKey"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(DirectSumologic.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -169,6 +183,10 @@ export interface DirectSumologicState {
      */
     displayName?: pulumi.Input<string>;
     /**
+     * [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+     */
+    logCollectionEnabled?: pulumi.Input<boolean>;
+    /**
      * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
     name?: pulumi.Input<string>;
@@ -181,7 +199,13 @@ export interface DirectSumologicState {
      */
     queryDelay?: pulumi.Input<inputs.DirectSumologicQueryDelay>;
     /**
-     * Source of Metrics and/or Services.
+     * Release channel of the created datasource [stable/beta]
+     */
+    releaseChannel?: pulumi.Input<string>;
+    /**
+     * This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+     *
+     * @deprecated 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
      */
     sourceOfs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -215,6 +239,10 @@ export interface DirectSumologicArgs {
      */
     displayName?: pulumi.Input<string>;
     /**
+     * [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+     */
+    logCollectionEnabled?: pulumi.Input<boolean>;
+    /**
      * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
     name?: pulumi.Input<string>;
@@ -227,9 +255,15 @@ export interface DirectSumologicArgs {
      */
     queryDelay?: pulumi.Input<inputs.DirectSumologicQueryDelay>;
     /**
-     * Source of Metrics and/or Services.
+     * Release channel of the created datasource [stable/beta]
      */
-    sourceOfs: pulumi.Input<pulumi.Input<string>[]>;
+    releaseChannel?: pulumi.Input<string>;
+    /**
+     * This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+     *
+     * @deprecated 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
+     */
+    sourceOfs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * Sumo Logic API URL.
      */

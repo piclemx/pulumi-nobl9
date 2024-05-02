@@ -6,21 +6,34 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Inputs
+namespace Piclemx.Nobl9.Inputs
 {
 
     public sealed class SloObjectiveRawMetricQueryLightstepArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Optional value to filter by percentiles
+        /// </summary>
         [Input("percentile")]
         public Input<double>? Percentile { get; set; }
 
+        /// <summary>
+        /// ID of the metrics stream
+        /// </summary>
         [Input("streamId")]
         public Input<string>? StreamId { get; set; }
 
+        /// <summary>
+        /// Type of data to filter by
+        /// </summary>
         [Input("typeOfData", required: true)]
         public Input<string> TypeOfData { get; set; } = null!;
 
+        /// <summary>
+        /// UQL query
+        /// </summary>
         [Input("uql")]
         public Input<string>? Uql { get; set; }
 

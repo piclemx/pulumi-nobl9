@@ -92,9 +92,11 @@ export class AlertMethodWebhook extends pulumi.CustomResource {
             resourceInputs["project"] = args ? args.project : undefined;
             resourceInputs["template"] = args ? args.template : undefined;
             resourceInputs["templateFields"] = args ? args.templateFields : undefined;
-            resourceInputs["url"] = args ? args.url : undefined;
+            resourceInputs["url"] = args?.url ? pulumi.secret(args.url) : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["url"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(AlertMethodWebhook.__pulumiType, name, resourceInputs, opts);
     }
 }

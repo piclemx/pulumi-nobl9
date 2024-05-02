@@ -7,7 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -32,9 +33,9 @@ type Provider struct {
 	OktaOrgUrl pulumi.StringPtrOutput `pulumi:"oktaOrgUrl"`
 	// Nobl9 [Organization ID](https://docs.nobl9.com/API_Documentation/api-endpoints-for-slo-annotations/#common-headers) that
 	// contains resources managed by the Nobl9 Terraform provider.
-	Organization pulumi.StringOutput `pulumi:"organization"`
+	Organization pulumi.StringPtrOutput `pulumi:"organization"`
 	// Nobl9 project used when importing resources.
-	Project pulumi.StringOutput `pulumi:"project"`
+	Project pulumi.StringPtrOutput `pulumi:"project"`
 }
 
 // NewProvider registers a new resource with the given unique name, arguments, and options.
@@ -50,13 +51,14 @@ func NewProvider(ctx *pulumi.Context,
 	if args.ClientSecret == nil {
 		return nil, errors.New("invalid value for required argument 'ClientSecret'")
 	}
-	if args.Organization == nil {
-		return nil, errors.New("invalid value for required argument 'Organization'")
+	if args.ClientSecret != nil {
+		args.ClientSecret = pulumi.ToSecret(args.ClientSecret).(pulumi.StringInput)
 	}
-	if args.Project == nil {
-		return nil, errors.New("invalid value for required argument 'Project'")
-	}
-	opts = pkgResourceDefaultOpts(opts)
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"clientSecret",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Provider
 	err := ctx.RegisterResource("pulumi:providers:nobl9", name, args, &resource, opts...)
 	if err != nil {
@@ -80,9 +82,9 @@ type providerArgs struct {
 	OktaOrgUrl *string `pulumi:"oktaOrgUrl"`
 	// Nobl9 [Organization ID](https://docs.nobl9.com/API_Documentation/api-endpoints-for-slo-annotations/#common-headers) that
 	// contains resources managed by the Nobl9 Terraform provider.
-	Organization string `pulumi:"organization"`
+	Organization *string `pulumi:"organization"`
 	// Nobl9 project used when importing resources.
-	Project string `pulumi:"project"`
+	Project *string `pulumi:"project"`
 }
 
 // The set of arguments for constructing a Provider resource.
@@ -101,9 +103,9 @@ type ProviderArgs struct {
 	OktaOrgUrl pulumi.StringPtrInput
 	// Nobl9 [Organization ID](https://docs.nobl9.com/API_Documentation/api-endpoints-for-slo-annotations/#common-headers) that
 	// contains resources managed by the Nobl9 Terraform provider.
-	Organization pulumi.StringInput
+	Organization pulumi.StringPtrInput
 	// Nobl9 project used when importing resources.
-	Project pulumi.StringInput
+	Project pulumi.StringPtrInput
 }
 
 func (ProviderArgs) ElementType() reflect.Type {
@@ -172,13 +174,13 @@ func (o ProviderOutput) OktaOrgUrl() pulumi.StringPtrOutput {
 
 // Nobl9 [Organization ID](https://docs.nobl9.com/API_Documentation/api-endpoints-for-slo-annotations/#common-headers) that
 // contains resources managed by the Nobl9 Terraform provider.
-func (o ProviderOutput) Organization() pulumi.StringOutput {
-	return o.ApplyT(func(v *Provider) pulumi.StringOutput { return v.Organization }).(pulumi.StringOutput)
+func (o ProviderOutput) Organization() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.Organization }).(pulumi.StringPtrOutput)
 }
 
 // Nobl9 project used when importing resources.
-func (o ProviderOutput) Project() pulumi.StringOutput {
-	return o.ApplyT(func(v *Provider) pulumi.StringOutput { return v.Project }).(pulumi.StringOutput)
+func (o ProviderOutput) Project() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.Project }).(pulumi.StringPtrOutput)
 }
 
 func init() {

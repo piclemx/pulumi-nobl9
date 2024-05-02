@@ -6,15 +6,22 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Inputs
+namespace Piclemx.Nobl9.Inputs
 {
 
     public sealed class SloCompositeBurnRateConditionArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Type of logical operation
+        /// </summary>
         [Input("op", required: true)]
         public Input<string> Op { get; set; } = null!;
 
+        /// <summary>
+        /// Burn rate value.
+        /// </summary>
         [Input("value", required: true)]
         public Input<double> Value { get; set; } = null!;
 

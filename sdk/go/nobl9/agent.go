@@ -7,7 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -23,37 +24,36 @@ import (
 // package main
 //
 // import (
-// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		thisProject, err := nobl9.NewProject(ctx, "thisProject", &nobl9.ProjectArgs{
-// 			DisplayName: pulumi.String("Test N9 Terraform"),
-// 			Description: pulumi.String("An example N9 Terraform project"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = nobl9.NewAgent(ctx, "thisAgent", &nobl9.AgentArgs{
-// 			Project: thisProject.Name,
-// 			SourceOfs: pulumi.StringArray{
-// 				pulumi.String("Metrics"),
-// 				pulumi.String("Services"),
-// 			},
-// 			AgentType: pulumi.String("prometheus"),
-// 			PrometheusConfig: &AgentPrometheusConfigArgs{
-// 				Url: pulumi.String("http://web.net"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			thisProject, err := nobl9.NewProject(ctx, "thisProject", &nobl9.ProjectArgs{
+//				DisplayName: pulumi.String("Test N9 Terraform"),
+//				Description: pulumi.String("An example N9 Terraform project"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = nobl9.NewAgent(ctx, "thisAgent", &nobl9.AgentArgs{
+//				Project:        thisProject.Name,
+//				AgentType:      pulumi.String("prometheus"),
+//				ReleaseChannel: pulumi.String("stable"),
+//				PrometheusConfig: &nobl9.AgentPrometheusConfigArgs{
+//					Url: pulumi.String("http://web.net"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -67,6 +67,8 @@ type Agent struct {
 	AmazonPrometheusConfig AgentAmazonPrometheusConfigPtrOutput `pulumi:"amazonPrometheusConfig"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#appdynamics-agent)
 	AppdynamicsConfig AgentAppdynamicsConfigPtrOutput `pulumi:"appdynamicsConfig"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#azure-monitor-agent)
+	AzureMonitorConfig AgentAzureMonitorConfigPtrOutput `pulumi:"azureMonitorConfig"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#bigquery-agent)
 	BigqueryConfig AgentBigqueryConfigPtrOutput `pulumi:"bigqueryConfig"`
 	// client_id of created agent.
@@ -91,6 +93,10 @@ type Agent struct {
 	GrafanaLokiConfig AgentGrafanaLokiConfigPtrOutput `pulumi:"grafanaLokiConfig"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/graphite#graphite-agent)
 	GraphiteConfig AgentGraphiteConfigPtrOutput `pulumi:"graphiteConfig"`
+	// [Replay configuration documentation](https://docs.nobl9.com/replay)
+	HistoricalDataRetrieval AgentHistoricalDataRetrievalOutput `pulumi:"historicalDataRetrieval"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#hc-agent)
+	HoneycombConfig AgentHoneycombConfigPtrOutput `pulumi:"honeycombConfig"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#influxdb-agent)
 	InfluxdbConfig AgentInfluxdbConfigPtrOutput `pulumi:"influxdbConfig"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/instana#instana-agent)
@@ -105,15 +111,19 @@ type Agent struct {
 	OpentsdbConfig AgentOpentsdbConfigPtrOutput `pulumi:"opentsdbConfig"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#pingdom-agent)
 	PingdomConfig AgentPingdomConfigPtrOutput `pulumi:"pingdomConfig"`
-	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// Name of the Lightstep project.
 	Project pulumi.StringOutput `pulumi:"project"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#prometheus-agent)
 	PrometheusConfig AgentPrometheusConfigPtrOutput `pulumi:"prometheusConfig"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-	QueryDelay AgentQueryDelayPtrOutput `pulumi:"queryDelay"`
+	QueryDelay AgentQueryDelayOutput `pulumi:"queryDelay"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/?_highlight=redshift#amazon-redshift-agent)
 	RedshiftConfig AgentRedshiftConfigPtrOutput `pulumi:"redshiftConfig"`
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringOutput `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayOutput `pulumi:"sourceOfs"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#splunk-agent)
 	SplunkConfig AgentSplunkConfigPtrOutput `pulumi:"splunkConfig"`
@@ -140,10 +150,7 @@ func NewAgent(ctx *pulumi.Context,
 	if args.Project == nil {
 		return nil, errors.New("invalid value for required argument 'Project'")
 	}
-	if args.SourceOfs == nil {
-		return nil, errors.New("invalid value for required argument 'SourceOfs'")
-	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Agent
 	err := ctx.RegisterResource("nobl9:index/agent:Agent", name, args, &resource, opts...)
 	if err != nil {
@@ -172,6 +179,8 @@ type agentState struct {
 	AmazonPrometheusConfig *AgentAmazonPrometheusConfig `pulumi:"amazonPrometheusConfig"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#appdynamics-agent)
 	AppdynamicsConfig *AgentAppdynamicsConfig `pulumi:"appdynamicsConfig"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#azure-monitor-agent)
+	AzureMonitorConfig *AgentAzureMonitorConfig `pulumi:"azureMonitorConfig"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#bigquery-agent)
 	BigqueryConfig *AgentBigqueryConfig `pulumi:"bigqueryConfig"`
 	// client_id of created agent.
@@ -196,6 +205,10 @@ type agentState struct {
 	GrafanaLokiConfig *AgentGrafanaLokiConfig `pulumi:"grafanaLokiConfig"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/graphite#graphite-agent)
 	GraphiteConfig *AgentGraphiteConfig `pulumi:"graphiteConfig"`
+	// [Replay configuration documentation](https://docs.nobl9.com/replay)
+	HistoricalDataRetrieval *AgentHistoricalDataRetrieval `pulumi:"historicalDataRetrieval"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#hc-agent)
+	HoneycombConfig *AgentHoneycombConfig `pulumi:"honeycombConfig"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#influxdb-agent)
 	InfluxdbConfig *AgentInfluxdbConfig `pulumi:"influxdbConfig"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/instana#instana-agent)
@@ -210,7 +223,7 @@ type agentState struct {
 	OpentsdbConfig *AgentOpentsdbConfig `pulumi:"opentsdbConfig"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#pingdom-agent)
 	PingdomConfig *AgentPingdomConfig `pulumi:"pingdomConfig"`
-	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// Name of the Lightstep project.
 	Project *string `pulumi:"project"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#prometheus-agent)
 	PrometheusConfig *AgentPrometheusConfig `pulumi:"prometheusConfig"`
@@ -218,7 +231,11 @@ type agentState struct {
 	QueryDelay *AgentQueryDelay `pulumi:"queryDelay"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/?_highlight=redshift#amazon-redshift-agent)
 	RedshiftConfig *AgentRedshiftConfig `pulumi:"redshiftConfig"`
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#splunk-agent)
 	SplunkConfig *AgentSplunkConfig `pulumi:"splunkConfig"`
@@ -239,6 +256,8 @@ type AgentState struct {
 	AmazonPrometheusConfig AgentAmazonPrometheusConfigPtrInput
 	// [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#appdynamics-agent)
 	AppdynamicsConfig AgentAppdynamicsConfigPtrInput
+	// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#azure-monitor-agent)
+	AzureMonitorConfig AgentAzureMonitorConfigPtrInput
 	// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#bigquery-agent)
 	BigqueryConfig AgentBigqueryConfigPtrInput
 	// client_id of created agent.
@@ -263,6 +282,10 @@ type AgentState struct {
 	GrafanaLokiConfig AgentGrafanaLokiConfigPtrInput
 	// [Configuration documentation](https://docs.nobl9.com/Sources/graphite#graphite-agent)
 	GraphiteConfig AgentGraphiteConfigPtrInput
+	// [Replay configuration documentation](https://docs.nobl9.com/replay)
+	HistoricalDataRetrieval AgentHistoricalDataRetrievalPtrInput
+	// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#hc-agent)
+	HoneycombConfig AgentHoneycombConfigPtrInput
 	// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#influxdb-agent)
 	InfluxdbConfig AgentInfluxdbConfigPtrInput
 	// [Configuration documentation](https://docs.nobl9.com/Sources/instana#instana-agent)
@@ -277,7 +300,7 @@ type AgentState struct {
 	OpentsdbConfig AgentOpentsdbConfigPtrInput
 	// [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#pingdom-agent)
 	PingdomConfig AgentPingdomConfigPtrInput
-	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// Name of the Lightstep project.
 	Project pulumi.StringPtrInput
 	// [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#prometheus-agent)
 	PrometheusConfig AgentPrometheusConfigPtrInput
@@ -285,7 +308,11 @@ type AgentState struct {
 	QueryDelay AgentQueryDelayPtrInput
 	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/?_highlight=redshift#amazon-redshift-agent)
 	RedshiftConfig AgentRedshiftConfigPtrInput
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 	// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#splunk-agent)
 	SplunkConfig AgentSplunkConfigPtrInput
@@ -310,6 +337,8 @@ type agentArgs struct {
 	AmazonPrometheusConfig *AgentAmazonPrometheusConfig `pulumi:"amazonPrometheusConfig"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#appdynamics-agent)
 	AppdynamicsConfig *AgentAppdynamicsConfig `pulumi:"appdynamicsConfig"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#azure-monitor-agent)
+	AzureMonitorConfig *AgentAzureMonitorConfig `pulumi:"azureMonitorConfig"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#bigquery-agent)
 	BigqueryConfig *AgentBigqueryConfig `pulumi:"bigqueryConfig"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#cloudwatch-agent)
@@ -330,6 +359,10 @@ type agentArgs struct {
 	GrafanaLokiConfig *AgentGrafanaLokiConfig `pulumi:"grafanaLokiConfig"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/graphite#graphite-agent)
 	GraphiteConfig *AgentGraphiteConfig `pulumi:"graphiteConfig"`
+	// [Replay configuration documentation](https://docs.nobl9.com/replay)
+	HistoricalDataRetrieval *AgentHistoricalDataRetrieval `pulumi:"historicalDataRetrieval"`
+	// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#hc-agent)
+	HoneycombConfig *AgentHoneycombConfig `pulumi:"honeycombConfig"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#influxdb-agent)
 	InfluxdbConfig *AgentInfluxdbConfig `pulumi:"influxdbConfig"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/instana#instana-agent)
@@ -344,7 +377,7 @@ type agentArgs struct {
 	OpentsdbConfig *AgentOpentsdbConfig `pulumi:"opentsdbConfig"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#pingdom-agent)
 	PingdomConfig *AgentPingdomConfig `pulumi:"pingdomConfig"`
-	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// Name of the Lightstep project.
 	Project string `pulumi:"project"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#prometheus-agent)
 	PrometheusConfig *AgentPrometheusConfig `pulumi:"prometheusConfig"`
@@ -352,7 +385,11 @@ type agentArgs struct {
 	QueryDelay *AgentQueryDelay `pulumi:"queryDelay"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/?_highlight=redshift#amazon-redshift-agent)
 	RedshiftConfig *AgentRedshiftConfig `pulumi:"redshiftConfig"`
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 	// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#splunk-agent)
 	SplunkConfig *AgentSplunkConfig `pulumi:"splunkConfig"`
@@ -372,6 +409,8 @@ type AgentArgs struct {
 	AmazonPrometheusConfig AgentAmazonPrometheusConfigPtrInput
 	// [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#appdynamics-agent)
 	AppdynamicsConfig AgentAppdynamicsConfigPtrInput
+	// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#azure-monitor-agent)
+	AzureMonitorConfig AgentAzureMonitorConfigPtrInput
 	// [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#bigquery-agent)
 	BigqueryConfig AgentBigqueryConfigPtrInput
 	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#cloudwatch-agent)
@@ -392,6 +431,10 @@ type AgentArgs struct {
 	GrafanaLokiConfig AgentGrafanaLokiConfigPtrInput
 	// [Configuration documentation](https://docs.nobl9.com/Sources/graphite#graphite-agent)
 	GraphiteConfig AgentGraphiteConfigPtrInput
+	// [Replay configuration documentation](https://docs.nobl9.com/replay)
+	HistoricalDataRetrieval AgentHistoricalDataRetrievalPtrInput
+	// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#hc-agent)
+	HoneycombConfig AgentHoneycombConfigPtrInput
 	// [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#influxdb-agent)
 	InfluxdbConfig AgentInfluxdbConfigPtrInput
 	// [Configuration documentation](https://docs.nobl9.com/Sources/instana#instana-agent)
@@ -406,7 +449,7 @@ type AgentArgs struct {
 	OpentsdbConfig AgentOpentsdbConfigPtrInput
 	// [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#pingdom-agent)
 	PingdomConfig AgentPingdomConfigPtrInput
-	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// Name of the Lightstep project.
 	Project pulumi.StringInput
 	// [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#prometheus-agent)
 	PrometheusConfig AgentPrometheusConfigPtrInput
@@ -414,7 +457,11 @@ type AgentArgs struct {
 	QueryDelay AgentQueryDelayPtrInput
 	// [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/?_highlight=redshift#amazon-redshift-agent)
 	RedshiftConfig AgentRedshiftConfigPtrInput
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 	// [Configuration documentation](https://docs.nobl9.com/Sources/splunk#splunk-agent)
 	SplunkConfig AgentSplunkConfigPtrInput
@@ -452,7 +499,7 @@ func (i *Agent) ToAgentOutputWithContext(ctx context.Context) AgentOutput {
 // AgentArrayInput is an input type that accepts AgentArray and AgentArrayOutput values.
 // You can construct a concrete instance of `AgentArrayInput` via:
 //
-//          AgentArray{ AgentArgs{...} }
+//	AgentArray{ AgentArgs{...} }
 type AgentArrayInput interface {
 	pulumi.Input
 
@@ -477,7 +524,7 @@ func (i AgentArray) ToAgentArrayOutputWithContext(ctx context.Context) AgentArra
 // AgentMapInput is an input type that accepts AgentMap and AgentMapOutput values.
 // You can construct a concrete instance of `AgentMapInput` via:
 //
-//          AgentMap{ "key": AgentArgs{...} }
+//	AgentMap{ "key": AgentArgs{...} }
 type AgentMapInput interface {
 	pulumi.Input
 
@@ -526,6 +573,11 @@ func (o AgentOutput) AmazonPrometheusConfig() AgentAmazonPrometheusConfigPtrOutp
 // [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#appdynamics-agent)
 func (o AgentOutput) AppdynamicsConfig() AgentAppdynamicsConfigPtrOutput {
 	return o.ApplyT(func(v *Agent) AgentAppdynamicsConfigPtrOutput { return v.AppdynamicsConfig }).(AgentAppdynamicsConfigPtrOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#azure-monitor-agent)
+func (o AgentOutput) AzureMonitorConfig() AgentAzureMonitorConfigPtrOutput {
+	return o.ApplyT(func(v *Agent) AgentAzureMonitorConfigPtrOutput { return v.AzureMonitorConfig }).(AgentAzureMonitorConfigPtrOutput)
 }
 
 // [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#bigquery-agent)
@@ -588,6 +640,16 @@ func (o AgentOutput) GraphiteConfig() AgentGraphiteConfigPtrOutput {
 	return o.ApplyT(func(v *Agent) AgentGraphiteConfigPtrOutput { return v.GraphiteConfig }).(AgentGraphiteConfigPtrOutput)
 }
 
+// [Replay configuration documentation](https://docs.nobl9.com/replay)
+func (o AgentOutput) HistoricalDataRetrieval() AgentHistoricalDataRetrievalOutput {
+	return o.ApplyT(func(v *Agent) AgentHistoricalDataRetrievalOutput { return v.HistoricalDataRetrieval }).(AgentHistoricalDataRetrievalOutput)
+}
+
+// [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#hc-agent)
+func (o AgentOutput) HoneycombConfig() AgentHoneycombConfigPtrOutput {
+	return o.ApplyT(func(v *Agent) AgentHoneycombConfigPtrOutput { return v.HoneycombConfig }).(AgentHoneycombConfigPtrOutput)
+}
+
 // [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#influxdb-agent)
 func (o AgentOutput) InfluxdbConfig() AgentInfluxdbConfigPtrOutput {
 	return o.ApplyT(func(v *Agent) AgentInfluxdbConfigPtrOutput { return v.InfluxdbConfig }).(AgentInfluxdbConfigPtrOutput)
@@ -623,7 +685,7 @@ func (o AgentOutput) PingdomConfig() AgentPingdomConfigPtrOutput {
 	return o.ApplyT(func(v *Agent) AgentPingdomConfigPtrOutput { return v.PingdomConfig }).(AgentPingdomConfigPtrOutput)
 }
 
-// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+// Name of the Lightstep project.
 func (o AgentOutput) Project() pulumi.StringOutput {
 	return o.ApplyT(func(v *Agent) pulumi.StringOutput { return v.Project }).(pulumi.StringOutput)
 }
@@ -634,8 +696,8 @@ func (o AgentOutput) PrometheusConfig() AgentPrometheusConfigPtrOutput {
 }
 
 // [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-func (o AgentOutput) QueryDelay() AgentQueryDelayPtrOutput {
-	return o.ApplyT(func(v *Agent) AgentQueryDelayPtrOutput { return v.QueryDelay }).(AgentQueryDelayPtrOutput)
+func (o AgentOutput) QueryDelay() AgentQueryDelayOutput {
+	return o.ApplyT(func(v *Agent) AgentQueryDelayOutput { return v.QueryDelay }).(AgentQueryDelayOutput)
 }
 
 // [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/?_highlight=redshift#amazon-redshift-agent)
@@ -643,7 +705,14 @@ func (o AgentOutput) RedshiftConfig() AgentRedshiftConfigPtrOutput {
 	return o.ApplyT(func(v *Agent) AgentRedshiftConfigPtrOutput { return v.RedshiftConfig }).(AgentRedshiftConfigPtrOutput)
 }
 
-// Source of Metrics and/or Services.
+// Release channel of the created datasource [stable/beta]
+func (o AgentOutput) ReleaseChannel() pulumi.StringOutput {
+	return o.ApplyT(func(v *Agent) pulumi.StringOutput { return v.ReleaseChannel }).(pulumi.StringOutput)
+}
+
+// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+//
+// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 func (o AgentOutput) SourceOfs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Agent) pulumi.StringArrayOutput { return v.SourceOfs }).(pulumi.StringArrayOutput)
 }

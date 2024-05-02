@@ -6,23 +6,51 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class SloObjectiveCountMetricGoodCloudwatch
     {
+        /// <summary>
+        /// AccountID used with cross-account observability feature
+        /// </summary>
+        public readonly string? AccountId;
+        /// <summary>
+        /// Dimensions of the metric [Optional for metrics]
+        /// </summary>
         public readonly ImmutableArray<Outputs.SloObjectiveCountMetricGoodCloudwatchDimension> Dimensions;
+        /// <summary>
+        /// JSON query
+        /// </summary>
         public readonly string? Json;
+        /// <summary>
+        /// Name of the metric [Required for metrics]
+        /// </summary>
         public readonly string? MetricName;
+        /// <summary>
+        /// Namespace of the metric
+        /// </summary>
         public readonly string? Namespace;
+        /// <summary>
+        /// Region of the CloudWatch instance
+        /// </summary>
         public readonly string Region;
+        /// <summary>
+        /// SQL query
+        /// </summary>
         public readonly string? Sql;
+        /// <summary>
+        /// Metric data aggregations
+        /// </summary>
         public readonly string? Stat;
 
         [OutputConstructor]
         private SloObjectiveCountMetricGoodCloudwatch(
+            string? accountId,
+
             ImmutableArray<Outputs.SloObjectiveCountMetricGoodCloudwatchDimension> dimensions,
 
             string? json,
@@ -37,6 +65,7 @@ namespace Pulumi.Nobl9.Outputs
 
             string? stat)
         {
+            AccountId = accountId;
             Dimensions = dimensions;
             Json = json;
             MetricName = metricName;

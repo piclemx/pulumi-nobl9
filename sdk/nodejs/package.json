@@ -1,19 +1,17 @@
 {
-    "name": "@pulumi/nobl9",
+    "name": "@piclemx/pulumi-nobl9",
     "version": "${VERSION}",
-    "description": "A Pulumi package for creating and managing Nobl9 cloud resources.",
+    "description": "A Pulumi package for creating and managing Nobl9 resources. Based on terraform-provider-nobl9: version v0.24.5",
     "keywords": [
         "pulumi",
         "nobl9",
-        "n9",
-        "category/cloud"
+        "category/monitoring"
     ],
-    "homepage": "https://www.pulumi.com",
+    "homepage": "https://github.com/piclemx/pulumi-nobl9",
     "repository": "https://github.com/piclemx/pulumi-nobl9",
     "license": "Apache-2.0",
     "scripts": {
-        "build": "tsc",
-        "install": "node scripts/install-pulumi-plugin.js resource nobl9 ${VERSION}"
+        "build": "tsc"
     },
     "dependencies": {
         "@pulumi/pulumi": "^3.0.0"
@@ -26,6 +24,6 @@
     "pulumi": {
         "resource": true,
         "name": "nobl9",
-        "server": "https://github.com/piclemx/pulumi-nobl9/releases/"
+        "server": "github://api.github.com/piclemx/pulumi-nobl9"
     }
 }

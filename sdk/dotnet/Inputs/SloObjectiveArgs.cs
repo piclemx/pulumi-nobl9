@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Inputs
+namespace Piclemx.Nobl9.Inputs
 {
 
     public sealed class SloObjectiveArgs : global::Pulumi.ResourceArgs
@@ -16,7 +17,7 @@ namespace Pulumi.Nobl9.Inputs
         private InputList<Inputs.SloObjectiveCountMetricArgs>? _countMetrics;
 
         /// <summary>
-        /// Compares two time series, indicating the ratio of the count of good values to total values.
+        /// Compares two time series, calculating the ratio of either good or bad values to the total number of values. Fill either the 'good' or 'bad' series, but not both.
         /// </summary>
         public InputList<Inputs.SloObjectiveCountMetricArgs> CountMetrics
         {

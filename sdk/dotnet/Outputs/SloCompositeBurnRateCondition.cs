@@ -6,14 +6,21 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class SloCompositeBurnRateCondition
     {
+        /// <summary>
+        /// Type of logical operation
+        /// </summary>
         public readonly string Op;
+        /// <summary>
+        /// Burn rate value.
+        /// </summary>
         public readonly double Value;
 
         [OutputConstructor]

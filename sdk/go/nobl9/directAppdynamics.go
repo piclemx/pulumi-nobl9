@@ -7,11 +7,12 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// AppDynamics is a performance management program for applications. It helps users to gain a comprehensive understanding of the impact of technical difficulties on business goals, allowing IT teams to prioritize their efforts in a way that improves ROI. Nobl9 connects with AppDynamics to collect SLI measurements and compare them to SLO targets.
+// AppDynamics is a performance management program for applications. It helps users to gain a comprehensive understanding of the impact of technical difficulties on business goals, allowing IT teams to prioritize their efforts in a way that improves ROI. Nobl9 connects to AppDynamics for SLI measurement collection and comparison with SLO targets.
 //
 // For more information, refer to [AppDynamics Direct | Nobl9 Documentation](https://docs.nobl9.com/Sources/appdynamics#appdynamics-direct)
 //
@@ -21,30 +22,31 @@ import (
 // package main
 //
 // import (
-// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := nobl9.NewDirectAppdynamics(ctx, "test-appdynamics", &nobl9.DirectAppdynamicsArgs{
-// 			AccountName:  pulumi.String("account name"),
-// 			ClientName:   pulumi.String("client name"),
-// 			ClientSecret: pulumi.String("secret"),
-// 			Description:  pulumi.String("desc"),
-// 			Project:      pulumi.String("terraform"),
-// 			SourceOfs: pulumi.StringArray{
-// 				pulumi.String("Metrics"),
-// 				pulumi.String("Services"),
-// 			},
-// 			Url: pulumi.String("https://web.net"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := nobl9.NewDirectAppdynamics(ctx, "test-appdynamics", &nobl9.DirectAppdynamicsArgs{
+//				AccountName:          pulumi.String("account name"),
+//				ClientName:           pulumi.String("client name"),
+//				ClientSecret:         pulumi.String("secret"),
+//				Description:          pulumi.String("desc"),
+//				LogCollectionEnabled: pulumi.Bool(true),
+//				Project:              pulumi.String("terraform"),
+//				ReleaseChannel:       pulumi.String("stable"),
+//				Url:                  pulumi.String("https://web.net"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -64,13 +66,21 @@ type DirectAppdynamics struct {
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrOutput `pulumi:"displayName"`
+	// [Replay configuration documentation](https://docs.nobl9.com/replay)
+	HistoricalDataRetrieval DirectAppdynamicsHistoricalDataRetrievalOutput `pulumi:"historicalDataRetrieval"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrOutput `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringOutput `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-	QueryDelay DirectAppdynamicsQueryDelayPtrOutput `pulumi:"queryDelay"`
-	// Source of Metrics and/or Services.
+	QueryDelay DirectAppdynamicsQueryDelayOutput `pulumi:"queryDelay"`
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringOutput `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayOutput `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status pulumi.StringOutput `pulumi:"status"`
@@ -94,13 +104,17 @@ func NewDirectAppdynamics(ctx *pulumi.Context,
 	if args.Project == nil {
 		return nil, errors.New("invalid value for required argument 'Project'")
 	}
-	if args.SourceOfs == nil {
-		return nil, errors.New("invalid value for required argument 'SourceOfs'")
-	}
 	if args.Url == nil {
 		return nil, errors.New("invalid value for required argument 'Url'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.ClientSecret != nil {
+		args.ClientSecret = pulumi.ToSecret(args.ClientSecret).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"clientSecret",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DirectAppdynamics
 	err := ctx.RegisterResource("nobl9:index/directAppdynamics:DirectAppdynamics", name, args, &resource, opts...)
 	if err != nil {
@@ -135,13 +149,21 @@ type directAppdynamicsState struct {
 	Description *string `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName *string `pulumi:"displayName"`
+	// [Replay configuration documentation](https://docs.nobl9.com/replay)
+	HistoricalDataRetrieval *DirectAppdynamicsHistoricalDataRetrieval `pulumi:"historicalDataRetrieval"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project *string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectAppdynamicsQueryDelay `pulumi:"queryDelay"`
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status *string `pulumi:"status"`
@@ -162,13 +184,21 @@ type DirectAppdynamicsState struct {
 	Description pulumi.StringPtrInput
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrInput
+	// [Replay configuration documentation](https://docs.nobl9.com/replay)
+	HistoricalDataRetrieval DirectAppdynamicsHistoricalDataRetrievalPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringPtrInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectAppdynamicsQueryDelayPtrInput
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 	// The status of the created direct.
 	Status pulumi.StringPtrInput
@@ -191,13 +221,21 @@ type directAppdynamicsArgs struct {
 	Description *string `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName *string `pulumi:"displayName"`
+	// [Replay configuration documentation](https://docs.nobl9.com/replay)
+	HistoricalDataRetrieval *DirectAppdynamicsHistoricalDataRetrieval `pulumi:"historicalDataRetrieval"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectAppdynamicsQueryDelay `pulumi:"queryDelay"`
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 	// Base URL to the AppDynamics Controller.
 	Url string `pulumi:"url"`
@@ -215,13 +253,21 @@ type DirectAppdynamicsArgs struct {
 	Description pulumi.StringPtrInput
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrInput
+	// [Replay configuration documentation](https://docs.nobl9.com/replay)
+	HistoricalDataRetrieval DirectAppdynamicsHistoricalDataRetrievalPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectAppdynamicsQueryDelayPtrInput
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 	// Base URL to the AppDynamics Controller.
 	Url pulumi.StringInput
@@ -253,7 +299,7 @@ func (i *DirectAppdynamics) ToDirectAppdynamicsOutputWithContext(ctx context.Con
 // DirectAppdynamicsArrayInput is an input type that accepts DirectAppdynamicsArray and DirectAppdynamicsArrayOutput values.
 // You can construct a concrete instance of `DirectAppdynamicsArrayInput` via:
 //
-//          DirectAppdynamicsArray{ DirectAppdynamicsArgs{...} }
+//	DirectAppdynamicsArray{ DirectAppdynamicsArgs{...} }
 type DirectAppdynamicsArrayInput interface {
 	pulumi.Input
 
@@ -278,7 +324,7 @@ func (i DirectAppdynamicsArray) ToDirectAppdynamicsArrayOutputWithContext(ctx co
 // DirectAppdynamicsMapInput is an input type that accepts DirectAppdynamicsMap and DirectAppdynamicsMapOutput values.
 // You can construct a concrete instance of `DirectAppdynamicsMapInput` via:
 //
-//          DirectAppdynamicsMap{ "key": DirectAppdynamicsArgs{...} }
+//	DirectAppdynamicsMap{ "key": DirectAppdynamicsArgs{...} }
 type DirectAppdynamicsMapInput interface {
 	pulumi.Input
 
@@ -344,6 +390,18 @@ func (o DirectAppdynamicsOutput) DisplayName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DirectAppdynamics) pulumi.StringPtrOutput { return v.DisplayName }).(pulumi.StringPtrOutput)
 }
 
+// [Replay configuration documentation](https://docs.nobl9.com/replay)
+func (o DirectAppdynamicsOutput) HistoricalDataRetrieval() DirectAppdynamicsHistoricalDataRetrievalOutput {
+	return o.ApplyT(func(v *DirectAppdynamics) DirectAppdynamicsHistoricalDataRetrievalOutput {
+		return v.HistoricalDataRetrieval
+	}).(DirectAppdynamicsHistoricalDataRetrievalOutput)
+}
+
+// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+func (o DirectAppdynamicsOutput) LogCollectionEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DirectAppdynamics) pulumi.BoolPtrOutput { return v.LogCollectionEnabled }).(pulumi.BoolPtrOutput)
+}
+
 // Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 func (o DirectAppdynamicsOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *DirectAppdynamics) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
@@ -355,11 +413,18 @@ func (o DirectAppdynamicsOutput) Project() pulumi.StringOutput {
 }
 
 // [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-func (o DirectAppdynamicsOutput) QueryDelay() DirectAppdynamicsQueryDelayPtrOutput {
-	return o.ApplyT(func(v *DirectAppdynamics) DirectAppdynamicsQueryDelayPtrOutput { return v.QueryDelay }).(DirectAppdynamicsQueryDelayPtrOutput)
+func (o DirectAppdynamicsOutput) QueryDelay() DirectAppdynamicsQueryDelayOutput {
+	return o.ApplyT(func(v *DirectAppdynamics) DirectAppdynamicsQueryDelayOutput { return v.QueryDelay }).(DirectAppdynamicsQueryDelayOutput)
 }
 
-// Source of Metrics and/or Services.
+// Release channel of the created datasource [stable/beta]
+func (o DirectAppdynamicsOutput) ReleaseChannel() pulumi.StringOutput {
+	return o.ApplyT(func(v *DirectAppdynamics) pulumi.StringOutput { return v.ReleaseChannel }).(pulumi.StringOutput)
+}
+
+// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+//
+// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 func (o DirectAppdynamicsOutput) SourceOfs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *DirectAppdynamics) pulumi.StringArrayOutput { return v.SourceOfs }).(pulumi.StringArrayOutput)
 }

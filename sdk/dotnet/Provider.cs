@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9
+namespace Piclemx.Nobl9
 {
     /// <summary>
     /// The provider type for the nobl9 package. By default, resources use package-wide configuration
@@ -55,13 +56,13 @@ namespace Pulumi.Nobl9
         /// contains resources managed by the Nobl9 Terraform provider.
         /// </summary>
         [Output("organization")]
-        public Output<string> Organization { get; private set; } = null!;
+        public Output<string?> Organization { get; private set; } = null!;
 
         /// <summary>
         /// Nobl9 project used when importing resources.
         /// </summary>
         [Output("project")]
-        public Output<string> Project { get; private set; } = null!;
+        public Output<string?> Project { get; private set; } = null!;
 
 
         /// <summary>
@@ -81,7 +82,11 @@ namespace Pulumi.Nobl9
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/piclemx/pulumi-nobl9/releases/",
+                PluginDownloadURL = "github://api.github.com/piclemx/pulumi-nobl9",
+                AdditionalSecretOutputs =
+                {
+                    "clientSecret",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -99,12 +104,22 @@ namespace Pulumi.Nobl9
         [Input("clientId", required: true)]
         public Input<string> ClientId { get; set; } = null!;
 
+        [Input("clientSecret", required: true)]
+        private Input<string>? _clientSecret;
+
         /// <summary>
         /// the [Client Secret](https://docs.nobl9.com/sloctl-user-guide/#configuration) of your Nobl9 account required to connect
         /// to Nobl9.
         /// </summary>
-        [Input("clientSecret", required: true)]
-        public Input<string> ClientSecret { get; set; } = null!;
+        public Input<string>? ClientSecret
+        {
+            get => _clientSecret;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _clientSecret = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Nobl9 API URL.
@@ -128,14 +143,14 @@ namespace Pulumi.Nobl9
         /// Nobl9 [Organization ID](https://docs.nobl9.com/API_Documentation/api-endpoints-for-slo-annotations/#common-headers) that
         /// contains resources managed by the Nobl9 Terraform provider.
         /// </summary>
-        [Input("organization", required: true)]
-        public Input<string> Organization { get; set; } = null!;
+        [Input("organization")]
+        public Input<string>? Organization { get; set; }
 
         /// <summary>
         /// Nobl9 project used when importing resources.
         /// </summary>
-        [Input("project", required: true)]
-        public Input<string> Project { get; set; } = null!;
+        [Input("project")]
+        public Input<string>? Project { get; set; }
 
         public ProviderArgs()
         {

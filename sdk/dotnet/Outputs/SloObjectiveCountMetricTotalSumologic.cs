@@ -6,16 +6,29 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class SloObjectiveCountMetricTotalSumologic
     {
+        /// <summary>
+        /// Period of data aggregation
+        /// </summary>
         public readonly string? Quantization;
+        /// <summary>
+        /// Query for the metrics
+        /// </summary>
         public readonly string Query;
+        /// <summary>
+        /// Aggregation function - avg, sum, min, max, count, none
+        /// </summary>
         public readonly string? Rollup;
+        /// <summary>
+        /// Sumologic source - metrics or logs
+        /// </summary>
         public readonly string Type;
 
         [OutputConstructor]

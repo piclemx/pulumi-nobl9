@@ -2,11 +2,12 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * Google BigQuery is a serverless data warehouse that enables scalable analysis over petabytes of data. It is a Platform as a Service that supports querying using ANSI SQL. BigQuery integration with Nobl9 enables users to turn their big data into valuable business insights. Nobl9 connects with BigQuery to collect SLI measurements and compare them to SLO targets.
+ * Google BigQuery is a serverless data warehouse that enables scalable analysis over petabytes of data. It is a Platform as a Service that supports querying using ANSI SQL. BigQuery integration with Nobl9 enables users to turn their big data into valuable business insights. Nobl9 connects to BigQuery for SLI measurement collection and comparison with SLO targets.
  *
  * For more information, refer to [BigQuery Direct | Nobl9 Documentation](https://docs.nobl9.com/Sources/bigquery#bigquery-direct)
  *
@@ -14,16 +15,13 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as nobl9 from "@pulumi/nobl9";
+ * import * as nobl9 from "@piclemx/pulumi-nobl9";
  *
  * const test_bigquery = new nobl9.DirectBigquery("test-bigquery", {
  *     description: "desc",
+ *     logCollectionEnabled: true,
  *     project: "terraform",
  *     serviceAccountKey: "secret",
- *     sourceOfs: [
- *         "Metrics",
- *         "Services",
- *     ],
  * });
  * ```
  * ## Nobl9 Official Documentation
@@ -67,6 +65,10 @@ export class DirectBigquery extends pulumi.CustomResource {
      */
     public readonly displayName!: pulumi.Output<string | undefined>;
     /**
+     * [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+     */
+    public readonly logCollectionEnabled!: pulumi.Output<boolean | undefined>;
+    /**
      * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
     public readonly name!: pulumi.Output<string>;
@@ -77,15 +79,21 @@ export class DirectBigquery extends pulumi.CustomResource {
     /**
      * [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
      */
-    public readonly queryDelay!: pulumi.Output<outputs.DirectBigqueryQueryDelay | undefined>;
+    public readonly queryDelay!: pulumi.Output<outputs.DirectBigqueryQueryDelay>;
+    /**
+     * Release channel of the created datasource [stable/beta]
+     */
+    public readonly releaseChannel!: pulumi.Output<string>;
     /**
      * [required] | Service Account Key.
      */
     public readonly serviceAccountKey!: pulumi.Output<string>;
     /**
-     * Source of Metrics and/or Services.
+     * This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+     *
+     * @deprecated 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
      */
-    public readonly sourceOfs!: pulumi.Output<string[]>;
+    public readonly sourceOfs!: pulumi.Output<string[] | undefined>;
     /**
      * The status of the created direct.
      */
@@ -106,9 +114,11 @@ export class DirectBigquery extends pulumi.CustomResource {
             const state = argsOrState as DirectBigqueryState | undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["displayName"] = state ? state.displayName : undefined;
+            resourceInputs["logCollectionEnabled"] = state ? state.logCollectionEnabled : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["project"] = state ? state.project : undefined;
             resourceInputs["queryDelay"] = state ? state.queryDelay : undefined;
+            resourceInputs["releaseChannel"] = state ? state.releaseChannel : undefined;
             resourceInputs["serviceAccountKey"] = state ? state.serviceAccountKey : undefined;
             resourceInputs["sourceOfs"] = state ? state.sourceOfs : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
@@ -117,19 +127,20 @@ export class DirectBigquery extends pulumi.CustomResource {
             if ((!args || args.project === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'project'");
             }
-            if ((!args || args.sourceOfs === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'sourceOfs'");
-            }
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["displayName"] = args ? args.displayName : undefined;
+            resourceInputs["logCollectionEnabled"] = args ? args.logCollectionEnabled : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["project"] = args ? args.project : undefined;
             resourceInputs["queryDelay"] = args ? args.queryDelay : undefined;
-            resourceInputs["serviceAccountKey"] = args ? args.serviceAccountKey : undefined;
+            resourceInputs["releaseChannel"] = args ? args.releaseChannel : undefined;
+            resourceInputs["serviceAccountKey"] = args?.serviceAccountKey ? pulumi.secret(args.serviceAccountKey) : undefined;
             resourceInputs["sourceOfs"] = args ? args.sourceOfs : undefined;
             resourceInputs["status"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["serviceAccountKey"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(DirectBigquery.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -147,6 +158,10 @@ export interface DirectBigqueryState {
      */
     displayName?: pulumi.Input<string>;
     /**
+     * [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+     */
+    logCollectionEnabled?: pulumi.Input<boolean>;
+    /**
      * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
     name?: pulumi.Input<string>;
@@ -159,11 +174,17 @@ export interface DirectBigqueryState {
      */
     queryDelay?: pulumi.Input<inputs.DirectBigqueryQueryDelay>;
     /**
+     * Release channel of the created datasource [stable/beta]
+     */
+    releaseChannel?: pulumi.Input<string>;
+    /**
      * [required] | Service Account Key.
      */
     serviceAccountKey?: pulumi.Input<string>;
     /**
-     * Source of Metrics and/or Services.
+     * This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+     *
+     * @deprecated 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
      */
     sourceOfs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -185,6 +206,10 @@ export interface DirectBigqueryArgs {
      */
     displayName?: pulumi.Input<string>;
     /**
+     * [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+     */
+    logCollectionEnabled?: pulumi.Input<boolean>;
+    /**
      * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
     name?: pulumi.Input<string>;
@@ -197,11 +222,17 @@ export interface DirectBigqueryArgs {
      */
     queryDelay?: pulumi.Input<inputs.DirectBigqueryQueryDelay>;
     /**
+     * Release channel of the created datasource [stable/beta]
+     */
+    releaseChannel?: pulumi.Input<string>;
+    /**
      * [required] | Service Account Key.
      */
     serviceAccountKey?: pulumi.Input<string>;
     /**
-     * Source of Metrics and/or Services.
+     * This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+     *
+     * @deprecated 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
      */
-    sourceOfs: pulumi.Input<pulumi.Input<string>[]>;
+    sourceOfs?: pulumi.Input<pulumi.Input<string>[]>;
 }

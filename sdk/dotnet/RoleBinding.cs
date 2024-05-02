@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9
+namespace Piclemx.Nobl9
 {
     /// <summary>
     /// ## Example Usage
@@ -16,16 +17,17 @@ namespace Pulumi.Nobl9
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
-    /// using Nobl9 = Pulumi.Nobl9;
+    /// using Nobl9 = Piclemx.Nobl9;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
     ///     var @this = new Nobl9.RoleBinding("this", new()
     ///     {
-    ///         ProjectRef = "1234567890asdfghjkl",
+    ///         GroupRef = "test",
+    ///         ProjectRef = "default",
     ///         RoleRef = "project-owner",
-    ///         User = "1234567890asdfghjkl",
     ///     });
     /// 
     /// });
@@ -46,28 +48,34 @@ namespace Pulumi.Nobl9
         public Output<string?> DisplayName { get; private set; } = null!;
 
         /// <summary>
+        /// Group name that can be retrieved from the Nobl9 UI (**Settings** &gt; **Access Controls** &gt; **Groups**) or using sloctl `get usergroups` command.
+        /// </summary>
+        [Output("groupRef")]
+        public Output<string?> GroupRef { get; private set; } = null!;
+
+        /// <summary>
         /// Automatically generated, unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Project name, the project in which we want the user to assume the specified role. When `project_ref` is empty, `role_ref` must contain an Organization Role.
+        /// Project name, the project in which we want the user or group to assume the specified role. When `project_ref` is empty, `role_ref` must contain an Organization Role.
         /// </summary>
         [Output("projectRef")]
         public Output<string?> ProjectRef { get; private set; } = null!;
 
         /// <summary>
-        /// Role name; the role that you want the user to assume.
+        /// Role name; the role that you want the user or group to assume.
         /// </summary>
         [Output("roleRef")]
         public Output<string> RoleRef { get; private set; } = null!;
 
         /// <summary>
-        /// Okta User ID that can be retrieved from the Nobl9 UI (**Settings** &gt; **Users**).
+        /// Okta User ID that can be retrieved from the Nobl9 UI (**Settings** &gt; **Access Controls** &gt; **Users**).
         /// </summary>
         [Output("user")]
-        public Output<string> User { get; private set; } = null!;
+        public Output<string?> User { get; private set; } = null!;
 
 
         /// <summary>
@@ -92,7 +100,7 @@ namespace Pulumi.Nobl9
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/piclemx/pulumi-nobl9/releases/",
+                PluginDownloadURL = "github://api.github.com/piclemx/pulumi-nobl9",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -123,28 +131,34 @@ namespace Pulumi.Nobl9
         public Input<string>? DisplayName { get; set; }
 
         /// <summary>
+        /// Group name that can be retrieved from the Nobl9 UI (**Settings** &gt; **Access Controls** &gt; **Groups**) or using sloctl `get usergroups` command.
+        /// </summary>
+        [Input("groupRef")]
+        public Input<string>? GroupRef { get; set; }
+
+        /// <summary>
         /// Automatically generated, unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Project name, the project in which we want the user to assume the specified role. When `project_ref` is empty, `role_ref` must contain an Organization Role.
+        /// Project name, the project in which we want the user or group to assume the specified role. When `project_ref` is empty, `role_ref` must contain an Organization Role.
         /// </summary>
         [Input("projectRef")]
         public Input<string>? ProjectRef { get; set; }
 
         /// <summary>
-        /// Role name; the role that you want the user to assume.
+        /// Role name; the role that you want the user or group to assume.
         /// </summary>
         [Input("roleRef", required: true)]
         public Input<string> RoleRef { get; set; } = null!;
 
         /// <summary>
-        /// Okta User ID that can be retrieved from the Nobl9 UI (**Settings** &gt; **Users**).
+        /// Okta User ID that can be retrieved from the Nobl9 UI (**Settings** &gt; **Access Controls** &gt; **Users**).
         /// </summary>
-        [Input("user", required: true)]
-        public Input<string> User { get; set; } = null!;
+        [Input("user")]
+        public Input<string>? User { get; set; }
 
         public RoleBindingArgs()
         {
@@ -161,25 +175,31 @@ namespace Pulumi.Nobl9
         public Input<string>? DisplayName { get; set; }
 
         /// <summary>
+        /// Group name that can be retrieved from the Nobl9 UI (**Settings** &gt; **Access Controls** &gt; **Groups**) or using sloctl `get usergroups` command.
+        /// </summary>
+        [Input("groupRef")]
+        public Input<string>? GroupRef { get; set; }
+
+        /// <summary>
         /// Automatically generated, unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Project name, the project in which we want the user to assume the specified role. When `project_ref` is empty, `role_ref` must contain an Organization Role.
+        /// Project name, the project in which we want the user or group to assume the specified role. When `project_ref` is empty, `role_ref` must contain an Organization Role.
         /// </summary>
         [Input("projectRef")]
         public Input<string>? ProjectRef { get; set; }
 
         /// <summary>
-        /// Role name; the role that you want the user to assume.
+        /// Role name; the role that you want the user or group to assume.
         /// </summary>
         [Input("roleRef")]
         public Input<string>? RoleRef { get; set; }
 
         /// <summary>
-        /// Okta User ID that can be retrieved from the Nobl9 UI (**Settings** &gt; **Users**).
+        /// Okta User ID that can be retrieved from the Nobl9 UI (**Settings** &gt; **Access Controls** &gt; **Users**).
         /// </summary>
         [Input("user")]
         public Input<string>? User { get; set; }

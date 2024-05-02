@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9
+namespace Piclemx.Nobl9
 {
     /// <summary>
     /// A **service** in Nobl9 is a high-level grouping of Service Level Objectives (SLOs). A service can represent a logical service endpoint like an API, a database, an application, or anything else you care about setting an SLO for. Every SLO in Nobl9 is tied to a service, and the service can have one or more SLOs.
@@ -20,8 +21,9 @@ namespace Pulumi.Nobl9
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
-    /// using Nobl9 = Pulumi.Nobl9;
+    /// using Nobl9 = Piclemx.Nobl9;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
@@ -128,7 +130,7 @@ namespace Pulumi.Nobl9
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/piclemx/pulumi-nobl9/releases/",
+                PluginDownloadURL = "github://api.github.com/piclemx/pulumi-nobl9",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.

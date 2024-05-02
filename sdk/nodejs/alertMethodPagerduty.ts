@@ -2,6 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 export class AlertMethodPagerduty extends pulumi.CustomResource {
@@ -52,6 +54,10 @@ export class AlertMethodPagerduty extends pulumi.CustomResource {
      * Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
     public readonly project!: pulumi.Output<string>;
+    /**
+     * Sends a notification after the cooldown period is over.
+     */
+    public readonly sendResolution!: pulumi.Output<outputs.AlertMethodPagerdutySendResolution | undefined>;
 
     /**
      * Create a AlertMethodPagerduty resource with the given unique name, arguments, and options.
@@ -71,6 +77,7 @@ export class AlertMethodPagerduty extends pulumi.CustomResource {
             resourceInputs["integrationKey"] = state ? state.integrationKey : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["project"] = state ? state.project : undefined;
+            resourceInputs["sendResolution"] = state ? state.sendResolution : undefined;
         } else {
             const args = argsOrState as AlertMethodPagerdutyArgs | undefined;
             if ((!args || args.project === undefined) && !opts.urn) {
@@ -78,11 +85,14 @@ export class AlertMethodPagerduty extends pulumi.CustomResource {
             }
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["displayName"] = args ? args.displayName : undefined;
-            resourceInputs["integrationKey"] = args ? args.integrationKey : undefined;
+            resourceInputs["integrationKey"] = args?.integrationKey ? pulumi.secret(args.integrationKey) : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["project"] = args ? args.project : undefined;
+            resourceInputs["sendResolution"] = args ? args.sendResolution : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["integrationKey"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(AlertMethodPagerduty.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -111,6 +121,10 @@ export interface AlertMethodPagerdutyState {
      * Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
     project?: pulumi.Input<string>;
+    /**
+     * Sends a notification after the cooldown period is over.
+     */
+    sendResolution?: pulumi.Input<inputs.AlertMethodPagerdutySendResolution>;
 }
 
 /**
@@ -137,4 +151,8 @@ export interface AlertMethodPagerdutyArgs {
      * Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
     project: pulumi.Input<string>;
+    /**
+     * Sends a notification after the cooldown period is over.
+     */
+    sendResolution?: pulumi.Input<inputs.AlertMethodPagerdutySendResolution>;
 }

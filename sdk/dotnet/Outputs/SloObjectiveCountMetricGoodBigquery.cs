@@ -6,15 +6,25 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class SloObjectiveCountMetricGoodBigquery
     {
+        /// <summary>
+        /// Location of you BigQuery
+        /// </summary>
         public readonly string Location;
+        /// <summary>
+        /// Project ID
+        /// </summary>
         public readonly string ProjectId;
+        /// <summary>
+        /// Query for the metrics
+        /// </summary>
         public readonly string Query;
 
         [OutputConstructor]

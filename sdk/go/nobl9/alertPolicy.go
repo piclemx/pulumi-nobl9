@@ -7,13 +7,14 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // An **Alert Policy** expresses a set of conditions you want to track or monitor. The conditions for an Alert Policy define what is monitored and when to activate an alert: when the performance of your service is declining, Nobl9 will send a notification to a predefined channel.
 //
-// A Nobl9 AlertPolicy accepts up to 7 conditions. All the specified conditions must be satisfied to trigger an alert.
+// A Nobl9 AlertPolicy accepts up to 3 conditions. All the specified conditions must be satisfied to trigger an alert.
 //
 // For more details, refer to the [Alert Policy configuration | Nobl9 Documentation](https://docs.nobl9.com/yaml-guide#alertpolicy).
 //
@@ -25,58 +26,104 @@ import (
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"fmt"
+//
+//	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		thisProject, err := nobl9.NewProject(ctx, "thisProject", &nobl9.ProjectArgs{
-// 			DisplayName: pulumi.String("My Project"),
-// 			Description: pulumi.String("An example N9 Terraform project"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = nobl9.NewService(ctx, "thisService", &nobl9.ServiceArgs{
-// 			Project: thisProject.Name,
-// 			DisplayName: thisProject.DisplayName.ApplyT(func(displayName string) (string, error) {
-// 				return fmt.Sprintf("%v Front Page", displayName), nil
-// 			}).(pulumi.StringOutput),
-// 			Description: pulumi.String("Front page service"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = nobl9.NewAlertPolicy(ctx, "thisAlertPolicy", &nobl9.AlertPolicyArgs{
-// 			Project: thisProject.Name,
-// 			DisplayName: thisProject.DisplayName.ApplyT(func(displayName string) (string, error) {
-// 				return fmt.Sprintf("%v Front Page Latency", displayName), nil
-// 			}).(pulumi.StringOutput),
-// 			Severity:    pulumi.String("High"),
-// 			Description: pulumi.String("Alert when page latency is > 2000 and error budget would be exhausted"),
-// 			Conditions: AlertPolicyConditionArray{
-// 				&AlertPolicyConditionArgs{
-// 					Measurement: pulumi.String("timeToBurnBudget"),
-// 					ValueString: pulumi.String("72h"),
-// 					LastsFor:    pulumi.String("30m"),
-// 				},
-// 			},
-// 			AlertMethods: AlertPolicyAlertMethodArray{
-// 				&AlertPolicyAlertMethodArgs{
-// 					Name: pulumi.String("my-alert-method"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			thisProject, err := nobl9.NewProject(ctx, "thisProject", &nobl9.ProjectArgs{
+//				DisplayName: pulumi.String("My Project"),
+//				Description: pulumi.String("An example N9 Terraform project"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = nobl9.NewService(ctx, "thisService", &nobl9.ServiceArgs{
+//				Project: thisProject.Name,
+//				DisplayName: thisProject.DisplayName.ApplyT(func(displayName *string) (string, error) {
+//					return fmt.Sprintf("%v Front Page", displayName), nil
+//				}).(pulumi.StringOutput),
+//				Description: pulumi.String("Front page service"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = nobl9.NewAlertPolicy(ctx, "thisAlertPolicy", &nobl9.AlertPolicyArgs{
+//				Project: thisProject.Name,
+//				DisplayName: thisProject.DisplayName.ApplyT(func(displayName *string) (string, error) {
+//					return fmt.Sprintf("%v Front Page Latency", displayName), nil
+//				}).(pulumi.StringOutput),
+//				Severity:    pulumi.String("High"),
+//				Description: pulumi.String("Alert when page latency is > 2000 and error budget would be exhausted"),
+//				Cooldown:    pulumi.String("5m"),
+//				Conditions: nobl9.AlertPolicyConditionArray{
+//					&nobl9.AlertPolicyConditionArgs{
+//						Measurement: pulumi.String("timeToBurnBudget"),
+//						ValueString: pulumi.String("72h"),
+//						LastsFor:    pulumi.String("30m"),
+//					},
+//				},
+//				AlertMethods: nobl9.AlertPolicyAlertMethodArray{
+//					&nobl9.AlertPolicyAlertMethodArgs{
+//						Name: pulumi.String("my-alert-method"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = nobl9.NewAlertPolicy(ctx, "thisIndex/alertPolicyAlertPolicy", &nobl9.AlertPolicyArgs{
+//				Project: thisProject.Name,
+//				DisplayName: thisProject.DisplayName.ApplyT(func(displayName *string) (string, error) {
+//					return fmt.Sprintf("%v Slow Burn (1x12h and 2x15min)", displayName), nil
+//				}).(pulumi.StringOutput),
+//				Severity:    pulumi.String("Low"),
+//				Description: pulumi.String("The budget is slowly exhausting and not recovering."),
+//				Cooldown:    pulumi.String("5m"),
+//				Conditions: nobl9.AlertPolicyConditionArray{
+//					&nobl9.AlertPolicyConditionArgs{
+//						Measurement:    pulumi.String("averageBurnRate"),
+//						Value:          pulumi.Float64(1),
+//						AlertingWindow: pulumi.String("12h"),
+//					},
+//					&nobl9.AlertPolicyConditionArgs{
+//						Measurement:    pulumi.String("averageBurnRate"),
+//						Value:          pulumi.Float64(2),
+//						AlertingWindow: pulumi.String("15m"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = nobl9.NewAlertPolicy(ctx, "thisNobl9Index/alertPolicyAlertPolicy", &nobl9.AlertPolicyArgs{
+//				Project: thisProject.Name,
+//				DisplayName: thisProject.DisplayName.ApplyT(func(displayName *string) (string, error) {
+//					return fmt.Sprintf("%v Fast Burn (20x5min)", displayName), nil
+//				}).(pulumi.StringOutput),
+//				Severity:    pulumi.String("High"),
+//				Description: pulumi.String("There’s been a significant spike in burn rate over a brief period."),
+//				Cooldown:    pulumi.String("5m"),
+//				Conditions: nobl9.AlertPolicyConditionArray{
+//					&nobl9.AlertPolicyConditionArgs{
+//						Measurement:    pulumi.String("averageBurnRate"),
+//						Value:          pulumi.Float64(20),
+//						AlertingWindow: pulumi.String("5m"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ## Useful Links
 //
@@ -87,13 +134,15 @@ type AlertPolicy struct {
 	AlertMethods AlertPolicyAlertMethodArrayOutput `pulumi:"alertMethods"`
 	// Configuration of an [alert condition](https://docs.nobl9.com/yaml-guide/#alertpolicy).
 	Conditions AlertPolicyConditionArrayOutput `pulumi:"conditions"`
+	// An interval measured from the last time stamp when all alert policy conditions were satisfied before alert is marked as resolved
+	Cooldown pulumi.StringPtrOutput `pulumi:"cooldown"`
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrOutput `pulumi:"displayName"`
-	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// The name of the previously defined alert method.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// Project name the Alert Method is in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
 	Project pulumi.StringOutput `pulumi:"project"`
 	// Alert severity. One of `Low` | `Medium` | `High`.
 	Severity pulumi.StringOutput `pulumi:"severity"`
@@ -115,7 +164,7 @@ func NewAlertPolicy(ctx *pulumi.Context,
 	if args.Severity == nil {
 		return nil, errors.New("invalid value for required argument 'Severity'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AlertPolicy
 	err := ctx.RegisterResource("nobl9:index/alertPolicy:AlertPolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -141,13 +190,15 @@ type alertPolicyState struct {
 	AlertMethods []AlertPolicyAlertMethod `pulumi:"alertMethods"`
 	// Configuration of an [alert condition](https://docs.nobl9.com/yaml-guide/#alertpolicy).
 	Conditions []AlertPolicyCondition `pulumi:"conditions"`
+	// An interval measured from the last time stamp when all alert policy conditions were satisfied before alert is marked as resolved
+	Cooldown *string `pulumi:"cooldown"`
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 	Description *string `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName *string `pulumi:"displayName"`
-	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// The name of the previously defined alert method.
 	Name *string `pulumi:"name"`
-	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// Project name the Alert Method is in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
 	Project *string `pulumi:"project"`
 	// Alert severity. One of `Low` | `Medium` | `High`.
 	Severity *string `pulumi:"severity"`
@@ -157,13 +208,15 @@ type AlertPolicyState struct {
 	AlertMethods AlertPolicyAlertMethodArrayInput
 	// Configuration of an [alert condition](https://docs.nobl9.com/yaml-guide/#alertpolicy).
 	Conditions AlertPolicyConditionArrayInput
+	// An interval measured from the last time stamp when all alert policy conditions were satisfied before alert is marked as resolved
+	Cooldown pulumi.StringPtrInput
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 	Description pulumi.StringPtrInput
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrInput
-	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// The name of the previously defined alert method.
 	Name pulumi.StringPtrInput
-	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// Project name the Alert Method is in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
 	Project pulumi.StringPtrInput
 	// Alert severity. One of `Low` | `Medium` | `High`.
 	Severity pulumi.StringPtrInput
@@ -177,13 +230,15 @@ type alertPolicyArgs struct {
 	AlertMethods []AlertPolicyAlertMethod `pulumi:"alertMethods"`
 	// Configuration of an [alert condition](https://docs.nobl9.com/yaml-guide/#alertpolicy).
 	Conditions []AlertPolicyCondition `pulumi:"conditions"`
+	// An interval measured from the last time stamp when all alert policy conditions were satisfied before alert is marked as resolved
+	Cooldown *string `pulumi:"cooldown"`
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 	Description *string `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName *string `pulumi:"displayName"`
-	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// The name of the previously defined alert method.
 	Name *string `pulumi:"name"`
-	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// Project name the Alert Method is in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
 	Project string `pulumi:"project"`
 	// Alert severity. One of `Low` | `Medium` | `High`.
 	Severity string `pulumi:"severity"`
@@ -194,13 +249,15 @@ type AlertPolicyArgs struct {
 	AlertMethods AlertPolicyAlertMethodArrayInput
 	// Configuration of an [alert condition](https://docs.nobl9.com/yaml-guide/#alertpolicy).
 	Conditions AlertPolicyConditionArrayInput
+	// An interval measured from the last time stamp when all alert policy conditions were satisfied before alert is marked as resolved
+	Cooldown pulumi.StringPtrInput
 	// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 	Description pulumi.StringPtrInput
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrInput
-	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// The name of the previously defined alert method.
 	Name pulumi.StringPtrInput
-	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+	// Project name the Alert Method is in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
 	Project pulumi.StringInput
 	// Alert severity. One of `Low` | `Medium` | `High`.
 	Severity pulumi.StringInput
@@ -232,7 +289,7 @@ func (i *AlertPolicy) ToAlertPolicyOutputWithContext(ctx context.Context) AlertP
 // AlertPolicyArrayInput is an input type that accepts AlertPolicyArray and AlertPolicyArrayOutput values.
 // You can construct a concrete instance of `AlertPolicyArrayInput` via:
 //
-//          AlertPolicyArray{ AlertPolicyArgs{...} }
+//	AlertPolicyArray{ AlertPolicyArgs{...} }
 type AlertPolicyArrayInput interface {
 	pulumi.Input
 
@@ -257,7 +314,7 @@ func (i AlertPolicyArray) ToAlertPolicyArrayOutputWithContext(ctx context.Contex
 // AlertPolicyMapInput is an input type that accepts AlertPolicyMap and AlertPolicyMapOutput values.
 // You can construct a concrete instance of `AlertPolicyMapInput` via:
 //
-//          AlertPolicyMap{ "key": AlertPolicyArgs{...} }
+//	AlertPolicyMap{ "key": AlertPolicyArgs{...} }
 type AlertPolicyMapInput interface {
 	pulumi.Input
 
@@ -302,6 +359,11 @@ func (o AlertPolicyOutput) Conditions() AlertPolicyConditionArrayOutput {
 	return o.ApplyT(func(v *AlertPolicy) AlertPolicyConditionArrayOutput { return v.Conditions }).(AlertPolicyConditionArrayOutput)
 }
 
+// An interval measured from the last time stamp when all alert policy conditions were satisfied before alert is marked as resolved
+func (o AlertPolicyOutput) Cooldown() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AlertPolicy) pulumi.StringPtrOutput { return v.Cooldown }).(pulumi.StringPtrOutput)
+}
+
 // Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
 func (o AlertPolicyOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AlertPolicy) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
@@ -312,12 +374,12 @@ func (o AlertPolicyOutput) DisplayName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AlertPolicy) pulumi.StringPtrOutput { return v.DisplayName }).(pulumi.StringPtrOutput)
 }
 
-// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+// The name of the previously defined alert method.
 func (o AlertPolicyOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *AlertPolicy) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+// Project name the Alert Method is in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
 func (o AlertPolicyOutput) Project() pulumi.StringOutput {
 	return o.ApplyT(func(v *AlertPolicy) pulumi.StringOutput { return v.Project }).(pulumi.StringOutput)
 }

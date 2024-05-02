@@ -6,17 +6,33 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class SloObjectiveCountMetricGoodInstanaInfrastructure
     {
+        /// <summary>
+        /// Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+        /// </summary>
         public readonly string MetricId;
+        /// <summary>
+        /// Metric retrieval method 'query' or 'snapshot'
+        /// </summary>
         public readonly string MetricRetrievalMethod;
+        /// <summary>
+        /// Plugin ID
+        /// </summary>
         public readonly string PluginId;
+        /// <summary>
+        /// Query for the metrics
+        /// </summary>
         public readonly string? Query;
+        /// <summary>
+        /// Snapshot ID
+        /// </summary>
         public readonly string? SnapshotId;
 
         [OutputConstructor]

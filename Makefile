@@ -1,45 +1,43 @@
-PROJECT_NAME := nobl9 Package
-
+ROOT_DIR         := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 SHELL            := /bin/bash
-PACK             := nobl9
-ORG              := piclemx
-PROJECT          := github.com/${ORG}/pulumi-${PACK}
-NODE_MODULE_NAME := @pulumi/${PACK}
-TF_NAME          := ${PACK}
+PROJECT          := github.com/piclemx/pulumi-nobl9
+NODE_MODULE_NAME := @piclemx/pulumi-nobl9
+TF_NAME          := nobl9
 PROVIDER_PATH    := provider
+PROVIDER_VERSION := 0.24.5
 VERSION_PATH     := ${PROVIDER_PATH}/pkg/version.Version
 
-TFGEN           := pulumi-tfgen-${PACK}
-PROVIDER        := pulumi-resource-${PACK}
-VERSION         := $(shell pulumictl get version)
+JAVA_GEN         := pulumi-java-gen
+JAVA_GEN_VERSION := v0.10.0
+TFGEN            := pulumi-tfgen-nobl9
+PROVIDER         := pulumi-resource-nobl9
+VERSION          := $(shell pulumictl get version)
 
-TESTPARALLELISM := 4
+TESTPARALLELISM  := 4
 
-WORKING_DIR     := $(shell pwd)
+WORKING_DIR      := $(shell pwd)
 
-OS := $(shell uname)
-EMPTY_TO_AVOID_SED := ""
+GO_MAJOR_VERSION := $(shell go version | cut -c 14- | cut -d' ' -f1 | cut -d'.' -f1)
+GO_MINOR_VERSION := $(shell go version | cut -c 14- | cut -d' ' -f1 | cut -d'.' -f2)
+####
+# Defines the required Go version. This is a safeguard, because
+# the (local) version must match the version specified in .github/workflows/release.yml
+# otherwise publkishing the Go SDK of the provider will fail
+REQUIRED_GO_MAJOR_VERSION := 1
+REQUIRED_GO_MINOR_VERSION := 22
+GO_VERSION_VALIDATION_ERR_MSG := Golang version $(REQUIRED_GO_MAJOR_VERSION).$(REQUIRED_GO_MINOR_VERSION) is required
 
-prepare::
-	@if test -z "${NAME}"; then echo "NAME not set"; exit 1; fi
-	@if test -z "${REPOSITORY}"; then echo "REPOSITORY not set"; exit 1; fi
-	@if test ! -d "provider/cmd/pulumi-tfgen-x${EMPTY_TO_AVOID_SED}yz"; then "Project already prepared"; exit 1; fi
+.PHONY: development provider build_sdks build_nodejs build_dotnet build_go build_python cleanup validate_go_version
 
-	mv "provider/cmd/pulumi-tfgen-x${EMPTY_TO_AVOID_SED}yz" provider/cmd/pulumi-tfgen-${NAME}
-	mv "provider/cmd/pulumi-resource-x${EMPTY_TO_AVOID_SED}yz" provider/cmd/pulumi-resource-${NAME}
-
-	if [[ "${OS}" != "Darwin" ]]; then \
-		sed -i 's,github.com/piclemx/pulumi-nobl9,${REPOSITORY},g' provider/go.mod; \
-		find ./ ! -path './.git/*' -type f -exec sed -i 's/[x]yz/${NAME}/g' {} \; &> /dev/null; \
+validate_go_version: ## Validates the installed version of go
+	@if [ $(GO_MAJOR_VERSION) -ne $(REQUIRED_GO_MAJOR_VERSION) ]; then \
+		echo '$(GO_VERSION_VALIDATION_ERR_MSG)';\
+		exit 1 ;\
 	fi
-
-	# In MacOS the -i parameter needs an empty string to execute in place.
-	if [[ "${OS}" == "Darwin" ]]; then \
-		sed -i '' 's,github.com/piclemx/pulumi-nobl9,${REPOSITORY},g' provider/go.mod; \
-		find ./ ! -path './.git/*' -type f -exec sed -i '' 's/[x]yz/${NAME}/g' {} \; &> /dev/null; \
+	@if [ $(GO_MINOR_VERSION) -ne $(REQUIRED_GO_MINOR_VERSION) ]; then \
+		echo '$(GO_VERSION_VALIDATION_ERR_MSG)';\
+		exit 1 ;\
 	fi
-
-.PHONY: development provider build_sdks build_nodejs build_dotnet build_go build_python cleanup
 
 development:: install_plugins provider lint_provider build_sdks install_sdks cleanup # Build the provider & SDKs for a development environment
 
@@ -63,7 +61,6 @@ build_nodejs:: install_plugins tfgen # build the node sdk
 	cd sdk/nodejs/ && \
         yarn install && \
         yarn run tsc && \
-		cp -R scripts/ bin && \
         cp ../../README.md ../../LICENSE package.json yarn.lock ./bin/ && \
 		sed -i.bak -e "s/\$${VERSION}/$(VERSION)/g" ./bin/package.json
 
@@ -88,9 +85,24 @@ build_dotnet:: install_plugins tfgen # build the dotnet sdk
 
 build_go:: install_plugins tfgen # build the go sdk
 	$(WORKING_DIR)/bin/$(TFGEN) go --overlays provider/overlays/go --out sdk/go/
+	cd sdk/go/ && \
+		go mod tidy
+
+build_java:: PACKAGE_VERSION := $(shell pulumictl get version --language generic)
+build_java:: $(WORKING_DIR)/bin/$(JAVA_GEN)
+	$(WORKING_DIR)/bin/$(JAVA_GEN) generate --schema provider/cmd/$(PROVIDER)/schema.json --out sdk/java  --build gradle-nexus
+	cd sdk/java/ && \
+		echo "module fake_java_module // Exclude this directory from Go tools\n\ngo 1.17" > go.mod && \
+		gradle --console=plain build
+
+$(WORKING_DIR)/bin/$(JAVA_GEN)::
+	$(shell pulumictl download-binary -n pulumi-language-java -v $(JAVA_GEN_VERSION) -r pulumi/pulumi-java)
 
 lint_provider:: provider # lint the provider code
 	cd provider && golangci-lint run -c ../.golangci.yml
+
+tidy:: # call go mod tidy in relevant directories
+	find ./provider -name go.mod -execdir go mod tidy \;
 
 cleanup:: # cleans up the temporary directory
 	rm -r $(WORKING_DIR)/bin
@@ -102,9 +114,14 @@ help::
  	expand -t20
 
 clean::
-	rm -rf sdk/{dotnet,nodejs,go,python}
+	rm -rf sdk/{dotnet,nodejs,go,python} sdk/go.sum
 
-install_plugins::
+.PHONY: fmt
+fmt::
+	@echo "Fixing source code with gofmt..."
+	find . -name '*.go' | grep -v vendor | xargs gofmt -s -w
+
+install_plugins:: validate_go_version
 	[ -x $(shell which pulumi) ] || curl -fsSL https://get.pulumi.com | sh
 	pulumi plugin install resource random 4.3.1
 
@@ -123,4 +140,3 @@ install_sdks:: install_dotnet_sdk install_python_sdk install_nodejs_sdk
 
 test::
 	cd examples && go test -v -tags=all -parallel ${TESTPARALLELISM} -timeout 2h
-

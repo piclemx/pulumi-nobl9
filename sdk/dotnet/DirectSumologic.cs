@@ -6,11 +6,12 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9
+namespace Piclemx.Nobl9
 {
     /// <summary>
-    /// Sumo Logic is an observability platform that provides visibility into AWS, Azure, and GCP cloud applications and infrastructure. Nobl9 connects with Sumo Logic to collect SLI measurements and compare them to SLO targets.
+    /// Sumo Logic is an observability platform that provides visibility into AWS, Azure, and GCP cloud applications and infrastructure. Nobl9 connects to Sumo Logic for SLI measurement collection and comparison with SLO targets.
     /// 
     /// For more information, refer to [Sumo Logic Direct | Nobl9 Documentation](https://docs.nobl9.com/Sources/sumo-logic#sumo-logic-direct).
     /// 
@@ -18,8 +19,9 @@ namespace Pulumi.Nobl9
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
-    /// using Nobl9 = Pulumi.Nobl9;
+    /// using Nobl9 = Piclemx.Nobl9;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
@@ -28,11 +30,8 @@ namespace Pulumi.Nobl9
     ///         AccessId = "secret",
     ///         AccessKey = "secret",
     ///         Description = "desc",
+    ///         LogCollectionEnabled = true,
     ///         Project = "terraform",
-    ///         SourceOfs = new[]
-    ///         {
-    ///             "Metrics",
-    ///         },
     ///         Url = "http://web.net",
     ///     });
     /// 
@@ -70,6 +69,12 @@ namespace Pulumi.Nobl9
         public Output<string?> DisplayName { get; private set; } = null!;
 
         /// <summary>
+        /// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+        /// </summary>
+        [Output("logCollectionEnabled")]
+        public Output<bool?> LogCollectionEnabled { get; private set; } = null!;
+
+        /// <summary>
         /// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
         /// </summary>
         [Output("name")]
@@ -85,10 +90,16 @@ namespace Pulumi.Nobl9
         /// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
         /// </summary>
         [Output("queryDelay")]
-        public Output<Outputs.DirectSumologicQueryDelay?> QueryDelay { get; private set; } = null!;
+        public Output<Outputs.DirectSumologicQueryDelay> QueryDelay { get; private set; } = null!;
 
         /// <summary>
-        /// Source of Metrics and/or Services.
+        /// Release channel of the created datasource [stable/beta]
+        /// </summary>
+        [Output("releaseChannel")]
+        public Output<string> ReleaseChannel { get; private set; } = null!;
+
+        /// <summary>
+        /// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
         /// </summary>
         [Output("sourceOfs")]
         public Output<ImmutableArray<string>> SourceOfs { get; private set; } = null!;
@@ -128,7 +139,12 @@ namespace Pulumi.Nobl9
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/piclemx/pulumi-nobl9/releases/",
+                PluginDownloadURL = "github://api.github.com/piclemx/pulumi-nobl9",
+                AdditionalSecretOutputs =
+                {
+                    "accessId",
+                    "accessKey",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -152,17 +168,37 @@ namespace Pulumi.Nobl9
 
     public sealed class DirectSumologicArgs : global::Pulumi.ResourceArgs
     {
+        [Input("accessId")]
+        private Input<string>? _accessId;
+
         /// <summary>
         /// [required] | Sumo Logic API Access ID.
         /// </summary>
-        [Input("accessId")]
-        public Input<string>? AccessId { get; set; }
+        public Input<string>? AccessId
+        {
+            get => _accessId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _accessId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("accessKey")]
+        private Input<string>? _accessKey;
 
         /// <summary>
         /// [required] | Sumo Logic API Access Key.
         /// </summary>
-        [Input("accessKey")]
-        public Input<string>? AccessKey { get; set; }
+        public Input<string>? AccessKey
+        {
+            get => _accessKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _accessKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
@@ -175,6 +211,12 @@ namespace Pulumi.Nobl9
         /// </summary>
         [Input("displayName")]
         public Input<string>? DisplayName { get; set; }
+
+        /// <summary>
+        /// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+        /// </summary>
+        [Input("logCollectionEnabled")]
+        public Input<bool>? LogCollectionEnabled { get; set; }
 
         /// <summary>
         /// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
@@ -194,12 +236,19 @@ namespace Pulumi.Nobl9
         [Input("queryDelay")]
         public Input<Inputs.DirectSumologicQueryDelayArgs>? QueryDelay { get; set; }
 
-        [Input("sourceOfs", required: true)]
+        /// <summary>
+        /// Release channel of the created datasource [stable/beta]
+        /// </summary>
+        [Input("releaseChannel")]
+        public Input<string>? ReleaseChannel { get; set; }
+
+        [Input("sourceOfs")]
         private InputList<string>? _sourceOfs;
 
         /// <summary>
-        /// Source of Metrics and/or Services.
+        /// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
         /// </summary>
+        [Obsolete(@"'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.")]
         public InputList<string> SourceOfs
         {
             get => _sourceOfs ?? (_sourceOfs = new InputList<string>());
@@ -220,17 +269,37 @@ namespace Pulumi.Nobl9
 
     public sealed class DirectSumologicState : global::Pulumi.ResourceArgs
     {
+        [Input("accessId")]
+        private Input<string>? _accessId;
+
         /// <summary>
         /// [required] | Sumo Logic API Access ID.
         /// </summary>
-        [Input("accessId")]
-        public Input<string>? AccessId { get; set; }
+        public Input<string>? AccessId
+        {
+            get => _accessId;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _accessId = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("accessKey")]
+        private Input<string>? _accessKey;
 
         /// <summary>
         /// [required] | Sumo Logic API Access Key.
         /// </summary>
-        [Input("accessKey")]
-        public Input<string>? AccessKey { get; set; }
+        public Input<string>? AccessKey
+        {
+            get => _accessKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _accessKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
@@ -243,6 +312,12 @@ namespace Pulumi.Nobl9
         /// </summary>
         [Input("displayName")]
         public Input<string>? DisplayName { get; set; }
+
+        /// <summary>
+        /// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+        /// </summary>
+        [Input("logCollectionEnabled")]
+        public Input<bool>? LogCollectionEnabled { get; set; }
 
         /// <summary>
         /// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
@@ -262,12 +337,19 @@ namespace Pulumi.Nobl9
         [Input("queryDelay")]
         public Input<Inputs.DirectSumologicQueryDelayGetArgs>? QueryDelay { get; set; }
 
+        /// <summary>
+        /// Release channel of the created datasource [stable/beta]
+        /// </summary>
+        [Input("releaseChannel")]
+        public Input<string>? ReleaseChannel { get; set; }
+
         [Input("sourceOfs")]
         private InputList<string>? _sourceOfs;
 
         /// <summary>
-        /// Source of Metrics and/or Services.
+        /// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
         /// </summary>
+        [Obsolete(@"'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.")]
         public InputList<string> SourceOfs
         {
             get => _sourceOfs ?? (_sourceOfs = new InputList<string>());

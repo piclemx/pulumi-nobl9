@@ -2,13 +2,14 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
  * An **Alert Policy** expresses a set of conditions you want to track or monitor. The conditions for an Alert Policy define what is monitored and when to activate an alert: when the performance of your service is declining, Nobl9 will send a notification to a predefined channel.
  *
- * A Nobl9 AlertPolicy accepts up to 7 conditions. All the specified conditions must be satisfied to trigger an alert.
+ * A Nobl9 AlertPolicy accepts up to 3 conditions. All the specified conditions must be satisfied to trigger an alert.
  *
  * For more details, refer to the [Alert Policy configuration | Nobl9 Documentation](https://docs.nobl9.com/yaml-guide#alertpolicy).
  *
@@ -18,7 +19,7 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as nobl9 from "@pulumi/nobl9";
+ * import * as nobl9 from "@piclemx/pulumi-nobl9";
  *
  * const thisProject = new nobl9.Project("thisProject", {
  *     displayName: "My Project",
@@ -34,6 +35,7 @@ import * as utilities from "./utilities";
  *     displayName: thisProject.displayName.apply(displayName => `${displayName} Front Page Latency`),
  *     severity: "High",
  *     description: "Alert when page latency is > 2000 and error budget would be exhausted",
+ *     cooldown: "5m",
  *     conditions: [{
  *         measurement: "timeToBurnBudget",
  *         valueString: "72h",
@@ -41,6 +43,37 @@ import * as utilities from "./utilities";
  *     }],
  *     alertMethods: [{
  *         name: "my-alert-method",
+ *     }],
+ * });
+ * const thisIndex_alertPolicyAlertPolicy = new nobl9.AlertPolicy("thisIndex/alertPolicyAlertPolicy", {
+ *     project: thisProject.name,
+ *     displayName: thisProject.displayName.apply(displayName => `${displayName} Slow Burn (1x12h and 2x15min)`),
+ *     severity: "Low",
+ *     description: "The budget is slowly exhausting and not recovering.",
+ *     cooldown: "5m",
+ *     conditions: [
+ *         {
+ *             measurement: "averageBurnRate",
+ *             value: 1,
+ *             alertingWindow: "12h",
+ *         },
+ *         {
+ *             measurement: "averageBurnRate",
+ *             value: 2,
+ *             alertingWindow: "15m",
+ *         },
+ *     ],
+ * });
+ * const thisNobl9Index_alertPolicyAlertPolicy = new nobl9.AlertPolicy("thisNobl9Index/alertPolicyAlertPolicy", {
+ *     project: thisProject.name,
+ *     displayName: thisProject.displayName.apply(displayName => `${displayName} Fast Burn (20x5min)`),
+ *     severity: "High",
+ *     description: "There’s been a significant spike in burn rate over a brief period.",
+ *     cooldown: "5m",
+ *     conditions: [{
+ *         measurement: "averageBurnRate",
+ *         value: 20,
+ *         alertingWindow: "5m",
  *     }],
  * });
  * ```
@@ -82,6 +115,10 @@ export class AlertPolicy extends pulumi.CustomResource {
      */
     public readonly conditions!: pulumi.Output<outputs.AlertPolicyCondition[]>;
     /**
+     * An interval measured from the last time stamp when all alert policy conditions were satisfied before alert is marked as resolved
+     */
+    public readonly cooldown!: pulumi.Output<string | undefined>;
+    /**
      * Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
      */
     public readonly description!: pulumi.Output<string | undefined>;
@@ -90,11 +127,11 @@ export class AlertPolicy extends pulumi.CustomResource {
      */
     public readonly displayName!: pulumi.Output<string | undefined>;
     /**
-     * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+     * The name of the previously defined alert method.
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+     * Project name the Alert Method is in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
      */
     public readonly project!: pulumi.Output<string>;
     /**
@@ -117,6 +154,7 @@ export class AlertPolicy extends pulumi.CustomResource {
             const state = argsOrState as AlertPolicyState | undefined;
             resourceInputs["alertMethods"] = state ? state.alertMethods : undefined;
             resourceInputs["conditions"] = state ? state.conditions : undefined;
+            resourceInputs["cooldown"] = state ? state.cooldown : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["displayName"] = state ? state.displayName : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
@@ -135,6 +173,7 @@ export class AlertPolicy extends pulumi.CustomResource {
             }
             resourceInputs["alertMethods"] = args ? args.alertMethods : undefined;
             resourceInputs["conditions"] = args ? args.conditions : undefined;
+            resourceInputs["cooldown"] = args ? args.cooldown : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["displayName"] = args ? args.displayName : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
@@ -156,6 +195,10 @@ export interface AlertPolicyState {
      */
     conditions?: pulumi.Input<pulumi.Input<inputs.AlertPolicyCondition>[]>;
     /**
+     * An interval measured from the last time stamp when all alert policy conditions were satisfied before alert is marked as resolved
+     */
+    cooldown?: pulumi.Input<string>;
+    /**
      * Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
      */
     description?: pulumi.Input<string>;
@@ -164,11 +207,11 @@ export interface AlertPolicyState {
      */
     displayName?: pulumi.Input<string>;
     /**
-     * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+     * The name of the previously defined alert method.
      */
     name?: pulumi.Input<string>;
     /**
-     * Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+     * Project name the Alert Method is in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
      */
     project?: pulumi.Input<string>;
     /**
@@ -187,6 +230,10 @@ export interface AlertPolicyArgs {
      */
     conditions: pulumi.Input<pulumi.Input<inputs.AlertPolicyCondition>[]>;
     /**
+     * An interval measured from the last time stamp when all alert policy conditions were satisfied before alert is marked as resolved
+     */
+    cooldown?: pulumi.Input<string>;
+    /**
      * Optional description of the resource. Here, you can add details about who is responsible for the integration (team/owner) or the purpose of creating it.
      */
     description?: pulumi.Input<string>;
@@ -195,11 +242,11 @@ export interface AlertPolicyArgs {
      */
     displayName?: pulumi.Input<string>;
     /**
-     * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+     * The name of the previously defined alert method.
      */
     name?: pulumi.Input<string>;
     /**
-     * Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+     * Project name the Alert Method is in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
      */
     project: pulumi.Input<string>;
     /**

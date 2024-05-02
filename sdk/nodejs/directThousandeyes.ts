@@ -2,11 +2,12 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * ThousandEyes monitors the performance of both local and wide-area networks. ThousandEyes combines Internet and WAN visibility, browser synthetics, end-user monitoring, and Internet Insights to deliver a holistic view of your hybrid digital ecosystem – across cloud, SaaS, and the Internet. It's a SaaS-based tool that helps troubleshoot application delivery and maps Internet performance. Nobl9 connects with ThousandEyes to collect SLI measurements and compare them to SLO targets.
+ * ThousandEyes monitors the performance of both local and wide-area networks. ThousandEyes combines Internet and WAN visibility, browser synthetics, end-user monitoring, and Internet Insights to deliver a holistic view of your hybrid digital ecosystem – across cloud, SaaS, and the Internet. It's a SaaS-based tool that helps troubleshoot application delivery and maps Internet performance. Nobl9 connects to ThousandEyes for SLI measurement collection and comparison with SLO targets.
  *
  * For more information, refer to [ThousandEyes Direct | Nobl9 Documentation](https://docs.nobl9.com/Sources/thousandeyes#thousandeyes-direct).
  *
@@ -14,16 +15,13 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as nobl9 from "@pulumi/nobl9";
+ * import * as nobl9 from "@piclemx/pulumi-nobl9";
  *
  * const test_thousandeyes = new nobl9.DirectThousandeyes("test-thousandeyes", {
  *     description: "desc",
+ *     logCollectionEnabled: true,
  *     oauthBearerToken: "secret",
  *     project: "terraform",
- *     sourceOfs: [
- *         "Metrics",
- *         "Services",
- *     ],
  * });
  * ```
  * ## Nobl9 Official Documentation
@@ -67,6 +65,10 @@ export class DirectThousandeyes extends pulumi.CustomResource {
      */
     public readonly displayName!: pulumi.Output<string | undefined>;
     /**
+     * [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+     */
+    public readonly logCollectionEnabled!: pulumi.Output<boolean | undefined>;
+    /**
      * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
     public readonly name!: pulumi.Output<string>;
@@ -81,11 +83,17 @@ export class DirectThousandeyes extends pulumi.CustomResource {
     /**
      * [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
      */
-    public readonly queryDelay!: pulumi.Output<outputs.DirectThousandeyesQueryDelay | undefined>;
+    public readonly queryDelay!: pulumi.Output<outputs.DirectThousandeyesQueryDelay>;
     /**
-     * Source of Metrics and/or Services.
+     * Release channel of the created datasource [stable/beta]
      */
-    public readonly sourceOfs!: pulumi.Output<string[]>;
+    public readonly releaseChannel!: pulumi.Output<string>;
+    /**
+     * This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+     *
+     * @deprecated 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
+     */
+    public readonly sourceOfs!: pulumi.Output<string[] | undefined>;
     /**
      * The status of the created direct.
      */
@@ -106,10 +114,12 @@ export class DirectThousandeyes extends pulumi.CustomResource {
             const state = argsOrState as DirectThousandeyesState | undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["displayName"] = state ? state.displayName : undefined;
+            resourceInputs["logCollectionEnabled"] = state ? state.logCollectionEnabled : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["oauthBearerToken"] = state ? state.oauthBearerToken : undefined;
             resourceInputs["project"] = state ? state.project : undefined;
             resourceInputs["queryDelay"] = state ? state.queryDelay : undefined;
+            resourceInputs["releaseChannel"] = state ? state.releaseChannel : undefined;
             resourceInputs["sourceOfs"] = state ? state.sourceOfs : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
         } else {
@@ -117,19 +127,20 @@ export class DirectThousandeyes extends pulumi.CustomResource {
             if ((!args || args.project === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'project'");
             }
-            if ((!args || args.sourceOfs === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'sourceOfs'");
-            }
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["displayName"] = args ? args.displayName : undefined;
+            resourceInputs["logCollectionEnabled"] = args ? args.logCollectionEnabled : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["oauthBearerToken"] = args ? args.oauthBearerToken : undefined;
+            resourceInputs["oauthBearerToken"] = args?.oauthBearerToken ? pulumi.secret(args.oauthBearerToken) : undefined;
             resourceInputs["project"] = args ? args.project : undefined;
             resourceInputs["queryDelay"] = args ? args.queryDelay : undefined;
+            resourceInputs["releaseChannel"] = args ? args.releaseChannel : undefined;
             resourceInputs["sourceOfs"] = args ? args.sourceOfs : undefined;
             resourceInputs["status"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["oauthBearerToken"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(DirectThousandeyes.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -147,6 +158,10 @@ export interface DirectThousandeyesState {
      */
     displayName?: pulumi.Input<string>;
     /**
+     * [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+     */
+    logCollectionEnabled?: pulumi.Input<boolean>;
+    /**
      * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
     name?: pulumi.Input<string>;
@@ -163,7 +178,13 @@ export interface DirectThousandeyesState {
      */
     queryDelay?: pulumi.Input<inputs.DirectThousandeyesQueryDelay>;
     /**
-     * Source of Metrics and/or Services.
+     * Release channel of the created datasource [stable/beta]
+     */
+    releaseChannel?: pulumi.Input<string>;
+    /**
+     * This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+     *
+     * @deprecated 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
      */
     sourceOfs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -185,6 +206,10 @@ export interface DirectThousandeyesArgs {
      */
     displayName?: pulumi.Input<string>;
     /**
+     * [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+     */
+    logCollectionEnabled?: pulumi.Input<boolean>;
+    /**
      * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
      */
     name?: pulumi.Input<string>;
@@ -201,7 +226,13 @@ export interface DirectThousandeyesArgs {
      */
     queryDelay?: pulumi.Input<inputs.DirectThousandeyesQueryDelay>;
     /**
-     * Source of Metrics and/or Services.
+     * Release channel of the created datasource [stable/beta]
      */
-    sourceOfs: pulumi.Input<pulumi.Input<string>[]>;
+    releaseChannel?: pulumi.Input<string>;
+    /**
+     * This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+     *
+     * @deprecated 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
+     */
+    sourceOfs?: pulumi.Input<pulumi.Input<string>[]>;
 }

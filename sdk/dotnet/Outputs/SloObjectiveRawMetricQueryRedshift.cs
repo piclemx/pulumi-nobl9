@@ -6,16 +6,29 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class SloObjectiveRawMetricQueryRedshift
     {
+        /// <summary>
+        /// Redshift custer ID
+        /// </summary>
         public readonly string ClusterId;
+        /// <summary>
+        /// Database name
+        /// </summary>
         public readonly string DatabaseName;
+        /// <summary>
+        /// Query for the metrics
+        /// </summary>
         public readonly string Query;
+        /// <summary>
+        /// Region of the CloudWatch instance
+        /// </summary>
         public readonly string Region;
 
         [OutputConstructor]

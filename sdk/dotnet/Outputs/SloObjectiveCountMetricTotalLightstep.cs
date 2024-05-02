@@ -6,16 +6,29 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class SloObjectiveCountMetricTotalLightstep
     {
+        /// <summary>
+        /// Optional value to filter by percentiles
+        /// </summary>
         public readonly double? Percentile;
+        /// <summary>
+        /// ID of the metrics stream
+        /// </summary>
         public readonly string? StreamId;
+        /// <summary>
+        /// Type of data to filter by
+        /// </summary>
         public readonly string TypeOfData;
+        /// <summary>
+        /// UQL query
+        /// </summary>
         public readonly string? Uql;
 
         [OutputConstructor]

@@ -6,35 +6,64 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Inputs
+namespace Piclemx.Nobl9.Inputs
 {
 
     public sealed class SloObjectiveRawMetricQueryCloudwatchArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// AccountID used with cross-account observability feature
+        /// </summary>
+        [Input("accountId")]
+        public Input<string>? AccountId { get; set; }
+
         [Input("dimensions")]
         private InputList<Inputs.SloObjectiveRawMetricQueryCloudwatchDimensionArgs>? _dimensions;
+
+        /// <summary>
+        /// Dimensions of the metric [Optional for metrics]
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryCloudwatchDimensionArgs> Dimensions
         {
             get => _dimensions ?? (_dimensions = new InputList<Inputs.SloObjectiveRawMetricQueryCloudwatchDimensionArgs>());
             set => _dimensions = value;
         }
 
+        /// <summary>
+        /// JSON query
+        /// </summary>
         [Input("json")]
         public Input<string>? Json { get; set; }
 
+        /// <summary>
+        /// Name of the metric [Required for metrics]
+        /// </summary>
         [Input("metricName")]
         public Input<string>? MetricName { get; set; }
 
+        /// <summary>
+        /// Namespace of the metric
+        /// </summary>
         [Input("namespace")]
         public Input<string>? Namespace { get; set; }
 
+        /// <summary>
+        /// Region of the CloudWatch instance
+        /// </summary>
         [Input("region", required: true)]
         public Input<string> Region { get; set; } = null!;
 
+        /// <summary>
+        /// SQL query
+        /// </summary>
         [Input("sql")]
         public Input<string>? Sql { get; set; }
 
+        /// <summary>
+        /// Metric data aggregations
+        /// </summary>
         [Input("stat")]
         public Input<string>? Stat { get; set; }
 

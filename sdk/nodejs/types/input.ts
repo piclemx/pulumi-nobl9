@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 
 export interface AgentAmazonPrometheusConfig {
     /**
@@ -20,6 +21,13 @@ export interface AgentAppdynamicsConfig {
      * Base URL to the AppDynamics Controller.
      */
     url: pulumi.Input<string>;
+}
+
+export interface AgentAzureMonitorConfig {
+    /**
+     * Azure Tenant Id.
+     */
+    tenantId: pulumi.Input<string>;
 }
 
 export interface AgentBigqueryConfig {
@@ -66,6 +74,42 @@ export interface AgentGraphiteConfig {
     url: pulumi.Input<string>;
 }
 
+export interface AgentHistoricalDataRetrieval {
+    /**
+     * Used by default for any SLOs connected to this data source.
+     */
+    defaultDurations: pulumi.Input<pulumi.Input<inputs.AgentHistoricalDataRetrievalDefaultDuration>[]>;
+    /**
+     * Defines the maximum period for which data can be retrieved.
+     */
+    maxDurations: pulumi.Input<pulumi.Input<inputs.AgentHistoricalDataRetrievalMaxDuration>[]>;
+}
+
+export interface AgentHistoricalDataRetrievalDefaultDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
+    unit: pulumi.Input<string>;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
+    value: pulumi.Input<number>;
+}
+
+export interface AgentHistoricalDataRetrievalMaxDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
+    unit: pulumi.Input<string>;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
+    value: pulumi.Input<number>;
+}
+
+export interface AgentHoneycombConfig {
+}
+
 export interface AgentInfluxdbConfig {
     /**
      * API URL endpoint to the InfluxDB's instance.
@@ -89,6 +133,10 @@ export interface AgentLightstepConfig {
      * Name of the Lightstep project.
      */
     project: pulumi.Input<string>;
+    /**
+     * Lightstep API URL. Nobl9 will use https://api.lightstep.com if empty.
+     */
+    url?: pulumi.Input<string>;
 }
 
 export interface AgentNewrelicConfig {
@@ -153,6 +201,13 @@ export interface AgentSumologicConfig {
 export interface AgentThousandeyesConfig {
 }
 
+export interface AlertMethodPagerdutySendResolution {
+    /**
+     * A message that will be attached to your 'all clear' notification.
+     */
+    message?: pulumi.Input<string>;
+}
+
 export interface AlertPolicyAlertMethod {
     /**
      * The name of the previously defined alert method.
@@ -166,11 +221,15 @@ export interface AlertPolicyAlertMethod {
 
 export interface AlertPolicyCondition {
     /**
+     * Duration over which the burn rate is evaluated.
+     */
+    alertingWindow?: pulumi.Input<string>;
+    /**
      * Indicates how long a given condition needs to be valid to mark the condition as true.
      */
     lastsFor?: pulumi.Input<string>;
     /**
-     * One of `timeToBurnBudget` | `burnRate` | `burnedBudget`.
+     * One of `timeToBurnBudget` | `timeToBurnEntireBudget` | `burnRate` | `burnedBudget`.
      */
     measurement: pulumi.Input<string>;
     /**
@@ -178,12 +237,89 @@ export interface AlertPolicyCondition {
      */
     value?: pulumi.Input<number>;
     /**
-     * Used with `timeToBurnBudget`, indicates when the budget would be exhausted. The expected value is a string in time duration string format.
+     * Used with `timeToBurnBudget` or `timeToBurnEntireBudget`, indicates when the budget would be exhausted. The expected value is a string in time duration string format.
      */
     valueString?: pulumi.Input<string>;
 }
 
+export interface DirectAppdynamicsHistoricalDataRetrieval {
+    /**
+     * Used by default for any SLOs connected to this data source.
+     */
+    defaultDurations: pulumi.Input<pulumi.Input<inputs.DirectAppdynamicsHistoricalDataRetrievalDefaultDuration>[]>;
+    /**
+     * Defines the maximum period for which data can be retrieved.
+     */
+    maxDurations: pulumi.Input<pulumi.Input<inputs.DirectAppdynamicsHistoricalDataRetrievalMaxDuration>[]>;
+}
+
+export interface DirectAppdynamicsHistoricalDataRetrievalDefaultDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
+    unit: pulumi.Input<string>;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
+    value: pulumi.Input<number>;
+}
+
+export interface DirectAppdynamicsHistoricalDataRetrievalMaxDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
+    unit: pulumi.Input<string>;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
+    value: pulumi.Input<number>;
+}
+
 export interface DirectAppdynamicsQueryDelay {
+    /**
+     * Must be one of Minute or Second.
+     */
+    unit: pulumi.Input<string>;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
+    value: pulumi.Input<number>;
+}
+
+export interface DirectAzureMonitorHistoricalDataRetrieval {
+    /**
+     * Used by default for any SLOs connected to this data source.
+     */
+    defaultDurations: pulumi.Input<pulumi.Input<inputs.DirectAzureMonitorHistoricalDataRetrievalDefaultDuration>[]>;
+    /**
+     * Defines the maximum period for which data can be retrieved.
+     */
+    maxDurations: pulumi.Input<pulumi.Input<inputs.DirectAzureMonitorHistoricalDataRetrievalMaxDuration>[]>;
+}
+
+export interface DirectAzureMonitorHistoricalDataRetrievalDefaultDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
+    unit: pulumi.Input<string>;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
+    value: pulumi.Input<number>;
+}
+
+export interface DirectAzureMonitorHistoricalDataRetrievalMaxDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
+    unit: pulumi.Input<string>;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
+    value: pulumi.Input<number>;
+}
+
+export interface DirectAzureMonitorQueryDelay {
     /**
      * Must be one of Minute or Second.
      */
@@ -217,12 +353,24 @@ export interface DirectCloudwatchHistoricalDataRetrieval {
 }
 
 export interface DirectCloudwatchHistoricalDataRetrievalDefaultDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: pulumi.Input<string>;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: pulumi.Input<number>;
 }
 
 export interface DirectCloudwatchHistoricalDataRetrievalMaxDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: pulumi.Input<string>;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: pulumi.Input<number>;
 }
 
@@ -249,12 +397,24 @@ export interface DirectDatadogHistoricalDataRetrieval {
 }
 
 export interface DirectDatadogHistoricalDataRetrievalDefaultDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: pulumi.Input<string>;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: pulumi.Input<number>;
 }
 
 export interface DirectDatadogHistoricalDataRetrievalMaxDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: pulumi.Input<string>;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: pulumi.Input<number>;
 }
 
@@ -281,12 +441,24 @@ export interface DirectDynatraceHistoricalDataRetrieval {
 }
 
 export interface DirectDynatraceHistoricalDataRetrievalDefaultDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: pulumi.Input<string>;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: pulumi.Input<number>;
 }
 
 export interface DirectDynatraceHistoricalDataRetrievalMaxDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: pulumi.Input<string>;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: pulumi.Input<number>;
 }
 
@@ -302,6 +474,50 @@ export interface DirectDynatraceQueryDelay {
 }
 
 export interface DirectGcmQueryDelay {
+    /**
+     * Must be one of Minute or Second.
+     */
+    unit: pulumi.Input<string>;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
+    value: pulumi.Input<number>;
+}
+
+export interface DirectHoneycombHistoricalDataRetrieval {
+    /**
+     * Used by default for any SLOs connected to this data source.
+     */
+    defaultDurations: pulumi.Input<pulumi.Input<inputs.DirectHoneycombHistoricalDataRetrievalDefaultDuration>[]>;
+    /**
+     * Defines the maximum period for which data can be retrieved.
+     */
+    maxDurations: pulumi.Input<pulumi.Input<inputs.DirectHoneycombHistoricalDataRetrievalMaxDuration>[]>;
+}
+
+export interface DirectHoneycombHistoricalDataRetrievalDefaultDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
+    unit: pulumi.Input<string>;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
+    value: pulumi.Input<number>;
+}
+
+export interface DirectHoneycombHistoricalDataRetrievalMaxDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
+    unit: pulumi.Input<string>;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
+    value: pulumi.Input<number>;
+}
+
+export interface DirectHoneycombQueryDelay {
     /**
      * Must be one of Minute or Second.
      */
@@ -346,12 +562,24 @@ export interface DirectLightstepHistoricalDataRetrieval {
 }
 
 export interface DirectLightstepHistoricalDataRetrievalDefaultDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: pulumi.Input<string>;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: pulumi.Input<number>;
 }
 
 export interface DirectLightstepHistoricalDataRetrievalMaxDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: pulumi.Input<string>;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: pulumi.Input<number>;
 }
 
@@ -378,12 +606,24 @@ export interface DirectNewrelicHistoricalDataRetrieval {
 }
 
 export interface DirectNewrelicHistoricalDataRetrievalDefaultDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: pulumi.Input<string>;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: pulumi.Input<number>;
 }
 
 export interface DirectNewrelicHistoricalDataRetrievalMaxDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: pulumi.Input<string>;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: pulumi.Input<number>;
 }
 
@@ -432,12 +672,24 @@ export interface DirectSplunkHistoricalDataRetrieval {
 }
 
 export interface DirectSplunkHistoricalDataRetrievalDefaultDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: pulumi.Input<string>;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: pulumi.Input<number>;
 }
 
 export interface DirectSplunkHistoricalDataRetrievalMaxDuration {
+    /**
+     * Must be one of Minute, Hour, or Day.
+     */
     unit: pulumi.Input<string>;
+    /**
+     * Must be an integer greater than or equal to 0.
+     */
     value: pulumi.Input<number>;
 }
 
@@ -507,6 +759,31 @@ export interface ServiceLabel {
     values: pulumi.Input<pulumi.Input<string>[]>;
 }
 
+export interface SloAnomalyConfig {
+    /**
+     * Alert Policies attached to SLO
+     */
+    noData: pulumi.Input<inputs.SloAnomalyConfigNoData>;
+}
+
+export interface SloAnomalyConfigNoData {
+    /**
+     * Alert methods attached to Anomaly Config
+     */
+    alertMethods: pulumi.Input<pulumi.Input<inputs.SloAnomalyConfigNoDataAlertMethod>[]>;
+}
+
+export interface SloAnomalyConfigNoDataAlertMethod {
+    /**
+     * The name of the previously defined alert method.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Project name the Alert Method is in,  must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
+     */
+    project: pulumi.Input<string>;
+}
+
 export interface SloAttachment {
     /**
      * Name displayed for the attachment. Max. length: 63 characters.
@@ -530,7 +807,13 @@ export interface SloComposite {
 }
 
 export interface SloCompositeBurnRateCondition {
+    /**
+     * Type of logical operation
+     */
     op: pulumi.Input<string>;
+    /**
+     * Burn rate value.
+     */
     value: pulumi.Input<number>;
 }
 
@@ -562,7 +845,7 @@ export interface SloLabel {
 
 export interface SloObjective {
     /**
-     * Compares two time series, indicating the ratio of the count of good values to total values.
+     * Compares two time series, calculating the ratio of either good or bad values to the total number of values. Fill either the 'good' or 'bad' series, but not both.
      */
     countMetrics?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetric>[]>;
     /**
@@ -596,516 +879,2020 @@ export interface SloObjective {
 }
 
 export interface SloObjectiveCountMetric {
+    /**
+     * Configuration for bad time series metrics.
+     */
+    bads?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBad>[]>;
+    /**
+     * Configuration for good time series metrics.
+     */
     goods?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGood>[]>;
+    /**
+     * Should the metrics be incrementing or not
+     */
     incremental: pulumi.Input<boolean>;
-    totals?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotal>[]>;
+    /**
+     * Configuration for metric source
+     */
+    totals: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotal>[]>;
+}
+
+export interface SloObjectiveCountMetricBad {
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
+     */
+    amazonPrometheuses?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadAmazonPrometheus>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
+     */
+    appdynamics?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadAppdynamic>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+     */
+    azureMonitors?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadAzureMonitor>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
+     */
+    bigqueries?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadBigquery>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
+     */
+    cloudwatches?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadCloudwatch>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
+     */
+    datadogs?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadDatadog>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
+     */
+    dynatraces?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadDynatrace>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
+     */
+    elasticsearches?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadElasticsearch>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
+     */
+    gcms?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadGcm>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
+     */
+    grafanaLokis?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadGrafanaLoki>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
+     */
+    graphites?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadGraphite>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+     */
+    honeycombs?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadHoneycomb>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
+     */
+    influxdbs?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadInfluxdb>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
+     */
+    instanas?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadInstana>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
+     */
+    lightsteps?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadLightstep>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
+     */
+    newrelics?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadNewrelic>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
+     */
+    opentsdbs?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadOpentsdb>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
+     */
+    pingdoms?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadPingdom>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
+     */
+    prometheuses?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadPrometheus>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
+     */
+    redshifts?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadRedshift>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
+     */
+    splunkObservabilities?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadSplunkObservability>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
+     */
+    splunks?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadSplunk>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
+     */
+    sumologics?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadSumologic>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
+     */
+    thousandeyes?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadThousandeye>[]>;
+}
+
+export interface SloObjectiveCountMetricBadAmazonPrometheus {
+    /**
+     * Query for the metrics
+     */
+    promql: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadAppdynamic {
+    /**
+     * Name of the added application
+     */
+    applicationName: pulumi.Input<string>;
+    /**
+     * Path to the metrics
+     */
+    metricPath: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadAzureMonitor {
+    /**
+     * Aggregation type [Required for metrics]
+     */
+    aggregation?: pulumi.Input<string>;
+    /**
+     * Specifies source: 'metrics' or 'logs'
+     */
+    dataType: pulumi.Input<string>;
+    /**
+     * Dimensions of the metric [Optional for metrics]
+     */
+    dimensions?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadAzureMonitorDimension>[]>;
+    /**
+     * Logs query in Kusto Query Language [Required for logs]
+     */
+    kqlQuery?: pulumi.Input<string>;
+    /**
+     * Name of the metric [Required for metrics]
+     */
+    metricName?: pulumi.Input<string>;
+    /**
+     * Namespace of the metric [Optional for metrics]
+     */
+    metricNamespace?: pulumi.Input<string>;
+    /**
+     * Identifier of the Azure Cloud resource [Required for metrics]
+     */
+    resourceId?: pulumi.Input<string>;
+    /**
+     * Log analytics workspace [Required for logs]
+     */
+    workspaces?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadAzureMonitorWorkspace>[]>;
+}
+
+export interface SloObjectiveCountMetricBadAzureMonitorDimension {
+    /**
+     * The name of the previously defined alert method.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Burn rate value.
+     */
+    value: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadAzureMonitorWorkspace {
+    /**
+     * Resource group of the workspace
+     */
+    resourceGroup: pulumi.Input<string>;
+    /**
+     * Subscription ID of the workspace
+     */
+    subscriptionId: pulumi.Input<string>;
+    /**
+     * ID of the workspace
+     */
+    workspaceId: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadBigquery {
+    /**
+     * Location of you BigQuery
+     */
+    location: pulumi.Input<string>;
+    /**
+     * Project ID
+     */
+    projectId: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
+    query: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadCloudwatch {
+    /**
+     * AccountID used with cross-account observability feature
+     */
+    accountId?: pulumi.Input<string>;
+    /**
+     * Dimensions of the metric [Optional for metrics]
+     */
+    dimensions?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadCloudwatchDimension>[]>;
+    /**
+     * JSON query
+     */
+    json?: pulumi.Input<string>;
+    /**
+     * Name of the metric [Required for metrics]
+     */
+    metricName?: pulumi.Input<string>;
+    /**
+     * Namespace of the metric
+     */
+    namespace?: pulumi.Input<string>;
+    /**
+     * Region of the CloudWatch instance
+     */
+    region: pulumi.Input<string>;
+    /**
+     * SQL query
+     */
+    sql?: pulumi.Input<string>;
+    /**
+     * Metric data aggregations
+     */
+    stat?: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadCloudwatchDimension {
+    /**
+     * The name of the previously defined alert method.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Burn rate value.
+     */
+    value: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadDatadog {
+    /**
+     * Query for the metrics
+     */
+    query: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadDynatrace {
+    /**
+     * Selector for the metrics
+     */
+    metricSelector: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadElasticsearch {
+    /**
+     * Index of metrics we want to query
+     */
+    index: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
+    query: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadGcm {
+    /**
+     * Project ID
+     */
+    projectId: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
+    query: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadGrafanaLoki {
+    /**
+     * Query for the logs
+     */
+    logql: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadGraphite {
+    /**
+     * Path to the metrics
+     */
+    metricPath: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadHoneycomb {
+    /**
+     * Column name - required for all calculation types besides 'CONCURRENCY' and 'COUNT'
+     */
+    attribute?: pulumi.Input<string>;
+    /**
+     * Calculation type
+     */
+    calculation: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadInfluxdb {
+    /**
+     * Query for the metrics
+     */
+    query: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadInstana {
+    /**
+     * Infrastructure metric type
+     */
+    applications?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadInstanaApplication>[]>;
+    /**
+     * Infrastructure metric type
+     */
+    infrastructures?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadInstanaInfrastructure>[]>;
+    /**
+     * Instana metric type 'application' or 'infrastructure'
+     */
+    metricType: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadInstanaApplication {
+    /**
+     * Aggregation type [Required for metrics]
+     */
+    aggregation: pulumi.Input<string>;
+    /**
+     * API query user passes in a JSON format
+     */
+    apiQuery: pulumi.Input<string>;
+    /**
+     * Group by method
+     */
+    groupBies: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricBadInstanaApplicationGroupBy>[]>;
+    /**
+     * Include internal
+     */
+    includeInternal?: pulumi.Input<boolean>;
+    /**
+     * Include synthetic
+     */
+    includeSynthetic?: pulumi.Input<boolean>;
+    /**
+     * Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+     */
+    metricId: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadInstanaApplicationGroupBy {
+    /**
+     * Group by tag
+     */
+    tag: pulumi.Input<string>;
+    /**
+     * Tag entity - one of 'DESTINATION', 'SOURCE', 'NOT_APPLICABLE'
+     */
+    tagEntity: pulumi.Input<string>;
+    tagSecondLevelKey?: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadInstanaInfrastructure {
+    /**
+     * Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+     */
+    metricId: pulumi.Input<string>;
+    /**
+     * Metric retrieval method 'query' or 'snapshot'
+     */
+    metricRetrievalMethod: pulumi.Input<string>;
+    /**
+     * Plugin ID
+     */
+    pluginId: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
+    query?: pulumi.Input<string>;
+    /**
+     * Snapshot ID
+     */
+    snapshotId?: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadLightstep {
+    /**
+     * Optional value to filter by percentiles
+     */
+    percentile?: pulumi.Input<number>;
+    /**
+     * ID of the metrics stream
+     */
+    streamId?: pulumi.Input<string>;
+    /**
+     * Type of data to filter by
+     */
+    typeOfData: pulumi.Input<string>;
+    /**
+     * UQL query
+     */
+    uql?: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadNewrelic {
+    /**
+     * Query for the metrics
+     */
+    nrql: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadOpentsdb {
+    /**
+     * Query for the metrics
+     */
+    query: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadPingdom {
+    /**
+     * Pingdom uptime or transaction check's ID
+     */
+    checkId: pulumi.Input<string>;
+    /**
+     * Pingdom check type - uptime or transaction
+     */
+    checkType?: pulumi.Input<string>;
+    /**
+     * Optional for the Uptime checks. Use it to filter the Pingdom check results by status
+     */
+    status?: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadPrometheus {
+    /**
+     * Query for the metrics
+     */
+    promql: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadRedshift {
+    /**
+     * Redshift custer ID
+     */
+    clusterId: pulumi.Input<string>;
+    /**
+     * Database name
+     */
+    databaseName: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
+    query: pulumi.Input<string>;
+    /**
+     * Region of the CloudWatch instance
+     */
+    region: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadSplunk {
+    /**
+     * Query for the metrics
+     */
+    query: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadSplunkObservability {
+    /**
+     * Query for the metrics
+     */
+    program: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadSumologic {
+    /**
+     * Period of data aggregation
+     */
+    quantization?: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
+    query: pulumi.Input<string>;
+    /**
+     * Aggregation function - avg, sum, min, max, count, none
+     */
+    rollup?: pulumi.Input<string>;
+    /**
+     * Sumologic source - metrics or logs
+     */
+    type: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricBadThousandeye {
+    /**
+     * ID of the test
+     */
+    testId: pulumi.Input<number>;
 }
 
 export interface SloObjectiveCountMetricGood {
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
+     */
     amazonPrometheuses?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodAmazonPrometheus>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
+     */
     appdynamics?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodAppdynamic>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+     */
+    azureMonitors?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodAzureMonitor>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
+     */
     bigqueries?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodBigquery>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
+     */
     cloudwatches?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodCloudwatch>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
+     */
     datadogs?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodDatadog>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
+     */
     dynatraces?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodDynatrace>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
+     */
     elasticsearches?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodElasticsearch>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
+     */
     gcms?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodGcm>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
+     */
     grafanaLokis?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodGrafanaLoki>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
+     */
     graphites?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodGraphite>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+     */
+    honeycombs?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodHoneycomb>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
+     */
     influxdbs?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodInfluxdb>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
+     */
     instanas?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodInstana>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
+     */
     lightsteps?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodLightstep>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
+     */
     newrelics?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodNewrelic>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
+     */
     opentsdbs?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodOpentsdb>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
+     */
     pingdoms?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodPingdom>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
+     */
     prometheuses?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodPrometheus>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
+     */
     redshifts?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodRedshift>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
+     */
     splunkObservabilities?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodSplunkObservability>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
+     */
     splunks?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodSplunk>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
+     */
     sumologics?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodSumologic>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
+     */
     thousandeyes?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodThousandeye>[]>;
 }
 
 export interface SloObjectiveCountMetricGoodAmazonPrometheus {
+    /**
+     * Query for the metrics
+     */
     promql: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodAppdynamic {
+    /**
+     * Name of the added application
+     */
     applicationName: pulumi.Input<string>;
+    /**
+     * Path to the metrics
+     */
     metricPath: pulumi.Input<string>;
 }
 
+export interface SloObjectiveCountMetricGoodAzureMonitor {
+    /**
+     * Aggregation type [Required for metrics]
+     */
+    aggregation?: pulumi.Input<string>;
+    /**
+     * Specifies source: 'metrics' or 'logs'
+     */
+    dataType: pulumi.Input<string>;
+    /**
+     * Dimensions of the metric [Optional for metrics]
+     */
+    dimensions?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodAzureMonitorDimension>[]>;
+    /**
+     * Logs query in Kusto Query Language [Required for logs]
+     */
+    kqlQuery?: pulumi.Input<string>;
+    /**
+     * Name of the metric [Required for metrics]
+     */
+    metricName?: pulumi.Input<string>;
+    /**
+     * Namespace of the metric [Optional for metrics]
+     */
+    metricNamespace?: pulumi.Input<string>;
+    /**
+     * Identifier of the Azure Cloud resource [Required for metrics]
+     */
+    resourceId?: pulumi.Input<string>;
+    /**
+     * Log analytics workspace [Required for logs]
+     */
+    workspaces?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodAzureMonitorWorkspace>[]>;
+}
+
+export interface SloObjectiveCountMetricGoodAzureMonitorDimension {
+    /**
+     * The name of the previously defined alert method.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Burn rate value.
+     */
+    value: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricGoodAzureMonitorWorkspace {
+    /**
+     * Resource group of the workspace
+     */
+    resourceGroup: pulumi.Input<string>;
+    /**
+     * Subscription ID of the workspace
+     */
+    subscriptionId: pulumi.Input<string>;
+    /**
+     * ID of the workspace
+     */
+    workspaceId: pulumi.Input<string>;
+}
+
 export interface SloObjectiveCountMetricGoodBigquery {
+    /**
+     * Location of you BigQuery
+     */
     location: pulumi.Input<string>;
+    /**
+     * Project ID
+     */
     projectId: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodCloudwatch {
+    /**
+     * AccountID used with cross-account observability feature
+     */
+    accountId?: pulumi.Input<string>;
+    /**
+     * Dimensions of the metric [Optional for metrics]
+     */
     dimensions?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodCloudwatchDimension>[]>;
+    /**
+     * JSON query
+     */
     json?: pulumi.Input<string>;
+    /**
+     * Name of the metric [Required for metrics]
+     */
     metricName?: pulumi.Input<string>;
+    /**
+     * Namespace of the metric
+     */
     namespace?: pulumi.Input<string>;
+    /**
+     * Region of the CloudWatch instance
+     */
     region: pulumi.Input<string>;
+    /**
+     * SQL query
+     */
     sql?: pulumi.Input<string>;
+    /**
+     * Metric data aggregations
+     */
     stat?: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodCloudwatchDimension {
     /**
-     * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+     * The name of the previously defined alert method.
      */
     name: pulumi.Input<string>;
+    /**
+     * Burn rate value.
+     */
     value: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodDatadog {
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodDynatrace {
+    /**
+     * Selector for the metrics
+     */
     metricSelector: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodElasticsearch {
+    /**
+     * Index of metrics we want to query
+     */
     index: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodGcm {
+    /**
+     * Project ID
+     */
     projectId: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodGrafanaLoki {
+    /**
+     * Query for the logs
+     */
     logql: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodGraphite {
+    /**
+     * Path to the metrics
+     */
     metricPath: pulumi.Input<string>;
 }
 
+export interface SloObjectiveCountMetricGoodHoneycomb {
+    /**
+     * Column name - required for all calculation types besides 'CONCURRENCY' and 'COUNT'
+     */
+    attribute?: pulumi.Input<string>;
+    /**
+     * Calculation type
+     */
+    calculation: pulumi.Input<string>;
+}
+
 export interface SloObjectiveCountMetricGoodInfluxdb {
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodInstana {
+    /**
+     * Infrastructure metric type
+     */
     applications?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodInstanaApplication>[]>;
+    /**
+     * Infrastructure metric type
+     */
     infrastructures?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodInstanaInfrastructure>[]>;
+    /**
+     * Instana metric type 'application' or 'infrastructure'
+     */
     metricType: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodInstanaApplication {
+    /**
+     * Aggregation type [Required for metrics]
+     */
     aggregation: pulumi.Input<string>;
+    /**
+     * API query user passes in a JSON format
+     */
     apiQuery: pulumi.Input<string>;
+    /**
+     * Group by method
+     */
     groupBies: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricGoodInstanaApplicationGroupBy>[]>;
+    /**
+     * Include internal
+     */
     includeInternal?: pulumi.Input<boolean>;
+    /**
+     * Include synthetic
+     */
     includeSynthetic?: pulumi.Input<boolean>;
+    /**
+     * Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+     */
     metricId: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodInstanaApplicationGroupBy {
+    /**
+     * Group by tag
+     */
     tag: pulumi.Input<string>;
+    /**
+     * Tag entity - one of 'DESTINATION', 'SOURCE', 'NOT_APPLICABLE'
+     */
     tagEntity: pulumi.Input<string>;
     tagSecondLevelKey?: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodInstanaInfrastructure {
+    /**
+     * Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+     */
     metricId: pulumi.Input<string>;
+    /**
+     * Metric retrieval method 'query' or 'snapshot'
+     */
     metricRetrievalMethod: pulumi.Input<string>;
+    /**
+     * Plugin ID
+     */
     pluginId: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
     query?: pulumi.Input<string>;
+    /**
+     * Snapshot ID
+     */
     snapshotId?: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodLightstep {
+    /**
+     * Optional value to filter by percentiles
+     */
     percentile?: pulumi.Input<number>;
+    /**
+     * ID of the metrics stream
+     */
     streamId?: pulumi.Input<string>;
+    /**
+     * Type of data to filter by
+     */
     typeOfData: pulumi.Input<string>;
+    /**
+     * UQL query
+     */
     uql?: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodNewrelic {
+    /**
+     * Query for the metrics
+     */
     nrql: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodOpentsdb {
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodPingdom {
+    /**
+     * Pingdom uptime or transaction check's ID
+     */
     checkId: pulumi.Input<string>;
+    /**
+     * Pingdom check type - uptime or transaction
+     */
     checkType?: pulumi.Input<string>;
+    /**
+     * Optional for the Uptime checks. Use it to filter the Pingdom check results by status
+     */
     status?: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodPrometheus {
+    /**
+     * Query for the metrics
+     */
     promql: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodRedshift {
+    /**
+     * Redshift custer ID
+     */
     clusterId: pulumi.Input<string>;
+    /**
+     * Database name
+     */
     databaseName: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
+    /**
+     * Region of the CloudWatch instance
+     */
     region: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodSplunk {
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodSplunkObservability {
+    /**
+     * Query for the metrics
+     */
     program: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodSumologic {
+    /**
+     * Period of data aggregation
+     */
     quantization?: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
+    /**
+     * Aggregation function - avg, sum, min, max, count, none
+     */
     rollup?: pulumi.Input<string>;
+    /**
+     * Sumologic source - metrics or logs
+     */
     type: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricGoodThousandeye {
+    /**
+     * ID of the test
+     */
     testId: pulumi.Input<number>;
 }
 
 export interface SloObjectiveCountMetricTotal {
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
+     */
     amazonPrometheuses?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalAmazonPrometheus>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
+     */
     appdynamics?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalAppdynamic>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+     */
+    azureMonitors?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalAzureMonitor>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
+     */
     bigqueries?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalBigquery>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
+     */
     cloudwatches?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalCloudwatch>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
+     */
     datadogs?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalDatadog>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
+     */
     dynatraces?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalDynatrace>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
+     */
     elasticsearches?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalElasticsearch>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
+     */
     gcms?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalGcm>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
+     */
     grafanaLokis?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalGrafanaLoki>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
+     */
     graphites?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalGraphite>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+     */
+    honeycombs?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalHoneycomb>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
+     */
     influxdbs?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalInfluxdb>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
+     */
     instanas?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalInstana>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
+     */
     lightsteps?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalLightstep>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
+     */
     newrelics?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalNewrelic>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
+     */
     opentsdbs?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalOpentsdb>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
+     */
     pingdoms?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalPingdom>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
+     */
     prometheuses?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalPrometheus>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
+     */
     redshifts?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalRedshift>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
+     */
     splunkObservabilities?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalSplunkObservability>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
+     */
     splunks?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalSplunk>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
+     */
     sumologics?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalSumologic>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
+     */
     thousandeyes?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalThousandeye>[]>;
 }
 
 export interface SloObjectiveCountMetricTotalAmazonPrometheus {
+    /**
+     * Query for the metrics
+     */
     promql: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalAppdynamic {
+    /**
+     * Name of the added application
+     */
     applicationName: pulumi.Input<string>;
+    /**
+     * Path to the metrics
+     */
     metricPath: pulumi.Input<string>;
 }
 
+export interface SloObjectiveCountMetricTotalAzureMonitor {
+    /**
+     * Aggregation type [Required for metrics]
+     */
+    aggregation?: pulumi.Input<string>;
+    /**
+     * Specifies source: 'metrics' or 'logs'
+     */
+    dataType: pulumi.Input<string>;
+    /**
+     * Dimensions of the metric [Optional for metrics]
+     */
+    dimensions?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalAzureMonitorDimension>[]>;
+    /**
+     * Logs query in Kusto Query Language [Required for logs]
+     */
+    kqlQuery?: pulumi.Input<string>;
+    /**
+     * Name of the metric [Required for metrics]
+     */
+    metricName?: pulumi.Input<string>;
+    /**
+     * Namespace of the metric [Optional for metrics]
+     */
+    metricNamespace?: pulumi.Input<string>;
+    /**
+     * Identifier of the Azure Cloud resource [Required for metrics]
+     */
+    resourceId?: pulumi.Input<string>;
+    /**
+     * Log analytics workspace [Required for logs]
+     */
+    workspaces?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalAzureMonitorWorkspace>[]>;
+}
+
+export interface SloObjectiveCountMetricTotalAzureMonitorDimension {
+    /**
+     * The name of the previously defined alert method.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Burn rate value.
+     */
+    value: pulumi.Input<string>;
+}
+
+export interface SloObjectiveCountMetricTotalAzureMonitorWorkspace {
+    /**
+     * Resource group of the workspace
+     */
+    resourceGroup: pulumi.Input<string>;
+    /**
+     * Subscription ID of the workspace
+     */
+    subscriptionId: pulumi.Input<string>;
+    /**
+     * ID of the workspace
+     */
+    workspaceId: pulumi.Input<string>;
+}
+
 export interface SloObjectiveCountMetricTotalBigquery {
+    /**
+     * Location of you BigQuery
+     */
     location: pulumi.Input<string>;
+    /**
+     * Project ID
+     */
     projectId: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalCloudwatch {
+    /**
+     * AccountID used with cross-account observability feature
+     */
+    accountId?: pulumi.Input<string>;
+    /**
+     * Dimensions of the metric [Optional for metrics]
+     */
     dimensions?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalCloudwatchDimension>[]>;
+    /**
+     * JSON query
+     */
     json?: pulumi.Input<string>;
+    /**
+     * Name of the metric [Required for metrics]
+     */
     metricName?: pulumi.Input<string>;
+    /**
+     * Namespace of the metric
+     */
     namespace?: pulumi.Input<string>;
+    /**
+     * Region of the CloudWatch instance
+     */
     region: pulumi.Input<string>;
+    /**
+     * SQL query
+     */
     sql?: pulumi.Input<string>;
+    /**
+     * Metric data aggregations
+     */
     stat?: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalCloudwatchDimension {
     /**
-     * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+     * The name of the previously defined alert method.
      */
     name: pulumi.Input<string>;
+    /**
+     * Burn rate value.
+     */
     value: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalDatadog {
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalDynatrace {
+    /**
+     * Selector for the metrics
+     */
     metricSelector: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalElasticsearch {
+    /**
+     * Index of metrics we want to query
+     */
     index: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalGcm {
+    /**
+     * Project ID
+     */
     projectId: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalGrafanaLoki {
+    /**
+     * Query for the logs
+     */
     logql: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalGraphite {
+    /**
+     * Path to the metrics
+     */
     metricPath: pulumi.Input<string>;
 }
 
+export interface SloObjectiveCountMetricTotalHoneycomb {
+    /**
+     * Column name - required for all calculation types besides 'CONCURRENCY' and 'COUNT'
+     */
+    attribute?: pulumi.Input<string>;
+    /**
+     * Calculation type
+     */
+    calculation: pulumi.Input<string>;
+}
+
 export interface SloObjectiveCountMetricTotalInfluxdb {
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalInstana {
+    /**
+     * Infrastructure metric type
+     */
     applications?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalInstanaApplication>[]>;
+    /**
+     * Infrastructure metric type
+     */
     infrastructures?: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalInstanaInfrastructure>[]>;
+    /**
+     * Instana metric type 'application' or 'infrastructure'
+     */
     metricType: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalInstanaApplication {
+    /**
+     * Aggregation type [Required for metrics]
+     */
     aggregation: pulumi.Input<string>;
+    /**
+     * API query user passes in a JSON format
+     */
     apiQuery: pulumi.Input<string>;
+    /**
+     * Group by method
+     */
     groupBies: pulumi.Input<pulumi.Input<inputs.SloObjectiveCountMetricTotalInstanaApplicationGroupBy>[]>;
+    /**
+     * Include internal
+     */
     includeInternal?: pulumi.Input<boolean>;
+    /**
+     * Include synthetic
+     */
     includeSynthetic?: pulumi.Input<boolean>;
+    /**
+     * Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+     */
     metricId: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalInstanaApplicationGroupBy {
+    /**
+     * Group by tag
+     */
     tag: pulumi.Input<string>;
+    /**
+     * Tag entity - one of 'DESTINATION', 'SOURCE', 'NOT_APPLICABLE'
+     */
     tagEntity: pulumi.Input<string>;
     tagSecondLevelKey?: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalInstanaInfrastructure {
+    /**
+     * Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+     */
     metricId: pulumi.Input<string>;
+    /**
+     * Metric retrieval method 'query' or 'snapshot'
+     */
     metricRetrievalMethod: pulumi.Input<string>;
+    /**
+     * Plugin ID
+     */
     pluginId: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
     query?: pulumi.Input<string>;
+    /**
+     * Snapshot ID
+     */
     snapshotId?: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalLightstep {
+    /**
+     * Optional value to filter by percentiles
+     */
     percentile?: pulumi.Input<number>;
+    /**
+     * ID of the metrics stream
+     */
     streamId?: pulumi.Input<string>;
+    /**
+     * Type of data to filter by
+     */
     typeOfData: pulumi.Input<string>;
+    /**
+     * UQL query
+     */
     uql?: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalNewrelic {
+    /**
+     * Query for the metrics
+     */
     nrql: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalOpentsdb {
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalPingdom {
+    /**
+     * Pingdom uptime or transaction check's ID
+     */
     checkId: pulumi.Input<string>;
+    /**
+     * Pingdom check type - uptime or transaction
+     */
     checkType?: pulumi.Input<string>;
+    /**
+     * Optional for the Uptime checks. Use it to filter the Pingdom check results by status
+     */
     status?: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalPrometheus {
+    /**
+     * Query for the metrics
+     */
     promql: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalRedshift {
+    /**
+     * Redshift custer ID
+     */
     clusterId: pulumi.Input<string>;
+    /**
+     * Database name
+     */
     databaseName: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
+    /**
+     * Region of the CloudWatch instance
+     */
     region: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalSplunk {
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalSplunkObservability {
+    /**
+     * Query for the metrics
+     */
     program: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalSumologic {
+    /**
+     * Period of data aggregation
+     */
     quantization?: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
+    /**
+     * Aggregation function - avg, sum, min, max, count, none
+     */
     rollup?: pulumi.Input<string>;
+    /**
+     * Sumologic source - metrics or logs
+     */
     type: pulumi.Input<string>;
 }
 
 export interface SloObjectiveCountMetricTotalThousandeye {
+    /**
+     * ID of the test
+     */
     testId: pulumi.Input<number>;
 }
 
 export interface SloObjectiveRawMetric {
-    queries?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQuery>[]>;
+    /**
+     * Query for the metrics
+     */
+    queries: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQuery>[]>;
 }
 
 export interface SloObjectiveRawMetricQuery {
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Prometheus/#creating-slos-with-ams-prometheus)
+     */
     amazonPrometheuses?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryAmazonPrometheus>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/appdynamics#creating-slos-with-appdynamics)
+     */
     appdynamics?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryAppdynamic>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/azure-monitor#creating-slos-with-azure-monitor)
+     */
+    azureMonitors?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryAzureMonitor>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/bigquery#creating-slos-with-bigquery)
+     */
     bigqueries?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryBigquery>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_CloudWatch/#creating-slos-with-cloudwatch)
+     */
     cloudwatches?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryCloudwatch>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/datadog#creating-slos-with-datadog)
+     */
     datadogs?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryDatadog>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/dynatrace#creating-slos-with-dynatrace)
+     */
     dynatraces?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryDynatrace>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/elasticsearch#creating-slos-with-elasticsearch)
+     */
     elasticsearches?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryElasticsearch>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/google-cloud-monitoring#creating-slos-with-google-cloud-monitoring)
+     */
     gcms?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryGcm>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/grafana-loki#creating-slos-with-grafana-loki)
+     */
     grafanaLokis?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryGrafanaLoki>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/graphite#creating-slos-with-graphite)
+     */
     graphites?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryGraphite>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/honeycomb#creating-slos-with-honeycomb)
+     */
+    honeycombs?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryHoneycomb>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/influxdb#creating-slos-with-influxdb)
+     */
     influxdbs?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryInfluxdb>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/instana#creating-slos-with-instana)
+     */
     instanas?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryInstana>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/lightstep#creating-slos-with-lightstep)
+     */
     lightsteps?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryLightstep>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/new-relic#creating-slos-with-new-relic)
+     */
     newrelics?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryNewrelic>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/opentsdb#creating-slos-with-opentsdb)
+     */
     opentsdbs?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryOpentsdb>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/pingdom#creating-slos-with-pingdom)
+     */
     pingdoms?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryPingdom>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/prometheus#creating-slos-with-prometheus)
+     */
     prometheuses?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryPrometheus>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/Amazon_Redshift/#creating-slos-with-amazon-redshift)
+     */
     redshifts?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryRedshift>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk-observability)
+     */
     splunkObservabilities?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQuerySplunkObservability>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/splunk#creating-slos-with-splunk)
+     */
     splunks?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQuerySplunk>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/sumo-logic#creating-slos-with-sumo-logic)
+     */
     sumologics?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQuerySumologic>[]>;
+    /**
+     * [Configuration documentation](https://docs.nobl9.com/Sources/thousandeyes#creating-slos-with-thousandeyes)
+     */
     thousandeyes?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryThousandeye>[]>;
 }
 
 export interface SloObjectiveRawMetricQueryAmazonPrometheus {
+    /**
+     * Query for the metrics
+     */
     promql: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQueryAppdynamic {
+    /**
+     * Name of the added application
+     */
     applicationName: pulumi.Input<string>;
+    /**
+     * Path to the metrics
+     */
     metricPath: pulumi.Input<string>;
 }
 
+export interface SloObjectiveRawMetricQueryAzureMonitor {
+    /**
+     * Aggregation type [Required for metrics]
+     */
+    aggregation?: pulumi.Input<string>;
+    /**
+     * Specifies source: 'metrics' or 'logs'
+     */
+    dataType: pulumi.Input<string>;
+    /**
+     * Dimensions of the metric [Optional for metrics]
+     */
+    dimensions?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryAzureMonitorDimension>[]>;
+    /**
+     * Logs query in Kusto Query Language [Required for logs]
+     */
+    kqlQuery?: pulumi.Input<string>;
+    /**
+     * Name of the metric [Required for metrics]
+     */
+    metricName?: pulumi.Input<string>;
+    /**
+     * Namespace of the metric [Optional for metrics]
+     */
+    metricNamespace?: pulumi.Input<string>;
+    /**
+     * Identifier of the Azure Cloud resource [Required for metrics]
+     */
+    resourceId?: pulumi.Input<string>;
+    /**
+     * Log analytics workspace [Required for logs]
+     */
+    workspaces?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryAzureMonitorWorkspace>[]>;
+}
+
+export interface SloObjectiveRawMetricQueryAzureMonitorDimension {
+    /**
+     * The name of the previously defined alert method.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * Burn rate value.
+     */
+    value: pulumi.Input<string>;
+}
+
+export interface SloObjectiveRawMetricQueryAzureMonitorWorkspace {
+    /**
+     * Resource group of the workspace
+     */
+    resourceGroup: pulumi.Input<string>;
+    /**
+     * Subscription ID of the workspace
+     */
+    subscriptionId: pulumi.Input<string>;
+    /**
+     * ID of the workspace
+     */
+    workspaceId: pulumi.Input<string>;
+}
+
 export interface SloObjectiveRawMetricQueryBigquery {
+    /**
+     * Location of you BigQuery
+     */
     location: pulumi.Input<string>;
+    /**
+     * Project ID
+     */
     projectId: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQueryCloudwatch {
+    /**
+     * AccountID used with cross-account observability feature
+     */
+    accountId?: pulumi.Input<string>;
+    /**
+     * Dimensions of the metric [Optional for metrics]
+     */
     dimensions?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryCloudwatchDimension>[]>;
+    /**
+     * JSON query
+     */
     json?: pulumi.Input<string>;
+    /**
+     * Name of the metric [Required for metrics]
+     */
     metricName?: pulumi.Input<string>;
+    /**
+     * Namespace of the metric
+     */
     namespace?: pulumi.Input<string>;
+    /**
+     * Region of the CloudWatch instance
+     */
     region: pulumi.Input<string>;
+    /**
+     * SQL query
+     */
     sql?: pulumi.Input<string>;
+    /**
+     * Metric data aggregations
+     */
     stat?: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQueryCloudwatchDimension {
     /**
-     * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+     * The name of the previously defined alert method.
      */
     name: pulumi.Input<string>;
+    /**
+     * Burn rate value.
+     */
     value: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQueryDatadog {
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQueryDynatrace {
+    /**
+     * Selector for the metrics
+     */
     metricSelector: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQueryElasticsearch {
+    /**
+     * Index of metrics we want to query
+     */
     index: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQueryGcm {
+    /**
+     * Project ID
+     */
     projectId: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQueryGrafanaLoki {
+    /**
+     * Query for the logs
+     */
     logql: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQueryGraphite {
+    /**
+     * Path to the metrics
+     */
     metricPath: pulumi.Input<string>;
 }
 
+export interface SloObjectiveRawMetricQueryHoneycomb {
+    /**
+     * Column name - required for all calculation types besides 'CONCURRENCY' and 'COUNT'
+     */
+    attribute?: pulumi.Input<string>;
+    /**
+     * Calculation type
+     */
+    calculation: pulumi.Input<string>;
+}
+
 export interface SloObjectiveRawMetricQueryInfluxdb {
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQueryInstana {
+    /**
+     * Infrastructure metric type
+     */
     applications?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryInstanaApplication>[]>;
+    /**
+     * Infrastructure metric type
+     */
     infrastructures?: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryInstanaInfrastructure>[]>;
+    /**
+     * Instana metric type 'application' or 'infrastructure'
+     */
     metricType: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQueryInstanaApplication {
+    /**
+     * Aggregation type [Required for metrics]
+     */
     aggregation: pulumi.Input<string>;
+    /**
+     * API query user passes in a JSON format
+     */
     apiQuery: pulumi.Input<string>;
+    /**
+     * Group by method
+     */
     groupBies: pulumi.Input<pulumi.Input<inputs.SloObjectiveRawMetricQueryInstanaApplicationGroupBy>[]>;
+    /**
+     * Include internal
+     */
     includeInternal?: pulumi.Input<boolean>;
+    /**
+     * Include synthetic
+     */
     includeSynthetic?: pulumi.Input<boolean>;
+    /**
+     * Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+     */
     metricId: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQueryInstanaApplicationGroupBy {
+    /**
+     * Group by tag
+     */
     tag: pulumi.Input<string>;
+    /**
+     * Tag entity - one of 'DESTINATION', 'SOURCE', 'NOT_APPLICABLE'
+     */
     tagEntity: pulumi.Input<string>;
     tagSecondLevelKey?: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQueryInstanaInfrastructure {
+    /**
+     * Metric ID one of 'calls', 'erroneousCalls', 'errors', 'latency'
+     */
     metricId: pulumi.Input<string>;
+    /**
+     * Metric retrieval method 'query' or 'snapshot'
+     */
     metricRetrievalMethod: pulumi.Input<string>;
+    /**
+     * Plugin ID
+     */
     pluginId: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
     query?: pulumi.Input<string>;
+    /**
+     * Snapshot ID
+     */
     snapshotId?: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQueryLightstep {
+    /**
+     * Optional value to filter by percentiles
+     */
     percentile?: pulumi.Input<number>;
+    /**
+     * ID of the metrics stream
+     */
     streamId?: pulumi.Input<string>;
+    /**
+     * Type of data to filter by
+     */
     typeOfData: pulumi.Input<string>;
+    /**
+     * UQL query
+     */
     uql?: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQueryNewrelic {
+    /**
+     * Query for the metrics
+     */
     nrql: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQueryOpentsdb {
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQueryPingdom {
+    /**
+     * Pingdom uptime or transaction check's ID
+     */
     checkId: pulumi.Input<string>;
+    /**
+     * Pingdom check type - uptime or transaction
+     */
     checkType?: pulumi.Input<string>;
+    /**
+     * Optional for the Uptime checks. Use it to filter the Pingdom check results by status
+     */
     status?: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQueryPrometheus {
+    /**
+     * Query for the metrics
+     */
     promql: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQueryRedshift {
+    /**
+     * Redshift custer ID
+     */
     clusterId: pulumi.Input<string>;
+    /**
+     * Database name
+     */
     databaseName: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
+    /**
+     * Region of the CloudWatch instance
+     */
     region: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQuerySplunk {
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQuerySplunkObservability {
+    /**
+     * Query for the metrics
+     */
     program: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQuerySumologic {
+    /**
+     * Period of data aggregation
+     */
     quantization?: pulumi.Input<string>;
+    /**
+     * Query for the metrics
+     */
     query: pulumi.Input<string>;
+    /**
+     * Aggregation function - avg, sum, min, max, count, none
+     */
     rollup?: pulumi.Input<string>;
+    /**
+     * Sumologic source - metrics or logs
+     */
     type: pulumi.Input<string>;
 }
 
 export interface SloObjectiveRawMetricQueryThousandeye {
+    /**
+     * ID of the test
+     */
     testId: pulumi.Input<number>;
 }
 
@@ -1133,7 +2920,12 @@ export interface SloTimeWindow {
 }
 
 export interface SloTimeWindowCalendar {
+    /**
+     * Date of the start
+     */
     startTime: pulumi.Input<string>;
+    /**
+     * Timezone name in IANA Time Zone Database
+     */
     timeZone: pulumi.Input<string>;
 }
-

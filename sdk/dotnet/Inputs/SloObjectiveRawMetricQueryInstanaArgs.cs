@@ -6,14 +6,19 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Inputs
+namespace Piclemx.Nobl9.Inputs
 {
 
     public sealed class SloObjectiveRawMetricQueryInstanaArgs : global::Pulumi.ResourceArgs
     {
         [Input("applications")]
         private InputList<Inputs.SloObjectiveRawMetricQueryInstanaApplicationArgs>? _applications;
+
+        /// <summary>
+        /// Infrastructure metric type
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryInstanaApplicationArgs> Applications
         {
             get => _applications ?? (_applications = new InputList<Inputs.SloObjectiveRawMetricQueryInstanaApplicationArgs>());
@@ -22,12 +27,19 @@ namespace Pulumi.Nobl9.Inputs
 
         [Input("infrastructures")]
         private InputList<Inputs.SloObjectiveRawMetricQueryInstanaInfrastructureArgs>? _infrastructures;
+
+        /// <summary>
+        /// Infrastructure metric type
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryInstanaInfrastructureArgs> Infrastructures
         {
             get => _infrastructures ?? (_infrastructures = new InputList<Inputs.SloObjectiveRawMetricQueryInstanaInfrastructureArgs>());
             set => _infrastructures = value;
         }
 
+        /// <summary>
+        /// Instana metric type 'application' or 'infrastructure'
+        /// </summary>
         [Input("metricType", required: true)]
         public Input<string> MetricType { get; set; } = null!;
 

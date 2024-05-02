@@ -7,6 +7,7 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -44,6 +45,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &AlertPolicy{}
 	case "nobl9:index/directAppdynamics:DirectAppdynamics":
 		r = &DirectAppdynamics{}
+	case "nobl9:index/directAzureMonitor:DirectAzureMonitor":
+		r = &DirectAzureMonitor{}
 	case "nobl9:index/directBigquery:DirectBigquery":
 		r = &DirectBigquery{}
 	case "nobl9:index/directCloudwatch:DirectCloudwatch":
@@ -54,6 +57,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &DirectDynatrace{}
 	case "nobl9:index/directGcm:DirectGcm":
 		r = &DirectGcm{}
+	case "nobl9:index/directHoneycomb:DirectHoneycomb":
+		r = &DirectHoneycomb{}
 	case "nobl9:index/directInfluxdb:DirectInfluxdb":
 		r = &DirectInfluxdb{}
 	case "nobl9:index/directInstana:DirectInstana":
@@ -109,7 +114,10 @@ func (p *pkg) ConstructProvider(ctx *pulumi.Context, name, typ, urn string) (pul
 }
 
 func init() {
-	version, _ := PkgVersion()
+	version, err := internal.PkgVersion()
+	if err != nil {
+		version = semver.Version{Major: 1}
+	}
 	pulumi.RegisterResourceModule(
 		"nobl9",
 		"index/agent",
@@ -172,6 +180,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"nobl9",
+		"index/directAzureMonitor",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"nobl9",
 		"index/directBigquery",
 		&module{version},
 	)
@@ -193,6 +206,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"nobl9",
 		"index/directGcm",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"nobl9",
+		"index/directHoneycomb",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

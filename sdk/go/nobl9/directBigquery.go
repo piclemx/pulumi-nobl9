@@ -7,11 +7,12 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Google BigQuery is a serverless data warehouse that enables scalable analysis over petabytes of data. It is a Platform as a Service that supports querying using ANSI SQL. BigQuery integration with Nobl9 enables users to turn their big data into valuable business insights. Nobl9 connects with BigQuery to collect SLI measurements and compare them to SLO targets.
+// Google BigQuery is a serverless data warehouse that enables scalable analysis over petabytes of data. It is a Platform as a Service that supports querying using ANSI SQL. BigQuery integration with Nobl9 enables users to turn their big data into valuable business insights. Nobl9 connects to BigQuery for SLI measurement collection and comparison with SLO targets.
 //
 // For more information, refer to [BigQuery Direct | Nobl9 Documentation](https://docs.nobl9.com/Sources/bigquery#bigquery-direct)
 //
@@ -21,27 +22,27 @@ import (
 // package main
 //
 // import (
-// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := nobl9.NewDirectBigquery(ctx, "test-bigquery", &nobl9.DirectBigqueryArgs{
-// 			Description:       pulumi.String("desc"),
-// 			Project:           pulumi.String("terraform"),
-// 			ServiceAccountKey: pulumi.String("secret"),
-// 			SourceOfs: pulumi.StringArray{
-// 				pulumi.String("Metrics"),
-// 				pulumi.String("Services"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := nobl9.NewDirectBigquery(ctx, "test-bigquery", &nobl9.DirectBigqueryArgs{
+//				Description:          pulumi.String("desc"),
+//				LogCollectionEnabled: pulumi.Bool(true),
+//				Project:              pulumi.String("terraform"),
+//				ServiceAccountKey:    pulumi.String("secret"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -53,15 +54,21 @@ type DirectBigquery struct {
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrOutput `pulumi:"displayName"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrOutput `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringOutput `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-	QueryDelay DirectBigqueryQueryDelayPtrOutput `pulumi:"queryDelay"`
+	QueryDelay DirectBigqueryQueryDelayOutput `pulumi:"queryDelay"`
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringOutput `pulumi:"releaseChannel"`
 	// [required] | Service Account Key.
 	ServiceAccountKey pulumi.StringOutput `pulumi:"serviceAccountKey"`
-	// Source of Metrics and/or Services.
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayOutput `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status pulumi.StringOutput `pulumi:"status"`
@@ -77,10 +84,14 @@ func NewDirectBigquery(ctx *pulumi.Context,
 	if args.Project == nil {
 		return nil, errors.New("invalid value for required argument 'Project'")
 	}
-	if args.SourceOfs == nil {
-		return nil, errors.New("invalid value for required argument 'SourceOfs'")
+	if args.ServiceAccountKey != nil {
+		args.ServiceAccountKey = pulumi.ToSecret(args.ServiceAccountKey).(pulumi.StringPtrInput)
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"serviceAccountKey",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DirectBigquery
 	err := ctx.RegisterResource("nobl9:index/directBigquery:DirectBigquery", name, args, &resource, opts...)
 	if err != nil {
@@ -107,15 +118,21 @@ type directBigqueryState struct {
 	Description *string `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName *string `pulumi:"displayName"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project *string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectBigqueryQueryDelay `pulumi:"queryDelay"`
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
 	// [required] | Service Account Key.
 	ServiceAccountKey *string `pulumi:"serviceAccountKey"`
-	// Source of Metrics and/or Services.
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status *string `pulumi:"status"`
@@ -126,15 +143,21 @@ type DirectBigqueryState struct {
 	Description pulumi.StringPtrInput
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringPtrInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectBigqueryQueryDelayPtrInput
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
 	// [required] | Service Account Key.
 	ServiceAccountKey pulumi.StringPtrInput
-	// Source of Metrics and/or Services.
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 	// The status of the created direct.
 	Status pulumi.StringPtrInput
@@ -149,15 +172,21 @@ type directBigqueryArgs struct {
 	Description *string `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName *string `pulumi:"displayName"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectBigqueryQueryDelay `pulumi:"queryDelay"`
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
 	// [required] | Service Account Key.
 	ServiceAccountKey *string `pulumi:"serviceAccountKey"`
-	// Source of Metrics and/or Services.
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 }
 
@@ -167,15 +196,21 @@ type DirectBigqueryArgs struct {
 	Description pulumi.StringPtrInput
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectBigqueryQueryDelayPtrInput
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
 	// [required] | Service Account Key.
 	ServiceAccountKey pulumi.StringPtrInput
-	// Source of Metrics and/or Services.
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 }
 
@@ -205,7 +240,7 @@ func (i *DirectBigquery) ToDirectBigqueryOutputWithContext(ctx context.Context) 
 // DirectBigqueryArrayInput is an input type that accepts DirectBigqueryArray and DirectBigqueryArrayOutput values.
 // You can construct a concrete instance of `DirectBigqueryArrayInput` via:
 //
-//          DirectBigqueryArray{ DirectBigqueryArgs{...} }
+//	DirectBigqueryArray{ DirectBigqueryArgs{...} }
 type DirectBigqueryArrayInput interface {
 	pulumi.Input
 
@@ -230,7 +265,7 @@ func (i DirectBigqueryArray) ToDirectBigqueryArrayOutputWithContext(ctx context.
 // DirectBigqueryMapInput is an input type that accepts DirectBigqueryMap and DirectBigqueryMapOutput values.
 // You can construct a concrete instance of `DirectBigqueryMapInput` via:
 //
-//          DirectBigqueryMap{ "key": DirectBigqueryArgs{...} }
+//	DirectBigqueryMap{ "key": DirectBigqueryArgs{...} }
 type DirectBigqueryMapInput interface {
 	pulumi.Input
 
@@ -276,6 +311,11 @@ func (o DirectBigqueryOutput) DisplayName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DirectBigquery) pulumi.StringPtrOutput { return v.DisplayName }).(pulumi.StringPtrOutput)
 }
 
+// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+func (o DirectBigqueryOutput) LogCollectionEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DirectBigquery) pulumi.BoolPtrOutput { return v.LogCollectionEnabled }).(pulumi.BoolPtrOutput)
+}
+
 // Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 func (o DirectBigqueryOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *DirectBigquery) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
@@ -287,8 +327,13 @@ func (o DirectBigqueryOutput) Project() pulumi.StringOutput {
 }
 
 // [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-func (o DirectBigqueryOutput) QueryDelay() DirectBigqueryQueryDelayPtrOutput {
-	return o.ApplyT(func(v *DirectBigquery) DirectBigqueryQueryDelayPtrOutput { return v.QueryDelay }).(DirectBigqueryQueryDelayPtrOutput)
+func (o DirectBigqueryOutput) QueryDelay() DirectBigqueryQueryDelayOutput {
+	return o.ApplyT(func(v *DirectBigquery) DirectBigqueryQueryDelayOutput { return v.QueryDelay }).(DirectBigqueryQueryDelayOutput)
+}
+
+// Release channel of the created datasource [stable/beta]
+func (o DirectBigqueryOutput) ReleaseChannel() pulumi.StringOutput {
+	return o.ApplyT(func(v *DirectBigquery) pulumi.StringOutput { return v.ReleaseChannel }).(pulumi.StringOutput)
 }
 
 // [required] | Service Account Key.
@@ -296,7 +341,9 @@ func (o DirectBigqueryOutput) ServiceAccountKey() pulumi.StringOutput {
 	return o.ApplyT(func(v *DirectBigquery) pulumi.StringOutput { return v.ServiceAccountKey }).(pulumi.StringOutput)
 }
 
-// Source of Metrics and/or Services.
+// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+//
+// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 func (o DirectBigqueryOutput) SourceOfs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *DirectBigquery) pulumi.StringArrayOutput { return v.SourceOfs }).(pulumi.StringArrayOutput)
 }

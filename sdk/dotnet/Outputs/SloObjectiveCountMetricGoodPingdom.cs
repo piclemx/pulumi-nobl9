@@ -6,15 +6,25 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class SloObjectiveCountMetricGoodPingdom
     {
+        /// <summary>
+        /// Pingdom uptime or transaction check's ID
+        /// </summary>
         public readonly string CheckId;
+        /// <summary>
+        /// Pingdom check type - uptime or transaction
+        /// </summary>
         public readonly string? CheckType;
+        /// <summary>
+        /// Optional for the Uptime checks. Use it to filter the Pingdom check results by status
+        /// </summary>
         public readonly string? Status;
 
         [OutputConstructor]

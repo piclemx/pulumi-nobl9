@@ -6,14 +6,19 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Inputs
+namespace Piclemx.Nobl9.Inputs
 {
 
     public sealed class SloObjectiveRawMetricGetArgs : global::Pulumi.ResourceArgs
     {
-        [Input("queries")]
+        [Input("queries", required: true)]
         private InputList<Inputs.SloObjectiveRawMetricQueryGetArgs>? _queries;
+
+        /// <summary>
+        /// Query for the metrics
+        /// </summary>
         public InputList<Inputs.SloObjectiveRawMetricQueryGetArgs> Queries
         {
             get => _queries ?? (_queries = new InputList<Inputs.SloObjectiveRawMetricQueryGetArgs>());

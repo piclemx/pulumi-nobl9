@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9
+namespace Piclemx.Nobl9
 {
     [Nobl9ResourceType("nobl9:index/alertMethodWebhook:AlertMethodWebhook")]
     public partial class AlertMethodWebhook : global::Pulumi.CustomResource
@@ -77,7 +78,11 @@ namespace Pulumi.Nobl9
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/piclemx/pulumi-nobl9/releases/",
+                PluginDownloadURL = "github://api.github.com/piclemx/pulumi-nobl9",
+                AdditionalSecretOutputs =
+                {
+                    "url",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -143,11 +148,21 @@ namespace Pulumi.Nobl9
             set => _templateFields = value;
         }
 
+        [Input("url")]
+        private Input<string>? _url;
+
         /// <summary>
         /// URL of the webhook endpoint.
         /// </summary>
-        [Input("url")]
-        public Input<string>? Url { get; set; }
+        public Input<string>? Url
+        {
+            get => _url;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _url = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         public AlertMethodWebhookArgs()
         {
@@ -199,11 +214,21 @@ namespace Pulumi.Nobl9
             set => _templateFields = value;
         }
 
+        [Input("url")]
+        private Input<string>? _url;
+
         /// <summary>
         /// URL of the webhook endpoint.
         /// </summary>
-        [Input("url")]
-        public Input<string>? Url { get; set; }
+        public Input<string>? Url
+        {
+            get => _url;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _url = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         public AlertMethodWebhookState()
         {

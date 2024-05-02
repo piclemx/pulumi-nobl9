@@ -37,9 +37,11 @@ export class AlertMethodEmail extends pulumi.CustomResource {
      */
     public readonly bccs!: pulumi.Output<string[] | undefined>;
     /**
-     * The Body of the email alert. For the format of the body and the list of variables that you can define, refer to the [Nobl9 documentation](https://docs.nobl9.com/Alerting/Alert_methods/email-alert#yaml-configuration).
+     * This value was used as the template for the email alert's body. 'body' is deprecated and not used anywhere; however, its' kept for backward compatibility.
+     *
+     * @deprecated 'body' indicated the email alert's body. It has been deprecated since the Nobl9 1.57 release and is no longer used to generate emails. You can safely remove it from your configuration file.
      */
-    public readonly body!: pulumi.Output<string>;
+    public readonly body!: pulumi.Output<string | undefined>;
     /**
      * Carbon copy recipients. The maximum number of recipients is 10.
      */
@@ -61,9 +63,11 @@ export class AlertMethodEmail extends pulumi.CustomResource {
      */
     public readonly project!: pulumi.Output<string>;
     /**
-     * The Subject of the email alert.
+     * This value was used as the email alert's subject. 'subject' is deprecated and not used anywhere; however, its' kept for backward compatibility.
+     *
+     * @deprecated 'subject' indicated the email alert's subject. It has been deprecated since the Nobl9 1.57 release and is no longer used to generate emails. You can safely remove it from your configuration file.
      */
-    public readonly subject!: pulumi.Output<string>;
+    public readonly subject!: pulumi.Output<string | undefined>;
     /**
      * Recipients. The maximum number of recipients is 10.
      */
@@ -93,14 +97,8 @@ export class AlertMethodEmail extends pulumi.CustomResource {
             resourceInputs["tos"] = state ? state.tos : undefined;
         } else {
             const args = argsOrState as AlertMethodEmailArgs | undefined;
-            if ((!args || args.body === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'body'");
-            }
             if ((!args || args.project === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'project'");
-            }
-            if ((!args || args.subject === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'subject'");
             }
             if ((!args || args.tos === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'tos'");
@@ -129,7 +127,9 @@ export interface AlertMethodEmailState {
      */
     bccs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The Body of the email alert. For the format of the body and the list of variables that you can define, refer to the [Nobl9 documentation](https://docs.nobl9.com/Alerting/Alert_methods/email-alert#yaml-configuration).
+     * This value was used as the template for the email alert's body. 'body' is deprecated and not used anywhere; however, its' kept for backward compatibility.
+     *
+     * @deprecated 'body' indicated the email alert's body. It has been deprecated since the Nobl9 1.57 release and is no longer used to generate emails. You can safely remove it from your configuration file.
      */
     body?: pulumi.Input<string>;
     /**
@@ -153,7 +153,9 @@ export interface AlertMethodEmailState {
      */
     project?: pulumi.Input<string>;
     /**
-     * The Subject of the email alert.
+     * This value was used as the email alert's subject. 'subject' is deprecated and not used anywhere; however, its' kept for backward compatibility.
+     *
+     * @deprecated 'subject' indicated the email alert's subject. It has been deprecated since the Nobl9 1.57 release and is no longer used to generate emails. You can safely remove it from your configuration file.
      */
     subject?: pulumi.Input<string>;
     /**
@@ -171,9 +173,11 @@ export interface AlertMethodEmailArgs {
      */
     bccs?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The Body of the email alert. For the format of the body and the list of variables that you can define, refer to the [Nobl9 documentation](https://docs.nobl9.com/Alerting/Alert_methods/email-alert#yaml-configuration).
+     * This value was used as the template for the email alert's body. 'body' is deprecated and not used anywhere; however, its' kept for backward compatibility.
+     *
+     * @deprecated 'body' indicated the email alert's body. It has been deprecated since the Nobl9 1.57 release and is no longer used to generate emails. You can safely remove it from your configuration file.
      */
-    body: pulumi.Input<string>;
+    body?: pulumi.Input<string>;
     /**
      * Carbon copy recipients. The maximum number of recipients is 10.
      */
@@ -195,9 +199,11 @@ export interface AlertMethodEmailArgs {
      */
     project: pulumi.Input<string>;
     /**
-     * The Subject of the email alert.
+     * This value was used as the email alert's subject. 'subject' is deprecated and not used anywhere; however, its' kept for backward compatibility.
+     *
+     * @deprecated 'subject' indicated the email alert's subject. It has been deprecated since the Nobl9 1.57 release and is no longer used to generate emails. You can safely remove it from your configuration file.
      */
-    subject: pulumi.Input<string>;
+    subject?: pulumi.Input<string>;
     /**
      * Recipients. The maximum number of recipients is 10.
      */

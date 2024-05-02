@@ -6,17 +6,21 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class SloObjectiveCountMetricTotalCloudwatchDimension
     {
         /// <summary>
-        /// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+        /// The name of the previously defined alert method.
         /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// Burn rate value.
+        /// </summary>
         public readonly string Value;
 
         [OutputConstructor]

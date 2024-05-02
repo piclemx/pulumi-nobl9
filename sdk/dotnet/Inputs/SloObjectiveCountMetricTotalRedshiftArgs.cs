@@ -6,21 +6,34 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Inputs
+namespace Piclemx.Nobl9.Inputs
 {
 
     public sealed class SloObjectiveCountMetricTotalRedshiftArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Redshift custer ID
+        /// </summary>
         [Input("clusterId", required: true)]
         public Input<string> ClusterId { get; set; } = null!;
 
+        /// <summary>
+        /// Database name
+        /// </summary>
         [Input("databaseName", required: true)]
         public Input<string> DatabaseName { get; set; } = null!;
 
+        /// <summary>
+        /// Query for the metrics
+        /// </summary>
         [Input("query", required: true)]
         public Input<string> Query { get; set; } = null!;
 
+        /// <summary>
+        /// Region of the CloudWatch instance
+        /// </summary>
         [Input("region", required: true)]
         public Input<string> Region { get; set; } = null!;
 

@@ -6,13 +6,17 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9.Outputs
+namespace Piclemx.Nobl9.Outputs
 {
 
     [OutputType]
     public sealed class SloObjectiveCountMetricTotalGrafanaLoki
     {
+        /// <summary>
+        /// Query for the logs
+        /// </summary>
         public readonly string Logql;
 
         [OutputConstructor]

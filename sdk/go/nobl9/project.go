@@ -7,6 +7,7 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -24,38 +25,40 @@ import (
 // package main
 //
 // import (
-// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := nobl9.NewProject(ctx, "this", &nobl9.ProjectArgs{
-// 			Description: pulumi.String("An example N9 Terraform project"),
-// 			DisplayName: pulumi.String("My Project"),
-// 			Labels: ProjectLabelArray{
-// 				&ProjectLabelArgs{
-// 					Key: pulumi.String("env"),
-// 					Values: pulumi.StringArray{
-// 						pulumi.String("dev"),
-// 						pulumi.String("prod"),
-// 					},
-// 				},
-// 				&ProjectLabelArgs{
-// 					Key: pulumi.String("team"),
-// 					Values: pulumi.StringArray{
-// 						pulumi.String("red"),
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := nobl9.NewProject(ctx, "this", &nobl9.ProjectArgs{
+//				Description: pulumi.String("An example N9 Terraform project"),
+//				DisplayName: pulumi.String("My Project"),
+//				Labels: nobl9.ProjectLabelArray{
+//					&nobl9.ProjectLabelArgs{
+//						Key: pulumi.String("env"),
+//						Values: pulumi.StringArray{
+//							pulumi.String("dev"),
+//							pulumi.String("prod"),
+//						},
+//					},
+//					&nobl9.ProjectLabelArgs{
+//						Key: pulumi.String("team"),
+//						Values: pulumi.StringArray{
+//							pulumi.String("red"),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ## Useful Links
 //
@@ -82,7 +85,7 @@ func NewProject(ctx *pulumi.Context,
 		args = &ProjectArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Project
 	err := ctx.RegisterResource("nobl9:index/project:Project", name, args, &resource, opts...)
 	if err != nil {
@@ -179,7 +182,7 @@ func (i *Project) ToProjectOutputWithContext(ctx context.Context) ProjectOutput 
 // ProjectArrayInput is an input type that accepts ProjectArray and ProjectArrayOutput values.
 // You can construct a concrete instance of `ProjectArrayInput` via:
 //
-//          ProjectArray{ ProjectArgs{...} }
+//	ProjectArray{ ProjectArgs{...} }
 type ProjectArrayInput interface {
 	pulumi.Input
 
@@ -204,7 +207,7 @@ func (i ProjectArray) ToProjectArrayOutputWithContext(ctx context.Context) Proje
 // ProjectMapInput is an input type that accepts ProjectMap and ProjectMapOutput values.
 // You can construct a concrete instance of `ProjectMapInput` via:
 //
-//          ProjectMap{ "key": ProjectArgs{...} }
+//	ProjectMap{ "key": ProjectArgs{...} }
 type ProjectMapInput interface {
 	pulumi.Input
 

@@ -7,11 +7,12 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// InfluxDB is an open source time series database platform that enables users to collect, process, and analyze data to optimize their infrastructure. Nobl9 connects with InfluxDB to collect SLI measurements and compare them to SLO targets.
+// InfluxDB is an open source time series database platform that enables users to collect, process, and analyze data to optimize their infrastructure. Nobl9 connects to InfluxDB for SLI measurement collection and comparison with SLO targets.
 //
 // For more information, refer to [InfluxDB Direct | Nobl9 Documentation](https://docs.nobl9.com/Sources/influxdb#influxdb-direct).
 //
@@ -21,29 +22,29 @@ import (
 // package main
 //
 // import (
-// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := nobl9.NewDirectInfluxdb(ctx, "test-influxdb", &nobl9.DirectInfluxdbArgs{
-// 			ApiToken:       pulumi.String("secret"),
-// 			Description:    pulumi.String("desc"),
-// 			OrganizationId: pulumi.String("secret"),
-// 			Project:        pulumi.String("terraform"),
-// 			SourceOfs: pulumi.StringArray{
-// 				pulumi.String("Metrics"),
-// 				pulumi.String("Services"),
-// 			},
-// 			Url: pulumi.String("https://web.net"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := nobl9.NewDirectInfluxdb(ctx, "test-influxdb", &nobl9.DirectInfluxdbArgs{
+//				ApiToken:             pulumi.String("secret"),
+//				Description:          pulumi.String("desc"),
+//				LogCollectionEnabled: pulumi.Bool(true),
+//				OrganizationId:       pulumi.String("secret"),
+//				Project:              pulumi.String("terraform"),
+//				Url:                  pulumi.String("https://web.net"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -57,6 +58,8 @@ type DirectInfluxdb struct {
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrOutput `pulumi:"displayName"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrOutput `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringOutput `pulumi:"name"`
 	// [required] | InfluxDB Organization ID.
@@ -64,8 +67,12 @@ type DirectInfluxdb struct {
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringOutput `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-	QueryDelay DirectInfluxdbQueryDelayPtrOutput `pulumi:"queryDelay"`
-	// Source of Metrics and/or Services.
+	QueryDelay DirectInfluxdbQueryDelayOutput `pulumi:"queryDelay"`
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringOutput `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayOutput `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status pulumi.StringOutput `pulumi:"status"`
@@ -83,13 +90,21 @@ func NewDirectInfluxdb(ctx *pulumi.Context,
 	if args.Project == nil {
 		return nil, errors.New("invalid value for required argument 'Project'")
 	}
-	if args.SourceOfs == nil {
-		return nil, errors.New("invalid value for required argument 'SourceOfs'")
-	}
 	if args.Url == nil {
 		return nil, errors.New("invalid value for required argument 'Url'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.ApiToken != nil {
+		args.ApiToken = pulumi.ToSecret(args.ApiToken).(pulumi.StringPtrInput)
+	}
+	if args.OrganizationId != nil {
+		args.OrganizationId = pulumi.ToSecret(args.OrganizationId).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"apiToken",
+		"organizationId",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DirectInfluxdb
 	err := ctx.RegisterResource("nobl9:index/directInfluxdb:DirectInfluxdb", name, args, &resource, opts...)
 	if err != nil {
@@ -118,6 +133,8 @@ type directInfluxdbState struct {
 	Description *string `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName *string `pulumi:"displayName"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// [required] | InfluxDB Organization ID.
@@ -126,7 +143,11 @@ type directInfluxdbState struct {
 	Project *string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectInfluxdbQueryDelay `pulumi:"queryDelay"`
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status *string `pulumi:"status"`
@@ -141,6 +162,8 @@ type DirectInfluxdbState struct {
 	Description pulumi.StringPtrInput
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// [required] | InfluxDB Organization ID.
@@ -149,7 +172,11 @@ type DirectInfluxdbState struct {
 	Project pulumi.StringPtrInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectInfluxdbQueryDelayPtrInput
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 	// The status of the created direct.
 	Status pulumi.StringPtrInput
@@ -168,6 +195,8 @@ type directInfluxdbArgs struct {
 	Description *string `pulumi:"description"`
 	// User-friendly display name of the resource.
 	DisplayName *string `pulumi:"displayName"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// [required] | InfluxDB Organization ID.
@@ -176,7 +205,11 @@ type directInfluxdbArgs struct {
 	Project string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectInfluxdbQueryDelay `pulumi:"queryDelay"`
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 	// API URL endpoint to the InfluxDB's instance.
 	Url string `pulumi:"url"`
@@ -190,6 +223,8 @@ type DirectInfluxdbArgs struct {
 	Description pulumi.StringPtrInput
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// [required] | InfluxDB Organization ID.
@@ -198,7 +233,11 @@ type DirectInfluxdbArgs struct {
 	Project pulumi.StringInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectInfluxdbQueryDelayPtrInput
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 	// API URL endpoint to the InfluxDB's instance.
 	Url pulumi.StringInput
@@ -230,7 +269,7 @@ func (i *DirectInfluxdb) ToDirectInfluxdbOutputWithContext(ctx context.Context) 
 // DirectInfluxdbArrayInput is an input type that accepts DirectInfluxdbArray and DirectInfluxdbArrayOutput values.
 // You can construct a concrete instance of `DirectInfluxdbArrayInput` via:
 //
-//          DirectInfluxdbArray{ DirectInfluxdbArgs{...} }
+//	DirectInfluxdbArray{ DirectInfluxdbArgs{...} }
 type DirectInfluxdbArrayInput interface {
 	pulumi.Input
 
@@ -255,7 +294,7 @@ func (i DirectInfluxdbArray) ToDirectInfluxdbArrayOutputWithContext(ctx context.
 // DirectInfluxdbMapInput is an input type that accepts DirectInfluxdbMap and DirectInfluxdbMapOutput values.
 // You can construct a concrete instance of `DirectInfluxdbMapInput` via:
 //
-//          DirectInfluxdbMap{ "key": DirectInfluxdbArgs{...} }
+//	DirectInfluxdbMap{ "key": DirectInfluxdbArgs{...} }
 type DirectInfluxdbMapInput interface {
 	pulumi.Input
 
@@ -306,6 +345,11 @@ func (o DirectInfluxdbOutput) DisplayName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DirectInfluxdb) pulumi.StringPtrOutput { return v.DisplayName }).(pulumi.StringPtrOutput)
 }
 
+// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+func (o DirectInfluxdbOutput) LogCollectionEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DirectInfluxdb) pulumi.BoolPtrOutput { return v.LogCollectionEnabled }).(pulumi.BoolPtrOutput)
+}
+
 // Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 func (o DirectInfluxdbOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *DirectInfluxdb) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
@@ -322,11 +366,18 @@ func (o DirectInfluxdbOutput) Project() pulumi.StringOutput {
 }
 
 // [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-func (o DirectInfluxdbOutput) QueryDelay() DirectInfluxdbQueryDelayPtrOutput {
-	return o.ApplyT(func(v *DirectInfluxdb) DirectInfluxdbQueryDelayPtrOutput { return v.QueryDelay }).(DirectInfluxdbQueryDelayPtrOutput)
+func (o DirectInfluxdbOutput) QueryDelay() DirectInfluxdbQueryDelayOutput {
+	return o.ApplyT(func(v *DirectInfluxdb) DirectInfluxdbQueryDelayOutput { return v.QueryDelay }).(DirectInfluxdbQueryDelayOutput)
 }
 
-// Source of Metrics and/or Services.
+// Release channel of the created datasource [stable/beta]
+func (o DirectInfluxdbOutput) ReleaseChannel() pulumi.StringOutput {
+	return o.ApplyT(func(v *DirectInfluxdb) pulumi.StringOutput { return v.ReleaseChannel }).(pulumi.StringOutput)
+}
+
+// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+//
+// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 func (o DirectInfluxdbOutput) SourceOfs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *DirectInfluxdb) pulumi.StringArrayOutput { return v.SourceOfs }).(pulumi.StringArrayOutput)
 }

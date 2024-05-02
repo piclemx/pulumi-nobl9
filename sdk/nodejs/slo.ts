@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
@@ -10,6 +11,119 @@ import * as utilities from "./utilities";
  *
  * For more information, refer to [SLO configuration documentation](https://docs.nobl9.com/yaml-guide#slo)
  *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as nobl9 from "@piclemx/pulumi-nobl9";
+ *
+ * const thisProject = new nobl9.Project("thisProject", {
+ *     displayName: "Test N9 Terraform",
+ *     description: "An example N9 Terraform project",
+ * });
+ * const thisService = new nobl9.Service("thisService", {
+ *     project: thisProject.name,
+ *     displayName: thisProject.displayName.apply(displayName => `${displayName} Front Page`),
+ *     description: "Front page service",
+ * });
+ * const thisSlo = new nobl9.Slo("thisSlo", {
+ *     service: thisService.name,
+ *     budgetingMethod: "Occurrences",
+ *     project: thisProject.name,
+ *     labels: [
+ *         {
+ *             key: "env",
+ *             values: [
+ *                 "dev",
+ *                 "prod",
+ *             ],
+ *         },
+ *         {
+ *             key: "team",
+ *             values: ["red"],
+ *         },
+ *     ],
+ *     attachments: [
+ *         {
+ *             url: "https://www.nobl9.com/",
+ *             displayName: "Nobl9 Reliability Center",
+ *         },
+ *         {
+ *             url: "https://duckduckgo.com/",
+ *             displayName: "Nice search engine",
+ *         },
+ *     ],
+ *     alertPolicies: ["foo-front-page-latency"],
+ *     timeWindow: {
+ *         unit: "Day",
+ *         count: 30,
+ *         isRolling: true,
+ *     },
+ *     objectives: [{
+ *         name: "tf-objective-1",
+ *         target: 0.99,
+ *         displayName: "OK",
+ *         value: 2000,
+ *         op: "gte",
+ *         rawMetrics: [{
+ *             queries: [{
+ *                 prometheuses: [{
+ *                     promql: "          latency_west_c7{code=\"ALL\",instance=\"localhost:3000\",job=\"prometheus\",service=\"glob_account\"}\n",
+ *                 }],
+ *             }],
+ *         }],
+ *     }],
+ *     indicator: {
+ *         name: "test-terraform-prom-agent",
+ *     },
+ * });
+ * const thisIndex_sloSlo = new nobl9.Slo("thisIndex/sloSlo", {
+ *     service: thisService.name,
+ *     budgetingMethod: "Occurrences",
+ *     project: thisProject.name,
+ *     timeWindow: {
+ *         unit: "Day",
+ *         count: 30,
+ *         isRolling: true,
+ *     },
+ *     objectives: [{
+ *         name: "tf-objective-1",
+ *         target: 0.99,
+ *         displayName: "OK",
+ *         value: 1,
+ *         countMetrics: [{
+ *             incremental: true,
+ *             goods: [{
+ *                 prometheuses: [{
+ *                     promql: "1.0",
+ *                 }],
+ *             }],
+ *             totals: [{
+ *                 prometheuses: [{
+ *                     promql: "1.0",
+ *                 }],
+ *             }],
+ *         }],
+ *     }],
+ *     indicator: {
+ *         name: "test-terraform-prom-agent",
+ *     },
+ *     anomalyConfig: {
+ *         noData: {
+ *             alertMethods: [
+ *                 {
+ *                     name: "foo-method-method",
+ *                     project: "default",
+ *                 },
+ *                 {
+ *                     name: "bar-alert-method",
+ *                     project: "default",
+ *                 },
+ *             ],
+ *         },
+ *     },
+ * });
+ * ```
  * ## Nobl9 Official Documentation
  *
  * https://docs.nobl9.com/SLOs_as_code/?_highlight=slo
@@ -47,6 +161,11 @@ export class Slo extends pulumi.CustomResource {
      */
     public readonly alertPolicies!: pulumi.Output<string[] | undefined>;
     /**
+     * Configuration for Anomalies. Currently supported Anomaly Type is NoData
+     */
+    public readonly anomalyConfig!: pulumi.Output<outputs.SloAnomalyConfig | undefined>;
+    public readonly attachment!: pulumi.Output<outputs.SloAttachment[] | undefined>;
+    /**
      * @deprecated "attachments" argument is deprecated use "attachment" instead
      */
     public readonly attachments!: pulumi.Output<outputs.SloAttachment[] | undefined>;
@@ -63,7 +182,7 @@ export class Slo extends pulumi.CustomResource {
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * User-friendly display name of the resource.
+     * Name displayed for the attachment. Max. length: 63 characters.
      */
     public readonly displayName!: pulumi.Output<string | undefined>;
     /**
@@ -74,7 +193,7 @@ export class Slo extends pulumi.CustomResource {
      */
     public readonly labels!: pulumi.Output<outputs.SloLabel[] | undefined>;
     /**
-     * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+     * The name of the previously defined alert method.
      */
     public readonly name!: pulumi.Output<string>;
     /**
@@ -82,7 +201,7 @@ export class Slo extends pulumi.CustomResource {
      */
     public readonly objectives!: pulumi.Output<outputs.SloObjective[]>;
     /**
-     * Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+     * Project name the Alert Method is in,  must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
      */
     public readonly project!: pulumi.Output<string>;
     /**
@@ -107,6 +226,8 @@ export class Slo extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as SloState | undefined;
             resourceInputs["alertPolicies"] = state ? state.alertPolicies : undefined;
+            resourceInputs["anomalyConfig"] = state ? state.anomalyConfig : undefined;
+            resourceInputs["attachment"] = state ? state.attachment : undefined;
             resourceInputs["attachments"] = state ? state.attachments : undefined;
             resourceInputs["budgetingMethod"] = state ? state.budgetingMethod : undefined;
             resourceInputs["composite"] = state ? state.composite : undefined;
@@ -140,6 +261,8 @@ export class Slo extends pulumi.CustomResource {
                 throw new Error("Missing required property 'timeWindow'");
             }
             resourceInputs["alertPolicies"] = args ? args.alertPolicies : undefined;
+            resourceInputs["anomalyConfig"] = args ? args.anomalyConfig : undefined;
+            resourceInputs["attachment"] = args ? args.attachment : undefined;
             resourceInputs["attachments"] = args ? args.attachments : undefined;
             resourceInputs["budgetingMethod"] = args ? args.budgetingMethod : undefined;
             resourceInputs["composite"] = args ? args.composite : undefined;
@@ -167,6 +290,11 @@ export interface SloState {
      */
     alertPolicies?: pulumi.Input<pulumi.Input<string>[]>;
     /**
+     * Configuration for Anomalies. Currently supported Anomaly Type is NoData
+     */
+    anomalyConfig?: pulumi.Input<inputs.SloAnomalyConfig>;
+    attachment?: pulumi.Input<pulumi.Input<inputs.SloAttachment>[]>;
+    /**
      * @deprecated "attachments" argument is deprecated use "attachment" instead
      */
     attachments?: pulumi.Input<pulumi.Input<inputs.SloAttachment>[]>;
@@ -183,7 +311,7 @@ export interface SloState {
      */
     description?: pulumi.Input<string>;
     /**
-     * User-friendly display name of the resource.
+     * Name displayed for the attachment. Max. length: 63 characters.
      */
     displayName?: pulumi.Input<string>;
     /**
@@ -194,7 +322,7 @@ export interface SloState {
      */
     labels?: pulumi.Input<pulumi.Input<inputs.SloLabel>[]>;
     /**
-     * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+     * The name of the previously defined alert method.
      */
     name?: pulumi.Input<string>;
     /**
@@ -202,7 +330,7 @@ export interface SloState {
      */
     objectives?: pulumi.Input<pulumi.Input<inputs.SloObjective>[]>;
     /**
-     * Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+     * Project name the Alert Method is in,  must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
      */
     project?: pulumi.Input<string>;
     /**
@@ -223,6 +351,11 @@ export interface SloArgs {
      */
     alertPolicies?: pulumi.Input<pulumi.Input<string>[]>;
     /**
+     * Configuration for Anomalies. Currently supported Anomaly Type is NoData
+     */
+    anomalyConfig?: pulumi.Input<inputs.SloAnomalyConfig>;
+    attachment?: pulumi.Input<pulumi.Input<inputs.SloAttachment>[]>;
+    /**
      * @deprecated "attachments" argument is deprecated use "attachment" instead
      */
     attachments?: pulumi.Input<pulumi.Input<inputs.SloAttachment>[]>;
@@ -239,7 +372,7 @@ export interface SloArgs {
      */
     description?: pulumi.Input<string>;
     /**
-     * User-friendly display name of the resource.
+     * Name displayed for the attachment. Max. length: 63 characters.
      */
     displayName?: pulumi.Input<string>;
     /**
@@ -250,7 +383,7 @@ export interface SloArgs {
      */
     labels?: pulumi.Input<pulumi.Input<inputs.SloLabel>[]>;
     /**
-     * Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+     * The name of the previously defined alert method.
      */
     name?: pulumi.Input<string>;
     /**
@@ -258,7 +391,7 @@ export interface SloArgs {
      */
     objectives: pulumi.Input<pulumi.Input<inputs.SloObjective>[]>;
     /**
-     * Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
+     * Project name the Alert Method is in,  must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names). If not defined, Nobl9 returns a default value for this field.
      */
     project: pulumi.Input<string>;
     /**

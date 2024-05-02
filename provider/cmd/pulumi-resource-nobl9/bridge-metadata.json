@@ -1,0 +1,784 @@
+{
+    "renames": {
+        "resources": {
+            "nobl9:index/agent:Agent": "nobl9_agent",
+            "nobl9:index/alertMethodDiscord:AlertMethodDiscord": "nobl9_alert_method_discord",
+            "nobl9:index/alertMethodEmail:AlertMethodEmail": "nobl9_alert_method_email",
+            "nobl9:index/alertMethodJira:AlertMethodJira": "nobl9_alert_method_jira",
+            "nobl9:index/alertMethodMsteams:AlertMethodMsteams": "nobl9_alert_method_msteams",
+            "nobl9:index/alertMethodOpsgenie:AlertMethodOpsgenie": "nobl9_alert_method_opsgenie",
+            "nobl9:index/alertMethodPagerduty:AlertMethodPagerduty": "nobl9_alert_method_pagerduty",
+            "nobl9:index/alertMethodServicenow:AlertMethodServicenow": "nobl9_alert_method_servicenow",
+            "nobl9:index/alertMethodSlack:AlertMethodSlack": "nobl9_alert_method_slack",
+            "nobl9:index/alertMethodWebhook:AlertMethodWebhook": "nobl9_alert_method_webhook",
+            "nobl9:index/alertPolicy:AlertPolicy": "nobl9_alert_policy",
+            "nobl9:index/directAppdynamics:DirectAppdynamics": "nobl9_direct_appdynamics",
+            "nobl9:index/directAzureMonitor:DirectAzureMonitor": "nobl9_direct_azure_monitor",
+            "nobl9:index/directBigquery:DirectBigquery": "nobl9_direct_bigquery",
+            "nobl9:index/directCloudwatch:DirectCloudwatch": "nobl9_direct_cloudwatch",
+            "nobl9:index/directDatadog:DirectDatadog": "nobl9_direct_datadog",
+            "nobl9:index/directDynatrace:DirectDynatrace": "nobl9_direct_dynatrace",
+            "nobl9:index/directGcm:DirectGcm": "nobl9_direct_gcm",
+            "nobl9:index/directHoneycomb:DirectHoneycomb": "nobl9_direct_honeycomb",
+            "nobl9:index/directInfluxdb:DirectInfluxdb": "nobl9_direct_influxdb",
+            "nobl9:index/directInstana:DirectInstana": "nobl9_direct_instana",
+            "nobl9:index/directLightstep:DirectLightstep": "nobl9_direct_lightstep",
+            "nobl9:index/directNewrelic:DirectNewrelic": "nobl9_direct_newrelic",
+            "nobl9:index/directPingdom:DirectPingdom": "nobl9_direct_pingdom",
+            "nobl9:index/directRedshift:DirectRedshift": "nobl9_direct_redshift",
+            "nobl9:index/directSplunk:DirectSplunk": "nobl9_direct_splunk",
+            "nobl9:index/directSplunkObservability:DirectSplunkObservability": "nobl9_direct_splunk_observability",
+            "nobl9:index/directSumologic:DirectSumologic": "nobl9_direct_sumologic",
+            "nobl9:index/directThousandeyes:DirectThousandeyes": "nobl9_direct_thousandeyes",
+            "nobl9:index/project:Project": "nobl9_project",
+            "nobl9:index/roleBinding:RoleBinding": "nobl9_role_binding",
+            "nobl9:index/service:Service": "nobl9_service",
+            "nobl9:index/slo:Slo": "nobl9_slo"
+        },
+        "functions": {
+            "nobl9:index/getAwsIamRoleExternalId:getAwsIamRoleExternalId": "nobl9_aws_iam_role_external_id"
+        },
+        "renamedProperties": {
+            "nobl9:index/AgentAzureMonitorConfig:AgentAzureMonitorConfig": {
+                "tenantId": "tenant_id"
+            },
+            "nobl9:index/AgentHistoricalDataRetrieval:AgentHistoricalDataRetrieval": {
+                "defaultDurations": "default_duration",
+                "maxDurations": "max_duration"
+            },
+            "nobl9:index/AgentNewrelicConfig:AgentNewrelicConfig": {
+                "accountId": "account_id"
+            },
+            "nobl9:index/AlertPolicyCondition:AlertPolicyCondition": {
+                "alertingWindow": "alerting_window",
+                "lastsFor": "lasts_for",
+                "valueString": "value_string"
+            },
+            "nobl9:index/DirectAppdynamicsHistoricalDataRetrieval:DirectAppdynamicsHistoricalDataRetrieval": {
+                "defaultDurations": "default_duration",
+                "maxDurations": "max_duration"
+            },
+            "nobl9:index/DirectAzureMonitorHistoricalDataRetrieval:DirectAzureMonitorHistoricalDataRetrieval": {
+                "defaultDurations": "default_duration",
+                "maxDurations": "max_duration"
+            },
+            "nobl9:index/DirectCloudwatchHistoricalDataRetrieval:DirectCloudwatchHistoricalDataRetrieval": {
+                "defaultDurations": "default_duration",
+                "maxDurations": "max_duration"
+            },
+            "nobl9:index/DirectDatadogHistoricalDataRetrieval:DirectDatadogHistoricalDataRetrieval": {
+                "defaultDurations": "default_duration",
+                "maxDurations": "max_duration"
+            },
+            "nobl9:index/DirectDynatraceHistoricalDataRetrieval:DirectDynatraceHistoricalDataRetrieval": {
+                "defaultDurations": "default_duration",
+                "maxDurations": "max_duration"
+            },
+            "nobl9:index/DirectHoneycombHistoricalDataRetrieval:DirectHoneycombHistoricalDataRetrieval": {
+                "defaultDurations": "default_duration",
+                "maxDurations": "max_duration"
+            },
+            "nobl9:index/DirectLightstepHistoricalDataRetrieval:DirectLightstepHistoricalDataRetrieval": {
+                "defaultDurations": "default_duration",
+                "maxDurations": "max_duration"
+            },
+            "nobl9:index/DirectNewrelicHistoricalDataRetrieval:DirectNewrelicHistoricalDataRetrieval": {
+                "defaultDurations": "default_duration",
+                "maxDurations": "max_duration"
+            },
+            "nobl9:index/DirectSplunkHistoricalDataRetrieval:DirectSplunkHistoricalDataRetrieval": {
+                "defaultDurations": "default_duration",
+                "maxDurations": "max_duration"
+            },
+            "nobl9:index/SloAnomalyConfig:SloAnomalyConfig": {
+                "noData": "no_data"
+            },
+            "nobl9:index/SloAnomalyConfigNoData:SloAnomalyConfigNoData": {
+                "alertMethods": "alert_method"
+            },
+            "nobl9:index/SloAttachment:SloAttachment": {
+                "displayName": "display_name"
+            },
+            "nobl9:index/SloComposite:SloComposite": {
+                "burnRateConditions": "burn_rate_condition"
+            },
+            "nobl9:index/SloObjective:SloObjective": {
+                "countMetrics": "count_metrics",
+                "displayName": "display_name",
+                "rawMetrics": "raw_metric",
+                "timeSliceTarget": "time_slice_target"
+            },
+            "nobl9:index/SloObjectiveCountMetric:SloObjectiveCountMetric": {
+                "bads": "bad",
+                "goods": "good",
+                "totals": "total"
+            },
+            "nobl9:index/SloObjectiveCountMetricBad:SloObjectiveCountMetricBad": {
+                "amazonPrometheuses": "amazon_prometheus",
+                "azureMonitors": "azure_monitor",
+                "bigqueries": "bigquery",
+                "cloudwatches": "cloudwatch",
+                "datadogs": "datadog",
+                "dynatraces": "dynatrace",
+                "elasticsearches": "elasticsearch",
+                "gcms": "gcm",
+                "grafanaLokis": "grafana_loki",
+                "graphites": "graphite",
+                "honeycombs": "honeycomb",
+                "influxdbs": "influxdb",
+                "instanas": "instana",
+                "lightsteps": "lightstep",
+                "newrelics": "newrelic",
+                "opentsdbs": "opentsdb",
+                "pingdoms": "pingdom",
+                "prometheuses": "prometheus",
+                "redshifts": "redshift",
+                "splunkObservabilities": "splunk_observability",
+                "splunks": "splunk",
+                "sumologics": "sumologic"
+            },
+            "nobl9:index/SloObjectiveCountMetricBadAppdynamic:SloObjectiveCountMetricBadAppdynamic": {
+                "applicationName": "application_name",
+                "metricPath": "metric_path"
+            },
+            "nobl9:index/SloObjectiveCountMetricBadAzureMonitor:SloObjectiveCountMetricBadAzureMonitor": {
+                "dataType": "data_type",
+                "kqlQuery": "kql_query",
+                "metricName": "metric_name",
+                "metricNamespace": "metric_namespace",
+                "resourceId": "resource_id",
+                "workspaces": "workspace"
+            },
+            "nobl9:index/SloObjectiveCountMetricBadAzureMonitorWorkspace:SloObjectiveCountMetricBadAzureMonitorWorkspace": {
+                "resourceGroup": "resource_group",
+                "subscriptionId": "subscription_id",
+                "workspaceId": "workspace_id"
+            },
+            "nobl9:index/SloObjectiveCountMetricBadBigquery:SloObjectiveCountMetricBadBigquery": {
+                "projectId": "project_id"
+            },
+            "nobl9:index/SloObjectiveCountMetricBadCloudwatch:SloObjectiveCountMetricBadCloudwatch": {
+                "accountId": "account_id",
+                "metricName": "metric_name"
+            },
+            "nobl9:index/SloObjectiveCountMetricBadDynatrace:SloObjectiveCountMetricBadDynatrace": {
+                "metricSelector": "metric_selector"
+            },
+            "nobl9:index/SloObjectiveCountMetricBadGcm:SloObjectiveCountMetricBadGcm": {
+                "projectId": "project_id"
+            },
+            "nobl9:index/SloObjectiveCountMetricBadGraphite:SloObjectiveCountMetricBadGraphite": {
+                "metricPath": "metric_path"
+            },
+            "nobl9:index/SloObjectiveCountMetricBadInstana:SloObjectiveCountMetricBadInstana": {
+                "applications": "application",
+                "infrastructures": "infrastructure",
+                "metricType": "metric_type"
+            },
+            "nobl9:index/SloObjectiveCountMetricBadInstanaApplication:SloObjectiveCountMetricBadInstanaApplication": {
+                "apiQuery": "api_query",
+                "groupBies": "group_by",
+                "includeInternal": "include_internal",
+                "includeSynthetic": "include_synthetic",
+                "metricId": "metric_id"
+            },
+            "nobl9:index/SloObjectiveCountMetricBadInstanaApplicationGroupBy:SloObjectiveCountMetricBadInstanaApplicationGroupBy": {
+                "tagEntity": "tag_entity",
+                "tagSecondLevelKey": "tag_second_level_key"
+            },
+            "nobl9:index/SloObjectiveCountMetricBadInstanaInfrastructure:SloObjectiveCountMetricBadInstanaInfrastructure": {
+                "metricId": "metric_id",
+                "metricRetrievalMethod": "metric_retrieval_method",
+                "pluginId": "plugin_id",
+                "snapshotId": "snapshot_id"
+            },
+            "nobl9:index/SloObjectiveCountMetricBadLightstep:SloObjectiveCountMetricBadLightstep": {
+                "streamId": "stream_id",
+                "typeOfData": "type_of_data"
+            },
+            "nobl9:index/SloObjectiveCountMetricBadPingdom:SloObjectiveCountMetricBadPingdom": {
+                "checkId": "check_id",
+                "checkType": "check_type"
+            },
+            "nobl9:index/SloObjectiveCountMetricBadRedshift:SloObjectiveCountMetricBadRedshift": {
+                "clusterId": "cluster_id",
+                "databaseName": "database_name"
+            },
+            "nobl9:index/SloObjectiveCountMetricBadThousandeye:SloObjectiveCountMetricBadThousandeye": {
+                "testId": "test_id"
+            },
+            "nobl9:index/SloObjectiveCountMetricGood:SloObjectiveCountMetricGood": {
+                "amazonPrometheuses": "amazon_prometheus",
+                "azureMonitors": "azure_monitor",
+                "bigqueries": "bigquery",
+                "cloudwatches": "cloudwatch",
+                "datadogs": "datadog",
+                "dynatraces": "dynatrace",
+                "elasticsearches": "elasticsearch",
+                "gcms": "gcm",
+                "grafanaLokis": "grafana_loki",
+                "graphites": "graphite",
+                "honeycombs": "honeycomb",
+                "influxdbs": "influxdb",
+                "instanas": "instana",
+                "lightsteps": "lightstep",
+                "newrelics": "newrelic",
+                "opentsdbs": "opentsdb",
+                "pingdoms": "pingdom",
+                "prometheuses": "prometheus",
+                "redshifts": "redshift",
+                "splunkObservabilities": "splunk_observability",
+                "splunks": "splunk",
+                "sumologics": "sumologic"
+            },
+            "nobl9:index/SloObjectiveCountMetricGoodAppdynamic:SloObjectiveCountMetricGoodAppdynamic": {
+                "applicationName": "application_name",
+                "metricPath": "metric_path"
+            },
+            "nobl9:index/SloObjectiveCountMetricGoodAzureMonitor:SloObjectiveCountMetricGoodAzureMonitor": {
+                "dataType": "data_type",
+                "kqlQuery": "kql_query",
+                "metricName": "metric_name",
+                "metricNamespace": "metric_namespace",
+                "resourceId": "resource_id",
+                "workspaces": "workspace"
+            },
+            "nobl9:index/SloObjectiveCountMetricGoodAzureMonitorWorkspace:SloObjectiveCountMetricGoodAzureMonitorWorkspace": {
+                "resourceGroup": "resource_group",
+                "subscriptionId": "subscription_id",
+                "workspaceId": "workspace_id"
+            },
+            "nobl9:index/SloObjectiveCountMetricGoodBigquery:SloObjectiveCountMetricGoodBigquery": {
+                "projectId": "project_id"
+            },
+            "nobl9:index/SloObjectiveCountMetricGoodCloudwatch:SloObjectiveCountMetricGoodCloudwatch": {
+                "accountId": "account_id",
+                "metricName": "metric_name"
+            },
+            "nobl9:index/SloObjectiveCountMetricGoodDynatrace:SloObjectiveCountMetricGoodDynatrace": {
+                "metricSelector": "metric_selector"
+            },
+            "nobl9:index/SloObjectiveCountMetricGoodGcm:SloObjectiveCountMetricGoodGcm": {
+                "projectId": "project_id"
+            },
+            "nobl9:index/SloObjectiveCountMetricGoodGraphite:SloObjectiveCountMetricGoodGraphite": {
+                "metricPath": "metric_path"
+            },
+            "nobl9:index/SloObjectiveCountMetricGoodInstana:SloObjectiveCountMetricGoodInstana": {
+                "applications": "application",
+                "infrastructures": "infrastructure",
+                "metricType": "metric_type"
+            },
+            "nobl9:index/SloObjectiveCountMetricGoodInstanaApplication:SloObjectiveCountMetricGoodInstanaApplication": {
+                "apiQuery": "api_query",
+                "groupBies": "group_by",
+                "includeInternal": "include_internal",
+                "includeSynthetic": "include_synthetic",
+                "metricId": "metric_id"
+            },
+            "nobl9:index/SloObjectiveCountMetricGoodInstanaApplicationGroupBy:SloObjectiveCountMetricGoodInstanaApplicationGroupBy": {
+                "tagEntity": "tag_entity",
+                "tagSecondLevelKey": "tag_second_level_key"
+            },
+            "nobl9:index/SloObjectiveCountMetricGoodInstanaInfrastructure:SloObjectiveCountMetricGoodInstanaInfrastructure": {
+                "metricId": "metric_id",
+                "metricRetrievalMethod": "metric_retrieval_method",
+                "pluginId": "plugin_id",
+                "snapshotId": "snapshot_id"
+            },
+            "nobl9:index/SloObjectiveCountMetricGoodLightstep:SloObjectiveCountMetricGoodLightstep": {
+                "streamId": "stream_id",
+                "typeOfData": "type_of_data"
+            },
+            "nobl9:index/SloObjectiveCountMetricGoodPingdom:SloObjectiveCountMetricGoodPingdom": {
+                "checkId": "check_id",
+                "checkType": "check_type"
+            },
+            "nobl9:index/SloObjectiveCountMetricGoodRedshift:SloObjectiveCountMetricGoodRedshift": {
+                "clusterId": "cluster_id",
+                "databaseName": "database_name"
+            },
+            "nobl9:index/SloObjectiveCountMetricGoodThousandeye:SloObjectiveCountMetricGoodThousandeye": {
+                "testId": "test_id"
+            },
+            "nobl9:index/SloObjectiveCountMetricTotal:SloObjectiveCountMetricTotal": {
+                "amazonPrometheuses": "amazon_prometheus",
+                "azureMonitors": "azure_monitor",
+                "bigqueries": "bigquery",
+                "cloudwatches": "cloudwatch",
+                "datadogs": "datadog",
+                "dynatraces": "dynatrace",
+                "elasticsearches": "elasticsearch",
+                "gcms": "gcm",
+                "grafanaLokis": "grafana_loki",
+                "graphites": "graphite",
+                "honeycombs": "honeycomb",
+                "influxdbs": "influxdb",
+                "instanas": "instana",
+                "lightsteps": "lightstep",
+                "newrelics": "newrelic",
+                "opentsdbs": "opentsdb",
+                "pingdoms": "pingdom",
+                "prometheuses": "prometheus",
+                "redshifts": "redshift",
+                "splunkObservabilities": "splunk_observability",
+                "splunks": "splunk",
+                "sumologics": "sumologic"
+            },
+            "nobl9:index/SloObjectiveCountMetricTotalAppdynamic:SloObjectiveCountMetricTotalAppdynamic": {
+                "applicationName": "application_name",
+                "metricPath": "metric_path"
+            },
+            "nobl9:index/SloObjectiveCountMetricTotalAzureMonitor:SloObjectiveCountMetricTotalAzureMonitor": {
+                "dataType": "data_type",
+                "kqlQuery": "kql_query",
+                "metricName": "metric_name",
+                "metricNamespace": "metric_namespace",
+                "resourceId": "resource_id",
+                "workspaces": "workspace"
+            },
+            "nobl9:index/SloObjectiveCountMetricTotalAzureMonitorWorkspace:SloObjectiveCountMetricTotalAzureMonitorWorkspace": {
+                "resourceGroup": "resource_group",
+                "subscriptionId": "subscription_id",
+                "workspaceId": "workspace_id"
+            },
+            "nobl9:index/SloObjectiveCountMetricTotalBigquery:SloObjectiveCountMetricTotalBigquery": {
+                "projectId": "project_id"
+            },
+            "nobl9:index/SloObjectiveCountMetricTotalCloudwatch:SloObjectiveCountMetricTotalCloudwatch": {
+                "accountId": "account_id",
+                "metricName": "metric_name"
+            },
+            "nobl9:index/SloObjectiveCountMetricTotalDynatrace:SloObjectiveCountMetricTotalDynatrace": {
+                "metricSelector": "metric_selector"
+            },
+            "nobl9:index/SloObjectiveCountMetricTotalGcm:SloObjectiveCountMetricTotalGcm": {
+                "projectId": "project_id"
+            },
+            "nobl9:index/SloObjectiveCountMetricTotalGraphite:SloObjectiveCountMetricTotalGraphite": {
+                "metricPath": "metric_path"
+            },
+            "nobl9:index/SloObjectiveCountMetricTotalInstana:SloObjectiveCountMetricTotalInstana": {
+                "applications": "application",
+                "infrastructures": "infrastructure",
+                "metricType": "metric_type"
+            },
+            "nobl9:index/SloObjectiveCountMetricTotalInstanaApplication:SloObjectiveCountMetricTotalInstanaApplication": {
+                "apiQuery": "api_query",
+                "groupBies": "group_by",
+                "includeInternal": "include_internal",
+                "includeSynthetic": "include_synthetic",
+                "metricId": "metric_id"
+            },
+            "nobl9:index/SloObjectiveCountMetricTotalInstanaApplicationGroupBy:SloObjectiveCountMetricTotalInstanaApplicationGroupBy": {
+                "tagEntity": "tag_entity",
+                "tagSecondLevelKey": "tag_second_level_key"
+            },
+            "nobl9:index/SloObjectiveCountMetricTotalInstanaInfrastructure:SloObjectiveCountMetricTotalInstanaInfrastructure": {
+                "metricId": "metric_id",
+                "metricRetrievalMethod": "metric_retrieval_method",
+                "pluginId": "plugin_id",
+                "snapshotId": "snapshot_id"
+            },
+            "nobl9:index/SloObjectiveCountMetricTotalLightstep:SloObjectiveCountMetricTotalLightstep": {
+                "streamId": "stream_id",
+                "typeOfData": "type_of_data"
+            },
+            "nobl9:index/SloObjectiveCountMetricTotalPingdom:SloObjectiveCountMetricTotalPingdom": {
+                "checkId": "check_id",
+                "checkType": "check_type"
+            },
+            "nobl9:index/SloObjectiveCountMetricTotalRedshift:SloObjectiveCountMetricTotalRedshift": {
+                "clusterId": "cluster_id",
+                "databaseName": "database_name"
+            },
+            "nobl9:index/SloObjectiveCountMetricTotalThousandeye:SloObjectiveCountMetricTotalThousandeye": {
+                "testId": "test_id"
+            },
+            "nobl9:index/SloObjectiveRawMetric:SloObjectiveRawMetric": {
+                "queries": "query"
+            },
+            "nobl9:index/SloObjectiveRawMetricQuery:SloObjectiveRawMetricQuery": {
+                "amazonPrometheuses": "amazon_prometheus",
+                "azureMonitors": "azure_monitor",
+                "bigqueries": "bigquery",
+                "cloudwatches": "cloudwatch",
+                "datadogs": "datadog",
+                "dynatraces": "dynatrace",
+                "elasticsearches": "elasticsearch",
+                "gcms": "gcm",
+                "grafanaLokis": "grafana_loki",
+                "graphites": "graphite",
+                "honeycombs": "honeycomb",
+                "influxdbs": "influxdb",
+                "instanas": "instana",
+                "lightsteps": "lightstep",
+                "newrelics": "newrelic",
+                "opentsdbs": "opentsdb",
+                "pingdoms": "pingdom",
+                "prometheuses": "prometheus",
+                "redshifts": "redshift",
+                "splunkObservabilities": "splunk_observability",
+                "splunks": "splunk",
+                "sumologics": "sumologic"
+            },
+            "nobl9:index/SloObjectiveRawMetricQueryAppdynamic:SloObjectiveRawMetricQueryAppdynamic": {
+                "applicationName": "application_name",
+                "metricPath": "metric_path"
+            },
+            "nobl9:index/SloObjectiveRawMetricQueryAzureMonitor:SloObjectiveRawMetricQueryAzureMonitor": {
+                "dataType": "data_type",
+                "kqlQuery": "kql_query",
+                "metricName": "metric_name",
+                "metricNamespace": "metric_namespace",
+                "resourceId": "resource_id",
+                "workspaces": "workspace"
+            },
+            "nobl9:index/SloObjectiveRawMetricQueryAzureMonitorWorkspace:SloObjectiveRawMetricQueryAzureMonitorWorkspace": {
+                "resourceGroup": "resource_group",
+                "subscriptionId": "subscription_id",
+                "workspaceId": "workspace_id"
+            },
+            "nobl9:index/SloObjectiveRawMetricQueryBigquery:SloObjectiveRawMetricQueryBigquery": {
+                "projectId": "project_id"
+            },
+            "nobl9:index/SloObjectiveRawMetricQueryCloudwatch:SloObjectiveRawMetricQueryCloudwatch": {
+                "accountId": "account_id",
+                "metricName": "metric_name"
+            },
+            "nobl9:index/SloObjectiveRawMetricQueryDynatrace:SloObjectiveRawMetricQueryDynatrace": {
+                "metricSelector": "metric_selector"
+            },
+            "nobl9:index/SloObjectiveRawMetricQueryGcm:SloObjectiveRawMetricQueryGcm": {
+                "projectId": "project_id"
+            },
+            "nobl9:index/SloObjectiveRawMetricQueryGraphite:SloObjectiveRawMetricQueryGraphite": {
+                "metricPath": "metric_path"
+            },
+            "nobl9:index/SloObjectiveRawMetricQueryInstana:SloObjectiveRawMetricQueryInstana": {
+                "applications": "application",
+                "infrastructures": "infrastructure",
+                "metricType": "metric_type"
+            },
+            "nobl9:index/SloObjectiveRawMetricQueryInstanaApplication:SloObjectiveRawMetricQueryInstanaApplication": {
+                "apiQuery": "api_query",
+                "groupBies": "group_by",
+                "includeInternal": "include_internal",
+                "includeSynthetic": "include_synthetic",
+                "metricId": "metric_id"
+            },
+            "nobl9:index/SloObjectiveRawMetricQueryInstanaApplicationGroupBy:SloObjectiveRawMetricQueryInstanaApplicationGroupBy": {
+                "tagEntity": "tag_entity",
+                "tagSecondLevelKey": "tag_second_level_key"
+            },
+            "nobl9:index/SloObjectiveRawMetricQueryInstanaInfrastructure:SloObjectiveRawMetricQueryInstanaInfrastructure": {
+                "metricId": "metric_id",
+                "metricRetrievalMethod": "metric_retrieval_method",
+                "pluginId": "plugin_id",
+                "snapshotId": "snapshot_id"
+            },
+            "nobl9:index/SloObjectiveRawMetricQueryLightstep:SloObjectiveRawMetricQueryLightstep": {
+                "streamId": "stream_id",
+                "typeOfData": "type_of_data"
+            },
+            "nobl9:index/SloObjectiveRawMetricQueryPingdom:SloObjectiveRawMetricQueryPingdom": {
+                "checkId": "check_id",
+                "checkType": "check_type"
+            },
+            "nobl9:index/SloObjectiveRawMetricQueryRedshift:SloObjectiveRawMetricQueryRedshift": {
+                "clusterId": "cluster_id",
+                "databaseName": "database_name"
+            },
+            "nobl9:index/SloObjectiveRawMetricQueryThousandeye:SloObjectiveRawMetricQueryThousandeye": {
+                "testId": "test_id"
+            },
+            "nobl9:index/SloTimeWindow:SloTimeWindow": {
+                "calendars": "calendar",
+                "isRolling": "is_rolling"
+            },
+            "nobl9:index/SloTimeWindowCalendar:SloTimeWindowCalendar": {
+                "startTime": "start_time",
+                "timeZone": "time_zone"
+            },
+            "nobl9:index/agent:Agent": {
+                "agentType": "agent_type",
+                "amazonPrometheusConfig": "amazon_prometheus_config",
+                "appdynamicsConfig": "appdynamics_config",
+                "azureMonitorConfig": "azure_monitor_config",
+                "bigqueryConfig": "bigquery_config",
+                "clientId": "client_id",
+                "clientSecret": "client_secret",
+                "cloudwatchConfig": "cloudwatch_config",
+                "datadogConfig": "datadog_config",
+                "displayName": "display_name",
+                "dynatraceConfig": "dynatrace_config",
+                "elasticsearchConfig": "elasticsearch_config",
+                "gcmConfig": "gcm_config",
+                "grafanaLokiConfig": "grafana_loki_config",
+                "graphiteConfig": "graphite_config",
+                "historicalDataRetrieval": "historical_data_retrieval",
+                "honeycombConfig": "honeycomb_config",
+                "influxdbConfig": "influxdb_config",
+                "instanaConfig": "instana_config",
+                "lightstepConfig": "lightstep_config",
+                "newrelicConfig": "newrelic_config",
+                "opentsdbConfig": "opentsdb_config",
+                "pingdomConfig": "pingdom_config",
+                "prometheusConfig": "prometheus_config",
+                "queryDelay": "query_delay",
+                "redshiftConfig": "redshift_config",
+                "releaseChannel": "release_channel",
+                "sourceOfs": "source_of",
+                "splunkConfig": "splunk_config",
+                "splunkObservabilityConfig": "splunk_observability_config",
+                "sumologicConfig": "sumologic_config",
+                "thousandeyesConfig": "thousandeyes_config"
+            },
+            "nobl9:index/alertMethodDiscord:AlertMethodDiscord": {
+                "displayName": "display_name"
+            },
+            "nobl9:index/alertMethodEmail:AlertMethodEmail": {
+                "bccs": "bcc",
+                "ccs": "cc",
+                "displayName": "display_name",
+                "tos": "to"
+            },
+            "nobl9:index/alertMethodJira:AlertMethodJira": {
+                "displayName": "display_name",
+                "projectKey": "project_key"
+            },
+            "nobl9:index/alertMethodMsteams:AlertMethodMsteams": {
+                "displayName": "display_name"
+            },
+            "nobl9:index/alertMethodOpsgenie:AlertMethodOpsgenie": {
+                "displayName": "display_name"
+            },
+            "nobl9:index/alertMethodPagerduty:AlertMethodPagerduty": {
+                "displayName": "display_name",
+                "integrationKey": "integration_key",
+                "sendResolution": "send_resolution"
+            },
+            "nobl9:index/alertMethodServicenow:AlertMethodServicenow": {
+                "displayName": "display_name",
+                "instanceName": "instance_name"
+            },
+            "nobl9:index/alertMethodSlack:AlertMethodSlack": {
+                "displayName": "display_name"
+            },
+            "nobl9:index/alertMethodWebhook:AlertMethodWebhook": {
+                "displayName": "display_name",
+                "templateFields": "template_fields"
+            },
+            "nobl9:index/alertPolicy:AlertPolicy": {
+                "alertMethods": "alert_method",
+                "conditions": "condition",
+                "displayName": "display_name"
+            },
+            "nobl9:index/directAppdynamics:DirectAppdynamics": {
+                "accountName": "account_name",
+                "clientId": "client_id",
+                "clientName": "client_name",
+                "clientSecret": "client_secret",
+                "displayName": "display_name",
+                "historicalDataRetrieval": "historical_data_retrieval",
+                "logCollectionEnabled": "log_collection_enabled",
+                "queryDelay": "query_delay",
+                "releaseChannel": "release_channel",
+                "sourceOfs": "source_of"
+            },
+            "nobl9:index/directAzureMonitor:DirectAzureMonitor": {
+                "clientId": "client_id",
+                "clientSecret": "client_secret",
+                "displayName": "display_name",
+                "historicalDataRetrieval": "historical_data_retrieval",
+                "logCollectionEnabled": "log_collection_enabled",
+                "queryDelay": "query_delay",
+                "releaseChannel": "release_channel",
+                "sourceOfs": "source_of",
+                "tenantId": "tenant_id"
+            },
+            "nobl9:index/directBigquery:DirectBigquery": {
+                "displayName": "display_name",
+                "logCollectionEnabled": "log_collection_enabled",
+                "queryDelay": "query_delay",
+                "releaseChannel": "release_channel",
+                "serviceAccountKey": "service_account_key",
+                "sourceOfs": "source_of"
+            },
+            "nobl9:index/directCloudwatch:DirectCloudwatch": {
+                "displayName": "display_name",
+                "historicalDataRetrieval": "historical_data_retrieval",
+                "logCollectionEnabled": "log_collection_enabled",
+                "queryDelay": "query_delay",
+                "releaseChannel": "release_channel",
+                "roleArn": "role_arn",
+                "sourceOfs": "source_of"
+            },
+            "nobl9:index/directDatadog:DirectDatadog": {
+                "apiKey": "api_key",
+                "applicationKey": "application_key",
+                "displayName": "display_name",
+                "historicalDataRetrieval": "historical_data_retrieval",
+                "logCollectionEnabled": "log_collection_enabled",
+                "queryDelay": "query_delay",
+                "releaseChannel": "release_channel",
+                "sourceOfs": "source_of"
+            },
+            "nobl9:index/directDynatrace:DirectDynatrace": {
+                "displayName": "display_name",
+                "dynatraceToken": "dynatrace_token",
+                "historicalDataRetrieval": "historical_data_retrieval",
+                "logCollectionEnabled": "log_collection_enabled",
+                "queryDelay": "query_delay",
+                "releaseChannel": "release_channel",
+                "sourceOfs": "source_of"
+            },
+            "nobl9:index/directGcm:DirectGcm": {
+                "displayName": "display_name",
+                "logCollectionEnabled": "log_collection_enabled",
+                "queryDelay": "query_delay",
+                "releaseChannel": "release_channel",
+                "serviceAccountKey": "service_account_key",
+                "sourceOfs": "source_of"
+            },
+            "nobl9:index/directHoneycomb:DirectHoneycomb": {
+                "apiKey": "api_key",
+                "displayName": "display_name",
+                "historicalDataRetrieval": "historical_data_retrieval",
+                "logCollectionEnabled": "log_collection_enabled",
+                "queryDelay": "query_delay",
+                "releaseChannel": "release_channel",
+                "sourceOfs": "source_of"
+            },
+            "nobl9:index/directInfluxdb:DirectInfluxdb": {
+                "apiToken": "api_token",
+                "displayName": "display_name",
+                "logCollectionEnabled": "log_collection_enabled",
+                "organizationId": "organization_id",
+                "queryDelay": "query_delay",
+                "releaseChannel": "release_channel",
+                "sourceOfs": "source_of"
+            },
+            "nobl9:index/directInstana:DirectInstana": {
+                "apiToken": "api_token",
+                "displayName": "display_name",
+                "logCollectionEnabled": "log_collection_enabled",
+                "queryDelay": "query_delay",
+                "releaseChannel": "release_channel",
+                "sourceOfs": "source_of"
+            },
+            "nobl9:index/directLightstep:DirectLightstep": {
+                "appToken": "app_token",
+                "displayName": "display_name",
+                "historicalDataRetrieval": "historical_data_retrieval",
+                "lightstepOrganization": "lightstep_organization",
+                "lightstepProject": "lightstep_project",
+                "logCollectionEnabled": "log_collection_enabled",
+                "queryDelay": "query_delay",
+                "releaseChannel": "release_channel",
+                "sourceOfs": "source_of"
+            },
+            "nobl9:index/directNewrelic:DirectNewrelic": {
+                "accountId": "account_id",
+                "displayName": "display_name",
+                "historicalDataRetrieval": "historical_data_retrieval",
+                "insightsQueryKey": "insights_query_key",
+                "logCollectionEnabled": "log_collection_enabled",
+                "queryDelay": "query_delay",
+                "releaseChannel": "release_channel",
+                "sourceOfs": "source_of"
+            },
+            "nobl9:index/directPingdom:DirectPingdom": {
+                "apiToken": "api_token",
+                "displayName": "display_name",
+                "logCollectionEnabled": "log_collection_enabled",
+                "queryDelay": "query_delay",
+                "releaseChannel": "release_channel",
+                "sourceOfs": "source_of"
+            },
+            "nobl9:index/directRedshift:DirectRedshift": {
+                "displayName": "display_name",
+                "logCollectionEnabled": "log_collection_enabled",
+                "queryDelay": "query_delay",
+                "releaseChannel": "release_channel",
+                "roleArn": "role_arn",
+                "secretArn": "secret_arn",
+                "sourceOfs": "source_of"
+            },
+            "nobl9:index/directSplunk:DirectSplunk": {
+                "accessToken": "access_token",
+                "displayName": "display_name",
+                "historicalDataRetrieval": "historical_data_retrieval",
+                "logCollectionEnabled": "log_collection_enabled",
+                "queryDelay": "query_delay",
+                "releaseChannel": "release_channel",
+                "sourceOfs": "source_of"
+            },
+            "nobl9:index/directSplunkObservability:DirectSplunkObservability": {
+                "accessToken": "access_token",
+                "displayName": "display_name",
+                "queryDelay": "query_delay",
+                "releaseChannel": "release_channel",
+                "sourceOfs": "source_of"
+            },
+            "nobl9:index/directSumologic:DirectSumologic": {
+                "accessId": "access_id",
+                "accessKey": "access_key",
+                "displayName": "display_name",
+                "logCollectionEnabled": "log_collection_enabled",
+                "queryDelay": "query_delay",
+                "releaseChannel": "release_channel",
+                "sourceOfs": "source_of"
+            },
+            "nobl9:index/directThousandeyes:DirectThousandeyes": {
+                "displayName": "display_name",
+                "logCollectionEnabled": "log_collection_enabled",
+                "oauthBearerToken": "oauth_bearer_token",
+                "queryDelay": "query_delay",
+                "releaseChannel": "release_channel",
+                "sourceOfs": "source_of"
+            },
+            "nobl9:index/getAwsIamRoleExternalId:getAwsIamRoleExternalId": {
+                "accountId": "account_id",
+                "externalId": "external_id"
+            },
+            "nobl9:index/project:Project": {
+                "displayName": "display_name",
+                "labels": "label"
+            },
+            "nobl9:index/roleBinding:RoleBinding": {
+                "displayName": "display_name",
+                "groupRef": "group_ref",
+                "projectRef": "project_ref",
+                "roleRef": "role_ref"
+            },
+            "nobl9:index/service:Service": {
+                "displayName": "display_name",
+                "labels": "label"
+            },
+            "nobl9:index/slo:Slo": {
+                "alertPolicies": "alert_policies",
+                "anomalyConfig": "anomaly_config",
+                "budgetingMethod": "budgeting_method",
+                "displayName": "display_name",
+                "labels": "label",
+                "objectives": "objective",
+                "timeWindow": "time_window"
+            },
+            "nobl9:index:Provider": {
+                "clientId": "client_id",
+                "clientSecret": "client_secret",
+                "ingestUrl": "ingest_url",
+                "oktaAuthServer": "okta_auth_server",
+                "oktaOrgUrl": "okta_org_url"
+            }
+        },
+        "renamedConfigProperties": {
+            "clientId": "client_id",
+            "clientSecret": "client_secret",
+            "ingestUrl": "ingest_url",
+            "oktaAuthServer": "okta_auth_server",
+            "oktaOrgUrl": "okta_org_url"
+        }
+    }
+}

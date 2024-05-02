@@ -7,11 +7,12 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
+	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Lightstep is an observability platform that enables distributed tracing, that can be used to rapidly pinpoint the causes of failures and poor performance across the deeply complex dependencies among services, teams, and workloads in modern production systems. Nobl9 integration with Lightstep enables organizations to establish service level objectives from performance data captured through distributed traces in the Lightstep platform. Nobl9 connects with Lightstep to collect SLI measurements and compare them to SLO targets.
+// Lightstep is an observability platform that enables distributed tracing, that can be used to rapidly pinpoint the causes of failures and poor performance across the deeply complex dependencies among services, teams, and workloads in modern production systems. Nobl9 integration with Lightstep enables organizations to establish service level objectives from performance data captured through distributed traces in the Lightstep platform. Nobl9 connects to Lightstep for SLI measurement collection and comparison with SLO targets.
 //
 // For more information, refer to [Lightstep Direct | Nobl9 Documentation](https://docs.nobl9.com/Sources/lightstep#lightstep-direct).
 //
@@ -21,44 +22,43 @@ import (
 // package main
 //
 // import (
-// 	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi-nobl9/sdk/go/nobl9"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+//	"github.com/piclemx/pulumi-nobl9/sdk/go/nobl9"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := nobl9.NewDirectLightstep(ctx, "test-lightstep", &nobl9.DirectLightstepArgs{
-// 			AppToken:    pulumi.String("secret"),
-// 			Description: pulumi.String("desc"),
-// 			HistoricalDataRetrieval: &DirectLightstepHistoricalDataRetrievalArgs{
-// 				DefaultDurations: DirectLightstepHistoricalDataRetrievalDefaultDurationArray{
-// 					&DirectLightstepHistoricalDataRetrievalDefaultDurationArgs{
-// 						Unit:  pulumi.String("Day"),
-// 						Value: pulumi.Int(0),
-// 					},
-// 				},
-// 				MaxDurations: DirectLightstepHistoricalDataRetrievalMaxDurationArray{
-// 					&DirectLightstepHistoricalDataRetrievalMaxDurationArgs{
-// 						Unit:  pulumi.String("Day"),
-// 						Value: pulumi.Int(30),
-// 					},
-// 				},
-// 			},
-// 			LightstepOrganization: pulumi.String("acme"),
-// 			LightstepProject:      pulumi.String("project1"),
-// 			Project:               pulumi.String("terraform"),
-// 			SourceOfs: pulumi.StringArray{
-// 				pulumi.String("Metrics"),
-// 				pulumi.String("Services"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := nobl9.NewDirectLightstep(ctx, "test-lightstep", &nobl9.DirectLightstepArgs{
+//				AppToken:    pulumi.String("secret"),
+//				Description: pulumi.String("desc"),
+//				HistoricalDataRetrieval: &nobl9.DirectLightstepHistoricalDataRetrievalArgs{
+//					DefaultDurations: nobl9.DirectLightstepHistoricalDataRetrievalDefaultDurationArray{
+//						&nobl9.DirectLightstepHistoricalDataRetrievalDefaultDurationArgs{
+//							Unit:  pulumi.String("Day"),
+//							Value: pulumi.Int(0),
+//						},
+//					},
+//					MaxDurations: nobl9.DirectLightstepHistoricalDataRetrievalMaxDurationArray{
+//						&nobl9.DirectLightstepHistoricalDataRetrievalMaxDurationArgs{
+//							Unit:  pulumi.String("Day"),
+//							Value: pulumi.Int(30),
+//						},
+//					},
+//				},
+//				LightstepOrganization: pulumi.String("acme"),
+//				LightstepProject:      pulumi.String("project1"),
+//				LogCollectionEnabled:  pulumi.Bool(true),
+//				Project:               pulumi.String("terraform"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 // ## Nobl9 Official Documentation
 //
@@ -73,21 +73,29 @@ type DirectLightstep struct {
 	// User-friendly display name of the resource.
 	DisplayName pulumi.StringPtrOutput `pulumi:"displayName"`
 	// [Replay configuration documentation](https://docs.nobl9.com/replay)
-	HistoricalDataRetrieval DirectLightstepHistoricalDataRetrievalPtrOutput `pulumi:"historicalDataRetrieval"`
+	HistoricalDataRetrieval DirectLightstepHistoricalDataRetrievalOutput `pulumi:"historicalDataRetrieval"`
 	// Organization name registered in Lightstep.
 	LightstepOrganization pulumi.StringOutput `pulumi:"lightstepOrganization"`
 	// Name of the Lightstep project.
 	LightstepProject pulumi.StringOutput `pulumi:"lightstepProject"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrOutput `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringOutput `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-	QueryDelay DirectLightstepQueryDelayPtrOutput `pulumi:"queryDelay"`
-	// Source of Metrics and/or Services.
+	QueryDelay DirectLightstepQueryDelayOutput `pulumi:"queryDelay"`
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringOutput `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayOutput `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status pulumi.StringOutput `pulumi:"status"`
+	// Lightstep API URL. Nobl9 will use https://api.lightstep.com if empty.
+	Url pulumi.StringPtrOutput `pulumi:"url"`
 }
 
 // NewDirectLightstep registers a new resource with the given unique name, arguments, and options.
@@ -106,10 +114,14 @@ func NewDirectLightstep(ctx *pulumi.Context,
 	if args.Project == nil {
 		return nil, errors.New("invalid value for required argument 'Project'")
 	}
-	if args.SourceOfs == nil {
-		return nil, errors.New("invalid value for required argument 'SourceOfs'")
+	if args.AppToken != nil {
+		args.AppToken = pulumi.ToSecret(args.AppToken).(pulumi.StringPtrInput)
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"appToken",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DirectLightstep
 	err := ctx.RegisterResource("nobl9:index/directLightstep:DirectLightstep", name, args, &resource, opts...)
 	if err != nil {
@@ -144,16 +156,24 @@ type directLightstepState struct {
 	LightstepOrganization *string `pulumi:"lightstepOrganization"`
 	// Name of the Lightstep project.
 	LightstepProject *string `pulumi:"lightstepProject"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project *string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectLightstepQueryDelay `pulumi:"queryDelay"`
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
 	// The status of the created direct.
 	Status *string `pulumi:"status"`
+	// Lightstep API URL. Nobl9 will use https://api.lightstep.com if empty.
+	Url *string `pulumi:"url"`
 }
 
 type DirectLightstepState struct {
@@ -169,16 +189,24 @@ type DirectLightstepState struct {
 	LightstepOrganization pulumi.StringPtrInput
 	// Name of the Lightstep project.
 	LightstepProject pulumi.StringPtrInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringPtrInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectLightstepQueryDelayPtrInput
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
 	// The status of the created direct.
 	Status pulumi.StringPtrInput
+	// Lightstep API URL. Nobl9 will use https://api.lightstep.com if empty.
+	Url pulumi.StringPtrInput
 }
 
 func (DirectLightstepState) ElementType() reflect.Type {
@@ -198,14 +226,22 @@ type directLightstepArgs struct {
 	LightstepOrganization string `pulumi:"lightstepOrganization"`
 	// Name of the Lightstep project.
 	LightstepProject string `pulumi:"lightstepProject"`
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled *bool `pulumi:"logCollectionEnabled"`
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name *string `pulumi:"name"`
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project string `pulumi:"project"`
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay *DirectLightstepQueryDelay `pulumi:"queryDelay"`
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel *string `pulumi:"releaseChannel"`
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs []string `pulumi:"sourceOfs"`
+	// Lightstep API URL. Nobl9 will use https://api.lightstep.com if empty.
+	Url *string `pulumi:"url"`
 }
 
 // The set of arguments for constructing a DirectLightstep resource.
@@ -222,14 +258,22 @@ type DirectLightstepArgs struct {
 	LightstepOrganization pulumi.StringInput
 	// Name of the Lightstep project.
 	LightstepProject pulumi.StringInput
+	// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+	LogCollectionEnabled pulumi.BoolPtrInput
 	// Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Name pulumi.StringPtrInput
 	// Name of the Nobl9 project the resource sits in, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
 	Project pulumi.StringInput
 	// [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
 	QueryDelay DirectLightstepQueryDelayPtrInput
-	// Source of Metrics and/or Services.
+	// Release channel of the created datasource [stable/beta]
+	ReleaseChannel pulumi.StringPtrInput
+	// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+	//
+	// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 	SourceOfs pulumi.StringArrayInput
+	// Lightstep API URL. Nobl9 will use https://api.lightstep.com if empty.
+	Url pulumi.StringPtrInput
 }
 
 func (DirectLightstepArgs) ElementType() reflect.Type {
@@ -258,7 +302,7 @@ func (i *DirectLightstep) ToDirectLightstepOutputWithContext(ctx context.Context
 // DirectLightstepArrayInput is an input type that accepts DirectLightstepArray and DirectLightstepArrayOutput values.
 // You can construct a concrete instance of `DirectLightstepArrayInput` via:
 //
-//          DirectLightstepArray{ DirectLightstepArgs{...} }
+//	DirectLightstepArray{ DirectLightstepArgs{...} }
 type DirectLightstepArrayInput interface {
 	pulumi.Input
 
@@ -283,7 +327,7 @@ func (i DirectLightstepArray) ToDirectLightstepArrayOutputWithContext(ctx contex
 // DirectLightstepMapInput is an input type that accepts DirectLightstepMap and DirectLightstepMapOutput values.
 // You can construct a concrete instance of `DirectLightstepMapInput` via:
 //
-//          DirectLightstepMap{ "key": DirectLightstepArgs{...} }
+//	DirectLightstepMap{ "key": DirectLightstepArgs{...} }
 type DirectLightstepMapInput interface {
 	pulumi.Input
 
@@ -335,10 +379,10 @@ func (o DirectLightstepOutput) DisplayName() pulumi.StringPtrOutput {
 }
 
 // [Replay configuration documentation](https://docs.nobl9.com/replay)
-func (o DirectLightstepOutput) HistoricalDataRetrieval() DirectLightstepHistoricalDataRetrievalPtrOutput {
-	return o.ApplyT(func(v *DirectLightstep) DirectLightstepHistoricalDataRetrievalPtrOutput {
+func (o DirectLightstepOutput) HistoricalDataRetrieval() DirectLightstepHistoricalDataRetrievalOutput {
+	return o.ApplyT(func(v *DirectLightstep) DirectLightstepHistoricalDataRetrievalOutput {
 		return v.HistoricalDataRetrieval
-	}).(DirectLightstepHistoricalDataRetrievalPtrOutput)
+	}).(DirectLightstepHistoricalDataRetrievalOutput)
 }
 
 // Organization name registered in Lightstep.
@@ -349,6 +393,11 @@ func (o DirectLightstepOutput) LightstepOrganization() pulumi.StringOutput {
 // Name of the Lightstep project.
 func (o DirectLightstepOutput) LightstepProject() pulumi.StringOutput {
 	return o.ApplyT(func(v *DirectLightstep) pulumi.StringOutput { return v.LightstepProject }).(pulumi.StringOutput)
+}
+
+// [Logs documentation](https://docs.nobl9.com/Features/SLO_troubleshooting/event-logs)
+func (o DirectLightstepOutput) LogCollectionEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DirectLightstep) pulumi.BoolPtrOutput { return v.LogCollectionEnabled }).(pulumi.BoolPtrOutput)
 }
 
 // Unique name of the resource, must conform to the naming convention from [DNS RFC1123](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names).
@@ -362,11 +411,18 @@ func (o DirectLightstepOutput) Project() pulumi.StringOutput {
 }
 
 // [Query delay configuration documentation](https://docs.nobl9.com/Features/query-delay). Computed if not provided.
-func (o DirectLightstepOutput) QueryDelay() DirectLightstepQueryDelayPtrOutput {
-	return o.ApplyT(func(v *DirectLightstep) DirectLightstepQueryDelayPtrOutput { return v.QueryDelay }).(DirectLightstepQueryDelayPtrOutput)
+func (o DirectLightstepOutput) QueryDelay() DirectLightstepQueryDelayOutput {
+	return o.ApplyT(func(v *DirectLightstep) DirectLightstepQueryDelayOutput { return v.QueryDelay }).(DirectLightstepQueryDelayOutput)
 }
 
-// Source of Metrics and/or Services.
+// Release channel of the created datasource [stable/beta]
+func (o DirectLightstepOutput) ReleaseChannel() pulumi.StringOutput {
+	return o.ApplyT(func(v *DirectLightstep) pulumi.StringOutput { return v.ReleaseChannel }).(pulumi.StringOutput)
+}
+
+// This value indicated whether the field was a source of metrics and/or services. 'source_of' is deprecated and not used anywhere; however, it's kept for backward compatibility.
+//
+// Deprecated: 'source_of' is deprecated and not used anywhere. You can safely remove it from your configuration file.
 func (o DirectLightstepOutput) SourceOfs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *DirectLightstep) pulumi.StringArrayOutput { return v.SourceOfs }).(pulumi.StringArrayOutput)
 }
@@ -374,6 +430,11 @@ func (o DirectLightstepOutput) SourceOfs() pulumi.StringArrayOutput {
 // The status of the created direct.
 func (o DirectLightstepOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v *DirectLightstep) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
+}
+
+// Lightstep API URL. Nobl9 will use https://api.lightstep.com if empty.
+func (o DirectLightstepOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DirectLightstep) pulumi.StringPtrOutput { return v.Url }).(pulumi.StringPtrOutput)
 }
 
 type DirectLightstepArrayOutput struct{ *pulumi.OutputState }

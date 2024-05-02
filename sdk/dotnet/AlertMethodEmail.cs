@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Nobl9
+namespace Piclemx.Nobl9
 {
     [Nobl9ResourceType("nobl9:index/alertMethodEmail:AlertMethodEmail")]
     public partial class AlertMethodEmail : global::Pulumi.CustomResource
@@ -19,10 +20,10 @@ namespace Pulumi.Nobl9
         public Output<ImmutableArray<string>> Bccs { get; private set; } = null!;
 
         /// <summary>
-        /// The Body of the email alert. For the format of the body and the list of variables that you can define, refer to the [Nobl9 documentation](https://docs.nobl9.com/Alerting/Alert_methods/email-alert#yaml-configuration).
+        /// This value was used as the template for the email alert's body. 'body' is deprecated and not used anywhere; however, its' kept for backward compatibility.
         /// </summary>
         [Output("body")]
-        public Output<string> Body { get; private set; } = null!;
+        public Output<string?> Body { get; private set; } = null!;
 
         /// <summary>
         /// Carbon copy recipients. The maximum number of recipients is 10.
@@ -55,10 +56,10 @@ namespace Pulumi.Nobl9
         public Output<string> Project { get; private set; } = null!;
 
         /// <summary>
-        /// The Subject of the email alert.
+        /// This value was used as the email alert's subject. 'subject' is deprecated and not used anywhere; however, its' kept for backward compatibility.
         /// </summary>
         [Output("subject")]
-        public Output<string> Subject { get; private set; } = null!;
+        public Output<string?> Subject { get; private set; } = null!;
 
         /// <summary>
         /// Recipients. The maximum number of recipients is 10.
@@ -89,7 +90,7 @@ namespace Pulumi.Nobl9
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "https://github.com/piclemx/pulumi-nobl9/releases/",
+                PluginDownloadURL = "github://api.github.com/piclemx/pulumi-nobl9",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -126,10 +127,10 @@ namespace Pulumi.Nobl9
         }
 
         /// <summary>
-        /// The Body of the email alert. For the format of the body and the list of variables that you can define, refer to the [Nobl9 documentation](https://docs.nobl9.com/Alerting/Alert_methods/email-alert#yaml-configuration).
+        /// This value was used as the template for the email alert's body. 'body' is deprecated and not used anywhere; however, its' kept for backward compatibility.
         /// </summary>
-        [Input("body", required: true)]
-        public Input<string> Body { get; set; } = null!;
+        [Input("body")]
+        public Input<string>? Body { get; set; }
 
         [Input("ccs")]
         private InputList<string>? _ccs;
@@ -168,10 +169,10 @@ namespace Pulumi.Nobl9
         public Input<string> Project { get; set; } = null!;
 
         /// <summary>
-        /// The Subject of the email alert.
+        /// This value was used as the email alert's subject. 'subject' is deprecated and not used anywhere; however, its' kept for backward compatibility.
         /// </summary>
-        [Input("subject", required: true)]
-        public Input<string> Subject { get; set; } = null!;
+        [Input("subject")]
+        public Input<string>? Subject { get; set; }
 
         [Input("tos", required: true)]
         private InputList<string>? _tos;
@@ -206,7 +207,7 @@ namespace Pulumi.Nobl9
         }
 
         /// <summary>
-        /// The Body of the email alert. For the format of the body and the list of variables that you can define, refer to the [Nobl9 documentation](https://docs.nobl9.com/Alerting/Alert_methods/email-alert#yaml-configuration).
+        /// This value was used as the template for the email alert's body. 'body' is deprecated and not used anywhere; however, its' kept for backward compatibility.
         /// </summary>
         [Input("body")]
         public Input<string>? Body { get; set; }
@@ -248,7 +249,7 @@ namespace Pulumi.Nobl9
         public Input<string>? Project { get; set; }
 
         /// <summary>
-        /// The Subject of the email alert.
+        /// This value was used as the email alert's subject. 'subject' is deprecated and not used anywhere; however, its' kept for backward compatibility.
         /// </summary>
         [Input("subject")]
         public Input<string>? Subject { get; set; }
